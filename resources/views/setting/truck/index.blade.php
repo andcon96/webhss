@@ -41,6 +41,8 @@
             <tr>
                 <th>No Polis</th>
                 <th>Active</th>
+                <th>Driver</th>
+                <th>Pengurus</th>
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -52,6 +54,12 @@
                 </td>
                 <td>
                     {{$datas->truck_is_active == 1 ? 'Active' : 'Not Active'}}
+                </td>
+                <td>
+                    {{$datas->getUserDriver->name}}
+                </td>
+                <td>
+                    {{$datas->getUserPengurus->name}}
                 </td>
                 <td>
                     @if($datas->truck_is_active == 1)
@@ -92,7 +100,29 @@
                         <div class="form-group row">
                             <label for="polis" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
                             <div class="col-md-7">
-                                <input id="polis" type="polis" class="form-control" name="polis" autocomplete="off" value="" required>
+                                <input id="polis" type="text" class="form-control" name="polis" autocomplete="off" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="driver" class="col-md-3 col-form-label text-md-right">{{ __('Driver') }}</label>
+                            <div class="col-md-7">
+                                <select id="driver" class="form-control user" name="driver" autofocus required autocomplete="off">
+                                    <option value=""> --Select Data-- </option>
+                                    @foreach($user as $driver)
+                                    <option value="{{$driver->id}}">{{$driver->username}} -- {{$driver->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="pengurus" class="col-md-3 col-form-label text-md-right">{{ __('Pengurus') }}</label>
+                            <div class="col-md-7">
+                                <select id="pengurus" class="form-control user" name="pengurus" autofocus required autocomplete="off">
+                                    <option value=""> --Select Data-- </option>
+                                    @foreach($user as $pengurus)
+                                    <option value="{{$pengurus->id}}">{{$pengurus->username}} -- {{$pengurus->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -161,7 +191,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('.driver, #s_truck').select2({
+    $('.driver, #s_truck, .user').select2({
         width: '100%'
     });
 

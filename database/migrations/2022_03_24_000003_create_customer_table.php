@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTruckTable extends Migration
+class CreateCustomerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateTruckTable extends Migration
      */
     public function up()
     {
-        Schema::create('truck', function (Blueprint $table) {
+        Schema::create('customer', function (Blueprint $table) {
             $table->id();
-            $table->string('truck_no_polis');
-            $table->tinyInteger('truck_is_active')->default(1);
+            $table->string('cust_domain');
+            $table->string('cust_code',15);
+            $table->string('cust_desc');
+            $table->string('cust_alt_desc')->nullable();
+            $table->integer('cust_top')->nullable();
+            $table->string('cust_site');
+            $table->longText('cust_alamat')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
@@ -29,6 +34,6 @@ class CreateTruckTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('truck');
+        Schema::dropIfExists('customer');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCheckInOutTable extends Migration
+class CreateTipeTruckTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCheckInOutTable extends Migration
      */
     public function up()
     {
-        Schema::create('checkinout', function (Blueprint $table) {
+        Schema::create('tipetruck', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cio_truck')->index();
-            $table->foreign('cio_truck')->references('id')->on('truck')->onDelete('restrict');
-            $table->tinyInteger('cio_is_check_in');
+            $table->string('tt_desc');
+            $table->string('tt_isactive');
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateCheckInOutTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('checkinout');
+        Schema::dropIfExists('tipe_truck');
     }
 }

@@ -13,13 +13,13 @@ class CreateKerusakanStrukturTable extends Migration
      */
     public function up()
     {
-        Schema::create('kerusakan_struktur', function (Blueprint $table) {
+        Schema::create('kr_struktur', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kerusakan_mstr_id')->index();
-            $table->foreign('kerusakan_mstr_id')->references('id')->on('kerusakan_mstr')->onDelete('restrict');
-            $table->unsignedBigInteger('kerusakan_struktur_id')->index();
-            $table->foreign('kerusakan_struktur_id')->references('id')->on('struktur_lapor_kerusakan')->onDelete('cascade');
-            $table->string('kerusakan_mekanik');
+            $table->unsignedBigInteger('krs_krd_det_id')->index();
+            $table->foreign('krs_krd_det_id')->references('id')->on('krd_det')->onDelete('restrict');
+            $table->unsignedBigInteger('krs_kerusakan_struktur_id')->index();
+            $table->foreign('krs_kerusakan_struktur_id')->references('id')->on('kerusakan_struktur')->onDelete('cascade');
+            $table->string('krs_desc',255);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

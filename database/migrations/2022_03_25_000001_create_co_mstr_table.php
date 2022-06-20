@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStukturLaporKerusakanTable extends Migration
+class CreateCoMstrTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateStukturLaporKerusakanTable extends Migration
      */
     public function up()
     {
-        Schema::create('struktur_lapor_kerusakan', function (Blueprint $table) {
+        Schema::create('co_mstr', function (Blueprint $table) {
             $table->id();
-            $table->string('slk_desc');
-            $table->integer('slk_order');
+            $table->string('co_domain');
+            $table->string('co_nbr',8);
+            $table->string('co_cust_code');
+            $table->string('co_type');
+            $table->enum('co_status',['New','Closed','Cancelled']);
+            $table->text('co_remark')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
@@ -29,6 +33,6 @@ class CreateStukturLaporKerusakanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('struktur_lapor_kerusakan');
+        Schema::dropIfExists('co_mstr');
     }
 }

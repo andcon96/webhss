@@ -17,6 +17,7 @@ class CreateKerusakanTable extends Migration
             $table->id();
             $table->string('kerusakan_code',15);
             $table->string('kerusakan_desc',255);
+            $table->tinyInteger('kerusakan_need_approval')->default('0');
             $table->tinyInteger('kerusakan_is_active')->default('1');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

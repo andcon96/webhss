@@ -2,20 +2,19 @@
 
 namespace App\Models\Transaksi;
 
-use App\Models\Master\TruckDriver;
+use App\Models\Master\Truck;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CheckInOut extends Model
+class ReportBiaya extends Model
 {
     use HasFactory;
 
-    public $table = 'checkinout';
-
-    public $timestamps = false;
+    public $table = 'rb_hist';
 
     public function getTruck()
     {
-        return $this->belongsTo(TruckDriver::class,'cio_truck');
+        return $this->belongsTo(Truck::class, 'id', 'rb_truck_id');
     }
+    
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePrefixTable extends Migration
+class CreateShipFromTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePrefixTable extends Migration
      */
     public function up()
     {
-        Schema::create('prefix', function (Blueprint $table) {
+        Schema::create('shipfrom', function (Blueprint $table) {
             $table->id();
-            $table->string('prefix_so')->nullable();
-            $table->string('rn_so')->nullable();
-            $table->string('prefix_kerusakan')->nullable();
-            $table->string('rn_kerusakan')->nullable();
-            $table->timestamps();
+            $table->string('sf_code');
+            $table->string('sf_desc');
+            $table->string('sf_is_active');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
@@ -30,6 +30,6 @@ class CreatePrefixTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prefix');
+        Schema::dropIfExists('ship_from');
     }
 }

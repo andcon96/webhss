@@ -2,6 +2,7 @@
 
 namespace App\Models\Master;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,13 +12,39 @@ class Truck extends Model
 
     public $table = 'truck';
 
-    public function getTruckDriver()
+    public function getAllCheckInOut()
     {
-        return $this->hasMany(TruckDriver::class, 'truck_no_polis');
+        return $this->hasMany(CheckInOut::class, 'cio_truck')->orderBy('created_at','Desc');
+    }
+    
+    public function getLastCheckInOut()
+    {
+        return $this->hasOne(CheckInOut::class, 'cio_truck')->latest();
     }
 
-    public function getActiveDriver()
+    public function getUserDriver()
     {
-        return $this->hasOne(TruckDriver::class, 'truck_no_polis')->where('truck_is_active',1);
+        return $this->hasOne(User::class, 'id', 'truck_user_id');
+    }
+
+    public function getUserPengurus()
+    {
+        return $this->hasOne(User::class, 'id', 'truck_pengurus_id');
+    }
+
+    public function getTipe()
+    {
+        return $this->hasOne(TipeTruck::class, 'id', 'truck_tipe_id');
+    }
+    
+    protected static function boot()
+    {
+        parent::boot();
+        
+
+        self::addGlobalScope(function(Builder $builder){
+            // $builder->where('user_id', '=', Auth()->user()->id);
+            // $builder->where('truck_is_active', 1);
+        });
     }
 }

@@ -2,16 +2,18 @@
 
 namespace App\Models\Master;
 
+use App\Models\Transaksi\KerusakanDetail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerShipTo extends Model
+class KerusakanStruktur extends Model
 {
     use HasFactory;
-    public $table = 'customership';
+    
+    public $table = 'kerusakan_struktur';
+
     protected $fillable = [
-        'cs_code',
-        'cs_shipto',
-        'cs_domain'
+        'id',
+        'ks_order'
     ];
 }

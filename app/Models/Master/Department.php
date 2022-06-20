@@ -11,9 +11,4 @@ class Department extends Model
     use HasFactory;
 
     public $table = 'departments';
-
-    public function hasRFPMaster()
-    {
-        return $this->hasMany(RFPMaster::class, 'rfp_department_id');
-    }
 }

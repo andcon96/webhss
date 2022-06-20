@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDomainTable extends Migration
+class CreateStukturLaporKerusakanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateDomainTable extends Migration
      */
     public function up()
     {
-        Schema::create('domain', function (Blueprint $table) {
+        Schema::create('kerusakan_struktur', function (Blueprint $table) {
             $table->id();
-            $table->string('domain_code',8);
-            $table->string('domain_desc',50);
-            $table->timestamps();
+            $table->string('ks_desc');
+            $table->integer('ks_order');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateDomainTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domain');
+        Schema::dropIfExists('struktur_lapor_kerusakan');
     }
 }

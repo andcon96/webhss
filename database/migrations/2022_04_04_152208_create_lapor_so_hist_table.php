@@ -13,13 +13,16 @@ class CreateLaporSoHistTable extends Migration
      */
     public function up()
     {
-        Schema::create('so_hist_trip', function (Blueprint $table) {
+        Schema::create('sj_trip_hist', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('soh_so_mstr_id')->index();
-            $table->foreign('soh_so_mstr_id')->references('id')->on('so_mstr')->onDelete('restrict');
-            $table->unsignedBigInteger('soh_driver')->index();
-            $table->foreign('soh_driver')->references('id')->on('truckdriver')->onDelete('restrict');
+            $table->unsignedBigInteger('sjh_so_mstr_id')->index();
+            $table->foreign('sjh_so_mstr_id')->references('id')->on('sj_mstr')->onDelete('restrict');
+            $table->unsignedBigInteger('sjh_truck')->index();
+            $table->foreign('sjh_truck')->references('id')->on('truck')->onDelete('restrict');
+            $table->string('sjh_remark')->nullable();
+            $table->decimal('sjh_uang_extra',20,2)->default(0);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

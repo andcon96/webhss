@@ -15,14 +15,17 @@ class CreateSalesOrderMstrTable extends Migration
     {
         Schema::create('so_mstr', function (Blueprint $table) {
             $table->id();
+            $table->string('so_domain',8);
+            $table->unsignedBigInteger('so_co_mstr_id')->index();
+            $table->foreign('so_co_mstr_id')->references('id')->on('co_mstr')->onDelete('restrict');
             $table->string('so_nbr',8);
-            $table->string('so_cust',8);
-            $table->enum('so_type',['Berat','Rits','Shift']);
             $table->string('so_ship_from',8);
             $table->string('so_ship_to',8);
             $table->date('so_due_date');
-            $table->string('so_domain',8);
+            $table->date('so_effdate')->nullable();
+            $table->enum('so_type',['Berat','Rits','Shift']);
             $table->enum('so_status',['New','Open','Closed','Cancelled','Selesai']);
+            $table->text('so_remark')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

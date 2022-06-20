@@ -40,6 +40,8 @@ class TruckMTController extends Controller
     {
         $newTruck = new Truck();
         $newTruck->truck_no_polis = $request->polis;
+        $newTruck->truck_user_id = $request->driver;
+        $newTruck->truck_pengurus_id = $request->pengurus;
         $newTruck->save();
 
         

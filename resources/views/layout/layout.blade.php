@@ -283,12 +283,12 @@
                     <p>Truck Maintenance</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{route('truckdrivemaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Truck Driver Maintenance</p>
                   </a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                   <a href="{{route('prefixmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

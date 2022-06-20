@@ -25,10 +25,10 @@
                     @foreach($data as $datas)
                     <tr>
                         <td data-title="Deskripsi" data-label="% Start">
-                            <input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="{{$datas->slk_desc}}" style="height:37px" required/>
+                            <input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="{{$datas->ks_desc}}" style="height:37px" required/>
                         </td>
                         <td data-title="Order" data-label="% Reward">
-                            <input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="{{$datas->slk_order}}" step="1" required/>
+                            <input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="{{$datas->ks_order}}" step="1" required/>
                         </td>
                         <td data-title="Action"><input type="button" class="ibtnDel btn btn-danger"  value="Delete"></td>
                     </tr>

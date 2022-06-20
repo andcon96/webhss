@@ -2,43 +2,43 @@
 
 namespace App\Models\Transaksi;
 
-use App\Models\Master\Truck;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
 
-class SuratJalan extends Model
+class CustomerOrderMstr extends Model
 {
     use HasFactory;
 
-    public $table = 'sj_mstr';
+    public $table = 'co_mstr';
 
     public function getDetail()
     {
-        return $this->hasMany(SuratJalanDetail::class, 'sjd_sj_mstr_id');
-    }
-
-    public function getSOMaster()
-    {
-        return $this->belongsTo(SalesOrderMstr::class, 'id', 'sj_so_mstr_id');
-    }
-
-    public function getTruck()
-    {
-        return $this->hasOne(Truck::class,'id','sj_truck_id');
+        return $this->hasMany(CustomerOrderDetail::class,'cod_co_mstr_id');
     }
     
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::class, 'cust_code', 'co_cust');
+    }
+    
+    public function getNewCoAttribute()
+    {
+        // std get NewSo Attribute -> new_so , Ilangin get & Attribute
+        return $this->co_status == 'New';
+    }
+
     protected static function boot()
     {
         parent::boot();
         
         self::creating(function($model){
-            $model->sj_domain = Session::get('domain');
+            $model->co_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){
-            $builder->where('sj_domain', Session::get('domain'));
+            $builder->where('co_domain', Session::get('domain'));
             $builder->orderBy('created_at','DESC');
         });
     }

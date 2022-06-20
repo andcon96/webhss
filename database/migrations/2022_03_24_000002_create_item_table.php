@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustShipTable extends Migration
+class CreateItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCustShipTable extends Migration
      */
     public function up()
     {
-        Schema::create('cust_ship', function (Blueprint $table) {
+        Schema::create('item', function (Blueprint $table) {
             $table->id();
-            $table->string('cust_domain');
-            $table->string('cust_code');
-            $table->string('cust_shipto');
-            $table->string('cust_shipto_name',255)->nullable();
-            $table->text('cust_address')->nullable();
+            $table->string('item_domain');
+            $table->string('item_part','50');
+            $table->string('item_desc');
+            $table->string('item_um',2)->nullable();
+            $table->string('item_promo')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
@@ -32,6 +32,6 @@ class CreateCustShipTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cust_ship');
+        Schema::dropIfExists('item');
     }
 }

@@ -22,7 +22,7 @@ class SalesOrderMstr extends Model
         return $this->hasMany(SalesOrderDetail::class, 'sod_so_mstr_id');
     }
 
-    public function getSangu()
+    public function getSJ()
     {
         return $this->hasMany(SalesOrderSangu::class, 'sos_so_mstr_id');
     }
@@ -49,7 +49,7 @@ class SalesOrderMstr extends Model
         parent::boot();
         
         self::creating(function($model){
-            $model->user_id = Auth()->user()->id;
+            $model->so_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){

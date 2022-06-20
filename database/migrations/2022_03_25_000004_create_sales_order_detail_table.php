@@ -21,9 +21,7 @@ class CreateSalesOrderDetailTable extends Migration
             $table->string('sod_part',50);
             $table->decimal('sod_qty_ord',15,2);
             $table->decimal('sod_qty_ship',15,2);
-            $table->string('sod_um',2);
-            $table->date('sod_date')->nullable();
-            $table->string('sod_remarks',255)->nullable();
+            $table->string('sod_um',2)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

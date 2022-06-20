@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKerusakanMstrTable extends Migration
+class CreateCustShipTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateKerusakanMstrTable extends Migration
      */
     public function up()
     {
-        Schema::create('kr_mstr', function (Blueprint $table) {
+        Schema::create('customership', function (Blueprint $table) {
             $table->id();
-            $table->string('kr_domain',8);
-            $table->string('kr_nbr',15);
-            $table->unsignedBigInteger('kr_truck')->index();
-            $table->foreign('kr_truck')->references('id')->on('truck')->onDelete('restrict');
-            $table->date('kr_date');
-            $table->enum('kr_status',['New','Ongoing','Done','Cancelled']);
+            $table->string('cs_domain');
+            $table->unsignedBigInteger('cs_cust_code')->index();
+            $table->foreign('cs_cust_code')->references('cust_code')->on('customer');
+            $table->string('cs_shipto');
+            $table->string('cs_shipto_name',255)->nullable();
+            $table->text('cs_address')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
@@ -33,6 +33,6 @@ class CreateKerusakanMstrTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kerusakan_mstr');
+        Schema::dropIfExists('cust_ship');
     }
 }
