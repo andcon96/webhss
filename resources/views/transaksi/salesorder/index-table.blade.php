@@ -2,6 +2,7 @@
     <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
+                <th>Nomor CO</th>
                 <th>Nomor SO</th>
                 <th>Customer</th>
                 <th>Type</th>
@@ -15,18 +16,19 @@
         <tbody>
             @forelse ($data as $key => $datas)
             <tr>
+                <td data-label="CO NUMBER">{{$datas->getCOMaster->co_nbr}}</td>
                 <td data-label="SO NUMBER">{{$datas->so_nbr}}</td>
-                <td data-label="SO CUSTOMER">{{$datas->so_cust}}</td>
-                <td data-label="SO TYPE">{{$datas->so_type}}</td>
+                <td data-label="SO CUSTOMER">{{$datas->getCOMaster->co_cust_code}} -- {{$datas->getCOMaster->getCustomer->cust_desc}}</td>
+                <td data-label="SO TYPE">{{$datas->getCOMaster->co_type}}</td>
                 <td data-label="SO SHIP FROM">{{$datas->so_ship_from}}</td>
                 <td data-label="SO SHIP TO">{{$datas->so_ship_to}}</td>
                 <td data-label="SO DUE DATE">{{$datas->so_due_date}}</td>
                 <td data-label="SO STATUS">{{$datas->so_status}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
-                        data-cust="{{$datas->so_cust}}" data-type="{{$datas->so_type}}" 
+                        data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 
                         data-shipfrom="{{$datas->so_ship_from}}" data-shipto="{{$datas->so_ship_to}}" 
-                        data-duedate="{{$datas->so_due_date}}" 
+                        data-duedate="{{$datas->so_due_date}}" data-custdesc="{{$datas->getCOMaster->getCustomer->cust_desc ?? ''}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
                         

@@ -19,7 +19,7 @@ class CreateCoMstrTable extends Migration
             $table->string('co_nbr',8);
             $table->string('co_cust_code');
             $table->string('co_type');
-            $table->enum('co_status',['New','Closed','Cancelled']);
+            $table->enum('co_status',['New','Ongoing','Closed','Cancelled']);
             $table->text('co_remark')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

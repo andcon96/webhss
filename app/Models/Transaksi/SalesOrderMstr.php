@@ -27,9 +27,9 @@ class SalesOrderMstr extends Model
         return $this->hasMany(SalesOrderSangu::class, 'sos_so_mstr_id');
     }
 
-    public function getCustomer()
+    public function getCOMaster()
     {
-        return $this->hasOne(Customer::class, 'cust_code', 'so_cust');
+        return $this->hasOne(CustomerOrderMstr::class, 'id' , 'so_co_mstr_id');
     }
 
     public function getNewSoAttribute()

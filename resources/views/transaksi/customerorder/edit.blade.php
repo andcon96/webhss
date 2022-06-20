@@ -4,53 +4,39 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Sales Order Maintenance - Edit {{$data->so_nbr}}</li>
+    <li class="breadcrumb-item active">Customer Order Maintenance - Edit {{$data->co_nbr}}</li>
 </ol>
 @endsection
 
 @section('content')
-<form action="{{ route('salesorder.update',$data->id) }}" id="submit" method="POST">
+<form action="{{ route('customerorder.update',$data->id) }}" id="submit" method="POST">
     @csrf
     @method('PUT')
     <div class="row">
         <input type="hidden" name="idmaster" value="{{$data->id}}">
         <div class="form-group row col-md-12">
-            <label for="sonbr" class="col-md-2 col-form-label text-md-right">Nomor SO</label>
+            <label for="sonbr" class="col-md-2 col-form-label text-md-right">Nomor CO</label>
             <div class="col-md-3">
-                <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->co_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
-                <input id="customer" type="text" class="form-control" name="customer" value="{{$data->getCOMaster->co_cust_code}} -- {{$data->getCOMaster->getCustomer->cust_desc}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="customer" type="text" class="form-control" name="customer" value="{{$data->co_cust_code}} - {{$data->getCustomer->cust_desc}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
+            <label for="status" class="col-md-2 col-form-label text-md-right">Status</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
-            </div>
-            <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
-            <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="status" type="text" class="form-control" name="status" value="{{$data->co_status}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
-            <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" autofocus>
-            </div>
-            <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
-            <div class="col-md-3">
-                <input id="type" type="text" class="form-control" name="type" value="{{$data->getCOMaster->co_type}}" autocomplete="off" maxlength="24" autofocus readonly>
-            </div>
-        </div>
-        <div class="form-group row col-md-12">
-            @include('transaksi.salesorder.edit-table')
+            @include('transaksi.customerorder.edit-table')
         </div>
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
-                    <a href="{{route('salesorder.index')}}" id="btnback" class="btn btn-success bt-action">Back</a>
+                    <a href="{{route('customerorder.index')}}" id="btnback" class="btn btn-success bt-action">Back</a>
                     <button type="submit" class="btn btn-success bt-action btn-focus" id="btnconf">Save</button>
                     <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                         <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
@@ -99,16 +85,15 @@
         cols += '<select id="barang" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="part[]" data-size="5" data-live-search="true" required autofocus>';
         cols += '<option value = ""> -- Select Data -- </option>'
         @foreach($item as $items)
-        cols += '<option value="{{$items->cod_part}}" data-sisaqty="{{$items->cod_qty_ord - $items->cod_qty_used}}" data-um="{{$items->getItem->item_um}}"> {{$items->cod_part}} -- {{$items->getItem->item_desc ?? ''}} </option>';
+        cols += '<option value="{{$items->item_part}}"> {{$items->item_part}} -- {{$items->item_desc}} </option>';
         @endforeach
         cols += '</select>';
         cols += '</td>';
-        cols += '<td data-title="UM" data-label="Type"><input type="text" class="form-control um" autocomplete="off" name="um[]" style="height:37px" min="1" step="1" required readonly/></td>';
-
-        cols += '<td data-title="Qty Order" data-label="Jumlah"><input type="text" class="form-control qtysisa" autocomplete="off" name="sisa[]" style="height:37px" value="0" required min="1" readonly/></td>';
-        cols += '<td data-title="Qty Order" data-label="Jumlah"><input type="hidden" name="qtyold[]"><input type="number" class="form-control qtyord" autocomplete="off" name="qtyord[]" style="height:37px" required min="1"/></td>';
-        cols += '<td data-title="Qty Ship" data-label="Jumlah"><input type="number" class="form-control" autocomplete="off" name="qtyship[]" style="height:37px" required readonly value="0"/></td>';
-
+        cols += '<td data-title="Qty Order" data-label="Jumlah"><input type="number" class="form-control" autocomplete="off" name="qtyord[]" style="height:37px" required value="0" readonly/></td>';
+        cols += '<td data-title="Qty Open" data-label="Jumlah"><input type="number" class="form-control" autocomplete="off" name="qtyopen[]" style="height:37px" required value="0" readonly/></td>';
+        
+        cols += '<td data-title="Qty New" data-label="Jumlah"><input type="number" class="form-control" autocomplete="off" name="qtynew[]" style="height:37px" required min="1"/></td>';
+        
         cols += '<td data-title="Action"><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';
         cols += '</tr>'
         newRow.append(cols);
@@ -134,13 +119,18 @@
         var line = $(this).closest('tr').find('.line').val();
         var um = $(this).closest('tr').find('.um');
 
-        var dataum = $(this).find(':selected').data('um');
-        var qtysisa = $(this).find(':selected').data('sisaqty');
-        
+        $.ajax({
+            url: "/getum",
+            data: {
+                search: data,
+            },
+            success: function(data) {
+                um.val(data);
+            }
+        })
 
-        $(this).closest('tr').find('.qtyord').attr('max',qtysisa);
-        $(this).closest('tr').find('.um').val(dataum);
-        $(this).closest('tr').find('.qtysisa').val(qtysisa);
+
+        console.log(line);
     })
 
     $(document).on('submit', '#submit', function(e) {

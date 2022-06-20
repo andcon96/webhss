@@ -20,7 +20,7 @@ class CreateCodDetTable extends Migration
             $table->integer('cod_line');
             $table->string('cod_part');
             $table->decimal('cod_qty_ord',15,2);
-            $table->decimal('cod_qty_used',15,2);
+            $table->decimal('cod_qty_used',15,2)->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

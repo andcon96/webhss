@@ -19,9 +19,11 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Transaksi\AuditTrailSanguController;
 use App\Http\Controllers\Transaksi\BrowsePolisController;
 use App\Http\Controllers\Transaksi\CheckInOutController;
+use App\Http\Controllers\Transaksi\CustomerOrderController;
 use App\Http\Controllers\Transaksi\KerusakanLaporMTController;
 use App\Http\Controllers\Transaksi\SalesOrderController;
 use App\Http\Controllers\Transaksi\SalesOrderSanguController;
+use App\Http\Controllers\Transaksi\SuratJalanController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
@@ -55,6 +57,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/changedomain', [NotificationController::class, 'changedomain'])->name('changeDomain');
     
     //================================
+
+    Route::group(['middleware'=>'can:access_co'], function(){
+        Route::resource('customerorder',CustomerOrderController::class);
+        Route::get('/customerorder/getdetail/{id}', [CustomerOrderController::class, 'getdetail'])->name('getDetailCO');
+        Route::get('/customerorder/getalokasi/{id}', [CustomerOrderController::class, 'getalokasi'])->name('getAlokasiCO');
+        Route::get('/customerorder/createso/{id}', [CustomerOrderController::class, 'createso'])->name('coCreateSO');
+        Route::post('/customerorder/saveso', [CustomerOrderController::class, 'updateso'])->name('coUpdateSO');
+    });
+
+    Route::group(['middleware'=>'can:access_sj'], function(){
+        Route::resource('suratjalan',SuratJalanController::class);
+    });
 
     Route::group(['middleware'=>'can:access_so'], function(){
         Route::resource('salesorder', SalesOrderController::class);

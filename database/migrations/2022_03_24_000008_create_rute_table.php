@@ -22,6 +22,7 @@ class CreateRuteTable extends Migration
             $table->unsignedBigInteger('rute_customership_id')->index();
             $table->foreign('rute_customership_id')->references('id')->on('customership');
             $table->decimal('rute_harga',15,2);
+            $table->tinyInteger('rute_is_active')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

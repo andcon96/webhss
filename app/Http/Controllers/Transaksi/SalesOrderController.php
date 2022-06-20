@@ -8,6 +8,7 @@ use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
 use App\Models\Master\Prefix;
+use App\Models\Transaksi\CustomerOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Services\CreateTempTable;
@@ -27,12 +28,15 @@ class SalesOrderController extends Controller
     public function index(Request $request)
     {
         $cust = Customer::get();
-        $data = SalesOrderMstr::query();
+        $data = SalesOrderMstr::query()
+                              ->with('getDetail',
+                                     'getCOMaster.getCustomer');
+
         if($request->s_sonumber){
             $data->where('so_nbr',$request->s_sonumber);
         }
         if($request->s_customer){
-            $data->where('so_cust',$request->s_customer);
+            $data->whereRelation('getCOMaster.getCustomer','co_cust_code',$request->s_customer);
         }
         if($request->s_shipto){
             $data->where('so_ship_to',$request->s_shipto);
@@ -45,7 +49,7 @@ class SalesOrderController extends Controller
         }
 
 
-        $data = $data->with('getDetail')->orderBy('created_at','DESC')->paginate(10);
+        $data = $data->orderBy('created_at','DESC')->paginate(10);
         return view('transaksi.salesorder.index',['data' => $data, 'cust' => $cust]);
         
     }
@@ -72,7 +76,7 @@ class SalesOrderController extends Controller
     {
         DB::beginTransaction();
         try{
-            Prefix::lockForUpdate()->first();
+            Domain::where('domain_code',Session::get('domain'))->lockForUpdate()->first();
 
             $getrn = (new CreateTempTable())->getrnso();
             if($getrn === false){
@@ -81,17 +85,17 @@ class SalesOrderController extends Controller
                 return back();
             }
 
-            $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
-            if($sendSO === false){
-                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-                return back();
-            }elseif($sendSO == 'nourl'){
-                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-                return back();
-            }elseif($sendSO[0] == 'error'){
-                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-                return back();
-            }
+            // $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
+            // if($sendSO === false){
+            //     alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+            //     return back();
+            // }elseif($sendSO == 'nourl'){
+            //     alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+            //     return back();
+            // }elseif($sendSO[0] == 'error'){
+            //     alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+            //     return back();
+            // }
             
             $so_mstr = new SalesOrderMstr();
             $so_mstr->so_nbr = $getrn;
@@ -135,20 +139,18 @@ class SalesOrderController extends Controller
 
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem')->findOrFail($id);
+        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail')->findOrFail($id);
+        
+        $item = CustomerOrderDetail::with('getItem')->where('cod_co_mstr_id',$data->so_co_mstr_id)->get();
 
         $this->authorize('update',[SalesOrderMstr::class, $data]);
         
-        $item = Item::get();
         return view('transaksi.salesorder.edit',compact('data','item'));
     }
 
     public function update(Request $request, SalesOrderMstr $salesOrderMstr)
     {
-        // dd($request->all());
         $id = $request->idmaster;
-        $shipfrom = $request->shipfrom;
-        $shipto = $request->shipto;
         $duedate = $request->duedate;
 
         $operation = $request->operation;
@@ -156,14 +158,13 @@ class SalesOrderController extends Controller
         $line = $request->line;
         $part = $request->part;
         $qtyord = $request->qtyord;
+        $qtyold = $request->qtyold;
         $qtyship = $request->qtyship;
         $um = $request->um;
 
         DB::beginTransaction();
         try{
             $master = SalesOrderMstr::findOrFail($id);
-            $master->so_ship_from = $shipfrom;
-            $master->so_ship_to = $shipto;
             $master->so_due_date = $duedate;
             $master->save();
 
@@ -180,6 +181,24 @@ class SalesOrderController extends Controller
                     $detail->sod_um = $um[$key];
                     $detail->save();
                 }
+
+                if($qtyold[$key] != $qtyord[$key]){
+                    $codetail = CustomerOrderDetail::query()
+                                        ->where('cod_co_mstr_id',$master->so_co_mstr_id)
+                                        ->where('cod_line',$line[$key])
+                                        ->where('cod_part',$part[$key])
+                                        ->first();
+                                        
+                    $codetail->cod_qty_used = $codetail->cod_qty_used - $qtyold[$key] + $qtyord[$key];
+                    if($codetail->cod_qty_used > $codetail->cod_qty_ord){
+                        DB::rollback();
+                        alert()->error('Error', 'Data Sudah berubah, silahkan dicoba lagi')->persistent('Dismiss');
+                        return back();
+                    }else{
+                        $codetail->save();
+                    }
+                }
+                
             }
             DB::commit();
             alert()->success('Success', 'SO Updated')->persistent('Dismiss');
@@ -207,14 +226,27 @@ class SalesOrderController extends Controller
         DB::beginTransaction();
 
         try{
-            $truck = SalesOrderMstr::where('id', $id)->firstOrFail();
-            $truck->so_status = 'Cancelled';
-            $truck->save();
+            $somstr = SalesOrderMstr::findOrFail($id);
+            
+            $soddet = SalesOrderDetail::where('sod_so_mstr_id',$id)->get();
+            foreach($soddet as $key => $soddets){
+                $coddet = CustomerOrderDetail::query()
+                                    ->where('cod_line',$soddets->sod_line)
+                                    ->where('cod_part',$soddets->sod_part)
+                                    ->where('cod_co_mstr_id',$somstr->so_co_mstr_id)
+                                    ->firstOrFail();
+                $coddet->cod_qty_used = $coddet->cod_qty_used - $soddets->sod_qty_ord;
+                $coddet->save();
+            }
+            
+            $somstr->so_status = 'Cancelled';
+            $somstr->save();
 
             DB::commit();
             alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
+            dd($err);
             alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
         }
 

@@ -2,16 +2,19 @@
 
 namespace App\Models\Transaksi;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Master\Item;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
 
 class CustomerOrderDetail extends Model
 {
     use HasFactory;
 
-    public $table = 'co_mstr';
+    public $table = 'cod_det';
+    
+    protected $fillable = [
+        'id'
+    ];
 
     public function getItem()
     {

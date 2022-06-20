@@ -23,8 +23,8 @@ class CreateSalesOrderMstrTable extends Migration
             $table->string('so_ship_to',8);
             $table->date('so_due_date');
             $table->date('so_effdate')->nullable();
-            $table->enum('so_type',['Berat','Rits','Shift']);
-            $table->enum('so_status',['New','Open','Closed','Cancelled','Selesai']);
+            // $table->enum('so_type',['Berat','Rits','Shift']);
+            $table->enum('so_status',['New','Open','Closed','Cancelled','Selesai'])->default('New');
             $table->text('so_remark')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

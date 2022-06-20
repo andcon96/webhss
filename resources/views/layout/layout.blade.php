@@ -117,6 +117,14 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @can('access_co')
+                <li class="nav-item">
+                  <a href="{{route('customerorder.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>CO Maintenance</p>
+                  </a>
+                </li>
+                @endcan
                 @can('access_so')
                 <li class="nav-item">
                   <a href="{{route('salesorder.index')}}" class="nav-link">
@@ -125,7 +133,15 @@
                   </a>
                 </li>
                 @endcan
-                @can('access_so_sangu')
+                @can('access_sj')
+                <li class="nav-item">
+                  <a href="{{route('suratjalan.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>SJ Maintenance</p>
+                  </a>
+                </li>
+                @endcan
+                {{-- @can('access_so_sangu')
                 <li class="nav-item">
                   <a href="{{route('sosangu.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -140,7 +156,7 @@
                     <p>Browse SO Sangu</p>
                   </a>
                 </li>
-                @endcan
+                @endcan --}}
               </ul>
             </li>
             @endcan

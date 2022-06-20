@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,7 @@ class CustomerOrderMstr extends Model
     
     public function getCustomer()
     {
-        return $this->hasOne(Customer::class, 'cust_code', 'co_cust');
+        return $this->hasOne(Customer::class, 'cust_code', 'co_cust_code');
     }
     
     public function getNewCoAttribute()
