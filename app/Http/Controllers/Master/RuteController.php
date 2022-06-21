@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Rute;
+use App\Models\Master\RuteHistory;
 use App\Models\Master\TipeTruck;
 use Illuminate\Http\Request;
 
@@ -88,15 +89,18 @@ class RuteController extends Controller
         //
     }
 
-    public function index2($id)
+    public function viewDetail($id)
     {
         $rute_data = Rute::with(['getShipFrom','getShipTo','getTipe'])->where('rute_tipe_id',$id)->paginate(10);
         return view('setting.rute.indexdetail', compact('rute_data'));
         //
     }
 
-    public function index3(Request $request)
+    public function viewHistory($id)
     {
+        
+        $history_data = RuteHistory::with(['getRute.getShipTo','getRute.getShipFrom','getRute.getTipe'])->where('rute_tipe_id',$id)->paginate(10);
+        return view('setting.rute.indexhistory', compact('history_data'));
         //
     }
 }
