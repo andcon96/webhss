@@ -16,8 +16,7 @@ class CreateCustShipTable extends Migration
         Schema::create('customership', function (Blueprint $table) {
             $table->id();
             $table->string('cs_domain');
-            $table->unsignedBigInteger('cs_cust_code')->index();
-            $table->foreign('cs_cust_code')->references('cust_code')->on('customer');
+            $table->string('cs_cust_code');
             $table->string('cs_shipto');
             $table->string('cs_shipto_name',255)->nullable();
             $table->text('cs_address')->nullable();

@@ -12,6 +12,7 @@ use App\Http\Controllers\Master\PrefixController;
 use App\Http\Controllers\Master\RoleMTController;
 use App\Http\Controllers\Master\UserMTController;
 use App\Http\Controllers\Master\QxWsaMTController;
+use App\Http\Controllers\Master\RuteController;
 use App\Http\Controllers\Master\StrukturKerusakanController;
 use App\Http\Controllers\Master\TruckDriverController;
 use App\Http\Controllers\Master\TruckMTController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\Transaksi\SuratJalanController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
+use App\Models\Master\Rute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -201,6 +203,12 @@ Route::group(['middleware' => ['auth']], function () {
         // QX WSA Master
         //================================
         Route::resource('custshipto', CustomerShipToController::class);
+        //================================
+
+        // Rute Maintenance
+        //================================
+        Route::resource('rute', RuteController::class);
+        Route::get('rutedetail/{id}', [RuteController::class,'index2']);
         //================================
     });
 });

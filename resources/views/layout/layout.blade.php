@@ -323,6 +323,12 @@
                     <p>WSA Qxtend Maintenance</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{{url('rute')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Rute Maintenance</p>
+                  </a>
+                </li>
 
               </ul>
             </li>

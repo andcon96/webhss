@@ -13,16 +13,16 @@ class Rute extends Model
 
     public function getTipe()
     {
-        return $this->belongsTo(TipeTruck::class, 'id', 'rute_tipe_id');
+        return $this->belongsTo(TipeTruck::class, 'rute_tipe_id', 'id');
     }
 
     public function getShipFrom()
     {
-        return $this->belongsTo(ShipFrom::class, 'id', 'rute_shipfrom_id');
+        return $this->belongsTo(ShipFrom::class, 'rute_shipfrom_id', 'id');
     }
 
     public function getShipTo()
     {
-        return $this->belongsTo(CustomerShipTo::class, 'id', 'rute_customership_id');
+        return $this->belongsTo(CustomerShipTo::class, 'rute_customership_id', 'id');
     }
 }

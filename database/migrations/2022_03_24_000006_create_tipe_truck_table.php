@@ -15,6 +15,7 @@ class CreateTipeTruckTable extends Migration
     {
         Schema::create('tipetruck', function (Blueprint $table) {
             $table->id();
+            $table->string('tt_code');
             $table->string('tt_desc');
             $table->string('tt_isactive');
             $table->timestamp('created_at')->useCurrent();
