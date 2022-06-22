@@ -103,4 +103,25 @@ class CreateTempTable
             return false;
         }
     }
+
+    public function getrnsj(){
+        try{
+            // $prefix = Prefix::firstOrFail();
+            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            
+            $cektahun = substr($prefix->domain_sj_rn,0,2);
+            $yearnow = date('y');
+            
+            if($cektahun != $yearnow){
+                $rn_new = $yearnow.'0001';
+            }else{
+                $rn_new = $prefix->domain_sj_rn + 1;
+            }
+            $newprefix = $prefix->domain_sj_prefix.$rn_new;
+    
+            return $newprefix;
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }

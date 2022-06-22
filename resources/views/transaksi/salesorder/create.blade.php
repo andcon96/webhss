@@ -9,50 +9,53 @@
 @endsection
 
 @section('content')
-<form action="{{ route('salesorder.store') }}" id="submit" method="POST">
+<form action="{{ route('suratjalan.store') }}" id="submit" method="POST">
     @csrf
     @method('POST')
     <div class="row">
         <div class="form-group row col-md-12">
-            <label for="customer" class="col-md-2 col-form-label text-md-right">Customer</label>
+            <label for="conbr" class="col-md-2 col-form-label text-md-right">Customer Order</label>
             <div class="col-md-3">
-                <select name="customer" id="customer" class="form-control" required>
+                <select name="conbr" id="conbr" class="form-control" required>
                     <option value="">Select Data</option>
-                    @foreach($cust as $custs)
-                    <option value="{{$custs->cust_code}}">{{$custs->cust_code}} -- {{$custs->cust_desc}}</option>
+                    @foreach($conbr as $conbrs)
+                    <option value="{{$conbrs->id}}" 
+                            data-cust="{{$conbrs->co_cust_code}}"
+                            data-custdesc="{{$conbrs->getCustomer->cust_desc}}"
+                            data-type="{{$conbrs->co_type}}">{{$conbrs->co_nbr}}</option>
                     @endforeach
                 </select>
             </div>
-            <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
+            <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
-                <select name="type" id="type" class="form-control" required>
-                    <option value="">Select Data</option>
-                    <option value="BERAT">Berat</option>
-                    <option value="RITS">Rits</option>
-                    <option value="SHIFT">Shift</option>
-                </select>
+                <input id="customer" type="text" class="form-control" name="customer" value="" autocomplete="off" maxlength="24" readonly autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="type" class="col-md-2 col-form-label text-md-right">Type</label>
+            <div class="col-md-3">
+                <input id="type" type="text" class="form-control" name="type" value="" autocomplete="off" maxlength="24" required readonly>
+            </div>
+            <label for="duedate" class="col-md-3 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->addDays(1)->toDateString()}}" autocomplete="off" maxlength="24" required autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="" autocomplete="off" maxlength="24" required autofocus>
+                <select name="shipfrom" id="shipfrom" class="form-control" required>
+                    <option value="">Select Data</option>
+                    @foreach($shipfrom as $shipfroms)
+                        <option value="{{$shipfroms->sf_code}}">{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>
+                    @endforeach
+                </select>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
                 <select name="shipto" id="shipto" class="form-control" required>
                     <option value="">Select Data</option>
                 </select>
-            </div>
-        </div>
-        <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
-            <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="" autocomplete="off" maxlength="24" required autofocus>
-            </div>
-            <label for="domain" class="col-md-3 col-form-label text-md-right">Domain</label>
-            <div class="col-md-3">
-                <input id="domains" type="text" class="form-control" name="domains" value="{{Session::get('domain')}}" autocomplete="off" maxlength="24" required readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -77,10 +80,9 @@
 
 @section('scripts')
 <script>
-    $('#customer, #type, #shipto').select2({
+    $('#shipto,#conbr,#shipfrom').select2({
         width: '100%'
     });
-    $("#customer").select2('open');
     
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -90,135 +92,66 @@
         }
     });
 
-    var counter = 1;
+    $('#btnconf').hide();
 
-    function selectRefresh() {
-        $('.selectpicker').selectpicker().focus();
-    }
-
-    $(document).on('change', '#customer',function(){
+    $(document).on('change', '#conbr', function(){
         let value = $(this).val();
-
-        $.ajax({
-            url: "/getshipto",
-            data: {
-                search: value,
-            },
-            success: function(data) {
-                console.log(data);
-                $('#shipto').html('').append(data);
-            }
-        });
-    });
-
-    function resetDropDownValue(){
-        let filter = $('#type').val();
-
-        $('.selectpicker option').each(function() {
-            if ($(this).data('type') == filter || $(this).val() == ""){  
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        })
-
-        $('.selectpicker').selectpicker('refresh');
-    }
-
-    $(document).on('change','#type',function(){
-        $('.selectpicker').val('');
-        resetDropDownValue();
-    });
-
-    $(document).on('click', '#addrow', function() {
-        var rowCount = $('#createTable tr').length;
-
-        var currow = rowCount - 2;
-
-        var lastline = parseInt($('#createTable tr:eq(' + currow + ') td:eq(0) input[type="number"]').val()) + 1;
-
-        if (lastline !== lastline) {
-            // check apa NaN
-            lastline = 1;
-        }
-
-        var newRow = $("<tr>");
-        var cols = "";
-        cols += '<td data-title="Line" data-label="Line"><input type="hidden" name="operation[]" class="operation" value="M"><input type="number" class="form-control line" autocomplete="off" name="line[]" style="height:37px" required min="1" value="' + lastline + '"/></td>';
-        cols += '<td data-label="Item Part">';
-        cols += '<select id="barang" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="part[]" data-size="5" data-live-search="true" required autofocus>';
-        cols += '<option value = ""> -- Select Data -- </option>'
-        @foreach($item as $items)
-        cols += '<option value="{{$items->item_part}}" data-type="{{$items->item_promo}}"> {{$items->item_part}} -- {{$items->item_desc}} </option>';
-        @endforeach
-        cols += '</select>';
-        cols += '</td>';
-        cols += '<td data-title="UM" data-label="UM"><input type="text" class="form-control um" autocomplete="off" name="um[]" style="height:37px" min="1" step="1" required readonly/></td>';
-
-        cols += '<td data-title="Qty Order" data-label="Qty Order"><input type="number" class="form-control" autocomplete="off" name="qtyord[]" style="height:37px" required min="1"/></td>';
-        
-        cols += '<td data-title="Action"><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';
-        cols += '</tr>'
-        newRow.append(cols);
-        $("#addtable").append(newRow);
-        counter++;
-
-        selectRefresh();
-        resetDropDownValue();
-    });
-
-    $(document).on('change', '.qaddel', function() {
-        var checkbox = $(this), // Selected or current checkbox
-            value = checkbox.val(); // Value of checkbox
-
-        if (checkbox.is(':checked')) {
-            $(this).closest("tr").find('.operation').val('R');
-        } else {
-            $(this).closest("tr").find('.operation').val('M');
-        }
-    });
-
-    $(document).on('change', '.selectpicker', function() {
-        var data = $(this).val();
-        var line = $(this).closest('tr').find('.line').val();
-        var um = $(this).closest('tr').find('.um');
-        
         var type = $(this).find(':selected').data('type');
+        var cust = $(this).find(':selected').data('cust');
+        var desc = $(this).find(':selected').data('custdesc');
+        var customer = cust + ' - ' + desc;
 
-        $.ajax({
-            url: "/getum",
-            data: {
-                search: data,
-            },
-            success: function(data) {
-                um.val(data);
-            }
-        })
+        $('#customer').val(customer);
+        $('#type').val(type);
 
+        if(value != ''){
+            $.ajax({
+                url: "/getshipto",
+                data: {
+                    search: cust,
+                },
+                success: function(data) {
+                    $('#shipto').html('').append(data);
+                    $.ajax({
+                        url: "{{ route('getCO') }}",
+                        data: {
+                            search: value,
+                        },
+                        success: function(data) {
+                            $('#addtable').html('').append(data);
+                            $('#btnconf').show();
+                        },
+                        error: function(data) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                html: 'Gagal mencari data',
+                                showCloseButton: true,
+                            })
+                        }
+                    });
+                },
+                error: function(data) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: 'Gagal mencari data',
+                        showCloseButton: true,
+                    })
+                }
+            });
 
-        console.log(line);
-    });
+            
+        }else{
+            $('#addtable').html('');
+            $('#btnconf').hide();
+        }
+    })
 
     $(document).on('submit', '#submit', function(e) {
         document.getElementById('btnconf').style.display = 'none';
         document.getElementById('btnback').style.display = 'none';
         document.getElementById('btnloading').style.display = '';
-    });
-
-    $("table#createTable").on("click", ".ibtnDel", function(event) {
-        var row = $(this).closest("tr");
-        var line = row.find(".line").val();
-        
-        if (line == counter - 1) {
-            counter -= 1
-        }
-        
-        $(this).closest("tr").remove();
-
-        // if(colCount == 2){
-        //   // Row table kosong. sisa header & footer
-        //   counter = 1;
-        // }
     });
 </script>
 @endsection

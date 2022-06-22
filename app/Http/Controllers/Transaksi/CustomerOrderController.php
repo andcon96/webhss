@@ -127,9 +127,6 @@ class CustomerOrderController extends Controller
             alert()->error('Error', 'Save Gagal')->persistent('Dismiss');
             return back();
         }
-
-        
-        dd($comstr);
     }
 
     public function destroy(Request $request)
@@ -191,7 +188,8 @@ class CustomerOrderController extends Controller
                 if($list->count() > 0){
                     foreach($list as $key => $lists){
                         $output .= '<tr>';
-                        $output .= '<td colspan="3"><b>SO Number : '.$lists->so_nbr.'</b></td>';
+                        $output .= '<td colspan="2"><b>SO Number : '.$lists->so_nbr.'</b></td>';
+                        $output .= '<td><b> Status : '.$lists->so_status.'</b></td>';
                         foreach($lists->getDetail as $detail){
                             if($detail->sod_part == $datas->cod_part){
                                 $output .= '<td colspan="2"><b>Qty : '.$detail->sod_qty_ord.'</b></td>';
@@ -251,6 +249,10 @@ class CustomerOrderController extends Controller
                     $so_detail->save();
     
                     $coddet = CustomerOrderDetail::lockForUpdate()->findOrFail($request->idcodetail[$key]);
+                    if($coddet->cod_qty_used + $request->qtyord[$key] > $coddet->cod_qty_ord){
+                        alert()->error('Error', 'Save Gagal, Qty Customer Order berubah')->persistent('Dismiss');
+                        return back();
+                    }
                     $coddet->cod_qty_used = $coddet->cod_qty_used + $request->qtyord[$key];
                     $coddet->save();
                 }

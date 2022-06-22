@@ -71,7 +71,7 @@
         <!-- konten modal-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">Create Driver</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel">View SO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -185,6 +185,81 @@
 </div>
 
 
+<div id="detailModal" class="modal fade bd-example-modal-lg" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <!-- konten modal-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Alokasi SO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="panel-body">
+                <!-- heading modal -->
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="dsonbr" class="col-md-2 col-form-label text-md-right">{{ __('Nomor SO') }}</label>
+                        <div class="col-md-3">
+                            <input id="dsonbr" type="text" class="form-control" name="dsonbr" autocomplete="off" value="" readonly>
+                        </div>
+
+                        <label for="dcust" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
+                        <div class="col-md-3">
+                            <input id="dcust" type="text" class="form-control" name="dcust" autocomplete="off" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="dshipfrom" class="col-md-2 col-form-label text-md-right">{{ __('Ship From') }}</label>
+                        <div class="col-md-3">
+                            <input id="dshipfrom" type="text" class="form-control" name="dshipfrom" autocomplete="off" value="" readonly>
+                        </div>
+                        <label for="dshipto" class="col-md-2 col-form-label text-md-right">{{ __('Ship To') }}</label>
+                        <div class="col-md-3">
+                            <input id="dshipto" type="text" class="form-control" name="dshipto" autocomplete="off" value="" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="dtype" class="col-md-2 col-form-label text-md-right">{{ __('Type') }}</label>
+                        <div class="col-md-3">
+                            <input id="dtype" type="text" class="form-control" name="dtype" autocomplete="off" value="" readonly>
+                        </div>
+
+                        <label for="dduedate" class="col-md-2 col-form-label text-md-right">{{ __('Due Date') }}</label>
+                        <div class="col-md-3">
+                            <input id="dduedate" type="text" class="form-control" name="dduedate" autocomplete="off" value="" readonly>
+                        </div>
+                    </div>
+                    <div id="form-group row">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Line</th>
+                                    <th>Item Part</th>
+                                    <th>Item UM</th>
+                                    <th>Qty Order</th>
+                                    <th>Qty Ship</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dbodydetail">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info bt-action" id="btnclose" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn bt-action" id="btnloading" style="display:none">
+                        <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 
 
@@ -254,6 +329,34 @@
 
         document.getElementById("temp_id").value = id;
         document.getElementById('temp_uname').text = sonbr;
+    });
+
+    $(document).on('click', '.detailModal', function(){
+        var id = $(this).data('id');
+        var sonbr = $(this).data('sonbr');
+        var cust = $(this).data('cust');
+        var type = $(this).data('type');
+        var shipfrom = $(this).data('shipfrom');
+        var shipto = $(this).data('shipto');
+        var duedate = $(this).data('duedate');
+        var custdesc = $(this).data('custdesc');
+
+        document.getElementById("dsonbr").value = sonbr;
+        document.getElementById('dcust').value = cust + ' - ' + custdesc;
+        document.getElementById('dtype').value = type;
+        document.getElementById('dshipfrom').value = shipfrom;
+        document.getElementById('dshipto').value = shipto;
+        document.getElementById('dduedate').value = duedate;
+
+
+        $.ajax({
+            url: "/salesorder/getalokasi/" + id,
+            success: function(data) {
+                console.log(data);
+                $('#dbodydetail').html('');
+                $('#dbodydetail').html(data);
+            }
+        })
     });
 
     $(document).on('click', '#btnrefresh', function(){

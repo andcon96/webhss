@@ -21,13 +21,19 @@ class SuratJalan extends Model
 
     public function getSOMaster()
     {
-        return $this->belongsTo(SalesOrderMstr::class, 'id', 'sj_so_mstr_id');
+        return $this->belongsTo(SalesOrderMstr::class, 'sj_so_mstr_id', 'id');
     }
 
     public function getTruck()
     {
         return $this->hasOne(Truck::class,'id','sj_truck_id');
     }
+    
+    public function getHistTrip()
+    {
+        return $this->hasMany(SJHistTrip::class, 'sjh_so_mstr_id', 'sj_so_mstr_id');
+    }
+
     
     protected static function boot()
     {

@@ -15,26 +15,29 @@
             <tr>
                 <td data-label="SO NUMBER">{{$datas->getSOMaster->so_nbr}}</td>
                 <td data-label="SJ NUMBER">{{$datas->sj_nbr}}</td>
-                <td data-label="CUSTOMER">{{$datas->getSOMaster->so_cust}} -- {{$datas->getSOMaster->getCustomer->cust_desc}}</td>
-                <td data-label="SHIP TO">{{$datas->sj_shipto}}</td>
+                <td data-label="CUSTOMER">{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
+                <td data-label="SHIP TO">{{$datas->getSOMaster->so_ship_to}}</td>
                 <td data-label="CO STATUS">{{$datas->sj_status}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}"
                         data-sonbr="{{$datas->getSOMaster->so_nbr}}" data-sjnbr="{{$datas->sj_nbr}}"
-                        data-cust="{{$datas->getSOMaster->so_cust}}" data-shipto="{{$datas->sj_shipto}}"
+                        data-cust="{{$datas->getSOMaster->getCOMaster->co_cust_code}}" 
+                        data-custdesc="{{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}"
+                        data-shipto="{{$datas->getSOMaster->so_ship_to}}"
                         data-status="{{$datas->sj_status}}"
                         data-truck="{{$datas->getTruck->truck_no_polis}}" data-trip="{{$datas->sj_jmlh_trip}}"
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
-                        data-pengurus="{{$datas->getTruck->getActiveDriver->getPengurus->name}}"
+                        data-pengurus="{{$datas->getTruck->getUserPengurus->name}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
                     
-                    <a href="{{route('customerorder.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
+                    @if($datas->sj_status == 'Open')
+                        <a href="{{route('suratjalan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
 
-                    <a href="" class="deleteModal" 
-                        data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
-                        data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
-                        
+                        <a href="" class="deleteModal" 
+                            data-id="{{$datas->id}}" data-sonbr="{{$datas->sj_nbr}}"
+                            data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
+                    @endif
                 </td>
             </tr>
             @empty

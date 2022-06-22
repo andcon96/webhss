@@ -37,14 +37,4 @@ class Truck extends Model
         return $this->hasOne(TipeTruck::class, 'id', 'truck_tipe_id');
     }
     
-    protected static function boot()
-    {
-        parent::boot();
-        
-
-        self::addGlobalScope(function(Builder $builder){
-            // $builder->where('user_id', '=', Auth()->user()->id);
-            // $builder->where('truck_is_active', 1);
-        });
-    }
 }

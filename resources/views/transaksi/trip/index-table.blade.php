@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>Sales Order</th>
+                <th>Surat Jalan</th>
                 <th>Customer</th>
                 <th>Type</th>
                 <th>Ship To</th>
@@ -16,19 +17,20 @@
         <tbody>
             @forelse ($data as $key => $datas)
                 <tr>
-                    <td data-label="SO Number">{{$datas->getMaster->so_nbr}}</td>
-                    <td data-label="SO Customer">{{$datas->getMaster->so_cust}}</td>
-                    <td data-label="SO Type">{{$datas->getMaster->so_type}}</td>
-                    <td data-label="SO Ship To">{{$datas->getMaster->so_ship_to}}</td>
-                    <td data-label="SO Due Date">{{$datas->getMaster->so_due_date}}</td>
-                    <td data-label="Total Sangu">{{number_format($datas->sos_sangu,0)}}</td>
-                    <td data-label="Total Trip">{{$datas->sos_tot_trip}}</td>
-                    <td data-label="Trip Dilaporkan">{{$datas->countLaporanHist->count()}}</td>
-                    <td data-label="Surat Jalan">{{$datas->countLaporanHist->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>
+                    <td data-label="SO Number">{{$datas->getSOMaster->so_nbr}}</td>
+                    <td data-label="SJ Number">{{$datas->sj_nbr}}</td>
+                    <td data-label="SO Customer">{{$datas->getSOMaster->getCOMaster->co_cust_code}}</td>
+                    <td data-label="SO Type">{{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
+                    <td data-label="SO Ship To">{{$datas->getSOMaster->so_ship_to}}</td>
+                    <td data-label="SO Due Date">{{$datas->getSOMaster->so_due_date}}</td>
+                    <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>
+                    <td data-label="Total Trip">{{$datas->sj_jmlh_trip}}</td>
+                    <td data-label="Trip Dilaporkan">{{$datas->getHistTrip->count()}}</td>
+                    <td data-label="Surat Jalan">{{$datas->getHistTrip->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>
                 </tr>
             @empty
             <tr>
-                <td colspan='8' style="color:red;text-align:center;"> No Data Avail</td>
+                <td colspan='9' style="color:red;text-align:center;"> No Data Avail</td>
             </tr>
             @endforelse
         </tbody>

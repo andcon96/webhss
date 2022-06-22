@@ -8,6 +8,7 @@ use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SalesOrderSangu;
 use App\Models\Transaksi\SOHistTrip;
+use App\Models\Transaksi\SuratJalan;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,32 +21,35 @@ class TripLaporMTController extends Controller
     {
         $truck = Truck::orderBy('truck_no_polis', 'ASC')->get();
 
-        $data = SalesOrderMstr::query()
-            ->with(['getSangu.getTruckDriver.getTruck', 'getDetail']);
-            // ->where('so_status', 'Open');
+        $data = SuratJalan::query()
+                        ->with('getTruck',
+                               'getSOMaster.getCOMaster.getCustomer',
+                               'getHistTrip');
 
-        $user = Auth::user()->id;
-        $truckUser = TruckDriver::with('getTruck')->where('truck_user_id', $user)->where('truck_is_active', 1)->first();
+        $userid = Auth::user()->id;
+        $userDriver = Truck::where('truck_user_id',$userid)->first();
 
 
         if ($request->truck) {
-            $data->whereRelation('getSangu.getTruckDriver.getTruck', 'id', $request->truck);
+            $data->whereRelation('getTruck', 'id', $request->truck);
             $data = $data->orderBy('created_at', 'DESC')->get();
         } else {
-            if ($truckUser) {
-                $data = SalesOrderSangu::with(['getMaster','getTruckDriver.getTruck'])
-                                       ->whereRelation('getTruckDriver.getTruck','id',$truckUser->getTruck->id)
-                                       ->where('so_status','!=','Closed')
-                                       ->orderBy('created_at','DESC')
-                                       ->get();
-                // $data->whereRelation('getSangu.getTruckDriver.getTruck', 'id', $truckUser->getTruck->id);
-                // $data = $data->orderBy('updated_at', 'DESC')->take(5)->get();
+            if ($userDriver) {
+                $data = SuratJalan::with(['getSOMaster','getTruck'])
+                                  ->whereRelation('getTruck','id',$userDriver->id)
+                                  ->where('sj_status','!=','Closed')
+                                  ->where(function($query){
+                                        $query->where('sj_status','Selesai');
+                                        $query->orWhere('sj_status','Open');
+                                  })
+                                  ->orderBy('created_at','DESC')
+                                  ->get();
             } else {
                 $data = [];
             }
         }
 
-        return view('transaksi.trip.lapor.index', compact('truck', 'data', 'truckUser'));
+        return view('transaksi.trip.lapor.index', compact('truck', 'data', 'userDriver'));
     }
 
     public function edit($id)

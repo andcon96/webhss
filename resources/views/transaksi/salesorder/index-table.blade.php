@@ -10,7 +10,7 @@
                 <th>Ship-To</th>
                 <th>Due Date</th>
                 <th>Status</th>
-                <th width="10%">Action</th>
+                <th width="13%">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +38,18 @@
                     <a href="" class="deleteModal" 
                         data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
+
+                        
+                    <a href="{{route('soCreateSJ',['id' => $datas->id]) }}"><i class="fas fa-plus-square"></i></a>
+                    
+                    <a href="" class="detailModal" data-id="{{$datas->id}}" ddata-sonbr="{{$datas->so_nbr}}"
+                        data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 
+                        data-shipfrom="{{$datas->so_ship_from}}" data-shipto="{{$datas->so_ship_to}}" 
+                        data-duedate="{{$datas->so_due_date}}" data-custdesc="{{$datas->getCOMaster->getCustomer->cust_desc ?? ''}}"
+                        data-toggle='modal' data-target="#detailModal"><i
+                        class="fas fa-book"></i></button>
                     @endif
+                    
                 </td>
             </tr>
             @empty

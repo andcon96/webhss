@@ -11,20 +11,33 @@
 @section('content')
 
 <!-- Page Heading -->
-
+<div class="col-md-12 mb-3">
+    <a href="{{route('CreateSJ') }}" class="btn btn-info bt-action">Create SJ</a>
+</div>
 <form action="{{route('suratjalan.index')}}" method="get">
 
     <div class="form-group row col-md-12">
-        <label for="conumber" class="col-md-2 col-form-label text-md-right">{{ __('CO Number.') }}</label>
+        <label for="sonumber" class="col-md-2 col-form-label text-md-right">{{ __('SO Number.') }}</label>
         <div class="col-md-4 col-lg-3">
-            {{-- <input id="conumber" type="text" class="form-control" name="conumber" value="{{ request()->input('conumber') }}" autofocus autocomplete="off"> --}}
-            <select id="conumber" class="form-control" name="conumber" autofocus autocomplete="off">
+            <select id="sonumber" class="form-control" name="sonumber" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
-                @foreach($listco as $conumbers)
-                <option value="{{$conumbers->id}}">{{$conumbers->co_nbr}}</option>
+                @foreach($listso as $sonumbers)
+                <option value="{{$sonumbers->id}}">{{$sonumbers->so_nbr}}</option>
                 @endforeach
             </select>
         </div>
+        <label for="sjnumber" class="col-md-2 col-form-label text-md-right">{{ __('SJ Number') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="sjnumber" class="form-control" name="sjnumber" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($listsj as $listsjs)
+                <option value="{{$listsjs->id}}">{{$listsjs->sj_nbr}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-12">
         <label for="s_customer" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="s_customer" class="form-control" name="s_customer" autofocus autocomplete="off">
@@ -34,9 +47,6 @@
                 @endforeach
             </select>
         </div>
-    </div>
-
-    <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
@@ -144,6 +154,49 @@
     </div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Delete Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="{{route('suratjalan.destroy', 'role')}}" method="post">
+
+                {{ method_field('delete') }}
+                {{ csrf_field() }}
+
+                <div class="modal-body">
+
+                    <input type="hidden" name="_method" value="delete">
+
+                    <input type="hidden" name="temp_id" id="temp_id" value="">
+
+                    <div class="container">
+                        <div class="row">
+                            Are you sure you want to delete SJ  Number :&nbsp; <strong><a name="temp_uname" id="temp_uname"></a></strong>
+                            &nbsp;?
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info bt-action" id="d_btnclose" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success bt-action" id="d_btnconf">Save</button>
+                    <button type="button" class="btn bt-action" id="d_btnloading" style="display:none">
+                        <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
 
 @endsection
 
@@ -151,13 +204,14 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#s_customer, #conumber').select2({
+    $('#s_customer, #sonumber, #sjnumber').select2({
         width: '100%',
     });
     
     function resetSearch(){
         $('#s_customer').val('');
-        $('#conumber').val('');
+        $('#sonumber').val('');
+        $('#sjnumber').val('');
     }
 
     $(document).ready(function(){
@@ -167,10 +221,12 @@
         let queryString = new URLSearchParams(paramString);
 
         let customer = queryString.get('s_customer');
-        let conumber = queryString.get('conumber');
+        let sonumber = queryString.get('sonumber');
+        let sjnumber = queryString.get('sjnumber');
 
         $('#s_customer').val(customer).trigger('change');
-        $('#conumber').val(conumber).trigger('change');
+        $('#sonumber').val(sonumber).trigger('change');
+        $('#sjnumber').val(sjnumber).trigger('change');
     });
 
     $(document).on('click', '.viewModal', function() { // Click to only happen on announce links
@@ -178,6 +234,7 @@
         var sonbr = $(this).data('sonbr');
         var sjnbr = $(this).data('sjnbr');
         var cust = $(this).data('cust');
+        var custdesc = $(this).data('custdesc');
         var shipto = $(this).data('shipto');
         var status = $(this).data('status');
         var truck = $(this).data('truck');
@@ -188,7 +245,7 @@
 
         document.getElementById("sonbr").value = sonbr;
         document.getElementById("sjnbr").value = sjnbr;
-        document.getElementById("cust").value = cust;
+        document.getElementById("cust").value = cust + ' - ' + custdesc;
         document.getElementById("shipto").value = shipto;
         document.getElementById("status").value = status;
         document.getElementById("truck").value = truck;

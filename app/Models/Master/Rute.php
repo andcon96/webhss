@@ -31,9 +31,14 @@ class Rute extends Model
     {
         return $this->belongsTo(CustomerShipTo::class, 'rute_customership_id', 'id');
     }
+    
     public function getHistory()
     {
         return $this->hasMany(RuteHistory::class,'history_rute_id','id');
-        
+    }
+
+    public function getActivePrice()
+    {
+        return $this->hasOne(RuteHistory::class, 'history_rute_id')->where('rute_is_active',1);
     }
 }

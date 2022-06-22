@@ -3,6 +3,8 @@
 namespace App\Models\Transaksi;
 
 use App\Models\Master\Customer;
+use App\Models\Master\CustomerShipTo;
+use App\Models\Master\ShipFrom;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +32,16 @@ class SalesOrderMstr extends Model
     public function getCOMaster()
     {
         return $this->hasOne(CustomerOrderMstr::class, 'id' , 'so_co_mstr_id');
+    }
+
+    public function getShipFrom()
+    {
+        return $this->belongsTo(ShipFrom::class, 'so_ship_from', 'sf_code');
+    }
+
+    public function getShipTo()
+    {
+        return $this->belongsTo(CustomerShipTo::class, 'so_ship_to', 'cs_shipto');
     }
 
     public function getNewSoAttribute()

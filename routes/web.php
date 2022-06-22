@@ -61,20 +61,27 @@ Route::group(['middleware' => ['auth']], function () {
     //================================
 
     Route::group(['middleware'=>'can:access_co'], function(){
-        Route::resource('customerorder',CustomerOrderController::class);
         Route::get('/customerorder/getdetail/{id}', [CustomerOrderController::class, 'getdetail'])->name('getDetailCO');
         Route::get('/customerorder/getalokasi/{id}', [CustomerOrderController::class, 'getalokasi'])->name('getAlokasiCO');
         Route::get('/customerorder/createso/{id}', [CustomerOrderController::class, 'createso'])->name('coCreateSO');
         Route::post('/customerorder/saveso', [CustomerOrderController::class, 'updateso'])->name('coUpdateSO');
+        Route::resource('customerorder',CustomerOrderController::class);
     });
 
     Route::group(['middleware'=>'can:access_sj'], function(){
+        Route::get('/suratjalan/socreatesj', [SuratJalanController::class, 'socreatesj'])->name("soCreateSJ");
+        Route::get('/suratjalan/createsj', [SuratJalanController::class, 'createsj'])->name("CreateSJ");
+        Route::get('/suratjalan/getdetail/{id}', [SuratJalanController::class, 'getdetail'])->name('getDetailSJ');
+        Route::get('getrute', [SuratJalanController::class, 'getrute'])->name('getRute');
+        Route::get('/detailso/{id}', [SuratJalanController::class, 'getdetailso'])->name('getDetailSJSO');
         Route::resource('suratjalan',SuratJalanController::class);
     });
 
     Route::group(['middleware'=>'can:access_so'], function(){
-        Route::resource('salesorder', SalesOrderController::class);
+        Route::get('/salesorder/getco', [SalesOrderController::class, 'getco'])->name('getCO');
+        Route::get('/salesorder/getalokasi/{id}', [SalesOrderController::class, 'getalokasiso'])->name('getAlokasiSO');
         Route::get('/salesorder/getdetail/{id}', [SalesOrderController::class, 'getdetail'])->name('getDetailSO');
+        Route::resource('salesorder', SalesOrderController::class);
         Route::get('/getum', [SalesOrderController::class, 'getUM'])->name('getum');
         Route::get('/getshipto', [SalesOrderController::class, 'getshipto'])->name('getShipTo');
     });
@@ -96,11 +103,11 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware'=>'can:access_lapor_sj'], function(){
-        Route::resource('laporsj', SuratJalanLaporMTController::class);
         Route::get('laporsj/{so}/{truck}', [SuratJalanLaporMTController::class, 'laporsj'])->name('LaporSJ');
         Route::post('laporsj/updatesj', [SuratJalanLaporMTController::class, 'updatesj'])->name('updateSJ');
         Route::get('laporsj/catatsj/{so}/{truck}', [SuratJalanLaporMTController::class, 'catatsj'])->name('CatatSJ');
         Route::post('laporsj/catatsj', [SuratJalanLaporMTController::class, 'updatecatatsj'])->name('updateCatatSJ');
+        Route::resource('laporsj', SuratJalanLaporMTController::class);
     });
 
     Route::group(['middleware'=>'can:access_lapor_kerusakan'], function(){
