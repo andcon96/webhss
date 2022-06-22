@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('menu_name','Role Maintenance')
+@section('menu_name','Rute Maintenance')
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
   <li class="breadcrumb-item"><a href="{{url('/')}}">Master</a></li>
@@ -27,16 +27,16 @@
       @foreach ($rute_data as $index => $show)
       <tr>
         <td>
-          {{$show->getTipe->tt_desc}}
+          {{$show->getTipe->tt_desc ?? ''}}
         </td>
         <td>
-          {{$show->getShipFrom->sf_desc}}
+          {{$show->getShipFrom->sf_desc ?? ''}}
         </td>
         <td>
-          {{$show->getShipTo->cs_shipto_name}}
+          {{$show->getShipTo->cs_shipto_name ?? ''}}
         </td>
         <td>
-          <a href="rutedetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
+          <a href="/historydetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
         </td>
       </tr>
       @endforeach

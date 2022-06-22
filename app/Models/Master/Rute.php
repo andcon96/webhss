@@ -4,12 +4,18 @@ namespace App\Models\Master;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Rute extends Model
 {
     use HasFactory;
 
     public $table = 'rute';
+    protected $fillable = [
+        'rute_tipe_id',
+        'rute_shipfrom_id',
+        'rute_customership_id'
+    ];
 
     public function getTipe()
     {
@@ -24,5 +30,10 @@ class Rute extends Model
     public function getShipTo()
     {
         return $this->belongsTo(CustomerShipTo::class, 'rute_customership_id', 'id');
+    }
+    public function getHistory()
+    {
+        return $this->hasMany(RuteHistory::class,'history_rute_id','id');
+        
     }
 }

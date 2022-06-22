@@ -17,9 +17,10 @@ class CreateRuteHistory extends Migration
             $table->id();
             $table->unsignedBigInteger('history_rute_id')->index();
             $table->foreign('history_rute_id')->references('id')->on('rute')->onDelete('restrict');
-            $table->decimal('rute_harga',15,2);
-            $table->tinyInteger('rute_is_active')->default(1);
-            $table->timestamp('history_last_active');
+            $table->decimal('history_harga',15,2);
+            $table->tinyInteger('history_is_active')->default(1);
+            $table->dateTime('history_last_active')->nullable();
+            $table->string('history_user');
             $table->timestamps();
         });
     }
