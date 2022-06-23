@@ -70,6 +70,26 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="trip" class="col-md-2 col-form-label text-md-right">Sangu Truck</label>
+            <div class="col-md-3">
+                <input type="text" id="sangutruck" class="form-control" value="0" readonly>
+            </div>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right">Komisi Truck</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="komisitruck" id="komisitruck" value="0" readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="trip" class="col-md-2 col-form-label text-md-right">Price Per Unit</label>
+            <div class="col-md-3">
+                <input type="text" id="defaultprice" class="form-control" value="0" readonly>
+            </div>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right">Total Price</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             <label for="trip" class="col-md-2 col-form-label text-md-right">Jumlah Trip</label>
             <div class="col-md-3">
                 <input type="number" class="form-control" name="trip" min="1" value="1" id="trip">
@@ -77,16 +97,6 @@
             <label for="totsangu" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
             <div class="col-md-3">
                 <input type="text" class="form-control sangu" name="totsangu" id="totsangu">
-            </div>
-        </div>
-        <div class="form-group row col-md-12">
-            <label for="trip" class="col-md-2 col-form-label text-md-right">Price Per Rute</label>
-            <div class="col-md-3">
-                <input type="text" id="defaultprice" class="form-control" value="0" readonly>
-            </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right">Default Sangu</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -133,11 +143,22 @@
         $('.qtysj').each(function(){
             sum += parseFloat(this.value);
         });
+
+        var hsangu = $('#sangutruck').val();
+        var hkomisi = $('#komisitruck').val();
+        var hprice = $('#defaultprice').val();
+        var jmlhtrip = $('#trip').val();
+
+        let total = parseInt(hprice) * parseInt(sum) + parseInt(jmlhtrip) * 
+                    (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',','')));
+
+        total = Number(total).toLocaleString('en-US');
+        
+        $('#defaultsangu').val(total);
     }
-    $(document).on('keyup', '.qtysj',function(){
-        let price = $('#defaultprice').val();
+
+    $(document).on('keyup', '.qtysj,#trip',function(){
         getDefaultSangu();
-        $('#defaultsangu').val(Number(price * sum).toLocaleString('en-US'));
     });
 
     $(document).on('change', '#truck',function(){
@@ -156,9 +177,10 @@
                 shipfrom: shipfrom
             },
             success: function(data) {
-                $('#defaultprice').val(data);
+                $('#sangutruck').val(Number(data['history_sangu'] ?? 0).toLocaleString('en-US'));
+                $('#komisitruck').val(Number(data['history_ongkos'] ?? 0).toLocaleString('en-US'))
+                $('#defaultprice').val(Number(data['history_harga'] ?? 0).toLocaleString('en-US'));
                 getDefaultSangu();
-                $('#defaultsangu').val(Number(data * sum).toLocaleString('en-US'));
             },
             error: function(data) {
                 Swal.fire({

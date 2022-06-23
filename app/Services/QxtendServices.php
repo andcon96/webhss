@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Master\Qxwsa;
 use App\Models\Transaksi\SalesOrderDetail;
+use App\Models\Transaksi\SuratJalanDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
@@ -275,10 +276,10 @@ class QxtendServices
                       <document>'.$data['remark'].'</document>'
                       ;
                       foreach($data['iddetail'] as $key => $idDetail){
-                          $datadetail = SalesOrderDetail::findOrFail($idDetail); 
+                          $datadetail = SuratJalanDetail::findOrFail($idDetail); 
                           $qdocbody.= '
                           <lineDetail>
-                                  <line>'.$datadetail->sod_line.'</line>
+                                  <line>'.$datadetail->sjd_line.'</line>
                                   <lotserialQty>'.$data['qtyakui'][$key].'</lotserialQty>
                                   <pickLogic>false</pickLogic>    
                                   <yn>true</yn>

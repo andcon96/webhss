@@ -39,6 +39,6 @@ class Rute extends Model
 
     public function getActivePrice()
     {
-        return $this->hasOne(RuteHistory::class, 'history_rute_id')->where('rute_is_active',1);
+        return $this->hasOne(RuteHistory::class, 'history_rute_id')->where('history_is_active',1);
     }
 }

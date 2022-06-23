@@ -13,16 +13,16 @@
         @php($totaltrip = 0)
         @php($ongoingtrip = 0)
         <tbody id="edittable">
-            @forelse ($data->countLaporanHist as $key => $datas)
+            @forelse ($data->getHistTrip as $key => $datas)
 
             <tr>
                 <td>{{$key + 1}}</td>
-                <td>{{$datas->getTruckDriver->getTruck->truck_no_polis}} -- {{$datas->getTruckDriver->getUser->name}}</td>
+                <td>{{$datas->getTruck->truck_no_polis}} -- {{$datas->getTruck->getUserDriver->name}}</td>
                 <td>{{$datas->created_at}}</td>
                 <td>
                     <input type="hidden" name="idsangu[]" value="{{$data->id}}">
                     <input type="hidden" name="idhist[]" value="{{$datas->id}}">
-                    <input type="text" class="form-control" name="sj[]" value="{{$datas->soh_sj}}" >
+                    <input type="text" class="form-control" name="sj[]" value="{{$datas->sjh_remark}}" >
                 </td>
             </tr>
 

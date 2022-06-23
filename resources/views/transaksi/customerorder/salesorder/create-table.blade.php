@@ -19,12 +19,20 @@
                     <td>{{$datas->cod_qty_ord}}</td>
                     <td>{{$datas->cod_qty_ord - $datas->cod_qty_used}}</td>
                     <td>
-                        <input type="hidden" name="operation[]" class="operation" value="M">
-                        <input type="hidden" name="idcodetail[]" value="{{$datas->id}}">
-                        <input type="hidden" name="line[]" value="{{$datas->cod_line}}">
-                        <input type="hidden" name="um[]" value="{{$datas->getItem->item_um}}">
-                        <input type="hidden" name="part[]" class="operation" value="{{$datas->cod_part}}">
-                        <input type="number" class="form-control" name="qtyord[]" value="{{$datas->cod_qty_ord - $datas->cod_qty_used}}" max="{{$datas->cod_qty_ord - $datas->cod_qty_used}}">
+                        <input type="hidden" name="operation[]" class="operation" value="M"
+                            {{ $datas->cod_qty_ord - $datas->cod_qty_used == 0 ? 'disabled' : '' }}>
+                        <input type="hidden" name="idcodetail[]" value="{{$datas->id}}"
+                            {{ $datas->cod_qty_ord - $datas->cod_qty_used == 0 ? 'disabled' : '' }}>
+                        <input type="hidden" name="line[]" value="{{$datas->cod_line}}"
+                            {{ $datas->cod_qty_ord - $datas->cod_qty_used == 0 ? 'disabled' : '' }}>
+                        <input type="hidden" name="um[]" value="{{$datas->getItem->item_um}}"
+                            {{ $datas->cod_qty_ord - $datas->cod_qty_used == 0 ? 'disabled' : '' }}>
+                        <input type="hidden" name="part[]" class="operation" value="{{$datas->cod_part}}"
+                            {{ $datas->cod_qty_ord - $datas->cod_qty_used == 0 ? 'disabled' : '' }}>
+                        <input type="number" class="form-control" name="qtyord[]" 
+                            value="{{$datas->cod_qty_ord - $datas->cod_qty_used}}" 
+                            max="{{$datas->cod_qty_ord - $datas->cod_qty_used}}"
+                            {{ $datas->cod_qty_ord - $datas->cod_qty_used == 0 ? 'disabled' : '' }}>
                     </td>
                 </tr>
             @empty

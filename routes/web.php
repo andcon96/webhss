@@ -103,9 +103,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware'=>'can:access_lapor_sj'], function(){
-        Route::get('laporsj/{so}/{truck}', [SuratJalanLaporMTController::class, 'laporsj'])->name('LaporSJ');
+        Route::get('laporsj/{sj}/{truck}', [SuratJalanLaporMTController::class, 'laporsj'])->name('LaporSJ');
         Route::post('laporsj/updatesj', [SuratJalanLaporMTController::class, 'updatesj'])->name('updateSJ');
-        Route::get('laporsj/catatsj/{so}/{truck}', [SuratJalanLaporMTController::class, 'catatsj'])->name('CatatSJ');
+        Route::get('laporsj/catatsj/{sj}/{truck}', [SuratJalanLaporMTController::class, 'catatsj'])->name('CatatSJ');
         Route::post('laporsj/catatsj', [SuratJalanLaporMTController::class, 'updatecatatsj'])->name('updateCatatSJ');
         Route::resource('laporsj', SuratJalanLaporMTController::class);
     });

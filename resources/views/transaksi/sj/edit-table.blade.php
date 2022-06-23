@@ -5,7 +5,7 @@
                 <th width="10%">Line</th>
                 <th width="40%">Part</th>
                 <th width="10%">UM</th>
-                <th width="10%">Qty Open CO</th>
+                <th width="10%">Qty Open SO</th>
                 <th width="10%">Qty Order</th>
                 <th width="10%">Qty Ship</th>
                 <th width="10%">Delete</th>
@@ -17,7 +17,7 @@
                 @php($qtyco = 0)
                 @php($sodetail = $data->getSOMaster->getDetail->where('sod_part',$datas->sjd_part)->where('sod_line',$datas->sjd_line)->first())
                 @php($sisa = $sodetail->sod_qty_ord - $sodetail->sod_qty_ship + $datas->sjd_qty_ship)
-
+                
                 <input type="hidden" name="operation[]" class="operation" value="M">
                 <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                 <input type="hidden" name="idsodetail[]" value="{{$sodetail->id}}">

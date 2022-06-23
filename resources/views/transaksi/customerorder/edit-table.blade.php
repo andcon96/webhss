@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th width="10%">Line</th>
-                <th width="50%">Part</th>
+                <th width="40%">Part</th>
                 <th width="10%">Qty Order</th>
                 <th width="10%">Qty Open</th>
                 <th width="10%">Qty New</th>
@@ -21,13 +21,13 @@
                     <input type="text" class="form-control" value="{{$datas->cod_part}} - {{$datas->getItem->item_desc ?? ''}}" readonly>
                 </td>
                 <td data-label="Qty Order">
-                    <input type="text" class="form-control" value="{{$datas->cod_qty_ord}}" name="qtyord[]" readonly>
+                    <input type="text" class="form-control" value="{{(int)$datas->cod_qty_ord}}" name="qtyord[]" readonly>
                 </td>
                 <td data-label="Qty Open">
                     <input type="text" class="form-control" value="{{$datas->cod_qty_ord - $datas->cod_qty_used}}" name="qtyopen[]" readonly>
                 </td>
                 <td data-label="Qty Order">
-                    <input type="number" class="form-control" value="{{$datas->cod_qty_ord}}" name="qtynew[]" min="{{$datas->cod_qty_used}}">
+                    <input type="number" class="form-control" value="{{(int)$datas->cod_qty_ord}}" name="qtynew[]" min="{{$datas->cod_qty_used}}">
                 </td>
                 <td data-label="Delete" style="vertical-align:middle;text-align:center;"> 
                     @if($datas->sod_qty_ship != 0)

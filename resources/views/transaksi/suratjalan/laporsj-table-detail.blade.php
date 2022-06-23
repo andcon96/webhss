@@ -5,22 +5,20 @@
                 <th width="5%">Line</th>
                 <th width="25%">Part</th>
                 <th width="5%">UM</th>
-                <th width="10%">Qty Order</th>
-                <th width="10%">Qty Open</th>
+                <th width="10%">Qty SJ</th>
                 <th width="10%">Qty Diakui</th>
             </tr>
         </thead>
         <tbody id="edittable">
-            @forelse ($data->getMaster->getDetail as $key => $datas)
+            @forelse ($data->getDetail as $key => $datas)
             <tr>
-                <td>{{$datas->sod_line}}</td>
-                <td>{{$datas->sod_part}}</td>
-                <td>{{$datas->sod_um}}</td>
-                <td>{{$datas->sod_qty_ord}}</td>
-                <td>{{number_format($datas->sod_qty_ord - $datas->sod_qty_ship,2)}}</td>
+                <td>{{$datas->sjd_line}}</td>
+                <td>{{$datas->sjd_part}}</td>
+                <td>{{$datas->getItem->item_um}}</td>
+                <td>{{$datas->sjd_qty_ship}}</td>
                 <td>
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
-                    <input type="number" name="qtyakui[]" class="form-control">
+                    <input type="number" name="qtyakui[]" value="{{$datas->sjd_qty_ship}}" class="form-control">
                 </td>
             </tr>
             @empty

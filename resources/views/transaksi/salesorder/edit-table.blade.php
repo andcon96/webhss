@@ -29,11 +29,11 @@
                     <input type="text" class="form-control" value="{{$sisa}}" name="sisa[]" readonly>
                 </td>
                 <td data-label="Qty Order">
-                    <input type="number" class="form-control" value="{{$datas->sod_qty_ord}}" name="qtyord[]" min="{{$datas->sod_qty_ship}}" max="{{$sisa}}">
-                    <input type="hidden" class="form-control" value="{{$datas->sod_qty_ord}}" name="qtyold[]" min="{{$datas->sod_qty_ship}}" max="{{$sisa}}">
+                    <input type="number" class="form-control" value="{{(int)$datas->sod_qty_ord}}" name="qtyord[]" min="{{(int)$datas->sod_qty_ship}}" max="{{$sisa}}">
+                    <input type="hidden" class="form-control" value="{{(int)$datas->sod_qty_ord}}" name="qtyold[]" min="{{(int)$datas->sod_qty_ship}}" max="{{$sisa}}">
                 </td>
                 <td data-label="Qty Ship">
-                    <input type="number" class="form-control" value="{{$datas->sod_qty_ship}}" name="qtyship[]" readonly>
+                    <input type="number" class="form-control" value="{{(int)$datas->sod_qty_ship}}" name="qtyship[]" readonly>
                 </td>
                 <td data-label="Delete" style="vertical-align:middle;text-align:center;"> 
                     @if($datas->sod_qty_ship != 0)

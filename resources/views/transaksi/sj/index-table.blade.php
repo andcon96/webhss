@@ -30,7 +30,7 @@
                         data-pengurus="{{$datas->getTruck->getUserPengurus->name}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
-                    
+                        
                     @if($datas->sj_status == 'Open')
                         <a href="{{route('suratjalan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
 
@@ -38,6 +38,8 @@
                             data-id="{{$datas->id}}" data-sonbr="{{$datas->sj_nbr}}"
                             data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
                     @endif
+
+                    
                 </td>
             </tr>
             @empty

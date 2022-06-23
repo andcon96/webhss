@@ -31,7 +31,7 @@ class SuratJalan extends Model
     
     public function getHistTrip()
     {
-        return $this->hasMany(SJHistTrip::class, 'sjh_sj_mstr_id', 'sj_so_mstr_id');
+        return $this->hasMany(SJHistTrip::class, 'sjh_sj_mstr_id');
     }
 
     

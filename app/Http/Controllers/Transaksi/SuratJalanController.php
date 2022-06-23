@@ -14,6 +14,7 @@ use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
 use App\Services\CreateTempTable;
+use App\Services\QxtendServices;
 use App\Services\WSAServices;
 use Carbon\Carbon;
 use Exception;
@@ -191,7 +192,6 @@ class SuratJalanController extends Controller
             alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
-            dd($err);
             alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
         }
 
@@ -229,7 +229,7 @@ class SuratJalanController extends Controller
                 $output .= '<td>'.$datas->sod_line.'</td>';
                 $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
                 $output .= '<td>'.$datas->getItem->item_um.'</td>';
-                $output .= '<td>'.$datas->sod_qty_ord.'</td>';
+                $output .= '<td>'.(int)$datas->sod_qty_ord.'</td>';
                 $output .= '<td>'.$qtyopen.'</td>';
                 $output .= '<td>
                             <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
@@ -253,17 +253,17 @@ class SuratJalanController extends Controller
                     ->with('getActivePrice')
                     ->first();
         
-        return $data->getActivePrice->rute_harga ?? 0;
+        return $data->getActivePrice ?? 0;
         
     }
 
     public function socreatesj(Request $request)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer')->findOrFail($request->id);
+        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getShipFrom','getShipTo')->findOrFail($request->id);
         $item = Item::get();
         $cust = Customer::get();
         $truck = Truck::with('getUserDriver','getUserPengurus')->get();
-
+        
         return view('transaksi.salesorder.suratjalan.create',compact('data','item','cust','truck'));
     }
     

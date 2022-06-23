@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            @include('transaksi.salesorder.create-table')
+            @include('transaksi.customerorder.create-table')
         </div>
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">

@@ -7,6 +7,7 @@ use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
+use App\Models\Master\ShipFrom;
 use App\Models\Transaksi\CustomerOrderDetail;
 use App\Models\Transaksi\CustomerOrderMstr;
 use App\Models\Transaksi\SalesOrderDetail;
@@ -82,6 +83,10 @@ class CustomerOrderController extends Controller
                 $coddet->save();
             }
 
+            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            $prefix->domain_co_rn = substr($getCORN,2,6);
+            $prefix->save();
+
             DB::commit();
             alert()->success('Success', 'Save Berhasil')->persistent('Dismiss');
             return back();
@@ -94,8 +99,6 @@ class CustomerOrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $comstr = CustomerOrderMstr::findOrFail($id);
         DB::beginTransaction();
         try{
 
@@ -209,14 +212,14 @@ class CustomerOrderController extends Controller
         $data = CustomerOrderMstr::with('getDetail.getItem')->findOrFail($id);
         $cust = Customer::get();
         $item = Item::get();
-        $shipto = CustomerShipTo::get();
+        $shipto = CustomerShipTo::where('cs_code',$data->co_cust_code)->get();
+        $shipfrom = ShipFrom::get();
 
-        return view('transaksi.customerorder.salesorder.create', compact('data','item','cust','shipto'));
+        return view('transaksi.customerorder.salesorder.create', compact('data','item','cust','shipto','shipfrom'));
     }
     
     public function updateso(Request $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try{
             Domain::where('domain_code',Session::get('domain'))->lockForUpdate()->first();

@@ -37,12 +37,15 @@
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="" autocomplete="off" maxlength="24" required autofocus>
+                <select name="shipfrom" id="shipfrom" class="form-control" required>
+                    @foreach($shipfrom as $shipfroms)
+                        <option value="{{$shipfroms->sf_code}}">{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>
+                    @endforeach
+                </select>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
                 <select name="shipto" id="shipto" class="form-control" required>
-                    <option value="{{$data->co_cust_code}}">{{$data->co_cust_code}}</option>
                     @foreach($shipto as $shiptos)
                         <option value="{{$shiptos->cs_shipto}}">{{$shiptos->cs_shipto}}</option>
                     @endforeach
@@ -71,7 +74,7 @@
 
 @section('scripts')
 <script>
-    $(' #shipto').select2({
+    $('#shipto,#shipfrom').select2({
         width: '100%'
     });
     

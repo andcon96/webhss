@@ -16,36 +16,40 @@
         <div class="form-group row col-md-12">
             <label for="sonbr" class="col-md-2 col-form-label text-md-right">Nomor SO</label>
             <div class="col-md-3">
-                <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->getMaster->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
-                <input type="hidden" name="idmstr" value="{{$data->getMaster->id}}">
+                <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->getSOMaster->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
+            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SJ</label>
             <div class="col-md-3">
-                <input id="customer" type="text" class="form-control" name="customer" value="{{$data->getMaster->so_cust}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="sjnbr" type="text" class="form-control" name="sjnbr" value="{{$data->sj_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input type="hidden" name="idsjmstr" value="{{$data->id}}">
             </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->getMaster->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->getSOMaster->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->getMaster->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->getSOMaster->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
             <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->getMaster->so_due_date}}" autocomplete="off" maxlength="24" autofocus disabled>
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->getSOMaster->so_due_date}}" autocomplete="off" maxlength="24" autofocus disabled>
             </div>
             <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
             <div class="col-md-3">
-                <input id="type" type="text" class="form-control" name="type" value="{{$data->getMaster->so_type}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="type" type="text" class="form-control" name="type" value="{{$data->getSOMaster->getCOMaster->co_type}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="effdate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
+            <label for="customer" class="col-md-2 col-form-label text-md-right">Customer</label>
+            <div class="col-md-3">
+                <input id="customer" type="text" class="form-control" name="customer" value="{{$data->getSOMaster->getCOMaster->co_cust_code}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+            <label for="effdate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
             <div class="col-md-3">
                 <input id="effdate" type="text" class="form-control" name="effdate" value="{{\Carbon\Carbon::now()->toDateString()}}" autocomplete="off" maxlength="24" autofocus>
             </div>
