@@ -6,6 +6,7 @@
                 <th width="20%">Kerusakan Code</th>
                 <th>Description</th>
                 <th>Active</th>
+                <th>Need Approval</th>
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -22,8 +23,11 @@
                     {{$datas->kerusakan_is_active == 1 ? 'Active' : 'Not Active'}}
                 </td>
                 <td>
+                    {{$datas->kerusakan_need_approval == 1 ? 'Yes' : 'No'}}
+                </td>
+                <td>
                     <a href="" class="editRole" data-id="{{$datas->id}}" data-code="{{$datas->kerusakan_code}}" 
-                        data-desc="{{$datas->kerusakan_desc}}" data-toggle='modal' data-target="#editModal">
+                        data-desc="{{$datas->kerusakan_desc}}" data-appr="{{$datas->kerusakan_need_approval}}" data-toggle='modal' data-target="#editModal">
                         <i class="fas fa-edit"></i>
                     </a>
                     <a href="" class="deleteRole" data-id="{{$datas->id}}" data-code="{{$datas->kerusakan_code}}" 

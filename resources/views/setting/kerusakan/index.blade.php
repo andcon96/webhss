@@ -67,6 +67,15 @@
                                 <input id="desc" type="text" class="form-control" name="desc" autocomplete="off" value="" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="appr" class="col-md-3 col-form-label text-md-right">{{ __('Need Approval') }}</label>
+                            <div class="col-md-7">
+                                <select id="appr" class="form-control" name="appr" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="modal-footer">
@@ -110,6 +119,15 @@
                             <label for="e_desc" class="col-md-3 col-form-label text-md-right">{{ __('Description') }}</label>
                             <div class="col-md-7">
                                 <input id="e_desc" type="text" class="form-control" name="e_desc" autocomplete="off" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="e_appr" class="col-md-3 col-form-label text-md-right">{{ __('Need Approval') }}</label>
+                            <div class="col-md-7">
+                                <select id="e_appr" class="form-control" name="e_appr" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -191,10 +209,11 @@
         let id = $(this).data('id');
         let code = $(this).data('code');
         let desc = $(this).data('desc');
-
+        let appr = $(this).data('appr')
         $('#edit_id').val(id);
         $('#e_code').val(code);
         $('#e_desc').val(desc);
+        $('#e_appr').val(appr);
     });
 
     $(document).on('click', '.deleteRole', function() { // Click to only happen on announce links
