@@ -17,13 +17,11 @@ use App\Http\Controllers\Master\StrukturKerusakanController;
 use App\Http\Controllers\Master\TruckDriverController;
 use App\Http\Controllers\Master\TruckMTController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\Transaksi\AuditTrailSanguController;
 use App\Http\Controllers\Transaksi\BrowsePolisController;
 use App\Http\Controllers\Transaksi\CheckInOutController;
 use App\Http\Controllers\Transaksi\CustomerOrderController;
 use App\Http\Controllers\Transaksi\KerusakanLaporMTController;
 use App\Http\Controllers\Transaksi\SalesOrderController;
-use App\Http\Controllers\Transaksi\SalesOrderSanguController;
 use App\Http\Controllers\Transaksi\SuratJalanController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
@@ -86,10 +84,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/getshipto', [SalesOrderController::class, 'getshipto'])->name('getShipTo');
     });
 
-    Route::group(['middleware'=>'can:access_so_sangu'], function(){
-        Route::resource('sosangu', SalesOrderSanguController::class);
-    });
-
     Route::group(['middleware'=>'can:access_trip'], function(){
         Route::resource('tripmt', TripMTController::class);
     });
@@ -119,11 +113,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware'=>'can:access_check_in_out'], function(){
         Route::resource('checkinout', CheckInOutController::class);
     }); 
-
-    Route::group(['middleware'=>'can:access_audit_trail_sangu'],function(){
-        Route::resource('sanguaudit', AuditTrailSanguController::class);
-    });
-
     
     Route::group(['middleware'=>'can:access_masters'], function () {
         //================================

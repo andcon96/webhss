@@ -72,14 +72,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'SO01');
         });
 
-        Gate::define('access_so_sangu', function($user){
-            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'SO02');
-        });
-
-        Gate::define('access_audit_trail_sangu', function($user){
-            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'SO03');
-        });
-        
         // TRIP
         Gate::define('access_trip_side', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'TR');

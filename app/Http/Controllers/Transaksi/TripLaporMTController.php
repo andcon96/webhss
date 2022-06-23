@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Truck;
-use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\SalesOrderMstr;
-use App\Models\Transaksi\SalesOrderSangu;
 use App\Models\Transaksi\SJHistTrip;
-use App\Models\Transaksi\SOHistTrip;
 use App\Models\Transaksi\SuratJalan;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

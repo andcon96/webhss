@@ -2,7 +2,6 @@
 
 namespace App\Models\Transaksi;
 
-use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\ShipFrom;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,11 +21,6 @@ class SalesOrderMstr extends Model
     public function getDetail()
     {
         return $this->hasMany(SalesOrderDetail::class, 'sod_so_mstr_id');
-    }
-
-    public function getSJ()
-    {
-        return $this->hasMany(SalesOrderSangu::class, 'sos_so_mstr_id');
     }
 
     public function getCOMaster()
