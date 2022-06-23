@@ -11,7 +11,7 @@
 @section('content')
 
 <!-- Page Heading -->
-<div class="col-md-12 offset-lg-2">
+<div class="col-md-8 offset-lg-2">
     <button class="btn btn-info bt-action newRole" data-toggle="modal" data-target="#myModal">
         Create Data</button>
 </div>

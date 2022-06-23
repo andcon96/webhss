@@ -28,6 +28,8 @@
             <th>Ship From</th>
             <th>Ship To</th>
             <th>Harga</th>
+            <th>Ongkos</th>
+            <th>Sangu</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +52,14 @@
                 {{$show["harga"] ?? ''}}
                 
               </td>
+              <td>
+                {{$show["ongkos"] ?? ''}}
+                
+              </td>
+              <td>
+                {{$show["sangu"] ?? ''}}
+                
+              </td>
               
             </tr>
             @endforeach
@@ -66,6 +76,8 @@
     <input type="hidden" name="shipfrom" value="{{$stringshipfrom}}">
     <input type="hidden" name="shipto" value="{{$stringshipto}}">
     <input type="hidden" name="harga" value="{{$stringharga}}">
+    <input type="hidden" name="ongkos" value="{{$stringongkos}}">
+    <input type="hidden" name="sangu" value="{{$stringsangu}}">
     <button class="btn bt-action" style="float: right;" >
         <b>Import</b>
       </button>

@@ -221,5 +221,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('importexcel', [RuteController::class,'importexcel']);
         Route::post('importrute', [RuteController::class,'importrute']);
         //================================
+
+
+        // Approval Maintenance
+        //================================
+        Route::resource('approvalmt', ApprovalController::class);
+        Route::get('/approvalmt/getdata', [ApprovalController::class, 'index']);
+        //================================
     });
 });
