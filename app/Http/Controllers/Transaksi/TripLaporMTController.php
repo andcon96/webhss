@@ -7,6 +7,7 @@ use App\Models\Master\Truck;
 use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SalesOrderSangu;
+use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SOHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use Carbon\Carbon;
@@ -24,7 +25,11 @@ class TripLaporMTController extends Controller
         $data = SuratJalan::query()
                         ->with('getTruck',
                                'getSOMaster.getCOMaster.getCustomer',
-                               'getHistTrip');
+                               'getHistTrip')
+                        ->where(function($query){
+                                $query->where('sj_status','Selesai');
+                                $query->orWhere('sj_status','Open');
+                        });
 
         $userid = Auth::user()->id;
         $userDriver = Truck::where('truck_user_id',$userid)->first();
@@ -54,32 +59,30 @@ class TripLaporMTController extends Controller
 
     public function edit($id)
     {
-        $data = SalesOrderMstr::with('getDetail')
-            ->with('getSangu.countLaporanHist', function ($query) {
-                $query->groupBy('soh_driver');
-            })
-            ->findOrFail($id);
-
-        $listdriver = SalesOrderSangu::with(['getTruckDriver.getUser','getTruckDriver.getTruck'])
-                    ->where('sos_so_mstr_id', $id)
-                    ->get();
+        $data = SuratJalan::with('getDetail.getItem')
+                    ->with('getHistTrip', function ($query) {
+                        $query->groupBy('sjh_truck');
+                    })
+                    ->findOrFail($id);
+     
+        $listdriver = SuratJalan::with(['getTruck.getUserDriver'])
+                                // ->where('sj_so_mstr_id',$data->sj_so_mstr_id)
+                                ->where('id',$id)
+                                ->get();
+        // dd($listdriver);
                     
-        $sohbyso = SOHistTrip::query()
-            ->with(['getMaster', 'getTruckDriver.getUser', 'getTruckDriver.getTruck'])
-            ->join('so_sangu', function ($e) {
-                $e->on('so_hist_trip.soh_so_mstr_id', 'so_sangu.sos_so_mstr_id');
-                $e->on('so_hist_trip.soh_driver', 'so_sangu.sos_truck');
-            });
+        $sohbyso = SJHistTrip::query()->with(['getSJMaster','getTruck.getUserDriver']);
 
         if (Auth::user()->role_id != '1') {
-            $sohbyso->whereRelation('getTruckDriver.getUser', 'id', '=', Auth::id());
+            $sohbyso->whereRelation('getTruck.getUserDriver', 'id', '=', Auth::id());
         }
 
-        $sohbyso = $sohbyso->where('soh_so_mstr_id', $id)
-                           ->select('*','so_hist_trip.created_at as tglhist')
-                           ->orderBy('soh_driver', 'ASC')
+        $sohbyso = $sohbyso->where('sjh_sj_mstr_id', $id)
+                           ->select('*','sj_trip_hist.created_at as tglhist')
+                           ->orderBy('sjh_truck', 'ASC')
                            ->get();
         
+                           
         return view('transaksi.trip.lapor.edit', compact('data', 'sohbyso', 'listdriver'));
     }
 
@@ -88,39 +91,39 @@ class TripLaporMTController extends Controller
         DB::beginTransaction();
         try {
             $user = Auth::user()->id;
-            $truckDriver = TruckDriver::where('truck_user_id', $user)
-                                      ->where('truck_is_active',1)
-                                      ->firstOrFail();
-            $SOSangu = SalesOrderSangu::where('sos_so_mstr_id', $request->idmaster)
-                ->where('sos_truck', $truckDriver->id)
-                ->first();
-                
-            $targetAbsen = $SOSangu->sos_tot_trip;
+            
+            $truck = Truck::query()
+                            ->where('truck_user_id', $user)
+                            ->where('truck_is_active',1)
+                            ->firstOrFail();
 
-            $OnGoingAbsen = SOHistTrip::where('soh_so_mstr_id', $request->idmaster)
-                ->where('soh_driver', $truckDriver->id)
-                ->count();
+            $sjmstr = SuratJalan::findOrFail($request->idsjmaster);
+                
+            $targetAbsen = $sjmstr->sj_jmlh_trip;
+
+            $OnGoingAbsen = SJHistTrip::where('sjh_sj_mstr_id', $request->idsjmaster)
+                                        ->where('sjh_truck', $truck->id)
+                                        ->count();
 
             if ($OnGoingAbsen >= $targetAbsen) {
                 alert()->error('Error', 'Target Absensi Sudah Tercapai, Data tidak disimpan')->persistent('Dismiss');
                 return back();
             }
 
-            $newdata = new SOHistTrip();
-            $newdata->soh_so_mstr_id = $request->idmaster;
-            $newdata->soh_driver = $truckDriver->id;
-            $newdata->created_at = Carbon::now();
+            $newdata = new SJHistTrip();
+            $newdata->sjh_sj_mstr_id = $request->idsjmaster;
+            $newdata->sjh_truck = $truck->id;
             $newdata->save();
 
             if($OnGoingAbsen + 1 == $targetAbsen){
-                $SOSangu->so_status = 'Selesai';
-                $SOSangu->save();
+                $sjmstr->sj_status = 'Selesai';
+                $sjmstr->save();
                 
-                $sisaSOSangu = SalesOrderSangu::where('sos_so_mstr_id', $request->idmaster)
-                                              ->where('so_status','Open')
+                $sisaSJ = SuratJalan::where('sj_so_mstr_id', $request->idsomaster)
+                                              ->where('sj_status','Open')
                                               ->count();
-                if($sisaSOSangu == 0){
-                    $so_mstr = SalesOrderMstr::find($request->idmaster);
+                if($sisaSJ == 0){
+                    $so_mstr = SalesOrderMstr::find($request->idsomaster);
                     if($so_mstr->so_status != 'Closed' && $so_mstr->so_status != 'Cancelled'){
                         $so_mstr->so_status = 'Selesai';
                         $so_mstr->save();

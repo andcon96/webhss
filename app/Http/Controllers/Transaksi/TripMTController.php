@@ -29,13 +29,15 @@ class TripMTController extends Controller
             $data = $data->orderBy('created_at','DESC')->take(5)->get();
         }else{
             if ($userDriver) {
-                $data = SuratJalan::with(['getSOMaster','getTruck'])
+                $data = SuratJalan::query()
+                                  ->with(['getSOMaster','getTruck'])
                                   ->with('getHistTrip', function($query) use($userDriver){
-                                        $query->where('sj_truck_id',$userDriver->id);
+                                        $query->where('sjh_truck',$userDriver->id);
                                   })
                                   ->where('sj_truck_id',$userDriver->id)
                                   ->orderBy('created_at','DESC')
                                   ->get();
+                                  
             } else {
                 $data = [];
             }

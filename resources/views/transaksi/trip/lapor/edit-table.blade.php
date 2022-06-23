@@ -13,10 +13,10 @@
             <tr>
                 <input type="hidden" class="operation" value="M">
                 <input type="hidden" value="{{$datas->id}}">
-                <td data-label="Line"><input type="number" class="form-control" value="{{$datas->sod_line}}" readonly></td>
-                <td data-label="Item Part"><input type="text" class="form-control" value="{{$datas->sod_part}}" readonly></td>
-                <td data-label="UM"><input type="text" class="form-control" value="{{$datas->sod_um}}" readonly></td>
-                <td data-label="Qty Order"><input type="number" class="form-control" value="{{$datas->sod_qty_ord}}" min="{{$datas->sod_qty_ship}}" readonly></td>
+                <td data-label="Line"><input type="number" class="form-control" value="{{$datas->sjd_line}}" readonly></td>
+                <td data-label="Item Part"><input type="text" class="form-control" value="{{$datas->sjd_part}} -- {{$datas->getItem->item_desc}}" readonly></td>
+                <td data-label="UM"><input type="text" class="form-control" value="{{$datas->getItem->item_um}}" readonly></td>
+                <td data-label="Qty Order"><input type="number" class="form-control" value="{{$datas->sjd_qty_ship}}" min="{{$datas->sod_qty_ship}}" readonly></td>
             </tr>
             @empty
             <tr>

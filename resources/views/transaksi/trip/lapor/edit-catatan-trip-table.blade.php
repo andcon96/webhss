@@ -13,28 +13,28 @@
         @php($ongoingtrip = 0)
         <tbody id="edittable">
             @forelse ($sohbyso as $key => $datas)
-            @if($datas->soh_driver != $driver && $driver != '')
+            @if($datas->sjh_truck != $driver && $driver != '')
             <tr>
                 <td colspan="3" style="text-align: right;" data-label="Total Trip"><b>{{$ongoingtrip}} / {{$totaltrip}}</b></td>
             </tr>
             @endif
-            @if($datas->soh_driver != $driver)
+            @if($datas->sjh_truck != $driver)
             @php($trip = 1)
             @php($ongoingtrip = 0)
             <tr>
-                <td colspan="3"><b>No Polis : {{$datas->getTruckDriver->getTruck->truck_no_polis}}</b></td>
+                <td colspan="3"><b>No Polis : {{$datas->getTruck->truck_no_polis}}</b></td>
             </tr>
             @endif
 
             <tr>
                 <td>Trip ke {{$trip}}</td>
-                <td data-label="No Polis & Driver">{{$datas->getTruckDriver->getTruck->truck_no_polis}} -- {{$datas->getTruckDriver->getUser->name}}</td>
+                <td data-label="No Polis & Driver">{{$datas->getTruck->truck_no_polis}} -- {{$datas->getTruck->getUserDriver->name}}</td>
                 <td data-label="Waktu Pencatatan">{{$datas->tglhist}}</td>
             </tr>
 
             @php($trip += 1)
-            @php($driver = $datas->soh_driver)
-            @php($totaltrip = $datas->sos_tot_trip)
+            @php($driver = $datas->sjh_truck)
+            @php($totaltrip = $datas->getSJMaster->sj_jmlh_trip)
             @php($ongoingtrip += 1)
 
             @if($loop->last)

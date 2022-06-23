@@ -2,8 +2,7 @@
 
 namespace App\Models\Transaksi;
 
-use App\Models\Master\TruckDriver;
-use App\Models\Master\User;
+use App\Models\Master\Truck;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,14 +14,14 @@ class SJHistTrip extends Model
     
     public $timestamps = false;
     
-    public function getMaster()
+    public function getSJMaster()
     {
-        return $this->belongsTo(SalesOrderMstr::class, 'sjh_so_mstr_id');
+        return $this->belongsTo(SuratJalan::class, 'sjh_sj_mstr_id');
     }
 
-    public function getSangu()
+    public function getTruck()
     {
-        return $this->belongsTo(SalesOrderSangu::class, 'sjh_so_mstr_id', 'sos_so_mstr_id');
+        return $this->hasOne(Truck::class,'id','sjh_truck');
     }
 
 }
