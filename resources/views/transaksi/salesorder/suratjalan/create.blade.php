@@ -53,7 +53,7 @@
         <div class="form-group row col-md-12">
             <label for="truck" class="col-md-2 col-form-label text-md-right">Truck</label>
             <div class="col-md-3">
-                <select id="truck" class="form-control" name="truck" autofocus autocomplete="off">
+                <select id="truck" class="form-control" name="truck" required autofocus autocomplete="off">
                     <option value=""> Select Data </option>
                     @foreach($truck as $trucks)
                     <option value="{{$trucks->id}}" 
@@ -96,7 +96,7 @@
             </div>
             <label for="totsangu" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
             <div class="col-md-3">
-                <input type="text" class="form-control sangu" name="totsangu" id="totsangu">
+                <input type="text" class="form-control sangu" required name="totsangu" id="totsangu">
             </div>
         </div>
         <div class="form-group row col-md-12">

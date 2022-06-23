@@ -14,8 +14,8 @@
     <div class="form-group row">
         <label for="polis" class="col-form-label text-md-right mt-2" style="margin-left:25px">{{ __('Truck') }}</label>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
-            @if($truckDriver)
-            <input type="text" name="polis" class="form-control" value="{{$truckDriver->getTruck->truck_no_polis ?? ''}}" readonly>
+            @if($userDriver)
+            <input type="text" name="polis" class="form-control" value="{{$userDriver->truck_no_polis ?? ''}}" readonly>
             @else
             <select name="polis" id="polis" class="form-control polis">
                 <option value="">Select Data</option>
@@ -25,15 +25,16 @@
             </select>
             @endif
         </div>
-        <div class="col-sm-12 col-md-2 mt-2" id='btn'>
-            @if(!$truckDriver)
-            <input type="submit" class="btn bt-ref" id="btnsearch" value="Search" style="margin-left:15px;" />
+        <div class="col-sm-12 col-md-4 mt-2" id='btn'>
+            @if(!$userDriver)
+            <input type="submit" class="btn bt-action newUser" id="btnsearch" value="Search" style="margin-left:15px;" />
+            <button class="btn bt-action newUser" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
             @endif
         </div>
     </div>
 </form>
 
-@if(!$truckDriver)
+@if(!$userDriver)
   @include('transaksi.checkinout.index-table-admin')
 @else
   @include('transaksi.checkinout.index-table-driver')
@@ -56,7 +57,7 @@
         {{ method_field('POST') }}
         {{ csrf_field() }}
 
-        <input type="hidden" name="truckdriver" id="truckdriver" value="{{$truckDriver->id ?? ''}}">
+        <input type="hidden" name="truck" id="truck" value="{{$userDriver->id ?? ''}}">
 
         <div class="modal-body">
             Check In / Check Out Truck ?
@@ -80,6 +81,14 @@
 <script>
     $('.polis').select2({
         width: '100%',
+    });
+    
+    function resetSearch(){
+        $('#polis').val('');
+    }
+    
+    $(document).on('click', '#btnrefresh', function(){
+        resetSearch();
     });
 
     $(document).ready(function() {

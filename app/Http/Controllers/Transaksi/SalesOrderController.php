@@ -7,7 +7,6 @@ use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
-use App\Models\Master\Prefix;
 use App\Models\Master\ShipFrom;
 use App\Models\Transaksi\CustomerOrderDetail;
 use App\Models\Transaksi\CustomerOrderMstr;
@@ -116,20 +115,20 @@ class SalesOrderController extends Controller
             
             
 
-            // $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
-            // if($sendSO === false){
-            //     alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($sendSO == 'nourl'){
-            //     alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($sendSO[0] == 'error'){
-            //     alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }
+            $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
+            if($sendSO === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }
 
             DB::commit();
             alert()->success('Success', 'Sales Order Created')->persistent('Dismiss');
@@ -209,6 +208,22 @@ class SalesOrderController extends Controller
                 }         
                 
             }
+
+            $sendSO = (new QxtendServices())->qxSOMaintenanceUpdate($request->all());
+            if($sendSO === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }
+
             DB::commit();
             alert()->success('Success', 'SO Updated')->persistent('Dismiss');
             return back();

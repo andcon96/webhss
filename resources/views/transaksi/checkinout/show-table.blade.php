@@ -7,7 +7,7 @@
             </tr>
         </thead>
         <tbody id="edittable">
-            @forelse ($data->getActiveDriver->getAllCheckInOut as $key => $datas)
+            @forelse ($data->getAllCheckInOut as $key => $datas)
             <tr>
                 <td>
                     {{$datas->cio_is_check_in ? "Check In" : "Check Out"}}

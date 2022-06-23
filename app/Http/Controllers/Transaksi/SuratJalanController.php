@@ -210,6 +210,7 @@ class SuratJalanController extends Controller
                 $output .= '<td>'.$datas->sjd_part.' - '.$datas->getItem->item_desc.'</td>';
                 $output .= '<td>'.$datas->getItem->item_um.'</td>';
                 $output .= '<td>'.$datas->sjd_qty_ship.'</td>';
+                $output .= '<td>'.$datas->sjd_qty_conf.'</td>';
                 $output .= '</tr>';
             }
         }
@@ -225,6 +226,9 @@ class SuratJalanController extends Controller
             $output = '';
             foreach($data as $datas){
                 $qtyopen = $datas->sod_qty_ord - $datas->sod_qty_ship;
+
+                $qtyopen <= 0 ? $status = 'disabled' : $status = '';
+                
                 $output .= '<tr>';
                 $output .= '<td>'.$datas->sod_line.'</td>';
                 $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
@@ -233,9 +237,9 @@ class SuratJalanController extends Controller
                 $output .= '<td>'.$qtyopen.'</td>';
                 $output .= '<td>
                             <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
-                                    value="'.$qtyopen.'" required class="form-control qtysj">
-                            <input type="hidden" name="line[]" value="'.$datas->sod_line.'">
-                            <input type="hidden" name="part[]" value="'.$datas->sod_part.'">        
+                                    value="'.$qtyopen.'" required class="form-control qtysj" '.$status.'>
+                            <input type="hidden" '.$status.' name="line[]" value="'.$datas->sod_line.'">
+                            <input type="hidden" '.$status.' name="part[]" value="'.$datas->sod_part.'">        
                             </td>';
                 $output .= '</tr>';
             }

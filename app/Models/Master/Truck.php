@@ -2,7 +2,7 @@
 
 namespace App\Models\Master;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Transaksi\CheckInOut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
