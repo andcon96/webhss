@@ -11,8 +11,8 @@
         <tbody>
             @forelse ($data as $key => $datas)
                 <tr>
-                    <td data-label="No Polis">{{$datas->getTruckDriver->getTruck->truck_no_polis}}</td>
-                    <td data-label="Driver">{{$datas->getTruckDriver->getUser->name}}</td>
+                    <td data-label="No Polis">{{$datas->truck_no_polis}}</td>
+                    <td data-label="Driver">{{$datas->getUserDriver->name}}</td>
                     <td data-label="Aktivitas">
                         {{$datas->cio_is_check_in == 1 ? 'Check In' : 'Check Out'}}
                     </td>

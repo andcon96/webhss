@@ -65,7 +65,7 @@
         <!-- konten modal-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">Customer Order</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel">Surat Jalan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -132,7 +132,8 @@
                                     <th>Line</th>
                                     <th>Item Part</th>
                                     <th>Item UM</th>
-                                    <th>Qty Order</th>
+                                    <th>Qty Ship</th>
+                                    <th>Qty Confirm</th>
                                 </tr>
                             </thead>
                             <tbody id="bodydetail">

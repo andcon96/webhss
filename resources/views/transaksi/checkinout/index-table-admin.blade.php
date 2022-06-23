@@ -13,18 +13,18 @@
             @forelse ($data as $key => $datas)
                 <tr>
                     <td>{{$datas->truck_no_polis}}</td>
-                    @if($datas->getActiveDriver)
-                    <td>{{$datas->getActiveDriver->getUser->name}}</td>
+                    @if($datas->getUserDriver)
+                    <td>{{$datas->getUserDriver->name}}</td>
                     @else
                     <td>No Data</td>
                     @endif
-                    @if($datas->getActiveDriver->getLastCheckInOut)
-                        @if($datas->getActiveDriver->getLastCheckInOut->cio_is_check_in == 1)
+                    @if($datas->getLastCheckInOut)
+                        @if($datas->getLastCheckInOut->cio_is_check_in == 1)
                             <td style="color: green">Check In</td>
                         @else
                             <td style="color: red">Check Out</td>
                         @endif
-                        <td>{{$datas->getActiveDriver->getLastCheckInOut->created_at}}</td>
+                        <td>{{$datas->getLastCheckInOut->created_at}}</td>
                     @else 
                         <td>No Data</td>
                         <td>No Data</td>

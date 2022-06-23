@@ -19,9 +19,13 @@
                     <td>{{$datas->sod_qty_ord}}</td>
                     <td>{{$datas->sod_qty_ord - $datas->sod_qty_ship}}</td>
                     <td>
-                        <input type="hidden" name="line[]" value="{{$datas->sod_line}}">
-                        <input type="hidden" name="part[]" value="{{$datas->sod_part}}">
-                        <input type="number" class="form-control qtysj" name="qtysj[]" value="{{$datas->sod_qty_ord - $datas->sod_qty_ship}}" max="{{$datas->sod_qty_ord}}">
+                        <input type="hidden" name="line[]" value="{{$datas->sod_line}}" 
+                                {{$datas->sod_qty_ord - $datas->sod_qty_ship <= 0 ? 'Disabled' : '' }}>
+                        <input type="hidden" name="part[]" value="{{$datas->sod_part}}" 
+                                {{$datas->sod_qty_ord - $datas->sod_qty_ship <= 0 ? 'Disabled' : '' }}>
+                        <input type="number" class="form-control qtysj" name="qtysj[]" 
+                                value="{{$datas->sod_qty_ord - $datas->sod_qty_ship}}" max="{{$datas->sod_qty_ord}}"
+                                {{$datas->sod_qty_ord - $datas->sod_qty_ship <= 0 ? 'Disabled' : '' }}>
                     </td>
                 </tr>
             @empty
