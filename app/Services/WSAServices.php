@@ -231,12 +231,12 @@ class WSAServices
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
             <Body>
-            <HRD_shipto_mstr xmlns="'.$wsa->wsas_path.'">
-            <inpdomain>'.$domain.'</inpdomain>
-            </HRD_shipto_mstr>
+                <HRD_cust_shipto xmlns="'.$wsa->wsas_path.'">
+                    <inpdomain>'.$domain.'</inpdomain>
+                </HRD_cust_shipto>
             </Body>
-            </Envelope>';
-
+        </Envelope>';
+        // dd($qdocRequest);
         $curlOptions = array(
             CURLOPT_URL => $qxUrl,
             CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
@@ -281,124 +281,130 @@ class WSAServices
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        // dd($qdocResponse,$dataloop);
+        
         if($qdocResult == 'true'){
             DB::beginTransaction();
             try{
-
+                
                 foreach($dataloop as $datas){
-                    $cust = CustomerShipTo::updateOrCreate([
-                        'cust_code' => $datas->t_custcode,
-                        'cust_domain' => $datas->t_domain,
-                        'cust_shipto' => $datas->t_shipto
-                    ]);
+                // dd($datas->domain,$datas->t_)    
+                     CustomerShipTo::updateOrCreate([
+                        'cs_domain' => $datas->t_domain,
+                        'cs_cust_code' => $datas->t_custcode,
+                        'cs_shipto' => $datas->t_shipto,
 
-                    $cust->cust_shipto_name = $datas->t_shiptoname;
-                    $cust->cust_address = $datas->t_shiptoaddr;
-                    $cust->save();
+                    ],[                     
+                        'cs_shipto_name' => $datas->t_custname,
+                        'cs_address' => $datas->t_shiptoaddr
+                    ]);
+                    
+
                 }
+
                 DB::commit();
                 return true;
             }catch(Exception $e){
+                
                 DB::rollBack();
+                dd($e);
                 return false;
             }
         }else{
             return false;
         }
     }
-    public function wsatruck()
-    {
-        $wsa = Qxwsa::first();
+    // public function wsatruck()
+    // {
+    //     $wsa = Qxwsa::first();
 
-        $qxUrl = $wsa->wsas_url;
-        $qxReceiver = '';
-        $qxSuppRes = 'false';
-        $qxScopeTrx = '';
-        $qdocName = '';
-        $qdocVersion = '';
-        $dsName = '';
-        $timeout = 0;
-        $domain = Session::get('domain');
+    //     $qxUrl = $wsa->wsas_url;
+    //     $qxReceiver = '';
+    //     $qxSuppRes = 'false';
+    //     $qxScopeTrx = '';
+    //     $qdocName = '';
+    //     $qdocVersion = '';
+    //     $dsName = '';
+    //     $timeout = 0;
+    //     $domain = Session::get('domain');
 
-        $qdocRequest =
-            '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
-            <Body>
-            <HRD_shipto_mstr xmlns="'.$wsa->wsas_path.'">
-            <inpdomain>'.$domain.'</inpdomain>
-            </HRD_shipto_mstr>
-            </Body>
-            </Envelope>';
+    //     $qdocRequest =
+    //         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    //         <Body>
+    //         <HRD_shipto_mstr xmlns="'.$wsa->wsas_path.'">
+    //         <inpdomain>'.$domain.'</inpdomain>
+    //         </HRD_shipto_mstr>
+    //         </Body>
+    //         </Envelope>';
 
-        $curlOptions = array(
-            CURLOPT_URL => $qxUrl,
-            CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
-            CURLOPT_TIMEOUT => $timeout + 120, // The maximum number of seconds to allow cURL functions to execute. must be greater than CURLOPT_CONNECTTIMEOUT
-            CURLOPT_HTTPHEADER => $this->httpHeader($qdocRequest),
-            CURLOPT_POSTFIELDS => preg_replace("/\s+/", " ", $qdocRequest),
-            CURLOPT_POST => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => false
-        );
+    //     $curlOptions = array(
+    //         CURLOPT_URL => $qxUrl,
+    //         CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
+    //         CURLOPT_TIMEOUT => $timeout + 120, // The maximum number of seconds to allow cURL functions to execute. must be greater than CURLOPT_CONNECTTIMEOUT
+    //         CURLOPT_HTTPHEADER => $this->httpHeader($qdocRequest),
+    //         CURLOPT_POSTFIELDS => preg_replace("/\s+/", " ", $qdocRequest),
+    //         CURLOPT_POST => true,
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_SSL_VERIFYPEER => false,
+    //         CURLOPT_SSL_VERIFYHOST => false
+    //     );
 
-        $getInfo = '';
-        $httpCode = 0;
-        $curlErrno = 0;
-        $curlError = '';
-        $qdocResponse = '';
+    //     $getInfo = '';
+    //     $httpCode = 0;
+    //     $curlErrno = 0;
+    //     $curlError = '';
+    //     $qdocResponse = '';
 
-        $curl = curl_init();
-        if ($curl) {
-            curl_setopt_array($curl, $curlOptions);
-            $qdocResponse = curl_exec($curl);           // sending qdocRequest here, the result is qdocResponse.
-            $curlErrno    = curl_errno($curl);
-            $curlError    = curl_error($curl);
-            $first        = true;
+    //     $curl = curl_init();
+    //     if ($curl) {
+    //         curl_setopt_array($curl, $curlOptions);
+    //         $qdocResponse = curl_exec($curl);           // sending qdocRequest here, the result is qdocResponse.
+    //         $curlErrno    = curl_errno($curl);
+    //         $curlError    = curl_error($curl);
+    //         $first        = true;
 
-            foreach (curl_getinfo($curl) as $key => $value) {
-                if (gettype($value) != 'array') {
-                    if (!$first) $getInfo .= ", ";
-                    $getInfo = $getInfo . $key . '=>' . $value;
-                    $first = false;
-                    if ($key == 'http_code') $httpCode = $value;
-                }
-            }
-            curl_close($curl);
-        }
+    //         foreach (curl_getinfo($curl) as $key => $value) {
+    //             if (gettype($value) != 'array') {
+    //                 if (!$first) $getInfo .= ", ";
+    //                 $getInfo = $getInfo . $key . '=>' . $value;
+    //                 $first = false;
+    //                 if ($key == 'http_code') $httpCode = $value;
+    //             }
+    //         }
+    //         curl_close($curl);
+    //     }
 
-        $xmlResp = simplexml_load_string($qdocResponse);
+    //     $xmlResp = simplexml_load_string($qdocResponse);
 
-        $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
+    //     $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         
-        $dataloop    = $xmlResp->xpath('//ns1:tempRow');
+    //     $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         
-        $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        // dd($qdocResponse,$dataloop);
-        if($qdocResult == 'true'){
-            DB::beginTransaction();
-            try{
+    //     $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
+    //     // dd($qdocResponse,$dataloop);
+    //     if($qdocResult == 'true'){
+    //         DB::beginTransaction();
+    //         try{
 
-                foreach($dataloop as $datas){
-                    $cust = CustomerShipTo::updateOrCreate([
-                        'cust_code' => $datas->t_custcode,
-                        'cust_domain' => $datas->t_domain,
-                        'cust_shipto' => $datas->t_shipto
-                    ]);
+    //             foreach($dataloop as $datas){
+    //                 $cust = CustomerShipTo::updateOrCreate([
+    //                     'cust_code' => $datas->t_custcode,
+    //                     'cust_domain' => $datas->t_domain,
+    //                     'cust_shipto' => $datas->t_shipto
+    //                 ]);
 
-                    $cust->cust_shipto_name = $datas->t_shiptoname;
-                    $cust->cust_address = $datas->t_shiptoaddr;
-                    $cust->save();
-                }
-                DB::commit();
-                return true;
-            }catch(Exception $e){
-                DB::rollBack();
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
+    //                 $cust->cust_shipto_name = $datas->t_shiptoname;
+    //                 $cust->cust_address = $datas->t_shiptoaddr;
+    //                 $cust->save();
+    //             }
+    //             DB::commit();
+    //             return true;
+    //         }catch(Exception $e){
+    //             DB::rollBack();
+    //             return false;
+    //         }
+    //     }else{
+    //         return false;
+    //     }
+    // }
     
 }

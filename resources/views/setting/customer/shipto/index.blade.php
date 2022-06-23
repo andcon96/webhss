@@ -49,10 +49,10 @@
             <tbody>
                 @forelse($data as $show)
                     <tr>
-                        <td>{{ $show->cust_code }}</td>
-                        <td>{{ $show->cust_shipto }}</td>
-                        <td>{{ $show->cust_shipto_name }}</td>
-                        <td>{{ $show->cust_address }}</td>
+                        <td>{{ $show->cs_cust_code }}</td>
+                        <td>{{ $show->cs_shipto }}</td>
+                        <td>{{ $show->cs_shipto_name }}</td>
+                        <td>{{ $show->cs_address }}</td>
                     </tr>
                 @empty
                     <tr>

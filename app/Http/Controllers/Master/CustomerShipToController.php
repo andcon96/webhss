@@ -18,7 +18,7 @@ class CustomerShipToController extends Controller
         if($request->s_custcode){
             $data->where('id',$request->s_custcode);
         }
-        
+    
         $data = $data->paginate(10);
 
         $listcust = Customer::get();
