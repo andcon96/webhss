@@ -24,6 +24,8 @@ class RuteImport implements ToCollection
                 'shipfrom'=>$row[1],
                 'shipto'=>$row[2],
                 'harga'=>$row[3],
+                'ongkos'=>$row[4],
+                'sangu'=>$row[5],
             ];
         });    
     }

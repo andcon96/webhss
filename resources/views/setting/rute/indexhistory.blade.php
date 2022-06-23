@@ -26,6 +26,8 @@
             <th>Ship From</th>
             <th>Ship To</th>
             <th>Harga</th>
+            <th>Sangu</th>
+            <th>Ongkos</th>
             <th>Active</th>
             <th>Last Active</th>
         </tr>
@@ -45,6 +47,12 @@
               </td>
               <td>
                 {{$show->history_harga ?? ''}}
+              </td>
+              <td>
+                {{$show->history_sangu ?? ''}}
+              </td>
+              <td>
+                {{$show->history_ongkos ?? ''}}
               </td>
               <td>
                 {{$show->history_is_active ?? ''}}
@@ -92,7 +100,19 @@
                   <div class="form-group row">
                     <label for="harga" class="col-md-3 col-form-label text-md-right" style="color: black">Harga</label>
                     <div class="col-md-7">
-                        <input id="harga" type="number" class="form-control" name="harga" step=".01" required>
+                        <input id="harga" type="number" class="form-control" name="harga" step=".01" value="0" min="0" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="sangu" class="col-md-3 col-form-label text-md-right" style="color: black">Sangu</label>
+                    <div class="col-md-7">
+                        <input id="sangu" type="number" class="form-control" name="sangu" step=".01" value="0" min="0" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="ongkos" class="col-md-3 col-form-label text-md-right" style="color: black">Ongkos</label>
+                    <div class="col-md-7">
+                        <input id="ongkos" type="number" class="form-control" name="ongkos" step=".01" value="0" min="0" required>
                     </div>
                   </div>
         

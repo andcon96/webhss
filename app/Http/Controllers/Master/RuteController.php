@@ -53,7 +53,8 @@ class RuteController extends Controller
     {
         $ruteid = $request->idrute;
         $harga = $request->harga;
-
+        $sangu = $request->sangu;
+        $ongkos = $request->ongkos;
         $lasthistory = RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)->first();
         DB::beginTransaction();
         
@@ -68,6 +69,8 @@ class RuteController extends Controller
                 $rutehist = new RuteHistory();
                 $rutehist->history_rute_id = $ruteid;
                 $rutehist->history_harga = $harga;
+                $rutehist->history_sangu = $sangu;
+                $rutehist->history_ongkos = $ongkos;
                 $rutehist->history_is_active = 1;
                 $rutehist->history_user = Auth::user()->username;
                 $rutehist->save();
@@ -158,6 +161,8 @@ class RuteController extends Controller
         $headers = array('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         return response()->download($file, 'template_hss.xlsx', $headers); 
     }
+
+
     public function importexcel(Request $request){
         // dd($request->all());
         $this->validate($request, [
@@ -186,12 +191,16 @@ class RuteController extends Controller
             $stringshipfrom = '';
             $stringshipto = '';
             $stringharga = '';
+            $stringongkos = '';
+            $stringsangu = '';
             foreach($rute_collect as $ri){
 
                 $tipetruk = $tipetruk_or->where('tt_code',$ri['tipe'])->first();
                 $shipfrom = $shipfrom_or->where('sf_code',$ri['shipfrom'])->first();
                 $shipto = $shipto_or->where('cs_shipto',$ri['shipto'])->first();
                 $harga = $ri['harga'];
+                $ongkos = $ri['ongkos'];
+                $sangu = $ri['sangu'];
                 $valtipetruk = $tipetruk->id;
                 $valshipfrom = $shipfrom->id;
                 $valshipto = $shipto->id;
@@ -200,6 +209,8 @@ class RuteController extends Controller
                 $stringshipfrom.=$valshipfrom.';';
                 $stringshipto.=$valshipto.';';
                 $stringharga.=$harga.';';
+                $stringongkos.=$ongkos.';';
+                $stringsangu.=$sangu.';';
 
                 $i++;
             
@@ -209,7 +220,9 @@ class RuteController extends Controller
             $stringshipfrom = rtrim($stringshipfrom,';');
             $stringshipto = rtrim($stringshipto,';');
             $stringharga = rtrim($stringharga,';');
-            return view('setting.rute.viewexcel', compact('rute_collect','stringtipe','stringshipfrom','stringshipto','stringharga'));
+            $stringongkos = rtrim($stringongkos,';');
+            $stringsangu = rtrim($stringsangu,';');
+            return view('setting.rute.viewexcel', compact('rute_collect','stringtipe','stringshipfrom','stringshipto','stringharga','stringongkos','stringsangu',));
             
         } catch (Exception $e) {
             
@@ -224,11 +237,15 @@ class RuteController extends Controller
         $shipfromstring = $request->shipfrom;
         $shiptostring = $request->shipto;
         $hargastring = $request->harga;
+        $ongkosstring = $request->ongkos;
+        $sangustring = $request->sangu;
 
         $tipeid = explode(';',$tipeidstring);
         $shipfrom = explode(';',$shipfromstring);
         $shipto = explode(';',$shiptostring);
         $harga = explode(';',$hargastring);
+        $ongkos = explode(';',$ongkosstring);
+        $sangu = explode(';',$sangustring);
         $rutearray = [];
         $arrayinsert = [];
         
@@ -253,6 +270,8 @@ class RuteController extends Controller
                 $arrayinsert[$index] = [
                     'history_rute_id' => $ruteid,
                     'history_harga' => $harga[$index],
+                    'history_ongkos' => $ongkos[$index],
+                    'history_sangu' => $sangu[$index],
                     'history_is_active' => 1,
                     'history_user' => Auth::user()->username
                 ];

@@ -29,11 +29,13 @@ class KerusakanController extends Controller
 
     public function store(Request $request)
     {
+        
         DB::beginTransaction();
         try{
             $newdata = new Kerusakan();
             $newdata->kerusakan_code = $request->code;
             $newdata->kerusakan_desc = $request->desc;
+            $newdata->kerusakan_need_approval = $request->appr;
             $newdata->save();
 
             DB::commit();
@@ -51,6 +53,7 @@ class KerusakanController extends Controller
         try{
             $newdata = Kerusakan::findOrFail($request->edit_id);
             $newdata->kerusakan_desc = $request->e_desc;
+            $newdata->kerusakan_need_approval = $request->e_appr;
             $newdata->save();
 
             DB::commit();
@@ -71,6 +74,7 @@ class KerusakanController extends Controller
             $newstat = 0;
             $newdata->kerusakan_is_active == 0 ? $newstat = 1 : $newstat = 0;
             $newdata->kerusakan_is_active = $newstat;
+            
             $newdata->save();
 
             DB::commit();

@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Master</a></li>
-    <li class="breadcrumb-item active">Kerusakan Maintenance</li>
+    <li class="breadcrumb-item active">Tipe Truck Maintenance</li>
 </ol>
 @endsection
 
@@ -16,11 +16,11 @@
         Create Data</button>
 </div>
 
-<form action="{{route('kerusakanmt.index')}}" method="get">
+<form action="{{route('tipetruckmt.index')}}" method="get">
     <div class="form-group row offset-md-1 col-md-10 mt-3">
-        <label for="s_kerusakan" class="col-md-2 col-form-label text-md-right">{{ __('Kerusakan') }}</label>
+        <label for="s_ttcode" class="col-md-2 col-form-label text-md-right">{{ __('Code') }}</label>
         <div class="col-md-3">
-            <select id="s_kerusakan" class="form-control" name="s_kerusakan" autofocus autocomplete="off">
+            <select id="s_ttcode" class="form-control" name="s_ttcode" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
                 @foreach($kerusakan as $datas)
                 <option value="{{$datas->id}}">{{$datas->kerusakan_code}} -- {{$datas->kerusakan_desc}}</option>
@@ -35,7 +35,7 @@
     </div>
 </form>
 
-@include('setting.kerusakan.index-table')
+@include('setting.tipetruck.index-table')
 
 
 <!--Create Modal-->
@@ -51,7 +51,7 @@
             </div>
             <div class="panel-body">
                 <!-- heading modal -->
-                <form class="form-horizontal" role="form" method="POST" action="{{route('kerusakanmt.store')}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{route('tipetruckmt.store')}}">
                     {{ method_field('post') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
