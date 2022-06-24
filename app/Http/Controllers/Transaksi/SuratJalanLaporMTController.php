@@ -29,7 +29,7 @@ class SuratJalanLaporMTController extends Controller
             $data = [];
         }
 
-        return view('transaksi.suratjalan.index', compact('data', 'truck'));
+        return view('transaksi.sjcust.index', compact('data', 'truck'));
     }
 
     public function laporsj($sj, $truck)
@@ -42,7 +42,7 @@ class SuratJalanLaporMTController extends Controller
                         ->where('sj_truck_id',$truck)
                         ->firstOrFail();
                         
-        return view('transaksi.suratjalan.laporsj', compact('data'));
+        return view('transaksi.sjcust.laporsj', compact('data'));
     }
 
     public function updatesj(Request $request){
@@ -96,7 +96,7 @@ class SuratJalanLaporMTController extends Controller
                         ->where('sj_truck_id',$truck)
                         ->firstOrFail();
                         
-        return view('transaksi.suratjalan.catatsj.index', compact('data'));
+        return view('transaksi.sjcust.catatsj.index', compact('data'));
     }
 
     public function updatecatatsj(Request $request)

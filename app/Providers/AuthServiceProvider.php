@@ -67,7 +67,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'SO05');
         });
 
-
         Gate::define('access_so', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'SO01');
         });
@@ -93,6 +92,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'TR04');
         });
 
+        Gate::define('access_rb', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'TR05');
+        });
+
         // DRIVER
         Gate::define('access_drive_side', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'DR');
@@ -100,6 +103,15 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('access_check_in_out', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'DR01');
         });
+
+        // DRIVER
+        Gate::define('access_report_side', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'RP');
+        });
+        Gate::define('access_report', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'RP01');
+        });
+
 
         
 

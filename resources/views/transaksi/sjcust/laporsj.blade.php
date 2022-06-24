@@ -62,7 +62,7 @@
         </div>
 
         <div class="form-group row col-md-12">
-            @include('transaksi.suratjalan.laporsj-table-detail')
+            @include('transaksi.sjcust.laporsj-table-detail')
         </div>
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">

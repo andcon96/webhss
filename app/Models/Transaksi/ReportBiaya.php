@@ -14,7 +14,7 @@ class ReportBiaya extends Model
 
     public function getTruck()
     {
-        return $this->belongsTo(Truck::class, 'id', 'rb_truck_id');
+        return $this->belongsTo(Truck::class, 'rb_truck_id', 'id');
     }
     
 }

@@ -20,6 +20,7 @@ class CreateReportBiayaTable extends Migration
             $table->date('rb_eff_date');
             $table->decimal('rb_nominal',20,2);
             $table->text('rb_remark')->nullable();
+            $table->tinyInteger('rb_is_active')->default('1');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

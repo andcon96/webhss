@@ -52,7 +52,7 @@
         </div>
         <label for="duedate" class="col-md-4 col-form-label text-md-right">History & Pelaporan SJ</label>
         <div class="form-group row col-md-12">
-            @include('transaksi.suratjalan.catatsj.index-table')
+            @include('transaksi.sjcust.catatsj.index-table')
         </div>
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">

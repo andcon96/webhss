@@ -27,7 +27,7 @@
     </div>
 </form>
 
-@include('transaksi.suratjalan.index-table')
+@include('transaksi.sjcust.index-table')
 
 @endsection
 
