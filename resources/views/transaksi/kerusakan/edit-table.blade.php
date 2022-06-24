@@ -15,7 +15,8 @@
                 <td style="vertical-align:middle;text-align:center;"> 
                     <input type="hidden" name="operation[]" class="operation" value="M">
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
-                    <input type="hidden" name="jeniskerusakan[]" value="{{$datas->kerusakan_id}}">
+                    
+                    <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
                     @if($datas->sod_qty_ship != 0)
                         <input type="checkbox" class="qaddel" value="" disabled> 
                     @else

@@ -2,9 +2,11 @@
 
 namespace App\Models\Master;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Transaksi\CheckInOut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Truck extends Model
 {
@@ -37,4 +39,19 @@ class Truck extends Model
         return $this->hasOne(TipeTruck::class, 'id', 'truck_tipe_id');
     }
     
+    
+    protected static function boot()
+    {
+        parent::boot();
+
+        
+        self::creating(function($model){
+            $model->item_domain = Session::get('domain');
+        });
+
+        self::addGlobalScope(function(Builder $builder){
+            $builder->where('item_domain', Session::get('domain'));
+        });
+    }
+
 }

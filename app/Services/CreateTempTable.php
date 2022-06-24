@@ -65,6 +65,7 @@ class CreateTempTable
     public function getrnkerusakan(){
         try{
             // $prefix = Prefix::firstOrFail();
+            
             $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
             
             $cektahun = substr($prefix->domain_kr_rn,0,2);
@@ -79,6 +80,7 @@ class CreateTempTable
     
             return $newprefix;
         }catch(Exception $e){
+            
             return false;
         }
     }

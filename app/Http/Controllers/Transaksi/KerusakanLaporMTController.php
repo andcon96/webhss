@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Transaksi;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Domain;
 use App\Models\Master\Kerusakan;
+use App\Models\Master\KerusakanStruktur;
 use App\Models\Master\KerusakanStrukturDetail;
 use App\Models\Master\StrukturKerusakan;
 use App\Models\Master\Truck;
@@ -20,17 +21,18 @@ class KerusakanLaporMTController extends Controller
 {
     public function index(Request $request)
     {
-        $data = KerusakanMstr::query()
-            ->with(['getDetail', 'getTruckDriver.getTruck', 'getTruckDriver.getTruck']);
 
+        $data = KerusakanMstr::query()
+            ->with(['getDetail', 'getTruck','getTruck.getUserDriver']);
+        
         if ($request->s_krnbr) {
             $data->where('kerusakan_nbr', $request->s_krnbr);
         }
         if ($request->s_driver) {
-            $data->whereRelation('getTruckDriver.getTruck', 'id', '=', $request->s_driver);
+            $data->whereRelation('getTruck', 'id', '=', $request->s_driver);
         }
         
-        $data->where('kerusakan_domain',Session::get('domain'));
+        // $data->where('kerusakan_domain',Session::get('domain'));
 
         $data = $data->orderBy('created_at', 'DESC')->paginate(10);
         $truck = Truck::get();
@@ -40,9 +42,9 @@ class KerusakanLaporMTController extends Controller
 
     public function show($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruckDriver.getTruck', 'getTruckDriver.getUser','getMekanik.getStruktur','getMekanik.getDetail.getKerusakan'])->findOrFail($id);
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getKerusakan'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
-        $struktur = StrukturKerusakan::get();
+        $struktur = KerusakanStruktur::get();
         // dd($data->getMekanik);
         return view('transaksi.kerusakan.show', compact('data', 'jeniskerusakan', 'struktur'));
     }
@@ -51,8 +53,8 @@ class KerusakanLaporMTController extends Controller
     {
         // $truckdriver = TruckDriver::with(['getTruck', 'getUser'])->where('truck_is_active', 1)->get();
         $jeniskerusakan = Kerusakan::get();
-
-        return view('transaksi.kerusakan.create', compact( 'jeniskerusakan'));
+        $truck = Truck::get();
+        return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck'));
     }
 
     public function store(Request $request)
@@ -60,24 +62,26 @@ class KerusakanLaporMTController extends Controller
         DB::beginTransaction();
         try {
             $getrn = (new CreateTempTable())->getrnkerusakan();
+            
             if ($getrn === false) {
                 alert()->error('Error', 'Gagal Melaporkan Kerusakan');
                 DB::rollBack();
                 return back();
             }
-
+            // dd($request->all());
             $kerusakan_mstr = new KerusakanMstr();
-            $kerusakan_mstr->kerusakan_nbr = $getrn;
-            $kerusakan_mstr->kerusakan_truck_driver = $request->truckdriver;
-            $kerusakan_mstr->kerusakan_date = $request->tgllapor;
-            $kerusakan_mstr->kerusakan_domain = $request->domain;
+            $kerusakan_mstr->kr_nbr = $getrn;
+            $kerusakan_mstr->kr_truck = $request->truck;
+            $kerusakan_mstr->kr_date = $request->tgllapor;
+            $kerusakan_mstr->kr_status = 'New';
+            $kerusakan_mstr->kr_domain = Session::get('domain');
             $kerusakan_mstr->save();
 
             $id = $kerusakan_mstr->id;
             foreach ($request->jeniskerusakan as $key => $datas) {
                 $kerusakan_detail = new KerusakanDetail();
-                $kerusakan_detail->kerusakan_mstr_id = $id;
-                $kerusakan_detail->kerusakan_id = $datas;
+                $kerusakan_detail->krd_kr_mstr_id = $id;
+                $kerusakan_detail->krd_kerusakan_id = $datas;
                 $kerusakan_detail->save();
             }
 
@@ -91,6 +95,7 @@ class KerusakanLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
+            dd($e);
             alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
             return back();
         }
@@ -98,7 +103,7 @@ class KerusakanLaporMTController extends Controller
 
     public function edit($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruckDriver.getTruck', 'getTruckDriver.getUser'])->findOrFail($id);
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
 
         return view('transaksi.kerusakan.edit', compact('data', 'jeniskerusakan'));
@@ -106,26 +111,31 @@ class KerusakanLaporMTController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
+        
 
         DB::beginTransaction();
         try {
             foreach ($request->iddetail as $key => $datas) {
                 $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
+                
                 if ($request->operation[$key] == 'R') {
                     $detail->delete();
                 } else {
-                    $detail->kerusakan_mstr_id = $request->idmaster;
-                    $detail->kerusakan_id = $request->jeniskerusakan[$key];
+                    
+                    $detail->krd_kr_mstr_id = $request->idmaster;
+                    $detail->krd_kerusakan_id = $request->jeniskerusakan[$key];
+
                     $detail->save();
                 }
+                
             }
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
+            alert()->success('Success', 'Kerusakan berhasil di update')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
+            dd($e);
             alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
             return back();
         }
@@ -151,16 +161,16 @@ class KerusakanLaporMTController extends Controller
 
     public function assignkr($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruckDriver.getTruck', 'getTruckDriver.getUser','getMekanik.getStruktur'])->findOrFail($id);
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
-        $struktur = StrukturKerusakan::get();
+        $struktur = KerusakanStruktur::get();
 
         return view('transaksi.kerusakan.assignkr', compact('data', 'jeniskerusakan', 'struktur'));
     }
 
     public function upassignkr($id, Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         DB::beginTransaction();
         try {
             // Update Detail

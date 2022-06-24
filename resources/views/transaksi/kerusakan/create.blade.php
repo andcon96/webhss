@@ -14,9 +14,14 @@
     @method('POST')
     <div class="row">
         <div class="form-group row col-md-12">
-            <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Truck Driver</label>
-            <div class="col-md-3">
-
+            <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Truck</label>
+            <div class="col-md-3">  
+                <select id="truck" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="truck" data-live-search="true" required autofocus>';
+                    <option value = ""> -- Select Data -- </option>
+                    @foreach($truck as $truck2)
+                        <option value="{{$truck2->id}}">{{$truck2->truck_no_polis}}</option>
+                    @endforeach
+                </select>
             </div>
             <label for="tgllapor" class="col-md-2 col-form-label text-md-right">Tanggal Lapor</label>
             <div class="col-md-3">

@@ -16,17 +16,18 @@
         <div class="form-group row col-md-12">
             <label for="sonbr" class="col-md-2 col-form-label text-md-right">Kerusakan Nbr</label>
             <div class="col-md-3">
-                <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->kerusakan_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->kr_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="truck" class="col-md-2 col-form-label text-md-right">Truck</label>
             <div class="col-md-3">
-                <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruckDriver->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" readonly>
+                <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" readonly>
             </div>
             <label for="driver" class="col-md-3 col-form-label text-md-right">Driver</label>
             <div class="col-md-3">
-                <input id="driver" type="text" class="form-control" name="driver" value="{{$data->getTruckDriver->getUser->name}}" autocomplete="off" maxlength="24" readonly>
+
+                <input id="driver" type="text" class="form-control" name="driver" value="{{$data->getTruck->getUserDriver->name}}" autocomplete="off" maxlength="24" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">

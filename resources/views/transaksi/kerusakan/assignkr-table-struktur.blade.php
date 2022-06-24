@@ -14,8 +14,10 @@
                         <table style="width:100%">
                             @forelse($struktur as $flg => $strukturs)
                                 <tr>
-                                    <td>{{$strukturs->slk_desc}}</td>
+
+                                    <td>{{$strukturs->ks_desc}}</td>
                                     <td>
+                                        
                                         <input type="hidden" name="struk_detail_id[]" value="{{$datas->id}}">
                                         <input type="hidden" name="struk_mekanik_id[]" value="{{$strukturs->id}}">
                                         <input type="text" class="form-control" name="struk_desc[]">
