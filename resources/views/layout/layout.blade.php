@@ -141,22 +141,6 @@
                   </a>
                 </li>
                 @endcan
-                {{-- @can('access_so_sangu')
-                <li class="nav-item">
-                  <a href="{{route('sosangu.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Alokasi Sangu SO</p>
-                  </a>
-                </li>
-                @endcan
-                @can('access_audit_trail_sangu')
-                <li class="nav-item">
-                  <a href="{{route('sanguaudit.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Browse SO Sangu</p>
-                  </a>
-                </li>
-                @endcan --}}
               </ul>
             </li>
             @endcan
@@ -199,6 +183,14 @@
                   <a href="{{route('laporkerusakan.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Lapor Kerusakan</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_rb')
+                <li class="nav-item">
+                  <a href="{{route('rbhist.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lapor Biaya Tambahan</p>
                   </a>
                 </li>
                 @endcan
