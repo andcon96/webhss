@@ -40,9 +40,10 @@
         <thead>
             <tr>
                 <th>No Polis</th>
-                <th>Active</th>
                 <th>Driver</th>
                 <th>Pengurus</th>
+                <th>Active</th>
+
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -53,14 +54,15 @@
                     {{$datas->truck_no_polis}}
                 </td>
                 <td>
-                    {{$datas->truck_is_active == 1 ? 'Active' : 'Not Active'}}
-                </td>
-                <td>
                     {{$datas->getUserDriver->name}}
                 </td>
                 <td>
                     {{$datas->getUserPengurus->name}}
                 </td>
+                <td>
+                    {{$datas->truck_is_active == 1 ? 'Active' : 'Not Active'}}
+                </td>
+
                 <td>
                     @if($datas->truck_is_active == 1)
                     <a href="" class="deleteRole" data-id="{{$datas->id}}" data-active="{{$datas->truck_is_active}}" data-polis="{{$datas->truck_no_polis}}" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>

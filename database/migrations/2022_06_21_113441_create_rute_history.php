@@ -22,7 +22,6 @@ class CreateRuteHistory extends Migration
             $table->decimal('history_sangu',15,2);
             $table->tinyInteger('history_is_active')->default(1);
             $table->dateTime('history_last_active')->nullable();
-            $table->string('history_user');
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ use App\Http\Controllers\Master\RuteController;
 use App\Http\Controllers\Master\StrukturKerusakanController;
 use App\Http\Controllers\Master\TruckDriverController;
 use App\Http\Controllers\Master\TruckMTController;
+use App\Http\Controllers\Master\TruckTipeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Transaksi\BrowsePolisController;
 use App\Http\Controllers\Transaksi\CheckInOutController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Models\Master\Rute;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -227,6 +229,12 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
         Route::resource('approvalmt', ApprovalController::class);
         Route::get('/approvalmt/getdata', [ApprovalController::class, 'index']);
+        //================================
+
+        // Approval Maintenance
+        //================================
+        Route::resource('tipetruck', TruckTipeController::class);
+
         //================================
     });
 });

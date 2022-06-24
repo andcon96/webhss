@@ -16,14 +16,14 @@
         Create Data</button>
 </div>
 
-<form action="{{route('tipetruckmt.index')}}" method="get">
+<form action="{{route('tipetruck.index')}}" method="get">
     <div class="form-group row offset-md-1 col-md-10 mt-3">
         <label for="s_ttcode" class="col-md-2 col-form-label text-md-right">{{ __('Code') }}</label>
         <div class="col-md-3">
             <select id="s_ttcode" class="form-control" name="s_ttcode" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
-                @foreach($kerusakan as $datas)
-                <option value="{{$datas->id}}">{{$datas->kerusakan_code}} -- {{$datas->kerusakan_desc}}</option>
+                @foreach($data as $s_data)
+                <option value="{{$s_data->id}}">{{$s_data->tt_code}} -- {{$s_data->tt_desc}}</option>
                 @endforeach
             </select>
         </div>
@@ -51,12 +51,12 @@
             </div>
             <div class="panel-body">
                 <!-- heading modal -->
-                <form class="form-horizontal" role="form" method="POST" action="{{route('tipetruckmt.store')}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{route('tipetruck.store')}}">
                     {{ method_field('post') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="code" class="col-md-3 col-form-label text-md-right">{{ __('Code') }}</label>
+                            <label for="code" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck Code') }}</label>
                             <div class="col-md-3">
                                 <input id="code" type="text" class="form-control" name="code" autocomplete="off" value="" required>
                             </div>
@@ -67,15 +67,7 @@
                                 <input id="desc" type="text" class="form-control" name="desc" autocomplete="off" value="" required>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="appr" class="col-md-3 col-form-label text-md-right">{{ __('Need Approval') }}</label>
-                            <div class="col-md-7">
-                                <select id="appr" class="form-control" name="appr" required>
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="modal-footer">
@@ -91,7 +83,7 @@
     </div>
 </div>
 
-<!--Create Modal-->
+<!--Edit Modal-->
 <div id="editModal" class="modal fade bd-example-modal-lg" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <!-- konten modal-->
@@ -110,7 +102,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="edit_id" id="edit_id">
                         <div class="form-group row">
-                            <label for="e_code" class="col-md-3 col-form-label text-md-right">{{ __('Code') }}</label>
+                            <label for="e_code" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck Code') }}</label>
                             <div class="col-md-3">
                                 <input id="e_code" type="text" class="form-control" name="e_code" autocomplete="off" value="" readonly>
                             </div>
@@ -121,15 +113,7 @@
                                 <input id="e_desc" type="text" class="form-control" name="e_desc" autocomplete="off" value="" required>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="e_appr" class="col-md-3 col-form-label text-md-right">{{ __('Need Approval') }}</label>
-                            <div class="col-md-7">
-                                <select id="e_appr" class="form-control" name="e_appr" required>
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="modal-footer">
@@ -156,7 +140,7 @@
                 </button>
             </div>
 
-            <form action="{{route('kerusakanmt.destroy', 'role')}}" method="post">
+            <form action="{{route('tipetruck.destroy', 'role')}}" method="post">
 
                 {{ method_field('delete') }}
                 {{ csrf_field() }}

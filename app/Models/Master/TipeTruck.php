@@ -10,4 +10,13 @@ class TipeTruck extends Model
     use HasFactory;
     
     public $table = 'tipetruck';
+    protected static function boot()
+    {
+        parent::boot();
+
+        
+        self::creating(function($model){
+            $model->tt_isactive = 1;
+        });
+    }
 }

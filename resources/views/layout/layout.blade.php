@@ -291,6 +291,12 @@
                     <p>Truck Maintenance</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{{route('tipetruck.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tipe Truck Maintenance</p>
+                  </a>
+                </li>
                 {{-- <li class="nav-item">
                   <a href="{{route('truckdrivemaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

@@ -72,7 +72,6 @@ class RuteController extends Controller
                 $rutehist->history_sangu = $sangu;
                 $rutehist->history_ongkos = $ongkos;
                 $rutehist->history_is_active = 1;
-                $rutehist->history_user = Auth::user()->username;
                 $rutehist->save();
                 DB::commit();
                 alert()->success('Success', 'History berhasil diperbarui');
@@ -273,7 +272,7 @@ class RuteController extends Controller
                     'history_ongkos' => $ongkos[$index],
                     'history_sangu' => $sangu[$index],
                     'history_is_active' => 1,
-                    'history_user' => Auth::user()->username
+
                 ];
             }
             

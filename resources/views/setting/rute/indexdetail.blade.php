@@ -11,7 +11,65 @@
 @section('content')
 
 <!-- Page Heading -->
+<div id="myModal" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+    <!-- konten modal-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Create Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="panel-body">
+        <!-- heading modal -->
+        <form class="form-horizontal" role="form" method="POST" action="{{route('rute.store')}}">
+          {{ method_field('post') }}
+          {{ csrf_field() }}
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="role" class="col-md-3 col-form-label text-md-right">{{ __('Ship From') }}</label>
+              <div class="col-md-7">
+                <select id="shipfrom" class="form-control role" name="shipfrom" required autofocus>
+                  <option value=""> Select Data </option>
+                  @foreach($shipfrom as $sf)
+                  <option value="{{$sf->id}}">{{$sf->sf_code}} -- {{$sf->sf_desc}}</option>
+                  
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="shipto" class="col-md-3 col-form-label text-md-right">{{ __('Ship To') }}</label>
+              <div class="col-md-7">
+                <select id="shipto" class="form-control shipto" name="shipto" required autofocus>
+                  <option value=""> Select Data </option>
+                  @foreach($shipto as $st)
+                    <option value="{{$st->id}}">{{$st->cs_shipto}} -- {{$st->cs_shipto_name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info bt-action" id="btnclose" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success bt-action" id="btnconf">Save</button>
+            <button type="button" class="btn bt-action" id="btnloading" style="display:none">
+              <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-lg-12">
+  <button class="btn btn-info bt-action newRole" data-toggle="modal" data-target="#myModal">
+    Create Rute</button>
+</div>
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
