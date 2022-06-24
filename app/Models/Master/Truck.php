@@ -46,11 +46,11 @@ class Truck extends Model
 
         
         self::creating(function($model){
-            $model->item_domain = Session::get('domain');
+            $model->truck_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){
-            $builder->where('item_domain', Session::get('domain'));
+            $builder->where('truck_domain', Session::get('domain'));
         });
     }
 
