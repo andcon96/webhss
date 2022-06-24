@@ -157,7 +157,7 @@
         $('#defaultsangu').val(total);
     }
 
-    $(document).on('keyup', '.qtysj,#trip',function(){
+    $(document).on('change', '.qtysj,#trip',function(){
         getDefaultSangu();
     });
 
