@@ -13,18 +13,20 @@ class CustomerShipTo extends Model
     use HasFactory;
     public $table = 'customership';
     protected $fillable = [
-        'cs_code',
+        'cs_cust_code',
         'cs_shipto',
-        'cs_domain'
+        'cs_domain',
+        'cs_shipto_name',
+        'cs_address'
     ];
     protected static function boot()
     {
         parent::boot();
 
         
-        self::creating(function($model){
-            $model->cust_domain = Session::get('domain');
-        });
+        // self::creating(function($model){
+        //     $model->cs_domain = Session::get('domain');
+        // });
 
         self::addGlobalScope(function(Builder $builder){
             $builder->where('cs_domain', Session::get('domain'));

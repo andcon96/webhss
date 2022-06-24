@@ -16,12 +16,7 @@
         <div class="form-group row col-md-12">
             <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Truck Driver</label>
             <div class="col-md-3">
-                <select name="truckdriver" id="truckdriver" class="form-control" required>
-                    <option value="">Select Data</option>
-                    @foreach($truckdriver as $truckdrivers)
-                    <option value="{{$truckdrivers->id}}">{{$truckdrivers->getTruck->truck_no_polis}} -- {{$truckdrivers->getUser->name}}</option>
-                    @endforeach
-                </select>
+
             </div>
             <label for="tgllapor" class="col-md-2 col-form-label text-md-right">Tanggal Lapor</label>
             <div class="col-md-3">

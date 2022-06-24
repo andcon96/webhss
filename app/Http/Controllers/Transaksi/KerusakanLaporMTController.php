@@ -8,7 +8,6 @@ use App\Models\Master\Kerusakan;
 use App\Models\Master\KerusakanStrukturDetail;
 use App\Models\Master\StrukturKerusakan;
 use App\Models\Master\Truck;
-use App\Models\Master\TruckDriver;
 use App\Models\Transaksi\KerusakanDetail;
 use App\Models\Transaksi\KerusakanMstr;
 use App\Services\CreateTempTable;
@@ -50,10 +49,10 @@ class KerusakanLaporMTController extends Controller
 
     public function create()
     {
-        $truckdriver = TruckDriver::with(['getTruck', 'getUser'])->where('truck_is_active', 1)->get();
+        // $truckdriver = TruckDriver::with(['getTruck', 'getUser'])->where('truck_is_active', 1)->get();
         $jeniskerusakan = Kerusakan::get();
 
-        return view('transaksi.kerusakan.create', compact('truckdriver', 'jeniskerusakan'));
+        return view('transaksi.kerusakan.create', compact( 'jeniskerusakan'));
     }
 
     public function store(Request $request)
