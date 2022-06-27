@@ -54,6 +54,27 @@
             @include('transaksi.sj.edit-table')
         </div>
         <div class="form-group row col-md-12">
+            <label for="defaultsangu" class="col-md-2 col-form-label text-md-right">Total Default Sangu</label>
+            <div class="col-md-3">
+                <input id="defaultsangu" type="text" class="form-control" name="defaultsangu" value="{{number_format($data->sj_default_sangu,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+            <label for="defaultprice" class="col-md-3 col-form-label text-md-right tonase">Price per Unit</label>
+            <div class="col-md-3">
+                <input id="defaultprice" type="text" class="form-control tonase" name="defaultprice" value="{{$data->getRuteHistory->history_harga ?? 0}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12" id="container">
+            <label for="sangutruck" class="col-md-2 col-form-label text-md-right">Default Sangu</label>
+            <div class="col-md-3">
+                <input id="sangutruck" type="text" class="form-control" name="sangutruck" value="{{number_format($data->getRuteHistory->history_sangu ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+            <label for="komisitruck" class="col-md-3 col-form-label text-md-right">Default Komisi</label>
+            <div class="col-md-3">
+                <input id="komisitruck" type="text" class="form-control" name="komisitruck" value="{{number_format($data->getRuteHistory->history_ongkos ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+
+        </div>
+        <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
                     <a href="{{route('suratjalan.index')}}" id="btnback" class="btn btn-success bt-action">Back</a>
@@ -78,6 +99,45 @@
         onClose: function() {
             $("#addrow").focus();
         }
+    });
+    
+    var tipebarang = $('#type').val();
+
+    if(tipebarang == 'BERAT'){
+        $('#container').css('display','none');
+    }else if(tipebarang == 'RITS'){
+        $('.tonase').css('display','none');
+        $('.pricetot').removeClass('col-md-3');
+        $('.pricetot').addClass('col-md-2');
+    }
+
+    function getDefaultSangu(){
+        var tipebarang = $('#type').val();
+        
+        if(tipebarang == 'BERAT'){
+            sum = 0;
+            $('.qtyord').each(function(){
+                sum += parseFloat(this.value);
+            });
+            var hprice = $('#defaultprice').val();
+            let total = parseInt(hprice) * parseInt(sum);
+
+            total = Number(total).toLocaleString('en-US');
+            $('#defaultsangu').val(total);
+        }else if(tipebarang == 'RITS'){
+            var hsangu = $('#sangutruck').val();
+            var hkomisi = $('#komisitruck').val();
+
+            let total = parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''));
+
+            total = Number(total).toLocaleString('en-US');
+            $('#defaultsangu').val(total);
+        }
+
+    }
+    
+    $(document).on('change keyup', '.qtyord',function(){
+        getDefaultSangu();
     });
 
     var counter = 1;

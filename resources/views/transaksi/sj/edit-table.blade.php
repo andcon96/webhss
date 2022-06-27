@@ -31,7 +31,7 @@
                     <input type="text" class="form-control" value="{{$sisa}}" name="sisa[]" readonly>
                 </td>
                 <td data-label="Qty Order">
-                    <input type="number" class="form-control" value="{{$datas->sjd_qty_ship}}" name="qtyord[]" min="{{$datas->sjd_qty_conf}}" max="{{$sisa}}">
+                    <input type="number" class="form-control qtyord" value="{{$datas->sjd_qty_ship}}" name="qtyord[]" min="{{$datas->sjd_qty_conf}}" max="{{$sisa}}">
                     <input type="hidden" class="form-control" value="{{$datas->sjd_qty_ship}}" name="qtyold[]" min="{{$datas->sjd_qty_conf}}" max="{{$sisa}}">
                 </td>
                 <td data-label="Qty Ship">

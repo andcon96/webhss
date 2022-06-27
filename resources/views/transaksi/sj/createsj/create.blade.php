@@ -82,7 +82,7 @@
                 <input type="text" class="form-control" name="pengurus" id="pengurus" readonly>
             </div>
         </div>
-        <div class="form-group row col-md-12">
+        <div class="form-group row col-md-12" id="container">
             <label for="trip" class="col-md-2 col-form-label text-md-right">Sangu Truck</label>
             <div class="col-md-3">
                 <input type="text" id="sangutruck" class="form-control" value="0" readonly>
@@ -93,11 +93,11 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="trip" class="col-md-2 col-form-label text-md-right">Price Per Unit</label>
-            <div class="col-md-3">
+            <label for="trip" class="col-md-2 col-form-label text-md-right tonase">Price Per Unit</label>
+            <div class="col-md-3 tonase">
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right">Default Sangu</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Default Sangu</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
@@ -174,6 +174,19 @@
             success: function(data){
                 $('#btnconf').show();
                 $('#addtable').html('').append(data);
+
+                console.log(type);
+                if(type == 'BERAT'){
+                    $('#container').css('display','none');
+                    $('.tonase').css('display','');
+                    $('.pricetot').removeClass('col-md-2');
+                    $('.pricetot').addClass('col-md-3');
+                }else if(type == 'RITS'){
+                    $('.tonase').css('display','none');
+                    $('.pricetot').removeClass('col-md-3');
+                    $('.pricetot').addClass('col-md-2');
+                    $('#container').css('display','');
+                }
             },
             error: function(data){
                 Swal.fire({

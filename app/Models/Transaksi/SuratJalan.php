@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\RuteHistory;
 use App\Models\Master\Truck;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,11 @@ class SuratJalan extends Model
     public function getHistTrip()
     {
         return $this->hasMany(SJHistTrip::class, 'sjh_sj_mstr_id');
+    }
+
+    public function getRuteHistory()
+    {
+        return $this->hasOne(RuteHistory::class, 'id', 'sj_default_sangu_type');
     }
 
     

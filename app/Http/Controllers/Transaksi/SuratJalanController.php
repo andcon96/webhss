@@ -69,6 +69,8 @@ class SuratJalanController extends Controller
             $sjmstr->sj_truck_id = $request->truck;
             $sjmstr->sj_jmlh_trip = $request->trip;
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
+            $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
+            $sjmstr->sj_default_sangu_type = $request->defaultpriceid;
             $sjmstr->save();
 
             $id = $sjmstr->id;
@@ -114,9 +116,9 @@ class SuratJalanController extends Controller
 
     public function edit($id)
     {
-        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getDetail')->findOrFail($id);
+        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getDetail','getRuteHistory')->findOrFail($id);
         $item = SalesOrderDetail::where('sod_so_mstr_id',$data->sj_so_mstr_id)->get();
-
+        // dd($data);
         return view('transaksi.sj.edit',compact('data','item'));
     }
 
@@ -125,6 +127,8 @@ class SuratJalanController extends Controller
         DB::beginTransaction();
         try{
             $sjmstr = SuratJalan::findOrFail($request->idmaster);
+            $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
+            $sjmstr->save();
             
             foreach($request->iddetail as $key => $datas){
                 $sjdet = SuratJalanDetail::firstOrNew(['id'=>$datas]);

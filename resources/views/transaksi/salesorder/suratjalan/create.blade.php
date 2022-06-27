@@ -69,7 +69,7 @@
                 <input type="text" class="form-control" name="pengurus" id="pengurus" readonly>
             </div>
         </div>
-        <div class="form-group row col-md-12">
+        <div class="form-group row col-md-12" id="container">
             <label for="trip" class="col-md-2 col-form-label text-md-right">Sangu Truck</label>
             <div class="col-md-3">
                 <input type="text" id="sangutruck" class="form-control" value="0" readonly>
@@ -80,11 +80,12 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="trip" class="col-md-2 col-form-label text-md-right">Price Per Unit</label>
-            <div class="col-md-3">
+            <label for="trip" class="col-md-2 col-form-label text-md-right tonase">Price Per Unit</label>
+            <div class="col-md-3 tonase">
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
+                <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right">Total Price</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Price</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
@@ -128,7 +129,17 @@
     $('#truck').select2({
         width: '100%'
     });
-   
+
+    var tipebarang = $('#type').val();
+
+    if(tipebarang == 'BERAT'){
+        $('#container').css('display','none');
+    }else if(tipebarang == 'RITS'){
+        $('.tonase').css('display','none');
+        $('.pricetot').removeClass('col-md-3');
+        $('.pricetot').addClass('col-md-2');
+    }
+    
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: '+0d',
@@ -139,22 +150,28 @@
 
     var sum = 0;
     function getDefaultSangu(){
-        sum = 0;
-        $('.qtysj').each(function(){
-            sum += parseFloat(this.value);
-        });
-
-        var hsangu = $('#sangutruck').val();
-        var hkomisi = $('#komisitruck').val();
-        var hprice = $('#defaultprice').val();
-        var jmlhtrip = $('#trip').val();
-
-        let total = parseInt(hprice) * parseInt(sum) + parseInt(jmlhtrip) * 
-                    (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',','')));
-
-        total = Number(total).toLocaleString('en-US');
+        var tipebarang = $('#type').val();
         
-        $('#defaultsangu').val(total);
+        if(tipebarang == 'BERAT'){
+            sum = 0;
+            $('.qtysj').each(function(){
+                sum += parseFloat(this.value);
+            });
+            var hprice = $('#defaultprice').val();
+            let total = parseInt(hprice) * parseInt(sum);
+
+            total = Number(total).toLocaleString('en-US');
+            $('#defaultsangu').val(total);
+        }else if(tipebarang == 'RITS'){
+            var hsangu = $('#sangutruck').val();
+            var hkomisi = $('#komisitruck').val();
+
+            let total = parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''));
+
+            total = Number(total).toLocaleString('en-US');
+            $('#defaultsangu').val(total);
+        }
+
     }
 
     $(document).on('change keyup', '.qtysj,#trip',function(){
@@ -177,9 +194,11 @@
                 shipfrom: shipfrom
             },
             success: function(data) {
+                console.log(data);
                 $('#sangutruck').val(Number(data['history_sangu'] ?? 0).toLocaleString('en-US'));
                 $('#komisitruck').val(Number(data['history_ongkos'] ?? 0).toLocaleString('en-US'))
                 $('#defaultprice').val(Number(data['history_harga'] ?? 0).toLocaleString('en-US'));
+                $('#defaultpriceid').val(data['id']);
                 getDefaultSangu();
             },
             error: function(data) {
