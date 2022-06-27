@@ -26,7 +26,7 @@
                     <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>
                     <td data-label="Total Trip">{{$datas->sj_jmlh_trip}}</td>
                     <td data-label="Trip Dilaporkan">{{$datas->getHistTrip->count()}}</td>
-                    <td data-label="Surat Jalan">{{$datas->getHistTrip->whereNotNull('soh_sj')->count() > 0 ? 'Yes' : 'No'}}</td>
+                    <td data-label="Surat Jalan">{{$datas->getHistTrip->whereNotNull('sjh_remark')->count() == $datas->sj_jmlh_trip ? 'Yes' : 'No'}}</td>
                 </tr>
             @empty
             <tr>

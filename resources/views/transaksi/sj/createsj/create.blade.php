@@ -211,10 +211,8 @@
         $('#defaultsangu').val(total);
     }
     
-    $(document).on('keyup', '.qtysj',function(){
-        let price = $('#defaultprice').val();
+    $(document).on('change keyup', '.qtysj,#trip',function(){
         getDefaultSangu();
-        $('#defaultsangu').val(Number(price * sum).toLocaleString('en-US'));
     });
 
     $(document).on('change', '#truck',function(){
