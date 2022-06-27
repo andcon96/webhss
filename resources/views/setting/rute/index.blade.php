@@ -67,7 +67,7 @@
           @endif
         </td>
         <td>
-          <a href="rutedetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
+          <a href="rute/rutedetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
         </td>
       </tr>
       @endforeach

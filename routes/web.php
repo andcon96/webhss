@@ -217,8 +217,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Rute Maintenance
         //================================
         Route::resource('rute', RuteController::class);
-        Route::get('rutedetail/{id}', [RuteController::class,'viewDetail']);
-        Route::get('historydetail/{id}', [RuteController::class,'viewHistory']);
+        Route::get('rute/rutedetail/{id}', [RuteController::class,'viewDetail']);
+        Route::get('rute/rutedetail/{oldid}/historydetail/{id}', [RuteController::class,'viewHistory']);
         Route::get('downloadexcel', [RuteController::class,'downloadtemplate']);
         Route::post('importexcel', [RuteController::class,'importexcel']);
         Route::post('importrute', [RuteController::class,'importrute']);

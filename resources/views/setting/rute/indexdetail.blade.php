@@ -95,7 +95,7 @@
           {{$show->getShipTo->cs_shipto ?? ''}} -- {{$show->getShipTo->cs_shipto_name ?? ''}}
         </td>
         <td>
-          <a href="/historydetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
+          <a href="/rute/rutedetail/{{$id}}/historydetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
         </td>
       </tr>
       @endforeach

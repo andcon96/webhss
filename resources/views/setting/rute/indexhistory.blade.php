@@ -118,7 +118,7 @@
         
         
                 <div class="modal-footer">
-                  
+                  <a href="/rute/rutedetail/{{$id}}" class="btn btn-success bt-action" id="btnback" color="white">Back</a>
                   <button type="submit" class="btn btn-success bt-action" id="btnconf" >Save</button>
                   <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                     <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
@@ -159,6 +159,9 @@
     $('form').submit(function(e){
       document.getElementById('btnloading').style.display = '';
       document.getElementById('btnconf').style.display = 'none';
-    })
+      document.getElementById('btnback').style.display = 'none';
+    });
+
+
 </script>
 @endsection
