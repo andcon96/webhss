@@ -51,10 +51,12 @@ class RuteController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $ruteid = $request->idrute;
         $harga = $request->harga;
-        $sangu = $request->sangu;
-        $ongkos = $request->ongkos;
+        $sangu = str_replace(',','',$request->sangu);
+        $ongkos = str_replace(',','',$request->ongkos);
+        // dd($sangu,$ongkos);
         $lasthistory = RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)->first();
         DB::beginTransaction();
         
@@ -121,6 +123,7 @@ class RuteController extends Controller
     public function update(Request $request, Rute $rute)
     {
         
+        
         //
     }
 
@@ -139,8 +142,10 @@ class RuteController extends Controller
     {
         
         $rute_data = Rute::with(['getShipFrom','getShipTo','getTipe'])->where('rute_tipe_id',$id)->whereRelation('getShipTo','cs_domain',Session::get('domain'))->paginate(10);
-        
-        return view('setting.rute.indexdetail', compact('rute_data'));
+        $shipfrom = ShipFrom::get();
+        $shipto = CustomerShipTo::get();
+        $id = $id;
+        return view('setting.rute.indexdetail', compact('rute_data','shipfrom','shipto','id'));
         //
     }
 
@@ -295,5 +300,25 @@ class RuteController extends Controller
             
         }
         
+    }
+
+    public function newrute(Request $request){
+        
+        DB::beginTransaction();
+        try{
+            $rute = new Rute();
+            $rute->rute_tipe_id = $request->tipecode;
+            $rute->rute_shipfrom_id = $request->shipfrom;
+            $rute->rute_customership_id = $request->shipto;
+            $rute->save();
+            DB::commit();
+            alert()->success('Success', 'Rute berhasil di tambah');
+            return back();
+        }
+        catch(Exception $err){
+            DB::rollback();
+            alert()->error('Error', 'Rute gagal di tambah');
+            return back();
+        }
     }
 }

@@ -12,6 +12,7 @@
         </thead>
         <tbody>
             @forelse ($data as $index => $datas)
+            
             <tr>
                 <td>
                     {{$datas->kerusakan_code}}

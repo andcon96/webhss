@@ -222,6 +222,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('downloadexcel', [RuteController::class,'downloadtemplate']);
         Route::post('importexcel', [RuteController::class,'importexcel']);
         Route::post('importrute', [RuteController::class,'importrute']);
+        Route::post('newrute', [RuteController::class,'newrute']);
         //================================
 
 
