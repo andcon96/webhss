@@ -431,27 +431,27 @@
   @yield('scripts')
 
   @if(session('errors'))
-  <script type="text/javascript">
-    var newerror = [];
+    <script type="text/javascript">
+      var newerror = [];
 
-    <?php
-    foreach ($errors->all() as $err) {
-      echo "newerror.push('" . $err . "');";
-    }
-    ?>
-    var countnewerror = newerror.length;
-    var newtext = '';
-    for (var i = 0; i < countnewerror; i++) {
+      <?php
+      foreach ($errors->all() as $err) {
+        echo "newerror.push('" . $err . "');";
+      }
+      ?>
+      var countnewerror = newerror.length;
+      var newtext = '';
+      for (var i = 0; i < countnewerror; i++) {
 
-      newtext += '<li>' + newerror[i] + '</li>';
-    }
-    Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      html: newtext,
-      showCloseButton: true,
-    })
-  </script>
+        newtext += '<li>' + newerror[i] + '</li>';
+      }
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        html: newtext,
+        showCloseButton: true,
+      })
+    </script>
   @endif
 
   <script type="text/javascript">
@@ -476,13 +476,16 @@
 
     /** add active class and stay opened when selected */
     var url = window.location.href;
-
+    let pecah = '';
     if(url.includes("?")){
+      pecah = url.split('/');
+      if(url.split("/").length > 4){
+        url = pecah[0] + '/' + pecah[1] + '/' + pecah[2] + '/' + pecah[3];
+      }
       url = url.split('?')[0];
     }else if (url.split("/").length > 4) {
-      let pecah = url.split('/');
+      pecah = url.split('/');
       url = pecah[0] + '/' + pecah[1] + '/' + pecah[2] + '/' + pecah[3];
-      console.log(pecah);
     }
 
     // for sidebar menu entirely but not cover treeview
@@ -494,45 +497,6 @@
     $('ul.nav-treeview a').filter(function() {
       return this.href == url;
     }).parentsUntil(".nav-sidebar > .nav-treeview").prev('a').addClass('active');
-
-
-    // Notification
-    function sendMarkRequest(id = null) {
-      return $.ajax("{{ route('notifread') }}", {
-        method: 'POST',
-        data: {
-          "_token": "{{csrf_token()}}",
-          "id": id
-        }
-      });
-    }
-
-    function sendMarkAllRequest(id = null) {
-      return $.ajax("{{ route('notifreadall') }}", {
-        method: 'POST',
-        data: {
-          "_token": "{{csrf_token()}}",
-          "id": id
-        }
-      });
-    }
-
-    $(function() {
-      $('.mark-as-read').click(function() {
-        let request = sendMarkRequest($(this).data('id'));
-        request.done(() => {
-          $(this).parents('div.alert').remove();
-        });
-      });
-
-      $('.mark-as-read-all').click(function() {
-        let request = sendMarkAllRequest($(this).data('id'));
-        request.done(() => {
-          $(this).parents('div.alert').remove();
-          window.location.reload();
-        });
-      });
-    });
 
     $('#headdomain').on('change',function($e){
       let domain = $(this).val();

@@ -16,7 +16,7 @@
                     <td>{{$datas->sod_line}}</td>
                     <td>{{$datas->sod_part}} -- {{$datas->getItem->item_desc}}</td>
                     <td>{{$datas->sod_um}}</td>
-                    <td>{{$datas->sod_qty_ord}}</td>
+                    <td>{{(int)$datas->sod_qty_ord}}</td>
                     <td>{{$datas->sod_qty_ord - $datas->sod_qty_ship}}</td>
                     <td>
                         <input type="hidden" name="line[]" value="{{$datas->sod_line}}" 

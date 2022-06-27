@@ -302,10 +302,7 @@ class SalesOrderController extends Controller
     {
         $output = '';
 
-        $customer = Customer::where('cust_code',$request->search)->firstOrFail();
-        $output .= '<option value="'.$customer->cust_code.'">'.$customer->cust_code.'</option>';
-
-        $shipto = CustomerShipTo::where('cs_code',$request->search)->get();
+        $shipto = CustomerShipTo::where('cs_code',$request->search)->orderBy('cs_shipto','asc')->get();
         if($shipto->count() > 0){
             foreach($shipto as $data){
                 $output .= '<option value="'.$data->cs_shipto.'">'.$data->cs_shipto.' - '.$data->cs_shipto_name.'</option>';
@@ -330,10 +327,17 @@ class SalesOrderController extends Controller
                 $output .= '<td>'.$datas->cod_part.' - '.$datas->getItem->item_desc.'<input type="hidden" name="part[]" value="'.$datas->cod_part.'"></td>';
                 $output .= '<td>'.$datas->getItem->item_um.'<input type="hidden" name="um[]" value="'.$datas->getItem->item_um.'"></td>';
                 $output .= '<td>'.$qtyopen.'</td>';
-                $output .= '<td>
-                            <input type="hidden" name="idcodetail[]" value="'.$datas->id.'">
-                            <input type="number" class="form-control" name="qtyord[]" max="'.$qtyopen.'" required>
-                            </td>';
+                if($qtyopen == 0){
+                    $output .= '<td>
+                                <input type="hidden" name="idcodetail[]" value="'.$datas->id.'">
+                                <input type="number" class="form-control" name="qtyord[]" max="'.$qtyopen.'" required disabled>
+                                </td>';
+                }else{
+                    $output .= '<td>
+                    <input type="hidden" name="idcodetail[]" value="'.$datas->id.'">
+                    <input type="number" class="form-control" name="qtyord[]" max="'.$qtyopen.'" required>
+                    </td>';
+                }
                 $output .= '</tr>';
             }
         }
@@ -352,8 +356,8 @@ class SalesOrderController extends Controller
                 $output .= '<td>'.$datas->sod_line.'</td>';
                 $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc .'</td>';
                 $output .= '<td>'.$datas->getItem->item_um.'</td>';
-                $output .= '<td>'.$datas->sod_qty_ord.'</td>';
-                $output .= '<td>'.$datas->sod_qty_ship.'</td>';
+                $output .= '<td>'.(int)$datas->sod_qty_ord.'</td>';
+                $output .= '<td>'.(int)$datas->sod_qty_ship.'</td>';
                 $output .= '</tr>';
 
                 $list = SuratJalan::query()
@@ -370,7 +374,8 @@ class SalesOrderController extends Controller
                         $output .= '<td><b> Status : '.$lists->sj_status.'</b></td>';
                         foreach($lists->getDetail as $detail){
                             if($detail->sjd_part == $datas->sod_part){
-                                $output .= '<td colspan="2"><b>Qty : '.$detail->sjd_qty_ship.'</b></td>';
+                                $output .= '<td></td>';
+                                $output .= '<td><b>Qty : '.(int)$detail->sjd_qty_ship.'</b></td>';
                             }
                         }
                         $output .= '</tr>';

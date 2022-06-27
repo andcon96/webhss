@@ -55,7 +55,7 @@ class QxtendServices
                             <qcom:ttContext>
                               <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                               <qcom:propertyName>domain</qcom:propertyName>
-                              <qcom:propertyValue>'.$data['domains'].'</qcom:propertyValue>
+                              <qcom:propertyValue>'.Session::get('domain').'</qcom:propertyValue>
                             </qcom:ttContext>
                             <qcom:ttContext>
                               <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
@@ -113,7 +113,7 @@ class QxtendServices
                         <soDueDate>' . $data['duedate'] . '</soDueDate>
                         <soDetailAll>true</soDetailAll>';
 
-                foreach ($data['operation'] as $key => $datas) {
+                foreach ($data['line'] as $key => $datas) {
                   $qdocbody .=    '<salesOrderDetail>' .
                     '<line>' . $data['line'][$key] . '</line>' .
                     '<sodPart>' . $data['part'][$key] . '</sodPart>' .
@@ -220,7 +220,7 @@ class QxtendServices
                             <qcom:ttContext>
                               <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                               <qcom:propertyName>domain</qcom:propertyName>
-                              <qcom:propertyValue>'.$data['domains'].'</qcom:propertyValue>
+                              <qcom:propertyValue>'.Session::get('domain').'</qcom:propertyValue>
                             </qcom:ttContext>
                             <qcom:ttContext>
                               <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
