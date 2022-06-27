@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('suratjalan.store') }}" id="submit" method="POST">
+<form action="{{ route('salesorder.store') }}" id="submit" method="POST">
     @csrf
     @method('POST')
     <div class="row">
@@ -110,6 +110,9 @@
                 data: {
                     search: cust,
                 },
+                beforeSend: function(){
+                    $('#loader').removeClass('hidden');
+                },
                 success: function(data) {
                     $('#shipto').html('').append(data);
                     $.ajax({
@@ -118,10 +121,12 @@
                             search: value,
                         },
                         success: function(data) {
+                            $('#loader').addClass('hidden');
                             $('#addtable').html('').append(data);
                             $('#btnconf').show();
                         },
                         error: function(data) {
+                            $('#loader').addClass('hidden');
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
@@ -132,6 +137,7 @@
                     });
                 },
                 error: function(data) {
+                    $('#loader').addClass('hidden');
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

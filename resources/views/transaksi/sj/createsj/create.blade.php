@@ -168,6 +168,9 @@
 
         $.ajax({
             url : url,
+            beforeSend: function(){
+                $('#loader').removeClass('hidden');
+            },
             success: function(data){
                 $('#btnconf').show();
                 $('#addtable').html('').append(data);
@@ -181,6 +184,9 @@
                 })
                 $('#addtable').html('');
                 $('#btnconf').hide();
+            },
+            complete: function(){
+                $('#loader').addClass('hidden');
             }
         })
     });
@@ -253,10 +259,9 @@
     });
     
     $(document).on('keyup', '.sangu', function() {
-        letterRegex = /[^\0-9\,]/;
         var data = $(this).val();
 
-        var newdata = data.replace(/([^0-9])/g, '');
+        var newdata = data.replace(/([^ 0-9])/g, '');
 
         console.log(Number(newdata).toLocaleString('en-US'));
 
