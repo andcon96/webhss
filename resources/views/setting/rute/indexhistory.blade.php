@@ -155,5 +155,10 @@
 
         $(this).val(Number(newdata).toLocaleString('en-US'));
     });
+
+    $('form').submit(function(e){
+      document.getElementById('btnloading').style.display = '';
+      document.getElementById('btnconf').style.display = 'none';
+    })
 </script>
 @endsection
