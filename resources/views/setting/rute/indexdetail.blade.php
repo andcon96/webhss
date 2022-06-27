@@ -23,9 +23,10 @@
       </div>
       <div class="panel-body">
         <!-- heading modal -->
-        <form class="form-horizontal" role="form" method="POST" action="{{route('rute.store')}}">
+        <form class="form-horizontal" role="form" method="POST" action="/newrute">
           {{ method_field('post') }}
           {{ csrf_field() }}
+          <input type="hidden" name="tipecode" value="{{$id}}">
           <div class="modal-body">
             <div class="form-group row">
               <label for="role" class="col-md-3 col-form-label text-md-right">{{ __('Ship From') }}</label>
@@ -85,13 +86,13 @@
       @foreach ($rute_data as $index => $show)
       <tr>
         <td>
-          {{$show->getTipe->tt_desc ?? ''}}
+          {{$show->getTipe->tt_code ?? ''}} -- {{$show->getTipe->tt_desc ?? ''}}
         </td>
         <td>
-          {{$show->getShipFrom->sf_desc ?? ''}}
+          {{$show->getShipFrom->sf_code ?? ''}} -- {{$show->getShipFrom->sf_desc ?? ''}}
         </td>
         <td>
-          {{$show->getShipTo->cs_shipto_name ?? ''}}
+          {{$show->getShipTo->cs_shipto ?? ''}} -- {{$show->getShipTo->cs_shipto_name ?? ''}}
         </td>
         <td>
           <a href="/historydetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
@@ -111,5 +112,18 @@
 @section('scripts')
 
 <script type="text/javascript">
+  $('#shipfrom').select2({
+    width: '100%'
+  });
+  $('#shipto').select2({
+    width: '100%'
+  });
+    
+  $('form').submit(function(e){
+    document.getElementById('btnclose').style.display = 'none';
+    document.getElementById('btnconf').style.display = 'none';
+    document.getElementById('btnloading').style.display = '';
+  })
+  
 </script>
 @endsection

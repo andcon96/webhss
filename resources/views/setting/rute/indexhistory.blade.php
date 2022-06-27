@@ -106,13 +106,13 @@
                   <div class="form-group row">
                     <label for="sangu" class="col-md-3 col-form-label text-md-right" style="color: black">Sangu</label>
                     <div class="col-md-7">
-                        <input id="sangu" type="number" class="form-control" name="sangu" step=".01" value="0" min="0" required>
+                        <input id="sangu" type="text" class="form-control" name="sangu" step=".01" value="0" min="0" required>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="ongkos" class="col-md-3 col-form-label text-md-right" style="color: black">Ongkos</label>
                     <div class="col-md-7">
-                        <input id="ongkos" type="number" class="form-control" name="ongkos" step=".01" value="0" min="0" required>
+                        <input id="ongkos" type="text" class="form-control" name="ongkos" step=".01" value="0" min="0" required>
                     </div>
                   </div>
         
@@ -135,5 +135,30 @@
 @section('scripts')
 
 <script type="text/javascript">
+      $(document).on('keyup', '#ongkos', function() {
+        letterRegex = /[^\0-9\,]/;
+        var data = $(this).val();
+
+        var newdata = data.replace(/([^0-9])/g, '');
+
+        console.log(Number(newdata).toLocaleString('en-US'));
+
+        $(this).val(Number(newdata).toLocaleString('en-US'));
+    });
+    $(document).on('keyup', '#sangu', function() {
+        letterRegex = /[^\0-9\,]/;
+        var data = $(this).val();
+
+        var newdata = data.replace(/([^0-9])/g, '');
+
+        console.log(Number(newdata).toLocaleString('en-US'));
+
+        $(this).val(Number(newdata).toLocaleString('en-US'));
+    });
+
+    $('form').submit(function(e){
+      document.getElementById('btnloading').style.display = '';
+      document.getElementById('btnconf').style.display = 'none';
+    })
 </script>
 @endsection

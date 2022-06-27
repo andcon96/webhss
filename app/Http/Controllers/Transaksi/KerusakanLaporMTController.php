@@ -35,6 +35,7 @@ class KerusakanLaporMTController extends Controller
         // $data->where('kerusakan_domain',Session::get('domain'));
 
         $data = $data->orderBy('created_at', 'DESC')->paginate(10);
+        
         $truck = Truck::get();
 
         return view('transaksi.kerusakan.index', compact('data', 'truck'));
