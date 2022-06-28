@@ -37,9 +37,9 @@ class AddSanguDefaultToSjMstrTable extends Migration
     public function down()
     {
         Schema::table('sj_mstr', function (Blueprint $table) {
-            $table->dropColumn('sj_default_sangu');
-            $table->dropForeign('sj_default_sangu_type');
+            $table->dropForeign(['sj_default_sangu_type']);
             $table->dropColumn('sj_default_sangu_type');
+            $table->dropColumn('sj_default_sangu');
         });
 
     }

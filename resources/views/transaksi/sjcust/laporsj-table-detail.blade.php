@@ -13,7 +13,7 @@
             @forelse ($data->getDetail as $key => $datas)
             <tr>
                 <td>{{$datas->sjd_line}}</td>
-                <td>{{$datas->sjd_part}}</td>
+                <td>{{$datas->sjd_part}} -- {{$datas->getItem->item_desc}}</td>
                 <td>{{$datas->getItem->item_um}}</td>
                 <td>{{$datas->sjd_qty_ship}}</td>
                 <td>

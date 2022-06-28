@@ -16,7 +16,7 @@ class CreateCheckInOutTable extends Migration
         Schema::create('checkinout', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cio_truck')->index();
-            $table->foreign('cio_truck')->references('id')->on('truck')->onDelete('restrict');
+            $table->foreign('cio_truck')->references('id')->on('truck');
             $table->tinyInteger('cio_is_check_in');
             $table->timestamp('created_at')->useCurrent();
         });

@@ -16,9 +16,9 @@ class CreateKerusakanDetailTable extends Migration
         Schema::create('krd_det', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('krd_kr_mstr_id')->index();
-            $table->foreign('krd_kr_mstr_id')->references('id')->on('kr_mstr')->onDelete('restrict');
+            $table->foreign('krd_kr_mstr_id')->references('id')->on('kr_mstr');
             $table->unsignedBigInteger('krd_kerusakan_id')->index();
-            $table->foreign('krd_kerusakan_id')->references('id')->on('kerusakan')->onDelete('restrict');
+            $table->foreign('krd_kerusakan_id')->references('id')->on('kerusakan');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

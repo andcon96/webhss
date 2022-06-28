@@ -23,7 +23,7 @@
                                 data-cust = "{{$listsos->getCOMaster->co_cust_code}}"
                                 data-custdesc = "{{$listsos->getCOMaster->getCustomer->cust_desc}}"
                                 data-shipfrom = "{{$listsos->so_ship_from}}"
-                                data-shipfromid = "{{$listsos->getShipFrom->id}}"
+                                data-shipfromid = "{{$listsos->getShipFrom->id ?? null}}"
                                 data-shipto = "{{$listsos->so_ship_to}}"
                                 data-shiptoid = "{{$listsos->getShipTo->id}}"
                                 data-type = "{{$listsos->getCOMaster->co_type}}"
@@ -96,6 +96,7 @@
             <label for="trip" class="col-md-2 col-form-label text-md-right tonase">Price Per Unit</label>
             <div class="col-md-3 tonase">
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
+                <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
             <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Default Sangu</label>
             <div class="col-md-3">
@@ -205,23 +206,39 @@
     });
 
     var sum = 0;
+    var tipebarang = $('#type').val();
+
     function getDefaultSangu(){
-        sum = 0;
-        $('.qtysj').each(function(){
-            sum += parseFloat(this.value);
-        });
-
-        var hsangu = $('#sangutruck').val();
-        var hkomisi = $('#komisitruck').val();
-        var hprice = $('#defaultprice').val();
-        var jmlhtrip = $('#trip').val();
-
-        let total = parseInt(hprice) * parseInt(sum) + parseInt(jmlhtrip) * 
-                    (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',','')));
-
-        total = Number(total).toLocaleString('en-US');
+        var tipebarang = $('#type').val();
         
-        $('#defaultsangu').val(total);
+        if(tipebarang == 'BERAT'){
+            sum = 0;
+            $('.qtysj').each(function(){
+                sum += parseFloat(this.value);
+            });
+            var hprice = $('#defaultprice').val();
+            let total = parseInt(hprice) * parseInt(sum);
+
+            total = Number(total).toLocaleString('en-US');
+            $('#defaultsangu').val(total);
+        }else if(tipebarang == 'RITS'){
+            var hsangu = $('#sangutruck').val();
+            var hkomisi = $('#komisitruck').val();
+
+            let total = parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''));
+
+            total = Number(total).toLocaleString('en-US');
+
+            $('#defaultsangu').val(total);
+        }
+    }
+
+    if(tipebarang == 'BERAT'){
+        $('#container').css('display','none');
+    }else if(tipebarang == 'RITS'){
+        $('.tonase').css('display','none');
+        $('.pricetot').removeClass('col-md-3');
+        $('.pricetot').addClass('col-md-2');
     }
     
     $(document).on('change keyup', '.qtysj,#trip',function(){
@@ -244,9 +261,11 @@
                 shipfrom: shipfrom
             },
             success: function(data) {
+                console.log(data);
                 $('#sangutruck').val(Number(data['history_sangu'] ?? 0).toLocaleString('en-US'));
                 $('#komisitruck').val(Number(data['history_ongkos'] ?? 0).toLocaleString('en-US'))
                 $('#defaultprice').val(Number(data['history_harga'] ?? 0).toLocaleString('en-US'));
+                $('#defaultpriceid').val(data['id']);
                 getDefaultSangu();
             },
             error: function(data) {
@@ -273,8 +292,6 @@
         var data = $(this).val();
 
         var newdata = data.replace(/([^ 0-9])/g, '');
-
-        console.log(Number(newdata).toLocaleString('en-US'));
 
         $(this).val(Number(newdata).toLocaleString('en-US'));
     });

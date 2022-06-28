@@ -29,7 +29,7 @@
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" value="{{$data->so_ship_from}}" autocomplete="off" maxlength="24" readonly required autofocus>
-                <input type="hidden" id="shipfrom" name="shipfrom" value="{{$data->getShipFrom->id}}">
+                <input type="hidden" id="shipfrom" name="shipfrom" value="{{$data->getShipFrom->id ?? null}}">
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
@@ -85,7 +85,7 @@
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
                 <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Price</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Default Sangu</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>

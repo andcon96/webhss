@@ -74,5 +74,16 @@
         $('#btnrefresh').on('click', function(){
             $('#loader').removeClass('hidden');
         });
+            
+        $(document).ready(function(){
+            var cur_url = window.location.href;
+
+            let paramString = cur_url.split('?')[1];
+            let queryString = new URLSearchParams(paramString);
+
+            let cust = queryString.get('s_custcode');
+
+            $('#s_custcode').val(cust).trigger('change');
+        });
     </script>
 @endsection

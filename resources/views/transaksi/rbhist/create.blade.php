@@ -30,7 +30,15 @@
         <div class="form-group row col-md-12">
             <label for="nominal" class="col-md-2 col-form-label text-md-right">Nominal</label>
             <div class="col-md-3">
-                <input type="number" name="nominal" class="form-control">
+                <input type="text" name="nominal" class="form-control nominal" min="0">
+            </div>
+            <label for="tipe" class="col-md-3 col-form-label text-md-right">Tipe</label>
+            <div class="col-md-3">
+                <select name="tipe" id="tipe" class="form-control" required>
+                    <option value="">Select Data</option>
+                    <option value="1">Pemasukan</option>
+                    <option value="0">Pengeluaran</option>
+                </select>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -58,12 +66,20 @@
 
 @section('scripts')
 <script>
-    $('#truck').select2({
+    $('#truck, #tipe').select2({
         width: '100%'
     });
     
     $("#effdate").datepicker({
         dateFormat: 'yy-mm-dd'
+    });
+
+    $(document).on('keyup', '.nominal', function() {
+        var data = $(this).val();
+
+        var newdata = data.replace(/([^ 0-9])/g, '');
+
+        $(this).val(Number(newdata).toLocaleString('en-US'));
     });
 
     $(document).on('submit', '#submit', function(e) {

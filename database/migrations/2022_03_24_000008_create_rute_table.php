@@ -17,7 +17,7 @@ class CreateRuteTable extends Migration
             $table->id();
             $table->unsignedBigInteger('rute_tipe_id')->index();
             $table->foreign('rute_tipe_id')->references('id')->on('tipetruck');
-            $table->unsignedBigInteger('rute_shipfrom_id')->index();
+            $table->unsignedBigInteger('rute_shipfrom_id')->index()->nullable();
             $table->foreign('rute_shipfrom_id')->references('id')->on('shipfrom');
             $table->unsignedBigInteger('rute_customership_id')->index();
             $table->foreign('rute_customership_id')->references('id')->on('customership');

@@ -16,7 +16,7 @@ class CreateSjdDetTable extends Migration
         Schema::create('sjd_det', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sjd_sj_mstr_id')->index();
-            $table->foreign('sjd_sj_mstr_id')->references('id')->on('sj_mstr')->onDelete('restrict');
+            $table->foreign('sjd_sj_mstr_id')->references('id')->on('sj_mstr');
             $table->integer('sjd_line');
             $table->string('sjd_part');
             $table->decimal('sjd_qty_ship',15,2);

@@ -16,7 +16,7 @@ class CreateSalesOrderDetailTable extends Migration
         Schema::create('sod_det', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sod_so_mstr_id')->index();
-            $table->foreign('sod_so_mstr_id')->references('id')->on('so_mstr')->onDelete('restrict');
+            $table->foreign('sod_so_mstr_id')->references('id')->on('so_mstr');
             $table->integer('sod_line');
             $table->string('sod_part',50);
             $table->decimal('sod_qty_ord',15,2);

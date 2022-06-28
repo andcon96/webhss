@@ -27,11 +27,11 @@
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->so_ship_from}}" autocomplete="off" maxlength="24" readonly required autofocus>
+                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->so_ship_from ?? ''}}" autocomplete="off" maxlength="24" readonly required autofocus>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->so_ship_to}}" autocomplete="off" maxlength="24" readonly required autofocus>
+                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->so_ship_to}}" autocomplete="off" maxlength="24" readonly required autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">

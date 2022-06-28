@@ -268,6 +268,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="{{route('shipfrom.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ship From Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{route('itemmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Item Maintenance</p>

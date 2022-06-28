@@ -212,8 +212,8 @@ class CustomerOrderController extends Controller
         $data = CustomerOrderMstr::with('getDetail.getItem')->findOrFail($id);
         $cust = Customer::get();
         $item = Item::get();
-        $shipto = CustomerShipTo::where('cs_code',$data->co_cust_code)->get();
-        $shipfrom = ShipFrom::get();
+        $shipto = CustomerShipTo::where('cs_cust_code',$data->co_cust_code)->get();
+        $shipfrom = ShipFrom::where('sf_is_active',1)->get();
 
         return view('transaksi.customerorder.salesorder.create', compact('data','item','cust','shipto','shipfrom'));
     }

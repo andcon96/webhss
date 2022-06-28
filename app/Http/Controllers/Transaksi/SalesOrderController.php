@@ -55,7 +55,7 @@ class SalesOrderController extends Controller
     {
         $item = Item::get();
         $cust = Customer::get();
-        $shipfrom = ShipFrom::get();
+        $shipfrom = ShipFrom::where('sf_is_active',1)->get();
         $conbr = CustomerOrderMstr::with('getCustomer')->get();
         return view('transaksi.salesorder.create',compact('item','cust','conbr','shipfrom'));
     }
@@ -115,20 +115,20 @@ class SalesOrderController extends Controller
             
             
 
-            // $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
-            // if($sendSO === false){
-            //     alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($sendSO == 'nourl'){
-            //     alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($sendSO[0] == 'error'){
-            //     alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }
+            $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
+            if($sendSO === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }
 
             DB::commit();
             alert()->success('Success', 'Sales Order Created')->persistent('Dismiss');
@@ -302,7 +302,7 @@ class SalesOrderController extends Controller
     {
         $output = '';
 
-        $shipto = CustomerShipTo::where('cs_code',$request->search)->orderBy('cs_shipto','asc')->get();
+        $shipto = CustomerShipTo::where('cs_cust_code',$request->search)->orderBy('cs_shipto','asc')->get();
         if($shipto->count() > 0){
             foreach($shipto as $data){
                 $output .= '<option value="'.$data->cs_shipto.'">'.$data->cs_shipto.' - '.$data->cs_shipto_name.'</option>';

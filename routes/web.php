@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
+use App\Http\Controllers\Master\ApprovalController;
 use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\CustomerShipToController;
 use App\Http\Controllers\Master\DepartmentController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Master\RoleMTController;
 use App\Http\Controllers\Master\UserMTController;
 use App\Http\Controllers\Master\QxWsaMTController;
 use App\Http\Controllers\Master\RuteController;
+use App\Http\Controllers\Master\ShipFromController;
 use App\Http\Controllers\Master\StrukturKerusakanController;
 use App\Http\Controllers\Master\TruckDriverController;
 use App\Http\Controllers\Master\TruckMTController;
@@ -169,12 +171,6 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
 
         //================================
-        // Truck Driver Maintenance
-        //================================
-        Route::resource('truckdrivemaint', TruckDriverController::class);
-        //================================
-
-        //================================
         // Customer Maintenance
         //================================
         Route::resource('customermaint', CustomerController::class);
@@ -209,9 +205,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('qxwsa', QxWsaMTController::class);
         //================================
         
-        // QX WSA Master
+        // Ship To Master
         //================================
         Route::resource('custshipto', CustomerShipToController::class);
+        //================================
+        
+        // Ship From Master
+        //================================
+        Route::resource('shipfrom', ShipFromController::class);
         //================================
 
         // Rute Maintenance

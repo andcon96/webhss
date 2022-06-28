@@ -44,6 +44,7 @@ class CustomerShipToController extends Controller
         }catch(Exception $err){
             alert()->error('Error', 'WSA Failed');
             DB::rollback();
+            dd($err);
             return back();
         }
     }

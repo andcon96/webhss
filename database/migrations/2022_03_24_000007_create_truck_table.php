@@ -16,7 +16,7 @@ class CreateTruckTable extends Migration
         Schema::create('truck', function (Blueprint $table) {
             $table->id();
             $table->string('truck_no_polis');
-            $table->unsignedBigInteger('truck_user_id')->index();
+            $table->unsignedBigInteger('truck_user_id')->index()->nullable();
             $table->foreign('truck_user_id')->references('id')->on('users');
             $table->unsignedBigInteger('truck_pengurus_id')->index();
             $table->foreign('truck_pengurus_id')->references('id')->on('users');

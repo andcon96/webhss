@@ -116,13 +116,6 @@
               </select>
             </div>
           </div>
-
-          <div class="form-group row">
-            <label for="email" class="col-md-3 col-form-label text-md-right">E-Mail</label>
-            <div class="col-md-7">
-              <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autocomplete="off" required>
-            </div>
-          </div>
           <div class="form-group row">
             <label for="password" class="col-md-3 col-form-label text-md-right">Password</label>
             <div class="col-md-5">

@@ -30,7 +30,7 @@ class ReportBiayaController extends Controller
             $data->where('rb_eff_date','<=',$request->dateto);
         }
 
-        $data = $data->paginate(10);
+        $data = $data->orderBy('created_at','desc')->paginate(10);
 
         return view('transaksi.rbhist.index',compact('data','truck'));
     }
@@ -60,8 +60,9 @@ class ReportBiayaController extends Controller
             $rbhist = new ReportBiaya();
             $rbhist->rb_truck_id = $request->truck;
             $rbhist->rb_eff_date = $request->effdate;
-            $rbhist->rb_nominal = $request->nominal;
+            $rbhist->rb_nominal = str_replace(',','',$request->nominal);
             $rbhist->rb_remark = $request->remark;
+            $rbhist->rb_is_pemasukan = $request->tipe;
             $rbhist->save();
 
             DB::commit();

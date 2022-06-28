@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
 use App\Models\Master\User;
 use Illuminate\Http\Request;
@@ -17,17 +18,22 @@ class TruckMTController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Truck::query();
+        $data = Truck::query()->with('getTipe','getUserDriver','getUserPengurus');
         $truck = Truck::get();
+        $tipe = TipeTruck::get();
         $user = User::get();
 
         if($request->s_truck){
             $data->where('id',$request->s_truck);
         }
 
+        if($request->s_tipe){
+            $data->where('truck_tipe_id',$request->s_tipe);
+        }
+
         $data = $data->paginate(10);
 
-        return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck]);
+        return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck, 'tipe' => $tipe]);
     }
 
     /**
@@ -49,6 +55,13 @@ class TruckMTController extends Controller
         return redirect()->route('truckmaint.index');
     }
 
+    public function edit($id){
+        $data = Truck::with('getUserDriver','getUserPengurus')->findOrFail($id);
+        $user = User::get();
+
+        return view('setting.truck.edit',['data' => $data, 'user' => $user]);
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -57,18 +70,17 @@ class TruckMTController extends Controller
      * @param  \App\Models\Master\Truck  $truck
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Truck $truck)
+    public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $id = $request->e_id;
-        $polis = $request->e_polis;
-        $userid = $request->e_driver;
+        $driver = $request->driver;
+        $pengurus = $request->pengurus;
 
         DB::beginTransaction();
 
         try{
-            $truck = Truck::where('id', $id)->firstOrFail();
-            $truck->truck_user_id = $userid;
+            $truck = Truck::findOrFail($id);
+            $truck->truck_user_id = $driver;
+            $truck->truck_pengurus_id = $pengurus;
             if ($truck->isDirty()) {
                 $truck->save();
             }

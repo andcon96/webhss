@@ -16,7 +16,7 @@ class CreateRuteHistory extends Migration
         Schema::create('rute_history', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('history_rute_id')->index();
-            $table->foreign('history_rute_id')->references('id')->on('rute')->onDelete('restrict');
+            $table->foreign('history_rute_id')->references('id')->on('rute');
             $table->decimal('history_harga',15,2);
             $table->decimal('history_ongkos',15,2);
             $table->decimal('history_sangu',15,2);

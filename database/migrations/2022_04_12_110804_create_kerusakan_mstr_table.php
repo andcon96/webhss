@@ -18,7 +18,7 @@ class CreateKerusakanMstrTable extends Migration
             $table->string('kr_domain',8);
             $table->string('kr_nbr',15);
             $table->unsignedBigInteger('kr_truck')->index();
-            $table->foreign('kr_truck')->references('id')->on('truck')->onDelete('restrict');
+            $table->foreign('kr_truck')->references('id')->on('truck');
             $table->date('kr_date');
             $table->enum('kr_status',['New','Ongoing','Done','Cancelled']);
             $table->timestamp('created_at')->useCurrent();

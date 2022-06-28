@@ -74,7 +74,6 @@ class UserMTController extends Controller
         $this->validate($request, [
             'username' => 'required|unique:users',
             'name' => 'required',
-            'email' => 'required|email',
             'dept' => 'required',
             'password' => 'required|min:8|max:20',
             'password_confirmation' => 'required|min:8|max:20|same:password',
@@ -111,17 +110,14 @@ class UserMTController extends Controller
             DB::rollback();
             return back()->withError($ex->getMessage())->withInput();
             alert()->error('Error', $ex->getMessage());
-            //return redirect()->back()->with(['error'=>'Username/Email Sudah Terdaftar']);
         } catch (\Exception $ex) {
             DB::rollback();
             return back()->withError($ex->getMessage())->withInput();
             alert()->error('Error', $ex->getMessage());
-            //return redirect()->back()->with(['error'=>'Username/Email Sudah Terdaftar']);
         } catch (\Error $ex) {
             DB::rollback();
             return back()->withError($ex->getMessage())->withInput();
             alert()->error('Error', $ex->getMessage());
-            //return redirect()->back()->with(['error'=>'Pastikan Data yang diinput sudah sesuai']);
         }
     }
 

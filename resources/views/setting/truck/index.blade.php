@@ -11,7 +11,7 @@
 @section('content')
 
 <!-- Page Heading -->
-<div class="col-md-8 offset-lg-2">
+<div class="col-md-10 offset-lg-1">
     <button class="btn btn-info bt-action newRole" data-toggle="modal" data-target="#myModal">
         Create Truck</button>
 </div>
@@ -27,6 +27,18 @@
                 @endforeach
             </select>
         </div>
+        <label for="s_tipe" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
+        <div class="col-md-3">
+            <select id="s_tipe" class="form-control" name="s_tipe" autofocus autocomplete="off">
+                <option value=""> --Select Data-- </option>
+                @foreach($tipe as $tipes)
+                <option value="{{$tipes->id}}">{{$tipes->tt_code}} - {{$tipes->tt_desc}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row offset-md-1 col-md-10 mt-3">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
@@ -35,15 +47,15 @@
     </div>
 </form>
 
-<div class="table-responsive offset-lg-2 col-lg-8 col-md-12 mt-3">
+<div class="table-responsive offset-lg-1 col-lg-10 col-md-12 mt-3">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
                 <th>No Polis</th>
+                <th>Tipe</th>
                 <th>Driver</th>
                 <th>Pengurus</th>
                 <th>Active</th>
-
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -52,6 +64,9 @@
             <tr>
                 <td>
                     {{$datas->truck_no_polis}}
+                </td>
+                <td>
+                    {{$datas->getTipe->tt_desc}}
                 </td>
                 <td>
                     {{$datas->getUserDriver->name}}
@@ -64,6 +79,7 @@
                 </td>
 
                 <td>
+                    <a href="{{Route('truckmaint.edit',$datas)}}" ><i class="fas fa-edit"></i></a>
                     @if($datas->truck_is_active == 1)
                     <a href="" class="deleteRole" data-id="{{$datas->id}}" data-active="{{$datas->truck_is_active}}" data-polis="{{$datas->truck_no_polis}}" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                     @else
@@ -73,7 +89,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan='3' style="color:red;text-align:center;"> No Data Avail</td>
+                <td colspan='6' style="color:red;text-align:center;"> No Data Avail</td>
             </tr>
             @endforelse
         </tbody>
@@ -193,7 +209,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('.driver, #s_truck, .user').select2({
+    $('.driver, #s_truck, .user, #s_tipe').select2({
         width: '100%'
     });
 
@@ -220,6 +236,7 @@
 
     function resetSearch(){
         $('#s_truck').val('').trigger('change');
+        $('#s_tipe').val('').trigger('change');
     }
     
     $(document).on('click', '#btnrefresh', function(){
@@ -233,8 +250,10 @@
         let queryString = new URLSearchParams(paramString);
 
         let truck = queryString.get('s_truck');
+        let tipe = queryString.get('s_tipe');
 
         $('#s_truck').val(truck).trigger('change');
+        $('#s_tipe').val(tipe).trigger('change');
     });
 </script>
 @endsection

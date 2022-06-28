@@ -16,7 +16,7 @@ class CreateReportBiayaTable extends Migration
         Schema::create('rb_hist', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rb_truck_id')->index();
-            $table->foreign('rb_truck_id')->references('id')->on('truck')->onDelete('restrict');
+            $table->foreign('rb_truck_id')->references('id')->on('truck');
             $table->date('rb_eff_date');
             $table->decimal('rb_nominal',20,2);
             $table->text('rb_remark')->nullable();

@@ -16,9 +16,9 @@ class CreateSjTripHistTable extends Migration
         Schema::create('sj_trip_hist', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sjh_sj_mstr_id')->index();
-            $table->foreign('sjh_sj_mstr_id')->references('id')->on('sj_mstr')->onDelete('restrict');
+            $table->foreign('sjh_sj_mstr_id')->references('id')->on('sj_mstr');
             $table->unsignedBigInteger('sjh_truck')->index();
-            $table->foreign('sjh_truck')->references('id')->on('truck')->onDelete('restrict');
+            $table->foreign('sjh_truck')->references('id')->on('truck');
             $table->string('sjh_remark')->nullable();
             $table->decimal('sjh_uang_extra',20,2)->default(0);
             $table->timestamp('created_at')->useCurrent();

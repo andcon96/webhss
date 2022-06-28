@@ -28,8 +28,12 @@ class DomainController extends Controller
                 }else{
                     $domain->domain_code = $request->code[$key];
                     $domain->domain_desc = $request->desc[$key];
+                    $domain->domain_co_prefix = $request->coprefix[$key];
+                    $domain->domain_co_rn = $request->corn[$key];
                     $domain->domain_so_prefix = $request->soprefix[$key];
                     $domain->domain_so_rn = $request->sorn[$key];
+                    $domain->domain_sj_prefix = $request->sjprefix[$key];
+                    $domain->domain_sj_rn = $request->sjrn[$key];
                     $domain->domain_kr_prefix = $request->krprefix[$key];
                     $domain->domain_kr_rn = $request->krrn[$key];
                     $domain->save();

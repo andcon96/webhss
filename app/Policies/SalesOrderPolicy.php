@@ -13,12 +13,12 @@ class SalesOrderPolicy
 
     public function view(User $user, SalesOrderMstr $somstr)
     {
-        return $somstr->so_domain == Session::get('domain');
+        return $somstr->so_domain == Session::get('domain') ;
     }
 
     public function update(User $user, SalesOrderMstr $somstr)
     {
-        return $somstr->so_domain == Session::get('domain');
+        return $somstr->so_domain == Session::get('domain') && ($somstr->so_status != 'Cancelled' && $somstr->so_status != 'Closed');
     }
 
 }

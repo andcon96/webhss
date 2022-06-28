@@ -16,7 +16,7 @@ class CreateCodDetTable extends Migration
         Schema::create('cod_det', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cod_co_mstr_id')->index();
-            $table->foreign('cod_co_mstr_id')->references('id')->on('co_mstr')->onDelete('restrict');
+            $table->foreign('cod_co_mstr_id')->references('id')->on('co_mstr');
             $table->integer('cod_line');
             $table->string('cod_part');
             $table->decimal('cod_qty_ord',15,2);

@@ -7,7 +7,7 @@
             </tr>
         </thead>
         <tbody id="edittable">
-            @forelse ($data->getAllCheckInOut as $key => $datas)
+            @forelse ($detail as $key => $datas)
             <tr>
                 <td>
                     {{$datas->cio_is_check_in ? "Check In" : "Check Out"}}
@@ -23,4 +23,5 @@
             @endforelse
         </tbody>
     </table>
+    {{$detail->links()}}
 </div>

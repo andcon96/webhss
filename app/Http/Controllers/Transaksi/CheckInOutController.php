@@ -31,19 +31,20 @@ class CheckInOutController extends Controller
             }
         }
 
-        $data = $data->get();
-
-        // dd($data);
-
+        $data = $data->orderBy('truck_no_polis','asc')->paginate(10);
         return view('transaksi.checkinout.index',compact('data','userDriver','truck'));
     }
     
 
     public function show(Request $request, $id)
     {
-        $data = Truck::with('getAllCheckInOut')->findOrFail($id);
+        $data = Truck::with(['getAllCheckInOut'])->findOrFail($id);
 
-        return view('transaksi.checkinout.show',compact('data'));
+        $detail = $data->getAllCheckInOut()->orderBy('created_at','desc')->paginate(10);
+
+        // dd($detail);
+
+        return view('transaksi.checkinout.show',compact('data','detail'));
     }
 
     public function store(Request $request)

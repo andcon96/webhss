@@ -17,7 +17,7 @@ class CreateRoleTypesTable extends Migration
             $table->id();
             $table->string('role_type');
             $table->unsignedBigInteger('role_id')->index();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('restrict');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->string('accessmenu')->nullable();
             $table->timestamps();
         });

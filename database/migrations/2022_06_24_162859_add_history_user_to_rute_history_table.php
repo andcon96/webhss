@@ -15,7 +15,7 @@ class AddHistoryUserToRuteHistoryTable extends Migration
     {
         Schema::table('rute_history', function (Blueprint $table) {
             $table->unsignedBigInteger('history_user')->index()->default(1)->after('history_last_active');
-            $table->foreign('history_user')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('history_user')->references('id')->on('users');
             //
         });
     }
@@ -28,7 +28,7 @@ class AddHistoryUserToRuteHistoryTable extends Migration
     public function down()
     {
         Schema::table('rute_history', function (Blueprint $table) {
-            
+            $table->dropForeign(['history_user']);
             $table->dropColumn('history_user');
         });
     }
