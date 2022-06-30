@@ -170,6 +170,8 @@ class SalesOrderController extends Controller
         DB::beginTransaction();
         try{
             $master = SalesOrderMstr::findOrFail($id);
+            $this->authorize('update',[SalesOrderMstr::class, $master]);
+
             $master->so_due_date = $duedate;
             $master->save();
 
@@ -244,6 +246,7 @@ class SalesOrderController extends Controller
 
         try{
             $somstr = SalesOrderMstr::findOrFail($id);
+            $this->authorize('delete',[SalesOrderMstr::class, $somstr]);
             
             $soddet = SalesOrderDetail::where('sod_so_mstr_id',$id)->get();
             foreach($soddet as $key => $soddets){
@@ -258,12 +261,11 @@ class SalesOrderController extends Controller
             
             $somstr->so_status = 'Cancelled';
             $somstr->save();
-
+            
             DB::commit();
             alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
-            dd($err);
             alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
         }
 

@@ -62,10 +62,8 @@ class TripLaporMTController extends Controller
                     ->findOrFail($id);
      
         $listdriver = SuratJalan::with(['getTruck.getUserDriver'])
-                                // ->where('sj_so_mstr_id',$data->sj_so_mstr_id)
                                 ->where('id',$id)
                                 ->get();
-        // dd($listdriver);
                     
         $sohbyso = SJHistTrip::query()->with(['getSJMaster','getTruck.getUserDriver']);
 
@@ -77,7 +75,6 @@ class TripLaporMTController extends Controller
                            ->select('*','sj_trip_hist.created_at as tglhist')
                            ->orderBy('sjh_truck', 'ASC')
                            ->get();
-        
                            
         return view('transaksi.trip.lapor.edit', compact('data', 'sohbyso', 'listdriver'));
     }
