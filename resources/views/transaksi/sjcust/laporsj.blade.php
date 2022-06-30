@@ -57,7 +57,7 @@
         <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
-                <input id="remark" type="text" class="form-control" name="remark" value="" autocomplete="off" autofocus>
+                <input id="remark" type="text" class="form-control" name="remark" maxlength="24" value="" autocomplete="off" autofocus>
             </div>
         </div>
 
