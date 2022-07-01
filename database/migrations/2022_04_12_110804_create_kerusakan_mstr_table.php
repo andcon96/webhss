@@ -20,7 +20,7 @@ class CreateKerusakanMstrTable extends Migration
             $table->unsignedBigInteger('kr_truck')->index();
             $table->foreign('kr_truck')->references('id')->on('truck');
             $table->date('kr_date');
-            $table->enum('kr_status',['New','Ongoing','Done','Cancelled']);
+            $table->enum('kr_status',['New','Ongoing','Done','Cancelled','Need Approval','Reject']);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

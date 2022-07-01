@@ -29,7 +29,11 @@ class KerusakanController extends Controller
 
     public function store(Request $request)
     {
-        
+        $cekkerusakan = Kerusakan::where('kerusakan_code',$request->code)->first();
+        if(isset($cekkerusakan)){
+            alert()->error('Error', 'Data Exist');
+            return back();
+        }
         DB::beginTransaction();
         try{
             $newdata = new Kerusakan();
@@ -39,10 +43,11 @@ class KerusakanController extends Controller
             $newdata->save();
 
             DB::commit();
-            alert()->success('Success', 'Department successfully created');
+            alert()->success('Success', 'Kerusakan behasil dibuat');
         }catch(Exception $e){
             DB::rollback();
-            alert()->error('Error', 'Failed to create Kerusakan');
+            alert()->error('Error', 'Kerusakan gagal dibuat');
+            return back();
         }
 
         return back();
@@ -57,10 +62,10 @@ class KerusakanController extends Controller
             $newdata->save();
 
             DB::commit();
-            alert()->success('Success', 'Department successfully Updated');
+            alert()->success('Success', 'Kerusakan berhasil di edit');
         }catch(Exception $e){
             DB::rollback();
-            alert()->error('Error', 'Failed to update Kerusakan');
+            alert()->error('Error', 'Gagal mengedit kerusakan');
         }
 
         return back();
@@ -78,10 +83,10 @@ class KerusakanController extends Controller
             $newdata->save();
 
             DB::commit();
-            alert()->success('Success', 'Department successfully Activated / Deactivated');
+            alert()->success('Success', 'Kerusakan berhasil di aktif / non-aktif');
         }catch(Exception $e){
             DB::rollback();
-            alert()->error('Error', 'Failed to Activated / Deactivated Kerusakan');
+            alert()->error('Error', 'Kerusakan gagal di aktif / non-aktif kan');
         }
 
         return back();

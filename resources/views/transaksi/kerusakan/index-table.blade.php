@@ -15,8 +15,8 @@
             <tr>
 
                 <td data-label="Nomor Kerusakan">{{$datas->kr_nbr}}</td>
-                <td data-label="No Polis">{{$datas->getTruck->truck_no_polis}}</td>
-                <td data-label="Driver">{{$datas->getTruck->getUserDriver->name }}</td>
+                <td data-label="No Polis">{{isset($datas->getTruck->truck_no_polis) ? $datas->getTruck->truck_no_polis : ''}}</td>
+                <td data-label="Driver">{{isset($datas->getTruck->getUserDriver->name) ? $datas->getTruck->getUserDriver->name : '' }}</td>
                 <td data-label="Tanggal Lapor">{{$datas->kr_date}}</td>
                 <td data-label="Status">{{$datas->kr_status}}</td>
                 <td data-label="Action">

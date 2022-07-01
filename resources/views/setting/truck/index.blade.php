@@ -17,9 +17,9 @@
 </div>
 
 <form action="{{route('truckmaint.index')}}" method="get">
-    <div class="form-group row offset-md-1 col-md-10 mt-3">
+    <div class="form-group row  col-md-12 mt-3">
         <label for="s_truck" class="col-md-2 col-form-label text-md-right">{{ __('Truck') }}</label>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <select id="s_truck" class="form-control" name="s_truck" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
                 @foreach($truck as $trucks)
@@ -27,8 +27,8 @@
                 @endforeach
             </select>
         </div>
-        <label for="s_tipe" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
-        <div class="col-md-3">
+        <label for="s_tipe" class="col-md-2 col-form-label text-md-right">{{ __('Tipe') }}</label>
+        <div class="col-md-2">
             <select id="s_tipe" class="form-control" name="s_tipe" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
                 @foreach($tipe as $tipes)
@@ -36,13 +36,12 @@
                 @endforeach
             </select>
         </div>
-    </div>
-
-    <div class="form-group row offset-md-1 col-md-10 mt-3">
-        <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-3">
-            <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
-            <button class="btn bt-action newUser" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
+            {{-- <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label> --}}
+            {{-- <div class="col-md-3"> --}}
+                <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
+                <button class="btn bt-action newUser" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
+        {{-- </div> --}}
         </div>
     </div>
 </form>

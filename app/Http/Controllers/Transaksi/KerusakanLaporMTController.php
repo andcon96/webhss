@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\EmailApprovalKerusakan;
+use App\Mail\ApprovalMail;
+use App\Models\Master\approval;
 use App\Models\Master\Domain;
 use App\Models\Master\Kerusakan;
 use App\Models\Master\KerusakanStruktur;
@@ -11,7 +14,9 @@ use App\Models\Master\StrukturKerusakan;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\KerusakanDetail;
 use App\Models\Transaksi\KerusakanMstr;
+use App\Models\Transaksi\KerusakanStukturTransaksi;
 use App\Services\CreateTempTable;
+use App\Services\QxtendServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -21,6 +26,7 @@ class KerusakanLaporMTController extends Controller
 {
     public function index(Request $request)
     {
+
 
         $data = KerusakanMstr::query()
             ->with(['getDetail', 'getTruck','getTruck.getUserDriver']);
@@ -47,6 +53,7 @@ class KerusakanLaporMTController extends Controller
         $jeniskerusakan = Kerusakan::get();
         $struktur = KerusakanStruktur::get();
         // dd($data->getMekanik);
+        
         return view('transaksi.kerusakan.show', compact('data', 'jeniskerusakan', 'struktur'));
     }
 
@@ -171,45 +178,99 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignkr($id, Request $request)
     {
-        dd($request->all());
-        DB::beginTransaction();
-        try {
-            // Update Detail
-            foreach ($request->iddetail as $key => $datas) {
-                $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
-                if ($request->operation[$key] == 'R') {
-                    $detail->delete();
-                } else {
-                    $detail->kerusakan_mstr_id = $request->idmaster;
-                    $detail->kerusakan_id = $request->jeniskerusakan[$key];
-                    $detail->save();
-                }
-            }
-
-            // Assign Mekanik
-            foreach ($request->struk_mekanik_id as $keys => $datas) {
-                $struktur_detail = KerusakanStrukturDetail::updateOrCreate([
-                    'kerusakan_struktur_id' => $datas,
-                    'kerusakan_mstr_id' => $request->idmaster,
-                    'kerusakan_struktur_detail_id' => $request->struk_detail_id[$keys]
-                ]);
-
-                $struktur_detail->kerusakan_mekanik = $request->struk_desc[$keys];
-                $struktur_detail->save();
-            }
-
-            // Update Status Mstr
-            $krmstr = KerusakanMstr::findOrFail($request->idmaster);
-            $krmstr->kerusakan_status = 'Ongoing';
-            $krmstr->save();
-            
-            DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
+        // dd($request->all());        
+        $nopol = $request->truck;
+        $wonbr = $request->sonbr;
+        
+        $kerusakanlist = [];
+        $rusaknbr = $request->sonbr;
+        $nopolnbr = $request->truck;
+         
+        // validasi approval ada atau tidak
+        $emailto = approval::get();
+        if(is_null($emailto)){
+            alert()->error('Error','Harap setting terlebih dahulu email untuk Approver di Approval Maintenance');
             return redirect()->route('laporkerusakan.index');
-        } catch (Exception $e) {
-            DB::rollBack();
-            alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
-            return back();
+        }
+
+        //kirim email dan update status
+        $kerusakan = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->where('kr_status', 'New')->findOrFail($request->idmaster);
+        $needappr = 0;
+        
+        foreach($kerusakan->getDetail as $key => $data){
+            $needappr = $data->getKerusakan->kerusakan_need_approval == 1 ? 1 : $needappr;
+            // array_push($needappr,$data->getKerusakan->kerusakan_need_approval);
+            array_push($kerusakanlist,$data->getKerusakan->kerusakan_desc);
+        }
+        // $kerusakanupdt = KerusakanMstr::where('id',$request->idmaster)->where('kr_status', 'New')->first();
+        switch($needappr){
+            case 1:
+                DB::beginTransaction();
+                try{
+                    $kerusakan->kr_status = 'Need Approval';
+                    $kerusakan->save();
+            
+                    foreach($request->struk_desc as $key=>$data){
+                        $kerusakandtl = new KerusakanStukturTransaksi();
+                        $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
+                        $kerusakandtl->krs_kerusakan_struktur_id = $request->struk_mekanik_id[$key];
+                        $kerusakandtl->krs_desc = $request->struk_desc[$key];
+                        $kerusakandtl->save();    
+                    }
+                    $pesan = 'New Truck Breakdown Approval';
+                    
+
+                    EmailApprovalKerusakan::dispatch(
+                        $pesan,
+                        $wonbr,
+                        $nopol,
+                        $kerusakanlist,
+                        $emailto,
+                        
+                    );
+
+                    DB::commit();
+                    alert()->success('Success','Kerusakan berhasil di assign');
+                    return redirect()->route('laporkerusakan.index');
+                }catch(Exception $err){
+                    DB::rollback();
+                    
+                    alert()->error('Error','Kerusakan gagal di assign');
+                    return redirect()->route('laporkerusakan.index');
+                }
+                break;
+            
+            case 0 :
+                DB::beginTransaction();
+                try{
+                    $kerusakan->kr_status = 'Done';
+                    $kerusakan->save();
+            
+                    foreach($request->struk_desc as $key=>$data){
+                        $kerusakandtl = new KerusakanStukturTransaksi();
+                        $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
+                        $kerusakandtl->krs_kerusakan_struktur_id = $request->struk_mekanik_id[$key];
+                        $kerusakandtl->krs_desc = $request->struk_desc[$key];
+                        $kerusakandtl->save();    
+                    }
+                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
+                    if($qxkerusakan[0] == false){
+                        DB::rollback();
+                        alert()->error('Error','Qxtend gagal, '.$qxkerusakan[1]);
+                        return back();
+                    }else if($qxkerusakan[0] == true){
+                        DB::commit();
+                        alert()->success('Success','Kerusakan berhasil di assign, Qxtend berhasil');
+                        return redirect()->route('laporkerusakan.index');
+                    }
+
+                    
+                }catch(Exception $err){
+                    DB::rollback();
+                    alert()->error('Error','Kerusakan gagal di assign');
+                    return redirect()->route('laporkerusakan.index');
+                }
+                break;
         }
     }
 }

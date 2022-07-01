@@ -10,7 +10,7 @@
 @section('content')
 
     <!-- page heading -->
-    <div class="col-md-12 col-lg-8 offset-lg-2 mb-4">
+    <div class="col-md-12 col-lg-8 offset-lg-1 mb-4">
         <form action="{{ route('custshipto.store', 'create') }}}" method="POST">
             {{ method_field('post') }}
             {{ csrf_field() }}

@@ -236,7 +236,6 @@ Route::group(['middleware' => ['auth']], function () {
         // Approval Maintenance
         //================================
         Route::resource('tipetruck', TruckTipeController::class);
-
         //================================
     });
 });
