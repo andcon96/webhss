@@ -163,6 +163,16 @@
             </div>
           </div>
 
+          <div class="form-group row">
+            <label for="cbBiaya" class="col-md-6 col-form-label text-md-right">{{ __('Lapor Biaya Tambahan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbBiaya">
+                <input type="checkbox" id="cbBiaya" name="cbBiaya" value="TR05" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
 
           <!-- UNTUK RFP heading -->
           <div class="form-group">
@@ -266,6 +276,11 @@
               document.getElementById("cbKerusakan").checked = true;  
             }else{
               document.getElementById("cbKerusakan").checked = false;
+            }
+            if(totmenu.search("TR05") >= 0){
+              document.getElementById("cbBiaya").checked = true;  
+            }else{
+              document.getElementById("cbBiaya").checked = false;
             }
             if(totmenu.search("DR01") >= 0){
               document.getElementById("cbDRInOut").checked = true;  
