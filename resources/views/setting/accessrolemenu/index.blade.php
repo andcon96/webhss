@@ -87,6 +87,16 @@
           </div>
 
           <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('CO Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbCOMT">
+                <input type="checkbox" id="cbCOMT" name="cbCOMT" value="SO04" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbSOMT">
@@ -97,20 +107,10 @@
           </div>
 
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Alokasi Sangu') }}</label>
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SJ Maintenance') }}</label>
             <div class="col-md-6">
-              <label class="switch" for="cbSOAloSangu">
-                <input type="checkbox" id="cbSOAloSangu" name="cbSOAloSangu" value="SO02" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Sangu Browse') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbSOBR">
-                <input type="checkbox" id="cbSOBR" name="cbSOBR" value="SO03" />
+              <label class="switch" for="cbSJMT">
+                <input type="checkbox" id="cbSJMT" name="cbSJMT" value="SO05" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -163,8 +163,16 @@
             </div>
           </div>
 
-
-          <!-- UNTUK RFP heading -->
+          <div class="form-group row">
+            <label for="cbBiaya" class="col-md-6 col-form-label text-md-right">{{ __('Lapor Biaya Tambahan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbBiaya">
+                <input type="checkbox" id="cbBiaya" name="cbBiaya" value="TR05" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
           <div class="form-group">
             <h6>
               <center><strong>Driver Check In / Out</strong></center>
@@ -177,6 +185,23 @@
             <div class="col-md-6">
               <label class="switch" for="cbDRInOut">
                 <input type="checkbox" id="cbDRInOut" name="cbDRInOut" value="DR01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <h6>
+              <center><strong>Fitur Tambahan</strong></center>
+            </h6>
+            <hr>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Pindah Domain') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbPdDomain">
+                <input type="checkbox" id="cbPdDomain" name="cbPdDomain" value="PD01" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -213,8 +238,6 @@
        desc = 'Super User'
      }
 
-     //alert(idrole)
-
      document.getElementById("edit_id").value = idrole;
      document.getElementById("role").value = role;
      document.getElementById("desc").value = desc;
@@ -237,15 +260,15 @@
             }else{
               document.getElementById("cbSOMT").checked = false;
             }
-            if(totmenu.search("SO02") >= 0){
-              document.getElementById("cbSOAloSangu").checked = true;  
+            if(totmenu.search("SO04") >= 0){
+              document.getElementById("cbCOMT").checked = true;  
             }else{
-              document.getElementById("cbSOAloSangu").checked = false;
+              document.getElementById("cbCOMT").checked = false;
             }
-            if(totmenu.search("SO03") >= 0){
-              document.getElementById("cbSOBR").checked = true;  
+            if(totmenu.search("SO05") >= 0){
+              document.getElementById("cbSJMT").checked = true;  
             }else{
-              document.getElementById("cbSOBR").checked = false;
+              document.getElementById("cbSJMT").checked = false;
             }
             if(totmenu.search("TR01") >= 0){
               document.getElementById("cbTripBrowse").checked = true;  
@@ -267,10 +290,20 @@
             }else{
               document.getElementById("cbKerusakan").checked = false;
             }
+            if(totmenu.search("TR05") >= 0){
+              document.getElementById("cbBiaya").checked = true;  
+            }else{
+              document.getElementById("cbBiaya").checked = false;
+            }
             if(totmenu.search("DR01") >= 0){
               document.getElementById("cbDRInOut").checked = true;  
             }else{
               document.getElementById("cbDRInOut").checked = false;
+            }
+            if(totmenu.search("PD01") >= 0){
+              document.getElementById("cbPdDomain").checked = true;  
+            }else{
+              document.getElementById("cbPdDomain").checked = false;
             }
           }
       });

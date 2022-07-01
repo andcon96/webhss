@@ -43,7 +43,6 @@ class Truck extends Model
     protected static function boot()
     {
         parent::boot();
-
         
         self::creating(function($model){
             $model->truck_domain = Session::get('domain');

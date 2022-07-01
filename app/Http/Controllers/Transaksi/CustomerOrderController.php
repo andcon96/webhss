@@ -43,6 +43,7 @@ class CustomerOrderController extends Controller
     public function edit($id)
     {
         $data = CustomerOrderMstr::with('getDetail')->findOrFail($id);
+        $this->authorize('update',[CustomerOrderMstr::class, $data]);
         $item = Item::get();
 
         return view('transaksi.customerorder.edit',compact('data','item'));
@@ -99,6 +100,8 @@ class CustomerOrderController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data = CustomerOrderMstr::findOrFail($id);
+        $this->authorize('update',[CustomerOrderMstr::class, $data]);
         DB::beginTransaction();
         try{
 

@@ -95,7 +95,6 @@ class SuratJalanController extends Controller
                     $sodet->save();
                 }
             }
-
             
             $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
             $prefix->domain_sj_rn = substr($getSJ,2,6);
@@ -114,8 +113,9 @@ class SuratJalanController extends Controller
     public function edit($id)
     {
         $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getDetail','getRuteHistory')->findOrFail($id);
+        $this->authorize('update',[SuratJalan::class, $data]);
         $item = SalesOrderDetail::where('sod_so_mstr_id',$data->sj_so_mstr_id)->get();
-        // dd($data);
+        
         return view('transaksi.sj.edit',compact('data','item'));
     }
 
@@ -124,6 +124,7 @@ class SuratJalanController extends Controller
         DB::beginTransaction();
         try{
             $sjmstr = SuratJalan::findOrFail($request->idmaster);
+            $this->authorize('update',[SuratJalan::class, $sjmstr]);
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->save();
             
@@ -174,6 +175,7 @@ class SuratJalanController extends Controller
 
         try{
             $sjmstr = SuratJalan::findOrFail($id);
+            $this->authorize('delete',[SuratJalan::class, $sjmstr]);
             
             $sjddet = SuratJalanDetail::where('sjd_sj_mstr_id',$id)->get();
             foreach($sjddet as $key => $sjddets){
@@ -188,12 +190,12 @@ class SuratJalanController extends Controller
             
             $sjmstr->sj_status = 'Cancelled';
             $sjmstr->save();
-
+            dd($id);
             DB::commit();
-            alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
+            alert()->success('Success', 'Surat Jalan Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
-            alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
+            alert()->error('Error', 'Failed to delete Surat Jalan')->persistent('Dismiss');
         }
 
         return redirect()->route('suratjalan.index');

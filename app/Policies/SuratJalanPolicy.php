@@ -20,4 +20,9 @@ class SuratJalanPolicy
     {
         return $sjmstr->sj_domain == Session::get('domain');
     }
+
+    public function delete(User $user, SuratJalan $sjmstr)
+    {
+        return $sjmstr->sj_domain == Session::get('domain') && $sjmstr->sj_status == 'Open';
+    }
 }

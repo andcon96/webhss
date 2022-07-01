@@ -57,7 +57,7 @@
         <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
-                <input id="remark" type="text" class="form-control" name="remark" value="" autocomplete="off" autofocus>
+                <input id="remark" type="text" class="form-control" name="remark" maxlength="24" value="" autocomplete="off" autofocus>
             </div>
         </div>
 
@@ -67,7 +67,7 @@
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
-                    <a href="{{ route('laporsj.index') }}" id="btnback" class="btn btn-success bt-action">Back</a>
+                    <a href="{{ route('laporsj.index',['truck' => $truck]) }}" id="btnback" class="btn btn-success bt-action">Back</a>
                     <button type="submit" class="btn btn-success bt-action btn-focus btnconf" id="btnconf">Confirm Shipment</button>
                     <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                         <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading

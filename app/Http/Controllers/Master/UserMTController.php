@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Department;
+use App\Models\Master\Domain;
 use App\Models\Master\Role;
 use App\Models\Master\RoleType;
 use App\Models\Master\User;
@@ -28,6 +29,8 @@ class UserMTController extends Controller
 
         $dept = Department::get();
 
+        $domain = Domain::get();
+
         if ($request->ajax()) {
             $username = $request->username;
             $name = $request->name;
@@ -49,7 +52,7 @@ class UserMTController extends Controller
 
             return view('setting.users.table', compact('users'));
         } else {
-            return view('setting.users.index', compact('users', 'roleType', 'dept'));
+            return view('setting.users.index', compact('users', 'roleType', 'dept', 'domain'));
         }
     }
 
@@ -74,7 +77,6 @@ class UserMTController extends Controller
         $this->validate($request, [
             'username' => 'required|unique:users',
             'name' => 'required',
-            'dept' => 'required',
             'password' => 'required|min:8|max:20',
             'password_confirmation' => 'required|min:8|max:20|same:password',
         ], [
@@ -97,7 +99,8 @@ class UserMTController extends Controller
             $storeUser->password = Hash::make($password);
             $storeUser->role_id = $role_id;
             $storeUser->role_type_id = $request->input('roletype');
-            $storeUser->dept_id = $dept;
+            $storeUser->dept_id = 1;
+            $storeUser->domain = $request->input('domain');
 
             $storeUser->isActive = 1;
             $storeUser->save();
@@ -155,9 +158,8 @@ class UserMTController extends Controller
         $user_id = $request->t_id;
         $username = $request->d_uname;
         $name = $request->name;
-        $email = $request->email;
         $roletype = $request->roletype;
-        $dept = $request->dept;
+        $domain = $request->domain;
 
         DB::beginTransaction();
 
@@ -166,9 +168,8 @@ class UserMTController extends Controller
             $user = User::where('id', $user_id)->first();
             $user->name = $name;
             $user->username = $username;
-            $user->email = $email;
             $user->role_type_id = $roletype;
-            $user->dept_id = $dept;
+            $user->domain = $domain;
             if ($user->isDirty()) {
                 $user->save();
             }

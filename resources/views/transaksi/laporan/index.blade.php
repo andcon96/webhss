@@ -24,7 +24,7 @@
     <div class="form-group row col-md-12">
         <label for="report" class="col-md-2 col-form-label text-md-right">{{ __('Tipe Report') }}</label>
         <div class="col-md-4 col-lg-3">
-            <select id="report" class="form-control" name="report" autofocus autocomplete="off">
+            <select id="report" class="form-control" name="report" autofocus autocomplete="off" required>
                 <option value=""> Select Data </option>
                 <option value="1"> Report Bulan by Date </option>
                 <option value="2"> Report Bulan by Truck by Date </option>
@@ -32,7 +32,7 @@
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
         <div class="col-md-4 col-lg-3">
-            <select id="truck" class="form-control" name="truck" autofocus autocomplete="off">
+            <select id="truck" class="form-control" name="truck" autofocus autocomplete="off" required>
                 <option value=""> Select Data </option>
                 @foreach($truck as $trucks)
                 <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
@@ -75,8 +75,10 @@
         
         if(val == 2){
             $('#truck').prop('disabled',false);
+            $('#truck').prop('required',true);
         }else{
-            $('#truck').prop('disabled',true);
+            $('#truck').prop('disabled',true);;
+            $('#truck').prop('required',false);
         }
     });
 

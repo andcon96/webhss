@@ -64,7 +64,7 @@
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
-                    <a href="{{Route('laportrip.index')}}" id="btnback" class="btn btn-success bt-action">Back</a>
+                    <a href="{{Route('laportrip.index',['truck' => $data->sj_truck_id])}}" id="btnback" class="btn btn-success bt-action">Back</a>
                     @if(Auth::user()->role_id != '1')
                     <button type="submit" class="btn btn-success bt-action btn-focus btnconf" id="btnconf">Lapor Trip</button>
                     @endif

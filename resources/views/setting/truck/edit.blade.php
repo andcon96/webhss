@@ -12,7 +12,7 @@
     <form action="{{route('truckmaint.update',$data->id)}}" method="post" id="submit">
         {{ method_field('put') }}
         {{ csrf_field() }}
-
+        <input type="hidden" name="prevurl" value="{{url()->previous()}}">
         <div class="modal-body">
             <div class="form-group row">
                 <label for="nopol" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
@@ -44,6 +44,7 @@
         </div>
 
         <div class="modal-footer">
+            <a href="{{ route('truckmaint.index') }}" id="btnback" class="btn btn-success bt-action">Back</a>
             <button type="submit" class="btn btn-success bt-action" id="btnconf">Save</button>
             <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                 <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading

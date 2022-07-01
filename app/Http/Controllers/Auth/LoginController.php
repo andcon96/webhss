@@ -66,10 +66,8 @@ class LoginController extends Controller
             Auth::logout();
             return redirect()->back()->with(['error' => 'Pastikan Role User sudah dibuat, Silahkan kontak Admin']);
         } else {
-            // Session::put('menu_flag', $users->xxrole_flag);
-            Session::put('supp_code', $users->supp_id);
             Session::put('getRole', $users->getRole->role);
-            Session::put('domain',$request->domain);
+            Session::put('domain',$users->domain);
             Session::put('department', $users->department);
             Session::put('name', $users->name);
 
@@ -102,9 +100,6 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        // $data = DB::table('users')
-        // ->where('username', '=', $request->username)
-        // ->get();
 
         $data = User::where('username', $request->username)->get();
 
@@ -117,10 +112,6 @@ class LoginController extends Controller
         $users = User::select('id', 'password')
                     ->where('username', $request->username)
                     ->first();
-        // $users = DB::table("users")
-        //     ->select('id', 'password')
-        //     ->where("users.username", $request->username)
-        //     ->first();
 
         if (!$hasher->check($request->password, $users->password)) {
             return redirect()->back()->with(['error' => 'Password salah']);

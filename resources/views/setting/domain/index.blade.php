@@ -141,6 +141,14 @@
         cols += '<td>';
         cols += '<input type="text" class="form-control" name="desc[]" required />';
         cols += '</td>';
+        
+        cols += '<td>';
+        cols += '<input type="text" class="form-control" name="coprefix[]" value="" maxlength="2" minlength="2" required />';
+        cols += '</td>';
+
+        cols += '<td>';
+        cols += '<input type="text" class="form-control" name="corn[]" value="{{$domains->domain_so_rn ?? ''}}" readonly maxlength="6" minlength="6" required />';
+        cols += '</td>';
 
         cols += '<td>';
         cols += '<input type="text" class="form-control" name="soprefix[]" value="" maxlength="2" minlength="2" required />';
@@ -148,6 +156,14 @@
 
         cols += '<td>';
         cols += '<input type="text" class="form-control" name="sorn[]" value="{{$domains->domain_so_rn ?? ''}}" readonly maxlength="6" minlength="6" required />';
+        cols += '</td>';
+
+        cols += '<td>';
+        cols += '<input type="text" class="form-control" name="sjprefix[]" value="" maxlength="2" minlength="2" required />';
+        cols += '</td>';
+
+        cols += '<td>';
+        cols += '<input type="text" class="form-control" name="sjrn[]" value="{{$domains->domain_so_rn ?? ''}}" readonly maxlength="6" minlength="6" required />';
         cols += '</td>';
 
         cols += '<td>';

@@ -13,7 +13,7 @@
         <tbody>
             @forelse ($data as $key => $datas)
             <tr>
-                <td data-label="Truck">{{$datas->getTruck->truck_no_polis}}</td>
+                <td data-label="Truck">{{$datas->getTruck->truck_no_polis ?? ''}}</td>
                 <td data-label="Tanggal Lapor">{{$datas->rb_eff_date}}</td>
                 <td data-label="Nominal">{{number_format($datas->rb_nominal,2)}}</td>
                 <td data-label="Catatan">{{$datas->rb_remark}}</td>

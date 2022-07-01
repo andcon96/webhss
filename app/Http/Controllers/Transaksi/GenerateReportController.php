@@ -24,6 +24,13 @@ class GenerateReportController extends Controller
         $truck = $request->truck;
         $report = $request->report;
 
-        return Excel::download(new ReportByMonthExport($datefrom,$dateto,$truck), 'ReportByMonth.xlsx');
+        if($report == '1'){
+            // By Date
+            dd('notyet');
+            return Excel::download(new ReportByMonthExport($datefrom,$dateto,$truck), 'laporan-sangu.xlsx');
+        }elseif($report == '2'){
+            // By Truck by Date
+            return Excel::download(new ReportByMonthExport($datefrom,$dateto,$truck), 'ReportByMonth.xlsx');
+        }
     }
 }

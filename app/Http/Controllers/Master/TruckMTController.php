@@ -92,7 +92,9 @@ class TruckMTController extends Controller
             alert()->error('Error', 'Failed to update truck');
         }
 
-        return redirect()->route('truckmaint.index');
+        return redirect()->to($request->prevurl ?? route('truckmaint.index'));
+
+        // return redirect()->route('truckmaint.index');
     }
 
     /**

@@ -32,13 +32,8 @@
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
                         
-                    @if($datas->new_so)
+                    @if($datas->new_open_so)
                     <a href="{{route('salesorder.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
-
-                    <a href="" class="deleteModal" 
-                        data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
-                        data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
-
                         
                     <a href="{{route('soCreateSJ',['id' => $datas->id]) }}"><i class="fas fa-plus-square"></i></a>
                     
@@ -49,7 +44,13 @@
                         data-toggle='modal' data-target="#detailModal"><i
                         class="fas fa-book"></i></button>
                     @endif
+
                     
+                    @if($datas->new_so)
+                    <a href="" class="deleteModal" 
+                        data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
+                        data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
+                    @endif
                 </td>
             </tr>
             @empty
