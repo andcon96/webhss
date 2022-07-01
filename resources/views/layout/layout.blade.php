@@ -51,7 +51,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Select Domain -->
-        @if(Auth()->user()->role_id == 1)
+        @if(Auth()->user()->role_id == 1 || str_contains(Auth()->user()->getRoleType->accessmenu,'PD01'))
         <li>
           <select name="headdomain" id="headdomain" class="form-control">
             @php

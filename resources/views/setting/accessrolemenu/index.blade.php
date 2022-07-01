@@ -173,8 +173,6 @@
             </div>
           </div>
           
-
-          <!-- UNTUK RFP heading -->
           <div class="form-group">
             <h6>
               <center><strong>Driver Check In / Out</strong></center>
@@ -187,6 +185,23 @@
             <div class="col-md-6">
               <label class="switch" for="cbDRInOut">
                 <input type="checkbox" id="cbDRInOut" name="cbDRInOut" value="DR01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <h6>
+              <center><strong>Fitur Tambahan</strong></center>
+            </h6>
+            <hr>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Pindah Domain') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbPdDomain">
+                <input type="checkbox" id="cbPdDomain" name="cbPdDomain" value="PD01" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -222,8 +237,6 @@
      if (desc == "Super_User") {
        desc = 'Super User'
      }
-
-     //alert(idrole)
 
      document.getElementById("edit_id").value = idrole;
      document.getElementById("role").value = role;
@@ -286,6 +299,11 @@
               document.getElementById("cbDRInOut").checked = true;  
             }else{
               document.getElementById("cbDRInOut").checked = false;
+            }
+            if(totmenu.search("PD01") >= 0){
+              document.getElementById("cbPdDomain").checked = true;  
+            }else{
+              document.getElementById("cbPdDomain").checked = false;
             }
           }
       });
