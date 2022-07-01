@@ -51,6 +51,7 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Select Domain -->
+        @if(Auth()->user()->role_id == 1)
         <li>
           <select name="headdomain" id="headdomain" class="form-control">
             @php
@@ -65,6 +66,7 @@
             @endphp
           </select>
         </li>
+        @endif
 
         <li>
           <a class="nav-link" role="button" data-toggle="dropdown">
@@ -249,12 +251,12 @@
                     <p>Role Menu Maintenance</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="{{route('deptmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Department Maintenance</p>
                   </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                   <a href="{{route('customermaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

@@ -75,6 +75,17 @@
 
         <div class="modal-body">
           <div class="form-group row">
+            <label for="domain" class="col-md-3 col-form-label text-md-right">Domain</label>
+            <div class="col-md-7">
+              <select id="domain" class="form-control role" name="domain" required autofocus>
+                <option value=""> Select Data </option>
+                @foreach($domain as $domains)
+                <option value="{{$domains->domain_code}}">{{$domains->domain_code}} -- {{$domains->domain_desc}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="username" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-5 {{ $errors->has('uname') ? 'has-error' : '' }}">
               <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" autocomplete="off" maxlength="8" required autofocus>
@@ -91,7 +102,6 @@
             <div class="col-md-7">
               <select id="role" class="form-control role" name="role" required autofocus>
                 <option value=""> Select Data </option>
-                <option value="Super_User">Admin</option>
                 <option value="User"> User </option>
               </select>
             </div>
@@ -105,17 +115,6 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="dept" class="col-md-3 col-form-label text-md-right">Department</label>
-            <div class="col-md-7">
-              <select id="dept" class="form-control role" name="dept" required autofocus>
-                <option value=""> Select Data </option>
-                @foreach($dept as $depts)
-                <option value="{{$depts->id}}">{{$depts->department_code}} -- {{$depts->department_name}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
           <div class="form-group row">
             <label for="password" class="col-md-3 col-form-label text-md-right">Password</label>
             <div class="col-md-5">
@@ -143,7 +142,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -165,6 +163,17 @@
           <input type="hidden" name='d_suppname' id='t_suppname'>
           <input type="hidden" name="lastPage" value="{{$users->lastPage()}}" />
           <div class="form-group row">
+            <label for="t_domain" class="col-md-3 col-form-label text-md-right">Domain</label>
+            <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
+              <select id="t_domain" class="form-control roletype" name="domain" required autofocus>
+                <option value=""> Select Data </option>
+                @foreach($domain as $domains)
+                  <option value="{{$domains->domain_code}}">{{$domains->domain_code}} - {{$domains->domain_desc}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="d_uname" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
               <input id="d_uname" type="text" class="form-control" name="d_uname" value="{{ old('d_uname') }}" readonly autofocus>
@@ -177,28 +186,10 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="d_email" class="col-md-3 col-form-label text-md-right">E-Mail</label>
-            <div class="col-md-7">
-              <input id="d_email" type="email" class="form-control" autocomplete="off" name="email" value="{{ old('email') }}" required>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="d_email" class="col-md-3 col-form-label text-md-right">Role Type</label>
             <div class="col-md-7">
               <select id="t_roletype" class="form-control roletype" name="roletype" required autofocus>
                 <option value=""> Select Data </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="e_dept" class="col-md-3 col-form-label text-md-right">Department</label>
-            <div class="col-md-7">
-              <select id="e_dept" class="form-control dept" name="dept" required autofocus>
-                <option value=""> Select Data </option>
-                @foreach($dept as $depts)
-                <option value="{{$depts->id}}">{{$depts->department_code}} -- {{$depts->department_name}}</option>
-                @endforeach
               </select>
             </div>
           </div>
@@ -397,7 +388,7 @@
     var username = $(this).data('uname');
     var name = $(this).data('name');
     var dept = $(this).data('dept');
-    // var domain = $(this).data('domain');
+    var domain = $(this).data('domain');
     var email = $(this).data('email');
 
     var role_type = $(this).data('roletype');
@@ -408,9 +399,9 @@
     document.getElementById("d_uname").value = username;
     document.getElementById("d_name").value = name;
     // document.getElementById("d_domain").value = domain;
-    document.getElementById("d_email").value = email;
     document.getElementById("t_role").value = role;
     $('#e_dept').val(dept);
+    $('#t_domain').val(domain).trigger('change');
 
     jQuery.ajax({
       type: "get",
@@ -434,7 +425,7 @@
   });
 
   $(document).ready(function() {
-    $("#suppid").select2({
+    $("#domain,#role,#roletype,.roletype").select2({
       width: '100%'
     });
 
@@ -456,6 +447,8 @@
               $('#roletype').append('<option value="' + data[i].id + '">' + data[i].role_type + '</option>');
             }
           }
+
+          $('#roletype').trigger('change');
         }
       });
     });

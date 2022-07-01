@@ -22,13 +22,13 @@
                   <span class="show">SHOW</span>
                   <label>Password</label>
             </div>
-            <div class="input-field">
+            {{-- <div class="input-field">
               <select name="domain" id="domain" style="width:100%;height:50px;font-size:16px;padding-left:10px;">
                 <option value="HSS">HSS</option>
                 <option value="AS">AS</option>
                 <option value="SPJS">SPJS</option>
               </select>
-            </div>
+            </div> --}}
             <div class="button">
                 <div class="inner">
                 </div>

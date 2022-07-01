@@ -85,7 +85,6 @@
               <div class="col-md-7">
                 <select id="role" class="form-control role" name="role" required autofocus>
                   <option value=""> Select Data </option>
-                  <option value="Super_User"> Admin </option>
                   <option value="User"> User </option>
                 </select>
               </div>
@@ -210,6 +209,10 @@
 @section('scripts')
 
 <script type="text/javascript">
+  $('.role').select2({
+    width: '100%',
+  })
+
   $(document).ready(function() {
       $('form').on("submit",function(){
           document.getElementById('btnclose').style.display = 'none';

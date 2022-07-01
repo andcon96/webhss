@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('role_type_id')->index();
             $table->foreign('role_type_id')->references('id')->on('role_types');
             $table->tinyInteger('isActive');
+            $table->string('domain');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
