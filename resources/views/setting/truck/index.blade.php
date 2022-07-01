@@ -69,10 +69,10 @@
                     {{$datas->getTipe->tt_desc}}
                 </td>
                 <td>
-                    {{$datas->getUserDriver->name}}
+                    {{$datas->getUserDriver->name ?? ''}}
                 </td>
                 <td>
-                    {{$datas->getUserPengurus->name}}
+                    {{$datas->getUserPengurus->name ?? ''}}
                 </td>
                 <td>
                     {{$datas->truck_is_active == 1 ? 'Active' : 'Not Active'}}
