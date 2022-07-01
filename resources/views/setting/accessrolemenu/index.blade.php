@@ -87,6 +87,16 @@
           </div>
 
           <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('CO Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbCOMT">
+                <input type="checkbox" id="cbCOMT" name="cbCOMT" value="SO04" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbSOMT">
@@ -97,20 +107,10 @@
           </div>
 
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Alokasi Sangu') }}</label>
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SJ Maintenance') }}</label>
             <div class="col-md-6">
-              <label class="switch" for="cbSOAloSangu">
-                <input type="checkbox" id="cbSOAloSangu" name="cbSOAloSangu" value="SO02" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('SO Sangu Browse') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbSOBR">
-                <input type="checkbox" id="cbSOBR" name="cbSOBR" value="SO03" />
+              <label class="switch" for="cbSJMT">
+                <input type="checkbox" id="cbSJMT" name="cbSJMT" value="SO05" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -260,15 +260,15 @@
             }else{
               document.getElementById("cbSOMT").checked = false;
             }
-            if(totmenu.search("SO02") >= 0){
-              document.getElementById("cbSOAloSangu").checked = true;  
+            if(totmenu.search("SO04") >= 0){
+              document.getElementById("cbCOMT").checked = true;  
             }else{
-              document.getElementById("cbSOAloSangu").checked = false;
+              document.getElementById("cbCOMT").checked = false;
             }
-            if(totmenu.search("SO03") >= 0){
-              document.getElementById("cbSOBR").checked = true;  
+            if(totmenu.search("SO05") >= 0){
+              document.getElementById("cbSJMT").checked = true;  
             }else{
-              document.getElementById("cbSOBR").checked = false;
+              document.getElementById("cbSJMT").checked = false;
             }
             if(totmenu.search("TR01") >= 0){
               document.getElementById("cbTripBrowse").checked = true;  

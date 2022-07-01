@@ -75,8 +75,8 @@ class AccessRoleMenuController extends Controller
     {
         // Menu SO
         $cbSOMT = $request->input('cbSOMT');
-        $cbSOAloSangu = $request->input('cbSOAloSangu');
-        $cbSOBrowse = $request->input('cbSOBR');
+        $cbCOMT = $request->input('cbCOMT');
+        $cbSJMT = $request->input('cbSJMT');
 
         // Menu Trip
         $cbTripBrowse = $request->input('cbTripBrowse');
@@ -91,7 +91,7 @@ class AccessRoleMenuController extends Controller
         // Fitur Tambahan
         $cbPdDomain = $request->input('cbPdDomain');
 
-        $data = $cbSOMT . $cbSOAloSangu . $cbSOBrowse . $cbTripBrowse . $cbTripLapor . 
+        $data = $cbSOMT . $cbCOMT . $cbSJMT . $cbTripBrowse . $cbTripLapor . 
                 $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya. $cbPdDomain;
 
         DB::beginTransaction();
