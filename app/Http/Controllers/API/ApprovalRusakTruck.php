@@ -31,7 +31,7 @@ class ApprovalRusakTruck extends Controller
             if($checkdata->status != 'Need Approval'){
                 $errorlist = [];
                 $status = 'ERROR';
-                $message = 'Kerusakan sudah di approve';
+                $message = 'Kerusakan sudah di approve/reject';
                 
             }
             elseif(!$checkdata){
@@ -85,6 +85,13 @@ class ApprovalRusakTruck extends Controller
         elseif($status == 'no'){
             
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
+            
+            if($checkdata->status != 'Need Approval'){
+                $errorlist = [];
+                $status = 'ERROR';
+                $message = 'Kerusakan sudah di approve/reject';
+                
+            }
             DB::beginTransaction();
             try{
                 $checkdata->kr_status = 'Reject';
