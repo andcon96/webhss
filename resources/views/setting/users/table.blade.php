@@ -24,17 +24,21 @@
       @endif
     </td>
     <td data-title="Edit" class="action">
+      @if(!$show->is_super_user)
       <a href="" class="editUser" data-toggle="modal" data-target="#editModal" data-id="{{$show->id}}" 
         data-uname="{{$show->username}}" data-name="{{$show->name}}" data-role="{{$show->getRole->role}}" 
         data-domain="{{$show->domain}}" data-email="{{$show->email}}" data-dept="{{$show->dept_id}}"
         data-roletype="{{$show->getRoleType->role_type}}" 
       ><i class="fas fa-edit"></i></a>
+      @endif
     </td>
     <td data-title="Pass" class="action">
+      @if(!$show->is_super_user)
       <a href="" class="changepass" data-id="{{$show->id}}" data-uname="{{$show->username}}" data-toggle='modal' data-target="#changepassModal"><i class="fas fa-key"></i></a>
+      @endif
     </td>
     <td data-title="Delete" class="action">
-      @if( $show->getRoleType->role_type != 'AdminIMI' )
+      @if( !$show->is_super_user )
         @if( $show->isActive == 0 )
       <a href="" class="deleteUser" data-id="{{$show->id}}" data-role="{{$show->username}}"  data-status="activate"  data-active="1" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-check"></i></a>
         @elseif($show->isActive == 1)

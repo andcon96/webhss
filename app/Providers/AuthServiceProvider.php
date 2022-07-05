@@ -107,13 +107,14 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'DR01');
         });
 
-        // DRIVER
+        // Report
         Gate::define('access_report_side', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'RP');
         });
         Gate::define('access_report', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'RP01');
         });
+        
 
 
         

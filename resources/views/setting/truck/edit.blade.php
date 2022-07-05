@@ -15,6 +15,12 @@
         <input type="hidden" name="prevurl" value="{{url()->previous()}}">
         <div class="modal-body">
             <div class="form-group row">
+                <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
+                <div class="col-md-7">
+                    <input id="truck" type="text" class="form-control" autocomplete="off" name="truck" value="{{$data->truck_domain}}" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="nopol" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
                 <div class="col-md-7">
                     <input id="nopol" type="text" class="form-control" autocomplete="off" name="nopol" value="{{$data->truck_no_polis}}" required>

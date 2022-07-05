@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Exports\ReportByMonthExport;
+use App\Exports\ReportLoosingHSST;
+use App\Exports\ReportTotalanSupirLoosingHSST;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Truck;
 use Illuminate\Http\Request;
@@ -31,6 +33,12 @@ class GenerateReportController extends Controller
         }elseif($report == '2'){
             // By Truck by Date
             return Excel::download(new ReportByMonthExport($datefrom,$dateto,$truck), 'ReportByMonth.xlsx');
+        }elseif($report == '3'){
+            // Loosing HSST
+            return Excel::download(new ReportLoosingHSST($datefrom,$dateto), 'ReportLoosingHSST.xlsx');
+        }elseif($report == '4'){
+            // Totalan Supir Loosing HSST
+            return Excel::download(new ReportTotalanSupirLoosingHSST($datefrom,$dateto), 'ReportTotalSupirLoosingHSST.xlsx');
         }
     }
 }

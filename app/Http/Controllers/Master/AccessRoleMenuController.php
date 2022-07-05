@@ -88,11 +88,15 @@ class AccessRoleMenuController extends Controller
         // Menu Driver
         $cbDRInOut = $request->input('cbDRInOut');
 
+        // Menu Report
+        $cbRPMT = $request->input('cbRPMT');
+
         // Fitur Tambahan
         $cbPdDomain = $request->input('cbPdDomain');
 
         $data = $cbSOMT . $cbCOMT . $cbSJMT . $cbTripBrowse . $cbTripLapor . 
-                $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya. $cbPdDomain;
+                $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya. $cbPdDomain.
+                $cbRPMT;
 
         DB::beginTransaction();
 
