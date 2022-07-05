@@ -45,8 +45,8 @@
             </table>
         </div>
 
-        <div class="offset-md-2 col-8 row" style="">
-                <button type="submit" class="btn btn-success bt-action"  data-toggle="modal" 
+        <div class="offset-md-2 col-md-8 row" style="overflow:auto">
+                <button type="submit" class="btn btn-success bt-action ml-auto"  data-toggle="modal" 
                 data-target="#loadingtable" data-backdrop="static" data-keyboard="false" id="btnconf">Save</button>
         </div>
     </form>

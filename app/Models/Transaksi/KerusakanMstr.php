@@ -22,6 +22,7 @@ class KerusakanMstr extends Model
     {
         return $this->hasOne(Truck::class, 'id' ,'kr_truck');
     }
+    
 
 
 }

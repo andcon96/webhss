@@ -13,17 +13,13 @@
                     <td>
                         <table style="width:100%">
                             @forelse($struktur as $flg => $strukturs)
+                            
                                 <tr>
-                                    @php($mekanik = $data->getMekanik
-                                        ->where('kerusakan_struktur_detail_id',$datas->id)
-                                        ->where('kerusakan_struktur_id',$strukturs->id)
-                                        ->first())
-                                    <td>{{$strukturs->slk_desc}}</td>
+
+                                    <td style="width: 50%">{{$strukturs->ks_desc}}</td>
                                     <td>
-                                        <input type="hidden" name="struk_detail_id[]" value="{{$datas->id}}">
-                                        <input type="hidden" name="struk_mekanik_id[]" value="{{$strukturs->id}}">
-                                        <input type="text" class="form-control" name="struk_desc[]" readonly
-                                            value="{{$mekanik->kerusakan_mekanik ?? ''}}">
+                                        
+                                        <input type="text" class="form-control" value="{{isset($strukturs->getStrukturTrans->krs_desc) ? $strukturs->getStrukturTrans->krs_desc : ''}}" readonly>
                                     </td>
                                 </tr>
                             @empty

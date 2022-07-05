@@ -51,17 +51,21 @@ class KerusakanLaporMTController extends Controller
 
     public function show($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getKerusakan'])->findOrFail($id);
+
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getKerusakan','getDetail.getStrukturTrans.getStrukturMaster'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
-        $struktur = KerusakanStruktur::get();
-        // dd($data->getMekanik);
         
+        $struktur = KerusakanStruktur::with(['getStrukturTrans' => function($q) use ($id){
+            $q->where('krs_krd_det_id',$id);
+        }])->get();
+             
+        // 
         return view('transaksi.kerusakan.show', compact('data', 'jeniskerusakan', 'struktur'));
     }
 
     public function create()
     {
-        // $truckdriver = TruckDriver::with(['getTruck', 'getUser'])->where('truck_is_active', 1)->get();
+        
         $jeniskerusakan = Kerusakan::get();
         $truck = Truck::get();
         return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck'));
@@ -78,7 +82,7 @@ class KerusakanLaporMTController extends Controller
                 DB::rollBack();
                 return back();
             }
-            // dd($request->all());
+            
             $kerusakan_mstr = new KerusakanMstr();
             $kerusakan_mstr->kr_nbr = $getrn;
             $kerusakan_mstr->kr_truck = $request->truck;
@@ -95,7 +99,7 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_detail->save();
             }
 
-            // $prefix = Prefix::firstOrFail();
+            
             $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
             $prefix->domain_kr_rn = substr($getrn, 2, 6);
             $prefix->save();
@@ -180,7 +184,7 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignkr($id, Request $request)
     {
-        // dd($request->all());        
+        
         $nopol = $request->truck;
         $wonbr = $request->sonbr;
         

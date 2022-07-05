@@ -23,7 +23,7 @@ class StrukturKerusakanController extends Controller
         DB::beginTransaction();
 
         try{
-            KerusakanStruktur::whereNotNull('id')->delete();
+            KerusakanStruktur::truncate();
             foreach($request->order as $key => $datas){
                 $newdata = KerusakanStruktur::firstOrNew(['ks_order' => $datas]);
                 $newdata->ks_desc = $request->desc[$key];

@@ -3,7 +3,7 @@
 namespace App\Models\Transaksi;
 
 use App\Models\Master\Kerusakan;
-use App\Models\Master\KerusakanStruktur;
+use App\Models\Transaksi\KerusakanStukturTransaksi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +24,6 @@ class KerusakanDetail extends Model
     
     public function getStrukturTrans()
     {
-        return $this->hasMany(KerusakanStruktur::class, 'id', 'krs_krd_det_id');
+        return $this->hasMany(KerusakanStukturTransaksi::class, 'id', 'krs_krd_det_id');
     }
 }

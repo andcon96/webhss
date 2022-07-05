@@ -28,15 +28,15 @@ class ApprovalRusakTruck extends Controller
             
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
             
-            if($checkdata->status != 'Need Approval'){
+            if($checkdata->kr_status != 'Need Approval'){
                 $errorlist = [];
-                $status = 'ERROR';
+                $status_display = 'ERROR';
                 $message = 'Kerusakan sudah di approve/reject';
                 
             }
             elseif(!$checkdata){
                 $errorlist = [];
-                $status = 'ERROR';
+                $status_display = 'ERROR';
                 $message = 'Data kerusakan tidak ditemukan';
                 
             }
@@ -86,9 +86,9 @@ class ApprovalRusakTruck extends Controller
             
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
             
-            if($checkdata->status != 'Need Approval'){
+            if($checkdata->kr_status != 'Need Approval'){
                 $errorlist = [];
-                $status = 'ERROR';
+                $status_display = 'ERROR';
                 $message = 'Kerusakan sudah di approve/reject';
                 
             }
