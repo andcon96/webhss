@@ -50,6 +50,7 @@
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
+                <th>Domain</th>
                 <th>No Polis</th>
                 <th>Tipe</th>
                 <th>Driver</th>
@@ -61,6 +62,9 @@
         <tbody>
             @forelse ($data as $index => $datas)
             <tr>
+                <td>
+                    {{$datas->truck_domain}}
+                </td>
                 <td>
                     {{$datas->truck_no_polis}}
                 </td>
@@ -114,6 +118,12 @@
                     {{ method_field('post') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="polis" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
+                            <div class="col-md-7">
+                                <input id="polis" type="text" class="form-control" name="polis" autocomplete="off" value="{{Session::get('domain')}}" readonly>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="polis" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
                             <div class="col-md-7">
