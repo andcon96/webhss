@@ -11,31 +11,35 @@
             </tr>
         </thead>
         <tbody>
+            
             @forelse ($data as $key => $datas)
-            <tr>
+                @if($datas->getTruck != null)
+            
+                    <tr>
+                        <td data-label="Nomor Kerusakan">{{$datas->kr_nbr}}</td>
+                        <td data-label="No Polis">{{isset($datas->getTruck->truck_no_polis) ? $datas->getTruck->truck_no_polis : ''}}</td>
+                        <td data-label="Driver">{{isset($datas->getTruck->getUserDriver->name) ? $datas->getTruck->getUserDriver->name : '' }}</td>
+                        <td data-label="Tanggal Lapor">{{$datas->kr_date}}</td>
+                        <td data-label="Status">{{$datas->kr_status}}</td>
+                        <td data-label="Action">
+                            <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
+                            @if($datas->kr_status == 'New')
+                            <a href="{{route('laporkerusakan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
+                            
+                            <a href="{{route('assignKR',$datas->id) }}"><i class="fas fa-tasks"></i></a>
 
-                <td data-label="Nomor Kerusakan">{{$datas->kr_nbr}}</td>
-                <td data-label="No Polis">{{isset($datas->getTruck->truck_no_polis) ? $datas->getTruck->truck_no_polis : ''}}</td>
-                <td data-label="Driver">{{isset($datas->getTruck->getUserDriver->name) ? $datas->getTruck->getUserDriver->name : '' }}</td>
-                <td data-label="Tanggal Lapor">{{$datas->kr_date}}</td>
-                <td data-label="Status">{{$datas->kr_status}}</td>
-                <td data-label="Action">
-                    <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
-                    @if($datas->kr_status == 'New')
-                    <a href="{{route('laporkerusakan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
-                    
-                    <a href="{{route('assignKR',$datas->id) }}"><i class="fas fa-tasks"></i></a>
-
-                    <a href="" class="deleteModal" 
-                        data-id="{{$datas->id}}" data-krnbr="{{$datas->kr_nbr}}"
-                        data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
-                    @endif
-                </td>
-            </tr>
+                            <a href="" class="deleteModal" 
+                                data-id="{{$datas->id}}" data-krnbr="{{$datas->kr_nbr}}"
+                                data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
+                            @endif
+                        </td>
+                    </tr>
+                @endif
             @empty
             <tr>
                 <td colspan='8' style="color:red;text-align:center;"> No Data Avail</td>
             </tr>
+            
             @endforelse
         </tbody>
     </table>

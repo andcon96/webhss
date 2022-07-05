@@ -70,6 +70,33 @@
 <div class="col-lg-12">
   <button class="btn btn-info bt-action newRole" data-toggle="modal" data-target="#myModal">
     Create Rute</button>
+    <form action="/rute/rutedetail/{{$id}}" method="get">
+      <div class="row form-group mt-4">
+          <label for="s_shipfrom" class="col-md-1 col-form-label">{{ __('Ship From') }}</label>
+          <div class="col-md-2">
+              <select name="s_shipfrom" id="s_shipfrom" class="form-control">
+                  <option value="">Select Data</option>
+                  @foreach($shipfrom as $shipf)
+                      <option value="{{$shipf->id}}">{{$shipf->sf_code}} -- {{$shipf->sf_desc}}</option>
+                  @endforeach
+              </select>
+          </div>
+          <label for="s_shipto" class="col-md-1 col-form-label offset-2">{{ __('Ship To') }}</label>
+          <div class="col-md-2">
+              <select name="s_shipto" id="s_shipto" class="form-control">
+                  <option value="">Select Data</option>
+                  @foreach($shipto as $shipt)
+                      <option value="{{$shipt->id}}">{{$shipt->cs_shipto}} -- {{$shipt->cs_shipto_name}}</option>
+                  @endforeach
+              </select>
+          </div>
+          
+
+          <div class="col-md-2 offset-md-1">
+              <input type="submit" class="btn bt-ref" id="btnsearch" value="Search" />
+          </div>
+      </div>
+  </form>
 </div>
 <div class="table-responsive col-lg-12 col-md-12 mt-3">
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -83,7 +110,7 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($rute_data as $index => $show)
+      @forelse ($rute_data as $index => $show)
       <tr>
         <td>
           {{$show->getTipe->tt_code ?? ''}} -- {{$show->getTipe->tt_desc ?? ''}}
@@ -98,9 +125,15 @@
           <a href="/rute/rutedetail/{{$id}}/historydetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>
         </td>
       </tr>
-      @endforeach
-    </tbody>
-  </table>
+      @empty
+            <tr>
+                <td colspan='8' style="color:red;text-align:center;"> No Data Avail</td>
+            </tr>
+            
+            @endforelse
+        </tbody>
+    </table>
+    {{$rute_data->withQueryString()->links()}}
 </div>
 
 
@@ -116,6 +149,12 @@
     width: '100%'
   });
   $('#shipto').select2({
+    width: '100%'
+  });
+  $('#s_shipfrom').select2({
+    width: '100%'
+  });
+  $('#s_shipto').select2({
     width: '100%'
   });
     

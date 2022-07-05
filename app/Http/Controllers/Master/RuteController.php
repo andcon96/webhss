@@ -25,10 +25,17 @@ class RuteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $truck_type = TipeTruck::paginate(10);
+        $truck_type = TipeTruck::query();
+            
         
+        if ($request->s_krnbr) {
+            $truck_type->where('tt_code', $request->s_ttcode);
+        }
+
+        $truck_type = $truck_type->orderBy('created_at', 'DESC')->paginate(10);
+                
         return view('setting.rute.index', compact('truck_type'));
         //
     }
@@ -138,16 +145,30 @@ class RuteController extends Controller
         //
     }
 
-    public function viewDetail($id)
+    public function viewDetail(Request $request,$id)
     {
         
-        $rute_data = Rute::with(['getShipFrom','getShipTo','getTipe'])->where('rute_tipe_id',$id)->whereRelation('getShipTo','cs_domain',Session::get('domain'))->paginate(10);
+        $rute_data = Rute::with(['getShipFrom','getShipTo','getTipe'])->where('rute_tipe_id',$id)->whereRelation('getShipTo','cs_domain',Session::get('domain'));
+        
+        if($request->s_shipfrom){
+            $rute_data->where('rute_shipfrom_id', $request->s_shipfrom);
+            
+        }
+        if($request->s_shipto){
+            $rute_data->where('rute_customership_id', $request->s_shipto);
+        }
+        
+        $rute_data = $rute_data->paginate(10);
+        
         $shipfrom = ShipFrom::get();
         $shipto = CustomerShipTo::get();
+        
+        
         $id = $id;
         return view('setting.rute.indexdetail', compact('rute_data','shipfrom','shipto','id'));
         //
     }
+
 
     public function viewHistory($oldid,$id)
     {

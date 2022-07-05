@@ -29,16 +29,18 @@ class KerusakanLaporMTController extends Controller
 
 
         $data = KerusakanMstr::query()
-            ->with(['getDetail', 'getTruck','getTruck.getUserDriver']);
+            ->with(['getDetail', 'getTruck','getTruck.getUserDriver'])
+            ->whereRelation('getTruck','truck_domain',Session::get('domain'));
+            
         
         if ($request->s_krnbr) {
-            $data->where('kerusakan_nbr', $request->s_krnbr);
+            $data->where('kr_nbr', $request->s_krnbr);
         }
         if ($request->s_driver) {
             $data->whereRelation('getTruck', 'id', '=', $request->s_driver);
         }
         
-        // $data->where('kerusakan_domain',Session::get('domain'));
+        
 
         $data = $data->orderBy('created_at', 'DESC')->paginate(10);
         
