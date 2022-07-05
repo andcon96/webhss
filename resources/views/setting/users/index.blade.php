@@ -468,7 +468,6 @@
     });
   });
 
-
   $(document).on('click', '.deleteUser', function() { // Click to only happen on announce links
 
     //alert('tst');

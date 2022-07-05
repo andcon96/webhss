@@ -28,6 +28,8 @@
                 <option value=""> Select Data </option>
                 <option value="1"> Report Bulan by Date </option>
                 <option value="2"> Report Bulan by Truck by Date </option>
+                <option value="3"> Report Rincian Sangu Loosing HSST</option>
+                <option value="4"> Report Total Supir Loosing HSS Trailer</option>
             </select>
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
@@ -63,11 +65,23 @@
     $('#truck,#report').select2({
         width: '100%',
     });
-    
-    $("#datefrom, #dateto").datepicker({
-        dateFormat: 'yy-mm-dd'
+
+    $("#dateto").datepicker({
+        dateFormat: 'yy-mm-dd',
+        maxDate: '+14D',
     });
 
+    $('#datefrom').datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(date){
+            let newdate = new Date(date);
+            newdate.setDate(newdate.getDate() + 14);
+
+            $("#dateto").val(date);
+            $("#dateto").datepicker( "option", "maxDate", newdate );
+        }
+    });
+    
     $('#truck').prop('disabled',true);
 
     $('#report').on('change', function(){

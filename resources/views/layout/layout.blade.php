@@ -220,6 +220,28 @@
               </ul>
             </li>
             @endcan
+            @can('access_report_side')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                  Report  
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('access_report')
+                <li class="nav-item">
+                  <a href="{{route('report.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Report Maintenance</p>
+                  </a>
+                </li>
+                @endcan
+              </ul>
+            </li>`
+
+            @endcan
 
 
             @can('access_masters')

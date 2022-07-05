@@ -172,7 +172,6 @@
               </label>
             </div>
           </div>
-          
           <div class="form-group">
             <h6>
               <center><strong>Driver Check In / Out</strong></center>
@@ -189,6 +188,24 @@
               </label>
             </div>
           </div>
+          
+          <div class="form-group">
+            <h6>
+              <center><strong>Report</strong></center>
+            </h6>
+            <hr>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Report Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbRPMT">
+                <input type="checkbox" id="cbRPMT" name="cbRPMT" value="RP01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
           
           <div class="form-group">
             <h6>
@@ -304,6 +321,11 @@
               document.getElementById("cbPdDomain").checked = true;  
             }else{
               document.getElementById("cbPdDomain").checked = false;
+            }
+            if(totmenu.search("RP01") >= 0){
+              document.getElementById("cbRPMT").checked = true;  
+            }else{
+              document.getElementById("cbRPMT").checked = false;
             }
           }
       });

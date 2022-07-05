@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(RoleType::class, 'role_type_id');
     }
+
+    public function getIsSuperUserAttribute()
+    {
+        // std get NewSo Attribute -> new_so , Ilangin get & Attribute
+        return $this->getRoleType->role_type == 'Super_User';
+    }
 }
