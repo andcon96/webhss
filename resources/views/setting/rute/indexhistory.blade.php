@@ -46,13 +46,13 @@
                 {{$show->getRute->getShipTo->cs_shipto_name ?? ''}}
               </td>
               <td>
-                {{$show->history_harga ?? ''}}
+                {{number_format($show->history_harga) ?? ''}}
               </td>
               <td>
-                {{$show->history_sangu ?? ''}}
+                {{number_format($show->history_sangu) ?? ''}}
               </td>
               <td>
-                {{$show->history_ongkos ?? ''}}
+                {{number_format($show->history_ongkos) ?? ''}}
               </td>
               <td>
                 {{$show->history_is_active ?? ''}}

@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 class ApprovalRusakTruck extends Controller
 {
@@ -18,10 +19,13 @@ class ApprovalRusakTruck extends Controller
         $nopolnbr = Crypt::decrypt($nopolnbr);
         $status = Crypt::decrypt($status);
         $wonbr = $wonbr;
+        
         $errorlist = [];
-        $status = '';
+        $status_display = '';
         $message = '';
-        if($status === 'yes'){
+        
+        if($status == 'yes'){
+            
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
             
             if($checkdata->status != 'Need Approval'){
@@ -78,14 +82,15 @@ class ApprovalRusakTruck extends Controller
             }
         }
             
-        elseif($status === 'no'){
+        elseif($status == 'no'){
+            
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
             DB::beginTransaction();
             try{
                 $checkdata->kr_status = 'Reject';
                 $checkdata->save();
                 DB::commit();
-                $status = 'SUCCESS';
+                $status_display = 'SUCCESS';
                 $errorlist = ['Reject approval success'];
                 $message = '';
                 
@@ -99,6 +104,6 @@ class ApprovalRusakTruck extends Controller
             }
 
         }
-        return view('publicview.APIresult', compact('errorlist','status','message'));
+        return view('publicview.APIresult', compact('errorlist','status_display','message'));
     }       
 }

@@ -75,14 +75,14 @@
                       <div class="form-group row">
                           <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                           <div class="col-md-7">
-                              <input type="text" class="col-md-8" name="name" placeholder="Name" required>
+                              <input type="text" class="col-md-8 form-control" name="name" placeholder="Name" required>
                           </div>
                       </div>
                       <div class="form-group row">
                           <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Email') }}</label>
                           <div class="col-md-7">
                             
-                              <input type="email" class="col-md-8" name="email" placeholder="Email" required >
+                              <input type="email" class="col-md-8 form-control" name="email" placeholder="Email" required >
                           </div>
                       </div>
                   </div>
