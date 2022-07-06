@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Master\Role;
 use App\Models\Transaksi\CustomerOrderMstr;
+use App\Models\Transaksi\KerusakanMstr;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Policies\CustomerOrderPolicy;
+use App\Policies\KerusakanPolicy;
 use App\Policies\SalesOrderPolicy;
 use App\Policies\SuratJalanPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         SalesOrderMstr::class => SalesOrderPolicy::class,
         CustomerOrderMstr::class => CustomerOrderPolicy::class,
         SuratJalan::class => SuratJalanPolicy::class,
+        KerusakanMstr::class => KerusakanPolicy::class,
     ];
 
     /**
