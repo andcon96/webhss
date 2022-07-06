@@ -24,9 +24,9 @@
                 <td>{{$datas->getSOMaster->so_due_date}}</td>
                 <td>{{$datas->sj_status}}</td>
                 <td>
-                    @if($datas->sj_status == 'Open' || $datas->sj_status == 'Selesai')
+                    @if($datas->sj_status == 'Selesai')
                         <a href="{{ route('LaporSJ', ['sj' => $datas->id, 'truck' => $datas->sj_truck_id]) }}">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-truck"></i>
                         </a>
                     @endif
                     

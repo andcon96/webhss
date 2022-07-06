@@ -161,7 +161,6 @@ class SuratJalanController extends Controller
             return back();
         }catch(Exception $e){
             DB::rollBack();
-            dd($request->all());
             alert()->error('Error', 'Surat Jalan gagal diupdate')->persistent('Dismiss');
             return back();
         }
@@ -190,7 +189,6 @@ class SuratJalanController extends Controller
             
             $sjmstr->sj_status = 'Cancelled';
             $sjmstr->save();
-            dd($id);
             DB::commit();
             alert()->success('Success', 'Surat Jalan Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {

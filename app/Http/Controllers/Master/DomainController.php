@@ -44,7 +44,6 @@ class DomainController extends Controller
             alert()->success('Success','Domain Berhasil Diupdate');
         }catch(Exception $e){
             DB::rollBack();
-            dd($e);
             alert()->error('Error','Terjadi kesalahan, Silahkan dicoba lagi');
         }
 
