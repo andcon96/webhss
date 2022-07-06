@@ -178,7 +178,7 @@ class UserMTController extends Controller
             alert()->success('Success', 'User updated successfully');
         } catch (\Exception $err) {
             //throw $th;
-            dd($err);
+            // dd($err);
             DB::rollBack();
             alert()->error('Error', 'Failed to update user');
         }

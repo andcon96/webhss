@@ -162,7 +162,6 @@ class KerusakanLaporMTController extends Controller
                 return back();
             } catch (Exception $e) {
                 DB::rollBack();
-                dd($e);
                 alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
                 return back();
             }
