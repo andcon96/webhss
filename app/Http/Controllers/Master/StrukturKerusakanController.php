@@ -19,7 +19,7 @@ class StrukturKerusakanController extends Controller
     }
 
     public function store(Request $request){
-        dd($request->all());
+        // dd($request->all());
         DB::beginTransaction();
 
         try{
@@ -37,7 +37,7 @@ class StrukturKerusakanController extends Controller
         }catch(Exception $e){
 
             DB::rollBack();
-            dd($e);
+            // dd($e);
             alert()->error('Error', 'Failed to Update');
         }
 
