@@ -521,13 +521,15 @@ class QxtendServices
     $timeout        = 0;
 
     // XML Qextend
+    // harindra = QADHSS
+    // sqlserver = HSS_qxtend
     $qdocHead = '<soapenv:Envelope xmlns="urn:schemas-qad-com:xml-services"
               xmlns:qcom="urn:schemas-qad-com:xml-services:common"
               xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsa="http://www.w3.org/2005/08/addressing">
               <soapenv:Header>
                 <wsa:Action/>
-                <wsa:To>urn:services-qad-com:HSS_qxtend</wsa:To>
-                <wsa:MessageID>urn:services-qad-com::HSS_qxtend</wsa:MessageID>
+                <wsa:To>urn:services-qad-com:QADHSS</wsa:To>
+                <wsa:MessageID>urn:services-qad-com::QADHSS</wsa:MessageID>
                 <wsa:ReferenceParameters>
                   <qcom:suppressResponseDetail>true</qcom:suppressResponseDetail>
                 </wsa:ReferenceParameters>
