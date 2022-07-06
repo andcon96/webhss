@@ -20,7 +20,7 @@ class KerusakanMstr extends Model
 
     public function getTruck()
     {
-        return $this->hasOne(Truck::class, 'id' ,'kr_truck');
+        return $this->hasOne(Truck::class, 'id' ,'kr_truck')->withoutGlobalScopes();
     }
     
 
