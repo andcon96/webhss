@@ -176,7 +176,7 @@ class KerusakanLaporMTController extends Controller
         DB::beginTransaction();
         try {
             $data = KerusakanMstr::findOrFail($request->temp_id);
-            $data->kerusakan_status = 'Cancelled';
+            $data->kr_status = 'Cancelled';
             $data->save();
 
             DB::commit();
@@ -184,6 +184,7 @@ class KerusakanLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
+            dd($e);
             alert()->error('Error', 'Cancel Gagal')->persistent('Dismiss');
             return back();
         }
