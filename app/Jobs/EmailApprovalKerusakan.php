@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 
-class EmailApprovalKerusakan implements ShouldQueue
+class EmailApprovalKerusakan
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

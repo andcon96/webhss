@@ -239,8 +239,7 @@
                 </li>
                 @endcan
               </ul>
-            </li>`
-
+            </li>
             @endcan
 
 
