@@ -13,28 +13,32 @@ class StrukturKerusakanController extends Controller
     public function index()
     {
         // dd('1');
-        $data = KerusakanStruktur::get();
+        $data = KerusakanStruktur::where('ks_isactive',1)->get();
 
         return view('setting.struktur.index',compact('data'));
     }
 
     public function store(Request $request){
-        // dd($request->all());
+        dd($request->all());
         DB::beginTransaction();
 
         try{
-            KerusakanStruktur::truncate();
+            
             foreach($request->order as $key => $datas){
-                $newdata = KerusakanStruktur::firstOrNew(['ks_order' => $datas]);
+                $newdata = new KerusakanStruktur;
+                
                 $newdata->ks_desc = $request->desc[$key];
+                $newdata->ks_order = $request->order[$key];
                 $newdata->save();
             }
 
             DB::commit();
             alert()->success('Success', 'Struktur Updated');
         }catch(Exception $e){
+
             DB::rollBack();
-            alert()->error('Error', 'Failed to Updated');
+            dd($e);
+            alert()->error('Error', 'Failed to Update');
         }
 
         return back();
@@ -52,11 +56,11 @@ class StrukturKerusakanController extends Controller
             }
             $ks->save();
             DB::commit();
-            alert()->success('Success', 'Struktur Activated/Deactivated');
+            alert()->success('Success', 'Struktur Deactivated');
             return back();
         }catch(Exception $err){
             DB::rollback();
-            alert()->error('Error', 'Failed to Activated/Deactivated');
+            alert()->error('Error', 'Failed to Deactivated');
             return back();
         }
 

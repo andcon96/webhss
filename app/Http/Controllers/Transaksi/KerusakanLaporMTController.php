@@ -195,7 +195,7 @@ class KerusakanLaporMTController extends Controller
     {
         $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
-        $struktur = KerusakanStruktur::get();
+        $struktur = KerusakanStruktur::where('ks_isactive',1)->get();
 
         return view('transaksi.kerusakan.assignkr', compact('data', 'jeniskerusakan', 'struktur'));
     }

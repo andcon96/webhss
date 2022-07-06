@@ -26,10 +26,12 @@
                     @foreach($data as $datas)
                     <tr>
                         <td data-title="Deskripsi" data-label="% Start">
-                            <input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="{{$datas->ks_desc}}" style="height:37px" required/>
+                            <input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="{{$datas->ks_desc}}" style="height:37px" disabled/>
+                            
                         </td>
                         <td data-title="Order" data-label="% Reward">
-                            <input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="{{$datas->ks_order}}" step="1" required/>
+                            <input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="{{$datas->ks_order}}" step="1" disabled/>
+                            
                         </td>
                         <td data-title="Active" data-label="% Active">
                             {{$datas->ks_isactive == 1 ? 'Yes' : 'No'}}
@@ -74,8 +76,10 @@
 	            var newRow = $("<tr>");
 	            var cols = "";
 
-	            cols += '<td data-title="Description" data-label="% Start"><input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="" style="height:37px" required/></td>';
-	            cols += '<td data-title="Order" data-label="% End"><input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="" step="1" required/></td>';
+	            cols += '<td data-title="Description" data-label="% Start"><input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="" style="height:37px" required/>';
+                cols += '</td>';
+	            cols += '<td data-title="Order" data-label="% End"><input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="" step="1" required/>';
+                cols += '</td>';
 	            cols += '<td>-</td>'
                 cols += '<td></td>'
 	            cols += '</tr>'
