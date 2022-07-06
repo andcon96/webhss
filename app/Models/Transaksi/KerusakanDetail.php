@@ -24,6 +24,6 @@ class KerusakanDetail extends Model
     
     public function getStrukturTrans()
     {
-        return $this->hasMany(KerusakanStukturTransaksi::class, 'id', 'krs_krd_det_id');
+        return $this->hasMany(KerusakanStukturTransaksi::class, 'krs_krd_det_id', 'id');
     }
 }

@@ -39,4 +39,26 @@ class StrukturKerusakanController extends Controller
 
         return back();
     }
+
+    public function activestruc($id){
+        $ks = KerusakanStruktur::where('id',$id)->first();
+        DB::beginTransaction();
+        try{
+            if($ks->ks_isactive == 1){
+               $ks->ks_isactive = 0; 
+            }
+            else{
+                $ks->ks_isactive = 1;
+            }
+            $ks->save();
+            DB::commit();
+            alert()->success('Success', 'Struktur Activated/Deactivated');
+            return back();
+        }catch(Exception $err){
+            DB::rollback();
+            alert()->error('Error', 'Failed to Activated/Deactivated');
+            return back();
+        }
+
+    }
 }

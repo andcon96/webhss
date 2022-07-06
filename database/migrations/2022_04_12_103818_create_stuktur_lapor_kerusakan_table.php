@@ -17,6 +17,7 @@ class CreateStukturLaporKerusakanTable extends Migration
             $table->id();
             $table->string('ks_desc');
             $table->integer('ks_order');
+            $table->tinyInteger('ks_isactive')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

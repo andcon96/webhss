@@ -12,14 +12,14 @@
                     <td>{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}</td>
                     <td>
                         <table style="width:100%">
-                            @forelse($struktur as $flg => $strukturs)
+                            @forelse($datas->getStrukturTrans as $flg => $strukturs)
                             
                                 <tr>
 
-                                    <td style="width: 50%">{{$strukturs->ks_desc}}</td>
+                                    <td style="width: 50%">{{$strukturs->getStrukturMaster->ks_desc}}</td>
                                     <td>
                                         
-                                        <input type="text" class="form-control" value="{{isset($strukturs->getStrukturTrans->krs_desc) ? $strukturs->getStrukturTrans->krs_desc : ''}}" readonly>
+                                        <input type="text" class="form-control" value="{{isset($strukturs->krs_desc) ? $strukturs->krs_desc : ''}}" readonly>
                                     </td>
                                 </tr>
                             @empty

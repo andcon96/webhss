@@ -18,7 +18,8 @@
                     <tr>
                         <th style="width:50%">Description </th>
                         <th style="width:25%">Order</th>
-                        <th style="width:10%">Delete</th>
+                        <th style="width:15%">Active</th>
+                        <th style="width:10%">Action</th>
                     </tr>
                 </thead>
                 <tbody id='e_detailapp'>
@@ -30,7 +31,10 @@
                         <td data-title="Order" data-label="% Reward">
                             <input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="{{$datas->ks_order}}" step="1" required/>
                         </td>
-                        <td data-title="Action"><input type="button" class="ibtnDel btn btn-danger"  value="Delete"></td>
+                        <td data-title="Active" data-label="% Active">
+                            {{$datas->ks_isactive == 1 ? 'Yes' : 'No'}}
+                        </td>
+                        <td data-title="Action"><a type="button" href="/activestruc/{{$datas->id}}" class="ibtnDel btn btn-danger" style="color: white;">{{$datas->ks_isactive == 1 ? 'Deactivate' : 'Activate'}}</a></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -70,12 +74,10 @@
 	            var newRow = $("<tr>");
 	            var cols = "";
 
-
 	            cols += '<td data-title="Description" data-label="% Start"><input type="text" class="form-control form-control-sm" autocomplete="off" name="desc[]" value="" style="height:37px" required/></td>';
-
 	            cols += '<td data-title="Order" data-label="% End"><input type="number" class="form-control form-control-sm total" autocomplete="off" name="order[]" style="height:37px" max="200" min="1" value="" step="1" required/></td>';
-	            
-	            cols += '<td data-title="Action"><input type="button" class="ibtnDel btn btn-danger"  value="Delete"></td>';
+	            cols += '<td>-</td>'
+                cols += '<td></td>'
 	            cols += '</tr>'
 	            newRow.append(cols);
 	            $("table.edit-list").append(newRow);
@@ -83,10 +85,7 @@
 	        });
 
 
-	        $("table.edit-list").on("click", ".ibtnDel", function (event) {
-	            $(this).closest("tr").remove();       
-	            counter -= 1
-	        });
+
 
 		});
 

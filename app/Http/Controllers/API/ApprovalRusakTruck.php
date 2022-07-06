@@ -31,7 +31,7 @@ class ApprovalRusakTruck extends Controller
             if($checkdata->kr_status != 'Need Approval'){
                 $errorlist = [];
                 $status_display = 'ERROR';
-                $message = 'Kerusakan sudah di approve/reject';
+                $message = 'Kerusakan '.$rusaknbr.' sudah di approve/reject';
                 
             }
             elseif(!$checkdata){
@@ -40,6 +40,7 @@ class ApprovalRusakTruck extends Controller
                 $message = 'Data kerusakan tidak ditemukan';
                 
             }
+
             else{
                 $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
                 
@@ -47,15 +48,16 @@ class ApprovalRusakTruck extends Controller
                     
                     if(isset($qxrusak[1])){
                         
-                        $errorlist = $qxrusak[1];
-                        $status = 'ERROR';
+                        $errorlist = [$qxrusak[1]];
+                        
+                        $status_display = 'ERROR';
                         $message = 'Approval gagal, terdapat kesalahan data pada QAD, mohon diperbaiki dan approve ulang. Error message :';
                         
                     }   
                     else{
-                        $status = 'ERROR';
-                        $errorlist = ['Error Qxtend Connection'];
-                        $message = '';
+                        $status_display = 'ERROR';
+                        $errorlist = [];
+                        $message = 'Error Qxtend Connection';
                         
                     }        
                 }
@@ -66,15 +68,15 @@ class ApprovalRusakTruck extends Controller
                         $checkdata->kr_status = 'Done';
                         $checkdata->save();
                         DB::commit();
-                        $status = 'SUCCESS';
-                        $errorlist = ['Kerusakan berhasil di setujui'];
-                        $message = '';
+                        $status_display = 'SUCCESS';
+                        $errorlist = [];
+                        $message = 'Kerusakan berhasil di approve';
                     }
                     catch(Exception $er){
                         DB::rollBack();
-                        $status = 'ERROR';
-                        $errorlist = ['Status kerusakan gagal di update '];
-                        $message = '';                        
+                        $status_display = 'ERROR';
+                        $errorlist = [];
+                        $message = 'Status kerusakan gagal di update ';                        
                     }
 
                     
@@ -85,30 +87,33 @@ class ApprovalRusakTruck extends Controller
         elseif($status == 'no'){
             
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
-            
+            // dd($checkdata->kr_status != 'Need Approval');
             if($checkdata->kr_status != 'Need Approval'){
                 $errorlist = [];
                 $status_display = 'ERROR';
-                $message = 'Kerusakan sudah di approve/reject';
+                $message = 'Kerusakan '.$rusaknbr.' sudah di approve/reject';
                 
             }
-            DB::beginTransaction();
-            try{
-                $checkdata->kr_status = 'Reject';
-                $checkdata->save();
-                DB::commit();
-                $status_display = 'SUCCESS';
-                $errorlist = ['Reject approval success'];
-                $message = '';
-                
+            else{
+                DB::beginTransaction();
+                try{
+                    $checkdata->kr_status = 'Reject';
+                    $checkdata->save();
+                    DB::commit();
+                    $status_display = 'SUCCESS';
+                    $errorlist = [];
+                    $message = 'Kerusakan '.$rusaknbr.' telah di reject';
+                    
+                }
+                catch(Exception $e){
+                    DB::rollBack();
+                    $status_display = 'ERROR';
+                    $errorlist = [];
+                    $message = 'Terjadi kesalahan, mohon diulang kembali';
+                    
+                }
             }
-            catch(Exception $e){
-                DB::rollBack();
-                $status = 'ERROR';
-                $errorlist = ['Terjadi kesalahan, mohon diulang kembali'];
-                $message = '';
-                
-            }
+            
 
         }
         return view('publicview.APIresult', compact('errorlist','status_display','message'));

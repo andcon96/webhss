@@ -20,6 +20,7 @@ class CreateKerusakanStrukturTable extends Migration
             $table->unsignedBigInteger('krs_kerusakan_struktur_id')->index();
             $table->foreign('krs_kerusakan_struktur_id')->references('id')->on('kerusakan_struktur');
             $table->string('krs_desc',255)->nullable();
+            
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

@@ -681,8 +681,14 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td width="" style="padding: 0px 40px;" class="mlContentOuter">
-                                                                        <h1 style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; color: #111111; font-size: 24px; line-height: 150%; font-weight: 400; margin: 0 0 10px 0; text-align: center;"><strong>{{$status_display}}</strong></h1>
+                                                                        @if($status_display == 'ERROR')
+                                                                        <h1 style="font-family: 'Open Sans', Arial, Helvetica, sans-serif;  font-size: 24px; line-height: 150%; font-weight: 400; margin: 0 0 10px 0; text-align: center; color:red"><strong>{{$status_display}}</strong></h1>
+                                                                        @else
+                                                                        <h1 style="font-family: 'Open Sans', Arial, Helvetica, sans-serif;  font-size: 24px; line-height: 150%; font-weight: 400; margin: 0 0 10px 0; text-align: center; color:darkgreen"><strong>{{$status_display}}</strong></h1>
+                                                                        @endif
+                                                                        
                                                                         <h4 style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; color: #111111; font-size: 18px; line-height: 150%; font-weight: 400; margin: 0 0 10px 0; text-align: center;"><strong>{{$message}}</strong></h4>
+                                                                        
                                                                         @foreach($errorlist as $el)
                                                                         <h1 style="font-family: 'Open Sans', Arial, Helvetica, sans-serif; color: red; font-size: 24px; line-height: 150%; font-weight: 400; margin: 0 0 10px 0; text-align: center;"><strong style="font-size: 2em">.</strong>&nbsp;<a style="font-size: 14px"><strong>{{$el}}</strong></a></h1>
                                                                         @endforeach

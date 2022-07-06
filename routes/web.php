@@ -168,6 +168,7 @@ Route::group(['middleware' => ['auth']], function () {
         // Struktur Kerusakan Maintenance
         //================================
         Route::resource('strukturkerusakanmt', StrukturKerusakanController::class);
+        Route::get('activestruc/{id}', [StrukturKerusakanController::class,'activestruc']);
         //================================
 
         //================================

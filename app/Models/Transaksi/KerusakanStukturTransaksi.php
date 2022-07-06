@@ -13,6 +13,6 @@ class KerusakanStukturTransaksi extends Model
     public $table = 'kr_struktur';
     public function getStrukturMaster()
     {
-        return $this->belongsTo(KerusakanStruktur::class, 'id', 'krs_kerusakan_struktur_id');
+        return $this->belongsTo(KerusakanStruktur::class, 'krs_kerusakan_struktur_id','id');
     }
 }

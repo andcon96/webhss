@@ -58,6 +58,8 @@ class KerusakanLaporMTController extends Controller
         $struktur = KerusakanStruktur::with(['getStrukturTrans' => function($q) use ($id){
             $q->where('krs_krd_det_id',$id);
         }])->get();
+        $struktur2 = KerusakanStukturTransaksi::with(["getStrukturMaster"])->where('krs_krd_det_id',$id)->get();
+        // dd($data->getDetail);
              
         // 
         return view('transaksi.kerusakan.show', compact('data', 'jeniskerusakan', 'struktur'));
