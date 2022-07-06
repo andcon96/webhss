@@ -76,8 +76,8 @@ class KerusakanLaporMTController extends Controller
 
     public function store(Request $request)
     {
-        if(Session::get('domain') != 'ASA'){
-            alert()->error('Error', 'Domain harus ASA')->persistent('Dismiss');
+        if(Session::get('domain') != 'HSS'){
+            alert()->error('Error', 'Domain harus HSS')->persistent('Dismiss');
             return back();
         }
         else{
@@ -135,8 +135,8 @@ class KerusakanLaporMTController extends Controller
     public function update(Request $request)
     {
         
-        if(Session::get('domain') != 'ASA'){
-            alert()->error('Error', 'Domain harus ASA')->persistent('Dismiss');
+        if(Session::get('domain') != 'HSS'){
+            alert()->error('Error', 'Domain harus HSS')->persistent('Dismiss');
             return back();
         }
         else{
@@ -171,8 +171,8 @@ class KerusakanLaporMTController extends Controller
 
     public function destroy(Request $request)
     {
-        if(Session::get('domain') != 'ASA'){
-            alert()->error('Error', 'Domain harus ASA')->persistent('Dismiss');
+        if(Session::get('domain') != 'HSS'){
+            alert()->error('Error', 'Domain harus HSS')->persistent('Dismiss');
             return back();
         }
         else{
@@ -204,8 +204,8 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignkr($id, Request $request)
     {
-        if(Session::get('domain') != 'ASA'){
-            alert()->error('Error', 'Domain harus ASA')->persistent('Dismiss');
+        if(Session::get('domain') != 'HSS'){
+            alert()->error('Error', 'Domain harus HSS')->persistent('Dismiss');
             return back();
         }
         else{
