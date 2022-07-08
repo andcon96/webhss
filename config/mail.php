@@ -92,8 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => 'aurelio@ptimi.co.id',
-        'name' => 'Aurelio',
+        'name' => 'no-reply',
     ],
 
     /*
