@@ -259,7 +259,7 @@ class KerusakanLaporMTController extends Controller
                     return redirect()->route('laporkerusakan.index');
                 }catch(Exception $err){
                     DB::rollback();
-                    
+                    dd($err,'a');
                     alert()->error('Error','Kerusakan gagal di assign');
                     return redirect()->route('laporkerusakan.index');
                 }
@@ -292,6 +292,7 @@ class KerusakanLaporMTController extends Controller
                     
                 }catch(Exception $err){
                     DB::rollback();
+                    dd($err,'b');
                     alert()->error('Error','Kerusakan gagal di assign');
                     return redirect()->route('laporkerusakan.index');
                 }
