@@ -39,27 +39,26 @@ class ReportTotalanSupirLoosingHSST implements FromView, WithColumnWidths, Shoul
             $rbhist->where('rb_eff_date','>=',$dateto);
         }
 
-        $data = $data->where('sj_status','=','Closed')
-                     ->with(['getTruck.getUserDriver','getTruck.getTipe'])
-                     ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                     ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
+        $data = $data->with(['getTruck.getUserDriver','getTruck.getTipe'])
+                    //  ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+                    //  ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
                      ->groupBy('sj_truck_id')
                      ->selectRaw('sj_truck_id,sum(sj_default_sangu) as defaultSangu, sum(sj_tot_sangu) as totalSangu')
                      ->get();
         
         $rbhist =  $rbhist->where('rb_is_active',1)
                           ->with(['getTruck.getUserDriver','getTruck.getTipe'])
-                          ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                          ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
+                        //   ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+                        //   ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
                           ->groupBy('rb_truck_id')
                           ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then rb_nominal else - rb_nominal end) as total')
                           ->get();
 
         $listtruck = Truck::with(['getTipe','getUserDriver'])
-                            ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                            ->orWhereRelation('getTipe', 'tt_code', '3EXL')
+                            // ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+                            // ->orWhereRelation('getTipe', 'tt_code', '3EXL')
                             ->get();
-
+        dd($data);
         return view('transaksi.laporan.excel.report-total-sopir-loosing-hsst',
                     compact('data','listtruck','datefrom','dateto','rbhist'));
     }

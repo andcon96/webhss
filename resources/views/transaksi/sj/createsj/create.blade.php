@@ -222,10 +222,14 @@
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);
         }else if(tipebarang == 'RITS'){
+            sum = 0;
+            $('.qtysj').each(function(){
+                sum += parseFloat(this.value);
+            });
             var hsangu = $('#sangutruck').val();
             var hkomisi = $('#komisitruck').val();
 
-            let total = parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''));
+            let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
 
             total = Number(total).toLocaleString('en-US');
 

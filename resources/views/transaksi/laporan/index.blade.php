@@ -68,7 +68,6 @@
 
     $("#dateto").datepicker({
         dateFormat: 'yy-mm-dd',
-        maxDate: '+14D',
     });
 
     $('#datefrom').datepicker({
@@ -76,9 +75,6 @@
         onSelect: function(date){
             let newdate = new Date(date);
             newdate.setDate(newdate.getDate() + 14);
-
-            $("#dateto").val(date);
-            // $("#dateto").datepicker( "option", "maxDate", newdate );
         }
     });
     
