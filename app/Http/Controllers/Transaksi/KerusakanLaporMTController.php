@@ -43,7 +43,7 @@ class KerusakanLaporMTController extends Controller
         
 
         $data = $data->orderBy('created_at', 'DESC')->paginate(10);
-        // dd($data);    
+        
         $truck = Truck::withoutGlobalScopes()->get();
         
         
@@ -60,7 +60,7 @@ class KerusakanLaporMTController extends Controller
             $q->where('krs_krd_det_id',$id);
         }])->get();
         $struktur2 = KerusakanStukturTransaksi::with(["getStrukturMaster"])->where('krs_krd_det_id',$id)->get();
-        // dd($data->getDetail);
+        
              
         // 
         return view('transaksi.kerusakan.show', compact('data', 'jeniskerusakan', 'struktur'));
@@ -161,7 +161,7 @@ class KerusakanLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
+            
             alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
             return back();
         }
@@ -184,7 +184,7 @@ class KerusakanLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            dd($e);
+            
             alert()->error('Error', 'Cancel Gagal')->persistent('Dismiss');
             return back();
         }
@@ -259,7 +259,7 @@ class KerusakanLaporMTController extends Controller
                     return redirect()->route('laporkerusakan.index');
                 }catch(Exception $err){
                     DB::rollback();
-                    dd($err,'a');
+                    
                     alert()->error('Error','Kerusakan gagal di assign');
                     return redirect()->route('laporkerusakan.index');
                 }
@@ -292,7 +292,7 @@ class KerusakanLaporMTController extends Controller
                     
                 }catch(Exception $err){
                     DB::rollback();
-                    dd($err,'b');
+                    
                     alert()->error('Error','Kerusakan gagal di assign');
                     return redirect()->route('laporkerusakan.index');
                 }
