@@ -27,7 +27,7 @@
                         data-status="{{$datas->sj_status}}"
                         data-truck="{{$datas->getTruck->truck_no_polis}}" data-trip="{{$datas->sj_jmlh_trip}}"
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
-                        data-pengurus="{{$datas->getTruck->getUserPengurus->name}}"
+                        data-pengurus="{{$datas->getTruck->getUserPengurus->name ?? ''}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
                         
