@@ -432,7 +432,7 @@ class QxtendServices
                   <SalesOrderShipment>
                       <soNbr>'.$data['sonbr'].'</soNbr>
                       <effDate>'.$data['effdate'].'</effDate>
-                      <document>'.$data['remark'].'</document>'
+                      <document>'.$data['sjnbr'].'</document>'
                       ;
                       foreach($data['iddetail'] as $key => $idDetail){
                           $datadetail = SuratJalanDetail::findOrFail($idDetail); 
