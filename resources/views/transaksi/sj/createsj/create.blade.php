@@ -28,7 +28,7 @@
                                 data-shiptoid = "{{$listsos->getShipTo->id}}"
                                 data-type = "{{$listsos->getCOMaster->co_type}}"
                                 data-duedate = "{{$listsos->so_due_date}}"
-                            >{{$listsos->so_nbr}} -- {{$$listsos->getCOMaster->getCustomer->cust_desc ?? ''}}</option>
+                            >{{$listsos->so_nbr}} -- {{$listsos->getCOMaster->getCustomer->cust_desc ?? ''}}</option>
                     @endforeach
                 </select>
             </div>

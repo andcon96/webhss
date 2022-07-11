@@ -19,10 +19,10 @@
                 <select name="conbr" id="conbr" class="form-control" required>
                     <option value="">Select Data</option>
                     @foreach($conbr as $conbrs)
-                    <option value="{{$conbrs->id}} - {{$conbrs->getCustomer->cust_desc ?? ''}}" 
+                    <option value="{{$conbrs->id}}" 
                             data-cust="{{$conbrs->co_cust_code}}"
                             data-custdesc="{{$conbrs->getCustomer->cust_desc}}"
-                            data-type="{{$conbrs->co_type}}">{{$conbrs->co_nbr}}</option>
+                            data-type="{{$conbrs->co_type}}">{{$conbrs->co_nbr}} -- {{$conbrs->getCustomer->cust_desc ?? ''}}</option>
                     @endforeach
                 </select>
             </div>
