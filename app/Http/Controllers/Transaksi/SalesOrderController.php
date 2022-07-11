@@ -137,6 +137,7 @@ class SalesOrderController extends Controller
 
         }catch(Exception $e){
             DB::rollback();
+            dd($e);
             alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
             return back();
         }
