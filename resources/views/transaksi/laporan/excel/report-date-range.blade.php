@@ -23,6 +23,7 @@
                 <th><b>TUJUAN</b></th>
                 <th><b>ORDER</b></th>
                 <th><b>RIT</b></th>
+                <th><b>SATUAN</b></th>
                 <th><b>HARGA</b></th>
             </tr>
         </thead>
@@ -32,12 +33,12 @@
             @foreach($data as $keys => $datas)
                 <tr>
                     <td>{{$keys + 1}}</td>
-                    <td></td>
+                    <td>{{$datas->getDetail[0]->sjd_part}}</td>
                     <td>{{$datas->sj_eff_date}}</td>
-                    <td>KAPAL 1</td>
+                    <td></td>
                     <td>{{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
-                    <td>FKS</td>
-                    <td>1</td>
+                    <td></td>
+                    <td>{{$datas->getDetail[0]->sjd_qty_ship}}</td>
                     <td style="text-align:right">{{number_format($datas->sj_default_sangu,2)}}</td>
                 </tr>
                 {{$totaldefault += $datas->sj_default_sangu}}
@@ -48,11 +49,13 @@
             <tr>
                 <td colspan="6" style="text-align:right">Total</td>
                 <td>:</td>
+                <td></td>
                 <td style="text-align:right"><b>{{number_format($totaldefault,2)}}</b></td>
             </tr>
             <tr>
                 <td colspan="6" style="text-align:right">BON Loosing</td>
                 <td>:</td>
+                <td></td>
                 <td style="text-align:right"><b>{{number_format($total,2)}}</b></td>
             </tr>
         </tfoot>

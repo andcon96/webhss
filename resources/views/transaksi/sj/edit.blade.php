@@ -72,6 +72,12 @@
             <div class="col-md-3">
                 <input id="komisitruck" type="text" class="form-control" name="komisitruck" value="{{number_format($data->getRuteHistory->history_ongkos ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="totsangu" class="col-md-2 col-form-label text-md-right">Total Sangu</label>
+            <div class="col-md-3">
+                <input id="totsangu" type="text" class="form-control sangu" name="totsangu" value="{{number_format($data->sj_tot_sangu ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
 
         </div>
         <div class="form-group row col-md-12">
@@ -125,10 +131,14 @@
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);
         }else if(tipebarang == 'RITS'){
+            sum = 0;
+            $('.qtyord').each(function(){
+                sum += parseFloat(this.value);
+            });
             var hsangu = $('#sangutruck').val();
             var hkomisi = $('#komisitruck').val();
 
-            let total = parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''));
+            let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
 
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);
@@ -216,6 +226,14 @@
         document.getElementById('btnconf').style.display = 'none';
         document.getElementById('btnback').style.display = 'none';
         document.getElementById('btnloading').style.display = '';
+    });
+    
+    $(document).on('keyup', '.sangu', function() {
+        var data = $(this).val();
+
+        var newdata = data.replace(/([^ 0-9])/g, '');
+
+        $(this).val(Number(newdata).toLocaleString('en-US'));
     });
 
     $("table.edittable").on("click", ".ibtnDel", function(event) {

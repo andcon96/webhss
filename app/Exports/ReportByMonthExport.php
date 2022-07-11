@@ -50,8 +50,7 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
 
         $rbhist = $rbhist->with('getTruck')->get();
 
-        $data = $data->where('sj_status','=','Closed')
-                     ->with('getDetail.getItem',
+        $data = $data->with('getDetail.getItem',
                             'getSOMaster.getCOMaster.getCustomer',
                             'getSOMaster.getShipFrom',
                             'getSOMaster.getShipTo'

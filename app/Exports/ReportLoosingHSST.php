@@ -37,17 +37,16 @@ class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, W
             $data->where('sj_eff_date','<=',$dateto);
         }
 
-        $data = $data->where('sj_status','=','Closed')
-                     ->with(['getTruck.getUserDriver','getTruck.getTipe'])
-                     ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                     ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
+        $data = $data->with(['getTruck.getUserDriver','getTruck.getTipe'])
+                    //  ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+                    //  ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
                      ->groupBy('sj_truck_id','sj_eff_date')
                      ->selectRaw('sj_truck_id,sj_eff_date,sum(sj_default_sangu) as sangu')
                      ->get();
 
         $listtruck = Truck::with(['getTipe','getUserDriver'])
-                            ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                            ->orWhereRelation('getTipe', 'tt_code', '3EXL')
+                            // ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+                            // ->orWhereRelation('getTipe', 'tt_code', '3EXL')
                             ->get();
         
         $interval = DateInterval::createFromDateString('1 day');
