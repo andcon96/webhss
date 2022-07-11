@@ -26,8 +26,7 @@ class Truck extends Model
 
     public function getUserDriver()
     {
-        return $this->hasOne(User::class, 'id', 'truck_user_id')->withoutGlobalScopes();
-        
+        return $this->hasOne(User::class, 'id', 'truck_user_id');
     }
 
     public function getUserPengurus()
