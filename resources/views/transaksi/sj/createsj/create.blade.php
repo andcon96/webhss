@@ -217,7 +217,7 @@
                 sum += parseFloat(this.value);
             });
             var hprice = $('#defaultprice').val();
-            let total = parseInt(hprice) * parseInt(sum);
+            let total = parseInt(hprice.replace(',','')) * parseInt(sum);
 
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);

@@ -21,7 +21,7 @@ class CreateSjMstrTable extends Migration
             $table->string('sj_nbr');
             $table->date('sj_eff_date');
             $table->text('sj_remark')->nullable();
-            $table->enum('sj_status',['Open','Selesai','Closed']);
+            $table->enum('sj_status',['Open','Selesai','Closed','Cancelled']);
             $table->unsignedBigInteger('sj_truck_id')->index();
             $table->foreign('sj_truck_id')->references('id')->on('truck');
             $table->integer('sj_jmlh_trip');
