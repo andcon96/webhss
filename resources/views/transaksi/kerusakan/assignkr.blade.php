@@ -126,7 +126,7 @@
         
         Swal.fire({
             title: "Assign Kerusakan ?",
-            text: "Pastikan Data Sudah Sesuai, Akan Merubah Status Menjadi 'Ongoing'.",
+            text: "Pastikan Data Sudah Sesuai, Akan Merubah Status Menjadi 'Need Approval / Done'.",
             type: "warning",
             icon: 'info',
             showCancelButton: true,
