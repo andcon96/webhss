@@ -27,7 +27,7 @@
             <label for="driver" class="col-md-3 col-form-label text-md-right">Driver</label>
             <div class="col-md-3">
 
-                <input id="driver" type="text" class="form-control" name="driver" value="{{$data->getTruck->getUserDriver->name}}" autocomplete="off" maxlength="24" readonly>
+                <input id="driver" type="text" class="form-control" name="driver" value="{{isset($data->getTruck->getUserDriver->name) ? $data->getTruck->getUserDriver->name : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
