@@ -107,7 +107,7 @@ class QxtendServices
     $qdocbody = '<dsSalesOrder>
                     <salesOrder>
                         <soNbr>' . $sonbr . '</soNbr>
-                        <soCust>' . $data['customer'] . '</soCust>
+                        <soCust>' . $data['custcode'] . '</soCust>
                         <soShip>' . $data['shipto'] . '</soShip>
                         <soOrdDate>' . Carbon::now()->toDateString() . '</soOrdDate>
                         <soDueDate>' . $data['duedate'] . '</soDueDate>

@@ -13,6 +13,7 @@ use App\Models\Transaksi\CustomerOrderMstr;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Services\CreateTempTable;
+use App\Services\QxtendServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -276,20 +277,20 @@ class CustomerOrderController extends Controller
             
             
 
-            // $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
-            // if($sendSO === false){
-            //     alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($sendSO == 'nourl'){
-            //     alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($sendSO[0] == 'error'){
-            //     alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }
+            $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
+            if($sendSO === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($sendSO[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }
 
             DB::commit();
             alert()->success('Success', 'Sales Order Created')->persistent('Dismiss');
