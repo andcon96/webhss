@@ -77,10 +77,9 @@ class SuratJalanLaporMTController extends Controller
             
             DB::commit();
             alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');
-            return redirect()->route('laporSJ');
+            return redirect()->route('laporsj.index');
         }catch(Exception $e){
             DB::rollback();
-            dd($e);
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }
