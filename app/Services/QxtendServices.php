@@ -24,6 +24,7 @@ class QxtendServices
 
   public function qxSOMaintenance($data, $sonbr)
   {
+    dd($data);
     $qxwsa = Qxwsa::firstOrFail();
     if (is_null($qxwsa->qx_url)) {
       return 'nourl';
