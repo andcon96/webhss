@@ -275,7 +275,9 @@ class SuratJalanController extends Controller
     
     public function createsj()
     {
-        $listso = SalesOrderMstr::with('getCOMaster.getCustomer','getShipFrom','getShipTo')->get();
+        $listso = SalesOrderMstr::with('getCOMaster.getCustomer','getShipFrom','getShipTo')
+                            ->whereIn('so_status',['New','Open'])
+                            ->get();
         $item = Item::get();
         $truck = Truck::with('getUserDriver','getUserPengurus')->get();
 

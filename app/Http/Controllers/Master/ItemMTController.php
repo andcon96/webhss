@@ -43,7 +43,7 @@ class ItemMTController extends Controller
                 DB::rollback();
                 return back();
             }
-            alert()->success('Success', 'Customer Data Loaded');
+            alert()->success('Success', 'Item Data Loaded');
             DB::commit();
             return back();
         }catch(Exception $err){

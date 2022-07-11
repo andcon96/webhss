@@ -28,7 +28,7 @@
                 <select name="type" id="type" class="form-control" required>
                     <option value="">Select Data</option>
                     <option value="BERAT">Berat</option>
-                    <option value="RITS">Rits</option>
+                    <option value="TRIP">Trip</option>
                     <option value="SHIFT">Shift</option>
                 </select>
             </div>

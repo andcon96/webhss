@@ -22,6 +22,7 @@
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
                 <input id="customer" type="text" class="form-control" name="customer" value="{{$data->co_cust_code}} -- {{$data->getCustomer->cust_desc}}" autocomplete="off" maxlength="24" required readonly autofocus>
+                <input type="hidden" value="{{$data->co_cust_code}}" name="custcode" id="custcode">
             </div>
         </div>
         <div class="form-group row col-md-12">

@@ -58,7 +58,7 @@
                     @foreach($truck as $trucks)
                     <option value="{{$trucks->id}}" 
                         data-typetruck="{{$trucks->truck_tipe_id}}"
-                        data-pengurus="{{$trucks->getUserPengurus->name}}">
+                        data-pengurus="{{$trucks->getUserPengurus->name ?? ''}}">
                         {{$trucks->truck_no_polis}}
                     </option>
                     @endforeach
@@ -158,7 +158,7 @@
                 sum += parseFloat(this.value);
             });
             var hprice = $('#defaultprice').val();
-            let total = parseInt(hprice) * parseInt(sum);
+            let total = parseInt(hprice.replace(',','')) * parseInt(sum);
 
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);

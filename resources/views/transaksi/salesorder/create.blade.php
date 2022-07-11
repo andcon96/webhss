@@ -22,13 +22,14 @@
                     <option value="{{$conbrs->id}}" 
                             data-cust="{{$conbrs->co_cust_code}}"
                             data-custdesc="{{$conbrs->getCustomer->cust_desc}}"
-                            data-type="{{$conbrs->co_type}}">{{$conbrs->co_nbr}}</option>
+                            data-type="{{$conbrs->co_type}}">{{$conbrs->co_nbr}} -- {{$conbrs->getCustomer->cust_desc ?? ''}}</option>
                     @endforeach
                 </select>
             </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
                 <input id="customer" type="text" class="form-control" name="customer" value="" autocomplete="off" maxlength="24" readonly autofocus>
+                <input type="hidden" id="custcode" name="custcode">
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -102,6 +103,7 @@
         var customer = cust + ' - ' + desc;
 
         $('#customer').val(customer);
+        $('#custcode').val(cust);
         $('#type').val(type);
 
         if(value != ''){

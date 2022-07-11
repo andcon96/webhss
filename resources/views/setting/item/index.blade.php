@@ -44,6 +44,7 @@
                     <th width="20%">Item Code</th>
                     <th>Item Desc</th>
                     <th width="10%">Item EA</th>
+                    <th width="10%">Type</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +54,7 @@
                         <td>{{ $items->item_part }}</td>
                         <td>{{ $items->item_desc }}</td>
                         <td>{{ $items->item_um }}</td>
+                        <td>{{ $items->item_promo }}</td>
                     </tr>
                 @empty
                     <tr>
