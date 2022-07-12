@@ -232,6 +232,7 @@ class SalesOrderController extends Controller
 
         }catch(\Exception $e){
             DB::rollBack();
+            dd($e);
             alert()->error('Error', 'Failed to update so')->persistent('Dismiss');
             return back();
         }
