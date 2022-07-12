@@ -269,22 +269,23 @@ class KerusakanLaporMTController extends Controller
             case 0 :
                 DB::beginTransaction();
                 try{
-                    $kerusakan->kr_status = 'Done';
-                    $kerusakan->save();
-            
-                    foreach($request->struk_desc as $key=>$data){
-                        $kerusakandtl = new KerusakanStukturTransaksi();
-                        $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
-                        $kerusakandtl->krs_kerusakan_struktur_id = $request->struk_mekanik_id[$key];
-                        $kerusakandtl->krs_desc = $request->struk_desc[$key];
-                        $kerusakandtl->save();    
-                    }
+                    
                     $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
                     if($qxkerusakan[0] == false){
                         DB::rollback();
                         alert()->error('Error','Qxtend gagal, '.$qxkerusakan[1]);
                         return back();
                     }else if($qxkerusakan[0] == true){
+                        $kerusakan->kr_status = 'Done';
+                        $kerusakan->save();
+                
+                        foreach($request->struk_desc as $key=>$data){
+                            $kerusakandtl = new KerusakanStukturTransaksi();
+                            $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
+                            $kerusakandtl->krs_kerusakan_struktur_id = $request->struk_mekanik_id[$key];
+                            $kerusakandtl->krs_desc = $request->struk_desc[$key];
+                            $kerusakandtl->save();    
+                        }
                         DB::commit();
                         alert()->success('Success','Kerusakan berhasil di assign, Qxtend berhasil');
                         return redirect()->route('laporkerusakan.index');
