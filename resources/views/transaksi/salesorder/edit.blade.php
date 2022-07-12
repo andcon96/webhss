@@ -94,12 +94,12 @@
 
         var newRow = $("<tr>");
         var cols = "";
-        cols += '<td data-title="Line" data-label="Line"><input type="hidden" name="operation[]" class="operation" value="M"><input type="hidden" name="iddetail[]" value=""><input type="number" class="form-control line" autocomplete="off" name="line[]" style="height:37px" required min="1" value="' + lastline + '"/></td>';
+        cols += '<td data-title="Line" data-label="Line"><input type="hidden" name="operation[]" class="operation" value="M"><input type="hidden" name="iddetail[]" value=""><input type="number" class="form-control line" autocomplete="off" name="line[]" style="height:37px" required min="1" value="" readonly/></td>';
         cols += '<td data-label="Item Part">';
         cols += '<select id="barang" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="part[]" data-size="5" data-live-search="true" required autofocus>';
         cols += '<option value = ""> -- Select Data -- </option>'
         @foreach($item as $items)
-        cols += '<option value="{{$items->cod_part}}" data-sisaqty="{{$items->cod_qty_ord - $items->cod_qty_used}}" data-um="{{$items->getItem->item_um}}"> {{$items->cod_part}} -- {{$items->getItem->item_desc ?? ''}} </option>';
+        cols += '<option value="{{$items->cod_part}}" data-line="{{$items->cod_line}}" data-sisaqty="{{$items->cod_qty_ord - $items->cod_qty_used}}" data-um="{{$items->getItem->item_um}}"> {{$items->cod_part}} -- {{$items->getItem->item_desc ?? ''}} </option>';
         @endforeach
         cols += '</select>';
         cols += '</td>';
@@ -136,11 +136,13 @@
 
         var dataum = $(this).find(':selected').data('um');
         var qtysisa = $(this).find(':selected').data('sisaqty');
+        var line = $(this).find(':selected').data('line');
         
 
         $(this).closest('tr').find('.qtyord').attr('max',qtysisa);
         $(this).closest('tr').find('.um').val(dataum);
         $(this).closest('tr').find('.qtysisa').val(qtysisa);
+        $(this).closest('tr').find('.line').val(line);
     })
 
     $(document).on('submit', '#submit', function(e) {

@@ -45,7 +45,7 @@ class CustomerOrderController extends Controller
     {
         $data = CustomerOrderMstr::with('getDetail')->findOrFail($id);
         $this->authorize('update',[CustomerOrderMstr::class, $data]);
-        $item = Item::get();
+        $item = Item::where('item_promo',$data->co_type)->get();
 
         return view('transaksi.customerorder.edit',compact('data','item'));
     }
