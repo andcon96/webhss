@@ -17,6 +17,7 @@ use App\Models\Transaksi\KerusakanMstr;
 use App\Models\Transaksi\KerusakanStukturTransaksi;
 use App\Services\CreateTempTable;
 use App\Services\QxtendServices;
+use App\Services\WSAServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -82,6 +83,19 @@ class KerusakanLaporMTController extends Controller
             return back();
         }
         else{
+            $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
+            
+            $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
+            if($checkwo === false){
+                alert()->error('Error', 'No Data from QAD');
+                DB::rollback();
+                return back();
+            }
+            else if($checkwo == 'nodata'){
+                alert()->error('Error', 'Truck already being repaired');
+                DB::rollback();
+                return back();
+            }
             DB::beginTransaction();
             try {
                 $getrn = (new CreateTempTable())->getrnkerusakan();
