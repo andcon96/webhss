@@ -379,14 +379,16 @@ class WSAServices
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
-        
+        if(empty($dataloop)){
+            return false;
+        }
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        // dd($qdocResponse,$dataloop);
+        
         if($qdocResult == 'true'){
             $status = '';
                 foreach($dataloop as $datas){
                     if($datas->t_location == 'POOL2'){
-                        dd($datas->t_location);
+                        
                         return 'nodata';
                     }
 
