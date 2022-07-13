@@ -44,9 +44,8 @@
                         data-toggle='modal' data-target="#detailModal"><i
                         class="fas fa-book"></i></button>
                     @endif
-
                     
-                    @if($datas->new_so && $datas->getDetail->where('sod_qty_ship','>','0')->count() == 0)
+                    @if($datas->new_so && $datas->used_so == 0)
                     <a href="" class="deleteModal" 
                         data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>

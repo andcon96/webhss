@@ -55,6 +55,11 @@ class SalesOrderMstr extends Model
         return $this->so_status == 'New' || $this->so_status == 'Open';
     }
 
+    public function getUsedSOAttribute()
+    {
+        return $this->getDetail->where('sod_qty_ship','>',0)->count();
+    }
+
     protected static function boot()
     {
         parent::boot();
