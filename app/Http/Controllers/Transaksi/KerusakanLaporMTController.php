@@ -104,7 +104,7 @@ class KerusakanLaporMTController extends Controller
                 alert()->error('Error', 'Truck already being repaired in QAD');
                 return back();
             }
-            dd('stop');
+            
             DB::beginTransaction();
             try {
                 $getrn = (new CreateTempTable())->getrnkerusakan();
