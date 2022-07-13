@@ -46,7 +46,7 @@
                     @endif
 
                     
-                    @if($datas->new_so)
+                    @if($datas->new_so && $datas->getDetail->where('sod_qty_ship','>','0')->count() == 0)
                     <a href="" class="deleteModal" 
                         data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>

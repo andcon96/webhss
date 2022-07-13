@@ -144,19 +144,25 @@ class SalesOrderController extends Controller
 
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail')->findOrFail($id);
+        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail','getNonCancelledSJ')->findOrFail($id);
         
         $item = CustomerOrderDetail::with('getItem')->where('cod_co_mstr_id',$data->so_co_mstr_id)->get();
 
+        $shipfrom = ShipFrom::get();
+
+        $shipto = CustomerShipTo::where('cs_cust_code',$data->getCOMaster->co_cust_code)->orderBy('cs_shipto','asc')->get();
+
         $this->authorize('update',[SalesOrderMstr::class, $data]);
         
-        return view('transaksi.salesorder.edit',compact('data','item'));
+        return view('transaksi.salesorder.edit',compact('data','item','shipfrom','shipto'));
     }
 
     public function update(Request $request, SalesOrderMstr $salesOrderMstr)
     {
         $id = $request->idmaster;
         $duedate = $request->duedate;
+        $shipfrom = $request->shipfrom;
+        $shipto = $request->shipto;
 
         $operation = $request->operation;
         $iddetail = $request->iddetail;
@@ -173,6 +179,8 @@ class SalesOrderController extends Controller
             $this->authorize('update',[SalesOrderMstr::class, $master]);
 
             $master->so_due_date = $duedate;
+            $master->so_ship_from = $shipfrom;
+            $master->so_ship_to = $shipto;
             $master->save();
 
             foreach($iddetail as $key => $details){
@@ -245,8 +253,10 @@ class SalesOrderController extends Controller
         DB::beginTransaction();
 
         try{
-            $somstr = SalesOrderMstr::findOrFail($id);
+            $somstr = SalesOrderMstr::with('getDetail')->findOrFail($id);
+            $useddet = $somstr->getDetail->where('sod_qty_ship','>','0')->count();
             $this->authorize('delete',[SalesOrderMstr::class, $somstr]);
+            dd('stop');
             
             $soddet = SalesOrderDetail::where('sod_so_mstr_id',$id)->get();
             foreach($soddet as $key => $soddets){

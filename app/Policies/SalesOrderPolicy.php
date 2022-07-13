@@ -23,6 +23,8 @@ class SalesOrderPolicy
 
     public function delete(User $user, SalesOrderMstr $somstr)
     {
-        return $somstr->so_domain == Session::get('domain') && $somstr->so_status == 'New';
+        return $somstr->so_domain == Session::get('domain') && 
+                $somstr->so_status == 'New' && 
+                $somstr->getDetail->where('sod_qty_ship','>',0)->count() == 0;
     }  
 }

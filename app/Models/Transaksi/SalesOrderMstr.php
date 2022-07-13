@@ -38,6 +38,11 @@ class SalesOrderMstr extends Model
         return $this->belongsTo(CustomerShipTo::class, 'so_ship_to', 'cs_shipto');
     }
 
+    public function getNonCancelledSJ()
+    {
+        return $this->hasMany(SuratJalan::class, 'sj_so_mstr_id', 'id')->where('sj_status','!=','Cancelled');
+    }
+
     public function getNewSoAttribute()
     {
         // std get NewSo Attribute -> new_so , Ilangin get & Attribute

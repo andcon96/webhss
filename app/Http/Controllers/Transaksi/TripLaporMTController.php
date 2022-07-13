@@ -111,17 +111,17 @@ class TripLaporMTController extends Controller
             if($OnGoingAbsen + 1 == $targetAbsen){
                 $sjmstr->sj_status = 'Selesai';
                 $sjmstr->save();
-                
-                $sisaSJ = SuratJalan::where('sj_so_mstr_id', $request->idsomaster)
-                                              ->where('sj_status','Open')
-                                              ->count();
-                if($sisaSJ == 0){
-                    $so_mstr = SalesOrderMstr::find($request->idsomaster);
-                    if($so_mstr->so_status != 'Closed' && $so_mstr->so_status != 'Cancelled'){
-                        $so_mstr->so_status = 'Selesai';
-                        $so_mstr->save();
-                    }
-                }
+
+                // $sisaSJ = SuratJalan::where('sj_so_mstr_id', $request->idsomaster)
+                //                               ->where('sj_status','Open')
+                //                               ->count();
+                // if($sisaSJ == 0){
+                //     $so_mstr = SalesOrderMstr::find($request->idsomaster);
+                //     if($so_mstr->so_status != 'Closed' && $so_mstr->so_status != 'Cancelled'){
+                //         $so_mstr->so_status = 'Selesai';
+                //         $so_mstr->save();
+                //     }
+                // }
             }
 
             DB::commit();

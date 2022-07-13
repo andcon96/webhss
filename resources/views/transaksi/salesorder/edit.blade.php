@@ -24,16 +24,39 @@
                 <input id="customer" type="text" class="form-control" name="customer" value="{{$data->getCOMaster->co_cust_code}} -- {{$data->getCOMaster->getCustomer->cust_desc}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
-        <div class="form-group row col-md-12">
-            <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
-            <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
+        @if ($data->getNonCancelledSJ->count() == 0)
+            <div class="form-group row col-md-12">
+                <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
+                <div class="col-md-3">
+                    <select name="shipfrom" id="shipfrom" class="form-control selectdrop">
+                        <option value="">None</option>
+                        @foreach ($shipfrom as $shipfroms)
+                            <option value="{{$shipfroms->sf_code}}" {{$data->so_ship_from == $shipfroms->sf_code ? 'Selected' : ''}} >{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
+                <div class="col-md-3">
+                    <select name="shipto" id="shipto" class="form-control selectdrop">
+                        <option value="">None</option>
+                        @foreach ($shipto as $shiptos)
+                            <option value="{{$shiptos->cs_shipto}}" {{$data->so_ship_to == $shiptos->cs_shipto ? 'Selected' : ''}} >{{$shiptos->cs_shipto}} -- {{$shiptos->cs_shipto_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
-            <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+        @else
+            <div class="form-group row col-md-12">
+                <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
+                <div class="col-md-3">
+                    <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
+                </div>
+                <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
+                <div class="col-md-3">
+                    <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+                </div>
             </div>
-        </div>
+        @endif
         <div class="form-group row col-md-12">
             <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
             <div class="col-md-3">
@@ -66,6 +89,9 @@
 
 @section('scripts')
 <script>
+    $('.selectdrop').select2({
+        width: '100%'
+    });
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: '+0d',
