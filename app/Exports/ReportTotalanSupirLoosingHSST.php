@@ -58,7 +58,7 @@ class ReportTotalanSupirLoosingHSST implements FromView, WithColumnWidths, Shoul
                             // ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
                             // ->orWhereRelation('getTipe', 'tt_code', '3EXL')
                             ->get();
-        dd($data);
+                            
         return view('transaksi.laporan.excel.report-total-sopir-loosing-hsst',
                     compact('data','listtruck','datefrom','dateto','rbhist'));
     }
