@@ -83,17 +83,17 @@ class KerusakanLaporMTController extends Controller
             return back();
         }
         else{
+
+            $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
             $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
                 $e->where('kr_status','New');
                 $e->orwhere('kr_status','Need Approval');
             })->first();
             
             if($checkkr){
-                alert()->error('Error', 'Report already exist for : '.$request->truck);
+                alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
                 return back();
             }
-            $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
-            
             $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
             if($checkwo === false){
                 alert()->error('Error', 'No Data from QAD');
