@@ -99,12 +99,12 @@ class KerusakanLaporMTController extends Controller
                 alert()->error('Error', 'No Data from QAD');
                 return back();
             }
-            else if($checkwo == 'nodata'){
-                dd($checkwo);
+            else if($checkwo === 'nodata'){
+                
                 alert()->error('Error', 'Truck already being repaired in QAD');
                 return back();
             }
-            
+            dd('stop');
             DB::beginTransaction();
             try {
                 $getrn = (new CreateTempTable())->getrnkerusakan();
