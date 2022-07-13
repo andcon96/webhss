@@ -101,7 +101,7 @@ class KerusakanLaporMTController extends Controller
             }
             else if($checkwo === 'nodata'){
                 
-                alert()->error('Error', 'Truck already being repaired in QAD');
+                alert()->error('Error', 'Truck '.$checktruck->truck_no_polis.' already being repaired in QAD');
                 return back();
             }
             
