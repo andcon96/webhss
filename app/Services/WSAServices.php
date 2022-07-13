@@ -385,6 +385,7 @@ class WSAServices
             $status = '';
                 foreach($dataloop as $datas){
                     if($datas->t_location == 'POOL2'){
+                        dd($datas->t_location);
                         return 'nodata';
                     }
 
