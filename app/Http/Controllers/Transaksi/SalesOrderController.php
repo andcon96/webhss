@@ -131,7 +131,7 @@ class SalesOrderController extends Controller
             }
 
             DB::commit();
-            alert()->success('Success', 'Sales Order Created')->persistent('Dismiss');
+            alert()->success('Success', 'Sales Order : '.$getrn.' Created')->persistent('Dismiss');
             return back();
             
 

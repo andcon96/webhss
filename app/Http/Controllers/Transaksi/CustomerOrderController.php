@@ -90,7 +90,7 @@ class CustomerOrderController extends Controller
             $prefix->save();
 
             DB::commit();
-            alert()->success('Success', 'Save Berhasil')->persistent('Dismiss');
+            alert()->success('Success', 'Customer Order :'.$getCORN.'Created')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollBack();

@@ -101,7 +101,7 @@ class SuratJalanController extends Controller
             $prefix->save();
 
             DB::commit();
-            alert()->success('Success', 'Surat Jalan berhasil dibuat')->persistent('Dismiss');
+            alert()->success('Success', 'Surat Jalan : '.$getSJ.' berhasil dibuat')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollBack();

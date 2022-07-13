@@ -45,7 +45,8 @@ class SuratJalanLaporMTController extends Controller
         return view('transaksi.sjcust.laporsj', compact('data','truck'));
     }
 
-    public function updatesj(Request $request){
+    public function updatesj(Request $request)
+    {
         DB::beginTransaction();
         try{
             // Update Master
