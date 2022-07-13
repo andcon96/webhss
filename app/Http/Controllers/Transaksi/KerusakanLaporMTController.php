@@ -79,29 +79,37 @@ class KerusakanLaporMTController extends Controller
     {
         $this->authorize('create',[KerusakanMstr::class]);
         if(Session::get('domain') != 'HSS'){
-            alert()->error('Error', 'Domain harus HSS')->persistent('Dismiss');
+            alert()->error('Error', 'Not Allowed')->persistent('Dismiss');
             return back();
         }
         else{
+            $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
+                $e->where('kr_status','New');
+                $e->orwhere('kr_status','Need Approval');
+            })->first();
+            
+            if($checkkr){
+                alert()->error('Error', 'Report already exist for : '.$request->truck);
+                return back();
+            }
             $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
             
             $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
             if($checkwo === false){
                 alert()->error('Error', 'No Data from QAD');
-                DB::rollback();
                 return back();
             }
             else if($checkwo == 'nodata'){
-                alert()->error('Error', 'Truck already being repaired');
-                DB::rollback();
+                alert()->error('Error', 'Truck already being repaired in QAD');
                 return back();
             }
+            
             DB::beginTransaction();
             try {
                 $getrn = (new CreateTempTable())->getrnkerusakan();
                 
                 if ($getrn === false) {
-                    alert()->error('Error', 'Gagal Melaporkan Kerusakan');
+                    alert()->error('Error', 'Report failed');
                     DB::rollBack();
                     return back();
                 }
@@ -128,7 +136,7 @@ class KerusakanLaporMTController extends Controller
                 $prefix->save();
 
                 DB::commit();
-                alert()->success('Success', 'Kerusakan berhasil dilaporkan')->persistent('Dismiss');
+                alert()->success('Success', 'Report created')->persistent('Dismiss');
                 return back();
             } catch (Exception $e) {
                 DB::rollBack();

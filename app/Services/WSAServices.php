@@ -382,8 +382,12 @@ class WSAServices
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
         // dd($qdocResponse,$dataloop);
         if($qdocResult == 'true'){
+            $status = '';
                 foreach($dataloop as $datas){
-                    dd($datas);
+                    if($datas->t_location == 'POOL2'){
+                        return 'nodata';
+                    }
+
                 }
                
                 return true;
