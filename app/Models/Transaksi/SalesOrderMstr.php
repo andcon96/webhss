@@ -43,10 +43,17 @@ class SalesOrderMstr extends Model
         return $this->hasMany(SuratJalan::class, 'sj_so_mstr_id', 'id')->where('sj_status','!=','Cancelled');
     }
 
+    public function getOpenOrSelesaiSJ()
+    {
+        return $this->hasMany(SuratJalan::class, 'sj_so_mstr_id', 'id')
+                    ->where('sj_status','Open')
+                    ->orWhere('sj_status','Selesai');
+    }
+
     public function getNewSoAttribute()
     {
         // std get NewSo Attribute -> new_so , Ilangin get & Attribute
-        return $this->so_status == 'New';
+        return $this->so_status == 'Open';
     }
 
     public function getNewOpenSoAttribute()

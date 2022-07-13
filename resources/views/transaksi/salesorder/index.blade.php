@@ -19,14 +19,19 @@
     <div class="form-group row col-md-12">
         <label for="s_sonumber" class="col-md-2 col-form-label text-md-right">{{ __('SO Number.') }}</label>
         <div class="col-md-4 col-lg-3">
-            <input id="s_sonumber" type="text" class="form-control" name="s_sonumber" value="{{ request()->input('s_sonumber') }}" autofocus autocomplete="off">
-        </div>
-        <label for="s_customer" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
-        <div class="col-md-4 col-lg-3">
-            <select id="s_customer" class="form-control" name="s_customer" autofocus autocomplete="off">
+            <select id="s_sonumber" class="form-control" name="s_sonumber" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
-                @foreach($cust as $custs)
-                <option value="{{$custs->cust_code}}">{{$custs->cust_code}} - {{$custs->cust_desc}}</option>
+                @foreach($salesord as $salesords)
+                <option value="{{$salesords->id}}">{{$salesords->so_nbr}}</option>
+                @endforeach
+            </select>
+        </div>
+        <label for="s_conumber" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="s_conumber" class="form-control" name="s_conumber" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($custord as $custords)
+                <option value="{{$custords->id}}">{{$custords->co_nbr}}</option>
                 @endforeach
             </select>
         </div>
@@ -45,16 +50,27 @@
     </div>
 
     <div class="form-group row col-md-12">
+        <label for="s_customer" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="s_customer" class="form-control" name="s_customer" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($cust as $custs)
+                <option value="{{$custs->cust_code}}">{{$custs->cust_code}} - {{$custs->cust_desc}}</option>
+                @endforeach
+            </select>
+        </div>
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('Status') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="s_status" class="form-control" name="s_status" autofocus autocomplete="off">
                 <option value=""> --Select Status-- </option>
-                <option value="New">New</option>
                 <option value="Open">Open</option>
                 <option value="Closed">Closed</option>
                 <option value="Cancelled">Cancelled</option>
             </select>
         </div>
+    </div>
+
+    <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
@@ -266,7 +282,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#s_customer, #s_status').select2({
+    $('#s_customer, #s_status, #s_sonumber, #s_conumber').select2({
         width: '100%',
     });
     
@@ -276,6 +292,7 @@
         $('#s_shipto').val('');
         $('#s_status').val('');
         $('#s_sonumber').val('');
+        $('#s_conumber').val('');
     }
 
     $(document).ready(function(){
@@ -288,9 +305,13 @@
         let shipfrom = queryString.get('s_shipfrom');
         let shipto   = queryString.get('s_shipto');
         let status = queryString.get('s_status');
+        let sonbr = queryString.get('s_sonumber');
+        let conbr = queryString.get('s_conumber');
 
         $('#s_customer').val(customer).trigger('change');
         $('#s_status').val(status).trigger('change');
+        $('#s_sonumber').val(sonbr).trigger('change');
+        $('#s_conumber').val(conbr).trigger('change');
     });
 
     $(document).on('click', '.viewModal', function() { // Click to only happen on announce links
