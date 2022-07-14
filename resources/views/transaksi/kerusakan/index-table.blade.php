@@ -23,7 +23,7 @@
                         <td data-label="Status">{{$datas->kr_status}}</td>
                         <td data-label="Action">
                             <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
-                            @if($datas->kr_status == 'New')
+                            @if($datas->kr_status == 'New' || $datas->kr_status == 'Done')
                             <a href="{{route('laporkerusakan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
                             
                             <a href="{{route('assignKR',$datas->id) }}"><i class="fas fa-tasks"></i></a>
