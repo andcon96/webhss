@@ -16,9 +16,9 @@
                 <td style="vertical-align:middle;text-align:center;"> 
                     <input type="hidden" name="operation[]" class="operation" value="M">
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
-                    {{dd(count($datas->getStrukturTrans))}}
+                    
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
-                    @if($data->kr_status == 'Done' && isset($datas->getStrukturTrans->id))
+                    @if($data->kr_status == 'Done' && count($datas->getStrukturTrans) >0)
                         <input type="checkbox" class="qaddel" value="" disabled> 
                     @else
                         <input type="checkbox" class="qaddel" value="Y" name="qaddel[]"> 
