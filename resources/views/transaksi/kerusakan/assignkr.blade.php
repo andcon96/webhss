@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            @include('transaksi.kerusakan.edit-table')
+            @include('transaksi.kerusakan.assignkr-edit-table')
         </div>
         
         <div class="form-group row col-md-12">
