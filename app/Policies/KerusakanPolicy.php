@@ -24,7 +24,7 @@ class KerusakanPolicy
     }
     public function update(User $user, KerusakanMstr $krmstr)
     {
-        return Session::get('domain') == 'HSS' && ($krmstr->kr_status == 'New');
+        return Session::get('domain') == 'HSS' && (($krmstr->kr_status == 'New')||($krmstr->kr_status == 'Done'));
     }
     public function delete(User $user)
     {

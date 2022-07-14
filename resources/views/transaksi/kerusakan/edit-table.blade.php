@@ -8,6 +8,7 @@
         </thead>
         <tbody id="edittable">
             @forelse ($data->getDetail as $key => $datas)
+            
             <tr>
                 <td>
                     <input type="text" class="form-control" value="{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}" readonly>
@@ -17,7 +18,7 @@
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
-                    @if($data->kr_status == 'Done')
+                    @if($data->kr_status == 'Done' && isset($datas->getStrukturTrans->id))
                         <input type="checkbox" class="qaddel" value="" disabled> 
                     @else
                         <input type="checkbox" class="qaddel" value="Y" name="qaddel[]"> 

@@ -28,7 +28,7 @@ class KerusakanLaporMTController extends Controller
     public function index(Request $request)
     {
         // $this->authorize('view',[KerusakanMstr::class]);
-        
+        $this->authorize('create',[KerusakanMstr::class]);
         $data = KerusakanMstr::query()
             ->with(['getDetail', 'getTruck','getTruck.getUserDriver'])
          ;   
@@ -69,7 +69,7 @@ class KerusakanLaporMTController extends Controller
 
     public function create()
     {
-        
+        $this->authorize('create',[KerusakanMstr::class]);
         $jeniskerusakan = Kerusakan::get();
         $truck = Truck::withoutGlobalScopes()->get();
         return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck'));
@@ -150,8 +150,10 @@ class KerusakanLaporMTController extends Controller
 
     public function edit($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver'])->findOrFail($id);
+        $data = KerusakanMstr::with(["getDetail.getStrukturTrans",'getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
+        
+        $this->authorize('update',[KerusakanMstr::class,$data]);
 
         return view('transaksi.kerusakan.edit', compact('data', 'jeniskerusakan'));
     }
