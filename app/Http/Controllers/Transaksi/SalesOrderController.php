@@ -25,6 +25,8 @@ class SalesOrderController extends Controller
     public function index(Request $request)
     {
         $cust = Customer::get();
+        $shipfrom = ShipFrom::get();
+        $shipto = CustomerShipTo::get();
         $custord = CustomerOrderMstr::get();
         $salesord = SalesOrderMstr::get();
         $data = SalesOrderMstr::query()
@@ -41,19 +43,20 @@ class SalesOrderController extends Controller
             $data->whereRelation('getCOMaster.getCustomer','co_cust_code',$request->s_customer);
         }
         if($request->s_shipto){
-            $data->where('so_ship_to',$request->s_shipto);
+                $data->where('so_ship_to',$request->s_shipto);
         }
         if($request->s_shipfrom){
-            $data->where('so_ship_from',$request->s_shipfrom);
+            $request->s_shipfrom == 'null' ? 
+                $data->whereNull('so_ship_from') : 
+                $data->where('so_ship_from',$request->s_shipfrom);
         }
         if($request->s_status){
             $data->where('so_status',$request->s_status);
         }
 
-
         $data = $data->orderBy('created_at','DESC')->paginate(10);
-        return view('transaksi.salesorder.index',['data' => $data, 'cust' => $cust, 'custord' => $custord, 'salesord' => $salesord]);
-        
+
+        return view('transaksi.salesorder.index',compact('cust','shipfrom','shipto','custord','salesord','data'));       
     }
 
     public function create()

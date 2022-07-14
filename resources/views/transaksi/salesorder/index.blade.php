@@ -40,12 +40,23 @@
     <div class="form-group row col-md-12">
         <label for="s_shipfrom" class="col-md-2 col-form-label text-md-right">{{ __('Ship From') }}</label>
         <div class="col-md-4 col-lg-3">
-            <input id="s_shipfrom" type="text" class="form-control" name="s_shipfrom" autofocus autocomplete="off">
+            <select id="s_shipfrom" class="form-control" name="s_shipfrom" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                <option value="null">None</option>
+                @foreach($shipfrom as $shipfroms)
+                <option value="{{$shipfroms->sf_code}}">{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>
+                @endforeach
+            </select>
         </div>
 
         <label for="s_shipto" class="col-md-2 col-form-label text-md-right">{{ __('Ship To') }}</label>
         <div class="col-md-4 col-lg-3">
-            <input id="s_shipto" type="text" class="form-control" name="s_shipto" autofocus autocomplete="off">
+            <select id="s_shipto" class="form-control" name="s_shipto" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($shipto as $shiptos)
+                <option value="{{$shiptos->cs_shipto}}">{{$shiptos->cs_shipto}} -- {{$shiptos->cs_shipto_name}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 
@@ -282,7 +293,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#s_customer, #s_status, #s_sonumber, #s_conumber').select2({
+    $('#s_customer, #s_status, #s_sonumber, #s_conumber, #s_shipfrom, #s_shipto').select2({
         width: '100%',
     });
     
@@ -312,6 +323,8 @@
         $('#s_status').val(status).trigger('change');
         $('#s_sonumber').val(sonbr).trigger('change');
         $('#s_conumber').val(conbr).trigger('change');
+        $('#s_shipfrom').val(shipfrom).trigger('change');
+        $('#s_shipto').val(shipto).trigger('change');
     });
 
     $(document).on('click', '.viewModal', function() { // Click to only happen on announce links
