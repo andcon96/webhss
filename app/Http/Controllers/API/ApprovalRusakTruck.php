@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 class ApprovalRusakTruck extends Controller
@@ -122,10 +123,10 @@ class ApprovalRusakTruck extends Controller
     //outbound check status wo berubah
     public function qxoutstatus(Request $request){
         $xml = simplexml_load_string($request->getContent());
-        return 'test';
-    	// $qdocFields = $xml->children('qdoc', true);
-
-    	// Log::channel('customlog')->info('Cust : '. (String) $qdocFields->purchaseOrderReceive->soCust);
+        
+    	$qdocFields = $xml->children('qdoc', true);
+        
+    	Log::channel('customlog')->info('WO : '. (String) $qdocFields->wo_nbr->woNbr);
 		
 		// foreach($qdocFields->purchaseOrderReceive->lineDetail as $data){
 		// 	Log::channel('customlog')->info('Item Part : '. $data->sodPart);

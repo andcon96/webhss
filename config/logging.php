@@ -155,6 +155,12 @@ return [
             'path' => storage_path('logs/poreceipt.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
+        
+        'customlog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/customlog.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ]
     ],
 
 ];
