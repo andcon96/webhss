@@ -125,8 +125,11 @@ class ApprovalRusakTruck extends Controller
         $xml = simplexml_load_string($request->getContent());
         
     	$qdocFields = $xml->children('qdoc', true);
-        
-    	Log::channel('customlog')->info((string)$request);
+        $data = $xml->children('soapenv',true)->Body->children('qdoc',true)->WOCheckStatus->dsWo_mstr->wo_mstr;
+        foreach($data as $datas){
+            Log::channel('customlog')->info('Wonbr : ' .$datas->woNbr);
+        }
+    	
         
 		// foreach($qdocFields->purchaseOrderReceive->lineDetail as $data){
 		// 	Log::channel('customlog')->info('Item Part : '. $data->sodPart);
