@@ -28,7 +28,7 @@ class KerusakanLaporMTController extends Controller
     public function index(Request $request)
     {
         // $this->authorize('view',[KerusakanMstr::class]);
-        $this->authorize('create',[KerusakanMstr::class]);
+        
         $data = KerusakanMstr::query()
             ->with(['getDetail', 'getTruck','getTruck.getUserDriver'])
          ;   
