@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Truck;
+use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
@@ -49,6 +50,7 @@ class SuratJalanLaporMTController extends Controller
     {
         DB::beginTransaction();
         try{
+
             // Update Master
             $sjmstr = SuratJalan::findOrFail($request->idsjmstr);
             $sjmstr->sj_conf_remark = $request->remark;
@@ -62,6 +64,22 @@ class SuratJalanLaporMTController extends Controller
                 $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
                 $sjddet->save();
             }
+
+            // Get SO Mstr
+            $somstr = SalesOrderMstr::query()
+                        ->with('getDetail' ,function($q){
+                            $q->whereRaw('sod_qty_ord > sod_qty_ship');   
+                        })
+                        ->with('getOpenOrSelesaiSJ')
+                        ->find($sjmstr->sj_so_mstr_id);
+            $soddet = $somstr->getDetail->count(); // 0 => Semua detail full ship
+            $listsj = $somstr->getOpenOrSelesaiSJ->count(); // 0 => Semua SJ antara Closed / Cancelled
+
+            if($soddet == 0 && $listsj == 0){
+                $somstr->so_status = 'Closed';
+                $somstr->save();
+            }
+            
 
             // Kirim Qxtend
             $soship = (new QxtendServices())->qxSOShip($request->all());

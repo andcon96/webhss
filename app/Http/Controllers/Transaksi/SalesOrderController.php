@@ -25,12 +25,17 @@ class SalesOrderController extends Controller
     public function index(Request $request)
     {
         $cust = Customer::get();
+        $custord = CustomerOrderMstr::get();
+        $salesord = SalesOrderMstr::get();
         $data = SalesOrderMstr::query()
                               ->with('getDetail',
                                      'getCOMaster.getCustomer');
 
         if($request->s_sonumber){
-            $data->where('so_nbr',$request->s_sonumber);
+            $data->where('id',$request->s_sonumber);
+        }
+        if($request->s_conumber){
+            $data->whereRelation('getCOMaster','id',$request->s_conumber);
         }
         if($request->s_customer){
             $data->whereRelation('getCOMaster.getCustomer','co_cust_code',$request->s_customer);
@@ -47,7 +52,7 @@ class SalesOrderController extends Controller
 
 
         $data = $data->orderBy('created_at','DESC')->paginate(10);
-        return view('transaksi.salesorder.index',['data' => $data, 'cust' => $cust]);
+        return view('transaksi.salesorder.index',['data' => $data, 'cust' => $cust, 'custord' => $custord, 'salesord' => $salesord]);
         
     }
 
@@ -56,7 +61,13 @@ class SalesOrderController extends Controller
         $item = Item::get();
         $cust = Customer::get();
         $shipfrom = ShipFrom::where('sf_is_active',1)->get();
-        $conbr = CustomerOrderMstr::with('getCustomer')->get();
+        $conbr = CustomerOrderMstr::query()
+                        ->with('getCustomer','getDetail')
+                        ->whereRelation('getDetail',function ($q){
+                            $q->whereRaw('cod_qty_ord > cod_qty_used');
+                        })
+                        ->get();
+                        
         return view('transaksi.salesorder.create',compact('item','cust','conbr','shipfrom'));
     }
 
@@ -254,9 +265,8 @@ class SalesOrderController extends Controller
 
         try{
             $somstr = SalesOrderMstr::with('getDetail')->findOrFail($id);
-            $useddet = $somstr->getDetail->where('sod_qty_ship','>','0')->count();
+            
             $this->authorize('delete',[SalesOrderMstr::class, $somstr]);
-            dd('stop');
             
             $soddet = SalesOrderDetail::where('sod_so_mstr_id',$id)->get();
             foreach($soddet as $key => $soddets){

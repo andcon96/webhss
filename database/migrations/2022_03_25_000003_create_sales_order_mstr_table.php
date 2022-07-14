@@ -24,7 +24,7 @@ class CreateSalesOrderMstrTable extends Migration
             $table->date('so_due_date');
             $table->date('so_effdate')->nullable();
             // $table->enum('so_type',['Berat','Rits','Shift']);
-            $table->enum('so_status',['New','Open','Closed','Cancelled','Selesai'])->default('New');
+            $table->enum('so_status',['Open','Closed','Cancelled','Selesai'])->default('Open');
             $table->text('so_remark')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
