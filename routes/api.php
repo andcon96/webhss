@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 route::get('apiapprovaltruck/{wonbr}/{rusaknbr}/{nopolnbr}/{status}',[ApprovalRusakTruck::class,'receiveAPI']);
-route::get('qxoutwo',[ApprovalRusakTruck::class,'qxoutstatus']);
+route::post('qxoutwo',[ApprovalRusakTruck::class,'qxoutstatus']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

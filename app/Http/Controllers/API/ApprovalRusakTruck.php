@@ -122,7 +122,7 @@ class ApprovalRusakTruck extends Controller
     //outbound check status wo berubah
     public function qxoutstatus(Request $request){
         $xml = simplexml_load_string($request->getContent());
-
+        return 'test';
     	// $qdocFields = $xml->children('qdoc', true);
 
     	// Log::channel('customlog')->info('Cust : '. (String) $qdocFields->purchaseOrderReceive->soCust);
