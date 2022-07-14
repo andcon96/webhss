@@ -1,4 +1,4 @@
-<div class="table-responsive offset-lg-2 col-lg-8 col-md-12 mt-3">
+<div class="table-responsive offset-lg-2 col-lg-8 col-md-12 mt-3" style="display: inline-table">
     <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
