@@ -126,7 +126,7 @@ class ApprovalRusakTruck extends Controller
         
     	$qdocFields = $xml->children('qdoc', true);
         
-    	Log::channel('customlog')->info($xml);
+    	Log::channel('customlog')->info((string)$xml);
         
 		// foreach($qdocFields->purchaseOrderReceive->lineDetail as $data){
 		// 	Log::channel('customlog')->info('Item Part : '. $data->sodPart);
