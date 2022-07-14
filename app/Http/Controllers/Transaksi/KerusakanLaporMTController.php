@@ -161,6 +161,10 @@ class KerusakanLaporMTController extends Controller
         
     
         $data = KerusakanMstr::findOrfail($request->idmaster);
+        if($data->kr_status == "Close"){
+            alert()->error('Error', 'Report is closed')->persistent('Dismiss');
+            return back();
+        }
         $this->authorize('update',[KerusakanMstr::class,$data]);
         DB::beginTransaction();
         try {
@@ -180,12 +184,12 @@ class KerusakanLaporMTController extends Controller
             }
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil di update')->persistent('Dismiss');
+            alert()->success('Success', 'Report updated')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
             
-            alert()->error('Error', 'Update Gagal')->persistent('Dismiss');
+            alert()->error('Error', 'Report failed to update')->persistent('Dismiss');
             return back();
         }
         
@@ -203,12 +207,12 @@ class KerusakanLaporMTController extends Controller
             $data->save();
 
             DB::commit();
-            alert()->success('Success', 'Kerusakan berhasil dicancel')->persistent('Dismiss');
+            alert()->success('Success', 'Report cancelled')->persistent('Dismiss');
             return back();
         } catch (Exception $e) {
             DB::rollBack();
             
-            alert()->error('Error', 'Cancel Gagal')->persistent('Dismiss');
+            alert()->error('Error', 'Failed to cancel')->persistent('Dismiss');
             return back();
         }
     
@@ -309,7 +313,7 @@ class KerusakanLaporMTController extends Controller
                         return back();
                     }else if($qxkerusakan[0] == true){
                         DB::commit();
-                        alert()->success('Success','Kerusakan berhasil di assign, Qxtend berhasil');
+                        alert()->success('Success','Assign report success');
                         return redirect()->route('laporkerusakan.index');
                     }
 
@@ -317,7 +321,7 @@ class KerusakanLaporMTController extends Controller
                 }catch(Exception $err){
                     DB::rollback();
                     
-                    alert()->error('Error','Kerusakan gagal di assign');
+                    alert()->error('Error','Assign report failed');
                     return redirect()->route('laporkerusakan.index');
                 }
                 break;
