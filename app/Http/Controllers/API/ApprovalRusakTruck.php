@@ -117,5 +117,22 @@ class ApprovalRusakTruck extends Controller
 
         }
         return view('publicview.APIresult', compact('errorlist','status_display','message'));
-    }       
+    }   
+    
+    //outbound check status wo berubah
+    public function qxoutstatus(Request $request){
+        $xml = simplexml_load_string($request->getContent());
+
+    	// $qdocFields = $xml->children('qdoc', true);
+
+    	// Log::channel('customlog')->info('Cust : '. (String) $qdocFields->purchaseOrderReceive->soCust);
+		
+		// foreach($qdocFields->purchaseOrderReceive->lineDetail as $data){
+		// 	Log::channel('customlog')->info('Item Part : '. $data->sodPart);
+		// }
+
+
+    	// dd($xml, $qdocFields, (String) $qdocFields->purchaseOrderReceive->soCust);
+
+    }
 }
