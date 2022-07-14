@@ -26,7 +26,7 @@
                 @endforeach
             </select>
         </div>
-        <label for="s_conumber" class="col-md-2 col-form-label text-md-right">{{ __('Customer') }}</label>
+        <label for="s_conumber" class="col-md-2 col-form-label text-md-right">{{ __('CO Number.') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="s_conumber" class="form-control" name="s_conumber" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
