@@ -127,7 +127,18 @@ class ApprovalRusakTruck extends Controller
     	$qdocFields = $xml->children('qdoc', true);
         $data = $xml->children('soapenv',true)->Body->children('qdoc',true)->WOCheckStatus->dsWo_mstr->wo_mstr->woNbr;
         
-            Log::channel('customlog')->info('Wonbr : ' .$data);
+        $kerusakandata = KerusakanMstr::where('kr_nbr',$data)->where('status','<>','Close')->first();
+        if($kerusakandata){
+            DB::beginTransaction();
+            try{
+                $kerusakandata->kr_status = 'Close';
+                $kerusakandata->save();
+                DB::commit();
+            }catch(Exception $err){
+                DB::rollback();
+            }
+            
+        }
         
     	
         
