@@ -91,7 +91,7 @@
         var newRow = $("<tr>");
         var cols = "";
         cols += '<td data-label="Jenis Kerusakan">';
-        cols += '<select id="jeniskerusakan" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="jeniskerusakan[]" data-live-search="true" required autofocus>';
+        cols += '<select id="jeniskerusakan" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="jeniskerusakan[]" data-live-search="true" data-size="4" required autofocus>';
         cols += '<option value = ""> -- Select Data -- </option>'
         @foreach($jeniskerusakan as $jeniskerusakans)
         cols += '<option value="{{$jeniskerusakans->id}}"> {{$jeniskerusakans->kerusakan_code}} -- {{$jeniskerusakans->kerusakan_desc}} </option>';
