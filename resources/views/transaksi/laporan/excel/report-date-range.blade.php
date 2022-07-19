@@ -39,6 +39,7 @@
                     <td>{{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                     <td></td>
                     <td>{{$datas->getDetail[0]->sjd_qty_ship}}</td>
+                    <td>{{$datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos}} </td>
                     <td style="text-align:right">{{number_format($datas->sj_default_sangu,2)}}</td>
                 </tr>
                 {{$totaldefault += $datas->sj_default_sangu}}

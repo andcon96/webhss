@@ -131,14 +131,10 @@
     });
 
     var tipebarang = $('#type').val();
-
-    if(tipebarang == 'BERAT'){
-        $('#container').css('display','none');
-    }else if(tipebarang == 'TRIP'){
-        $('.tonase').css('display','none');
-        $('.pricetot').removeClass('col-md-3');
-        $('.pricetot').addClass('col-md-2');
-    }
+    
+    $('.tonase').css('display','none');
+    $('.pricetot').removeClass('col-md-3');
+    $('.pricetot').addClass('col-md-2');
     
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -152,29 +148,18 @@
     function getDefaultSangu(){
         var tipebarang = $('#type').val();
         
-        if(tipebarang == 'BERAT'){
-            sum = 0;
-            $('.qtysj').each(function(){
-                sum += parseFloat(this.value);
-            });
-            var hprice = $('#defaultprice').val();
-            let total = parseInt(hprice.replace(',','')) * parseInt(sum);
+        sum = 0;
+        // $('.qtysj').each(function(){
+        //     sum += parseFloat(this.value);
+        // });
+        sum = $('#trip').val();
+        var hsangu = $('#sangutruck').val();
+        var hkomisi = $('#komisitruck').val();
 
-            total = Number(total).toLocaleString('en-US');
-            $('#defaultsangu').val(total);
-        }else if(tipebarang == 'TRIP'){
-            sum = 0;
-            $('.qtysj').each(function(){
-                sum += parseFloat(this.value);
-            });
-            var hsangu = $('#sangutruck').val();
-            var hkomisi = $('#komisitruck').val();
+        let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
 
-            let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
-
-            total = Number(total).toLocaleString('en-US');
-            $('#defaultsangu').val(total);
-        }
+        total = Number(total).toLocaleString('en-US');
+        $('#defaultsangu').val(total);
 
     }
 

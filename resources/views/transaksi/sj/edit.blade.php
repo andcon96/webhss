@@ -109,32 +109,18 @@
     
     var tipebarang = $('#type').val();
 
-    if(tipebarang == 'BERAT'){
-        $('#container').css('display','none');
-    }else if(tipebarang == 'TRIP'){
-        $('.tonase').css('display','none');
-        $('.pricetot').removeClass('col-md-3');
-        $('.pricetot').addClass('col-md-2');
-    }
+    $('.tonase').css('display','none');
+    $('.pricetot').removeClass('col-md-3');
+    $('.pricetot').addClass('col-md-2');
 
     function getDefaultSangu(){
         var tipebarang = $('#type').val();
         
-        if(tipebarang == 'BERAT'){
             sum = 0;
-            $('.qtyord').each(function(){
-                sum += parseFloat(this.value);
-            });
-            var hprice = $('#defaultprice').val();
-            let total = parseInt(hprice) * parseInt(sum);
-
-            total = Number(total).toLocaleString('en-US');
-            $('#defaultsangu').val(total);
-        }else if(tipebarang == 'TRIP'){
-            sum = 0;
-            $('.qtyord').each(function(){
-                sum += parseFloat(this.value);
-            });
+            // $('.qtyord').each(function(){
+            //     sum += parseFloat(this.value);
+            // });
+            sum = $('#trip').val();
             var hsangu = $('#sangutruck').val();
             var hkomisi = $('#komisitruck').val();
 
@@ -142,7 +128,6 @@
 
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);
-        }
 
     }
     
