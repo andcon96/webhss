@@ -127,6 +127,7 @@ class SuratJalanController extends Controller
             $this->authorize('update',[SuratJalan::class, $sjmstr]);
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
+            $sjmstr->sj_jmlh_trip = $request->trip;
             $sjmstr->save();
             
             foreach($request->iddetail as $key => $datas){

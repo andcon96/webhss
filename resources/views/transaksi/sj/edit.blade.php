@@ -58,9 +58,9 @@
             <div class="col-md-3">
                 <input id="defaultsangu" type="text" class="form-control" name="defaultsangu" value="{{number_format($data->sj_default_sangu,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="defaultprice" class="col-md-3 col-form-label text-md-right tonase">Price per Unit</label>
+            <label for="trip" class="col-md-3 col-form-label text-md-right">Trip</label>
             <div class="col-md-3">
-                <input id="defaultprice" type="text" class="form-control tonase" name="defaultprice" value="{{$data->getRuteHistory->history_harga ?? 0}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="trip" type="number" class="form-control qtyord" name="trip" value="{{$data->sj_jmlh_trip ?? 0}}" autocomplete="off" maxlength="24" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12" id="container">
