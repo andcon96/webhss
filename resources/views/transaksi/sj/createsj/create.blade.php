@@ -182,7 +182,7 @@
                     $('.tonase').css('display','');
                     $('.pricetot').removeClass('col-md-2');
                     $('.pricetot').addClass('col-md-3');
-                }else if(type == 'RITS'){
+                }else if(type == 'TRIP'){
                     $('.tonase').css('display','none');
                     $('.pricetot').removeClass('col-md-3');
                     $('.pricetot').addClass('col-md-2');
@@ -221,7 +221,7 @@
 
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);
-        }else if(tipebarang == 'RITS'){
+        }else if(tipebarang == 'TRIP'){
             sum = 0;
             $('.qtysj').each(function(){
                 sum += parseFloat(this.value);
@@ -239,7 +239,7 @@
 
     if(tipebarang == 'BERAT'){
         $('#container').css('display','none');
-    }else if(tipebarang == 'RITS'){
+    }else if(tipebarang == 'TRIP'){
         $('.tonase').css('display','none');
         $('.pricetot').removeClass('col-md-3');
         $('.pricetot').addClass('col-md-2');
