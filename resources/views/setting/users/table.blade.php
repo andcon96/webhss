@@ -33,7 +33,7 @@
       @endif
     </td>
     <td data-title="Pass" class="action">
-      @if(!$show->is_super_user)
+      @if(!$show->is_super_user || $show->id == Auth::user()->id)
       <a href="" class="changepass" data-id="{{$show->id}}" data-uname="{{$show->username}}" data-toggle='modal' data-target="#changepassModal"><i class="fas fa-key"></i></a>
       @endif
     </td>
