@@ -58,8 +58,6 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
                             
         $totalrb = ReportBiaya::where('rb_truck_id',$truck)->sum('rb_nominal');
 
-        dd($data, $totalrb);
-
         return view('transaksi.laporan.excel.report-date-range',
                         compact('data','datefrom','dateto','nopol','totalrb','rbhist'));
     }
