@@ -49,7 +49,7 @@
             <div class="col-md-3">
                 <select name="shipto" id="shipto" class="form-control" required>
                     @foreach($shipto as $shiptos)
-                        <option value="{{$shiptos->cs_shipto}}">{{$shiptos->cs_shipto}}</option>
+                        <option value="{{$shiptos->cs_shipto}}">{{$shiptos->cs_shipto}} -- {{$shiptos->cs_shipto_name}}</option>
                     @endforeach
                 </select>
             </div>

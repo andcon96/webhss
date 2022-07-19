@@ -47,6 +47,30 @@
                 @endforeach
             </select>
         </div>
+        <label for="s_truck" class="col-md-2 col-form-label text-md-right">{{ __('Truck') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="s_truck" class="form-control" name="s_truck" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($truck as $trucks)
+                <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-12">
+        <label for="datefrom" class="col-md-2 col-form-label text-md-right">{{ __('Date From') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="datefrom" type="text" class="form-control" name="datefrom" value="" autocomplete="off">
+        </div>
+        <label for="dateto" class="col-md-2 col-form-label text-md-right">{{ __('Date To') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="dateto" type="text" class="form-control" name="dateto" value="" autocomplete="off">
+        </div>
+    </div>
+
+
+    <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
@@ -205,14 +229,21 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#s_customer, #sonumber, #sjnumber').select2({
+    $('#s_customer, #sonumber, #sjnumber, #s_truck').select2({
         width: '100%',
+    });
+
+    $("#dateto, #datefrom").datepicker({
+        dateFormat: 'yy-mm-dd',
     });
     
     function resetSearch(){
         $('#s_customer').val('');
+        $('#s_truck').val('');
         $('#sonumber').val('');
         $('#sjnumber').val('');
+        $('#datefrom').val('');
+        $('#dateto').val('');
     }
 
     $(document).ready(function(){
@@ -222,10 +253,16 @@
         let queryString = new URLSearchParams(paramString);
 
         let customer = queryString.get('s_customer');
+        let truck = queryString.get('s_truck');
         let sonumber = queryString.get('sonumber');
         let sjnumber = queryString.get('sjnumber');
+        let datefrom = queryString.get('datefrom');
+        let dateto = queryString.get('dateto');
 
+        $('#datefrom').val(datefrom);
+        $('#dateto').val(dateto);
         $('#s_customer').val(customer).trigger('change');
+        $('#s_truck').val(truck).trigger('change');
         $('#sonumber').val(sonumber).trigger('change');
         $('#sjnumber').val(sjnumber).trigger('change');
     });

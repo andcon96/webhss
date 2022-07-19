@@ -26,6 +26,7 @@ class SuratJalanController extends Controller
         $listcust = Customer::get();
         $listsj = SuratJalan::get();
         $listso = SalesOrderMstr::get();
+        $truck = Truck::get();
 
         $data = SuratJalan::query()
                     ->with('getSOMaster.getCOMaster.getCustomer','getTruck');
@@ -42,9 +43,22 @@ class SuratJalanController extends Controller
             $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->s_customer);
         }
 
+        if($request->s_truck){
+            $data->where('sj_truck_id',$request->s_truck);
+        }
+
+        if($request->datefrom){
+            $data->where('sj_eff_date','>=',$request->datefrom);
+        }
+
+        if($request->dateto){
+            $data->where('sj_eff_date','<=',$request->dateto);
+        }
+
+
         $data = $data->paginate(10);
         
-        return view('transaksi.sj.index',compact('data','listcust','listso','listsj'));
+        return view('transaksi.sj.index',compact('data','listcust','listso','listsj','truck'));
     }
 
     public function store(Request $request)
