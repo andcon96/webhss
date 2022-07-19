@@ -411,7 +411,7 @@ class SalesOrderController extends Controller
                 if($list->count() > 0){
                     foreach($list as $key => $lists){
                         $output .= '<tr>';
-                        $output .= '<td colspan="2"><b>SJ Number : '.$lists->sj_nbr.'</b></td>';
+                        $output .= '<td colspan="2"><b>SPK Number : '.$lists->sj_nbr.'</b></td>';
                         $output .= '<td><b> Status : '.$lists->sj_status.'</b></td>';
                         foreach($lists->getDetail as $detail){
                             if($detail->sjd_part == $datas->sod_part){

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Sales Order</th>
-                <th>Surat Jalan</th>
+                <th>SPK</th>
                 <th>Customer</th>
                 <th>Type</th>
                 <th>Ship To</th>

@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Surat Jalan Maintenance - Edit {{$data->sj_nbr}}</li>
+    <li class="breadcrumb-item active">SPK Maintenance - Edit {{$data->sj_nbr}}</li>
 </ol>
 @endsection
 
@@ -19,7 +19,7 @@
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->getSOMaster->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SJ</label>
+            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SPK</label>
             <div class="col-md-3">
                 <input id="sjnbr" type="text" class="form-control" name="sjnbr" value="{{$data->sj_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>

@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Surat Jalan Maintenance</li>
+    <li class="breadcrumb-item active">SPK Maintenance</li>
 </ol>
 @endsection
 
@@ -12,7 +12,7 @@
 
 <!-- Page Heading -->
 <div class="col-md-12 mb-3">
-    <a href="{{route('CreateSJ') }}" class="btn btn-info bt-action">Create SJ</a>
+    <a href="{{route('CreateSJ') }}" class="btn btn-info bt-action">Create SPK</a>
 </div>
 <form action="{{route('suratjalan.index')}}" method="get">
 
@@ -26,7 +26,7 @@
                 @endforeach
             </select>
         </div>
-        <label for="sjnumber" class="col-md-2 col-form-label text-md-right">{{ __('SJ Number') }}</label>
+        <label for="sjnumber" class="col-md-2 col-form-label text-md-right">{{ __('SPK Number') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="sjnumber" class="form-control" name="sjnumber" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
@@ -65,7 +65,7 @@
         <!-- konten modal-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">Surat Jalan</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel">SPK</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,7 +78,7 @@
                         <div class="col-md-3">
                             <input id="sonbr" type="text" class="form-control" name="sonbr" autocomplete="off" value="" readonly>
                         </div>
-                        <label for="sjnbr" class="col-md-2 col-form-label text-md-right">{{ __('Nomor SJ') }}</label>
+                        <label for="sjnbr" class="col-md-2 col-form-label text-md-right">{{ __('Nomor SPK') }}</label>
                         <div class="col-md-3">
                             <input id="sjnbr" type="text" class="form-control" name="sjnbr" autocomplete="off" value="" readonly>
                         </div>

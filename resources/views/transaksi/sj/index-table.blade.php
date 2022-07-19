@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th width="15%">SO Number</th>
-                <th width="15%">SJ Number</th>
+                <th width="15%">SPK Number</th>
                 <th>Customer</th>
                 <th>Ship To</th>
                 <th width="15%">Status</th>

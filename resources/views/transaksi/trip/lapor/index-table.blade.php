@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Nomor SO</th>
-                <th>Nomor SJ</th>
+                <th>Nomor SPK</th>
                 <th>Customer</th>
                 <th>Total Sangu</th>
                 <th>Ship To</th>

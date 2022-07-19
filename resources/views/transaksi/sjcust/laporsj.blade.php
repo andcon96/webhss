@@ -18,7 +18,7 @@
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->getSOMaster->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SJ</label>
+            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SPK</label>
             <div class="col-md-3">
                 <input id="sjnbr" type="text" class="form-control" name="sjnbr" value="{{$data->sj_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
                 <input type="hidden" name="idsjmstr" value="{{$data->id}}">

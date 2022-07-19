@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Create Surat Jalan</li>
+    <li class="breadcrumb-item active">Create SPK</li>
 </ol>
 @endsection
 
