@@ -58,7 +58,7 @@
                 <td style="text-align:right"><b>{{number_format($totaldefault,2)}}</b></td>
             </tr>
             <tr>
-                <td colspan="6" style="text-align:right">BON Loosing</td>
+                <td colspan="6" style="text-align:right">Sangu</td>
                 <td>:</td>
                 <td colspan="2"></td>
                 <td style="text-align:right"><b>{{number_format($total,2)}}</b></td>
