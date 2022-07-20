@@ -50,6 +50,15 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
 
         $rbhist = $rbhist->with('getTruck')->get();
 
+        $openSPK = $data->with('getDetail.getItem',
+                                'getSOMaster.getCOMaster.getCustomer',
+                                'getSOMaster.getShipFrom',
+                                'getSOMaster.getShipTo',
+                                'getRuteHistory.getRute',
+                                )
+                            ->where('sj_status','!=','Closed')    
+                            ->get();
+
         $data = $data->with('getDetail.getItem',
                             'getSOMaster.getCOMaster.getCustomer',
                             'getSOMaster.getShipFrom',
@@ -58,11 +67,12 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
                             )
                         ->where('sj_status','Closed')    
                         ->get();
+        
                             
         $totalrb = ReportBiaya::where('rb_truck_id',$truck)->sum('rb_nominal');
 
         return view('transaksi.laporan.excel.report-date-range',
-                        compact('data','datefrom','dateto','nopol','totalrb','rbhist'));
+                        compact('data','datefrom','dateto','nopol','totalrb','rbhist','openSPK'));
     }
 
     public function styles(Worksheet $sheet)
