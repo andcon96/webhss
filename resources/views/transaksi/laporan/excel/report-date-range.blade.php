@@ -66,6 +66,52 @@
         </tfoot>
 	</table>
 
+    <table>
+        <thead>
+            <tr>
+                <th colspan="8"><b>Biaya Tambahan</b></th>
+            </tr>
+            <tr>
+                <th colspan="2"><b>Tanggal</b></th>
+                <th colspan="2"><b>Keterangan</b></th>
+                <th style="text-align:right"><b>Nominal</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{$totalbiaya = 0}}
+            {{$nominal = 0}}
+            @foreach ($rbhist as $rbhists)
+                {{  $nominal = 
+                    $rbhists->rb_is_pemasukan == 1 ? 
+                    -$rbhists->rb_nominal : 
+                    $rbhists->rb_nominal }}
+                <tr>
+                    <td colspan="2">{{$rbhists->rb_eff_date}}</td>
+                    <td colspan="2">{{$rbhists->rb_remark}}</td>
+                    <td style="text-align:right">{{number_format($nominal,2)}}</td>
+                </tr>
+                {{$totalbiaya += (float)$nominal}}
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align:right">Total :</td>
+                <td style="text-align:right"><b>{{number_format($totalbiaya,2)}}</b></td>
+            </tr>
+            <tr>
+                <td colspan="9"></td>
+                <td style="text-align:right"><b>{{number_format($totalbiaya,2)}}</b></td>
+            </tr>
+            <tr>
+                <td colspan="8" style="text-align:right">Total Diterima</td>
+                <td>:</td>
+                <td style="text-align:right"><b>{{number_format($totaldefault - $total + $totalbiaya,2)}}</b></td>
+            </tr>
+            
+        </tfoot>
+    </table>
+
+    
     {{-- SPK Gantung --}}
     <table>
         <thead>
@@ -120,51 +166,6 @@
                 <td colspan="2"></td>
                 <td style="text-align:right"><b>{{number_format($total,2)}}</b></td>
             </tr>
-        </tfoot>
-    </table>
-
-    <table>
-        <thead>
-            <tr>
-                <th colspan="8"><b>Biaya Tambahan</b></th>
-            </tr>
-            <tr>
-                <th colspan="2"><b>Tanggal</b></th>
-                <th colspan="2"><b>Keterangan</b></th>
-                <th style="text-align:right"><b>Nominal</b></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{$totalbiaya = 0}}
-            {{$nominal = 0}}
-            @foreach ($rbhist as $rbhists)
-                {{  $nominal = 
-                    $rbhists->rb_is_pemasukan == 1 ? 
-                    -$rbhists->rb_nominal : 
-                    $rbhists->rb_nominal }}
-                <tr>
-                    <td colspan="2">{{$rbhists->rb_eff_date}}</td>
-                    <td colspan="2">{{$rbhists->rb_remark}}</td>
-                    <td style="text-align:right">{{number_format($nominal,2)}}</td>
-                </tr>
-                {{$totalbiaya += (float)$nominal}}
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4" style="text-align:right">Total :</td>
-                <td style="text-align:right"><b>{{number_format($totalbiaya,2)}}</b></td>
-            </tr>
-            <tr>
-                <td colspan="9"></td>
-                <td style="text-align:right"><b>{{number_format($totalbiaya,2)}}</b></td>
-            </tr>
-            <tr>
-                <td colspan="8" style="text-align:right">Total Diterima</td>
-                <td>:</td>
-                <td style="text-align:right"><b>{{number_format($totaldefault - $total + $totalbiaya,2)}}</b></td>
-            </tr>
-            
         </tfoot>
     </table>
 </body>
