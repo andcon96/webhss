@@ -67,61 +67,7 @@
 	</table>
 
     {{-- SPK Gantung --}}
-    <table>
-        <thead>
-            <tr>
-                <th colspan="8"><b>SPK Gantung</b></th>
-            </tr>
-            <tr>
-                <th><b>No.</b></th>
-                <th><b>BRG</b></th>
-                <th><b>TGL</b></th>
-                <th><b>NAMA KAPAL</b></th>
-                <th><b>TUJUAN</b></th>
-                <th><b>ORDER</b></th>
-                <th><b>RIT</b></th>
-                <th><b>SANGU</b></th>
-                <th><b>KOMISI</b></th>
-                <th><b>HARGA</b></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{$total = 0}}
-            {{$totaldefault = 0}}
-            @foreach($openSPK as $keys => $datas)
-                <tr>
-                    <td>{{$keys + 1}}</td>
-                    <td>{{$datas->getDetail[0]->sjd_part}}</td>
-                    <td>{{$datas->sj_eff_date}}</td>
-                    <td></td>
-                    <td>{{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
-                    <td></td>
-                    <td>{{$datas->sj_jmlh_trip}}</td>
-                    <td>{{number_format($datas->getRuteHistory->history_sangu,0)}} </td>
-                    <td>{{number_format($datas->getRuteHistory->history_ongkos,0)}} </td>
-                    <td style="text-align:right">
-                        {{number_format(($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip,2)}}
-                    </td>
-                </tr>
-                {{$totaldefault += ($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip}}
-                {{$total += $datas->sj_tot_sangu}}
-		    @endforeach
-        </tbody>
-		<tfoot>
-            <tr>
-                <td colspan="6" style="text-align:right">Total</td>
-                <td>:</td>
-                <td colspan="2"></td>
-                <td style="text-align:right"><b>{{number_format($totaldefault,2)}}</b></td>
-            </tr>
-            <tr>
-                <td colspan="6" style="text-align:right">Sangu</td>
-                <td>:</td>
-                <td colspan="2"></td>
-                <td style="text-align:right"><b>{{number_format($total,2)}}</b></td>
-            </tr>
-        </tfoot>
-    </table>
+    
 
     <table>
         <thead>
