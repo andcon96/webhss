@@ -16,6 +16,8 @@ class TripMTController extends Controller
         $data = SuratJalan::query()
                         ->with('getTruck',
                                'getSOMaster.getCOMaster.getCustomer',
+                               'getSOMaster.getShipFrom',
+                               'getSOMaster.getShipTo',
                                'getHistTrip');
 
         $userid = Auth::user()->id;
@@ -28,7 +30,9 @@ class TripMTController extends Controller
         }else{
             if ($userDriver) {
                 $data = SuratJalan::query()
-                                  ->with(['getSOMaster','getTruck'])
+                                  ->with(['getSOMaster','getTruck',
+                                        'getSOMaster.getShipFrom',
+                                        'getSOMaster.getShipTo',])
                                   ->with('getHistTrip', function($query) use($userDriver){
                                         $query->where('sjh_truck',$userDriver->id);
                                   })

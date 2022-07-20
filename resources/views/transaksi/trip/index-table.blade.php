@@ -20,9 +20,9 @@
                 <tr>
                     <td data-label="SO Number">{{$datas->getSOMaster->so_nbr}}</td>
                     <td data-label="SJ Number">{{$datas->sj_nbr}}</td>
-                    <td data-label="SO Customer">{{$datas->getSOMaster->getCOMaster->co_cust_code}}</td>
+                    <td data-label="SO Customer">{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
                     <td data-label="SO Type">{{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
-                    <td data-label="SO Ship To">{{$datas->getSOMaster->so_ship_to}}</td>
+                    <td data-label="SO Ship To">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                     <td data-label="SO Due Date">{{$datas->getSOMaster->so_due_date}}</td>
                     <td data-label="SJ Status">{{$datas->sj_status}}</td>
                     <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>

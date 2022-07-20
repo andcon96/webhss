@@ -21,6 +21,7 @@ class TripLaporMTController extends Controller
         $data = SuratJalan::query()
                         ->with('getTruck',
                                'getSOMaster.getCOMaster.getCustomer',
+                               'getSOMaster.getShipTo',
                                'getHistTrip')
                         ->where(function($query){
                                 $query->where('sj_status','Selesai');
@@ -36,7 +37,8 @@ class TripLaporMTController extends Controller
             $data = $data->orderBy('created_at', 'DESC')->get();
         } else {
             if ($userDriver) {
-                $data = SuratJalan::with(['getSOMaster','getTruck'])
+                $data = SuratJalan::with(['getSOMaster','getTruck',
+                                    'getSOMaster.getShipTo',])
                                   ->whereRelation('getTruck','id',$userDriver->id)
                                   ->where('sj_status','!=','Closed')
                                   ->where(function($query){
