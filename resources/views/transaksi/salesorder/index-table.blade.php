@@ -20,8 +20,8 @@
                 <td data-label="CO NUMBER">{{$datas->getCOMaster->co_nbr}}</td>
                 <td data-label="SO CUSTOMER">{{$datas->getCOMaster->co_cust_code}} -- {{$datas->getCOMaster->getCustomer->cust_desc}}</td>
                 <td data-label="SO TYPE">{{$datas->getCOMaster->co_type}}</td>
-                <td data-label="SO SHIP FROM">{{$datas->so_ship_from}}</td>
-                <td data-label="SO SHIP TO">{{$datas->so_ship_to}}</td>
+                <td data-label="SO SHIP FROM">{{$datas->so_ship_from}} -- {{$datas->getShipFrom->sf_desc}}</td>
+                <td data-label="SO SHIP TO">{{$datas->so_ship_to}} -- {{$datas->getShipTo->cs_shipto_name}}</td>
                 <td data-label="SO DUE DATE">{{$datas->so_due_date}}</td>
                 <td data-label="SO STATUS">{{$datas->so_status}}</td>
                 <td>

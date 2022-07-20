@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="form-group row col-md-12" id="container">
-            <label for="trip" class="col-md-2 col-form-label text-md-right">Sangu Truck</label>
+            <label for="trip" class="col-md-2 col-form-label text-md-right">Tarif</label>
             <div class="col-md-3">
                 <input type="text" id="sangutruck" class="form-control" value="0" readonly>
             </div>
@@ -85,7 +85,7 @@
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
                 <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Default Sangu</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Trip</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
@@ -95,7 +95,7 @@
             <div class="col-md-3">
                 <input type="number" class="form-control" name="trip" min="1" value="1" id="trip">
             </div>
-            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
+            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Sangu</label>
             <div class="col-md-3">
                 <input type="text" class="form-control sangu" required name="totsangu" id="totsangu">
             </div>

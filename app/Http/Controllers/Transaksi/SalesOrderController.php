@@ -31,7 +31,9 @@ class SalesOrderController extends Controller
         $salesord = SalesOrderMstr::get();
         $data = SalesOrderMstr::query()
                               ->with('getDetail',
-                                     'getCOMaster.getCustomer');
+                                     'getCOMaster.getCustomer',
+                                     'getShipFrom',
+                                     'getShipTo');
 
         if($request->s_sonumber){
             $data->where('id',$request->s_sonumber);
