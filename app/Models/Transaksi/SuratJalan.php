@@ -37,7 +37,7 @@ class SuratJalan extends Model
 
     public function getRuteHistory()
     {
-        return $this->hasOne(RuteHistory::class, 'id', 'sj_default_sangu_type');
+        return $this->hasOne(RuteHistory::class, 'sj_default_sangu_type', 'id');
     }
 
     
