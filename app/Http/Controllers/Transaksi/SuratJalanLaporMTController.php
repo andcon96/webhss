@@ -38,7 +38,10 @@ class SuratJalanLaporMTController extends Controller
         $data = SuratJalan::query()
                         ->with('getTruck.getUserDriver',
                                'getDetail.getItem',
-                               'getSOMaster.getCOMaster.getCustomer')
+                               'getSOMaster.getCOMaster.getCustomer',
+                               'getSOMaster.getShipTo',
+                               'getSOMaster.getShipFrom',
+                                )
                         ->where('id',$sj)
                         ->where('sj_truck_id',$truck)
                         ->firstOrFail();
@@ -50,7 +53,7 @@ class SuratJalanLaporMTController extends Controller
     {
         DB::beginTransaction();
         try{
-
+            dd($request->all());
             // Update Master
             $sjmstr = SuratJalan::findOrFail($request->idsjmstr);
             $sjmstr->sj_conf_remark = $request->remark;

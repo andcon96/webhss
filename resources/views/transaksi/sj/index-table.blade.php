@@ -1,4 +1,4 @@
-<div class="table-responsive offset-lg-1 col-lg-10 col-md-12 mt-3">
+<div class="table-responsive col-lg-12 col-md-12 mt-3">
     <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>

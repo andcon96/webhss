@@ -23,8 +23,10 @@
                                 data-cust = "{{$listsos->getCOMaster->co_cust_code}}"
                                 data-custdesc = "{{$listsos->getCOMaster->getCustomer->cust_desc}}"
                                 data-shipfrom = "{{$listsos->so_ship_from}}"
+                                data-shipfromdesc = "{{$listsos->getShipFrom->sf_desc ?? null}}"
                                 data-shipfromid = "{{$listsos->getShipFrom->id ?? null}}"
                                 data-shipto = "{{$listsos->so_ship_to}}"
+                                data-shiptodesc = "{{$listsos->getShipTo->cs_shipto_name}}"
                                 data-shiptoid = "{{$listsos->getShipTo->id}}"
                                 data-type = "{{$listsos->getCOMaster->co_type}}"
                                 data-duedate = "{{$listsos->so_due_date}}"
@@ -83,7 +85,7 @@
             </div>
         </div>
         <div class="form-group row col-md-12" id="container">
-            <label for="trip" class="col-md-2 col-form-label text-md-right">Sangu Truck</label>
+            <label for="trip" class="col-md-2 col-form-label text-md-right">Tarif</label>
             <div class="col-md-3">
                 <input type="text" id="sangutruck" class="form-control" value="0" readonly>
             </div>
@@ -98,7 +100,7 @@
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
                 <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Default Sangu</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Tarif</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
@@ -108,7 +110,7 @@
             <div class="col-md-3">
                 <input type="number" class="form-control" name="trip" min="1" value="1" id="trip">
             </div>
-            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
+            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Sangu</label>
             <div class="col-md-3">
                 <input type="text" class="form-control sangu" name="totsangu" required id="totsangu">
             </div>
@@ -151,14 +153,16 @@
         var custdesc = $(this).find(':selected').data('custdesc');
         var shipfrom = $(this).find(':selected').data('shipfrom');
         var shipto = $(this).find(':selected').data('shipto');
+        var shipfromdesc = $(this).find(':selected').data('shipfromdesc');
+        var shiptodesc = $(this).find(':selected').data('shiptodesc');
         var type = $(this).find(':selected').data('type');
         var duedate = $(this).find(':selected').data('duedate');
         var shipfromid = $(this).find(':selected').data('shipfromid');
         var shiptoid = $(this).find(':selected').data('shiptoid');
 
         $('#customer').val(cust + ' - ' + custdesc);
-        $('#shipfrom').val(shipfrom);
-        $('#shipto').val(shipto);
+        $('#shipfrom').val(shipfrom + ' - ' + shipfromdesc);
+        $('#shipto').val(shipto + ' - ' + shiptodesc);
         $('#type').val(type);
         $('#duedate').val(duedate);
         $('#shipfromid').val(shipfromid);

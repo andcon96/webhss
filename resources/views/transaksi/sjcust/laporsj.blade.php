@@ -25,13 +25,25 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="domain" class="col-md-2 col-form-label text-md-right">Domain</label>
+            <div class="col-md-3">
+                <input id="domain" type="text" class="form-control" name="domain" value="{{$data->getTruck->truck_domain}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+            <label for="truck" class="col-md-3 col-form-label text-md-right">Truck</label>
+            <div class="col-md-3">
+                <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->getSOMaster->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="shipfrom" type="hidden" class="form-control" name="shipfrom" value="{{$data->getSOMaster->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="" type="text" class="form-control" name="" value="{{$data->getSOMaster->so_ship_from}} -- {{$data->getSOMaster->getShipFrom->sf_desc ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->getSOMaster->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="shipto" type="hidden" class="form-control" name="shipto" value="{{$data->getSOMaster->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="" type="text" class="form-control" name="" value="{{$data->getSOMaster->so_ship_to}} -- {{$data->getSOMaster->getShipTo->cs_shipto_name ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
