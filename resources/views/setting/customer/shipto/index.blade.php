@@ -24,7 +24,7 @@
                     <select name="s_custcode" id="s_custcode" class="form-control">
                         <option value="">Select Data</option>
                         @foreach($listcust as $listcusts)
-                            <option value="{{$listcusts->id}}">{{$listcusts->cust_code}} -- {{$listcusts->cust_desc}}</option>
+                            <option value="{{$listcusts->cust_code}}">{{$listcusts->cust_code}} -- {{$listcusts->cust_desc}}</option>
                         @endforeach
                     </select>
                 </div>
