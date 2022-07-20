@@ -104,7 +104,7 @@
                 <td style="text-align:right"><b>{{number_format($totalbiaya,2)}}</b></td>
             </tr>
             <tr>
-                <td colspan="10" style="text-align:right">Total</td>
+                <td colspan="8" style="text-align:right">Total</td>
                 <td>:</td>
                 <td style="text-align:right"><b>{{number_format($totaldefault - $total + $totalbiaya,2)}}</b></td>
                 {{$totalClosedSPK = $totaldefault - $total + $totalbiaya}}
@@ -172,8 +172,7 @@
                 <td colspan="6" style="text-align: right">Total Diterima</td>
                 <td>:</td>
                 <td colspan="2"></td>
-                <td style="text-align:right"><b>{{number_format($totalClosedSPK - $total + $totalbiaya,2)}}</b></td>
-                
+                <td style="text-align:right"><b>{{number_format($totalClosedSPK - $total,2)}}</b></td>
             </tr>
         </tfoot>
     </table>
