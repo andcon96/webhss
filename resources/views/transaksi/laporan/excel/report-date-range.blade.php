@@ -83,8 +83,8 @@
             @foreach ($rbhist as $rbhists)
                 {{  $nominal = 
                     $rbhists->rb_is_pemasukan == 1 ? 
-                    $rbhists->rb_nominal : 
-                    -$rbhists->rb_nominal }}
+                    -$rbhists->rb_nominal : 
+                    $rbhists->rb_nominal }}
                 <tr>
                     <td colspan="2">{{$rbhists->rb_eff_date}}</td>
                     <td colspan="2">{{$rbhists->rb_remark}}</td>
