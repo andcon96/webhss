@@ -23,7 +23,8 @@
                 <th><b>TUJUAN</b></th>
                 <th><b>ORDER</b></th>
                 <th><b>RIT</b></th>
-                <th><b>SATUAN</b></th>
+                <th><b>SANGU</b></th>
+                <th><b>KOMISI</b></th>
                 <th><b>HARGA</b></th>
             </tr>
         </thead>
@@ -38,9 +39,12 @@
                     <td></td>
                     <td>{{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                     <td></td>
-                    <td>{{$datas->getDetail[0]->sjd_qty_ship}}</td>
-                    <td>{{$datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos}} </td>
-                    <td style="text-align:right">{{number_format($datas->sj_default_sangu,2)}}</td>
+                    <td>{{$datas->sj_jmlh_trip}}</td>
+                    <td>{{number_format($datas->getRuteHistory->history_sangu,0)}} </td>
+                    <td>{{number_format($datas->getRuteHistory->history_ongkos,0)}} </td>
+                    <td style="text-align:right">
+                        {{number_format(($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip,2)}}
+                    </td>
                 </tr>
                 {{$totaldefault += $datas->sj_default_sangu}}
                 {{$total += $datas->sj_tot_sangu}}
