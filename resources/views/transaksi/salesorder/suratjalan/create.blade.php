@@ -91,7 +91,7 @@
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
                 <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Trip</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Tarif</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
