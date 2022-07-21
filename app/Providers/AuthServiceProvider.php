@@ -118,7 +118,14 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'RP01');
         });
         
+        // Invoice
+        Gate::define('access_invoice_side', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'IV');
+        });
 
+        Gate::define('access_invoice', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'IV01');
+        });
 
         
 

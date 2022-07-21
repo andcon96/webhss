@@ -662,6 +662,7 @@ class QxtendServices
 
   public function qxPendingInvoice($data)
   {
+    dd($data,$data['domain']);
     $qxwsa = Qxwsa::firstOrFail();
     if (is_null($qxwsa->qx_url)) {
       return 'nourl';
@@ -671,7 +672,7 @@ class QxtendServices
 
     $timeout        = 0;
 
-    $domain = '';
+    $domain = $data['domain'];
 
     // XML Qextend
     $qdocHead = '<?xml version="1.0" encoding="UTF-8"?>
@@ -736,12 +737,11 @@ class QxtendServices
 
     $qdocbody = '<dsPendingInvoice>
                   <pendingInvoice>
-                    <operation>text</operation>
-                    <soNbr>text</soNbr>
-                    <soCust>text</soCust>
-                    <soShip>text</soShip>
+                    <soNbr>'.$data['sonbr'].'</soNbr>
+                    <soCust>'.$data['customer'].'</soCust>
+                    <soShip>'.$data['shipto'].'</soShip>
                     <yn>true</yn>
-                    <soRmks>text</soRmks>
+                    <soRmks>'.$data['remark'].'</soRmks>
                   </pendingInvoice>';
 
                 foreach ($data['line'] as $key => $datas) {

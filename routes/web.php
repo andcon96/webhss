@@ -16,7 +16,6 @@ use App\Http\Controllers\Master\QxWsaMTController;
 use App\Http\Controllers\Master\RuteController;
 use App\Http\Controllers\Master\ShipFromController;
 use App\Http\Controllers\Master\StrukturKerusakanController;
-use App\Http\Controllers\Master\TruckDriverController;
 use App\Http\Controllers\Master\TruckMTController;
 use App\Http\Controllers\Master\TruckTipeController;
 use App\Http\Controllers\NotificationController;
@@ -24,6 +23,7 @@ use App\Http\Controllers\Transaksi\BrowsePolisController;
 use App\Http\Controllers\Transaksi\CheckInOutController;
 use App\Http\Controllers\Transaksi\CustomerOrderController;
 use App\Http\Controllers\Transaksi\GenerateReportController;
+use App\Http\Controllers\Transaksi\InvoiceMTController;
 use App\Http\Controllers\Transaksi\KerusakanLaporMTController;
 use App\Http\Controllers\Transaksi\ReportBiayaController;
 use App\Http\Controllers\Transaksi\SalesOrderController;
@@ -31,8 +31,6 @@ use App\Http\Controllers\Transaksi\SuratJalanController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
-use App\Models\Master\Rute;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -129,6 +127,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('checkinout', CheckInOutController::class);
     }); 
     
+    Route::group(['middleware'=>'can:access_invoice'], function(){
+        Route::resource('invoicemt', InvoiceMTController::class);
+        Route::get('checkinvoice', [InvoiceMTController::class, 'checkinvoice'])->name('checkInvoice');
+    });
+
     Route::group(['middleware'=>'can:access_masters'], function () {
         //================================
         // User Maintenance

@@ -9,6 +9,7 @@ use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
 use App\Services\QxtendServices;
+use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -84,9 +85,13 @@ class SuratJalanLaporMTController extends Controller
                 $somstr->save();
             }
             
+            // WSA Cek SO Exists / Tidak
+            // $cekso = (new WSAServices())
 
             // Kirim Qxtend
-            $soship = (new QxtendServices())->qxSOShip($request->all());
+            // $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
+
+            // $soship = (new QxtendServices())->qxSOShip($request->all());
             if($soship === false || $soship[0] == 'error'){
                 alert()->error('Error', 'Save Gagal, Error Qxtend')->persistent('Dismiss');
                 DB::rollback();

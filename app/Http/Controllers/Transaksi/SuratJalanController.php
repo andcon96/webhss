@@ -29,7 +29,7 @@ class SuratJalanController extends Controller
         $truck = Truck::get();
 
         $data = SuratJalan::query()
-                    ->with('getSOMaster.getCOMaster.getCustomer','getTruck');
+                    ->with('getSOMaster.getCOMaster.getCustomer','getTruck','getSOMaster.getShipFrom','getSOMaster.getShipTo');
 
         if($request->sjnumber){
             $data->where('id',$request->sjnumber);
