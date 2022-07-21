@@ -126,7 +126,7 @@ class SuratJalanController extends Controller
 
     public function edit($id)
     {
-        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getDetail','getRuteHistory')->findOrFail($id);
+        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getSOMaster.getShipTo','getSOMaster.getShipFrom','getDetail','getRuteHistory')->findOrFail($id);
         $this->authorize('update',[SuratJalan::class, $data]);
         $item = SalesOrderDetail::where('sod_so_mstr_id',$data->sj_so_mstr_id)->get();
         

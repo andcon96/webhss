@@ -274,6 +274,7 @@
         var cust = $(this).data('cust');
         var custdesc = $(this).data('custdesc');
         var shipto = $(this).data('shipto');
+        var shiptodesc = $(this).data('shiptodesc');
         var status = $(this).data('status');
         var truck = $(this).data('truck');
         var pengurus = $(this).data('pengurus');
@@ -284,7 +285,7 @@
         document.getElementById("sonbr").value = sonbr;
         document.getElementById("sjnbr").value = sjnbr;
         document.getElementById("cust").value = cust + ' - ' + custdesc;
-        document.getElementById("shipto").value = shipto;
+        document.getElementById("shipto").value = shipto + ' - ' + shiptodesc;
         document.getElementById("status").value = status;
         document.getElementById("truck").value = truck;
         document.getElementById("pengurus").value = pengurus;

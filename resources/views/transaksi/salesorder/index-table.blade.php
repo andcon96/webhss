@@ -20,14 +20,15 @@
                 <td data-label="CO NUMBER">{{$datas->getCOMaster->co_nbr}}</td>
                 <td data-label="SO CUSTOMER">{{$datas->getCOMaster->co_cust_code}} -- {{$datas->getCOMaster->getCustomer->cust_desc}}</td>
                 <td data-label="SO TYPE">{{$datas->getCOMaster->co_type}}</td>
-                <td data-label="SO SHIP FROM">{{$datas->so_ship_from}} -- {{$datas->getShipFrom->sf_desc}}</td>
+                <td data-label="SO SHIP FROM">{{$datas->so_ship_from}} -- {{$datas->getShipFrom->sf_desc ?? ''}}</td>
                 <td data-label="SO SHIP TO">{{$datas->so_ship_to}} -- {{$datas->getShipTo->cs_shipto_name}}</td>
                 <td data-label="SO DUE DATE">{{$datas->so_due_date}}</td>
                 <td data-label="SO STATUS">{{$datas->so_status}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 
-                        data-shipfrom="{{$datas->so_ship_from}}" data-shipto="{{$datas->so_ship_to}}" 
+                        data-shipfrom="{{$datas->so_ship_from}}" data-shipfromdesc="{{$datas->getShipFrom->sf_desc ?? ''}}"
+                        data-shipto="{{$datas->so_ship_to}}" data-shiptodesc="{{$datas->getShipTo->cs_shipto_name ?? ''}}"
                         data-duedate="{{$datas->so_due_date}}" data-custdesc="{{$datas->getCOMaster->getCustomer->cust_desc ?? ''}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
@@ -39,7 +40,8 @@
                     
                     <a href="" class="detailModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 
-                        data-shipfrom="{{$datas->so_ship_from}}" data-shipto="{{$datas->so_ship_to}}" 
+                        data-shipfrom="{{$datas->so_ship_from}}" data-shipfromdesc="{{$datas->getShipFrom->sf_desc ?? ''}}"
+                        data-shipto="{{$datas->so_ship_to}}" data-shiptodesc="{{$datas->getShipTo->cs_shipto_name ?? ''}}"
                         data-duedate="{{$datas->so_due_date}}" data-custdesc="{{$datas->getCOMaster->getCustomer->cust_desc ?? ''}}"
                         data-toggle='modal' data-target="#detailModal"><i
                         class="fas fa-book"></i></button>

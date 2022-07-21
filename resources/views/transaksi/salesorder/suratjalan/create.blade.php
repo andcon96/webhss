@@ -20,6 +20,16 @@
                 <input type="hidden" name="soid" value="{{$data->id}}">
             </div>
 
+            <label for="conbr" class="col-md-3 col-form-label text-md-right">CO Number</label>
+            <div class="col-md-3">
+                <input id="conbr" type="text" class="form-control" name="conbr" value="{{$data->getCOMaster->co_nbr}}" autocomplete="off" maxlength="24" readonly required autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" readonly required autofocus>
+            </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
                 <input id="customer" type="text" class="form-control" name="customer" value="{{$data->getCOMaster->co_cust_code}} - {{$data->getCOMaster->getCustomer->cust_desc ?? ''}}" autocomplete="off" maxlength="24" readonly required autofocus>
@@ -38,11 +48,7 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
-            <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" readonly required autofocus>
-            </div>
-            <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
+            <label for="type" class="col-md-2 col-form-label text-md-right">Type</label>
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->getCOMaster->co_type}}" autocomplete="off" maxlength="24" required readonly>
             </div>

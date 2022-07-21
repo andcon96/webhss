@@ -30,11 +30,22 @@
                                 data-shiptoid = "{{$listsos->getShipTo->id}}"
                                 data-type = "{{$listsos->getCOMaster->co_type}}"
                                 data-duedate = "{{$listsos->so_due_date}}"
+                                data-conbr = "{{$listsos->getCOMaster->co_nbr}}"
                             >{{$listsos->so_nbr}} -- {{$listsos->getCOMaster->getCustomer->cust_desc ?? ''}}</option>
                     @endforeach
                 </select>
             </div>
 
+            <label for="conbr" class="col-md-3 col-form-label text-md-right">CO Number</label>
+            <div class="col-md-3">
+                <input id="conbr" type="text" class="form-control" name="conbr" value="" autocomplete="off" maxlength="24" readonly required autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="" autocomplete="off" maxlength="24" readonly required autofocus>
+            </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
                 <input id="customer" type="text" class="form-control" name="customer" value="" autocomplete="off" maxlength="24" readonly required autofocus>
@@ -53,14 +64,11 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
-            <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="" autocomplete="off" maxlength="24" readonly required autofocus>
-            </div>
-            <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
+            <label for="type" class="col-md-2 col-form-label text-md-right">Type</label>
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="" autocomplete="off" maxlength="24" required readonly>
             </div>
+
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.sj.createsj.create-table')
@@ -159,6 +167,7 @@
         var duedate = $(this).find(':selected').data('duedate');
         var shipfromid = $(this).find(':selected').data('shipfromid');
         var shiptoid = $(this).find(':selected').data('shiptoid');
+        var conbr = $(this).find(':selected').data('conbr');
 
         $('#customer').val(cust + ' - ' + custdesc);
         $('#shipfrom').val(shipfrom + ' - ' + shipfromdesc);
@@ -167,6 +176,7 @@
         $('#duedate').val(duedate);
         $('#shipfromid').val(shipfromid);
         $('#shiptoid').val(shiptoid);
+        $('#conbr').val(conbr);
 
         let url = "{{route('getDetailSJSO',':soid')}}"
         url = url.replace(':soid',soid);

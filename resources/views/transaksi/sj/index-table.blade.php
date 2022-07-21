@@ -16,7 +16,7 @@
                 <td data-label="SO NUMBER">{{$datas->getSOMaster->so_nbr}}</td>
                 <td data-label="SJ NUMBER">{{$datas->sj_nbr}}</td>
                 <td data-label="CUSTOMER">{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
-                <td data-label="SHIP TO">{{$datas->getSOMaster->so_ship_to}}</td>
+                <td data-label="SHIP TO">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name ?? ''}}</td>
                 <td data-label="CO STATUS">{{$datas->sj_status}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}"
@@ -24,6 +24,7 @@
                         data-cust="{{$datas->getSOMaster->getCOMaster->co_cust_code}}" 
                         data-custdesc="{{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}"
                         data-shipto="{{$datas->getSOMaster->so_ship_to}}"
+                        data-shiptodesc="{{$datas->getSOMaster->getShipTo->cs_shipto_name}}"
                         data-status="{{$datas->sj_status}}"
                         data-truck="{{$datas->getTruck->truck_no_polis}}" data-trip="{{$datas->sj_jmlh_trip}}"
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
