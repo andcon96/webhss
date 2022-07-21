@@ -160,7 +160,7 @@ class SalesOrderController extends Controller
 
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail','getNonCancelledSJ')->findOrFail($id);
+        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail','getNonCancelledSJ','getShipFrom','getShipTo')->findOrFail($id);
         
         $item = CustomerOrderDetail::with('getItem')->where('cod_co_mstr_id',$data->so_co_mstr_id)->get();
 
