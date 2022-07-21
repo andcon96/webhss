@@ -55,7 +55,7 @@
                 {{number_format($show->history_ongkos) ?? ''}}
               </td>
               <td>
-                {{$show->history_is_active ?? ''}}
+                {{$show->history_is_active == 1 ? 'Aktif' : 'Tidak Aktif' ?? ''}}
               </td>
               <td>
                 {{$show->history_last_active ?? ''}}
