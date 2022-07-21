@@ -286,10 +286,24 @@
         $('#pengurus').val(pengurus);
     })
     
-    $(document).on('submit', '#submit', function(e) {
-        document.getElementById('btnconf').style.display = 'none';
-        document.getElementById('btnback').style.display = 'none';
-        document.getElementById('btnloading').style.display = '';
+    $(document).on('click', '#btnconf', function(e) {
+        e.preventDefault();
+        let totaltarif = $('#defaultsangu').val();
+        
+        if(totaltarif == 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: 'Total Tarif tidak boleh 0, Silahkan cek kembali',
+                showCloseButton: true,
+            })
+        }else{
+            document.getElementById('btnconf').style.display = 'none';
+            document.getElementById('btnback').style.display = 'none';
+            document.getElementById('btnloading').style.display = '';
+            
+            $('#submit').submit();
+        }
     });
     
     $(document).on('keyup', '.sangu', function() {
