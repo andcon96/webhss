@@ -37,6 +37,8 @@
                     <a href="{{route('salesorder.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
                         
                     <a href="{{route('soCreateSJ',['id' => $datas->id]) }}"><i class="fas fa-plus-square"></i></a>
+                    @endif
+
                     
                     <a href="" class="detailModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 
@@ -45,7 +47,6 @@
                         data-duedate="{{$datas->so_due_date}}" data-custdesc="{{$datas->getCOMaster->getCustomer->cust_desc ?? ''}}"
                         data-toggle='modal' data-target="#detailModal"><i
                         class="fas fa-book"></i></button>
-                    @endif
                     
                     @if($datas->new_so && $datas->used_so == 0)
                     <a href="" class="deleteModal" 
