@@ -2,7 +2,8 @@
     <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="80%">Jenis Kerusakan</th>
+                <th width="60%">Jenis Kerusakan</th>
+                
             </tr>
         </thead>
         <tbody id="edittable">

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th width="60%">Jenis Kerusakan</th>
-                
+                <th width="40%">Tindakan</th>
                 
             </tr>
         </thead>
@@ -18,7 +18,9 @@
                     
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
                 </td>
-
+                <td>
+                    <textarea type="text" class="form-control"  name="remarks[]">{{$datas->krd_remarks}}</textarea>
+                </td>
                 {{-- <td style="vertical-align:middle;text-align:center;">  --}}
                     
                     {{-- @if($data->kr_status == 'Done' && count($datas->getStrukturTrans) >0)

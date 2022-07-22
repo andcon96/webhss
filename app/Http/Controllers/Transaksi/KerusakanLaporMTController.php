@@ -250,6 +250,7 @@ class KerusakanLaporMTController extends Controller
 
         //kirim email dan update status
         $kerusakan = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->where('kr_status', 'New')->findOrFail($request->idmaster);
+        
         $needappr = 0;
         
         foreach($kerusakan->getDetail as $key => $data){
@@ -264,7 +265,12 @@ class KerusakanLaporMTController extends Controller
                 try{
                     $kerusakan->kr_status = 'Need Approval';
                     $kerusakan->save();
-            
+                    foreach($request->iddetail as $key => $data){
+                        if(!empty($request->remarks[$key])){
+                            KerusakanDetail::where('id',$data)->update(['krd_remarks' => $request->remarks[$key]]);
+                        }
+                    }
+
                     foreach($request->struk_desc as $key=>$data){
                         $kerusakandtl = new KerusakanStukturTransaksi();
                         $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
@@ -300,7 +306,11 @@ class KerusakanLaporMTController extends Controller
                 try{
                     $kerusakan->kr_status = 'Done';
                     $kerusakan->save();
-            
+                    foreach($request->iddetail as $key => $data){
+                        if(!empty($request->remarks[$key])){
+                            KerusakanDetail::where('id',$data)->update(['krd_remarks' => $request->remarks[$key]]);
+                        }
+                    }
                     foreach($request->struk_desc as $key=>$data){
                         $kerusakandtl = new KerusakanStukturTransaksi();
                         $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
@@ -311,6 +321,7 @@ class KerusakanLaporMTController extends Controller
                     $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
                     if($qxkerusakan[0] == false){
                         DB::rollback();
+                        
                         alert()->error('Error','Qxtend gagal, '.$qxkerusakan[1]);
                         return back();
                     }else if($qxkerusakan[0] == true){
@@ -330,4 +341,41 @@ class KerusakanLaporMTController extends Controller
         }
         
     }
+
+    public function assingremarkskr($id)
+    {
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->findOrFail($id);
+        
+        $jeniskerusakan = Kerusakan::get();
+        $struktur = KerusakanStruktur::where('ks_isactive',1)->get();
+
+        return view('transaksi.kerusakan.assignremarkskr', compact('data', 'jeniskerusakan', 'struktur'));
+    }
+
+    public function upassignremarkskr($id, Request $request)
+    {
+        
+        $this->authorize('custompolicy',[KerusakanMstr::class]);
+        DB::beginTransaction();
+        try{
+            foreach($request->iddetail as $key => $data){
+                if(!empty($request->remarks[$key])){
+                    KerusakanDetail::where('id',$data)->update(['krd_remarks' => $request->remarks[$key]]);
+                }
+            }
+
+            
+            DB::commit();
+            alert()->success('Success','Tindakan berhasil di assign');
+            return redirect()->route('laporkerusakan.index');
+        }catch(Exception $err){
+            DB::rollback();
+            
+            alert()->error('Error','Tindakan gagal di assign');
+            return redirect()->route('laporkerusakan.index');
+        }
+                
+        
+        
+    } 
 }

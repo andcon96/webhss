@@ -19,6 +19,7 @@ class CreateKerusakanDetailTable extends Migration
             $table->foreign('krd_kr_mstr_id')->references('id')->on('kr_mstr');
             $table->unsignedBigInteger('krd_kerusakan_id')->index();
             $table->foreign('krd_kerusakan_id')->references('id')->on('kerusakan');
+            $table->text('krd_remarks')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });
