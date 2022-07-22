@@ -91,7 +91,7 @@ class SuratJalanLaporMTController extends Controller
             // Kirim Qxtend
             // $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
 
-            // $soship = (new QxtendServices())->qxSOShip($request->all());
+            $soship = (new QxtendServices())->qxSOShip($request->all());
             if($soship === false || $soship[0] == 'error'){
                 alert()->error('Error', 'Save Gagal, Error Qxtend')->persistent('Dismiss');
                 DB::rollback();
