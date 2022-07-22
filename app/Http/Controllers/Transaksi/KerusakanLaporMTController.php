@@ -250,6 +250,7 @@ class KerusakanLaporMTController extends Controller
 
         //kirim email dan update status
         $kerusakan = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->where('kr_status', 'New')->findOrFail($request->idmaster);
+        
         $needappr = 0;
         
         foreach($kerusakan->getDetail as $key => $data){
@@ -264,7 +265,12 @@ class KerusakanLaporMTController extends Controller
                 try{
                     $kerusakan->kr_status = 'Need Approval';
                     $kerusakan->save();
-            
+                    foreach($request->iddetail as $key => $data){
+                        if(!empty($request->remarks[$key])){
+                            KerusakanDetail::where('id',$data)->update(['krd_remarks' => $request->remarks[$key]]);
+                        }
+                    }
+
                     foreach($request->struk_desc as $key=>$data){
                         $kerusakandtl = new KerusakanStukturTransaksi();
                         $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];
@@ -300,7 +306,11 @@ class KerusakanLaporMTController extends Controller
                 try{
                     $kerusakan->kr_status = 'Done';
                     $kerusakan->save();
-            
+                    foreach($request->iddetail as $key => $data){
+                        if(!empty($request->remarks[$key])){
+                            KerusakanDetail::where('id',$data)->update(['krd_remarks' => $request->remarks[$key]]);
+                        }
+                    }
                     foreach($request->struk_desc as $key=>$data){
                         $kerusakandtl = new KerusakanStukturTransaksi();
                         $kerusakandtl->krs_krd_det_id = $request->struk_detail_id[$key];

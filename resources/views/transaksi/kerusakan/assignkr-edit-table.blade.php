@@ -2,7 +2,8 @@
     <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="80%">Jenis Kerusakan</th>
+                <th width="60%">Jenis Kerusakan</th>
+                <th width="40%">Tindakan</th>
                 
             </tr>
         </thead>
@@ -10,12 +11,15 @@
             @forelse ($data->getDetail as $key => $datas)
             
             <tr>
-                <td>
+                <td >
                     <input type="text" class="form-control" value="{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}" readonly>
                     <input type="hidden" name="operation[]" class="operation" value="M">
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="remarks[]">
                 </td>
                 {{-- <td style="vertical-align:middle;text-align:center;">  --}}
                     
