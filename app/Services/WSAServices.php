@@ -415,9 +415,15 @@ class WSAServices
         $timeout = 0;
 
         // $invoicenbr = Voucher + '/' + Daybook + Year
-        $voucher = substr($invoicenbr,0,9);
-        $daybook = substr($invoicenbr,10,strlen($invoicenbr) - 9 - 4 - 1); // 9 Voucher 4 Year 1 offset
-        $year = substr($invoicenbr, -4);
+        // $voucher = substr($invoicenbr,0,9);
+        // $daybook = substr($invoicenbr,10,strlen($invoicenbr) - 9 - 4 - 1); // 9 Voucher 4 Year 1 offset
+        // $year = substr($invoicenbr, -4);
+
+        // $invoicenbr = Year + '/' + Daybook + Voucher
+        $year = substr($invoicenbr,0,4);
+        $voucher = substr($invoicenbr,-9);
+        $daybook = substr($invoicenbr,5,strlen($invoicenbr) - 9 - 4 - 1);
+
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
