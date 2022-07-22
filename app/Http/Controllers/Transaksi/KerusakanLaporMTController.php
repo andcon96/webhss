@@ -354,7 +354,7 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignremarkskr($id, Request $request)
     {
-        // dd($request->all());
+        
         $this->authorize('custompolicy',[KerusakanMstr::class]);
         DB::beginTransaction();
         try{
