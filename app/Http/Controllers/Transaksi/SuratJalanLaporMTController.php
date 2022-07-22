@@ -9,6 +9,7 @@ use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
 use App\Services\QxtendServices;
+use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,9 @@ class SuratJalanLaporMTController extends Controller
     {
         $data = SuratJalan::query()
                         ->with('getTruck.getUserDriver',
-                               'getSOMaster.getCOMaster.getCustomer');
+                               'getSOMaster.getCOMaster.getCustomer',
+                               'getSOMaster.getShipFrom',
+                               'getSOMaster.getShipTo');
 
         $truck = Truck::get();
 
@@ -38,7 +41,10 @@ class SuratJalanLaporMTController extends Controller
         $data = SuratJalan::query()
                         ->with('getTruck.getUserDriver',
                                'getDetail.getItem',
-                               'getSOMaster.getCOMaster.getCustomer')
+                               'getSOMaster.getCOMaster.getCustomer',
+                               'getSOMaster.getShipTo',
+                               'getSOMaster.getShipFrom',
+                                )
                         ->where('id',$sj)
                         ->where('sj_truck_id',$truck)
                         ->firstOrFail();
@@ -50,7 +56,6 @@ class SuratJalanLaporMTController extends Controller
     {
         DB::beginTransaction();
         try{
-
             // Update Master
             $sjmstr = SuratJalan::findOrFail($request->idsjmstr);
             $sjmstr->sj_conf_remark = $request->remark;
@@ -80,8 +85,12 @@ class SuratJalanLaporMTController extends Controller
                 $somstr->save();
             }
             
+            // WSA Cek SO Exists / Tidak
+            // $cekso = (new WSAServices())
 
             // Kirim Qxtend
+            // $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
+
             $soship = (new QxtendServices())->qxSOShip($request->all());
             if($soship === false || $soship[0] == 'error'){
                 alert()->error('Error', 'Save Gagal, Error Qxtend')->persistent('Dismiss');

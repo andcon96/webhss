@@ -333,15 +333,17 @@
         var cust = $(this).data('cust');
         var type = $(this).data('type');
         var shipfrom = $(this).data('shipfrom');
+        var shipfromdesc = $(this).data('shipfromdesc');
         var shipto = $(this).data('shipto');
+        var shiptodesc = $(this).data('shiptodesc');
         var duedate = $(this).data('duedate');
         var custdesc = $(this).data('custdesc');
 
         document.getElementById("sonbr").value = sonbr;
         document.getElementById('cust').value = cust + ' - ' + custdesc;
         document.getElementById('type').value = type;
-        document.getElementById('shipfrom').value = shipfrom;
-        document.getElementById('shipto').value = shipto;
+        document.getElementById('shipfrom').value = shipfrom + ' - ' + shipfromdesc;
+        document.getElementById('shipto').value = shipto + ' - ' + shiptodesc;
         document.getElementById('duedate').value = duedate;
 
 
@@ -371,15 +373,17 @@
         var cust = $(this).data('cust');
         var type = $(this).data('type');
         var shipfrom = $(this).data('shipfrom');
+        var shipfromdesc = $(this).data('shipfromdesc');
         var shipto = $(this).data('shipto');
+        var shiptodesc = $(this).data('shiptodesc');
         var duedate = $(this).data('duedate');
         var custdesc = $(this).data('custdesc');
 
         document.getElementById("dsonbr").value = sonbr;
         document.getElementById('dcust').value = cust + ' - ' + custdesc;
         document.getElementById('dtype').value = type;
-        document.getElementById('dshipfrom').value = shipfrom;
-        document.getElementById('dshipto').value = shipto;
+        document.getElementById('dshipfrom').value = shipfrom + ' - ' + shipfromdesc;
+        document.getElementById('dshipto').value = shipto + ' - ' + shiptodesc;
         document.getElementById('dduedate').value = duedate;
 
 

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th style="width:10%">Sales Order</th>
-                <th style="width:10%">Surat Jalan</th>
+                <th style="width:10%">SPK</th>
                 <th style="width:25%">Customer</th>
                 <th style="width:10%">Ship To</th>
                 <th style="width:10%">Ship From</th>

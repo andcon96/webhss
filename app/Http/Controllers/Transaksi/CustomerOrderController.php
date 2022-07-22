@@ -90,7 +90,7 @@ class CustomerOrderController extends Controller
             $prefix->save();
 
             DB::commit();
-            alert()->success('Success', 'Customer Order :'.$getCORN.'Created')->persistent('Dismiss');
+            alert()->success('Success', 'Customer Order : '.$getCORN.'Created')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollBack();
@@ -186,7 +186,7 @@ class CustomerOrderController extends Controller
                 $output .= '</tr>';
 
                 $list = SalesOrderMstr::query()
-                                ->with('getDetail')
+                                ->with('getDetail','getShipFrom','getShipTo')
                                 ->where('so_co_mstr_id',$datas->cod_co_mstr_id)
                                 ->whereRelation('getDetail','sod_line',$datas->cod_line)
                                 ->whereRelation('getDetail','sod_part',$datas->cod_part)
@@ -195,7 +195,10 @@ class CustomerOrderController extends Controller
                 if($list->count() > 0){
                     foreach($list as $key => $lists){
                         $output .= '<tr>';
-                        $output .= '<td colspan="2"><b>SO Number : '.$lists->so_nbr.'</b></td>';
+                        $output .= '<td colspan="3">
+                                    <b>SO Number : '.$lists->so_nbr.'</b>,
+                                    <b>To : '.$lists->getShipTo->cs_shipto.' - '.$lists->getShipTo->cs_shipto_name ?? ''.'</b>
+                                    </td>';
                         $output .= '<td><b> Status : '.$lists->so_status.'</b></td>';
                         foreach($lists->getDetail as $detail){
                             if($detail->sod_part == $datas->cod_part){

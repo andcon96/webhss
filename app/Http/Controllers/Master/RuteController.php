@@ -77,7 +77,7 @@ class RuteController extends Controller
                 }
                 $rutehist = new RuteHistory();
                 $rutehist->history_rute_id = $ruteid;
-                $rutehist->history_harga = $harga;
+                // $rutehist->history_harga = $harga;
                 $rutehist->history_sangu = $sangu;
                 $rutehist->history_ongkos = $ongkos;
                 $rutehist->history_is_active = 1;
@@ -88,6 +88,7 @@ class RuteController extends Controller
             }
             catch(Exception $err){
                 DB::rollback();
+                dd($err);
                 alert()->error('Error', 'Terjadi kesalahan');
                 return back();
             }

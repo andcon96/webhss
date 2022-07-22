@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Surat Jalan Maintenance - Edit {{$data->sj_nbr}}</li>
+    <li class="breadcrumb-item active">SPK Maintenance - Edit {{$data->sj_nbr}}</li>
 </ol>
 @endsection
 
@@ -19,7 +19,7 @@
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->getSOMaster->so_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SJ</label>
+            <label for="sjnbr" class="col-md-3 col-form-label text-md-right">Nomor SPK</label>
             <div class="col-md-3">
                 <input id="sjnbr" type="text" class="form-control" name="sjnbr" value="{{$data->sj_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
@@ -37,11 +37,11 @@
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->getSOMaster->so_ship_from}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->getSOMaster->so_ship_from}} -- {{$data->getSOMaster->getShipFrom->sf_desc ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->getSOMaster->so_ship_to}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->getSOMaster->so_ship_to}} -- {{$data->getSOMaster->getShipTo->cs_shipto_name ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -58,9 +58,9 @@
             <div class="col-md-3">
                 <input id="defaultsangu" type="text" class="form-control" name="defaultsangu" value="{{number_format($data->sj_default_sangu,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="defaultprice" class="col-md-3 col-form-label text-md-right tonase">Price per Unit</label>
+            <label for="trip" class="col-md-3 col-form-label text-md-right">Trip</label>
             <div class="col-md-3">
-                <input id="defaultprice" type="text" class="form-control tonase" name="defaultprice" value="{{$data->getRuteHistory->history_harga ?? 0}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <input id="trip" type="number" class="form-control qtyord" name="trip" value="{{$data->sj_jmlh_trip ?? 0}}" autocomplete="off" maxlength="24" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12" id="container">
@@ -109,32 +109,18 @@
     
     var tipebarang = $('#type').val();
 
-    if(tipebarang == 'BERAT'){
-        $('#container').css('display','none');
-    }else if(tipebarang == 'RITS'){
-        $('.tonase').css('display','none');
-        $('.pricetot').removeClass('col-md-3');
-        $('.pricetot').addClass('col-md-2');
-    }
+    $('.tonase').css('display','none');
+    $('.pricetot').removeClass('col-md-3');
+    $('.pricetot').addClass('col-md-2');
 
     function getDefaultSangu(){
         var tipebarang = $('#type').val();
         
-        if(tipebarang == 'BERAT'){
             sum = 0;
-            $('.qtyord').each(function(){
-                sum += parseFloat(this.value);
-            });
-            var hprice = $('#defaultprice').val();
-            let total = parseInt(hprice) * parseInt(sum);
-
-            total = Number(total).toLocaleString('en-US');
-            $('#defaultsangu').val(total);
-        }else if(tipebarang == 'RITS'){
-            sum = 0;
-            $('.qtyord').each(function(){
-                sum += parseFloat(this.value);
-            });
+            // $('.qtyord').each(function(){
+            //     sum += parseFloat(this.value);
+            // });
+            sum = $('#trip').val();
             var hsangu = $('#sangutruck').val();
             var hkomisi = $('#komisitruck').val();
 
@@ -142,7 +128,6 @@
 
             total = Number(total).toLocaleString('en-US');
             $('#defaultsangu').val(total);
-        }
 
     }
     

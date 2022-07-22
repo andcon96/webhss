@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Create Surat Jalan</li>
+    <li class="breadcrumb-item active">Create SPK</li>
 </ol>
 @endsection
 
@@ -23,16 +23,29 @@
                                 data-cust = "{{$listsos->getCOMaster->co_cust_code}}"
                                 data-custdesc = "{{$listsos->getCOMaster->getCustomer->cust_desc}}"
                                 data-shipfrom = "{{$listsos->so_ship_from}}"
+                                data-shipfromdesc = "{{$listsos->getShipFrom->sf_desc ?? null}}"
                                 data-shipfromid = "{{$listsos->getShipFrom->id ?? null}}"
                                 data-shipto = "{{$listsos->so_ship_to}}"
+                                data-shiptodesc = "{{$listsos->getShipTo->cs_shipto_name}}"
                                 data-shiptoid = "{{$listsos->getShipTo->id}}"
                                 data-type = "{{$listsos->getCOMaster->co_type}}"
                                 data-duedate = "{{$listsos->so_due_date}}"
+                                data-conbr = "{{$listsos->getCOMaster->co_nbr}}"
                             >{{$listsos->so_nbr}} -- {{$listsos->getCOMaster->getCustomer->cust_desc ?? ''}}</option>
                     @endforeach
                 </select>
             </div>
 
+            <label for="conbr" class="col-md-3 col-form-label text-md-right">CO Number</label>
+            <div class="col-md-3">
+                <input id="conbr" type="text" class="form-control" name="conbr" value="" autocomplete="off" maxlength="24" readonly required autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="" autocomplete="off" maxlength="24" readonly required autofocus>
+            </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">
                 <input id="customer" type="text" class="form-control" name="customer" value="" autocomplete="off" maxlength="24" readonly required autofocus>
@@ -51,14 +64,11 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
-            <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="" autocomplete="off" maxlength="24" readonly required autofocus>
-            </div>
-            <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
+            <label for="type" class="col-md-2 col-form-label text-md-right">Type</label>
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="" autocomplete="off" maxlength="24" required readonly>
             </div>
+
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.sj.createsj.create-table')
@@ -83,7 +93,7 @@
             </div>
         </div>
         <div class="form-group row col-md-12" id="container">
-            <label for="trip" class="col-md-2 col-form-label text-md-right">Sangu Truck</label>
+            <label for="trip" class="col-md-2 col-form-label text-md-right">Tarif</label>
             <div class="col-md-3">
                 <input type="text" id="sangutruck" class="form-control" value="0" readonly>
             </div>
@@ -98,7 +108,7 @@
                 <input type="text" id="defaultprice" class="form-control" value="0" readonly>
                 <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
             </div>
-            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Default Sangu</label>
+            <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Tarif</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
             </div>
@@ -108,7 +118,7 @@
             <div class="col-md-3">
                 <input type="number" class="form-control" name="trip" min="1" value="1" id="trip">
             </div>
-            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
+            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Sangu</label>
             <div class="col-md-3">
                 <input type="text" class="form-control sangu" name="totsangu" required id="totsangu">
             </div>
@@ -151,18 +161,22 @@
         var custdesc = $(this).find(':selected').data('custdesc');
         var shipfrom = $(this).find(':selected').data('shipfrom');
         var shipto = $(this).find(':selected').data('shipto');
+        var shipfromdesc = $(this).find(':selected').data('shipfromdesc');
+        var shiptodesc = $(this).find(':selected').data('shiptodesc');
         var type = $(this).find(':selected').data('type');
         var duedate = $(this).find(':selected').data('duedate');
         var shipfromid = $(this).find(':selected').data('shipfromid');
         var shiptoid = $(this).find(':selected').data('shiptoid');
+        var conbr = $(this).find(':selected').data('conbr');
 
         $('#customer').val(cust + ' - ' + custdesc);
-        $('#shipfrom').val(shipfrom);
-        $('#shipto').val(shipto);
+        $('#shipfrom').val(shipfrom + ' - ' + shipfromdesc);
+        $('#shipto').val(shipto + ' - ' + shiptodesc);
         $('#type').val(type);
         $('#duedate').val(duedate);
         $('#shipfromid').val(shipfromid);
         $('#shiptoid').val(shiptoid);
+        $('#conbr').val(conbr);
 
         let url = "{{route('getDetailSJSO',':soid')}}"
         url = url.replace(':soid',soid);
@@ -177,17 +191,17 @@
                 $('#addtable').html('').append(data);
 
                 console.log(type);
-                if(type == 'BERAT'){
-                    $('#container').css('display','none');
-                    $('.tonase').css('display','');
-                    $('.pricetot').removeClass('col-md-2');
-                    $('.pricetot').addClass('col-md-3');
-                }else if(type == 'RITS'){
-                    $('.tonase').css('display','none');
-                    $('.pricetot').removeClass('col-md-3');
-                    $('.pricetot').addClass('col-md-2');
-                    $('#container').css('display','');
-                }
+                // if(type == 'BERAT'){
+                //     $('#container').css('display','none');
+                //     $('.tonase').css('display','');
+                //     $('.pricetot').removeClass('col-md-2');
+                //     $('.pricetot').addClass('col-md-3');
+                // }else if(type == 'TRIP'){
+                // }
+                $('.tonase').css('display','none');
+                $('.pricetot').removeClass('col-md-3');
+                $('.pricetot').addClass('col-md-2');
+                $('#container').css('display','');
             },
             error: function(data){
                 Swal.fire({
@@ -210,40 +224,26 @@
 
     function getDefaultSangu(){
         var tipebarang = $('#type').val();
-        
-        if(tipebarang == 'BERAT'){
-            sum = 0;
-            $('.qtysj').each(function(){
-                sum += parseFloat(this.value);
-            });
-            var hprice = $('#defaultprice').val();
-            let total = parseInt(hprice.replace(',','')) * parseInt(sum);
+    
+        sum = 0;
+        // $('.qtysj').each(function(){
+        //     sum += parseFloat(this.value);
+        // });
+        sum = $('#trip').val();
 
-            total = Number(total).toLocaleString('en-US');
-            $('#defaultsangu').val(total);
-        }else if(tipebarang == 'RITS'){
-            sum = 0;
-            $('.qtysj').each(function(){
-                sum += parseFloat(this.value);
-            });
-            var hsangu = $('#sangutruck').val();
-            var hkomisi = $('#komisitruck').val();
+        var hsangu = $('#sangutruck').val();
+        var hkomisi = $('#komisitruck').val();
 
-            let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
+        let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
 
-            total = Number(total).toLocaleString('en-US');
+        total = Number(total).toLocaleString('en-US');
 
-            $('#defaultsangu').val(total);
-        }
+        $('#defaultsangu').val(total);
     }
 
-    if(tipebarang == 'BERAT'){
-        $('#container').css('display','none');
-    }else if(tipebarang == 'RITS'){
-        $('.tonase').css('display','none');
-        $('.pricetot').removeClass('col-md-3');
-        $('.pricetot').addClass('col-md-2');
-    }
+    $('.tonase').css('display','none');
+    $('.pricetot').removeClass('col-md-3');
+    $('.pricetot').addClass('col-md-2');
     
     $(document).on('change keyup', '.qtysj,#trip',function(){
         getDefaultSangu();
@@ -286,10 +286,24 @@
         $('#pengurus').val(pengurus);
     })
     
-    $(document).on('submit', '#submit', function(e) {
-        document.getElementById('btnconf').style.display = 'none';
-        document.getElementById('btnback').style.display = 'none';
-        document.getElementById('btnloading').style.display = '';
+    $(document).on('click', '#btnconf', function(e) {
+        e.preventDefault();
+        let totaltarif = $('#defaultsangu').val();
+        
+        if(totaltarif == 0){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: 'Total Tarif tidak boleh 0, Silahkan cek kembali',
+                showCloseButton: true,
+            })
+        }else{
+            document.getElementById('btnconf').style.display = 'none';
+            document.getElementById('btnback').style.display = 'none';
+            document.getElementById('btnloading').style.display = '';
+            
+            $('#submit').submit();
+        }
     });
     
     $(document).on('keyup', '.sangu', function() {

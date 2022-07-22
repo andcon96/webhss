@@ -55,7 +55,7 @@
                 {{number_format($show->history_ongkos) ?? ''}}
               </td>
               <td>
-                {{$show->history_is_active ?? ''}}
+                {{$show->history_is_active == 1 ? 'Aktif' : 'Tidak Aktif' ?? ''}}
               </td>
               <td>
                 {{$show->history_last_active ?? ''}}
@@ -97,20 +97,20 @@
                         <input id="shipto" type="text" class="form-control"  value="{{ $rute->getShipTo->cs_shipto_name }}" readonly>
                     </div>
                   </div>
-                  <div class="form-group row">
+                  {{-- <div class="form-group row">
                     <label for="harga" class="col-md-3 col-form-label text-md-right" style="color: black">Harga</label>
                     <div class="col-md-7">
                         <input id="harga" type="number" class="form-control" name="harga" step=".01" value="0" min="0" required>
                     </div>
-                  </div>
+                  </div> --}}
                   <div class="form-group row">
-                    <label for="sangu" class="col-md-3 col-form-label text-md-right" style="color: black">Sangu</label>
+                    <label for="sangu" class="col-md-3 col-form-label text-md-right" style="color: black">Tarif</label>
                     <div class="col-md-7">
                         <input id="sangu" type="text" class="form-control" name="sangu" step=".01" value="0" min="0" required>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="ongkos" class="col-md-3 col-form-label text-md-right" style="color: black">Ongkos</label>
+                    <label for="ongkos" class="col-md-3 col-form-label text-md-right" style="color: black">Komisi</label>
                     <div class="col-md-7">
                         <input id="ongkos" type="text" class="form-control" name="ongkos" step=".01" value="0" min="0" required>
                     </div>

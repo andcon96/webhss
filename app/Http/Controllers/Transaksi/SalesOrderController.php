@@ -31,7 +31,9 @@ class SalesOrderController extends Controller
         $salesord = SalesOrderMstr::get();
         $data = SalesOrderMstr::query()
                               ->with('getDetail',
-                                     'getCOMaster.getCustomer');
+                                     'getCOMaster.getCustomer',
+                                     'getShipFrom',
+                                     'getShipTo');
 
         if($request->s_sonumber){
             $data->where('id',$request->s_sonumber);
@@ -158,7 +160,7 @@ class SalesOrderController extends Controller
 
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail','getNonCancelledSJ')->findOrFail($id);
+        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail','getNonCancelledSJ','getShipFrom','getShipTo')->findOrFail($id);
         
         $item = CustomerOrderDetail::with('getItem')->where('cod_co_mstr_id',$data->so_co_mstr_id)->get();
 
@@ -402,7 +404,7 @@ class SalesOrderController extends Controller
                 $output .= '</tr>';
 
                 $list = SuratJalan::query()
-                                ->with('getDetail')
+                                ->with('getDetail','getTruck')
                                 ->where('sj_so_mstr_id',$datas->sod_so_mstr_id)
                                 ->whereRelation('getDetail','sjd_line',$datas->sod_line)
                                 ->whereRelation('getDetail','sjd_part',$datas->sod_part)
@@ -411,11 +413,11 @@ class SalesOrderController extends Controller
                 if($list->count() > 0){
                     foreach($list as $key => $lists){
                         $output .= '<tr>';
-                        $output .= '<td colspan="2"><b>SJ Number : '.$lists->sj_nbr.'</b></td>';
+                        $output .= '<td colspan="2"><b>SPK Number : '.$lists->sj_nbr.'</b></td>';
+                        $output .= '<td><b>Nopol : '.$lists->getTruck->truck_no_polis.'</b></td>';
                         $output .= '<td><b> Status : '.$lists->sj_status.'</b></td>';
                         foreach($lists->getDetail as $detail){
                             if($detail->sjd_part == $datas->sod_part){
-                                $output .= '<td></td>';
                                 $output .= '<td><b>Qty : '.(int)$detail->sjd_qty_ship.'</b></td>';
                             }
                         }

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Nomor SO</th>
-                <th>Nomor SJ</th>
+                <th>Nomor SPK</th>
                 <th>Customer</th>
                 <th>Total Sangu</th>
                 <th>Ship To</th>
@@ -25,7 +25,7 @@
                     {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}
                 </td>
                 <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>
-                <td data-label="SO Ship To">{{$datas->getSOMaster->so_ship_to}}</td>
+                <td data-label="SO Ship To">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                 <td data-label="SO Status">{{$datas->sj_status}}</td>
                 <td data-label="SO Due Date">{{$datas->getSOMaster->so_due_date}}</td>
                 <td data-label="Action">

@@ -139,7 +139,7 @@
                 <li class="nav-item">
                   <a href="{{route('suratjalan.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>SJ Maintenance</p>
+                    <p>SPK Maintenance</p>
                   </a>
                 </li>
                 @endcan

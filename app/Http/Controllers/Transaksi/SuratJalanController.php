@@ -26,9 +26,10 @@ class SuratJalanController extends Controller
         $listcust = Customer::get();
         $listsj = SuratJalan::get();
         $listso = SalesOrderMstr::get();
+        $truck = Truck::get();
 
         $data = SuratJalan::query()
-                    ->with('getSOMaster.getCOMaster.getCustomer','getTruck');
+                    ->with('getSOMaster.getCOMaster.getCustomer','getTruck','getSOMaster.getShipFrom','getSOMaster.getShipTo');
 
         if($request->sjnumber){
             $data->where('id',$request->sjnumber);
@@ -42,9 +43,22 @@ class SuratJalanController extends Controller
             $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->s_customer);
         }
 
+        if($request->s_truck){
+            $data->where('sj_truck_id',$request->s_truck);
+        }
+
+        if($request->datefrom){
+            $data->where('sj_eff_date','>=',$request->datefrom);
+        }
+
+        if($request->dateto){
+            $data->where('sj_eff_date','<=',$request->dateto);
+        }
+
+
         $data = $data->paginate(10);
         
-        return view('transaksi.sj.index',compact('data','listcust','listso','listsj'));
+        return view('transaksi.sj.index',compact('data','listcust','listso','listsj','truck'));
     }
 
     public function store(Request $request)
@@ -112,7 +126,7 @@ class SuratJalanController extends Controller
 
     public function edit($id)
     {
-        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getDetail','getRuteHistory')->findOrFail($id);
+        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getSOMaster.getShipTo','getSOMaster.getShipFrom','getDetail','getRuteHistory')->findOrFail($id);
         $this->authorize('update',[SuratJalan::class, $data]);
         $item = SalesOrderDetail::where('sod_so_mstr_id',$data->sj_so_mstr_id)->get();
         
@@ -127,6 +141,7 @@ class SuratJalanController extends Controller
             $this->authorize('update',[SuratJalan::class, $sjmstr]);
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
+            $sjmstr->sj_jmlh_trip = $request->trip;
             $sjmstr->save();
             
             foreach($request->iddetail as $key => $datas){

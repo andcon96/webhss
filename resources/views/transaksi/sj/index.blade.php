@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Surat Jalan Maintenance</li>
+    <li class="breadcrumb-item active">SPK Maintenance</li>
 </ol>
 @endsection
 
@@ -12,7 +12,7 @@
 
 <!-- Page Heading -->
 <div class="col-md-12 mb-3">
-    <a href="{{route('CreateSJ') }}" class="btn btn-info bt-action">Create SJ</a>
+    <a href="{{route('CreateSJ') }}" class="btn btn-info bt-action">Create SPK</a>
 </div>
 <form action="{{route('suratjalan.index')}}" method="get">
 
@@ -26,7 +26,7 @@
                 @endforeach
             </select>
         </div>
-        <label for="sjnumber" class="col-md-2 col-form-label text-md-right">{{ __('SJ Number') }}</label>
+        <label for="sjnumber" class="col-md-2 col-form-label text-md-right">{{ __('SPK Number') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="sjnumber" class="form-control" name="sjnumber" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
@@ -47,6 +47,30 @@
                 @endforeach
             </select>
         </div>
+        <label for="s_truck" class="col-md-2 col-form-label text-md-right">{{ __('Truck') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="s_truck" class="form-control" name="s_truck" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($truck as $trucks)
+                <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row col-md-12">
+        <label for="datefrom" class="col-md-2 col-form-label text-md-right">{{ __('Date From') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="datefrom" type="text" class="form-control" name="datefrom" value="" autocomplete="off">
+        </div>
+        <label for="dateto" class="col-md-2 col-form-label text-md-right">{{ __('Date To') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="dateto" type="text" class="form-control" name="dateto" value="" autocomplete="off">
+        </div>
+    </div>
+
+
+    <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
@@ -65,7 +89,7 @@
         <!-- konten modal-->
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">Surat Jalan</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel">SPK</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,7 +102,7 @@
                         <div class="col-md-3">
                             <input id="sonbr" type="text" class="form-control" name="sonbr" autocomplete="off" value="" readonly>
                         </div>
-                        <label for="sjnbr" class="col-md-2 col-form-label text-md-right">{{ __('Nomor SJ') }}</label>
+                        <label for="sjnbr" class="col-md-2 col-form-label text-md-right">{{ __('Nomor SPK') }}</label>
                         <div class="col-md-3">
                             <input id="sjnbr" type="text" class="form-control" name="sjnbr" autocomplete="off" value="" readonly>
                         </div>
@@ -205,14 +229,21 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#s_customer, #sonumber, #sjnumber').select2({
+    $('#s_customer, #sonumber, #sjnumber, #s_truck').select2({
         width: '100%',
+    });
+
+    $("#dateto, #datefrom").datepicker({
+        dateFormat: 'yy-mm-dd',
     });
     
     function resetSearch(){
         $('#s_customer').val('');
+        $('#s_truck').val('');
         $('#sonumber').val('');
         $('#sjnumber').val('');
+        $('#datefrom').val('');
+        $('#dateto').val('');
     }
 
     $(document).ready(function(){
@@ -222,10 +253,16 @@
         let queryString = new URLSearchParams(paramString);
 
         let customer = queryString.get('s_customer');
+        let truck = queryString.get('s_truck');
         let sonumber = queryString.get('sonumber');
         let sjnumber = queryString.get('sjnumber');
+        let datefrom = queryString.get('datefrom');
+        let dateto = queryString.get('dateto');
 
+        $('#datefrom').val(datefrom);
+        $('#dateto').val(dateto);
         $('#s_customer').val(customer).trigger('change');
+        $('#s_truck').val(truck).trigger('change');
         $('#sonumber').val(sonumber).trigger('change');
         $('#sjnumber').val(sjnumber).trigger('change');
     });
@@ -237,6 +274,7 @@
         var cust = $(this).data('cust');
         var custdesc = $(this).data('custdesc');
         var shipto = $(this).data('shipto');
+        var shiptodesc = $(this).data('shiptodesc');
         var status = $(this).data('status');
         var truck = $(this).data('truck');
         var pengurus = $(this).data('pengurus');
@@ -247,7 +285,7 @@
         document.getElementById("sonbr").value = sonbr;
         document.getElementById("sjnbr").value = sjnbr;
         document.getElementById("cust").value = cust + ' - ' + custdesc;
-        document.getElementById("shipto").value = shipto;
+        document.getElementById("shipto").value = shipto + ' - ' + shiptodesc;
         document.getElementById("status").value = status;
         document.getElementById("truck").value = truck;
         document.getElementById("pengurus").value = pengurus;

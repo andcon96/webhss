@@ -43,8 +43,8 @@
                     <td>{{number_format($defaultSanguTruck,0)}}</td>
                     <td>0</td>
                     <td>{{number_format($klaimTruck,0)}}</td>
-                    <td>{{number_format($defaultSanguTruck + $klaimTruck,0)}}</td>
-                    <td>{{number_format($totalSanguTruck - ($defaultSanguTruck + $klaimTruck),0)}}</td>
+                    <td>{{number_format($defaultSanguTruck + $klaimTruck,0)}}</td> <!-- Jumlah BON -->
+                    <td>{{number_format($totalSanguTruck - ($defaultSanguTruck + $klaimTruck),0)}}</td> <!-- Sisa -->
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
