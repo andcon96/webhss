@@ -15,7 +15,7 @@ class CreateCoMstrTable extends Migration
     {
         Schema::create('co_mstr', function (Blueprint $table) {
             $table->id();
-            $table->string('co_domain');
+            // $table->string('co_domain');
             $table->string('co_nbr',8);
             $table->string('co_cust_code');
             $table->string('co_type');

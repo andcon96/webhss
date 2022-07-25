@@ -43,18 +43,18 @@ class CreateTempTable
 
     public function getrnso(){
         try{
-            // $prefix = Prefix::firstOrFail();
-            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            $prefix = Prefix::firstOrFail();
             
-            $cektahun = substr($prefix->domain_so_rn,0,2);
+            $cektahun = substr($prefix->prefix_so_rn,0,1);
             $yearnow = date('y');
+            $lastdigityear = $yearnow % 10;
             
-            if($cektahun != $yearnow){
-                $rn_new = $yearnow.'0001';
+            if($cektahun != $lastdigityear){
+                $rn_new = $lastdigityear.'00001';
             }else{
-                $rn_new = $prefix->domain_so_rn + 1;
+                $rn_new = $prefix->prefix_so_rn + 1;
             }
-            $newprefix = $prefix->domain_so_prefix.$rn_new;
+            $newprefix = $prefix->prefix_so.$rn_new;
     
             return $newprefix;
         }catch(Exception $e){
@@ -87,18 +87,18 @@ class CreateTempTable
 
     public function getrnco(){
         try{
-            // $prefix = Prefix::firstOrFail();
-            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            $prefix = Prefix::firstOrFail();
             
-            $cektahun = substr($prefix->domain_co_rn,0,2);
+            $cektahun = substr($prefix->prefix_co_rn,0,1);
             $yearnow = date('y');
+            $lastdigityear = $yearnow % 10;
             
-            if($cektahun != $yearnow){
-                $rn_new = $yearnow.'0001';
+            if($cektahun != $lastdigityear){
+                $rn_new = $lastdigityear.'00001';
             }else{
-                $rn_new = $prefix->domain_co_rn + 1;
+                $rn_new = $prefix->prefix_co_rn + 1;
             }
-            $newprefix = $prefix->domain_co_prefix.$rn_new;
+            $newprefix = $prefix->prefix_co.$rn_new;
     
             return $newprefix;
         }catch(Exception $e){
@@ -108,18 +108,18 @@ class CreateTempTable
 
     public function getrnsj(){
         try{
-            // $prefix = Prefix::firstOrFail();
-            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
+            $prefix = Prefix::firstOrFail();
             
-            $cektahun = substr($prefix->domain_sj_rn,0,2);
+            $cektahun = substr($prefix->prefix_sj_rn,0,1);
             $yearnow = date('y');
+            $lastdigityear = $yearnow % 10;
             
-            if($cektahun != $yearnow){
-                $rn_new = $yearnow.'0001';
+            if($cektahun != $lastdigityear){
+                $rn_new = $lastdigityear.'00001';
             }else{
-                $rn_new = $prefix->domain_sj_rn + 1;
+                $rn_new = $prefix->prefix_sj_rn + 1;
             }
-            $newprefix = $prefix->domain_sj_prefix.$rn_new;
+            $newprefix = $prefix->prefix_sj.$rn_new;
     
             return $newprefix;
         }catch(Exception $e){

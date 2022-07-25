@@ -6,6 +6,7 @@
                 <th width="25%">Part</th>
                 <th width="5%">UM</th>
                 <th width="10%">Qty SJ</th>
+                <th width="10%">Qty Angkut</th>
                 <th width="10%">Qty Diakui</th>
             </tr>
         </thead>
@@ -16,6 +17,9 @@
                 <td>{{$datas->sjd_part}} -- {{$datas->getItem->item_desc}}</td>
                 <td>{{$datas->getItem->item_um}}</td>
                 <td>{{$datas->sjd_qty_ship}}</td>
+                <td>
+                    <input type="number" name="qtyangkut[]" value="{{$datas->sjd_qty_ship}}" class="form-control">
+                </td>
                 <td>
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     <input type="number" name="qtyakui[]" value="{{$datas->sjd_qty_ship}}" class="form-control">

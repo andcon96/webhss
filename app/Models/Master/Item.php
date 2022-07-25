@@ -23,11 +23,11 @@ class Item extends Model
 
         
         self::creating(function($model){
-            $model->item_domain = Session::get('domain');
+            // $model->item_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){
-            $builder->where('item_domain', Session::get('domain'));
+            // $builder->where('item_domain', Session::get('domain'));
         });
     }
 }

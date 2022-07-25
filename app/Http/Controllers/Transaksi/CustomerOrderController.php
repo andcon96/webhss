@@ -7,6 +7,7 @@ use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
+use App\Models\Master\Prefix;
 use App\Models\Master\ShipFrom;
 use App\Models\Transaksi\CustomerOrderDetail;
 use App\Models\Transaksi\CustomerOrderMstr;
@@ -67,6 +68,7 @@ class CustomerOrderController extends Controller
                 return back();
             }
             
+            // dd($getCORN);
             $comstr = new CustomerOrderMstr();
             $comstr->co_nbr = $getCORN;
             $comstr->co_cust_code = $request->customer;
@@ -85,12 +87,12 @@ class CustomerOrderController extends Controller
                 $coddet->save();
             }
 
-            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
-            $prefix->domain_co_rn = substr($getCORN,2,6);
+            $prefix = Prefix::firstOrFail();
+            $prefix->prefix_co_rn = substr($getCORN,2,6);
             $prefix->save();
 
             DB::commit();
-            alert()->success('Success', 'Customer Order : '.$getCORN.'Created')->persistent('Dismiss');
+            alert()->success('Success', 'Customer Order : '.$getCORN.' Created')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollBack();
@@ -229,7 +231,7 @@ class CustomerOrderController extends Controller
     {
         DB::beginTransaction();
         try{
-            Domain::where('domain_code',Session::get('domain'))->lockForUpdate()->first();
+            $prefix = Prefix::lockForUpdate()->first();
 
             $getrn = (new CreateTempTable())->getrnso();
             if($getrn === false){
@@ -268,8 +270,7 @@ class CustomerOrderController extends Controller
                 }
             }
 
-            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
-            $prefix->domain_so_rn = substr($getrn,2,6);
+            $prefix->prefix_so_rn = substr($getrn,2,6);
             $prefix->save();
 
             $comstr = CustomerOrderMstr::find($request->idcomstr);
@@ -277,26 +278,9 @@ class CustomerOrderController extends Controller
                 $comstr->co_status = 'Ongoing';
             }
             $comstr->save();
-            
-            
-
-            $sendSO = (new QxtendServices())->qxSOMaintenance($request->all(),$getrn);
-            if($sendSO === false){
-                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($sendSO == 'nourl'){
-                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($sendSO[0] == 'error'){
-                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }
 
             DB::commit();
-            alert()->success('Success', 'Sales Order Created')->persistent('Dismiss');
+            alert()->success('Success', 'Sales Order : '.$getrn.' Created')->persistent('Dismiss');
             return back();
             
 

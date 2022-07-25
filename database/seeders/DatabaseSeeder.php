@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             QxWsaTableSeeder::class,
             DomainTableSeeder::class,
+            PrefixTableSeeder::class,
         ]);
     }
 }

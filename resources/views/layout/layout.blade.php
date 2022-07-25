@@ -50,23 +50,6 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <!-- Select Domain -->
-        @if(Auth()->user()->role_id == 1 || str_contains(Auth()->user()->getRoleType->accessmenu,'PD01'))
-        <li>
-          <select name="headdomain" id="headdomain" class="form-control">
-            @php
-              $domain = DB::table('domain')->get();
-              foreach($domain as $domains){
-                if($domains->domain_code == Session::get('domain')){
-                  echo '<option value="'.$domains->domain_code.'" Selected >'.$domains->domain_code.'</option>';
-                }else{
-                  echo '<option value="'.$domains->domain_code.'" >'.$domains->domain_code.'</option>';
-                }
-              }
-            @endphp
-          </select>
-        </li>
-        @endif
 
         <li>
           <a class="nav-link" role="button" data-toggle="dropdown">
@@ -339,9 +322,9 @@
                   </a>
                 </li> --}}
                 <li class="nav-item">
-                  <a href="{{route('domainmaint.index')}}" class="nav-link">
+                  <a href="{{route('prefixmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Domain Maintenance</p>
+                    <p>Prefix Maintenance</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -354,6 +337,12 @@
                   <a href="{{url('rute')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Rute Maintenance</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('invoiceprice')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Invoice Price Maintenance</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -527,21 +516,6 @@
       return this.href == url;
     }).parentsUntil(".nav-sidebar > .nav-treeview").prev('a').addClass('active');
 
-    $('#headdomain').on('change',function($e){
-      let domain = $(this).val();
-      
-      $.ajax("{{ route('changeDomain') }}", {
-        method: 'Get',
-        data: {
-          "domain": domain
-        },beforeSend: function(data){
-						$('#loader').removeClass('hidden');
-        },
-        success: function(data) {
-          location.reload();
-        }
-      });
-    });
   </script>
 
 </body>

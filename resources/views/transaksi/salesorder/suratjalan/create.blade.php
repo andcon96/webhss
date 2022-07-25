@@ -64,7 +64,8 @@
                     @foreach($truck as $trucks)
                     <option value="{{$trucks->id}}" 
                         data-typetruck="{{$trucks->truck_tipe_id}}"
-                        data-pengurus="{{$trucks->getUserPengurus->name ?? ''}}">
+                        data-pengurus="{{$trucks->getUserPengurus->name ?? ''}}"
+                        data-domain="{{$trucks->truck_domain}}">
                         {{$trucks->truck_no_polis}}
                     </option>
                     @endforeach
@@ -94,6 +95,10 @@
             <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Tarif</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0" readonly>
+            </div>
+            <label for="truckdomain" class="col-md-3 col-form-label text-md-right">Truck Domain</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="truckdomain" id="truckdomain" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -177,6 +182,7 @@
         let truck = $(this).val();
         var typetruck = $(this).find(':selected').data('typetruck');
         var pengurus = $(this).find(':selected').data('pengurus');
+        var domain = $(this).find(':selected').data('domain');
         var shipfrom = $('#shipfrom').val();
         var shipto = $('#shipto').val();
         var trip = $('#trip').val();
@@ -207,6 +213,7 @@
         })
 
         $('#pengurus').val(pengurus);
+        $('#truckdomain').val(domain);
     })
     
     $(document).on('click', '#btnconf', function(e) {

@@ -23,10 +23,14 @@ class PrefixController extends Controller
     public function store(Request $request)
     {
         $prefix = Prefix::firstOrNew(['id'=>'1']);
+        $prefix->prefix_co = $request->prefixco;
+        $prefix->prefix_co_rn = $request->rnco;
         $prefix->prefix_so = $request->prefixso;
-        $prefix->rn_so = $request->rnso;
-        $prefix->prefix_kerusakan = $request->prefixkerusakan;
-        $prefix->rn_kerusakan = $request->rnkerusakan;
+        $prefix->prefix_so_rn = $request->rnso;
+        $prefix->prefix_sj = $request->prefixspk;
+        $prefix->prefix_sj_rn = $request->rnspk;
+        $prefix->prefix_kr = $request->prefixkerusakan;
+        $prefix->prefix_kr_rn = $request->rnkerusakan;
         $prefix->save();
 
         alert()->success('Success', 'Prefix Updated');

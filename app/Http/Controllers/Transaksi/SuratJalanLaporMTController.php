@@ -56,6 +56,7 @@ class SuratJalanLaporMTController extends Controller
     {
         DB::beginTransaction();
         try{
+            dd($request->all());
             // Update Master
             $sjmstr = SuratJalan::findOrFail($request->idsjmstr);
             $sjmstr->sj_conf_remark = $request->remark;
@@ -66,6 +67,7 @@ class SuratJalanLaporMTController extends Controller
             // Update Detail
             foreach($request->iddetail as $keys => $iddetail){
                 $sjddet = SuratJalanDetail::findOrFail($iddetail);
+                $sjddet->sjd_qty_angkut = $request->qtyangkut[$keys];
                 $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
                 $sjddet->save();
             }
@@ -86,8 +88,8 @@ class SuratJalanLaporMTController extends Controller
             }
             
             // WSA Cek SO Exists / Tidak
-            // $cekso = (new WSAServices())
-
+            $cekso = (new WSAServices())->wsacheckso($request->domain, $request->sonbr);
+            dd($cekso);
             // Kirim Qxtend
             // $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
 

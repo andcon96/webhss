@@ -35,8 +35,6 @@ class CustomerController extends Controller
     {
         DB::beginTransaction();
         try{
-            $domain = Domain::get();
-            
             $loadcust = (new WSAServices())->wsacust();
             if($loadcust === false){
                 alert()->error('Error', 'No Data from QAD');

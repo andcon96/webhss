@@ -29,7 +29,7 @@ class CustomerShipTo extends Model
         // });
 
         self::addGlobalScope(function(Builder $builder){
-            $builder->where('cs_domain', Session::get('domain'));
+            // $builder->where('cs_domain', Session::get('domain'));
         });
     }
 }

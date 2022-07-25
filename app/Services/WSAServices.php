@@ -497,6 +497,11 @@ class WSAServices
         }
     }
 
+    public function wsacheckso($domain, $noso)
+    {
+        
+    }
+
     // public function wsatruck()
     // {
     //     $wsa = Qxwsa::first();

@@ -7,6 +7,7 @@ use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\CustomerShipToController;
 use App\Http\Controllers\Master\DepartmentController;
 use App\Http\Controllers\Master\DomainController;
+use App\Http\Controllers\Master\InvoicePriceController;
 use App\Http\Controllers\Master\ItemMTController;
 use App\Http\Controllers\Master\KerusakanController;
 use App\Http\Controllers\Master\PrefixController;
@@ -230,6 +231,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('importexcel', [RuteController::class,'importexcel']);
         Route::post('importrute', [RuteController::class,'importrute']);
         Route::post('newrute', [RuteController::class,'newrute']);
+        //================================
+
+        // Invoice Price Maintenance
+        //================================
+        Route::resource('invoiceprice', InvoicePriceController::class);
+        Route::get('invoiceprice/invoicepricedetail/{id}', [InvoicePriceController::class,'listdetail']);
         //================================
 
 

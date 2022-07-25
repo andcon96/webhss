@@ -35,11 +35,11 @@ class CustomerOrderMstr extends Model
         parent::boot();
         
         self::creating(function($model){
-            $model->co_domain = Session::get('domain');
+            // $model->co_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){
-            $builder->where('co_domain', Session::get('domain'));
+            // $builder->where('co_domain', Session::get('domain'));
             $builder->orderBy('created_at','DESC');
         });
     }

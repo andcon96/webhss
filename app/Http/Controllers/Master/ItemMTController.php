@@ -35,8 +35,6 @@ class ItemMTController extends Controller
     {
         DB::beginTransaction();
         try{
-            $domain = Domain::get();
-            
             $loadcust = (new WSAServices())->wsaitem();
             if($loadcust === false){
                 alert()->error('Error', 'No Data from QAD');

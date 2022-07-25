@@ -19,29 +19,56 @@
         <div class="modal-body">
 
             <div class="form-group row">
+                <label for="prefixco" class="col-md-3 col-form-label text-md-right">{{ __('Prefix CO') }}</label>
+                <div class="col-md-2">
+                    <input id="prefixco" type="text" class="form-control" name="prefixco" autocomplete="off" value="{{$prefix->prefix_co ?? ''}}" maxlength="2" autofocus required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rnco" class="col-md-3 col-form-label text-md-right">{{ __('Running Nbr CO') }}</label>
+                <div class="col-md-3">
+                    <input id="rnco" type="text" class="form-control" autocomplete="off" name="rnco" value="{{$prefix->prefix_co_rn ?? ''}}" maxlength="6" required readonly>
+                    <span id="errorcur" style="color:red"></span>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="prefixso" class="col-md-3 col-form-label text-md-right">{{ __('Prefix SO') }}</label>
-                <div class="col-md-7">
+                <div class="col-md-2">
                     <input id="prefixso" type="text" class="form-control" name="prefixso" autocomplete="off" value="{{$prefix->prefix_so ?? ''}}" maxlength="2" autofocus required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="rnso" class="col-md-3 col-form-label text-md-right">{{ __('Running Nbr SO') }}</label>
-                <div class="col-md-7">
-                    <input id="rnso" type="text" class="form-control" autocomplete="off" name="rnso" value="{{$prefix->rn_so ?? ''}}" maxlength="6" required>
+                <div class="col-md-3">
+                    <input id="rnso" type="text" class="form-control" autocomplete="off" name="rnso" value="{{$prefix->prefix_so_rn ?? ''}}" maxlength="6" required readonly>
+                    <span id="errorcur" style="color:red"></span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="prefixspk" class="col-md-3 col-form-label text-md-right">{{ __('Prefix SPK') }}</label>
+                <div class="col-md-2">
+                    <input id="prefixspk" type="text" class="form-control" name="prefixspk" autocomplete="off" value="{{$prefix->prefix_sj ?? ''}}" maxlength="2" autofocus required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rnspk" class="col-md-3 col-form-label text-md-right">{{ __('Running Nbr SPK') }}</label>
+                <div class="col-md-3">
+                    <input id="rnspk" type="text" class="form-control" autocomplete="off" name="rnspk" value="{{$prefix->prefix_sj_rn ?? ''}}" maxlength="6" required readonly>
                     <span id="errorcur" style="color:red"></span>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="prefixkerusakan" class="col-md-3 col-form-label text-md-right">{{ __('Prefix Kerusakan') }}</label>
-                <div class="col-md-7">
-                    <input id="prefixkerusakan" type="text" class="form-control" name="prefixkerusakan" autocomplete="off" value="{{$prefix->prefix_kerusakan ?? ''}}" maxlength="2" autofocus required>
+                <div class="col-md-2">
+                    <input id="prefixkerusakan" type="text" class="form-control" name="prefixkerusakan" autocomplete="off" value="{{$prefix->prefix_kr ?? ''}}" maxlength="2" autofocus required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="rnkerusakan" class="col-md-3 col-form-label text-md-right">{{ __('Running Nbr Kerusakan') }}</label>
-                <div class="col-md-7">
-                    <input id="rnkerusakan" type="text" class="form-control" autocomplete="off" name="rnkerusakan" value="{{$prefix->rn_kerusakan ?? ''}}" maxlength="6" required>
+                <div class="col-md-3">
+                    <input id="rnkerusakan" type="text" class="form-control" autocomplete="off" name="rnkerusakan" value="{{$prefix->prefix_kr_rn ?? ''}}" maxlength="6" required readonly> 
                     <span id="errorcur" style="color:red"></span>
                 </div>
             </div>

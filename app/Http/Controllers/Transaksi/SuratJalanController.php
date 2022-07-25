@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Customer;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
+use App\Models\Master\Prefix;
 use App\Models\Master\Rute;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderDetail;
@@ -110,8 +111,8 @@ class SuratJalanController extends Controller
                 }
             }
             
-            $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
-            $prefix->domain_sj_rn = substr($getSJ,2,6);
+            $prefix = Prefix::firstOrFail();
+            $prefix->prefix_sj_rn = substr($getSJ,2,6);
             $prefix->save();
 
             DB::commit();
