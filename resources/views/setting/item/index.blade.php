@@ -40,7 +40,7 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                    <th width="15%">Domain</th>
+                    {{-- <th width="15%">Domain</th> --}}
                     <th width="20%">Item Code</th>
                     <th>Item Desc</th>
                     <th width="10%">Item EA</th>
@@ -50,7 +50,7 @@
             <tbody>
                 @forelse($item as $items)
                     <tr>
-                        <td>{{ $items->item_domain }}</td>
+                        {{-- <td>{{ $items->item_domain }}</td> --}}
                         <td>{{ $items->item_part }}</td>
                         <td>{{ $items->item_desc }}</td>
                         <td>{{ $items->item_um }}</td>

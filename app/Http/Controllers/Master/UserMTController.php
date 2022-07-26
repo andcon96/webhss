@@ -29,7 +29,7 @@ class UserMTController extends Controller
 
         $dept = Department::get();
 
-        $domain = Domain::get();
+        // $domain = Domain::get();
 
         if ($request->ajax()) {
             $username = $request->username;
@@ -52,7 +52,7 @@ class UserMTController extends Controller
 
             return view('setting.users.table', compact('users'));
         } else {
-            return view('setting.users.index', compact('users', 'roleType', 'dept', 'domain'));
+            return view('setting.users.index', compact('users', 'roleType', 'dept'));
         }
     }
 
@@ -74,6 +74,7 @@ class UserMTController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
             'username' => 'required|unique:users',
             'name' => 'required',
@@ -82,7 +83,7 @@ class UserMTController extends Controller
         ], [
             'unique' => 'Username Must Be Unique',
         ]);
-
+        
         DB::beginTransaction();
         try {
             $dept = $request->dept;
@@ -100,27 +101,30 @@ class UserMTController extends Controller
             $storeUser->role_id = $role_id;
             $storeUser->role_type_id = $request->input('roletype');
             $storeUser->dept_id = 1;
-            $storeUser->domain = $request->input('domain');
+            // $storeUser->domain = $request->input('domain');
 
             $storeUser->isActive = 1;
             $storeUser->save();
-
+            
 
             DB::commit();
             alert()->success('Success', 'User successfully created!');
             return redirect()->route('usermaint.index');
         } catch (\InvalidArgumentException $ex) {
             DB::rollback();
-            return back()->withError($ex->getMessage())->withInput();
             alert()->error('Error', $ex->getMessage());
+            return back()->withError($ex->getMessage())->withInput();
+            
         } catch (\Exception $ex) {
             DB::rollback();
-            return back()->withError($ex->getMessage())->withInput();
             alert()->error('Error', $ex->getMessage());
+            return back()->withError($ex->getMessage())->withInput();
+            
         } catch (\Error $ex) {
             DB::rollback();
-            return back()->withError($ex->getMessage())->withInput();
             alert()->error('Error', $ex->getMessage());
+            return back()->withError($ex->getMessage())->withInput();
+            
         }
     }
 
@@ -159,7 +163,7 @@ class UserMTController extends Controller
         $username = $request->d_uname;
         $name = $request->name;
         $roletype = $request->roletype;
-        $domain = $request->domain;
+        // $domain = $request->domain;
 
         DB::beginTransaction();
 
@@ -169,7 +173,7 @@ class UserMTController extends Controller
             $user->name = $name;
             $user->username = $username;
             $user->role_type_id = $roletype;
-            $user->domain = $domain;
+            // $user->domain = $domain;
             if ($user->isDirty()) {
                 $user->save();
             }

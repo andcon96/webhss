@@ -34,6 +34,10 @@
             <div class="col-md-3">
                 <input type="text" class="form-control" name="domain" value="{{Session::get('domain')}}" readonly>
             </div>
+            <label for="truckdriver" class="col-md-2 col-form-label text-md-right">KM</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" name="km" required>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.kerusakan.create-table')
@@ -64,7 +68,7 @@
     
     $("#tgllapor").datepicker({
         dateFormat: 'yy-mm-dd',
-        minDate: '+0d',
+        // minDate: '+0d',
         onClose: function() {
             $("#addrow").focus();
         }

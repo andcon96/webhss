@@ -136,6 +136,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['middleware'=>'can:access_masters'], function () {
+        Route::group(['middleware'=>'can:access_usermt'], function () {
         //================================
         // User Maintenance
         //================================
@@ -143,56 +144,73 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/getdata', [UserMTController::class, 'index']);
         Route::get('/searchoptionuser', [UserMTController::class, 'searchoptionuser']);
         Route::post('/adminchangepass', [UserMTController::class, 'adminchangepass']);
+        });
         //================================
 
         //================================
         // Role Maintenance
         //================================
-        Route::resource('rolemaint', RoleMTController::class);
+        Route::group(['middleware'=>'can:access_rolemt'], function () {
+            Route::resource('rolemaint', RoleMTController::class);
+        });
         //================================
 
         //================================
         // Access Role Menu
         //================================
-        Route::resource('accessrolemenu', AccessRoleMenuController::class);
-        Route::get('/accessmenu', [AccessRoleMenuController::class, 'accessmenu'])->name('accessmenu');
+        Route::group(['middleware'=>'can:access_rolemenumt'], function () {
+            Route::resource('accessrolemenu', AccessRoleMenuController::class);
+            Route::get('/accessmenu', [AccessRoleMenuController::class, 'accessmenu'])->name('accessmenu');
+        });
         //================================
 
         //================================
         // Truck Maintenance
         //================================
-        Route::resource('truckmaint', TruckMTController::class);
+        Route::group(['middleware'=>'can:access_trmt'], function () {
+            Route::resource('truckmaint', TruckMTController::class);
+        });
         //================================
         
         //================================
         // Kerusakan Maintenance
         //================================
-        Route::resource('kerusakanmt', KerusakanController::class);
+        Route::group(['middleware'=>'can:access_krmt'], function () {
+            Route::resource('kerusakanmt', KerusakanController::class);
+        });
         //================================
 
         //================================
         // Struktur Kerusakan Maintenance
         //================================
-        Route::resource('strukturkerusakanmt', StrukturKerusakanController::class);
-        Route::get('activestruc/{id}', [StrukturKerusakanController::class,'activestruc']);
+        Route::group(['middleware'=>'can:access_stmt'], function () {
+            Route::resource('strukturkerusakanmt', StrukturKerusakanController::class);
+            Route::get('activestruc/{id}', [StrukturKerusakanController::class,'activestruc']);
+        });
         //================================
 
         //================================
         // Customer Maintenance
         //================================
-        Route::resource('customermaint', CustomerController::class);
+        Route::group(['middleware'=>'can:access_custmt'], function () {
+            Route::resource('customermaint', CustomerController::class);
+        });
         //================================
 
         //================================
         // Item Maintenance
         //================================
-        Route::resource('itemmaint', ItemMTController::class);
+        Route::group(['middleware'=>'can:access_itemmt'], function () {
+            Route::resource('itemmaint', ItemMTController::class);
+        });
         //================================
 
         //================================
         // Prefix Maintenance
         //================================
-        Route::resource('prefixmaint', PrefixController::class);
+        Route::group(['middleware'=>'can:access_pmmt'], function () {
+            Route::resource('prefixmaint', PrefixController::class);
+        });
         //================================
 
         //================================
@@ -209,46 +227,60 @@ Route::group(['middleware' => ['auth']], function () {
         
         // QX WSA Master
         //================================
-        Route::resource('qxwsa', QxWsaMTController::class);
+        Route::group(['middleware'=>'can:access_wqmt'], function () {
+            Route::resource('qxwsa', QxWsaMTController::class);
+        });
         //================================
         
         // Ship To Master
         //================================
-        Route::resource('custshipto', CustomerShipToController::class);
+        Route::group(['middleware'=>'can:access_stmt'], function () {
+            Route::resource('custshipto', CustomerShipToController::class);
+        });
         //================================
         
         // Ship From Master
         //================================
-        Route::resource('shipfrom', ShipFromController::class);
+        Route::group(['middleware'=>'can:access_sfmt'], function () {
+            Route::resource('shipfrom', ShipFromController::class);
+        });
         //================================
 
         // Rute Maintenance
         //================================
-        Route::resource('rute', RuteController::class);
-        Route::get('rute/rutedetail/{id}', [RuteController::class,'viewDetail']);
-        Route::get('rute/rutedetail/{oldid}/historydetail/{id}', [RuteController::class,'viewHistory']);
-        Route::get('downloadexcel', [RuteController::class,'downloadtemplate']);
-        Route::post('importexcel', [RuteController::class,'importexcel']);
-        Route::post('importrute', [RuteController::class,'importrute']);
-        Route::post('newrute', [RuteController::class,'newrute']);
+        Route::group(['middleware'=>'can:access_rutemt'], function () {
+            Route::resource('rute', RuteController::class);
+            Route::get('rute/rutedetail/{id}', [RuteController::class,'viewDetail']);
+            Route::get('rute/rutedetail/{oldid}/historydetail/{id}', [RuteController::class,'viewHistory']);
+            Route::get('downloadexcel', [RuteController::class,'downloadtemplate']);
+            Route::post('importexcel', [RuteController::class,'importexcel']);
+            Route::post('importrute', [RuteController::class,'importrute']);
+            Route::post('newrute', [RuteController::class,'newrute']);
+        });
         //================================
 
         // Invoice Price Maintenance
         //================================
-        Route::resource('invoiceprice', InvoicePriceController::class);
-        Route::get('invoiceprice/invoicepricedetail/{id}', [InvoicePriceController::class,'listdetail']);
+        Route::group(['middleware'=>'can:access_ipmt'], function () {
+            Route::resource('invoiceprice', InvoicePriceController::class);
+            Route::get('invoiceprice/invoicepricedetail/{id}', [InvoicePriceController::class,'listdetail']);
+        });
         //================================
 
 
         // Approval Maintenance
         //================================
-        Route::resource('approvalmt', ApprovalController::class);
-        Route::get('/approvalmt/getdata', [ApprovalController::class, 'index']);
+        Route::group(['middleware'=>'can:access_apmt'], function () {
+            Route::resource('approvalmt', ApprovalController::class);
+            Route::get('/approvalmt/getdata', [ApprovalController::class, 'index']);
+        });
         //================================
 
-        // Approval Maintenance
+        // Tipe Truck Maintenance
         //================================
-        Route::resource('tipetruck', TruckTipeController::class);
+        Route::group(['middleware'=>'can:access_ttmt'], function () {
+            Route::resource('tipetruck', TruckTipeController::class);
+        });
         //================================
     });
 });

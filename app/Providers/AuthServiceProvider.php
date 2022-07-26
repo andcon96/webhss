@@ -127,7 +127,90 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'IV01');
         });
 
+        //=============================
+        // Settings
+        //=============================
         
+        //User Maintenance 
+        Gate::define('access_usermt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT01');
+        });
+
+        //Role Maintenance
+        Gate::define('access_rolemt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT02');
+        });
+        
+        //Role Menu maintenance
+        Gate::define('access_rolemenumt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT03');
+        });
+
+        //Customer Maintenance
+        Gate::define('access_custmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT04');
+        });
+
+        //Ship To Maintenance
+        Gate::define('access_stmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT05');
+        });
+
+        //Ship From maintenance
+        Gate::define('access_sfmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT06');
+        });
+
+        //Item Maintenance
+        Gate::define('access_itemmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT07');
+        });
+
+        //Kerusakan Maintenance
+        Gate::define('access_krmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT08');
+        });
+
+        //Struktur Kerusakan maintenance
+        Gate::define('access_skmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT09');
+        });
+
+        //Truck maintenance
+        Gate::define('access_trmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT10');
+        });
+
+        //Tipe Truck maintenance
+        Gate::define('access_ttmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT11');
+        });
+
+        //Prefix Maintenance
+        Gate::define('access_pmmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT12');
+        });
+
+        //WSA Qxtend Maintenance
+        Gate::define('access_wqmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT13');
+        });
+
+        //rute maintenance
+        Gate::define('access_rutemt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT14');
+        });
+
+        //Invoice Price maintenance
+        Gate::define('access_ipmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT15');
+        });
+
+        //Approval Maintenance
+        Gate::define('access_apmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT16');
+        });
+
 
         //=============================
         // Menu Master
