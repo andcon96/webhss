@@ -218,25 +218,9 @@ class SalesOrderController extends Controller
                 
             }
 
-            $sendSO = (new QxtendServices())->qxSOMaintenanceUpdate($request->all());
-            if($sendSO === false){
-                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($sendSO == 'nourl'){
-                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($sendSO[0] == 'error'){
-                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }
-
             DB::commit();
             alert()->success('Success', 'SO Updated')->persistent('Dismiss');
             return back();
-
         }catch(\Exception $e){
             DB::rollBack();
             alert()->error('Error', 'Failed to update so')->persistent('Dismiss');
