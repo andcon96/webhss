@@ -236,7 +236,9 @@ Route::group(['middleware' => ['auth']], function () {
         // Invoice Price Maintenance
         //================================
         Route::resource('invoiceprice', InvoicePriceController::class);
+        Route::get('invoiceprice/invoicepricedetail/{detailid}/historydetail/{id}', [InvoicePriceController::class,'viewHistory']);
         Route::get('invoiceprice/invoicepricedetail/{id}', [InvoicePriceController::class,'listdetail']);
+        Route::post('newinvoiceprice', [InvoicePriceController::class,'newinvoiceprice']);
         //================================
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\InvoicePrice;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SJHistTrip;
@@ -48,15 +49,22 @@ class SuratJalanLaporMTController extends Controller
                         ->where('id',$sj)
                         ->where('sj_truck_id',$truck)
                         ->firstOrFail();
-                        
-        return view('transaksi.sjcust.laporsj', compact('data','truck'));
+        
+        $invoiceprice = InvoicePrice::query()
+                        ->with('getActivePrice')
+                        ->where('ip_customership_id', $data->getSOMaster->getShipTo->id)
+                        ->where('ip_shipfrom_id', $data->getSOMaster->getShipFrom->id)
+                        ->where('ip_cust_id', $data->getSOMaster->getCOMaster->getCustomer->id)
+                        ->get();
+
+        
+        return view('transaksi.sjcust.laporsj', compact('data','truck','invoiceprice'));
     }
 
     public function updatesj(Request $request)
     {
         DB::beginTransaction();
         try{
-            dd($request->all());
             // Update Master
             $sjmstr = SuratJalan::findOrFail($request->idsjmstr);
             $sjmstr->sj_conf_remark = $request->remark;
@@ -87,20 +95,18 @@ class SuratJalanLaporMTController extends Controller
                 $somstr->save();
             }
             
-            // WSA Cek SO Exists / Tidak
-            $cekso = (new WSAServices())->wsacheckso($request->domain, $request->sonbr);
-            dd($cekso);
             // Kirim Qxtend
-            // $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
-
-            $soship = (new QxtendServices())->qxSOShip($request->all());
-            if($soship === false || $soship[0] == 'error'){
-                alert()->error('Error', 'Save Gagal, Error Qxtend')->persistent('Dismiss');
+            $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
+            if($pendinginvoice === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
                 DB::rollback();
                 return back();
-            }
-            if($soship == 'nourl'){
-                alert()->error('Error', 'Url Qxtend Belum disetup')->persistent('Dismiss');
+            }elseif($pendinginvoice == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($pendinginvoice[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
                 DB::rollback();
                 return back();
             }

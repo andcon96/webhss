@@ -194,15 +194,6 @@
             success: function(data){
                 $('#btnconf').show();
                 $('#addtable').html('').append(data);
-
-                console.log(type);
-                // if(type == 'BERAT'){
-                //     $('#container').css('display','none');
-                //     $('.tonase').css('display','');
-                //     $('.pricetot').removeClass('col-md-2');
-                //     $('.pricetot').addClass('col-md-3');
-                // }else if(type == 'TRIP'){
-                // }
                 $('.tonase').css('display','none');
                 $('.pricetot').removeClass('col-md-3');
                 $('.pricetot').addClass('col-md-2');
