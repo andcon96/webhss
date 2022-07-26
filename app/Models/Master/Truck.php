@@ -13,6 +13,12 @@ class Truck extends Model
     use HasFactory;
 
     public $table = 'truck';
+    protected $fillable = [
+        'truck_domain',
+        'truck_no_polis',
+        'truck_user_id',
+        'truck_pengurus_id'
+    ];
 
     public function getAllCheckInOut()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\Domain;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
 use App\Models\Master\User;
@@ -30,10 +31,10 @@ class TruckMTController extends Controller
         if($request->s_tipe){
             $data->where('truck_tipe_id',$request->s_tipe);
         }
-
+        $domain = Domain::groupBy('domain_code')->get();
         $data = $data->paginate(10);
 
-        return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck, 'tipe' => $tipe]);
+        return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck, 'tipe' => $tipe,'domain' => $domain]);
     }
 
     /**
@@ -44,10 +45,13 @@ class TruckMTController extends Controller
      */
     public function store(Request $request)
     {
+        
         $newTruck = new Truck();
+        $newTruck->truck_domain = $request->domain;
         $newTruck->truck_no_polis = $request->polis;
         $newTruck->truck_user_id = $request->driver;
         $newTruck->truck_pengurus_id = $request->pengurus;
+        $newTruck->truck_tipe_id = $request->tipetruck;
         $newTruck->save();
 
         
@@ -58,8 +62,9 @@ class TruckMTController extends Controller
     public function edit($id){
         $data = Truck::with('getUserDriver','getUserPengurus')->findOrFail($id);
         $user = User::get();
-
-        return view('setting.truck.edit',['data' => $data, 'user' => $user]);
+        $tipetruck = TipeTruck::get();
+        $domain = Domain::groupby('domain_code')->get();
+        return view('setting.truck.edit',['data' => $data, 'user' => $user, 'domain' => $domain,'tipetruck' => $tipetruck]);
     }
 
 
@@ -74,13 +79,16 @@ class TruckMTController extends Controller
     {
         $driver = $request->driver;
         $pengurus = $request->pengurus;
-
+        $domain = $request->domain;
         DB::beginTransaction();
 
         try{
             $truck = Truck::findOrFail($id);
+            $truck->truck_domain = $domain;
+            $truck->truck_no_polis = $request->nopol;
             $truck->truck_user_id = $driver;
             $truck->truck_pengurus_id = $pengurus;
+            $truck->truck_tipe_id = $request->tipetruck;
             if ($truck->isDirty()) {
                 $truck->save();
             }

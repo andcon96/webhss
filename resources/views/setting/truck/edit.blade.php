@@ -15,9 +15,13 @@
         <input type="hidden" name="prevurl" value="{{url()->previous()}}">
         <div class="modal-body">
             <div class="form-group row">
-                <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
+                <label for="domain" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
                 <div class="col-md-7">
-                    <input id="truck" type="text" class="form-control" autocomplete="off" name="truck" value="{{$data->truck_domain}}" readonly>
+                    <select id="domain" class="form-control domain" name="domain" autofocus required autocomplete="off">
+                        @foreach($domain as $dm)
+                            <option value="{{$dm->domain_code}}" {{$dm->domain_code == $data->truck_domain ? 'Selected' : ''}}>{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
@@ -42,6 +46,16 @@
                     <select name="pengurus" id="pengurus" class="form-control"> 
                         @foreach ($user as $pengurus)
                             <option value="{{$pengurus->id}}" {{$pengurus->id == $data->truck_pengurus_id ? 'Selected' : ''}} >{{$pengurus->username}} - {{$pengurus->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
+                <div class="col-md-7">
+                    <select name="tipetruck" id="tipetruck" class="form-control"> 
+                        @foreach ($tipetruck as $tt)
+                            <option value="{{$tt->id}}" {{$tt->id == $data->truck_tipe_id ? 'Selected' : ''}} >{{$tt->tt_code}} - {{$tt->tt_desc}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -77,14 +91,15 @@
             document.getElementById("qxpath").readOnly = true;
         }
     });
-
-    $('#driver,#pengurus').select2({
+    
+    $('#tipetruck,#domain,#driver,#pengurus').select2({
         placeholder: 'Pilih Driver',
         allowClear: true
     });
-
+    
     $('#submit').on("submit", function() {
         document.getElementById('btnconf').style.display = 'none';
+        document.getElementById('btnback').style.display = 'none';
         document.getElementById('btnloading').style.display = '';
     });
 </script>
