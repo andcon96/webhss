@@ -157,6 +157,7 @@
                                     <th>Item Part</th>
                                     <th>Item UM</th>
                                     <th>Qty Ship</th>
+                                    <th>Qty Angkut</th>
                                     <th>Qty Confirm</th>
                                 </tr>
                             </thead>
