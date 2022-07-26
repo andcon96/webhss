@@ -15,7 +15,7 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->id();
-            $table->string('cust_domain');
+            
             $table->string('cust_code',15);
             $table->string('cust_desc');
             $table->string('cust_alt_desc')->nullable();

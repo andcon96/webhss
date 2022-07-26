@@ -69,7 +69,7 @@ class KerusakanLaporMTController extends Controller
 
     public function create()
     {
-        $this->authorize('create',[KerusakanMstr::class]);
+        // $this->authorize('create',[KerusakanMstr::class]);
         $jeniskerusakan = Kerusakan::get();
         $truck = Truck::withoutGlobalScopes()->get();
         return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck'));
@@ -77,7 +77,7 @@ class KerusakanLaporMTController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create',[KerusakanMstr::class]);
+        // $this->authorize('create',[KerusakanMstr::class]);
         if(Session::get('domain') != 'HSS'){
             alert()->error('Error', 'Not Allowed')->persistent('Dismiss');
             return back();
@@ -121,6 +121,7 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_mstr->kr_date = $request->tgllapor;
                 $kerusakan_mstr->kr_status = 'New';
                 $kerusakan_mstr->kr_domain = Session::get('domain');
+                $kerusakan_mstr->kr_km = $request->km;
                 $kerusakan_mstr->save();
 
                 $id = $kerusakan_mstr->id;
@@ -153,7 +154,7 @@ class KerusakanLaporMTController extends Controller
         $data = KerusakanMstr::with(["getDetail.getStrukturTrans",'getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
         
-        $this->authorize('update',[KerusakanMstr::class,$data]);
+        // $this->authorize('update',[KerusakanMstr::class,$data]);
 
         return view('transaksi.kerusakan.edit', compact('data', 'jeniskerusakan'));
     }
@@ -167,7 +168,7 @@ class KerusakanLaporMTController extends Controller
             alert()->error('Error', 'Report is closed')->persistent('Dismiss');
             return back();
         }
-        $this->authorize('update',[KerusakanMstr::class,$data]);
+        // $this->authorize('update',[KerusakanMstr::class,$data]);
         DB::beginTransaction();
         try {
             foreach ($request->iddetail as $key => $datas) {
@@ -200,7 +201,7 @@ class KerusakanLaporMTController extends Controller
     public function destroy(Request $request)
     {
         
-        $this->authorize('delete',[KerusakanMstr::class]);
+        // $this->authorize('delete',[KerusakanMstr::class]);
 
         DB::beginTransaction();
         try {
@@ -232,7 +233,7 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignkr($id, Request $request)
     {
-        $this->authorize('custompolicy',[KerusakanMstr::class]);
+        // $this->authorize('custompolicy',[KerusakanMstr::class]);
         
         $nopol = $request->truck;
         $wonbr = $request->sonbr;
@@ -355,7 +356,7 @@ class KerusakanLaporMTController extends Controller
     public function upassignremarkskr($id, Request $request)
     {
         
-        $this->authorize('custompolicy',[KerusakanMstr::class]);
+        // $this->authorize('custompolicy',[KerusakanMstr::class]);
         DB::beginTransaction();
         try{
             foreach($request->iddetail as $key => $data){

@@ -15,7 +15,7 @@ class CreateItemTable extends Migration
     {
         Schema::create('item', function (Blueprint $table) {
             $table->id();
-            $table->string('item_domain');
+            
             $table->string('item_part','50');
             $table->string('item_desc');
             $table->string('item_um',2)->nullable();

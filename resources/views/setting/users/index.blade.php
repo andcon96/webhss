@@ -75,7 +75,7 @@
 
         <div class="modal-body">
           <div class="form-group row">
-            <label for="domain" class="col-md-3 col-form-label text-md-right">Domain</label>
+            {{-- <label for="domain" class="col-md-3 col-form-label text-md-right">Domain</label>
             <div class="col-md-7">
               <select id="domain" class="form-control role" name="domain" required autofocus>
                 <option value=""> Select Data </option>
@@ -83,7 +83,7 @@
                 <option value="{{$domains->domain_code}}">{{$domains->domain_code}} -- {{$domains->domain_desc}}</option>
                 @endforeach
               </select>
-            </div>
+            </div> --}}
           </div>
           <div class="form-group row">
             <label for="username" class="col-md-3 col-form-label text-md-right">Kode User</label>
@@ -162,7 +162,7 @@
           <input type="hidden" name='d_suppid' id='t_suppid'>
           <input type="hidden" name='d_suppname' id='t_suppname'>
           <input type="hidden" name="lastPage" value="{{$users->lastPage()}}" />
-          <div class="form-group row">
+          {{-- <div class="form-group row">
             <label for="t_domain" class="col-md-3 col-form-label text-md-right">Domain</label>
             <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
               <select id="t_domain" class="form-control roletype" name="domain" required autofocus>
@@ -172,7 +172,7 @@
                 @endforeach
               </select>
             </div>
-          </div>
+          </div> --}}
           <div class="form-group row">
             <label for="d_uname" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-7 {{ $errors->has('d_uname') ? 'has-error' : '' }}">
@@ -388,7 +388,7 @@
     var username = $(this).data('uname');
     var name = $(this).data('name');
     var dept = $(this).data('dept');
-    var domain = $(this).data('domain');
+    // var domain = $(this).data('domain');
     var email = $(this).data('email');
 
     var role_type = $(this).data('roletype');
@@ -401,7 +401,7 @@
     // document.getElementById("d_domain").value = domain;
     document.getElementById("t_role").value = role;
     $('#e_dept').val(dept);
-    $('#t_domain').val(domain).trigger('change');
+    // $('#t_domain').val(domain).trigger('change');
 
     jQuery.ajax({
       type: "get",
@@ -425,7 +425,10 @@
   });
 
   $(document).ready(function() {
-    $("#domain,#role,#roletype,.roletype").select2({
+    // $("#domain,#role,#roletype,.roletype").select2({
+    //   width: '100%'
+    // });
+    $("#role,#roletype,.roletype").select2({
       width: '100%'
     });
 

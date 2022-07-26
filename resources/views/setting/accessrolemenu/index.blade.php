@@ -78,9 +78,23 @@
             </h5>
             <hr>
           </div>
-
           <div class="form-group">
-            <h6>
+            <h5>
+              <center><strong>All Role</strong></center>
+              </h5>
+              <hr>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('All Role') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbAll">
+                <input type="checkbox" id="cbAll" value="SS" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>          
+          <div class="form-group">
+            <h5>
               <center><strong>Sales Order</strong></center>
               </h5>
               <hr>
@@ -205,25 +219,159 @@
               </label>
             </div>
           </div>
-          
-          
           <div class="form-group">
-            <h6>
-              <center><strong>Fitur Tambahan</strong></center>
-            </h6>
-            <hr>
+            <h5>
+              <center><strong>Settings</strong></center>
+              </h5>
+              <hr>
           </div>
 
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Pindah Domain') }}</label>
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('User Maintenance') }}</label>
             <div class="col-md-6">
-              <label class="switch" for="cbPdDomain">
-                <input type="checkbox" id="cbPdDomain" name="cbPdDomain" value="PD01" />
+              <label class="switch" for="cbMT01">
+                <input type="checkbox" id="cbMT01" name="cbMT01" value="MT01" />
                 <div class="slider round"></div>
               </label>
             </div>
           </div>
-
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Role Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT02">
+                <input type="checkbox" id="cbMT02" name="cbMT02" value="MT02" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Role Menu Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT03">
+                <input type="checkbox" id="cbMT03" name="cbMT03" value="MT03" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Customer Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT04">
+                <input type="checkbox" id="cbMT04" name="cbMT04" value="MT04" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Ship To Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT05">
+                <input type="checkbox" id="cbMT05" name="cbMT05" value="MT05" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Ship From Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT06">
+                <input type="checkbox" id="cbMT06" name="cbMT06" value="MT06" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Item Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT07">
+                <input type="checkbox" id="cbMT07" name="cbMT07" value="MT07" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Kerusakan Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT08">
+                <input type="checkbox" id="cbMT08" name="cbMT08" value="MT08" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Struktur Kerusakan Maintenance') }}</label>
+            <div class="col-md-6">  
+              <label class="switch" for="cbMT09">
+                <input type="checkbox" id="cbMT09" name="cbMT09" value="MT09" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Truck Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT10">
+                <input type="checkbox" id="cbMT10" name="cbMT10" value="MT10" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Tipe Truck Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT11">
+                <input type="checkbox" id="cbMT11" name="cbMT11" value="MT11" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Prefix Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT12">
+                <input type="checkbox" id="cbMT12" name="cbMT12" value="MT12" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('WSA Qxtend Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT13">
+                <input type="checkbox" id="cbMT13" name="cbMT13" value="MT13" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Rute Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT14">
+                <input type="checkbox" id="cbMT14" name="cbMT14" value="MT14" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Invoice Price Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT15">
+                <input type="checkbox" id="cbMT15" name="cbMT15" value="MT15" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Approval Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT16">
+                <input type="checkbox" id="cbMT16" name="cbMT16" value="MT16" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
+          
         </div>
 
         <div class="modal-footer">
@@ -244,6 +392,66 @@
 
 <!-- Pass Value Modal Edit & Checkbox Setting -->
 <script type="text/javascript">
+  $(document).on('change','#cbAll',function(e){
+    if(document.getElementById("cbAll").checked == true)
+    {
+        document.getElementById("cbSOMT").checked = true; 
+        document.getElementById("cbCOMT").checked = true; 
+        document.getElementById("cbSJMT").checked = true;  
+        document.getElementById("cbTripBrowse").checked = true;
+        document.getElementById("cbTripLapor").checked = true;
+        document.getElementById("cbSJLapor").checked = true;  
+        document.getElementById("cbKerusakan").checked = true;
+        document.getElementById("cbBiaya").checked = true;  
+        document.getElementById("cbDRInOut").checked = true; 
+        document.getElementById("cbRPMT").checked = true;  
+        document.getElementById("cbMT01").checked = true;  
+        document.getElementById("cbMT02").checked = true;  
+        document.getElementById("cbMT03").checked = true;  
+        document.getElementById("cbMT04").checked = true;  
+        document.getElementById("cbMT05").checked = true;  
+        document.getElementById("cbMT06").checked = true;  
+        document.getElementById("cbMT07").checked = true;  
+        document.getElementById("cbMT08").checked = true;  
+        document.getElementById("cbMT09").checked = true;  
+        document.getElementById("cbMT10").checked = true;  
+        document.getElementById("cbMT11").checked = true;  
+        document.getElementById("cbMT12").checked = true;  
+        document.getElementById("cbMT13").checked = true;  
+        document.getElementById("cbMT14").checked = true;  
+        document.getElementById("cbMT15").checked = true;  
+        document.getElementById("cbMT16").checked = true;  
+    }
+    else{
+      document.getElementById("cbSOMT").checked = false; 
+        document.getElementById("cbCOMT").checked = false; 
+        document.getElementById("cbSJMT").checked = false;  
+        document.getElementById("cbTripBrowse").checked = false;
+        document.getElementById("cbTripLapor").checked = false;
+        document.getElementById("cbSJLapor").checked = false;  
+        document.getElementById("cbKerusakan").checked = false;
+        document.getElementById("cbBiaya").checked = false;  
+        document.getElementById("cbDRInOut").checked = false; 
+        document.getElementById("cbRPMT").checked = false;  
+        document.getElementById("cbMT01").checked = false;  
+        document.getElementById("cbMT02").checked = false;  
+        document.getElementById("cbMT03").checked = false;  
+        document.getElementById("cbMT04").checked = false;  
+        document.getElementById("cbMT05").checked = false;  
+        document.getElementById("cbMT06").checked = false;  
+        document.getElementById("cbMT07").checked = false;  
+        document.getElementById("cbMT08").checked = false;  
+        document.getElementById("cbMT09").checked = false;  
+        document.getElementById("cbMT10").checked = false;  
+        document.getElementById("cbMT11").checked = false;  
+        document.getElementById("cbMT12").checked = false;  
+        document.getElementById("cbMT13").checked = false;  
+        document.getElementById("cbMT14").checked = false;  
+        document.getElementById("cbMT15").checked = false;  
+        document.getElementById("cbMT16").checked = false;  
+    }
+  })
+
   $(document).on('click','.editUser',function(){ // Click to only happen on announce links
      
      //alert('tst');
@@ -317,15 +525,92 @@
             }else{
               document.getElementById("cbDRInOut").checked = false;
             }
-            if(totmenu.search("PD01") >= 0){
-              document.getElementById("cbPdDomain").checked = true;  
-            }else{
-              document.getElementById("cbPdDomain").checked = false;
-            }
+
             if(totmenu.search("RP01") >= 0){
               document.getElementById("cbRPMT").checked = true;  
             }else{
               document.getElementById("cbRPMT").checked = false;
+            }
+            if(totmenu.search("MT01") >= 0){
+              document.getElementById("cbMT01").checked = true;  
+            }else{
+              document.getElementById("cbMT01").checked = false;
+            }
+            
+            if(totmenu.search("MT02") >= 0){
+              document.getElementById("cbMT02").checked = true;  
+            }else{
+              document.getElementById("cbMT02").checked = false;
+            }
+            if(totmenu.search("MT03") >= 0){
+              document.getElementById("cbMT03").checked = true;  
+            }else{
+              document.getElementById("cbMT03").checked = false;
+            }
+            if(totmenu.search("MT04") >= 0){
+              document.getElementById("cbMT04").checked = true;  
+            }else{
+              document.getElementById("cbMT04").checked = false;
+            }
+            if(totmenu.search("MT05") >= 0){
+              document.getElementById("cbMT05").checked = true;  
+            }else{
+              document.getElementById("cbMT05").checked = false;
+            }
+            if(totmenu.search("MT06") >= 0){
+              document.getElementById("cbMT06").checked = true;  
+            }else{
+              document.getElementById("cbMT06").checked = false;
+            }
+            if(totmenu.search("MT07") >= 0){
+              document.getElementById("cbMT07").checked = true;  
+            }else{
+              document.getElementById("cbMT07").checked = false;
+            }
+            if(totmenu.search("MT08") >= 0){
+              document.getElementById("cbMT08").checked = true;  
+            }else{
+              document.getElementById("cbMT08").checked = false;
+            }
+            if(totmenu.search("MT09") >= 0){
+              document.getElementById("cbMT09").checked = true;  
+            }else{
+              document.getElementById("cbMT09").checked = false;
+            }
+            if(totmenu.search("MT10") >= 0){
+              document.getElementById("cbMT10").checked = true;  
+            }else{
+              document.getElementById("cbMT10").checked = false;
+            }
+            if(totmenu.search("MT11") >= 0){
+              document.getElementById("cbMT11").checked = true;  
+            }else{
+              document.getElementById("cbMT11").checked = false;
+            }
+            if(totmenu.search("MT12") >= 0){
+              document.getElementById("cbMT12").checked = true;  
+            }else{
+              document.getElementById("cbMT12").checked = false;
+            }
+            if(totmenu.search("MT13") >= 0){
+              document.getElementById("cbMT13").checked = true;  
+            }else{
+              document.getElementById("cbMT13").checked = false;
+            }
+            if(totmenu.search("MT14") >= 0){
+              document.getElementById("cbMT14").checked = true;  
+            }else{
+              document.getElementById("cbMT14").checked = false;
+            }
+            if(totmenu.search("MT15") >= 0){
+              document.getElementById("cbMT15").checked = true;  
+            }else{
+              document.getElementById("cbMT15").checked = false;
+            }
+            if(totmenu.search("MT16") >= 0){
+              document.getElementById("cbMT16").checked = true;  
+            }else{
+              document.getElementById("cbMT16").checked = false;
             }
           }
       });
