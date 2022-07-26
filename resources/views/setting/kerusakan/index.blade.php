@@ -58,7 +58,7 @@
                         <div class="form-group row">
                             <label for="code" class="col-md-3 col-form-label text-md-right">{{ __('Code') }}</label>
                             <div class="col-md-3">
-                                <input id="code" type="text" class="form-control" name="code" autocomplete="off" value="" required>
+                                <input id="code" type="text" class="form-control" name="code" autocomplete="off" value="{{$lastnumber}}" required readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -91,7 +91,7 @@
     </div>
 </div>
 
-<!--Create Modal-->
+<!--Edit Modal-->
 <div id="editModal" class="modal fade bd-example-modal-lg" role="dialog" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <!-- konten modal-->
@@ -241,14 +241,7 @@
     });
 
     $(document).ready(function() {
-        var cur_url = window.location.href;
-
-        let paramString = cur_url.split('?')[1];
-        let queryString = new URLSearchParams(paramString);
-
-        let truck = queryString.get('s_kerusakan');
-
-        $('#s_kerusakan').val(truck).trigger('change');
+       
     });
 </script>
 @endsection

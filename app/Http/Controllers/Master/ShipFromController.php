@@ -22,6 +22,7 @@ class ShipFromController extends Controller
         }
 
         $data = $data->orderBy('id','desc')->paginate(10);
+        
         return view('setting.customer.shipfrom.index', compact('data'));
     }
 
@@ -32,7 +33,24 @@ class ShipFromController extends Controller
      */
     public function create()
     {
-        return view('setting.customer.shipfrom.create');
+        $quernumber = ShipFrom::where('sf_code','like','SF%')->orderBy('sf_code','desc')->first();
+        $lastnumber = '';
+        
+        if($quernumber){
+            
+            $number = $quernumber->sf_code;
+            
+            $strangka = substr($number,(strpos($number,'F')+1),strlen($number));
+            
+            $newangka = (string)((int)$strangka +1);
+            $selisihangka = 5 - strlen($newangka);
+            
+            $lastnumber = 'SF'.str_pad($newangka,$selisihangka,0,STR_PAD_LEFT);
+        }
+        else{
+            $lastnumber = 'SF0001';
+        }
+        return view('setting.customer.shipfrom.create',compact('lastnumber'));
     }
 
     /**

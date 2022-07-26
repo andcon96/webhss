@@ -22,9 +22,27 @@ class KerusakanController extends Controller
         if($request->s_kerusakan){
             $data->where('id',$request->s_kerusakan);
         }
+        $quernumber = Kerusakan::where('kerusakan_code','like','KR%')->orderBy('kerusakan_code','desc')->first();
+        $lastnumber = '';
+        
+        if($quernumber){
+            
+            $number = $quernumber->kerusakan_code;
+            
+            $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
+            
+            $newangka = (string)((int)$strangka +1);
+            $selisihangka = 5 - strlen($newangka);
+            
+            $lastnumber = 'KR'.str_pad($newangka,$selisihangka,0,STR_PAD_LEFT);
+        }
+        else{
+            $lastnumber = 'KR0001';
+        }
+        
         $data = $data->paginate(10);
 
-        return view('setting.kerusakan.index',compact('data','kerusakan'));
+        return view('setting.kerusakan.index',compact('data','kerusakan','lastnumber'));
     }
 
     public function store(Request $request)

@@ -27,7 +27,7 @@
             <div class="form-group row">
                 <label for="sfcode" class="col-md-3 col-form-label text-md-right">{{ __('Ship From Code') }}</label>
                 <div class="col-md-2">
-                    <input id="sfcode" type="text" class="form-control" autocomplete="off" name="sfcode" value="" maxlength="6" required>
+                    <input id="sfcode" type="text" class="form-control" autocomplete="off" name="sfcode" value="{{$lastnumber}}" maxlength="6" required readonly>
                 </div>
             </div>
             <div class="form-group row">
