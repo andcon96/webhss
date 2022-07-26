@@ -662,7 +662,6 @@ class QxtendServices
 
   public function qxPendingInvoice($data)
   {
-    dd($data,$data['domain']);
     $qxwsa = Qxwsa::firstOrFail();
     if (is_null($qxwsa->qx_url)) {
       return 'nourl';
@@ -744,13 +743,12 @@ class QxtendServices
                     <soRmks>'.$data['remark'].'</soRmks>
                   </pendingInvoice>';
 
-                foreach ($data['line'] as $key => $datas) {
+                foreach ($data['iddetail'] as $key => $datas) {
                   $qdocbody .=    '<salesLine>
-                                    <operation>text</operation>
-                                    <line>999</line>
-                                    <sodPart>text</sodPart>
-                                    <sodQtyChg>999.99</sodQtyChg>
-                                    <sodListPr>999.99</sodListPr>
+                                    <operation>A</operation>
+                                    <sodPart>'.$data['part'][$key].'</sodPart>
+                                    <sodQtyChg>'.$data['qtyakui'][$key].'</sodQtyChg>
+                                    <sodListPr>'.$data['price'][$key].'</sodListPr>
                                   </salesLine>';
                 }
 
@@ -805,7 +803,6 @@ class QxtendServices
     if (is_bool($qdocResponse)) {
       return false;
     }
-    // dd($qdocResponse, $qdocRequest);
 
     $xmlResp = simplexml_load_string($qdocResponse);
 

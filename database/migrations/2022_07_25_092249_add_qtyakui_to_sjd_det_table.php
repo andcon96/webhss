@@ -14,7 +14,7 @@ class AddQtyakuiToSjdDetTable extends Migration
     public function up()
     {
         Schema::table('sjd_det', function (Blueprint $table) {
-            $table->decimal('sjd_qty_akui', 10, 2)->default(0)->after('sjd_qty_conf');
+            $table->decimal('sjd_qty_angkut', 10, 2)->default(0)->after('sjd_qty_conf');
         });
     }
 
@@ -26,7 +26,7 @@ class AddQtyakuiToSjdDetTable extends Migration
     public function down()
     {
         Schema::table('sjd_det', function (Blueprint $table) {
-            $table->dropColumn('sjd_qty_akui');
+            $table->dropColumn('sjd_qty_angkut');
         });
     }
 }

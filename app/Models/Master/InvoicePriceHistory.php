@@ -10,4 +10,9 @@ class InvoicePriceHistory extends Model
     use HasFactory;
 
     public $table = 'invoiceprice_history';
+    
+    public function getIP()
+    {
+        return $this->belongsTo(InvoicePrice::class, 'iph_ip_id', 'id');
+    }
 }

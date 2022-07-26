@@ -10,4 +10,29 @@ class InvoicePrice extends Model
     use HasFactory;
 
     public $table = 'invoiceprice';
+
+    public function getShipFrom()
+    {
+        return $this->belongsTo(ShipFrom::class, 'ip_shipfrom_id', 'id');
+    }
+
+    public function getShipTo()
+    {
+        return $this->belongsTo(CustomerShipTo::class, 'ip_customership_id', 'id');
+    }
+
+    public function getCustomer()
+    {
+        return $this->belongsTo(Customer::class, 'ip_cust_id', 'id');
+    }
+    
+    public function getHistory()
+    {
+        return $this->hasMany(InvoicePriceHistory::class,'iph_ip_id','id');
+    }
+    
+    public function getActivePrice()
+    {
+        return $this->hasOne(InvoicePriceHistory::class, 'iph_ip_id')->where('iph_is_active',1);
+    }
 }
