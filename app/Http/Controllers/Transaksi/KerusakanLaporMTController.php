@@ -86,6 +86,7 @@ class KerusakanLaporMTController extends Controller
     public function create()
     {
         // $this->authorize('create',[KerusakanMstr::class]);
+        
         $jeniskerusakan = Kerusakan::get();
         $truck = Truck::withoutGlobalScopes()->get();
         return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck'));
