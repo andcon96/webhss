@@ -32,11 +32,40 @@
         </div>
     </div>
     <div class="form-group row col-md-12">
+        <label for="s_km" class="col-md-2 col-form-label text-md-right">{{ __('Kilometer') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="s_km" type="text" class="form-control" name="s_km" value="{{ request()->input('s_km') }}" autofocus autocomplete="off">
+        </div>
+        <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('Status') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="s_status" class="form-control" name="s_status" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                <option value="Cancelled"> Cancelled </option>
+                <option value="Done"> Done </option>
+                <option value="Need Approval"> Need Approval </option>
+                <option value="New"> New </option>
+                <option value="Ongoing"> Ongoing </option>
+                <option value="Reject"> Reject </option>
+            </select>  
+        </div>
+
+    </div>
+    <div class="form-group row col-md-12">
+        <label for="s_datefrom" class="col-md-2 col-form-label text-md-right">{{ __('Tanggal Lapor From') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="s_datefrom" type="date" class="form-control" name="s_datefrom" value="{{ request()->input('s_datefrom') }}" autofocus autocomplete="off">
+        </div>
+        <label for="s_dateto" class="col-md-2 col-form-label text-md-right">{{ __('To') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <input id="s_dateto" type="date" class="form-control" name="s_dateto" value="{{ request()->input('s_dateto') }}" autofocus autocomplete="off">
+        </div>
+    </div>
+    <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" id="btnsearch" value="Search">Search</button>
             <button class="btn bt-action newUser" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
-        </div>
+        </div>        
     </div>
 </form>
 
@@ -93,7 +122,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#s_driver').select2({
+    $('#s_status,#s_driver').select2({
         width: '100%',
     });
     

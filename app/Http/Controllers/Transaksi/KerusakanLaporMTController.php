@@ -15,6 +15,7 @@ use App\Models\Master\Truck;
 use App\Models\Transaksi\KerusakanDetail;
 use App\Models\Transaksi\KerusakanMstr;
 use App\Models\Transaksi\KerusakanStukturTransaksi;
+use App\Models\Transaksi\KerusakanTindakan;
 use App\Services\CreateTempTable;
 use App\Services\QxtendServices;
 use App\Services\WSAServices;
@@ -37,6 +38,20 @@ class KerusakanLaporMTController extends Controller
         if ($request->s_krnbr) {
             $data->where('kr_nbr', $request->s_krnbr);
         }
+        if ($request->s_status) {
+            $data->where('kr_status', $request->s_status);
+        }
+        if ($request->s_km) {
+            $data->where('kr_km', $request->s_km);
+        }
+        if($request->s_datefrom){
+            $data->where('kr_date','>=',$request->s_datefrom);
+        }
+
+        if($request->s_dateto){
+            $data->where('kr_date','<=',$request->s_dateto);
+        }
+        
         if ($request->s_driver) {
             $data->whereRelation('getTruck', 'id', '=', $request->s_driver);
         }
@@ -78,11 +93,11 @@ class KerusakanLaporMTController extends Controller
     public function store(Request $request)
     {
         // $this->authorize('create',[KerusakanMstr::class]);
-        if(Session::get('domain') != 'HSS'){
-            alert()->error('Error', 'Not Allowed')->persistent('Dismiss');
-            return back();
-        }
-        else{
+        // if(Session::get('domain') != 'HSS'){
+        //     alert()->error('Error', 'Not Allowed')->persistent('Dismiss');
+        //     return back();
+        // }
+        // else{
 
             $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
             $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
@@ -146,7 +161,7 @@ class KerusakanLaporMTController extends Controller
                 alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
                 return back();
             }
-        }
+        // }
     }
 
     public function edit($id)
@@ -345,7 +360,10 @@ class KerusakanLaporMTController extends Controller
 
     public function assingremarkskr($id)
     {
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->findOrFail($id);
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getTindakan' => function($q) use ($id){
+            $q->orderBy('id','desc');
+        }])->findOrFail($id);
+        
         
         $jeniskerusakan = Kerusakan::get();
         $struktur = KerusakanStruktur::where('ks_isactive',1)->get();
@@ -355,16 +373,20 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignremarkskr($id, Request $request)
     {
-        
+        // dd($request->all());
         // $this->authorize('custompolicy',[KerusakanMstr::class]);
         DB::beginTransaction();
         try{
             foreach($request->iddetail as $key => $data){
                 if(!empty($request->remarks[$key])){
-                    KerusakanDetail::where('id',$data)->update(['krd_remarks' => $request->remarks[$key]]);
+                    $kt = new KerusakanTindakan();
+                    $kt->krt_krd_id = $data;
+                    $kt->krt_remarks = $request->remarks[$key];
+                    $kt->krt_date = $request->dateinput[$key];
+                    $kt->save();
                 }
             }
-
+            
             
             DB::commit();
             alert()->success('Success','Tindakan berhasil di assign');
@@ -379,4 +401,22 @@ class KerusakanLaporMTController extends Controller
         
         
     } 
+
+    public function krhistoryview($id,Request $request){
+        
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getTindakan' => function($q) use ($id){
+            $q->orderBy('id','desc');
+        }])->findOrFail($id);
+        $tindakanlist = [];
+        if($request->s_jeniskerusakan){
+            
+            $tindakanlist= KerusakanTindakan::with('getDetail','getDetail.getKerusakan')->where('krt_krd_id',$request->s_jeniskerusakan)->orderBy('krt_date','desc')->paginate(10);    
+        }
+        // dd($tindakanlist);
+        $id = $id;
+        $jeniskerusakan = Kerusakan::get();
+        $struktur = KerusakanStruktur::where('ks_isactive',1)->get();
+        return view('transaksi.kerusakan.assignkrremakrshistory', compact('id','data', 'jeniskerusakan', 'struktur','tindakanlist'));
+        
+    }
 }
