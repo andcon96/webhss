@@ -119,9 +119,15 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="polis" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
+                            <label for="domain" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
                             <div class="col-md-7">
-                                <input id="polis" type="text" class="form-control" name="polis" autocomplete="off" value="{{Session::get('domain')}}" readonly>
+                                <select id="domain" class="form-control domain" name="domain" autofocus required autocomplete="off">
+                                    
+                                    @foreach($domain as $dm)
+                                    <option value="{{$dm->domain_code}}">{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
+                                    @endforeach
+                                </select>
+                                
                             </div>
                         </div>
                         <div class="form-group row">
@@ -148,6 +154,17 @@
                                     <option value=""> --Select Data-- </option>
                                     @foreach($user as $pengurus)
                                     <option value="{{$pengurus->id}}">{{$pengurus->username}} -- {{$pengurus->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe truck') }}</label>
+                            <div class="col-md-7">
+                                <select id="tipetruck" class="form-control user" name="tipetruck" autofocus required autocomplete="off">
+                                    
+                                    @foreach($tipe as $tt)
+                                    <option value="{{$tt->id}}">{{$tt->tt_code}} -- {{$tt->tt_desc}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -218,7 +235,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('.driver, #s_truck, .user, #s_tipe').select2({
+    $('.domain, .driver, #s_truck, .user, #s_tipe').select2({
         width: '100%'
     });
 

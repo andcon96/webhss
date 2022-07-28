@@ -126,6 +126,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('laporkerusakan/upassignkr/{id}', [KerusakanLaporMTController::class, 'upassignkr'])->name('UpAssignKR');
         Route::get('laporkerusakan/assingremarkskr/{id}', [KerusakanLaporMTController::class, 'assingremarkskr'])->name('assignRemarks');
         Route::put('laporkerusakan/upassignremarkskr/{id}', [KerusakanLaporMTController::class, 'upassignremarkskr'])->name('UpAssignRemarks');
+        Route::get('laporkerusakan/krhistory/{id}', [KerusakanLaporMTController::class, 'krhistoryview'])->name('krhistview');
+        // Route::get('laporkerusakan/krhistory/{id}', [KerusakanLaporMTController::class, 'krhistorytable'])->name('krhisttable');
     });
 
     Route::group(['middleware'=>'can:access_check_in_out'], function(){

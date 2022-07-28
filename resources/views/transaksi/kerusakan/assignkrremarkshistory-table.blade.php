@@ -1,36 +1,29 @@
+@if(!empty($tindakanlist)))
 <div class="table-responsive offset-1 col-lg-10 col-md-12 mt-3" style="display: inline-table">
     <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="25%">Jenis Kerusakan</th>
-                <th width="25%">Tindakan Sebelumnya</th>
-                <th width="12%">Tanggal Sebelumnya</th>
-                <th width="25%">Tindakan Selanjutnya</th>
-                <th width="12%">Tanggal Selanjutnya</th>
-                
+                <th width="45%">Jenis Kerusakan</th>
+                <th width="45%">Tindakan</th>
+                <th width="10%">Tanggal</th>
             </tr>
         </thead>
         <tbody id="edittable">
-            @forelse ($data->getDetail as $key => $datas)
+            
+            @forelse ($tindakanlist as $key => $datas)
             
             <tr>
                 <td>
-                    <input type="text" class="form-control" value="{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}" readonly>
+                    <input type="text" class="form-control" value="{{$datas->getDetail->getKerusakan->kerusakan_code}} -- {{$datas->getDetail->getKerusakan->kerusakan_desc}}" readonly>
                     <input type="hidden" name="operation[]" class="operation" value="M">
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
                 </td>
                 <td>
-                    <textarea type="text" class="form-control"  readonly>{{isset($datas->getTindakan[0]->krt_remarks) ? $datas->getTindakan[0]->krt_remarks : ''}}</textarea>
+                    <textarea type="text" class="form-control"  readonly>{{isset($datas->krt_remarks) ? $datas->krt_remarks : ''}}</textarea>
                 </td>
                 <td>
-                    <input type="date" class="form-control" value="{{isset($datas->getTindakan[0]->krt_date) ? $datas->getTindakan[0]->krt_date : ''}}" readonly>
-                </td>
-                <td>
-                    <textarea type="text" class="form-control"  name="remarks[]"></textarea>
-                </td>
-                <td>
-                    <input type="date" class="form-control" name="dateinput[]">
+                    <input type="date" class="form-control" value="{{isset($datas->krt_date) ? $datas->krt_date : ''}}" readonly>
                 </td>
                 {{-- <td style="vertical-align:middle;text-align:center;">  --}}
                     
@@ -46,6 +39,7 @@
                 <td colspan='8' style="color:red;text-align:center;"> No Data Avail</td>
             </tr>
             @endforelse
+            
         </tbody>
         {{-- <tfoot>
             <tr>
@@ -55,4 +49,6 @@
             </tr>
         </tfoot> --}}
     </table>
+    {{$tindakanlist->withQueryString()->links()}}
 </div>
+@endif

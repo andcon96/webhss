@@ -29,6 +29,7 @@
         </div>
 
         <div class="modal-footer">
+            <a href="{{ route('shipfrom.index') }}" id="btnback" class="btn btn-success bt-action">Back</a>
             <button type="submit" class="btn btn-success bt-action" id="btnconf">Save</button>
             <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                 <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
@@ -44,6 +45,7 @@
 <script type="text/javascript">
     $('#submit').on("submit", function() {
         document.getElementById('btnconf').style.display = 'none';
+        document.getElementById('btnback').style.display = 'none';
         document.getElementById('btnloading').style.display = '';
     });
 </script>

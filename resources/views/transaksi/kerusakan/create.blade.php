@@ -34,7 +34,7 @@
             <div class="col-md-3">
                 <input type="text" class="form-control" name="domain" value="{{Session::get('domain')}}" readonly>
             </div>
-            <label for="truckdriver" class="col-md-2 col-form-label text-md-right">KM</label>
+            <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Kilometer</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="km" required>
             </div>
