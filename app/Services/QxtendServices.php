@@ -798,7 +798,7 @@ class QxtendServices
       }
       curl_close($curl);
     }
-
+    dd($qdocResponse, $qdocRequest);
     if (is_bool($qdocResponse)) {
       return false;
     }
