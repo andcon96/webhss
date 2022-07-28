@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware'=>'can:access_report'],function(){
         Route::get('/report/sangubymonth', [GenerateReportController::class, 'reportsangu'])->name('reportSangu');
+        Route::get('/report/updatepreview', [GenerateReportController::class, 'updatepreview'])->name('updatePreview');
+        Route::get('/report/printpdf', [GenerateReportController::class, 'printpdf'])->name('reportPerNopol');
         Route::resource('report', GenerateReportController::class);
     });
 
