@@ -705,7 +705,7 @@ class QxtendServices
                         <qcom:ttContext>
                           <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                           <qcom:propertyName>version</qcom:propertyName>
-                          <qcom:propertyValue>eB2_3</qcom:propertyValue>
+                          <qcom:propertyValue>eB2_4</qcom:propertyValue>
                         </qcom:ttContext>
                         <qcom:ttContext>
                           <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
@@ -798,7 +798,7 @@ class QxtendServices
       }
       curl_close($curl);
     }
-    dd($qdocResponse, $qdocRequest);
+    
     if (is_bool($qdocResponse)) {
       return false;
     }
