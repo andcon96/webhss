@@ -75,17 +75,17 @@ class CreateTempTable
         try {
             // $prefix = Prefix::firstOrFail();
 
-            $prefix = Domain::where('domain_code', Session::get('domain'))->firstOrFail();
+            $prefix = Prefix::firstOrFail();
 
-            $cektahun = substr($prefix->domain_kr_rn, 0, 2);
+            $cektahun = substr($prefix->prefix_kr_rn, 0, 2);
             $yearnow = date('y');
-
+            
             if ($cektahun != $yearnow) {
                 $rn_new = $yearnow . '0001';
             } else {
-                $rn_new = $prefix->domain_kr_rn + 1;
+                $rn_new = $prefix->prefix_kr_rn + 1;
             }
-            $newprefix = $prefix->domain_kr_prefix . $rn_new;
+            $newprefix = $prefix->prefix_kr . $rn_new;
 
             return $newprefix;
         } catch (Exception $e) {

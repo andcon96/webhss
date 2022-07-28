@@ -15,7 +15,7 @@ class CustomerShipTo extends Model
     protected $fillable = [
         'cs_cust_code',
         'cs_shipto',
-        'cs_domain',
+        
         'cs_shipto_name',
         'cs_address'
     ];

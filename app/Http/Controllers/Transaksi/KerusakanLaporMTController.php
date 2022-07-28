@@ -10,6 +10,7 @@ use App\Models\Master\Domain;
 use App\Models\Master\Kerusakan;
 use App\Models\Master\KerusakanStruktur;
 use App\Models\Master\KerusakanStrukturDetail;
+use App\Models\Master\Prefix;
 use App\Models\Master\StrukturKerusakan;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\KerusakanDetail;
@@ -100,6 +101,7 @@ class KerusakanLaporMTController extends Controller
         // else{
 
             $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
+            $domainnow = $checktruck->truck_domain;
             $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
                 $e->where('kr_status','New');
                 $e->orwhere('kr_status','Need Approval');
@@ -135,7 +137,7 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_mstr->kr_truck = $request->truck;
                 $kerusakan_mstr->kr_date = $request->tgllapor;
                 $kerusakan_mstr->kr_status = 'New';
-                $kerusakan_mstr->kr_domain = Session::get('domain');
+                $kerusakan_mstr->kr_domain = $domainnow;
                 $kerusakan_mstr->kr_km = $request->km;
                 $kerusakan_mstr->save();
 
@@ -148,8 +150,9 @@ class KerusakanLaporMTController extends Controller
                 }
 
                 
-                $prefix = Domain::where('domain_code',Session::get('domain'))->firstOrFail();
-                $prefix->domain_kr_rn = substr($getrn, 2, 6);
+                $prefix = Prefix::firstOrFail();
+                
+                $prefix->prefix_kr_rn = substr($getrn, 2, 6);
                 $prefix->save();
 
                 DB::commit();

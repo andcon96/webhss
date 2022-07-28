@@ -40,7 +40,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = Session::get('domain');
+        $domain = "HSS";
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' .
@@ -100,7 +100,7 @@ class WSAServices
                 foreach($dataloop as $datas){
                     $item = Item::updateOrCreate([
                         'item_part' => $datas->t_part,
-                        'item_domain' => $datas->t_domain
+
                     ]);
                     
                     $item->item_desc = $datas->t_desc;
@@ -132,7 +132,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = Session::get('domain');
+        $domain = 'HSS';
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -195,7 +195,7 @@ class WSAServices
                 foreach($dataloop as $datas){
                     $cust = Customer::updateOrCreate([
                         'cust_code' => $datas->t_cmaddr,
-                        'cust_domain' => $domain
+                        
                     ]);
                     $cust->cust_desc = $datas->t_cmname;
                     $cust->cust_alt_desc = $datas->t_cmname;
@@ -226,7 +226,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = Session::get('domain');
+        $domain = 'HSS';
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -287,9 +287,9 @@ class WSAServices
             try{
                 
                 foreach($dataloop as $datas){
-                // dd($datas->domain,$datas->t_)    
+
                      CustomerShipTo::updateOrCreate([
-                        'cs_domain' => $datas->t_domain,
+                        
                         'cs_cust_code' => $datas->t_custcode,
                         'cs_shipto' => $datas->t_shipto,
 
@@ -325,7 +325,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = Session::get('domain');
+        $domain = "HSS";
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">

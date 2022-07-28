@@ -20,24 +20,24 @@ class KerusakanPolicy
 
     public function view(User $user)
     {
-        return Session::get('domain') == 'HSS' ;
+        // return Session::get('domain') == 'HSS' ;
     }
     public function update(User $user, KerusakanMstr $krmstr)
     {
-        return Session::get('domain') == 'HSS' && (($krmstr->kr_status == 'New')||($krmstr->kr_status == 'Done'));
+        // return Session::get('domain') == 'HSS' && (($krmstr->kr_status == 'New')||($krmstr->kr_status == 'Done'));
     }
     public function delete(User $user)
     {
-        return Session::get('domain') == 'HSS';
+        // return Session::get('domain') == 'HSS';
     }
     public function create(User $user)
     {
-        return Session::get('domain') == 'HSS';
+        // return Session::get('domain') == 'HSS';
     }
     
     public function custompolicy(User $user)
     {
-        return Session::get('domain') == 'HSS';
+        // return Session::get('domain') == 'HSS';
     }
 
 }

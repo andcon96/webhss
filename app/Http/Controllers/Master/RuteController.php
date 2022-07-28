@@ -173,9 +173,9 @@ class RuteController extends Controller
 
     public function viewHistory($oldid,$id)
     {
-
+        
         $history_data = RuteHistory::with(['getRute.getShipTo','getRute.getShipFrom','getRute.getTipe'])
-        ->where('history_rute_id',$id)->whereRelation('getRute.getShipTo','cs_domain',Session::get('domain'))->orderBy('history_is_active','desc')->orderBy('history_last_active','desc')->get();
+        ->where('history_rute_id',$id)->orderBy('history_is_active','desc')->orderBy('history_last_active','desc')->get();
         $rute = Rute::with('getShipFrom','getTipe','getShipTo')->where('id',$id)->first();
         $id = $oldid;
         return view('setting.rute.indexhistory', compact('history_data','rute','id'));
