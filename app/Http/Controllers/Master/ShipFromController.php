@@ -43,7 +43,7 @@ class ShipFromController extends Controller
             $strangka = substr($number,(strpos($number,'-')+1),strlen($number));
             
             $newangka = (string)((int)$strangka +1);
-            $selisihangka = 2 - strlen($newangka);
+            $selisihangka = 3 - strlen($newangka);
             
             $lastnumber = 'SBY-'.str_pad($newangka,$selisihangka,0,STR_PAD_LEFT);
         }
