@@ -14,48 +14,51 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, WithStyles 
+class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, WithStyles
 {
-    public function __construct($datefrom,$dateto)
+    public function __construct($datefrom, $dateto)
     {
         $this->datefrom      = $datefrom;
         $this->dateto        = $dateto;
     }
-    
-    public function view() : view
+
+    public function view(): view
     {
         $datefrom    = $this->datefrom;
         $dateto      = $this->dateto;
 
         $data = SuratJalan::query();
 
-        if($datefrom){
-            $data->where('sj_eff_date','>=',$datefrom);
+        if ($datefrom) {
+            $data->where('sj_eff_date', '>=', $datefrom);
         }
 
-        if($dateto){
-            $data->where('sj_eff_date','<=',$dateto);
+        if ($dateto) {
+            $data->where('sj_eff_date', '<=', $dateto);
         }
 
-        $data = $data->with(['getTruck.getUserDriver','getTruck.getTipe'])
-                    //  ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                    //  ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
-                     ->groupBy('sj_truck_id','sj_eff_date')
-                     ->selectRaw('sj_truck_id,sj_eff_date,sum(sj_default_sangu) as sangu')
-                     ->get();
+        $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
+            //  ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+            //  ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
+            ->where('sj_status', 'Closed')
+            ->groupBy('sj_truck_id', 'sj_eff_date')
+            ->selectRaw('sj_truck_id,sj_eff_date,sum(sj_default_sangu) as sangu')
+            ->get();
 
-        $listtruck = Truck::with(['getTipe','getUserDriver'])
-                            // ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-                            // ->orWhereRelation('getTipe', 'tt_code', '3EXL')
-                            ->get();
-        
+        $listtruck = Truck::with(['getTipe', 'getUserDriver'])
+            // ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
+            // ->orWhereRelation('getTipe', 'tt_code', '3EXL')
+            ->get();
+
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod(new DateTime($datefrom), $interval, new DateTime($dateto));
 
         // dd($data);
 
-        return view('transaksi.laporan.excel.report-loosing-hsst',
-                    compact('data','listtruck','period','datefrom','dateto'));
+        return view(
+            'transaksi.laporan.excel.report-loosing-hsst',
+            compact('data', 'listtruck', 'period', 'datefrom', 'dateto')
+        );
     }
 
     public function styles(Worksheet $sheet)
@@ -72,7 +75,7 @@ class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, W
     {
         return [
             'A' => 20,
-            'B' => 30,           
+            'B' => 30,
         ];
     }
 }

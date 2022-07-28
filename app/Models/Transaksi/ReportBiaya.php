@@ -25,12 +25,12 @@ class ReportBiaya extends Model
         parent::boot();
         
         self::creating(function($model){
-            $model->rb_domain = Session::get('domain');
+            // $model->rb_domain = Session::get('domain');
         });
 
         self::addGlobalScope(function(Builder $builder){
             // $builder->where('user_id', '=', Auth()->user()->id);
-            $builder->where('rb_domain', Session::get('domain'));
+            // $builder->where('rb_domain', Session::get('domain'));
             $builder->orderBy('created_at','DESC');
         });
     }
