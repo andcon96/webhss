@@ -87,7 +87,9 @@ class WSAServices
             }
             curl_close($curl);
         }
-
+        if(is_bool($qdocResponse)){
+            return false;
+        }
         $xmlResp = simplexml_load_string($qdocResponse);
 
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
@@ -179,7 +181,9 @@ class WSAServices
             }
             curl_close($curl);
         }
-
+        if(is_bool($qdocResponse)){
+            return false;
+        }
         $xmlResp = simplexml_load_string($qdocResponse);
 
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
@@ -273,7 +277,9 @@ class WSAServices
             }
             curl_close($curl);
         }
-
+        if(is_bool($qdocResponse)){
+            return false;
+        }
         $xmlResp = simplexml_load_string($qdocResponse);
 
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
@@ -373,9 +379,12 @@ class WSAServices
             }
             curl_close($curl);
         }
+        if(is_bool($qdocResponse)){
+            return false;
+        }
 
         $xmlResp = simplexml_load_string($qdocResponse);
-
+        
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
         
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
@@ -473,15 +482,17 @@ class WSAServices
             }
             curl_close($curl);
         }
-
+        if(is_bool($qdocResponse)){
+            return false;
+        }
         $xmlResp = simplexml_load_string($qdocResponse);
-
-        $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
-        
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         if(empty($dataloop)){
             return false;
         }
+        $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
+        
+
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
         
         if($qdocResult == 'true'){
