@@ -13,12 +13,14 @@ class CustomerOrderPolicy
 
     public function view(User $user, CustomerOrderMstr $comstr)
     {
-        return $comstr->co_domain == Session::get('domain');
+        // return $comstr->co_domain == Session::get('domain');
+        return true;
     }
 
     public function update(User $user, CustomerOrderMstr $comstr)
     {
-        return $comstr->co_domain == Session::get('domain');
+        // return $comstr->co_domain == Session::get('domain');
+        return true;
     }
 
 }
