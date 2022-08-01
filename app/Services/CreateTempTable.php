@@ -250,7 +250,7 @@ class CreateTempTable
             ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
             ->get();
         
-        dd($rbhist,$data);
+        // dd($rbhist,$data);
         
 
         $listtruck = Truck::with(['getTipe', 'getUserDriver'])
