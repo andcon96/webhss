@@ -159,6 +159,7 @@
                                     <th>Qty Ship</th>
                                     <th>Qty Angkut</th>
                                     <th>Qty Confirm</th>
+                                    <th>Price QAD</th>
                                 </tr>
                             </thead>
                             <tbody id="bodydetail">

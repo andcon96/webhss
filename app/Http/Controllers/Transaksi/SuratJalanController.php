@@ -230,6 +230,7 @@ class SuratJalanController extends Controller
                 $output .= '<td>'.$datas->sjd_qty_ship.'</td>';
                 $output .= '<td>'.$datas->sjd_qty_angkut.'</td>';
                 $output .= '<td>'.$datas->sjd_qty_conf.'</td>';
+                $output .= '<td>'.$datas->sjd_price.'</td>';
                 $output .= '</tr>';
             }
         }
