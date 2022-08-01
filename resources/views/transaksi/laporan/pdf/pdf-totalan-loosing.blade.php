@@ -95,20 +95,20 @@
             @foreach ($listtruck as $trucks)
                 @php($totalSanguTruck = $data->where('sj_truck_id',$trucks->id)->sum('totalSangu'))
                 @php($defaultSanguTruck = $data->where('sj_truck_id',$trucks->id)->sum('defaultSangu'))
-                @php($klaimTruck = $rbhist->where('rb_truck_id',$trucks->id)->sum('total'))
+                @php($extraBiayaSangu = $rbhist->where('rb_truck_id',$trucks->id)->sum('total'))
                 <tr>
                     <td>{{$trucks->getUserDriver->name ?? ''}}</td>
                     <td>{{$trucks->truck_no_polis}}</td>
-                    <td>{{number_format($totalSanguTruck,0)}}</td>
+                    <td>{{number_format($totalSanguTruck + $extraBiayaSangu,0)}}</td>
                     <td>{{number_format($defaultSanguTruck,0)}}</td>
                     <td>0</td>
-                    <td>{{number_format($klaimTruck,0)}}</td>
-                    <td>{{number_format($defaultSanguTruck + $klaimTruck,0)}}</td> <!-- Jumlah BON -->
-                    <td>{{number_format($totalSanguTruck - ($defaultSanguTruck + $klaimTruck),0)}}</td> <!-- Sisa -->
+                    <td>0</td>
+                    <td>{{number_format($defaultSanguTruck,0)}}</td> <!-- Jumlah BON -->
+                    <td>{{number_format($totalSanguTruck + $extraBiayaSangu - ($defaultSanguTruck),0)}}</td> <!-- Sisa -->
                     <td>0</td>
                     <td>0</td>
                     <td>0</td>
-                    <td>{{number_format($totalSanguTruck - ($defaultSanguTruck + $klaimTruck),0)}}</td>
+                    <td>{{number_format($totalSanguTruck + $extraBiayaSangu - ($defaultSanguTruck),0)}}</td>
                 </tr>
             @endforeach
         </tbody>

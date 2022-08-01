@@ -24,9 +24,13 @@
 
     table tr td {
         border: 1px solid black;
+        font-size: 10px !important;
         line-height: 20px;
         padding-left: 5px;
         padding-right: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
     }
 
     table thead tr th {

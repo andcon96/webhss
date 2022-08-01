@@ -233,7 +233,7 @@ class CreateTempTable
 
         if ($dateto) {
             $data->where('sj_eff_date', '<=', $dateto);
-            $rbhist->where('rb_eff_date', '>=', $dateto);
+            $rbhist->where('rb_eff_date', '<=', $dateto);
         }
 
         $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
@@ -249,6 +249,7 @@ class CreateTempTable
             ->groupBy('rb_truck_id')
             ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
             ->get();
+            
 
         $listtruck = Truck::with(['getTipe', 'getUserDriver'])
             ->where('truck_domain', $domain)

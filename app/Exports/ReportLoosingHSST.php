@@ -38,22 +38,16 @@ class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, W
         }
 
         $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
-            //  ->whereRelation('getTruck.getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-            //  ->orWhereRelation('getTruck.getTipe', 'tt_code', '3EXL')
             ->where('sj_status', 'Closed')
             ->groupBy('sj_truck_id', 'sj_eff_date')
             ->selectRaw('sj_truck_id,sj_eff_date,sum(sj_default_sangu) as sangu')
             ->get();
 
         $listtruck = Truck::with(['getTipe', 'getUserDriver'])
-            // ->whereRelation('getTipe', 'tt_code', '2EXL') // Hardcode Tipe Truck HSST
-            // ->orWhereRelation('getTipe', 'tt_code', '3EXL')
             ->get();
 
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod(new DateTime($datefrom), $interval, new DateTime($dateto));
-
-        // dd($data);
 
         return view(
             'transaksi.laporan.excel.report-loosing-hsst',
