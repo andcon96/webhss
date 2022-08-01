@@ -107,6 +107,9 @@ class CustomerOrderController extends Controller
         $this->authorize('update',[CustomerOrderMstr::class, $data]);
         DB::beginTransaction();
         try{
+            $comstr = CustomerOrderMstr::findOrFail($id);
+            $comstr->co_remark = $request->remark;
+            $comstr->save();
 
             foreach($request->iddetail as $key => $datas){
                 if($request->operation[$key] == 'R' && $request->qtyord[$key] != $request->qtyopen[$key]){
@@ -246,6 +249,7 @@ class CustomerOrderController extends Controller
             $so_mstr->so_ship_from = $request->shipfrom;
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
+            $so_mstr->so_remark = $request->remark;
             $so_mstr->save();
 
             $id = $so_mstr->id;

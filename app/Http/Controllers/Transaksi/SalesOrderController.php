@@ -162,6 +162,7 @@ class SalesOrderController extends Controller
         $duedate = $request->duedate;
         $shipfrom = $request->shipfrom;
         $shipto = $request->shipto;
+        $remark = $request->remark;
 
         $operation = $request->operation;
         $iddetail = $request->iddetail;
@@ -180,6 +181,7 @@ class SalesOrderController extends Controller
             $master->so_due_date = $duedate;
             $master->so_ship_from = $shipfrom;
             $master->so_ship_to = $shipto;
+            $master->so_remark = $remark;
             $master->save();
 
             foreach($iddetail as $key => $details){

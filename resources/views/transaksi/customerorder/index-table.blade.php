@@ -18,6 +18,7 @@
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-conbr="{{$datas->co_nbr}}"
                         data-cust="{{$datas->co_cust_code}}" data-custdesc="{{$datas->getCustomer->cust_desc}}"
                         data-status="{{$datas->co_status}}" 
+                        data-remark="{{$datas->co_remark}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
                     

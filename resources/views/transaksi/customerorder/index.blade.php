@@ -80,6 +80,12 @@
                             <input id="status" type="text" class="form-control" name="status" autocomplete="off" value="" readonly>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="remark" class="col-md-2 col-form-label text-md-right">{{ __('Remark CO') }}</label>
+                        <div class="col-md-8">
+                            <input id="remark" type="text" class="form-control" name="remark" autocomplete="off" value="" readonly>
+                        </div>
+                    </div>
                     <div id="form-group row">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -245,10 +251,12 @@
         var cust = $(this).data('cust');
         var status = $(this).data('status');
         var custdesc = $(this).data('custdesc');
+        var remark = $(this).data('remark');
 
         document.getElementById("conbr").value = conbr;
         document.getElementById('cust').value = cust + ' - ' + custdesc;
         document.getElementById('status').value = status;
+        document.getElementById('remark').value = remark;
 
         $.ajax({
             url: "/customerorder/getdetail/" + id,

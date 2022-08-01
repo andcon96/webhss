@@ -31,6 +31,13 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
+            <div class="col-md-9">
+                <input id="remark" type="text" class="form-control" name="remark" value="{{$data->co_remark}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
+
+        </div>
+        <div class="form-group row col-md-12">
             @include('transaksi.customerorder.edit-table')
         </div>
         <div class="form-group row col-md-12">

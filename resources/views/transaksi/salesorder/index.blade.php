@@ -138,6 +138,12 @@
                             <input id="duedate" type="text" class="form-control" name="duedate" autocomplete="off" value="" readonly>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="remark" class="col-md-2 col-form-label text-md-right">{{ __('Remark') }}</label>
+                        <div class="col-md-8">
+                            <input id="remark" type="text" class="form-control" name="remark" autocomplete="off" value="" readonly>
+                        </div>
+                    </div>
                     <div id="form-group row">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -338,6 +344,7 @@
         var shiptodesc = $(this).data('shiptodesc');
         var duedate = $(this).data('duedate');
         var custdesc = $(this).data('custdesc');
+        var remark = $(this).data('remark');
 
         document.getElementById("sonbr").value = sonbr;
         document.getElementById('cust').value = cust + ' - ' + custdesc;
@@ -345,6 +352,7 @@
         document.getElementById('shipfrom').value = shipfrom + ' - ' + shipfromdesc;
         document.getElementById('shipto').value = shipto + ' - ' + shiptodesc;
         document.getElementById('duedate').value = duedate;
+        document.getElementById('remark').value = remark;
 
 
         $.ajax({
