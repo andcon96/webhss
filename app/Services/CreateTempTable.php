@@ -246,8 +246,8 @@ class CreateTempTable
         $rbhist =  $rbhist->where('rb_is_active', 1)
             ->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
             ->whereRelation('getTruck', 'truck_domain', $domain)
-            // ->groupBy('rb_truck_id')
-            // ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
+            ->groupBy('rb_truck_id')
+            ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
             ->get();
         
         dd($rbhist,$data);
