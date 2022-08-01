@@ -747,7 +747,7 @@ class QxtendServices
                                     <operation>A</operation>
                                     <sodPart>'.$data['part'][$key].'</sodPart>
                                     <sodQtyChg>'.$data['qtyakui'][$key].'</sodQtyChg>
-                                    <sodListPr>'.$data['price'][$key].'</sodListPr>
+                                    <sodListPr>'.str_replace(',','',$data['price'][$key]).'</sodListPr>
                                   </salesLine>';
                 }
 

@@ -104,6 +104,17 @@
     $("#effdate").datepicker({
         dateFormat: 'yy-mm-dd',
     });
+    
+    $(document).on('keyup', '.sangu', function() {
+        letterRegex = /[^\0-9\,]/;
+        var data = $(this).val();
+
+        var newdata = data.replace(/([^0-9])/g, '');
+
+        console.log(Number(newdata).toLocaleString('en-US'));
+
+        $(this).val(Number(newdata).toLocaleString('en-US'));
+    });
 
     $(document).on('submit', '#submit', function(e) {
         document.getElementById('btnconf').style.display = 'none';
