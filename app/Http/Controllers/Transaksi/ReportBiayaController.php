@@ -70,7 +70,7 @@ class ReportBiayaController extends Controller
             return back();
         }catch(Exception $e){
             DB::rollBack();
-            dd($e);
+            // dd($e);
             alert()->error('Error', 'Save Gagal')->persistent('Dismiss');
             return back();
         }

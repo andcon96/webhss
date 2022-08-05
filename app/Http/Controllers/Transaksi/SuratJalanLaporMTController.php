@@ -81,7 +81,7 @@ class SuratJalanLaporMTController extends Controller
                 $sjddet->save();
             }
 
-            dd($sjddet);
+            // dd($sjddet);
             // Get SO Mstr
             $somstr = SalesOrderMstr::query()
                         ->with('getDetail' ,function($q){
@@ -118,7 +118,7 @@ class SuratJalanLaporMTController extends Controller
             return redirect()->route('laporsj.index');
         }catch(Exception $e){
             DB::rollback();
-            dd($e);
+            // dd($e);
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }

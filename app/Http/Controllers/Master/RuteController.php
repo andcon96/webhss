@@ -88,7 +88,7 @@ class RuteController extends Controller
             }
             catch(Exception $err){
                 DB::rollback();
-                dd($err);
+                // dd($err);
                 alert()->error('Error', 'Terjadi kesalahan');
                 return back();
             }

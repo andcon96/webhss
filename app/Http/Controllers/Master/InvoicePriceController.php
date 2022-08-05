@@ -57,7 +57,7 @@ class InvoicePriceController extends Controller
             return back();
         } catch (Exception $err) {
             DB::rollback();
-            dd($err);
+            // dd($err);
             alert()->error('Error', 'Terjadi kesalahan');
             return back();
         }
