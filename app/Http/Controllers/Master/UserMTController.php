@@ -78,8 +78,8 @@ class UserMTController extends Controller
         $this->validate($request, [
             'username' => 'required|unique:users',
             'name' => 'required',
-            'password' => 'required|min:8|max:20',
-            'password_confirmation' => 'required|min:8|max:20|same:password',
+            'password' => 'required|max:20',
+            'password_confirmation' => 'required|max:20|same:password',
         ], [
             'unique' => 'Username Must Be Unique',
         ]);
