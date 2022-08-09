@@ -116,10 +116,10 @@
           {{$show->getTipe->tt_code ?? ''}} -- {{$show->getTipe->tt_desc ?? ''}}
         </td>
         <td>
-          {{$show->getShipFrom->sf_code ?? ''}} -- {{$show->getShipFrom->sf_desc ?? ''}}
+          {{$show->sf_code ?? ''}} -- {{$show->sf_desc ?? ''}}
         </td>
         <td>
-          {{$show->getShipTo->cs_shipto ?? ''}} -- {{$show->getShipTo->cs_shipto_name ?? ''}}
+          {{$show->cs_shipto ?? ''}} -- {{$show->cs_shipto_name ?? ''}}
         </td>
         <td>
           <a href="/rute/rutedetail/{{$id}}/historydetail/{{$show->id}}" class="view"><i class="fas fa-eye"></i></a>

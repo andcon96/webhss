@@ -87,11 +87,9 @@ class RuteController extends Controller
     public function viewDetail(Request $request,$id)
     {
         
-        $rute_data = Rute::with(['getShipFrom'=>function($e){
-            $e->orderBy('sf_code');
-        },'getShipTo'=>function($f){
-            $f->orderBy('cs_shipto_name');
-        },'getTipe'])->where('rute_tipe_id',$id);
+        $rute_data = Rute::with(['getTipe'])->Join('shipfrom','rute_shipfrom_id','shipfrom.id')
+        ->Join('customership','rute_customership_id','customership.id')
+        ->where('rute_tipe_id',$id);
         
         if($request->s_shipfrom){
             $rute_data->where('rute_shipfrom_id', $request->s_shipfrom);
@@ -101,8 +99,9 @@ class RuteController extends Controller
             $rute_data->where('rute_customership_id', $request->s_shipto);
         }
         
-        $rute_data = $rute_data->paginate(10);
-        dd($rute_data);
+
+        $rute_data = $rute_data->OrderBy('sf_code','asc')->orderBy('cs_shipto','asc')->paginate(10);
+        
         $shipfrom = ShipFrom::get();
         $shipto = CustomerShipTo::get();
         
