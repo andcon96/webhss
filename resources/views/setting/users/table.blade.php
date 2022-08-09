@@ -3,17 +3,17 @@
     <td data-title="Name">{{ $show->name }}</td>
     <td data-title="Username">{{ $show->username }}</td>
     <td data-title="Role">
-      @if($show->getRole->role == 'User')
+      @if($show->role == 'User')
           User
-      @elseif($show->getRole->role == 'Super_User')
+      @elseif($show->role == 'Super_User')
           Super User
       @endif
     </td>
     <td>
-      @if ($show->getRoleType->role_type == 'Super_User')
+      @if ($show->role_type == 'Super_User')
         Super User
       @else
-        {{ucwords($show->getRoleType->role_type)}}
+        {{ucwords($show->role_type)}}
       @endif
     </td>
     <td>
@@ -26,9 +26,9 @@
     <td data-title="Edit" class="action">
       @if(!$show->is_super_user)
       <a href="" class="editUser" data-toggle="modal" data-target="#editModal" data-id="{{$show->id}}" 
-        data-uname="{{$show->username}}" data-name="{{$show->name}}" data-role="{{$show->getRole->role}}" 
+        data-uname="{{$show->username}}" data-name="{{$show->name}}" data-role="{{$show->role}}" 
         data-email="{{$show->email}}" data-dept="{{$show->dept_id}}"
-        data-roletype="{{$show->getRoleType->role_type}}" 
+        data-roletype="{{$show->role_type}}" 
       ><i class="fas fa-edit"></i></a>
       @endif
     </td>
