@@ -45,7 +45,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/loadrutefirst',[RuteController::class,'loadrutefirst']);
+// Route::get('/loadrutefirst',[RuteController::class,'loadrutefirst']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================
