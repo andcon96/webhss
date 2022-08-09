@@ -304,6 +304,8 @@ class RuteController extends Controller
                 }
             }
             Rute::insert($data);
+            $data = [];
         }
+
     }
 }
