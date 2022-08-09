@@ -41,16 +41,6 @@ class RuteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -66,84 +56,32 @@ class RuteController extends Controller
         // dd($sangu,$ongkos);
         $lasthistory = RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)->first();
         DB::beginTransaction();
-        
-            try{
-                if($lasthistory){
-                    RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)
-                    ->update([
-                        'history_is_active' => 0,
-                        'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
-                    ]);
-                }
-                $rutehist = new RuteHistory();
-                $rutehist->history_rute_id = $ruteid;
-                // $rutehist->history_harga = $harga;
-                $rutehist->history_sangu = $sangu;
-                $rutehist->history_ongkos = $ongkos;
-                $rutehist->history_is_active = 1;
-                $rutehist->save();
-                DB::commit();
-                alert()->success('Success', 'History berhasil diperbarui');
-                return back();
-            }
-            catch(Exception $err){
-                DB::rollback();
-                // dd($err);
-                alert()->error('Error', 'Terjadi kesalahan');
-                return back();
-            }
-        }
-        
-
-        //
     
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Master\Rute  $rute
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rute $rute)
-    {
-        
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Master\Rute  $rute
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rute $rute)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Master\Rute  $rute
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Rute $rute)
-    {
-        
-        
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Master\Rute  $rute
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Rute $rute)
-    {
-        //
+        try{
+            if($lasthistory){
+                RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)
+                ->update([
+                    'history_is_active' => 0,
+                    'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
+                ]);
+            }
+            $rutehist = new RuteHistory();
+            $rutehist->history_rute_id = $ruteid;
+            // $rutehist->history_harga = $harga;
+            $rutehist->history_sangu = $sangu;
+            $rutehist->history_ongkos = $ongkos;
+            $rutehist->history_is_active = 1;
+            $rutehist->save();
+            DB::commit();
+            alert()->success('Success', 'History berhasil diperbarui');
+            return back();
+        }
+        catch(Exception $err){
+            DB::rollback();
+            // dd($err);
+            alert()->error('Error', 'Terjadi kesalahan');
+            return back();
+        }
     }
 
     public function viewDetail(Request $request,$id)
@@ -174,7 +112,6 @@ class RuteController extends Controller
         //
     }
 
-
     public function viewHistory($oldid,$id)
     {
         
@@ -191,7 +128,6 @@ class RuteController extends Controller
         $headers = array('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         return response()->download($file, 'template_hss.xlsx', $headers); 
     }
-
 
     public function importexcel(Request $request){
         // dd($request->all());
@@ -260,6 +196,7 @@ class RuteController extends Controller
             return redirect()->route('rute.index');
         }
     }
+
     public function importrute(Request $request){
         
 
@@ -351,5 +288,28 @@ class RuteController extends Controller
             alert()->error('Error', 'Rute gagal di tambah');
             return back();
         }
+    }
+
+    public function loadrutefirst(Request $request)
+    {
+        $tipetruck = TipeTruck::get();
+        $shipfrom = ShipFrom::get();
+        $shipto = CustomerShipTo::get();
+        $data = [];
+
+        foreach($tipetruck as $key => $tipetrucks){
+            foreach($shipfrom as $shipfroms){
+                foreach($shipto as $shiptos){
+                    $data[] = [
+                        'rute_tipe_id' => $tipetrucks->id,
+                        'rute_shipfrom_id' => $shipfroms->id,
+                        'rute_customership_id' => $shiptos->id,
+                    ];
+                }
+            }
+            Rute::insert($data);
+            $data = [];
+        }
+
     }
 }
