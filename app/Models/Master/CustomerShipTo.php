@@ -6,7 +6,6 @@ namespace App\Models\Master;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
 
 class CustomerShipTo extends Model
 {
@@ -15,7 +14,6 @@ class CustomerShipTo extends Model
     protected $fillable = [
         'cs_cust_code',
         'cs_shipto',
-        
         'cs_shipto_name',
         'cs_address'
     ];
