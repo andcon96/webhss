@@ -21,8 +21,11 @@ class UserMTController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with([ 'getRoleType', 'getRole'])
+        $users = User::with([ 'getRoleType' => function($q){
+            $q->orderBy('role_type');
+        }, 'getRole'])
             ->orderBy('role_id')
+            
             ->paginate(10);
         
         $roleType = RoleType::get();
@@ -46,7 +49,9 @@ class UserMTController extends Controller
             }
 
             $users = $users
-                ->with(['getRoleType', 'getRole'])
+                ->with([ 'getRoleType' => function($q){
+                    $q->orderBy('role_type');
+                }, 'getRole'])
                 ->orderBy('role_id')
                 ->paginate(10);
 
@@ -233,8 +238,13 @@ class UserMTController extends Controller
     public function adminchangepass(Request $request)
     {
         $this->validate($request, [
-            'c_password' => 'required|min:8',
-            'password_confirmation' => 'required|min:8|same:c_password',
+            'c_password' => 'required',
+            'password_confirmation' => 'required|same:c_password',
+        ],
+        [
+            'c_password.required' => 'Password cannot empty',
+            'password_confirmation.required' => 'Confirm password cannot empty',
+            'same' => 'Confirm password and new password not match',
         ]);
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\ApprovalController;
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     //================================
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+    Route::get('Changepass', [ChangePassword::class,'update'])->name('changepass');
     //================================
     
 

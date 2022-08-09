@@ -56,7 +56,11 @@
             <i class="fas fa-user mr-2"></i>
             Hello, {{Session::get('name')}}
           </a>
+          
           <div class="dropdown-menu dropdown=menu-lg dropdown-menu-right">
+            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#changepassModal">
+              <i class="fas fa-power-off mr-2"></i> Change Password
+            </a>
             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
               <i class="fas fa-power-off mr-2"></i> Logout
             </a>
@@ -426,6 +430,55 @@
     </div>
   </div>
 
+  <!-- Change Pass Modal-->
+  <div class="modal fade" id="changepassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form class="form-horizontal" id="formchangepass" role="form" method="get" action="{{route('changepass')}}">
+          <div class="modal-body">
+              
+              <div class="form-group row col-md-12">
+              
+                <label for="s_name" class="col-md-5 mt-2 col-form-label">{{ __('Old Password') }}</label>
+                <div class="col-md-6 mt-2">
+                  <input id="c_oldpass" type="password" class="form-control" name="c_oldpass" autocomplete="off" autofocus required>
+                </div>
+              
+              </div>
+              <div class="form-group row col-md-12">
+              
+                <label for="s_name" class="col-md-5 mt-2 col-form-label">{{ __('New Password') }}</label>
+                <div class="col-md-6 mt-2">
+                  <input id="c_newpass" type="password" class="form-control" name="c_newpass" autocomplete="off" autofocus required>
+                </div>
+              
+              </div>
+              <div class="form-group row col-md-12">
+                <label for="s_name" class="col-md-5 mt-2 col-form-label">{{ __('Confirm Password') }}</label>
+                <div class="col-md-6 mt-2">
+                  <input id="c_confirmpass" type="password" class="form-control" name="c_confirmpass" autocomplete="off" autofocus required>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" id="btncancelcp" type="button" data-dismiss="modal">Cancel</button>
+            <button type="submit" id="btnsubmitcp" class="btn btn-primary" >Change</a>
+            <button type="button" class="btn bt-action" id="btnloadingcp" style="display:none">
+                <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- REQUIRED SCRIPTS -->
 
   <!-- jQuery -->
@@ -516,6 +569,11 @@
       return this.href == url;
     }).parentsUntil(".nav-sidebar > .nav-treeview").prev('a').addClass('active');
 
+    $(document).on('submit','#formchangepass',function(){
+      document.getElementById('btnchangecp').style.display = 'none';
+      document.getElementById('btncancelcp').style.display = 'none';
+      document.getElementById('btnloadingcp').style.display = '';
+    })
   </script>
 
 </body>
