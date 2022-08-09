@@ -34,10 +34,12 @@ class ChangePassword extends Controller
                 try{
                     $user->password = $passhash;
                     $user->save();
+                    DB::commit();
                     alert()->success('Success', 'Update password success');
                     return back();
                 }
                 catch(Exception $err){
+                    
                     DB::rollBack();
                     alert()->error('Error', 'Failed to update password');
                     return back();
