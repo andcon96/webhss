@@ -81,7 +81,7 @@
                   <div class="form-group row">
                     <label for="tipe" class="col-md-3 col-form-label text-md-right" style="color: black">Tipe</label>
                     <div class="col-md-5 {{ $errors->has('uname') ? 'has-error' : '' }}">
-                      <input id="tipe" type="text" class="form-control" value="{{ $rute->getTipe->tt_desc }}" readonly>
+                      <input id="tipe" type="text" class="form-control" value="{{ isset($rute->getTipe->tt_desc) ? $rute->getTipe->tt_desc : '' }}" readonly>
                       <input type="hidden" name="idrute" value="{{$rute->id}}">
                     </div>
                   </div>
