@@ -88,7 +88,7 @@
           <div class="form-group row">
             <label for="username" class="col-md-3 col-form-label text-md-right">Kode User</label>
             <div class="col-md-5 {{ $errors->has('uname') ? 'has-error' : '' }}">
-              <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" autocomplete="off" maxlength="8" required autofocus>
+              <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" autocomplete="off" required autofocus>
             </div>
           </div>
           <div class="form-group row">
