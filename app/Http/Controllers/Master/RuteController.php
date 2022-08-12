@@ -400,37 +400,7 @@ class RuteController extends Controller
             }
             
             fclose($open);
-            //     $tipetruck == '2EXL' ? 1 :
-            //     ($tipetruck == '3EXL' ? 2 :
-            //     ($tipetruck == 'SD' ? 3 :
-            //     ($tipetruck == 'LD' ? 4 :
-            //     ($tipetruck == '20"' ? 5 :
-            //     ($tipetruck == '40"' ? 6 : '')))));
-
-            //     $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
-
-            //     $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
-                
-            //     $insertData = [];
-            //     foreach($shipto as $shiptos){
-            //         $rute = Rute::where('rute_tipe_id',$tipetruck)
-            //                     ->where('rute_shipfrom_id',$shipfrom->id)
-            //                     ->where('rute_customership_id',$shiptos->id)->first();
-            //         if($rute){
-            //             $insertData[] = [
-            //                 'history_rute_id' => $rute->id,
-            //                 'history_sangu' => trim(str_replace('.','',$histories[5])),
-            //                 'history_ongkos' => trim(str_replace('.','',$histories[6])),
-            //                 'history_is_active' => 1,
-            //             ];
-            //         }
-
-            //         RuteHistory::insert($insertData);
-            //     }
-            // }
-            // dd($history);
-
-            // fclose($open);
+            
         }
     }
     
