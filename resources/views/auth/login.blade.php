@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-      <header>Login Form LIVE</header>
+      <header>Login Form</header>
         <form method="POST" action="{{ route('login') }}" name='loginform' class="form" autocomplete="off">
           @csrf
             <div class="input-field">
