@@ -89,6 +89,7 @@ class RuteController extends Controller
         
         $rute_data = Rute::with(['getTipe'])->Join('shipfrom','rute_shipfrom_id','shipfrom.id')
         ->Join('customership','rute_customership_id','customership.id')
+        ->selectRaw('rute.*,customership.*,shipfrom.*,rute.id')
         ->where('rute_tipe_id',$id);
         
         if($request->s_shipfrom){
@@ -117,7 +118,9 @@ class RuteController extends Controller
         $history_data = RuteHistory::with(['getRute.getShipTo','getRute.getShipFrom','getRute.getTipe'])
         ->where('history_rute_id',$id)->orderBy('history_is_active','desc')->orderBy('history_last_active','desc')->get();
         $rute = Rute::with('getShipFrom','getTipe','getShipTo')->where('id',$id)->first();
+
         $id = $oldid;
+        
         return view('setting.rute.indexhistory', compact('history_data','rute','id'));
         //
     }
