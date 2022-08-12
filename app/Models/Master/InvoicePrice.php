@@ -11,6 +11,8 @@ class InvoicePrice extends Model
 
     public $table = 'invoiceprice';
 
+    protected $fillable = ['id','ip_cust_id','ip_shipfrom_id','ip_customership_id'];
+
     public function getShipFrom()
     {
         return $this->belongsTo(ShipFrom::class, 'ip_shipfrom_id', 'id');
