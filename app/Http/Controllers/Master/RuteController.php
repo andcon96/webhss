@@ -331,7 +331,7 @@ class RuteController extends Controller
 
                 $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
 
-                $shipto = CustomerShipTo::where('cs_code', 'LIKE' ,'%'.$histories[3])->get();
+                $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
                 
                 $insertData = [];
                 foreach($shipto as $shiptos){
