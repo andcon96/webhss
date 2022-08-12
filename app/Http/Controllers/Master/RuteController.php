@@ -339,7 +339,7 @@ class RuteController extends Controller
                                 ->where('rute_shipfrom_id',$shipfrom->id)
                                 ->where('rute_customership_id',$shiptos->id)->first();
                     if($rute){
-                        $insertdata[] = [
+                        $insertData[] = [
                             'history_rute_id' => $rute->id,
                             'history_sangu' => trim(str_replace('.','',$histories[5])),
                             'history_ongkos' => trim(str_replace('.','',$histories[6])),
@@ -347,7 +347,7 @@ class RuteController extends Controller
                         ];
                     }
 
-                    RuteHistory::insert($insertdata);
+                    RuteHistory::insert($insertData);
                 }
             }
             dd($history);
