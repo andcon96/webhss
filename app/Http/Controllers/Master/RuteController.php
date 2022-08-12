@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Imports\RuteImport;
-use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
-use App\Models\Master\InvoicePrice;
 use App\Models\Master\Rute;
 use App\Models\Master\RuteHistory;
 use App\Models\Master\ShipFrom;
@@ -317,50 +315,93 @@ class RuteController extends Controller
 
     }
 
-    public function loadhistoryrute(Request $request)
-    {
-        if (($open = fopen(public_path() . "/historyrute.csv", "r")) !== FALSE) {
+    // public function loadhistoryrute(Request $request)
+    // {
+    //     if (($open = fopen(public_path() . "/historyrute.csv", "r")) !== FALSE) {
+
+    //         while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+    //             $history[] = $data;
+    //         }
+
+    //         $tipetruck = '';
+    //         foreach($history as $histories){
+    //             $tipetruck == '2EXL' ? 1 :
+    //             ($tipetruck == '3EXL' ? 2 :
+    //             ($tipetruck == 'SD' ? 3 :
+    //             ($tipetruck == 'LD' ? 4 :
+    //             ($tipetruck == '20"' ? 5 :
+    //             ($tipetruck == '40"' ? 6 : '')))));
+
+    //             $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
+
+    //             $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
+                
+    //             $insertData = [];
+    //             foreach($shipto as $shiptos){
+    //                 $rute = Rute::where('rute_tipe_id',$tipetruck)
+    //                             ->where('rute_shipfrom_id',$shipfrom->id)
+    //                             ->where('rute_customership_id',$shiptos->id)->first();
+    //                 if($rute){
+    //                     $insertData[] = [
+    //                         'history_rute_id' => $rute->id,
+    //                         'history_sangu' => trim(str_replace('.','',$histories[5])),
+    //                         'history_ongkos' => trim(str_replace('.','',$histories[6])),
+    //                         'history_is_active' => 1,
+    //                     ];
+    //                 }
+
+    //                 RuteHistory::insert($insertData);
+    //             }
+    //         }
+            
+
+    //         fclose($open);
+    //     }
+    // }
+
+    public function loadhistoryrutedetail(){
+        if (($open = fopen(public_path() . "/Book2.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $history[] = $data;
             }
-
-            
+            $rutearray = [];
+            $tipetruck = '';
             foreach($history as $histories){
-                $tipetruck = $histories[4];
-                $idtruck = '';
-                $tipetruck == '2EXL' ? $idtruck = 1 :
-                ($tipetruck == '3EXL' ? $idtruck = 2 :
-                ($tipetruck == 'SD' ? $idtruck = 3 :
-                ($tipetruck == 'LD' ? $idtruck = 4 :
-                ($tipetruck == '20"' ? $idtruck = 5 :
-                ($tipetruck == '40"' ? $idtruck = 6 : '')))));
                 
-                $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
-
-                $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
-                
-                $insertData = [];
-                foreach($shipto as $shiptos){
-                    $rute = Rute::where('rute_tipe_id',$idtruck)
-                                ->where('rute_shipfrom_id',$shipfrom->id)
-                                ->where('rute_customership_id',$shiptos->id)->first();
-                                
-                    if($rute){
-                        $insertData[] = [
-                            'history_rute_id' => $rute->id,
-                            'history_sangu' => trim(str_replace('.','',$histories[5])),
-                            'history_ongkos' => trim(str_replace('.','',$histories[6] ?? 0)),
-                            'history_is_active' => 1,
-                        ];
+                if(!empty($histories[2])){
+                    $tipebefore = str_replace('*','"',substr($histories[0],-3));
+                    $tipeid = TipeTruck::where('tt_code',$tipebefore)->first();
+                    if(isset($tipeid)){
+                        $shipto = CustomerShipTo::where('cs_shipto','like','%'.$histories[2])->get();
+                        if(count($shipto) > 0){
+                            
+                            foreach($shipto as $st){
+                                $rute = Rute::where('rute_tipe_id',$tipeid->id)->where('rute_customership_id',$st->id)->get();
+                                foreach ($rute as $rt){
+                                    $rutearray[] = [
+                                        'history_rute_id'       => $rt->id,
+                                        'history_harga'         => 0,
+                                        'history_sangu'         => (int)$histories[3],
+                                        'history_ongkos'        => (int)$histories[4],
+                                        'history_is_active'     => 1,
+                                        'history_last_active'   => Carbon::now()->toDateTimeString(),
+                                        'history_user'          => 1,
+                                        'created_at'            => Carbon::now()->toDateTimeString(),
+                                        'updated_at'            => Carbon::now()->toDateTimeString()
+                                    ];
+                                }
+                            }
+                        }
                     }
                 }
-                RuteHistory::insert($insertData);
+                RuteHistory::insert($rutearray);
+                $rutearray = [];
             }
-            dd($history);
-
+            
             fclose($open);
+            
         }
     }
-
+    
 }
