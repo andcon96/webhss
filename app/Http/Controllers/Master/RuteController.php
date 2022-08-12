@@ -87,7 +87,9 @@ class RuteController extends Controller
     public function viewDetail(Request $request,$id)
     {
         
-        $rute_data = Rute::with(['getShipFrom','getShipTo','getTipe'])->where('rute_tipe_id',$id);
+        $rute_data = Rute::with(['getTipe'])->Join('shipfrom','rute_shipfrom_id','shipfrom.id')
+        ->Join('customership','rute_customership_id','customership.id')
+        ->where('rute_tipe_id',$id);
         
         if($request->s_shipfrom){
             $rute_data->where('rute_shipfrom_id', $request->s_shipfrom);
@@ -97,7 +99,8 @@ class RuteController extends Controller
             $rute_data->where('rute_customership_id', $request->s_shipto);
         }
         
-        $rute_data = $rute_data->paginate(10);
+
+        $rute_data = $rute_data->OrderBy('sf_code','asc')->orderBy('cs_shipto','asc')->paginate(10);
         
         $shipfrom = ShipFrom::get();
         $shipto = CustomerShipTo::get();
@@ -307,5 +310,49 @@ class RuteController extends Controller
             $data = [];
         }
 
+    }
+
+    public function loadhistoryrute(Request $request)
+    {
+        if (($open = fopen(public_path() . "/historyrute.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $history[] = $data;
+            }
+
+            $tipetruck = '';
+            foreach($history as $histories){
+                $tipetruck == '2EXL' ? 1 :
+                ($tipetruck == '3EXL' ? 2 :
+                ($tipetruck == 'SD' ? 3 :
+                ($tipetruck == 'LD' ? 4 :
+                ($tipetruck == '20"' ? 5 :
+                ($tipetruck == '40"' ? 6 : '')))));
+
+                $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
+
+                $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
+                
+                $insertData = [];
+                foreach($shipto as $shiptos){
+                    $rute = Rute::where('rute_tipe_id',$tipetruck)
+                                ->where('rute_shipfrom_id',$shipfrom->id)
+                                ->where('rute_customership_id',$shiptos->id)->first();
+                    if($rute){
+                        $insertdata[] = [
+                            'history_rute_id' => $rute->id,
+                            'history_sangu' => trim(str_replace('.','',$histories[5])),
+                            'history_ongkos' => trim(str_replace('.','',$histories[6])),
+                            'history_is_active' => 1,
+                        ];
+                    }
+
+                    RuteHistory::insert($insertdata);
+                }
+            }
+            dd($history);
+
+            fclose($open);
+        }
     }
 }

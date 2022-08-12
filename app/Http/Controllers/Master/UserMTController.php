@@ -21,8 +21,11 @@ class UserMTController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with([ 'getRoleType', 'getRole'])
-            ->orderBy('role_id')
+        $users = User::join('role_types','role_type_id','role_types.id')
+            ->join('roles','users.role_id','roles.id')
+            ->orderBy('role')
+            ->orderBy('role_type')
+            ->orderBy('name')
             ->paginate(10);
         
         $roleType = RoleType::get();
@@ -44,11 +47,15 @@ class UserMTController extends Controller
             if (isset($name)) {
                 $users = $users->where('name', 'LIKE', '%' . $name . '%');
             }
-
+            
             $users = $users
-                ->with(['getRoleType', 'getRole'])
-                ->orderBy('role_id')
-                ->paginate(10);
+            ->join('role_types','role_type_id','role_types.id')
+            ->join('roles','users.role_id','roles.id')
+            ->orderBy('role')
+            ->orderBy('role_type')
+            ->orderBy('name')
+            ->paginate(10);
+                
 
             return view('setting.users.table', compact('users'));
         } else {
@@ -233,8 +240,13 @@ class UserMTController extends Controller
     public function adminchangepass(Request $request)
     {
         $this->validate($request, [
-            'c_password' => 'required|min:8',
-            'password_confirmation' => 'required|min:8|same:c_password',
+            'c_password' => 'required',
+            'password_confirmation' => 'required|same:c_password',
+        ],
+        [
+            'c_password.required' => 'Password cannot empty',
+            'password_confirmation.required' => 'Confirm password cannot empty',
+            'same' => 'Confirm password and new password not match',
         ]);
 
 
