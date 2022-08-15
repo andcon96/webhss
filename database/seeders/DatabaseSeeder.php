@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             QxWsaTableSeeder::class,
             DomainTableSeeder::class,
             PrefixTableSeeder::class,
+            UserDriverSeeder::class,
         ]);
     }
 }
