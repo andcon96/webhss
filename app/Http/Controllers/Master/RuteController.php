@@ -352,6 +352,7 @@ class RuteController extends Controller
                     }
 
                     RuteHistory::insert($insertData);
+                    $insertData = [];
                 }
             }
             
