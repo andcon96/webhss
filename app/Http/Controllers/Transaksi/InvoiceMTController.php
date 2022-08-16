@@ -111,8 +111,8 @@ class InvoiceMTController extends Controller
                     ];
                 }
             }
-            dd($data);
-            // InvoicePrice::insert($data);
+            // dd($data);
+            InvoicePrice::insert($data);
             $data = [];
         }
     }
