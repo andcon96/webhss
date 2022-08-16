@@ -268,6 +268,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('importexcel', [RuteController::class,'importexcel']);
             Route::post('importrute', [RuteController::class,'importrute']);
             Route::post('newrute', [RuteController::class,'newrute']);
+            Route::post('changestatus', [RuteController::class,'historychangestatus'])->name('changestatus');
         });
         //================================
 

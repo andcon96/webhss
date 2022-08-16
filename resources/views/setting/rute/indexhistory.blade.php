@@ -25,11 +25,12 @@
             <th>Tipe</th>
             <th>Ship From</th>
             <th>Ship To</th>
-            <th>Harga</th>
-            <th>Sangu</th>
-            <th>Ongkos</th>
+            
+            <th>Tarif</th>
+            <th>Komisi</th>
             <th>Active</th>
             <th>Last Active</th>
+            <th>Deactivate</th>
         </tr>
         </thead>
         <tbody>
@@ -45,9 +46,7 @@
               <td>
                 {{$show->getRute->getShipTo->cs_shipto_name ?? ''}}
               </td>
-              <td>
-                {{number_format($show->history_harga) ?? ''}}
-              </td>
+
               <td>
                 {{number_format($show->history_sangu) ?? ''}}
               </td>
@@ -59,6 +58,15 @@
               </td>
               <td>
                 {{$show->history_last_active ?? ''}}
+              </td>
+              <td>
+                @if($show->history_is_active == 1)
+                <form method="POST" action="{{ route('changestatus') }}" id="formchange" class="form" autocomplete="off">
+                  @csrf
+                  <input type="hidden" name="idhistory" value="{{$show->id}}">
+                  <a href ="javascript:void(0)" type="submit" id="btnsubmitchange" style="color:blue"><i class="fas fa-check" style="color=:white"></i></a>
+                </form>
+                @endif
               </td>
               
             </tr>
@@ -161,7 +169,12 @@
       document.getElementById('btnconf').style.display = 'none';
       document.getElementById('btnback').style.display = 'none';
     });
-
+    $(document).on('click','#btnsubmitchange',function($e){
+      
+        $(this).closest('form').submit();
+    
+    });
+    
 
 </script>
 @endsection

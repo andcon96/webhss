@@ -48,7 +48,7 @@ class RuteController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        
         $ruteid = $request->idrute;
         $harga = $request->harga;
         $sangu = str_replace(',','',$request->sangu);
@@ -58,13 +58,7 @@ class RuteController extends Controller
         DB::beginTransaction();
     
         try{
-            if($lasthistory){
-                RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)
-                ->update([
-                    'history_is_active' => 0,
-                    'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
-                ]);
-            }
+
             $rutehist = new RuteHistory();
             $rutehist->history_rute_id = $ruteid;
             // $rutehist->history_harga = $harga;
@@ -412,4 +406,23 @@ class RuteController extends Controller
         }
     }
     
+    public function historychangestatus(Request $request){
+        
+        try{
+            RuteHistory::where('id',$request->idhistory)->where('history_is_active',1)
+                ->update([
+                    'history_is_active' => 0,
+                    'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
+                ]);
+                DB::commit();
+                alert()->success('Success', 'Rute berhasil di nonaktif');
+                return back();
+            }
+            catch(Exception $err){
+                DB::rollback();
+                alert()->error('Error', 'Rute gagal di nonaktif');
+                return back();
+            }
+
+    }
 }
