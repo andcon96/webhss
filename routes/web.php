@@ -46,7 +46,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/loadrutefirst',[RuteController::class,'loadrutefirst']);
+Route::get('loadrutefirst',[RuteController::class,'loadrutefirst']);
 Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
 Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
 Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
