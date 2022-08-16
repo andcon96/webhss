@@ -110,10 +110,10 @@ class InvoiceMTController extends Controller
                         'ip_customership_id' => $shiptos->id,
                     ];
                 }
+                InvoicePrice::insert($data);
+                $data = [];
             }
             // dd($data);
-            InvoicePrice::insert($data);
-            $data = [];
         }
     }
 
