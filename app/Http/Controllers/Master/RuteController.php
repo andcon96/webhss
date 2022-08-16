@@ -346,7 +346,7 @@ class RuteController extends Controller
                         $insertData[] = [
                             'history_rute_id' => $rute->id,
                             'history_sangu' => trim(str_replace('.','',$histories[5])),
-                            'history_ongkos' => trim(str_replace('.','',$histories[6])),
+                            'history_ongkos' => 0,
                             'history_is_active' => 1,
                         ];
                     }
