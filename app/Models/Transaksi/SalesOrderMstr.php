@@ -70,14 +70,8 @@ class SalesOrderMstr extends Model
     protected static function boot()
     {
         parent::boot();
-        
-        self::creating(function($model){
-            // $model->so_domain = Session::get('domain');
-        });
 
         self::addGlobalScope(function(Builder $builder){
-            // $builder->where('user_id', '=', Auth()->user()->id);
-            // $builder->where('so_domain', Session::get('domain'));
             $builder->orderBy('created_at','DESC');
         });
     }
