@@ -325,12 +325,13 @@ class RuteController extends Controller
 
             $tipetruck = '';
             foreach($history as $histories){
-                $tipetruck == '2EXL' ? 1 :
-                ($tipetruck == '3EXL' ? 2 :
-                ($tipetruck == 'SD' ? 3 :
-                ($tipetruck == 'LD' ? 4 :
-                ($tipetruck == '20"' ? 5 :
-                ($tipetruck == '40"' ? 6 : '')))));
+                $kodetruck = $histories[4];
+                $kodetruck == '2EXL' ? $tipetruck = 1 :
+                ($kodetruck == '3EXL' ?  $tipetruck = 2 :
+                ($kodetruck == 'SD' ?  $tipetruck = 3 :
+                ($kodetruck == 'LD' ?  $tipetruck = 4 :
+                ($kodetruck == '20"' ?  $tipetruck = 5 :
+                ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
 
                 $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
 
