@@ -347,19 +347,16 @@ class RuteController extends Controller
                                     ->where('rute_shipfrom_id',$shipfrom->id)
                                     ->where('rute_customership_id',$shiptos->id)->first();
                         if($rute){
-                            if($rute->id == '313'){
-                                dump($histories);
-                            }
-                            // $insertData[] = [
-                            //     'history_rute_id' => $rute->id,
-                            //     'history_sangu' => trim(str_replace('.','',$histories[5])),
-                            //     'history_ongkos' => 0,
-                            //     'history_is_active' => 1,
-                            // ];
+                            $insertData[] = [
+                                'history_rute_id' => $rute->id,
+                                'history_sangu' => trim(str_replace('.','',$histories[5])),
+                                'history_ongkos' => 0,
+                                'history_is_active' => 1,
+                            ];
                         }
                     }
-                    // RuteHistory::insert($insertData);
-                    // $insertData = [];
+                    RuteHistory::insert($insertData);
+                    $insertData = [];
 
                 }
             }
