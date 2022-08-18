@@ -32,9 +32,14 @@ class KerusakanController extends Controller
             $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
             
             $newangka = (string)((int)$strangka +1);
-            $selisihangka = 5 - strlen($newangka);
-            
-            $lastnumber = 'KR'.str_pad($newangka,$selisihangka,0,STR_PAD_LEFT);
+            $selisihangka = 4 - strlen($newangka);
+            $lastnumber = 'KR';
+            for($i = 0; $i < $selisihangka; $i++){
+                $lastnumber .= '0';
+                if($i == $selisihangka - 1){
+                    $lastnumber .= $newangka;
+                }
+            }
         }
         else{
             $lastnumber = 'KR0001';
