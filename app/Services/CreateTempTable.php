@@ -177,7 +177,7 @@ class CreateTempTable
         }
         if ($truck) {
             $data->where('sj_truck_id', $truck);
-            $rbhist->where('rb_truck_id', '>=', $truck);
+            $rbhist->where('rb_truck_id', $truck);
         }
 
         $rbhist = $rbhist->with('getTruck')->get();
