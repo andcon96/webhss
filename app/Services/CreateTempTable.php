@@ -193,7 +193,7 @@ class CreateTempTable
             ->get();
 
         $totalrb = ReportBiaya::where('rb_truck_id', $truck)->sum('rb_nominal');
-        dd($rbhist);
+            
         return [
             'data' => $data,
             'rbhist' => $rbhist,

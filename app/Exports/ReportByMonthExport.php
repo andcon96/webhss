@@ -49,7 +49,7 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
         if($truck){
             $data->where('sj_truck_id',$truck);
             $openSPK->where('sj_truck_id',$truck);
-            $rbhist->where('rb_truck_id','>=',$truck);
+            $rbhist->where('rb_truck_id',$truck);
         }
 
         $rbhist = $rbhist->with('getTruck')->get();
