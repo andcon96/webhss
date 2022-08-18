@@ -180,7 +180,7 @@ class KerusakanLaporMTController extends Controller
 
     public function update(Request $request)
     {
-    
+        dd($request->all());
         $data = KerusakanMstr::findOrfail($request->idmaster);
         if($data->kr_status == "Close"){
             alert()->error('Error', 'Report is closed')->persistent('Dismiss');
