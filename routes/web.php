@@ -46,11 +46,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/loadrutefirst',[RuteController::class,'loadrutefirst']);
-Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
-Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
-Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
-Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
+// Route::get('loadrutefirst',[RuteController::class,'loadrutefirst']);
+// Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
+// Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
+// Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
+// Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================
@@ -268,6 +268,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('importexcel', [RuteController::class,'importexcel']);
             Route::post('importrute', [RuteController::class,'importrute']);
             Route::post('newrute', [RuteController::class,'newrute']);
+            Route::post('changestatus', [RuteController::class,'historychangestatus'])->name('changestatus');
         });
         //================================
 

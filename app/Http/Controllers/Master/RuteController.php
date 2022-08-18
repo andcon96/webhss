@@ -48,7 +48,7 @@ class RuteController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        
         $ruteid = $request->idrute;
         $harga = $request->harga;
         $sangu = str_replace(',','',$request->sangu);
@@ -58,13 +58,7 @@ class RuteController extends Controller
         DB::beginTransaction();
     
         try{
-            if($lasthistory){
-                RuteHistory::where('history_rute_id',$ruteid)->where('history_is_active',1)
-                ->update([
-                    'history_is_active' => 0,
-                    'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
-                ]);
-            }
+
             $rutehist = new RuteHistory();
             $rutehist->history_rute_id = $ruteid;
             // $rutehist->history_harga = $harga;
@@ -315,51 +309,59 @@ class RuteController extends Controller
 
     }
 
-    // public function loadhistoryrute(Request $request)
-    // {
-    //     if (($open = fopen(public_path() . "/historyrute.csv", "r")) !== FALSE) {
+    public function loadhistoryrute(Request $request)
+    {
+        ini_set('max_execution_time', 360);
 
-    //         while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
-    //             $history[] = $data;
-    //         }
+        if (($open = fopen(public_path() . "/historyrute.csv", "r")) !== FALSE) {
 
-    //         $tipetruck = '';
-    //         foreach($history as $histories){
-    //             $tipetruck == '2EXL' ? 1 :
-    //             ($tipetruck == '3EXL' ? 2 :
-    //             ($tipetruck == 'SD' ? 3 :
-    //             ($tipetruck == 'LD' ? 4 :
-    //             ($tipetruck == '20"' ? 5 :
-    //             ($tipetruck == '40"' ? 6 : '')))));
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $history[] = $data;
+            }
 
-    //             $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
+            $tipetruck = '';
+            foreach($history as $histories){
+                if($histories[3] != ''){
+                    $kodetruck = $histories[4];
+                    $kodetruck == '2EXL' ? $tipetruck = 1 :
+                    ($kodetruck == '3EXL' ?  $tipetruck = 2 :
+                    ($kodetruck == 'SD' ?  $tipetruck = 3 :
+                    ($kodetruck == 'LD' ?  $tipetruck = 4 :
+                    ($kodetruck == '20"' ?  $tipetruck = 5 :
+                    ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
+    
+                    $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
+    
+                    $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
+                    
+                    $insertData = [];
+    
+                    foreach($shipto as $shiptos){
+                        $rute = Rute::where('rute_tipe_id',$tipetruck)
+                                    ->where('rute_shipfrom_id',$shipfrom->id)
+                                    ->where('rute_customership_id',$shiptos->id)->first();
+                        if($rute){
+                            $insertData[] = [
+                                'history_rute_id' => $rute->id,
+                                'history_sangu' => trim(str_replace('.','',$histories[5])),
+                                'history_ongkos' => 0,
+                                'history_is_active' => 1,
+                            ];
+                        }
+                    }
+                    RuteHistory::insert($insertData);
+                    $insertData = [];
 
-    //             $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
-                
-    //             $insertData = [];
-    //             foreach($shipto as $shiptos){
-    //                 $rute = Rute::where('rute_tipe_id',$tipetruck)
-    //                             ->where('rute_shipfrom_id',$shipfrom->id)
-    //                             ->where('rute_customership_id',$shiptos->id)->first();
-    //                 if($rute){
-    //                     $insertData[] = [
-    //                         'history_rute_id' => $rute->id,
-    //                         'history_sangu' => trim(str_replace('.','',$histories[5])),
-    //                         'history_ongkos' => trim(str_replace('.','',$histories[6])),
-    //                         'history_is_active' => 1,
-    //                     ];
-    //                 }
-
-    //                 RuteHistory::insert($insertData);
-    //             }
-    //         }
+                }
+            }
             
 
-    //         fclose($open);
-    //     }
-    // }
+            fclose($open);
+        }
+    }
 
-    public function loadhistoryrutedetail(){
+    public function loadhistoryrutedetail()
+    {
         if (($open = fopen(public_path() . "/Book2.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
@@ -404,4 +406,23 @@ class RuteController extends Controller
         }
     }
     
+    public function historychangestatus(Request $request){
+        
+        try{
+            RuteHistory::where('id',$request->idhistory)->where('history_is_active',1)
+                ->update([
+                    'history_is_active' => 0,
+                    'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
+                ]);
+                DB::commit();
+                alert()->success('Success', 'Rute berhasil di nonaktif');
+                return back();
+            }
+            catch(Exception $err){
+                DB::rollback();
+                alert()->error('Error', 'Rute gagal di nonaktif');
+                return back();
+            }
+
+    }
 }

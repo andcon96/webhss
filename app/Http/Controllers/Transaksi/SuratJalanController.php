@@ -274,10 +274,10 @@ class SuratJalanController extends Controller
                     ->where('rute_tipe_id',$request->tipetruck)
                     ->where('rute_shipfrom_id',$request->shipfrom)
                     ->where('rute_customership_id',$request->shipto)
-                    ->with('getActivePrice')
+                    ->with('getAllActivePrice')
                     ->first();
-        
-        return $data->getActivePrice ?? 0;
+                    
+        return $data->getAllActivePrice ?? 0;
         
     }
 

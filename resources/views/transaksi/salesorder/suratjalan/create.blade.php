@@ -76,6 +76,14 @@
                 <input type="text" class="form-control" name="pengurus" id="pengurus" readonly>
             </div>
         </div>
+        <div class="form-group row col-md-12">
+            <label for="listsan" class="col-md-2 col-form-label text-md-right">List Sangu</label>
+            <div class="col-md-3">
+                <select id="listsan" class="form-control" name="listsan" required autofocus autocomplete="off">
+                    <option value="">Select Data</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group row col-md-12" id="container">
             <label for="trip" class="col-md-2 col-form-label text-md-right">Tarif</label>
             <div class="col-md-3">
@@ -108,7 +116,7 @@
             </div>
             <label for="totsangu" class="col-md-3 col-form-label text-md-right">Sangu</label>
             <div class="col-md-3">
-                <input type="text" class="form-control sangu" required name="totsangu" id="totsangu">
+                <input type="text" class="form-control sangu" required name="totsangu" id="totsangu" required>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -137,7 +145,7 @@
 
 @section('scripts')
 <script>
-    $('#truck').select2({
+    $('#truck,#listsan').select2({
         width: '100%'
     });
 
@@ -196,11 +204,22 @@
             },
             success: function(data) {
                 console.log(data);
-                $('#sangutruck').val(Number(data['history_sangu'] ?? 0).toLocaleString('en-US'));
-                $('#komisitruck').val(Number(data['history_ongkos'] ?? 0).toLocaleString('en-US'))
-                $('#defaultprice').val(Number(data['history_harga'] ?? 0).toLocaleString('en-US'));
-                $('#defaultpriceid').val(data['id']);
-                getDefaultSangu();
+
+                let output = '<option value=""> Select Data </option>';
+
+                data.forEach(element => {
+                    console.log(element['id']);
+                    output += `<option value="${element['id']}"
+                            data-sangu="${element['history_sangu']}"
+                            data-komisi="${element['history_ongkos']}"
+                            data-harga="${element['history_harga']}">
+
+                            Sangu : ${element['history_sangu']} , Komisi : ${element['history_ongkos']}
+                            
+                            </option>`;
+                });
+
+                $('#listsan').html('').append(output);
             },
             error: function(data) {
                 Swal.fire({
@@ -214,7 +233,20 @@
 
         $('#pengurus').val(pengurus);
         $('#truckdomain').val(domain);
-    })
+    });
+
+    $(document).on('change', '#listsan',function(){
+        let sangu = $(this).find(':selected').data('sangu');
+        let komisi = $(this).find(':selected').data('komisi');
+        let harga = $(this).find(':selected').data('harga');
+        let id = $(this).find(':selected').val();
+
+        $('#sangutruck').val(Number(sangu).toLocaleString('en-US'));
+        $('#komisitruck').val(Number(komisi).toLocaleString('en-US'))
+        $('#defaultprice').val(Number(harga).toLocaleString('en-US'));
+        $('#defaultpriceid').val(id);
+        getDefaultSangu();
+    });
     
     $(document).on('click', '#btnconf', function(e) {
         e.preventDefault();
