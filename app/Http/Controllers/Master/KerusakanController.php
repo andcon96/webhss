@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Kerusakan;
+use App\Models\Master\Truck;
+use App\Models\Transaksi\KerusakanMstr;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,30 +24,31 @@ class KerusakanController extends Controller
         if($request->s_kerusakan){
             $data->where('id',$request->s_kerusakan);
         }
-        $quernumber = Kerusakan::where('kerusakan_code','like','KR%')->orderBy('kerusakan_code','desc')->first();
+        
         $lastnumber = '';
         
-        if($quernumber){
+        // if($quernumber){
             
-            $number = $quernumber->kerusakan_code;
+        //     $number = $quernumber->kerusakan_code;
             
-            $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
+        //     $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
             
-            $newangka = (string)((int)$strangka +1);
-            $selisihangka = 4 - strlen($newangka);
-            $lastnumber = 'KR';
-            for($i = 0; $i < $selisihangka; $i++){
-                $lastnumber .= '0';
-                if($i == $selisihangka - 1){
-                    $lastnumber .= $newangka;
-                }
-            }
-        }
-        else{
-            $lastnumber = 'KR0001';
-        }
+        //     $newangka = (string)((int)$strangka +1);
+        //     $selisihangka = 4 - strlen($newangka);
+        //     $lastnumber = 'KR';
+        //     for($i = 0; $i < $selisihangka; $i++){
+        //         $lastnumber .= '0';
+        //         if($i == $selisihangka - 1){
+        //             $lastnumber .= $newangka;
+        //         }
+        //     }
+            
+        // }
+        // else{
+        //     $lastnumber = 'KR0001';
+        // }
         
-        $data = $data->paginate(10);
+        $data = $data->orderBy('kerusakan_code')->paginate(10);
 
         return view('setting.kerusakan.index',compact('data','kerusakan','lastnumber'));
     }
@@ -113,5 +116,33 @@ class KerusakanController extends Controller
         }
 
         return back();
+    }
+
+    public function getnbr(Request $request){
+        
+        
+        $searchcode = Kerusakan::where('kerusakan_code','<>','LAIN')->where('kerusakan_code','like',$request->code.'%')->orderBy('kerusakan_code','desc')->first(); 
+        $lastnumber = '';
+        
+        if($searchcode){
+            $laststring = substr($request->code,-1);
+            $number = $searchcode->kerusakan_code;
+            
+            $strangka = substr($number,(strpos($number,$laststring)+1),strlen($number));
+            
+            $newangka = (string)((int)$strangka +1);
+            $lastnumber = $request->code;
+            if(strlen($newangka) == 1){
+                $lastnumber .= '0'.$newangka;
+            } 
+            else{
+                $lastnumber .= $newangka;
+            }
+            
+        }
+        else{
+            $lastnumber = $request->code . '01';
+        }
+        return $lastnumber;
     }
 }

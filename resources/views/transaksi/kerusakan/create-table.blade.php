@@ -2,7 +2,8 @@
     <table class="table table-bordered addtable" id="createTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="80%">Jenis Kerusakan</th>
+                <th width="60%">Jenis Kerusakan</th>
+                <th width="20%">Note</th>
                 <th width="20%">Delete</th>
             </tr>
         </thead>

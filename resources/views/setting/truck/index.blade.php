@@ -72,6 +72,7 @@
                     {{$datas->getTipe->tt_desc}}
                 </td>
                 <td>
+                    
                     {{$datas->getUserDriver->name ?? ''}}
                 </td>
                 <td>
@@ -235,14 +236,15 @@
 @section('scripts')
 
 <script type="text/javascript">
+    
     $('.domain, .driver, #s_truck, .user, #s_tipe').select2({
         width: '100%'
     });
 
-    $(document).on('click', '.newRole', function() {
-        document.getElementById('role').value = '';
-        document.getElementById('desc').value = '';
-    });
+    // $(document).on('click', '.newRole', function() {
+    //     document.getElementById('role').value = '';
+    //     document.getElementById('desc').value = '';
+    // });
 
     $(document).on('click', '.deleteRole', function() { // Click to only happen on announce links
 
