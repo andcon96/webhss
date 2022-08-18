@@ -49,7 +49,7 @@
 
         <div class="form-group row col-md-12">
             <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
-            <div class="col-md-4 col-lg-3">
+            <div class="col-md-12">
                 {{-- <a href="{{route('reportPerNopol')}}" class="btn bt-action newUser" target="_blank">Preview</a> --}}
                 <a href="{{route('report.index')}}" class="btn bt-action">Back</a>
                 <button class="btn bt-action" formtarget="_blank">Preview</button>
