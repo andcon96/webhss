@@ -4,7 +4,8 @@
             <tr>
                 <th width="25%">Invoice Number</th>
                 <th width="25%">SO Number</th>
-                <th width="25%">Invoice Date</th>
+                <th>Invoice Date</th>
+                <th>Invoice Total</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -12,8 +13,11 @@
             @forelse ($data as $key => $datas)
                 <tr>
                     <td data-label="Invoice">{{ $datas->im_nbr }}</td>
-                    <td data-label="SO Number">{{ $datas->getSalesOrder->so_nbr }}</td>
-                    <td data-label="Nominal">{{ $datas->im_date }}</td>
+                    <td data-label="SO Number">{{ $datas->getSalesOrder->so_nbr ?? '' }}</td>
+                    <td data-label="Date">{{ $datas->im_date }}</td>
+                    <td data-label="Total">
+                        {{ number_format($datas->getDetail->sum('id_total'))}}
+                    </td>
                     <td>
                         @if ($datas->rb_is_active == 1)
                             <form action="{{ route('invoicemt.destroy', $datas->id) }}" method="POST" id="submit">
@@ -24,7 +28,7 @@
                                     <i class="fas fa-trash"></i></a>
                             </form>
                         @endif
-                        <a href="{{ route('printInvoice', $datas->id) }}" class="btn btn-info btn-sm"><i
+                        <a href="{{ route('printInvoice', $datas->id) }}" target="_blank" ><i
                                 class="fa fa-print"></i></a>
                     </td>
                 </tr>
