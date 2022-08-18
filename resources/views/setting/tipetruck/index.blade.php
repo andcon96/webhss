@@ -184,10 +184,10 @@
         width: '100%'
     });
 
-    $(document).on('click', '.newRole', function() {
-        document.getElementById('role').value = '';
-        document.getElementById('desc').value = '';
-    });
+    // $(document).on('click', '.newRole', function() {
+    //     document.getElementById('role').value = '';
+    //     document.getElementById('desc').value = '';
+    // });
 
     $(document).on('click', '.editRole', function() {
         let id = $(this).data('id');

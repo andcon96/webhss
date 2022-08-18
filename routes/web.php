@@ -190,6 +190,7 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
         Route::group(['middleware'=>'can:access_krmt'], function () {
             Route::resource('kerusakanmt', KerusakanController::class);
+            Route::get('getkerusakancodenbr', [KerusakanController::class, 'getnbr']);
         });
         //================================
 

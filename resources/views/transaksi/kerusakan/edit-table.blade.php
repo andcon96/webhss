@@ -2,7 +2,8 @@
     <table class="table table-bordered edittable" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="80%">Jenis Kerusakan</th>
+                <th width="60%">Jenis Kerusakan</th>
+                <th width="20%">Note</th>
                 <th width="20%">Delete</th>
             </tr>
         </thead>
@@ -12,6 +13,10 @@
             <tr>
                 <td>
                     <input type="text" class="form-control" value="{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}" readonly>
+                </td>
+                <td>
+                    <input type="hidden" name="remarkslain[]" value="{{$datas->krd_note}}">
+                    <textarea type="text" class="form-control" readonly>{{$datas->krd_note}}</textarea>
                 </td>
                 <td style="vertical-align:middle;text-align:center;"> 
                     <input type="hidden" name="operation[]" class="operation" value="M">

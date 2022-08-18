@@ -99,7 +99,7 @@
         @endforeach
         cols += '</select>';
         cols += '</td>';
-        
+        cols += '<td data-title="Action"><textarea type="text" class="form-control remarkslain" name="remarkslain[]"></td>';
         cols += '<td data-title="Action"><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';
         cols += '</tr>'
         newRow.append(cols);
@@ -108,7 +108,18 @@
 
         selectRefresh();
     });
-
+    // $(document).on('change','.selectpicker',function(){
+    //     var val = $("option:selected",this).text().split(' -- ')[1].trim();
+        
+    //     if(val == 'LAIN - LAIN'){
+    //         $(this).closest('div').closest('tr').find('.remarkslain').readOnly = false
+    //     }
+    //     else{
+           
+    //         $(this).closest('tr').find('.remarkslain').readOnly = true
+        
+    //     }
+    // })
     $(document).on('change', '.qaddel', function() {
         var checkbox = $(this), // Selected or current checkbox
             value = checkbox.val(); // Value of checkbox

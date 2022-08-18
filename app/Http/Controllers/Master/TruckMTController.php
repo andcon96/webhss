@@ -7,6 +7,7 @@ use App\Models\Master\Domain;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
 use App\Models\Master\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -77,27 +78,45 @@ class TruckMTController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $driver = $request->driver;
-        $pengurus = $request->pengurus;
-        $domain = $request->domain;
-        DB::beginTransaction();
-
-        try{
-            $truck = Truck::findOrFail($id);
-            $truck->truck_domain = $domain;
-            $truck->truck_no_polis = $request->nopol;
-            $truck->truck_user_id = $driver;
-            $truck->truck_pengurus_id = $pengurus;
-            $truck->truck_tipe_id = $request->tipetruck;
-            if ($truck->isDirty()) {
-                $truck->save();
+        if($request->isactive == 1){
+            $driver = $request->driver;
+            $pengurus = $request->pengurus;
+            $domain = $request->domain;
+            DB::beginTransaction();
+    
+            try{
+                
+                $truck = Truck::findOrFail($id);
+                $truck->truck_domain = $domain;
+                $truck->truck_no_polis = $request->nopol;
+                $truck->truck_user_id = $driver;
+                $truck->truck_pengurus_id = $pengurus;
+                $truck->truck_tipe_id = $request->tipetruck;
+                if ($truck->isDirty()) {
+                    $truck->save();
+                }
+    
+                DB::commit();
+                alert()->success('Success', 'Truck updated successfully');
+            }catch (Exception $err) {
+                DB::rollBack();
+                alert()->error('Error', 'Failed to update truck');
             }
-
-            DB::commit();
-            alert()->success('Success', 'Truck updated successfully');
-        }catch (\Exception $err) {
-            DB::rollBack();
-            alert()->error('Error', 'Failed to update truck');
+    
+        }
+        else if($request->isactive == 0){
+            
+            DB::beginTransaction();
+            try{
+                $truck = Truck::where('id',$id)->first();
+                $truck->new_truck_note = $request->newnopol;
+                $truck->save();
+                DB::commit();
+                alert()->success('Success', 'Truck updated successfully');
+            }catch (Exception $err) {
+                DB::rollBack();
+                alert()->error('Error', 'Failed to update truck');
+            }
         }
 
         return redirect()->to($request->prevurl ?? route('truckmaint.index'));
