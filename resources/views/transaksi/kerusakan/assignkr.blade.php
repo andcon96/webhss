@@ -18,13 +18,18 @@
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->kr_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
+            <label for="km" class="col-md-2 col-form-label text-md-right">Kilometer</label>
+            <div class="col-md-3">
+
+                <input id="km" type="text" class="form-control" name="km" value="{{isset($data->kr_km) ? $data->kr_km : ''}}" autocomplete="off"  readonly>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="truck" class="col-md-2 col-form-label text-md-right">Truck</label>
             <div class="col-md-3">
                 <input id="truck" type="text" class="form-control" name="truck" value="{{isset($data->getTruck->truck_no_polis) ? $data->getTruck->truck_no_polis : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
-            <label for="driver" class="col-md-3 col-form-label text-md-right">Driver</label>
+            <label for="driver" class="col-md-2 col-form-label text-md-right">Driver</label>
             <div class="col-md-3">
 
                 <input id="driver" type="text" class="form-control" name="driver" value="{{isset($data->getTruck->getUserDriver->name) ? $data->getTruck->getUserDriver->name : ''}}" autocomplete="off" maxlength="24" readonly>
