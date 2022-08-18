@@ -147,7 +147,8 @@ class GenerateReportController extends Controller
                 'datefrom' => $datefrom,
                 'dateto' => $dateto,
             ]
-        )->setPaper('A4', 'Potrait');
+        )->setPaper([0, 0, 684, 792], 'Potrait');
+        // ->setPaper('A4', 'Potrait');
 
         return $pdf->stream();
     }

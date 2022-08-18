@@ -13,12 +13,12 @@
         <tbody id="addtable">
             @forelse($data->getDetail as $key => $datas)
                 <tr>
-                    <td>{{$datas->sod_line}}</td>
-                    <td>{{$datas->sod_part}} -- {{$datas->getItem->item_desc}}</td>
-                    <td>{{$datas->sod_um}}</td>
-                    <td>{{(int)$datas->sod_qty_ord}}</td>
-                    <td>{{$datas->sod_qty_ord - $datas->sod_qty_ship}}</td>
-                    <td>
+                    <td data-label="Line">{{$datas->sod_line}}</td>
+                    <td data-label="Item">{{$datas->sod_part}} -- {{$datas->getItem->item_desc}}</td>
+                    <td data-label="UM">{{$datas->sod_um}}</td>
+                    <td data-label="Qty Ord">{{(int)$datas->sod_qty_ord}}</td>
+                    <td data-label="Qty Open">{{$datas->sod_qty_ord - $datas->sod_qty_ship}}</td>
+                    <td data-label="Qty SJ">
                         <input type="hidden" name="line[]" value="{{$datas->sod_line}}" 
                                 {{$datas->sod_qty_ord - $datas->sod_qty_ship <= 0 ? 'Disabled' : '' }}>
                         <input type="hidden" name="part[]" value="{{$datas->sod_part}}" 

@@ -250,12 +250,12 @@ class SuratJalanController extends Controller
                 $qtyopen <= 0 ? $status = 'disabled' : $status = '';
                 
                 $output .= '<tr>';
-                $output .= '<td>'.$datas->sod_line.'</td>';
-                $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
-                $output .= '<td>'.$datas->getItem->item_um.'</td>';
-                $output .= '<td>'.(int)$datas->sod_qty_ord.'</td>';
-                $output .= '<td>'.$qtyopen.'</td>';
-                $output .= '<td>
+                $output .= '<td data-label="Line">'.$datas->sod_line.'</td>';
+                $output .= '<td data-label="Item">'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
+                $output .= '<td data-label="UM">'.$datas->getItem->item_um.'</td>';
+                $output .= '<td data-label="Qty Ord">'.(int)$datas->sod_qty_ord.'</td>';
+                $output .= '<td data-label="Qty Open">'.$qtyopen.'</td>';
+                $output .= '<td data-label="Qty SJ">
                             <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
                                     value="'.$qtyopen.'" required class="form-control qtysj" '.$status.'>
                             <input type="hidden" '.$status.' name="line[]" value="'.$datas->sod_line.'">

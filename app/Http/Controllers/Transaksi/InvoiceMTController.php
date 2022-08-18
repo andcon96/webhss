@@ -8,10 +8,12 @@ use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\InvoicePrice;
 use App\Models\Master\InvoicePriceHistory;
+use App\Models\Master\Prefix;
 use App\Models\Master\ShipFrom;
 use App\Models\Transaksi\InvoiceMaster;
 use App\Models\Transaksi\InvoiceDetail;
 use App\Models\Transaksi\SalesOrderMstr;
+use App\Services\CreateTempTable;
 use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
@@ -55,8 +57,16 @@ class InvoiceMTController extends Controller
     {
         DB::beginTransaction();
         try{
+            $prefix = Prefix::lockForUpdate()->first();
+            
+            $getIV = (new CreateTempTable())->getrniv(); // Isi Array [0] Invoice, Array [1] Running Number
+            if($getIV === false){
+                alert()->error('Error', 'Gagal mengambil nomor SJ')->persistent('Dismiss');
+                return back();
+            }
+
             $invmstr = new InvoiceMaster();
-            $invmstr->im_nbr = 'INV2022/000000001';
+            $invmstr->im_nbr = $getIV[0];
             $invmstr->im_so_mstr_id = $request->sonbr;
             $invmstr->im_date = $request->im_date;
             $invmstr->save();
@@ -70,6 +80,9 @@ class InvoiceMTController extends Controller
                 $invdet->id_total = str_replace(',','',$request->price[$key]);
                 $invdet->save();
             }
+
+            $prefix->prefix_iv_rn = $getIV[1];
+            $prefix->save();
 
             DB::commit();
             alert()->success('Success', 'Save Berhasil')->persistent('Dismiss');

@@ -138,6 +138,26 @@ class CreateTempTable
         }
     }
 
+    public function getrniv()
+    {
+        try {
+            $prefix = Prefix::firstOrFail();
+            $cektahun = substr($prefix->prefix_iv_rn, 0, 4); // Save ke DB 2022000000001, 4 digit tahun 9 digit rn
+            $yearnow = date('Y');
+            if ($cektahun != $yearnow) {
+                $rn_new = '000000001';
+            } else {
+                $rn_new = $prefix->prefix_iv_rn + 1;
+            }
+            $newprefix =  $yearnow."/"."ASA".$rn_new;
+            $updateprefix = $yearnow.$rn_new;
+
+            return [$newprefix,$updateprefix];
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
     public function getDataReportPerNopol($truck, $datefrom, $dateto)
     {
         $truckcol = Truck::findOrFail($truck);
