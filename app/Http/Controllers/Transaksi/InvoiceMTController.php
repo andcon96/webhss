@@ -15,6 +15,7 @@ use App\Models\Transaksi\InvoiceDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Services\CreateTempTable;
 use App\Services\WSAServices;
+use PDF;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class InvoiceMTController extends Controller
      */
     public function index()
     {
-        $list_invoice = InvoiceMaster::all();
+        $list_invoice = InvoiceMaster::with('getDetail')->get();
         $list_sonbr = SalesOrderMstr::all();
         $data = InvoiceMaster::with('getDetail','getSalesOrder')->paginate(10);
 
@@ -104,6 +105,27 @@ class InvoiceMTController extends Controller
 
             return number_format((Float)$checkData,0);
         }
+    }
+
+    public function printinvoice($id)
+    {
+        $data = InvoiceMaster::with(['getDetail','getSalesOrder'])->findOrFail($id);
+        
+        $total = $data->getDetail->sum('id_total');
+        
+        $terbilang = (new CreateTempTable())->terbilang($total);
+        dd($terbilang);
+        
+        $pdf = PDF::loadview(
+            'transaksi.laporan.pdf.pdf-invoice',
+            [
+                'data' => $data,
+                'total' => $total,
+                'terbilang' => $terbilang
+            ]
+        )->setPaper('Letter', 'Potrait');
+
+        return $pdf->stream();
     }
 
     

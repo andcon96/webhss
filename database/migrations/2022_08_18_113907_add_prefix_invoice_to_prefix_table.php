@@ -14,7 +14,7 @@ class AddPrefixInvoiceToPrefixTable extends Migration
     public function up()
     {
         Schema::table('prefix', function (Blueprint $table) {
-            $table->string('prefix_iv_rn',20)->default(000000)->after('prefix_kr_cn');
+            $table->string('prefix_iv_rn',20)->default(000000)->after('prefix_kr_rn');
         });
     }
 
