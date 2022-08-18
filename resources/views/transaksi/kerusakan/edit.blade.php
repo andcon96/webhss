@@ -92,7 +92,7 @@
         @endforeach
         cols += '</select>';
         cols += '</td>';
-        cols += '<td > <textarea type="text" name="remarkslain[]"  value=""></textarea></td>';
+        cols += '<td> <textarea type="text" name="remarkslain[]"  value=""></textarea></td>';
         cols += '<td data-title="Action"><input type="hidden" name="operation[]" class="operation" value="A"><input type="hidden" name="iddetail[]" value=""><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';
         cols += '</tr>'
         newRow.append(cols);
