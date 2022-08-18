@@ -207,6 +207,27 @@
               </ul>
             </li>
             @endcan
+            @can('access_invoice_side')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                  Invoice Menu  
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('access_invoice')
+                <li class="nav-item">
+                  <a href="{{route('invoicemt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Invoice</p>
+                  </a>
+                </li>
+                @endcan
+              </ul>
+            </li>
+            @endcan
             @can('access_report_side')
             <li class="nav-item">
               <a href="#" class="nav-link">
