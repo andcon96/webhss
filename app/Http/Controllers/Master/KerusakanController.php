@@ -24,31 +24,31 @@ class KerusakanController extends Controller
         if($request->s_kerusakan){
             $data->where('id',$request->s_kerusakan);
         }
-        $quernumber = Kerusakan::where('kerusakan_code','like','KR%')->orderBy('kerusakan_code','desc')->first();
+        
         $lastnumber = '';
         
-        if($quernumber){
+        // if($quernumber){
             
-            $number = $quernumber->kerusakan_code;
+        //     $number = $quernumber->kerusakan_code;
             
-            $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
+        //     $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
             
-            $newangka = (string)((int)$strangka +1);
-            $selisihangka = 4 - strlen($newangka);
-            $lastnumber = 'KR';
-            for($i = 0; $i < $selisihangka; $i++){
-                $lastnumber .= '0';
-                if($i == $selisihangka - 1){
-                    $lastnumber .= $newangka;
-                }
-            }
+        //     $newangka = (string)((int)$strangka +1);
+        //     $selisihangka = 4 - strlen($newangka);
+        //     $lastnumber = 'KR';
+        //     for($i = 0; $i < $selisihangka; $i++){
+        //         $lastnumber .= '0';
+        //         if($i == $selisihangka - 1){
+        //             $lastnumber .= $newangka;
+        //         }
+        //     }
             
-        }
-        else{
-            $lastnumber = 'KR0001';
-        }
+        // }
+        // else{
+        //     $lastnumber = 'KR0001';
+        // }
         
-        $data = $data->paginate(10);
+        $data = $data->orderBy('kerusakan_code')->paginate(10);
 
         return view('setting.kerusakan.index',compact('data','kerusakan','lastnumber'));
     }
@@ -118,61 +118,31 @@ class KerusakanController extends Controller
         return back();
     }
 
-    // public function loaddatafromexcel(){
-
-    //     if (($open = fopen(public_path() . "/Book2.csv", "r")) !== FALSE) {
-
-    //         while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
-    //             $history[] = $data;
-    //         }
-    //         $quernumber = Kerusakan::where('kerusakan_code','like','KR%')->orderBy('kerusakan_code','desc')->first();
-    //         $rutearray = [];
-    //         $tipetruck = '';
-    //         foreach($history as $histories){
-    //             $truck = Truck::where('truck_no_polis',$histories[0])->first();
-    //             if($truck){
-    //                 $truckid = $truck->id;
-    //                 $kerusakan = KerusakanMstr::where('kr_truck',$truckid)->where('kr_date',$histories[2])->first();
-    //                 if($kerusakan){
-
-    //                 }
-    //                 else{
-    //                     KerusakanMstr::
-    //                 }
-    //             }
-    //             if(!empty($histories[2])){
-    //                 $tipebefore = str_replace('*','"',substr($histories[0],-3));
-    //                 $tipeid = TipeTruck::where('tt_code',$tipebefore)->first();
-    //                 if(isset($tipeid)){
-    //                     $shipto = CustomerShipTo::where('cs_shipto','like','%'.$histories[2])->get();
-    //                     if(count($shipto) > 0){
-                            
-    //                         foreach($shipto as $st){
-    //                             $rute = Rute::where('rute_tipe_id',$tipeid->id)->where('rute_customership_id',$st->id)->get();
-    //                             foreach ($rute as $rt){
-    //                                 $rutearray[] = [
-    //                                     'history_rute_id'       => $rt->id,
-    //                                     'history_harga'         => 0,
-    //                                     'history_sangu'         => (int)$histories[3],
-    //                                     'history_ongkos'        => (int)$histories[4],
-    //                                     'history_is_active'     => 1,
-    //                                     'history_last_active'   => Carbon::now()->toDateTimeString(),
-    //                                     'history_user'          => 1,
-    //                                     'created_at'            => Carbon::now()->toDateTimeString(),
-    //                                     'updated_at'            => Carbon::now()->toDateTimeString()
-    //                                 ];
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //             RuteHistory::insert($rutearray);
-    //             $rutearray = [];
-    //         }
+    public function getnbr(Request $request){
+        
+        
+        $searchcode = Kerusakan::where('kerusakan_code','<>','LAIN')->where('kerusakan_code','like',$request->code.'%')->orderBy('kerusakan_code','desc')->first(); 
+        $lastnumber = '';
+        
+        if($searchcode){
+            $laststring = substr($request->code,-1);
+            $number = $searchcode->kerusakan_code;
             
-    //         fclose($open);
+            $strangka = substr($number,(strpos($number,$laststring)+1),strlen($number));
             
-    //     }
-    
-    // }
+            $newangka = (string)((int)$strangka +1);
+            $lastnumber = $request->code;
+            if(strlen($newangka) == 1){
+                $lastnumber .= '0'.$newangka;
+            } 
+            else{
+                $lastnumber .= $newangka;
+            }
+            
+        }
+        else{
+            $lastnumber = $request->code . '01';
+        }
+        return $lastnumber;
+    }
 }

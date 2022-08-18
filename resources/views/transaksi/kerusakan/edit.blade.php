@@ -18,7 +18,7 @@
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->kr_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="km" class="col-md-2 col-form-label text-md-right">Kerusakan Nbr</label>
+            <label for="km" class="col-md-2 col-form-label text-md-right">Kilometer</label>
             <div class="col-md-3">
                 <input id="km" type="number" class="form-control" name="km" value="{{$data->kr_km}}" autocomplete="off" maxlength="24" autofocus>
             </div>
@@ -28,7 +28,7 @@
             <div class="col-md-3">
                 <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" readonly>
             </div>
-            <label for="driver" class="col-md-3 col-form-label text-md-right">Driver</label>
+            <label for="driver" class="col-md-2 col-form-label text-md-right">Driver</label>
             <div class="col-md-3">
                 <input id="driver" type="text" class="form-control" name="driver" value="{{isset($data->getTruck->getUserDriver->name) ? $data->getTruck->getUserDriver->name : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
@@ -92,7 +92,7 @@
         @endforeach
         cols += '</select>';
         cols += '</td>';
-        
+        cols += '<td > <textarea type="text" name="remarkslain[]"  value=""></textarea></td>';
         cols += '<td data-title="Action"><input type="hidden" name="operation[]" class="operation" value="A"><input type="hidden" name="iddetail[]" value=""><input type="button" class="ibtnDel btn btn-danger btn-focus"  value="Delete"></td>';
         cols += '</tr>'
         newRow.append(cols);

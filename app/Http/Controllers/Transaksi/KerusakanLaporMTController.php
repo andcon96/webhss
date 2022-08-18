@@ -147,6 +147,7 @@ class KerusakanLaporMTController extends Controller
                     $kerusakan_detail = new KerusakanDetail();
                     $kerusakan_detail->krd_kr_mstr_id = $id;
                     $kerusakan_detail->krd_kerusakan_id = $datas;
+                    $kerusakan_detail->krd_note = $request->remarkslain[$key];
                     $kerusakan_detail->save();
                 }
 
@@ -160,8 +161,7 @@ class KerusakanLaporMTController extends Controller
                 alert()->success('Success', 'Report created')->persistent('Dismiss');
                 return back();
             } catch (Exception $e) {
-                DB::rollBack();
-                
+
                 alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
                 return back();
             }
@@ -180,7 +180,7 @@ class KerusakanLaporMTController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
+        
         $data = KerusakanMstr::findOrfail($request->idmaster);
         if($data->kr_status == "Close"){
             alert()->error('Error', 'Report is closed')->persistent('Dismiss');
@@ -189,6 +189,9 @@ class KerusakanLaporMTController extends Controller
         // $this->authorize('update',[KerusakanMstr::class,$data]);
         DB::beginTransaction();
         try {
+            $mstr = KerusakanMstr::where('id',$request->idmaster)->first();
+            $mstr->kr_km = $request->km;
+            $mstr->save();
             foreach ($request->iddetail as $key => $datas) {
                 $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
                 
@@ -198,6 +201,7 @@ class KerusakanLaporMTController extends Controller
                     
                     $detail->krd_kr_mstr_id = $request->idmaster;
                     $detail->krd_kerusakan_id = $request->jeniskerusakan[$key];
+                    $detail->krd_note = $request->remarkslain[$key];
 
                     $detail->save();
                 }

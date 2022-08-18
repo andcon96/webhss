@@ -12,12 +12,13 @@
     <form action="{{route('truckmaint.update',$data->id)}}" method="post" id="submit">
         {{ method_field('put') }}
         {{ csrf_field() }}
+        <input type="hidden" id="isactive" name='isactive' value={{$data->truck_is_active}}>
         <input type="hidden" name="prevurl" value="{{url()->previous()}}">
         <div class="modal-body">
             <div class="form-group row">
                 <label for="domain" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
                 <div class="col-md-7">
-                    <select id="domain" class="form-control domain" name="domain" autofocus required autocomplete="off" {{$data->truck_is_active == 0 ? 'readonly' : ''}}>
+                    <select id="domain" class="form-control domain" name="domain" autofocus required autocomplete="off" readonly>
                         @foreach($domain as $dm)
                             <option value="{{$dm->domain_code}}" {{$dm->domain_code == $data->truck_domain ? 'Selected' : ''}}>{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
                         @endforeach
@@ -34,6 +35,7 @@
                 <label for="driver" class="col-md-3 col-form-label text-md-right">{{ __('Driver') }}</label>
                 <div class="col-md-7">
                     <select name="driver" id="driver" class="form-control" {{$data->truck_is_active == 0 ? 'readonly' : ''}}> 
+                        <option selected disabled></option>
                         @foreach ($user as $driver)
                             <option value="{{$driver->id}}" {{$driver->id == $data->truck_user_id ? 'Selected' : ''}} >{{$driver->username}} - {{$driver->name}}</option>
                         @endforeach
@@ -44,6 +46,7 @@
                 <label for="pengurus" class="col-md-3 col-form-label text-md-right">{{ __('Pengurus') }}</label>
                 <div class="col-md-7">
                     <select name="pengurus" id="pengurus" class="form-control" {{$data->truck_is_active == 0 ? 'readonly' : ''}}> 
+                        <option selected disabled></option>
                         @foreach ($user as $pengurus)
                             <option value="{{$pengurus->id}}" {{$pengurus->id == $data->truck_pengurus_id ? 'Selected' : ''}} >{{$pengurus->username}} - {{$pengurus->name}}</option>
                         @endforeach
@@ -60,10 +63,10 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row" style="display:{{$data->truck_is_active == 0 ? '' : 'none'}}">
                 <label for="newnopol" class="col-md-3 col-form-label text-md-right">{{ __('No Polis Baru') }}</label>
                 <div class="col-md-7">
-                    <input id="newnopol" type="text" class="form-control" autocomplete="off" name="newnopol" value="{{$data->truck_new}}" style="display:{{$data->truck_is_active == 0 ? '' : 'none'}}"}}>
+                    <input id="newnopol" type="text" class="form-control" autocomplete="off" name="newnopol" value="{{$data->new_truck_note}}" >
                 </div>
             </div>
 
@@ -98,10 +101,22 @@
         }
     });
     
-    $('#tipetruck,#domain,#driver,#pengurus').select2({
+    if($('#isactive').val() == 0){
+        
+        $('#tipetruck,#domain,#driver,#pengurus').select2({
+            placeholder: 'Pilih Driver',
+            allowClear: true,
+            readOnly : true,
+            disabled: true
+        });
+    }
+    else{
+        $('#tipetruck,#domain,#driver,#pengurus').select2({
         placeholder: 'Pilih Driver',
         allowClear: true
     });
+    }
+
     
     $('#submit').on("submit", function() {
         document.getElementById('btnconf').style.display = 'none';
