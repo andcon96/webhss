@@ -18,6 +18,10 @@
             <div class="col-md-3">
                 <input id="sonbr" type="text" class="form-control" name="sonbr" value="{{$data->kr_nbr}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
+            <label for="km" class="col-md-2 col-form-label text-md-right">Kerusakan Nbr</label>
+            <div class="col-md-3">
+                <input id="km" type="number" class="form-control" name="km" value="{{$data->kr_km}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="truck" class="col-md-2 col-form-label text-md-right">Truck</label>
