@@ -180,7 +180,6 @@ class KerusakanLaporMTController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
     
         $data = KerusakanMstr::findOrfail($request->idmaster);
         if($data->kr_status == "Close"){
