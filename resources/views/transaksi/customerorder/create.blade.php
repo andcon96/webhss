@@ -29,7 +29,7 @@
                     <option value="">Select Data</option>
                     <option value="BERAT">Berat</option>
                     <option value="TRIP">Trip</option>
-                    <option value="SHIFT">Shift</option>
+                    {{-- <option value="SHIFT">Shift</option> --}}
                 </select>
             </div>
         </div>
