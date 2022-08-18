@@ -216,7 +216,7 @@ class AuthServiceProvider extends ServiceProvider
         // Menu Master
         //=============================
         Gate::define('access_masters', function ($user) {
-            return $user->getRole->role === Role::SUPER_USER;
+            return $user->getRole->role === Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT');
         });
     }
 }
