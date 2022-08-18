@@ -91,6 +91,9 @@ class AccessRoleMenuController extends Controller
         // Menu Report
         $cbRPMT = $request->input('cbRPMT');
 
+        // Menu Invoice
+        $cbInv = $request->input('cbInvoice');
+
         // Menu Setting
         $cbMT01 = $request->input('cbMT01');
         $cbMT02 = $request->input('cbMT02');
@@ -114,7 +117,7 @@ class AccessRoleMenuController extends Controller
                 $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMT04.
                 $cbMT05 . $cbMT06 . $cbMT07 . $cbMT08 . $cbMT09.
                 $cbMT10 . $cbMT11 . $cbMT12 . $cbMT13 . $cbMT14.
-                $cbMT15 . $cbMT16; 
+                $cbMT15 . $cbMT16 . $cbInv; 
 
         DB::beginTransaction();
 
