@@ -212,7 +212,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file-alt"></i>
                 <p>
-                  Invoice Menu  
+                  Invoice  
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -221,7 +221,7 @@
                 <li class="nav-item">
                   <a href="{{route('invoicemt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Invoice</p>
+                    <p>Invoice Maintenance</p>
                   </a>
                 </li>
                 @endcan
