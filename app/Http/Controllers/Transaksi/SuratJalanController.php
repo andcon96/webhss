@@ -245,7 +245,12 @@ class SuratJalanController extends Controller
         if($data->count() > 0){
             $output = '';
             foreach($data as $datas){
-                $qtyopen = $datas->sod_qty_ord - $datas->sod_qty_ship;
+                $qtysisa = $datas->sod_qty_ord - $datas->sod_qty_ship;
+                if((int)$qtysisa > 25000){
+                    $qtyopen = 25000;
+                }else{
+                    $qtyopen = $datas->sod_qty_ord - $datas->sod_qty_ship;
+                }
 
                 $qtyopen <= 0 ? $status = 'disabled' : $status = '';
                 

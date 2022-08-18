@@ -24,7 +24,10 @@
                         <input type="hidden" name="part[]" value="{{$datas->sod_part}}" 
                                 {{$datas->sod_qty_ord - $datas->sod_qty_ship <= 0 ? 'Disabled' : '' }}>
                         <input type="number" class="form-control qtysj" name="qtysj[]" 
-                                value="{{$datas->sod_qty_ord - $datas->sod_qty_ship}}" max="{{$datas->sod_qty_ord}}"
+                                value="{{$datas->sod_qty_ord - $datas->sod_qty_ship > 25000 
+                                    ? 25000 
+                                    : $datas->sod_qty_ord - $datas->sod_qty_ship}}" 
+                                max="{{$datas->sod_qty_ord}}"
                                 {{$datas->sod_qty_ord - $datas->sod_qty_ship <= 0 ? 'Disabled' : '' }}>
                     </td>
                 </tr>

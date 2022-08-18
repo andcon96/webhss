@@ -145,6 +145,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware'=>'can:access_invoice'], function(){
         Route::resource('invoicemt', InvoiceMTController::class);
         Route::get('checkinvoice', [InvoiceMTController::class, 'checkinvoice'])->name('checkInvoice');
+        Route::get('printinvoice/{id}', [InvoiceMTController::class, 'printinvoice'])->name('printInvoice');
     });
 
     Route::group(['middleware'=>'can:access_masters'], function () {
