@@ -23,7 +23,7 @@
                 <th><b>TUJUAN</b></th>
                 <th><b>ORDER</b></th>
                 <th><b>RIT</b></th>
-                <th><b>SANGU</b></th>
+                <th><b>TARIF</b></th>
                 <th><b>KOMISI</b></th>
                 <th><b>HARGA</b></th>
             </tr>

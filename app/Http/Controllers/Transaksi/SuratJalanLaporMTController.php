@@ -67,10 +67,6 @@ class SuratJalanLaporMTController extends Controller
         try{
             // Update Master
             $sjmstr = SuratJalan::findOrFail($request->idsjmstr);
-            if($sjmstr->sj_tot_sangu == 0){
-                alert()->error('Error', 'Sangu yang diberikan SPK 0, Tolong diupdate terlebih dahulu.')->persistent('Dismiss');
-                return back();
-            }
             $sjmstr->sj_conf_remark = $request->remark;
             $sjmstr->sj_conf_date = $request->effdate;
             $sjmstr->sj_status = 'Closed';
