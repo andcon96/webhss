@@ -186,6 +186,25 @@
               </label>
             </div>
           </div>
+
+          <div class="form-group">
+            <h6>
+              <center><strong>Invoice</strong></center>
+              </h5>
+              <hr>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Invoice') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbInvoice">
+                <input type="checkbox" id="cbInvoice" name="cbInvoice" value="IV01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+
           <div class="form-group">
             <h6>
               <center><strong>Driver Check In / Out</strong></center>
@@ -404,6 +423,7 @@
         document.getElementById("cbKerusakan").checked = true;
         document.getElementById("cbBiaya").checked = true;  
         document.getElementById("cbDRInOut").checked = true; 
+        document.getElementById("cbInvoice").checked = true; 
         document.getElementById("cbRPMT").checked = true;  
         document.getElementById("cbMT01").checked = true;  
         document.getElementById("cbMT02").checked = true;  
@@ -431,7 +451,8 @@
         document.getElementById("cbSJLapor").checked = false;  
         document.getElementById("cbKerusakan").checked = false;
         document.getElementById("cbBiaya").checked = false;  
-        document.getElementById("cbDRInOut").checked = false; 
+        document.getElementById("cbDRInOut").checked = false;
+        document.getElementById("cbInvoice").checked = false;  
         document.getElementById("cbRPMT").checked = false;  
         document.getElementById("cbMT01").checked = false;  
         document.getElementById("cbMT02").checked = false;  
@@ -494,6 +515,11 @@
               document.getElementById("cbSJMT").checked = true;  
             }else{
               document.getElementById("cbSJMT").checked = false;
+            }
+            if(totmenu.search("IV01") >= 0){
+              document.getElementById("cbInvoice").checked = true;  
+            }else{
+              document.getElementById("cbInvoice").checked = false;
             }
             if(totmenu.search("TR01") >= 0){
               document.getElementById("cbTripBrowse").checked = true;  

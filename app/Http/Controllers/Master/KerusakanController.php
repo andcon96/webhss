@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Kerusakan;
+use App\Models\Master\Truck;
+use App\Models\Transaksi\KerusakanMstr;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,9 +34,15 @@ class KerusakanController extends Controller
             $strangka = substr($number,(strpos($number,'R')+1),strlen($number));
             
             $newangka = (string)((int)$strangka +1);
-            $selisihangka = 5 - strlen($newangka);
+            $selisihangka = 4 - strlen($newangka);
+            $lastnumber = 'KR';
+            for($i = 0; $i < $selisihangka; $i++){
+                $lastnumber .= '0';
+                if($i == $selisihangka - 1){
+                    $lastnumber .= $newangka;
+                }
+            }
             
-            $lastnumber = 'KR'.str_pad($newangka,$selisihangka,0,STR_PAD_LEFT);
         }
         else{
             $lastnumber = 'KR0001';
@@ -109,4 +117,62 @@ class KerusakanController extends Controller
 
         return back();
     }
+
+    // public function loaddatafromexcel(){
+
+    //     if (($open = fopen(public_path() . "/Book2.csv", "r")) !== FALSE) {
+
+    //         while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+    //             $history[] = $data;
+    //         }
+    //         $quernumber = Kerusakan::where('kerusakan_code','like','KR%')->orderBy('kerusakan_code','desc')->first();
+    //         $rutearray = [];
+    //         $tipetruck = '';
+    //         foreach($history as $histories){
+    //             $truck = Truck::where('truck_no_polis',$histories[0])->first();
+    //             if($truck){
+    //                 $truckid = $truck->id;
+    //                 $kerusakan = KerusakanMstr::where('kr_truck',$truckid)->where('kr_date',$histories[2])->first();
+    //                 if($kerusakan){
+
+    //                 }
+    //                 else{
+    //                     KerusakanMstr::
+    //                 }
+    //             }
+    //             if(!empty($histories[2])){
+    //                 $tipebefore = str_replace('*','"',substr($histories[0],-3));
+    //                 $tipeid = TipeTruck::where('tt_code',$tipebefore)->first();
+    //                 if(isset($tipeid)){
+    //                     $shipto = CustomerShipTo::where('cs_shipto','like','%'.$histories[2])->get();
+    //                     if(count($shipto) > 0){
+                            
+    //                         foreach($shipto as $st){
+    //                             $rute = Rute::where('rute_tipe_id',$tipeid->id)->where('rute_customership_id',$st->id)->get();
+    //                             foreach ($rute as $rt){
+    //                                 $rutearray[] = [
+    //                                     'history_rute_id'       => $rt->id,
+    //                                     'history_harga'         => 0,
+    //                                     'history_sangu'         => (int)$histories[3],
+    //                                     'history_ongkos'        => (int)$histories[4],
+    //                                     'history_is_active'     => 1,
+    //                                     'history_last_active'   => Carbon::now()->toDateTimeString(),
+    //                                     'history_user'          => 1,
+    //                                     'created_at'            => Carbon::now()->toDateTimeString(),
+    //                                     'updated_at'            => Carbon::now()->toDateTimeString()
+    //                                 ];
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //             RuteHistory::insert($rutearray);
+    //             $rutearray = [];
+    //         }
+            
+    //         fclose($open);
+            
+    //     }
+    
+    // }
 }
