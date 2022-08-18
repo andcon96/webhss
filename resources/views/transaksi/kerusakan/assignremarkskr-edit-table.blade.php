@@ -3,9 +3,10 @@
         <thead>
             <tr>
                 <th width="25%">Jenis Kerusakan</th>
-                <th width="25%">Tindakan Sebelumnya</th>
+                <th width="10%">Note</th>
+                <th width="20%">Tindakan Sebelumnya</th>
                 <th width="12%">Tanggal Sebelumnya</th>
-                <th width="25%">Tindakan Selanjutnya</th>
+                <th width="20%">Tindakan Selanjutnya</th>
                 <th width="12%">Tanggal Selanjutnya</th>
                 
             </tr>
@@ -19,6 +20,9 @@
                     <input type="hidden" name="operation[]" class="operation" value="M">
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
+                </td>
+                <td>
+                    <textarea type="text" class="form-control"  readonly>{{isset($datas->krd_note) ? $datas->krd_note : ''}}</textarea>
                 </td>
                 <td>
                     <textarea type="text" class="form-control"  readonly>{{isset($datas->getTindakan[0]->krt_remarks) ? $datas->getTindakan[0]->krt_remarks : ''}}</textarea>
