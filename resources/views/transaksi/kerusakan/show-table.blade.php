@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th width="60%">Jenis Kerusakan</th>
-                
+                <th>Note</th>
             </tr>
         </thead>
         <tbody id="edittable">
@@ -11,6 +11,9 @@
             <tr>
                 <td>
                     <input type="text" class="form-control" value="{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}" readonly>
+                </td>
+                <td>
+                    <input type="text" class="form-control" value="{{$datas->krd_note}}" readonly>
                 </td>
             </tr>
             @empty

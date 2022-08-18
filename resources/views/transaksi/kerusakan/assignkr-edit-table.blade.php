@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th width="60%">Jenis Kerusakan</th>
-                
+                <th>Note</th>
                 
             </tr>
         </thead>
@@ -17,6 +17,9 @@
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
+                </td>
+                <td>
+                    <input type="text" class="form-control" value="{{$datas->krd_note}}" readonly>
                 </td>
 
                 {{-- <td style="vertical-align:middle;text-align:center;">  --}}
