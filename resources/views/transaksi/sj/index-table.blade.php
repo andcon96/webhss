@@ -26,6 +26,7 @@
                         data-shipto="{{$datas->getSOMaster->so_ship_to}}"
                         data-shiptodesc="{{$datas->getSOMaster->getShipTo->cs_shipto_name}}"
                         data-status="{{$datas->sj_status}}"
+                        data-effdate="{{$datas->sj_eff_date}}"
                         data-truck="{{$datas->getTruck->truck_no_polis}}" data-trip="{{$datas->sj_jmlh_trip}}"
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
                         data-pengurus="{{$datas->getTruck->getUserPengurus->name ?? ''}}"

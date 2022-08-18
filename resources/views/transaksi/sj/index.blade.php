@@ -148,6 +148,10 @@
                         <div class="col-md-3">
                             <input id="status" type="text" class="form-control" name="status" autocomplete="off" value="" readonly>
                         </div>
+                        <label for="effdate" class="col-md-2 col-form-label text-md-right">{{ __('Eff Date SJ') }}</label>
+                        <div class="col-md-3">
+                            <input id="effdate" type="text" class="form-control" name="effdate" autocomplete="off" value="" readonly>
+                        </div>
                     </div>
                     <div id="form-group row">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -282,6 +286,7 @@
         var pengurus = $(this).data('pengurus');
         var trip = $(this).data('trip');
         var sangu = $(this).data('sangu');
+        var effdate = $(this).data('effdate');
         
 
         document.getElementById("sonbr").value = sonbr;
@@ -293,6 +298,7 @@
         document.getElementById("pengurus").value = pengurus;
         document.getElementById("trip").value = trip;
         document.getElementById("sangu").value = sangu;
+        document.getElementById("effdate").value = effdate;
 
         $.ajax({
             url: "/suratjalan/getdetail/" + id,
