@@ -11,6 +11,7 @@ use App\Models\Master\Rute;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
+use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
 use App\Services\CreateTempTable;
@@ -77,7 +78,8 @@ class SuratJalanController extends Controller
             $sjmstr->sj_nbr = $getSJ;
             $sjmstr->sj_eff_date = Carbon::now()->toDateString();
             $sjmstr->sj_remark = $request->remark;
-            $sjmstr->sj_status = "Open";
+            // $sjmstr->sj_status = "Open";
+            $sjmstr->sj_status = "Selesai";
             $sjmstr->sj_truck_id = $request->truck;
             $sjmstr->sj_jmlh_trip = $request->trip;
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
@@ -114,6 +116,11 @@ class SuratJalanController extends Controller
             $prefix = Prefix::firstOrFail();
             $prefix->prefix_sj_rn = substr($getSJ,2,6);
             $prefix->save();
+
+            $newdata = new SJHistTrip();
+            $newdata->sjh_sj_mstr_id = $id;
+            $newdata->sjh_truck = $request->truck;
+            $newdata->save();
 
             DB::commit();
             alert()->success('Success', 'Surat Jalan : '.$getSJ.' berhasil dibuat')->persistent('Dismiss');
@@ -259,7 +266,7 @@ class SuratJalanController extends Controller
                 $output .= '<td data-label="Item">'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
                 $output .= '<td data-label="UM">'.$datas->getItem->item_um.'</td>';
                 $output .= '<td data-label="Qty Ord">'.(int)$datas->sod_qty_ord.'</td>';
-                $output .= '<td data-label="Qty Open">'.$qtyopen.'</td>';
+                $output .= '<td data-label="Qty Open">'.$qtysisa.'</td>';
                 $output .= '<td data-label="Qty SJ">
                             <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
                                     value="'.$qtyopen.'" required class="form-control qtysj" '.$status.'>
