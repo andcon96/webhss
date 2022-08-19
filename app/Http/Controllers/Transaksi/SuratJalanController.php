@@ -266,7 +266,7 @@ class SuratJalanController extends Controller
                 $output .= '<td data-label="Item">'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
                 $output .= '<td data-label="UM">'.$datas->getItem->item_um.'</td>';
                 $output .= '<td data-label="Qty Ord">'.(int)$datas->sod_qty_ord.'</td>';
-                $output .= '<td data-label="Qty Open">'.$qtyopen.'</td>';
+                $output .= '<td data-label="Qty Open">'.$qtysisa.'</td>';
                 $output .= '<td data-label="Qty SJ">
                             <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
                                     value="'.$qtyopen.'" required class="form-control qtysj" '.$status.'>
