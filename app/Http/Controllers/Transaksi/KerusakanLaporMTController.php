@@ -273,7 +273,7 @@ class KerusakanLaporMTController extends Controller
 
         //kirim email dan update status
         $kerusakan = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans'])->where('kr_status', 'New')->findOrFail($request->idmaster);
-        
+        $krdate = $kerusakan->kr_date;
         $needappr = 0;
         
         foreach($kerusakan->getDetail as $key => $data){
@@ -341,7 +341,7 @@ class KerusakanLaporMTController extends Controller
                         $kerusakandtl->krs_desc = $request->struk_desc[$key];
                         $kerusakandtl->save();    
                     }
-                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
+                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$krdate);
                     if($qxkerusakan[0] == false){
                         DB::rollback();
                         

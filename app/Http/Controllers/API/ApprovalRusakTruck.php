@@ -43,7 +43,8 @@ class ApprovalRusakTruck extends Controller
             }
 
             else{
-                $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
+                $krdate = $checkdata->kr_date;
+                $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$krdate);
                 
                 if($qxrusak[0] == false){
                     
