@@ -28,7 +28,7 @@ class ApprovalRusakTruck extends Controller
         if($status == 'yes'){
             
             $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
-            
+            $krdate = $checkdata->kr_date;
             if($checkdata->kr_status != 'Need Approval'){
                 $errorlist = [];
                 $status_display = 'ERROR';
@@ -43,7 +43,7 @@ class ApprovalRusakTruck extends Controller
             }
 
             else{
-                $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr);
+                $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$krdate);
                 
                 if($qxrusak[0] == false){
                     
