@@ -25,7 +25,7 @@
                     @php($newprice = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ?
                                         $price->getActivePrice->iph_trip_price ?? 0: 
                                         $price->getActivePrice->iph_tonase_price ?? 0)
-                    <input type="number" name="price[]" value="{{number_format($newprice,2)}}" class="form-control">
+                    <input type="number" name="price[]" value="{{number_format($newprice,2)}}" class="form-control price">
                 </td>
                 <td>{{$datas->sjd_qty_ship}}</td>
                 <td>
