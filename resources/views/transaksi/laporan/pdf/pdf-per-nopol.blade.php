@@ -205,7 +205,7 @@
                 <td colspan="6">Uang Diterima Supir</td>
                 <td class="middle">:</td>
                 <td colspan="2"></td>
-                <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $cicilan + $tabungan, 0) }}</b></td>
+                <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $cicilan - $tabungan, 0) }}</b></td>
             </tr>
             <tr>
                 <td colspan="5" class="middle">
