@@ -816,7 +816,7 @@ class QxtendServices
   }
 
   //kerusakan
-  public function qxWOkerusakan($rusaknbr,$nopol){
+  public function qxWOkerusakan($rusaknbr,$nopol,$krdate){
     $qxwsa = Qxwsa::firstOrFail();
     if (is_null($qxwsa->qx_url)) {
       return [false,'Qxtend belum di setup'];
@@ -907,6 +907,9 @@ class QxtendServices
                       <woType>R</woType>
                       <woSite>HSS</woSite>
                       <woQtyOrd>1</woQtyOrd>
+                      <woOrdDate>'.$krdate.'</woOrdDate>
+                      <woRelDate>'.$krdate.'</woRelDate>
+                      <woDueDate>'.$krdate.'</woDueDate>
                       <wocmmts>false</wocmmts>
                       <woLotNext>'.$nopol.'</woLotNext>';
       
