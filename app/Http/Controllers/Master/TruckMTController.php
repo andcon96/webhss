@@ -33,7 +33,7 @@ class TruckMTController extends Controller
             $data->where('truck_tipe_id',$request->s_tipe);
         }
         $domain = Domain::groupBy('domain_code')->get();
-        $data = $data->orderBy('truck_domain')->paginate(10);
+        $data = $data->orderBy('truck_domain')->orderBy('truck_no_polis')->paginate(10);
 
         return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck, 'tipe' => $tipe,'domain' => $domain]);
     }
