@@ -10,8 +10,8 @@
 
 @section('content')
 
-<div class="col-md-12">
-    <a href="{{route('laporkerusakan.create') }}" class="btn btn-info bt-action mb-3">Lapor Kerusakan</a>
+<div class="col-md-12" style="display: {{$access == 'yes' ? '' : 'none'}}">
+    <a href="{{route('laporkerusakan.create') }}" class="btn btn-info bt-action mb-3" >Lapor Kerusakan</a>
 </div>
 <!-- Page Heading -->
 <form action="{{route('laporkerusakan.index')}}" method="get">
