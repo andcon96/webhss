@@ -56,6 +56,22 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group row">
+                            <label for="type" class="col-md-3 col-form-label text-md-right">{{ __('Type') }}</label>
+                            <div class="col-md-3">
+                                <select id="type" class="form-control" name="type" required>
+                                    <option disabled selected>-- Select Type --</option>
+                                    <option value="BN">BN</option>
+                                    <option value="KS">KS</option>
+                                    <option value="LA">LA</option>
+                                    <option value="LS">LS</option>
+                                    <option value="MS">MS</option>
+                                    <option value="OL">OL</option>
+                                    <option value="TR">TR</option>
+                                    <option value="US">US</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="code" class="col-md-3 col-form-label text-md-right">{{ __('Code') }}</label>
                             <div class="col-md-3">
                                 <input id="code" type="text" class="form-control" name="code" autocomplete="off" value="{{$lastnumber}}" required readonly>
@@ -196,14 +212,28 @@
 @section('scripts')
 
 <script type="text/javascript">
+    function fetch_data(code){
+        
+        $.ajax({
+            url: "getkerusakancodenbr?code=" + code,
+            success: function(data) {
+                $('#code').val(data);
+            },
+        })
+    }
+
+    $(document).on('change','#type',function(){
+        $selectval = $(this).val();
+        fetch_data($selectval);
+    })
     $('#s_kerusakan').select2({
         width: '100%'
     });
 
-    $(document).on('click', '.newRole', function() {
-        document.getElementById('role').value = '';
-        document.getElementById('desc').value = '';
-    });
+    // $(document).on('click', '.newRole', function() {
+    //     document.getElementById('role').value = '';
+    //     document.getElementById('desc').value = '';
+    // });
 
     $(document).on('click', '.editRole', function() {
         let id = $(this).data('id');
