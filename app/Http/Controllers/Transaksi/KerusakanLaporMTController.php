@@ -13,6 +13,7 @@ use App\Models\Master\KerusakanStrukturDetail;
 use App\Models\Master\Prefix;
 use App\Models\Master\StrukturKerusakan;
 use App\Models\Master\Truck;
+use App\Models\Master\User;
 use App\Models\Transaksi\KerusakanDetail;
 use App\Models\Transaksi\KerusakanMstr;
 use App\Models\Transaksi\KerusakanStukturTransaksi;
@@ -57,14 +58,23 @@ class KerusakanLaporMTController extends Controller
             $data->whereRelation('getTruck', 'id', '=', $request->s_driver);
         }
         
+        $access = '';
+        $user = session()->get('username');
+        $roletype = User::with(['getRoleType'])->where('username',$user)->first();
+        if(str_contains($roletype->getRoleType,'OPR')){
+            $access = 'no';
+        }
+        else{
+            $access = 'yes';
+        }
         
-
+        
         $data = $data->orderBy('created_at', 'DESC')->paginate(10);
         
         $truck = Truck::withoutGlobalScopes()->get();
         
         
-        return view('transaksi.kerusakan.index', compact('data', 'truck'));
+        return view('transaksi.kerusakan.index', compact('data', 'truck','access'));
     }
 
     public function show($id)

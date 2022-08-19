@@ -27,7 +27,7 @@
                         <td data-label="Status">{{$datas->kr_status}}</td>
                         <td data-label="Action">
                             <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
-                            @if($datas->kr_status == 'New' || $datas->kr_status == 'Done')
+                            @if(($datas->kr_status == 'New' || $datas->kr_status == 'Done') && $access == 'yes')
                             <a href="{{route('laporkerusakan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
                             
                             @endif
@@ -39,10 +39,11 @@
                             @endif
                             @if($datas->kr_status == 'New')
                             <a href="{{route('assignKR',$datas->id) }}"><i class="fas fa-tasks"></i></a>
-
+                            @if($access == 'yes')
                             <a href="" class="deleteModal" 
                                 data-id="{{$datas->id}}" data-krnbr="{{$datas->kr_nbr}}"
                                 data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>
+                                @endif
                             @endif
                         </td>
                     </tr>
