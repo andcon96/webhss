@@ -61,6 +61,7 @@ class InvoiceMTController extends Controller
             $prefix = Prefix::lockForUpdate()->first();
             
             $getIV = (new CreateTempTable())->getrniv(); // Isi Array [0] Invoice, Array [1] Running Number
+            
             if($getIV === false){
                 alert()->error('Error', 'Gagal mengambil nomor SJ')->persistent('Dismiss');
                 return back();
@@ -69,7 +70,7 @@ class InvoiceMTController extends Controller
             $invmstr = new InvoiceMaster();
             $invmstr->im_nbr = $getIV[0];
             $invmstr->im_so_mstr_id = $request->sonbr;
-            $invmstr->im_date = $request->im_date;
+            $invmstr->im_date = $request->effdate;
             $invmstr->save();
 
             $invmstr_id = $invmstr->id;
@@ -77,7 +78,8 @@ class InvoiceMTController extends Controller
                 $invdet = new InvoiceDetail();
                 $invdet->id_im_mstr_id = $invmstr_id;
                 $invdet->id_domain = $datas;
-                $invdet->id_nbr = $request->ivnbrv[$key];
+                $invdet->id_duedate = $request->duedate[$key];
+                $invdet->id_nbr = $request->ivnbr[$key];
                 $invdet->id_total = str_replace(',','',$request->price[$key]);
                 $invdet->save();
             }
@@ -99,29 +101,39 @@ class InvoiceMTController extends Controller
     {
         if($request->ajax()){
             $checkData = (new WSAServices())->wsacheckinvoice($request->domain, $request->invoiceqad);
+            
             if($checkData === false){
                 return response()->json(['error' => 'WSA Failed'],404);
             }
 
-            return number_format((Float)$checkData,0);
+            return [number_format((Float)$checkData[0],0), $checkData[1]];
         }
     }
 
     public function printinvoice($id)
     {
-        $data = InvoiceMaster::with(['getDetail','getSalesOrder'])->findOrFail($id);
+        $data = InvoiceMaster::with([
+                'getDetail',
+                'getSalesOrder.getCOMaster.getCustomer'])->findOrFail($id);
         
         $total = $data->getDetail->sum('id_total');
         
         $terbilang = (new CreateTempTable())->terbilang($total);
-        dd($terbilang);
+        
+        $detail = (new WSAServices())->wsadetailinvoice($data);
+        if($detail == false){
+            alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
+            return back();
+        }
+        // dd($detail);
         
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
             [
                 'data' => $data,
                 'total' => $total,
-                'terbilang' => $terbilang
+                'terbilang' => $terbilang,
+                'detail' => $detail,
             ]
         )->setPaper('Letter', 'Potrait');
 
