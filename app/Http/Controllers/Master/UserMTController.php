@@ -184,7 +184,7 @@ class UserMTController extends Controller
             if ($user->isDirty()) {
                 $user->save();
             }
-
+            $user->save();
             DB::commit();
             alert()->success('Success', 'User updated successfully');
         } catch (\Exception $err) {
