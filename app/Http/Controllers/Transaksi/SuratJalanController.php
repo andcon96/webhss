@@ -79,8 +79,8 @@ class SuratJalanController extends Controller
             // $sjmstr->sj_eff_date = Carbon::now()->toDateString();
             $sjmstr->sj_eff_date = $request->duedate;
             $sjmstr->sj_remark = $request->remark;
-            // $sjmstr->sj_status = "Open";
-            $sjmstr->sj_status = "Selesai";
+            $sjmstr->sj_status = "Open";
+            // $sjmstr->sj_status = "Selesai";
             $sjmstr->sj_truck_id = $request->truck;
             $sjmstr->sj_jmlh_trip = $request->trip;
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
@@ -118,10 +118,10 @@ class SuratJalanController extends Controller
             $prefix->prefix_sj_rn = substr($getSJ,2,6);
             $prefix->save();
 
-            $newdata = new SJHistTrip();
-            $newdata->sjh_sj_mstr_id = $id;
-            $newdata->sjh_truck = $request->truck;
-            $newdata->save();
+            // $newdata = new SJHistTrip();
+            // $newdata->sjh_sj_mstr_id = $id;
+            // $newdata->sjh_truck = $request->truck;
+            // $newdata->save();
 
             DB::commit();
             alert()->success('Success', 'Surat Jalan : '.$getSJ.' berhasil dibuat')->persistent('Dismiss');
