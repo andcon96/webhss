@@ -325,7 +325,7 @@ class RuteController extends Controller
                     $kodetruck = $histories[4];
                     $kodetruck == '2EXL' ? $tipetruck = 1 :
                     ($kodetruck == '3EXL' ?  $tipetruck = 2 :
-                    ($kodetruck == 'SD' ?  $tipetruck = 3 :
+                    ($kodetruck == 'Semi' ?  $tipetruck = 3 :
                     ($kodetruck == 'LD' ?  $tipetruck = 4 :
                     ($kodetruck == '20"' ?  $tipetruck = 5 :
                     ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
