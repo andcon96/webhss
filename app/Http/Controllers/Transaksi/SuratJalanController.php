@@ -77,7 +77,7 @@ class SuratJalanController extends Controller
             $sjmstr->sj_so_mstr_id = $request->soid;
             $sjmstr->sj_nbr = $getSJ;
             // $sjmstr->sj_eff_date = Carbon::now()->toDateString();
-            $sjmstr->sf_eff_date = $request->duedate;
+            $sjmstr->sj_eff_date = $request->duedate;
             $sjmstr->sj_remark = $request->remark;
             // $sjmstr->sj_status = "Open";
             $sjmstr->sj_status = "Selesai";
