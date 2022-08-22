@@ -36,7 +36,7 @@
         <DIV class="form-group row col-md-12">
             <label for="gandeng" class="col-md-2 col-form-label text-md-right">Gandengan</label>
             <div class="col-md-3">
-                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{isset($data->kr_gandeng) ? $data->kr_gandeng : ''}}" autocomplete="off" maxlength="24" readonly autofocus>
+                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{isset($data->kr_gandeng) ? $data->kr_gandeng : ''}}" autocomplete="off" readonly autofocus>
             </div>
         </DIV>
         <div class="form-group row col-md-12">

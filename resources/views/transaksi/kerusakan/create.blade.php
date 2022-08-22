@@ -37,7 +37,7 @@
             </div>
             <label for="gandeng" class="col-md-2 col-form-label text-md-right">Gandengan</label>
             <div class="col-md-3">
-                <input id="gandeng" type="text" class="form-control" name="gandeng" value="" autocomplete="off" maxlength="24" required autofocus>
+                <input id="gandeng" type="text" class="form-control" name="gandeng" value="" autocomplete="off" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
