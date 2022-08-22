@@ -18,6 +18,11 @@ class ReportBiaya extends Model
     {
         return $this->belongsTo(Truck::class, 'rb_truck_id', 'id');
     }
+
+    public function getDetail()
+    {
+        return $this->hasMany(ReportBiayaDetail::class, 'rbd_rb_hist_id', 'id');
+    }
     
     
     protected static function boot()

@@ -147,7 +147,8 @@ class CreateTempTable
             if ($cektahun != $yearnow) {
                 $rn_new = '000000001';
             } else {
-                $rn_new = $prefix->prefix_iv_rn + 1;
+                $rn_new = substr($prefix->prefix_iv_rn, 4, 10) + 1;
+                $rn_new = str_pad($rn_new, 9, '0', STR_PAD_LEFT);
             }
             $newprefix =  $yearnow."/"."ASA".$rn_new;
             $updateprefix = $yearnow.$rn_new;
