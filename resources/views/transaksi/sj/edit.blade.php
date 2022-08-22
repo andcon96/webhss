@@ -49,6 +49,10 @@
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->getSOMaster->getCOMaster->co_type}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
+            <label for="truck" class="col-md-3 col-form-label text-md-right">Truck</label>
+            <div class="col-md-3">
+                <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.sj.edit-table')
