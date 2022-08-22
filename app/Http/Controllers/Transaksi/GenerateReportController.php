@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\Exports\ReportByBiayaTambahan;
 use App\Exports\ReportByMonthExport;
 use App\Exports\ReportByTipeTruck;
 use App\Exports\ReportLoosingHSST;
@@ -10,7 +11,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Domain;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
-use App\Models\Transaksi\SuratJalan;
 use App\Services\CreateTempTable;
 use PDF;
 use Illuminate\Http\Request;
@@ -37,6 +37,8 @@ class GenerateReportController extends Controller
         $truck = $request->truck;
         $report = $request->report;
         $tipetruck = $request->tipetruck;
+        $domain = $request->domain;
+
 
         switch ($request->aksi) {
             case 1:
@@ -52,6 +54,10 @@ class GenerateReportController extends Controller
                 } elseif ($report == '5'){
                     // Report by Tipe Truck
                     return Excel::download(new ReportByTipeTruck($datefrom,$dateto,$tipetruck), 'ReportByTipeTruck.xlsx');
+                } elseif ($report == '6'){
+                    // Report by Biaya Tambahan
+
+                    return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto), 'ReportByTipeTruck.xlsx');
                 }
                 break;
             case 2:

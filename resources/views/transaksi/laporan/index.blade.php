@@ -30,6 +30,7 @@
                 <option value="3"> Report Rincian Sangu Loosing HSST</option>
                 <option value="4"> Report Total Supir Loosing HSS Trailer</option>
                 <option value="5"> Report Container By Tipe Truck </option>
+                <option value="6"> Report Tambahan Biaya</option>
             </select>
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
@@ -115,6 +116,9 @@
             
             $('#tipetruck').prop('disabled',false);
             $('#tipetruck').prop('required',true);
+        }else if(val == 6){
+            $('#truck,#domain,#tipetruck').prop('disabled',true);
+            $('#truck,#domain,#tipetruck').prop('required',false);
         }else{
             $('#truck,#tipetruck').prop('disabled',true);
             $('#truck,#tipetruck').prop('required',false);

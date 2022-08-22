@@ -76,10 +76,10 @@
             <tr>
                 <th colspan="10" class="head" style="font-size: 18px;">TOTALAN SOPIR</th>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th colspan="3" class="left-border">Nama</th>
-                <th colspan="7" class="right-border">: &nbsp; Andrew</th>
-            </tr>
+                <th colspan="7" class="right-border">: &nbsp; {{ $nopol }}</th>
+            </tr> --}}
             <tr>
                 <th colspan="3" class="left-border">No. Polis</th>
                 <th colspan="7" class="right-border">: &nbsp; {{ $nopol }}</th>
