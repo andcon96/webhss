@@ -114,8 +114,9 @@ class KerusakanLaporMTController extends Controller
             $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
             $domainnow = $checktruck->truck_domain;
             $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
-                $e->where('kr_status','New');
-                $e->orwhere('kr_status','Need Approval');
+                $e->where('kr_status','<>','Close');
+                $e->orwhere('kr_status','<>','Reject');
+                $e->orwhere('kr_status','<>','Cancelled');
             })->first();
             
             if($checkkr){
@@ -150,6 +151,7 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_mstr->kr_status = 'New';
                 $kerusakan_mstr->kr_domain = $domainnow;
                 $kerusakan_mstr->kr_km = $request->km;
+                $kerusakan_mstr->kr_gandeng = $request->gandeng;
                 $kerusakan_mstr->save();
 
                 $id = $kerusakan_mstr->id;
@@ -201,6 +203,7 @@ class KerusakanLaporMTController extends Controller
         try {
             $mstr = KerusakanMstr::where('id',$request->idmaster)->first();
             $mstr->kr_km = $request->km;
+            $mstr->kr_gandeng = $request->gandeng;
             $mstr->save();
             foreach ($request->iddetail as $key => $datas) {
                 $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
@@ -337,7 +340,7 @@ class KerusakanLaporMTController extends Controller
             case 0 :
                 DB::beginTransaction();
                 try{
-                    $kerusakan->kr_status = 'Done';
+                    $kerusakan->kr_status = 'WIP';
                     $kerusakan->save();
                     foreach($request->iddetail as $key => $data){
                         if(!empty($request->remarks[$key])){
@@ -435,5 +438,23 @@ class KerusakanLaporMTController extends Controller
         $struktur = KerusakanStruktur::where('ks_isactive',1)->get();
         return view('transaksi.kerusakan.assignkrremakrshistory', compact('id','data', 'jeniskerusakan', 'struktur','tindakanlist'));
         
+    }
+
+    public function krdone(Request $request){
+        
+        DB::beginTransaction();
+        
+        try{
+            $kerusakan = KerusakanMstr::where('id',$request->temp_id)->firstOrFail();
+            $kerusakan->kr_status = 'Done';
+            $kerusakan->save();
+            DB::commit();
+            alert()->success('Success', 'Report submited')->persistent('Dismiss');
+            return back();
+        } catch (Exception $e) {
+
+            alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
+            return back();
+        }
     }
 }

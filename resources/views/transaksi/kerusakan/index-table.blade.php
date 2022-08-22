@@ -27,15 +27,20 @@
                         <td data-label="Status">{{$datas->kr_status}}</td>
                         <td data-label="Action">
                             <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
-                            @if(($datas->kr_status == 'New' || $datas->kr_status == 'Done') && $access == 'yes')
+                            @if(($datas->kr_status == 'New' || $datas->kr_status == 'WIP') && $access == 'yes')
                             <a href="{{route('laporkerusakan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
                             
                             @endif
-                            @if($datas->kr_status == 'Done')
+                            @if($datas->kr_status == 'WIP')
                                 <a href="{{route('assignRemarks',$datas->id) }}"><i class="fas fa-book"></i></a>
                             @endif
-                            @if($datas->kr_status == 'Done' || $datas->kr_status == 'Close')
+                            @if($datas->kr_status == 'WIP' || $datas->kr_status == 'Close' || $datas->kr_status == 'Done')
                                 <a href="{{route('krhistview',$datas->id) }}"><i class="fas fa-history"></i></a>
+                            @endif
+                            @if($datas->kr_status == 'WIP' )
+                                <a href="" class="confirmModal" 
+                                    data-id="{{$datas->id}}" data-krnbr="{{$datas->kr_nbr}}"
+                                    data-toggle='modal' data-target="#confirmModal"><i class="fas fa-check-circle"></i></a>
                             @endif
                             @if($datas->kr_status == 'New')
                             <a href="{{route('assignKR',$datas->id) }}"><i class="fas fa-tasks"></i></a>

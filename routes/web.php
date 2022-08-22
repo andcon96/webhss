@@ -135,6 +135,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('laporkerusakan/assingremarkskr/{id}', [KerusakanLaporMTController::class, 'assingremarkskr'])->name('assignRemarks');
         Route::put('laporkerusakan/upassignremarkskr/{id}', [KerusakanLaporMTController::class, 'upassignremarkskr'])->name('UpAssignRemarks');
         Route::get('laporkerusakan/krhistory/{id}', [KerusakanLaporMTController::class, 'krhistoryview'])->name('krhistview');
+        Route::post('krdone',[KerusakanLaporMTController::class,'krdone'])->name('krdone');
         // Route::get('laporkerusakan/krhistory/{id}', [KerusakanLaporMTController::class, 'krhistorytable'])->name('krhisttable');
     });
 
