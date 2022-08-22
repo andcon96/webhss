@@ -34,6 +34,13 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="gandeng" class="col-md-2 col-form-label text-md-right">Gandengan</label>
+            <div class="col-md-3">
+                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{isset($data->kr_gandeng) ? $data->kr_gandeng : ''}}" autocomplete="off" autofocus>
+            </div>
+
+        </div>
+        <div class="form-group row col-md-12">
             @include('transaksi.kerusakan.edit-table')
         </div>
         <div class="form-group row col-md-12">

@@ -23,7 +23,7 @@
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     
                     <input type="hidden" name="jeniskerusakan[]" value="{{$datas->krd_kerusakan_id}}">
-                    @if($data->kr_status == 'Done' && count($datas->getStrukturTrans) >0)
+                    @if($data->kr_status == 'WIP' && count($datas->getStrukturTrans) >0)
                         <input type="checkbox" class="qaddel" value="" disabled> 
                     @else
                         <input type="checkbox" class="qaddel" value="Y" name="qaddel[]"> 
