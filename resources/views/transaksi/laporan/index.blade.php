@@ -98,7 +98,7 @@
         }
     });
     
-    $('#truck, #domain').prop('disabled',true);
+    $('#truck, #domain, #tipetruck').prop('disabled',true);
 
     $('#report').on('change', function(){
         let val = $(this).val();
