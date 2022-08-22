@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Exports\ReportByMonthExport;
+use App\Exports\ReportByTipeTruck;
 use App\Exports\ReportLoosingHSST;
 use App\Exports\ReportTotalanSupirLoosingHSST;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Domain;
+use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
+use App\Models\Transaksi\SuratJalan;
 use App\Services\CreateTempTable;
 use PDF;
 use Illuminate\Http\Request;
@@ -22,7 +25,9 @@ class GenerateReportController extends Controller
 
         $domain = Domain::get();
 
-        return view('transaksi.laporan.index', compact('truck', 'domain'));
+        $tipetruck = TipeTruck::get();
+
+        return view('transaksi.laporan.index', compact('truck', 'domain', 'tipetruck'));
     }
 
     public function reportsangu(Request $request)
@@ -31,6 +36,7 @@ class GenerateReportController extends Controller
         $dateto = $request->dateto;
         $truck = $request->truck;
         $report = $request->report;
+        $tipetruck = $request->tipetruck;
 
         switch ($request->aksi) {
             case 1:
@@ -43,6 +49,9 @@ class GenerateReportController extends Controller
                 } elseif ($report == '4') {
                     // Totalan Supir Loosing HSST
                     return Excel::download(new ReportTotalanSupirLoosingHSST($datefrom, $dateto), 'ReportTotalSupirLoosingHSST.xlsx');
+                } elseif ($report == '5'){
+                    // Report by Tipe Truck
+                    return Excel::download(new ReportByTipeTruck($datefrom,$dateto,$tipetruck), 'ReportByTipeTruck.xlsx');
                 }
                 break;
             case 2:

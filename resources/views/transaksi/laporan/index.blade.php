@@ -29,6 +29,7 @@
                 <option value="2"> Report Totalan Supir Loosing</option>
                 <option value="3"> Report Rincian Sangu Loosing HSST</option>
                 <option value="4"> Report Total Supir Loosing HSS Trailer</option>
+                <option value="5"> Report Container By Tipe Truck </option>
             </select>
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
@@ -48,6 +49,15 @@
                 <option value=""> Select Data </option>
                 @foreach($domain as $domains)
                 <option value="{{$domains->domain_code}}">{{$domains->domain_code}}</option>
+                @endforeach
+            </select>
+        </div>
+        <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="tipetruck" class="form-control" name="tipetruck" autofocus autocomplete="off" required>
+                <option value=""> Select Data </option>
+                @foreach($tipetruck as $tipetrucks)
+                <option value="{{$tipetrucks->id}}">{{$tipetrucks->tt_code}} -- {{$tipetrucks->tt_desc}}</option>
                 @endforeach
             </select>
         </div>
@@ -72,7 +82,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#truck,#report,#domain').select2({
+    $('#truck,#report,#domain,#tipetruck').select2({
         width: '100%',
     });
 
@@ -88,7 +98,7 @@
         }
     });
     
-    $('#truck, #domain').prop('disabled',true);
+    $('#truck, #domain, #tipetruck').prop('disabled',true);
 
     $('#report').on('change', function(){
         let val = $(this).val();
@@ -97,11 +107,17 @@
             $('#truck').prop('disabled',false);
             $('#truck').prop('required',true);
             
-            $('#domain').prop('disabled',true);
-            $('#domain').prop('required',false);
+            $('#domain,#tipetruck').prop('disabled',true);
+            $('#domain,#tipetruck').prop('required',false);
+        }else if(val == 5){
+            $('#truck,#domain').prop('disabled',true);
+            $('#truck,#domain').prop('required',false);
+            
+            $('#tipetruck').prop('disabled',false);
+            $('#tipetruck').prop('required',true);
         }else{
-            $('#truck').prop('disabled',true);
-            $('#truck').prop('required',false);
+            $('#truck,#tipetruck').prop('disabled',true);
+            $('#truck,#tipetruck').prop('required',false);
 
             $('#domain').prop('disabled',false);
             $('#domain').prop('required',true);
