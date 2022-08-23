@@ -83,6 +83,11 @@
                     <option value="">Select Data</option>
                 </select>
             </div>
+            <label for="catatansj" class="col-md-3 col-form-label text-md-right">SJ</label>
+            <div class="col-md-3">
+                <input id="text" type="catatansj" class="form-control" name="catatansj" value=""
+                    autocomplete="off" maxlength="24">
+            </div>
         </div>
         <div class="form-group row col-md-12" id="container">
             <label for="trip" class="col-md-2 col-form-label text-md-right">Tarif</label>

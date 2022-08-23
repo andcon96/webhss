@@ -86,6 +86,7 @@ class SuratJalanController extends Controller
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_default_sangu_type = $request->defaultpriceid;
+            $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();
 
             $id = $sjmstr->id;
@@ -151,6 +152,7 @@ class SuratJalanController extends Controller
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
             $sjmstr->sj_jmlh_trip = $request->trip;
+            $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();
             
             foreach($request->iddetail as $key => $datas){

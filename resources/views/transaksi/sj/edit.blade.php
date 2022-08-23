@@ -82,7 +82,10 @@
             <div class="col-md-3">
                 <input id="totsangu" type="text" class="form-control sangu" name="totsangu" value="{{number_format($data->sj_tot_sangu ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus>
             </div>
-
+            <label for="catatansj" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
+            <div class="col-md-3">
+                <input id="catatansj" type="text" class="form-control" name="catatansj" value="{{$data->sj_surat_jalan}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
