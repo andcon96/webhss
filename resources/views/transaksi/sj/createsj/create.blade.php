@@ -98,16 +98,18 @@
                 </div>
             </div>
             <div class="form-group row col-md-12">
+                <label for="catatansj" class="col-md-2 col-form-label text-md-right">SJ</label>
+                <div class="col-md-3">
+                    <input id="text" type="catatansj" class="form-control" name="catatansj" value=""
+                        autocomplete="off" maxlength="24">
+                </div>
+            </div>
+            <div class="form-group row col-md-12">
                 <label for="listsan" class="col-md-2 col-form-label text-md-right">List Sangu</label>
                 <div class="col-md-3">
                     <select id="listsan" class="form-control" name="listsan" required autofocus autocomplete="off">
                         <option value="">Select Data</option>
                     </select>
-                </div>
-                <label for="catatansj" class="col-md-3 col-form-label text-md-right">SJ</label>
-                <div class="col-md-3">
-                    <input id="text" type="catatansj" class="form-control" name="catatansj" value=""
-                        autocomplete="off" maxlength="24">
                 </div>
             </div>
             <div class="form-group row col-md-12" id="container">
