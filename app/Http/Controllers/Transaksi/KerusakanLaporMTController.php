@@ -115,8 +115,8 @@ class KerusakanLaporMTController extends Controller
             $domainnow = $checktruck->truck_domain;
             $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
                 $e->where('kr_status','<>','Close');
-                $e->orwhere('kr_status','<>','Reject');
-                $e->orwhere('kr_status','<>','Cancelled');
+                $e->where('kr_status','<>','Reject');
+                $e->where('kr_status','<>','Cancelled');
             })->first();
             
             if($checkkr){
