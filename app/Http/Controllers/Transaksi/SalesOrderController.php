@@ -363,8 +363,8 @@ class SalesOrderController extends Controller
                                 ->whereRelation('getDetail','sjd_line',$datas->sod_line)
                                 ->whereRelation('getDetail','sjd_part',$datas->sod_part)
                                 ->where('sj_status','!=','Cancelled')
-                                ->get()
-                                ->sortByDesc('getTruck.truck_no_polis');
+                                ->get();
+                                // ->sortByDesc('getTruck.truck_no_polis');
                 
 
                 if($list->count() > 0){
