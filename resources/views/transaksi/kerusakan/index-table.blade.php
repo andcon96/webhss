@@ -8,6 +8,7 @@
                 <th>Kilometer</th>
                 <th>Tanggal Lapor</th>
                 <th>Jam Lapor</th>
+                
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -25,6 +26,7 @@
                         <td data-label="Tanggal Lapor">{{$datas->kr_date}}</td>
                         <td data-label="Jam Lapor">{{substr($datas->created_at,11)}}</td>
                         <td data-label="Status">{{$datas->kr_status}}</td>
+                        
                         <td data-label="Action">
                             <a href="{{route('laporkerusakan.show',$datas->id) }}"><i class="fas fa-eye"></i></a>
                             @if(($datas->kr_status == 'New' || $datas->kr_status == 'WIP') && $access == 'yes')
