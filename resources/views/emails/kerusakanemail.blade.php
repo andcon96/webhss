@@ -168,8 +168,8 @@
     </div>
     <div style="text-align: center;">
       <p>Approve or Reject this Request using the buttons below. </p>
-      <a href="{{'http://45.196.31.99:22004/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param3}}" class="button">Approve</a>
-      <a href="{{'http://45.196.31.99:22004/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param4}}" class="button2">Reject</a>
+      <a href="{{'http://45.196.31.99:22003/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param3}}" class="button">Approve</a>
+      <a href="{{'http://45.196.31.99:22003/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param4}}" class="button2">Reject</a>
     </div>
 
       <!-- URL ganti ketika dipasang -->
