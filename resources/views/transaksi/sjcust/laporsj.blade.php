@@ -104,6 +104,18 @@
     $("#effdate").datepicker({
         dateFormat: 'yy-mm-dd',
     });
+
+    $('#harga').select2({
+        width: '100%'
+    });
+
+    $(document).on('change', '#harga',function(){
+        var value = $(this).find(':selected').val();
+
+        $('.price').val(value);
+
+        value == 'Custom' ? $('.price').prop('readonly',false) : $('.price').prop('readonly',true)
+    });
     
     $(document).on('keyup', '.sangu', function() {
         letterRegex = /[^\0-9\,]/;
@@ -128,7 +140,7 @@
         if(data == 0){
             swal.fire({
                 title: 'Warning',
-                text: 'Price cannot be 0',
+                text: 'Price cannot be 0 or Empty',
                 type: 'warning',
                 icon: 'info',
                 confirmButtonText: 'OK'
