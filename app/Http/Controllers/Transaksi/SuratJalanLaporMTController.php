@@ -51,12 +51,12 @@ class SuratJalanLaporMTController extends Controller
                         ->firstOrFail();
         
         $invoiceprice = InvoicePrice::query()
-                        ->with('getActivePrice')
+                        ->with('getAllActivePrice')
                         ->where('ip_customership_id', $data->getSOMaster->getShipTo->id)
                         ->where('ip_shipfrom_id', $data->getSOMaster->getShipFrom->id)
                         ->where('ip_cust_id', $data->getSOMaster->getCOMaster->getCustomer->id)
                         ->get();
-
+                        
         
         return view('transaksi.sjcust.laporsj', compact('data','truck','invoiceprice'));
     }

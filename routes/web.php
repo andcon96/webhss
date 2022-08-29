@@ -50,6 +50,7 @@ Auth::routes();
 Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
 // Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
 // Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
+Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
 // Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
 
 Route::group(['middleware' => ['auth']], function () {
@@ -282,6 +283,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('invoiceprice/invoicepricedetail/{detailid}/historydetail/{id}', [InvoicePriceController::class,'viewHistory']);
             Route::get('invoiceprice/invoicepricedetail/{id}', [InvoicePriceController::class,'listdetail']);
             Route::post('newinvoiceprice', [InvoicePriceController::class,'newinvoiceprice']);
+    
+            Route::post('changestatusinvoice', [InvoicePriceController::class,'changestatusinvoice'])->name('changestatusinvoice');
         });
 
         //================================
