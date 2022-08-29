@@ -22,11 +22,6 @@ use Illuminate\Support\Facades\DB;
 
 class InvoiceMTController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $list_invoice = InvoiceMaster::with('getDetail')->get();
@@ -36,11 +31,15 @@ class InvoiceMTController extends Controller
         return view('transaksi.invoice.index', compact('data','list_invoice','list_sonbr'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function edit($id)
+    {
+        $data = InvoiceMaster::with('getDetail')->findOrFail($id);
+
+        $listdomain = Domain::get();
+
+        return view('transaksi.invoice.edit',compact('data','listdomain'));
+    }
+
     public function create()
     {
         $list_sonbr = SalesOrderMstr::all();
@@ -48,12 +47,6 @@ class InvoiceMTController extends Controller
         return view('transaksi.invoice.create', compact('list_sonbr','list_domain'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -194,6 +187,65 @@ class InvoiceMTController extends Controller
                 
             }
             InvoicePriceHistory::insert($insertData);
+
+            fclose($open);
+        }    
+    }
+
+    public function loadinvoicecontainer(Request $request)
+    {
+        if (($open = fopen(public_path() . "/InvoiceContainers.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 2000, ",")) !== FALSE) {
+                $history[] = $data;
+            }
+            // dd($history);
+            $insertData = [];
+            foreach($history as $histories){
+                $customer = Customer::where('cust_code', $histories[0])->first()->id ?? '';
+                $shipfrom = ShipFrom::where('sf_code', $histories[2])->first()->id ?? '';
+                $custship = CustomerShipTo::where('cs_shipto', $histories[4])->first()->id ?? '';
+                // dump($customer, $shipfrom, $custship);
+                if($shipfrom != '' && $custship != '' && $customer != ''){
+                    // dump('1');
+                    $invoicelist = InvoicePrice::firstOrNew([
+                                        'ip_cust_id' => $customer,
+                                        'ip_shipfrom_id' => $shipfrom,
+                                        'ip_customership_id' => $custship,
+                                    ]);
+                    $invoicelist->save();
+                    
+                    $tipetruck = $histories[6] == '20"' ? '5' : '6';
+
+                    $existingprice = InvoicePriceHistory::query()
+                                ->where('iph_ip_id', $invoicelist->id)
+                                ->first();
+                    
+                    if($existingprice){
+                        if($existingprice->iph_tipe_truck_id == null){
+                            $existingprice->iph_tipe_truck_id = $tipetruck;
+                            $existingprice->iph_trip_price = str_replace(',','.',$histories[5]);
+                            $existingprice->save();
+                        }else{
+                            $newprice = new InvoicePriceHistory();
+                            $newprice->iph_ip_id = $invoicelist->id;
+                            $newprice->iph_tipe_truck_id = $tipetruck;
+                            $newprice->iph_trip_price = str_replace(',','.',$histories[5]);
+                            $newprice->iph_tonase_price = $existingprice->iph_tonase_price;
+                            $newprice->save();
+                        }
+                    }else{
+                        $newprice = new InvoicePriceHistory();
+                        $newprice->iph_ip_id = $invoicelist->id;
+                        $newprice->iph_tipe_truck_id = $tipetruck;
+                        $newprice->iph_trip_price = str_replace(',','.',$histories[5]);
+                        $newprice->save();
+                    }
+                }
+                
+            }
+            // dd($insertData);
+            // InvoicePriceHistory::insert($insertData);
 
             fclose($open);
         }    
