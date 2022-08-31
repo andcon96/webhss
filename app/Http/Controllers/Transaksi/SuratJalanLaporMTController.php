@@ -24,14 +24,14 @@ class SuratJalanLaporMTController extends Controller
                                'getSOMaster.getCOMaster.getCustomer',
                                'getSOMaster.getShipFrom',
                                'getSOMaster.getShipTo');
-
+        // dd($data);
         $truck = Truck::get();
 
         if ($request->truck) {
             $data->where('sj_truck_id', $request->truck);
             $data = $data->orderBy('created_at', 'DESC')->paginate(10);
         } else {
-            $data = [];
+            $data = $data->where('sj_truck_id',0)->paginate(10);
         }
 
         return view('transaksi.sjcust.index', compact('data', 'truck'));
@@ -81,7 +81,6 @@ class SuratJalanLaporMTController extends Controller
                 $sjddet->save();
             }
 
-            // dd($sjddet);
             // Get SO Mstr
             $somstr = SalesOrderMstr::query()
                         ->with('getDetail' ,function($q){
@@ -118,7 +117,6 @@ class SuratJalanLaporMTController extends Controller
             return redirect()->route('laporsj.index');
         }catch(Exception $e){
             DB::rollback();
-            // dd($e);
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }
