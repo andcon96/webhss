@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Sales Order Maintenance</li>
+    <li class="breadcrumb-item active">Customer Order Maintenance</li>
 </ol>
 @endsection
 
