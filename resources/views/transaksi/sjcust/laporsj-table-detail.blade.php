@@ -29,7 +29,7 @@
 
                     <select id="harga" class="form-control" required>
                         <option value="">Select Data</option>
-                        @if($price->getAllActivePrice)
+                        @if(!is_null($price->getAllActivePrice))
                         @foreach($price->getAllActivePrice as $keys => $harga)
                             @php($hargapakai = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ? $harga->iph_trip_price : $harga->iph_tonase_price)
                             <option value="{{$hargapakai}}">
