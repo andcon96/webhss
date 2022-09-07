@@ -103,7 +103,8 @@
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {   
-                    $('#submit').submit();
+                    $(this).closest('tr').find('#submit').submit();
+                    // $('#submit').submit();
                 } 
             })
         });
