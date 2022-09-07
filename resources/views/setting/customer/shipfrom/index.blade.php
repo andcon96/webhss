@@ -58,7 +58,12 @@
                                 <a href="" class="deleteModal"  id="btnDelete"
                                     data-id="{{$show->id}}" data-code="{{$show->sf_code}}"
                                     data-status="{{$show->sf_is_active}}">
-                                    <i class="fas fa-trash"></i></a>
+                                    @if($show->sf_is_active == 1)
+                                    <i class="fas fa-trash"></i>
+                                    @elseif($show->sf_is_active == 0)
+                                    <i class="fas fa-check"></i>
+                                    @endif
+                                </a>
                             </form>
                         </td>
                     </tr>
@@ -92,7 +97,7 @@
             let text = status == 1 ? 'Not Active' : 'Active';
 
             Swal.fire({
-                title: "Delete Data " + sfcode,
+                title: "Delete / Recover Data " + sfcode,
                 text: "Status akan dirubah menjadi " + text,
                 type: "warning",
                 icon: 'info',
