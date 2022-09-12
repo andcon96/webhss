@@ -17,7 +17,6 @@ class CreateGandenganMstrTable extends Migration
         
             $table->id();
             $table->string('gandeng_domain');
-            $table->string('gandeng_pelanggan');
             $table->string('gandeng_code');
             $table->tinyInteger('gandeng_is_active')->default(1);
             $table->timestamp('created_at')->useCurrent();

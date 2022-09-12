@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class GandenganMstr extends Model
 {
     use HasFactory;
+    public $table = 'gandengan_mstr';
+
 }
