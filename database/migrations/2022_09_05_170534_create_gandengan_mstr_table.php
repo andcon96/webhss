@@ -14,8 +14,14 @@ class CreateGandenganMstrTable extends Migration
     public function up()
     {
         Schema::create('gandengan_mstr', function (Blueprint $table) {
+        
             $table->id();
-            $table->timestamps();
+            $table->string('gandeng_domain');
+            $table->string('gandeng_pelanggan');
+            $table->string('gandeng_code');
+            $table->tinyInteger('gandeng_is_active')->default(1);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -4,6 +4,7 @@
             <tr>
                 <th>Nomor Kerusakan</th>
                 <th>Truck</th>
+                <th>Gandengan</th>
                 <th>Driver</th>
                 <th>Kilometer</th>
                 <th>Tanggal Lapor</th>
@@ -21,6 +22,7 @@
                     <tr>
                         <td data-label="Nomor Kerusakan">{{$datas->kr_nbr}}</td>
                         <td data-label="No Polis">{{isset($datas->getTruck->truck_no_polis) ? $datas->getTruck->truck_no_polis : ''}}</td>
+                        <td data-label="Gandengan">{{isset($datas->getTruck->truck_no_polis) ? $datas->getTruck->truck_no_polis : ''}}</td>
                         <td data-label="Driver">{{isset($datas->getTruck->getUserDriver->name) ? $datas->getTruck->getUserDriver->name : '' }}</td>
                         <td data-label="Km">{{isset($datas->kr_km) ? $datas->kr_km : '' }}</td>
                         <td data-label="Tanggal Lapor">{{$datas->kr_date}}</td>
