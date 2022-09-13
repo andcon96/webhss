@@ -90,6 +90,39 @@ class InvoiceMTController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try{
+            $invmstr = InvoiceMaster::findOrFail($id);
+            foreach($request->iddetail as $keys => $iddetail)
+            {
+                $invdet = InvoiceDetail::firstOrNew([
+                    'id' => $iddetail
+                ]);
+                if($request->operation[$keys] == 'R'){
+                    $invdet->delete();
+                }else{
+                    $invdet->id_im_mstr_id = $id;
+                    $invdet->id_domain = $request->domain[$keys];
+                    $invdet->id_nbr = $request->invnbr[$keys];
+                    $invdet->id_duedate = $request->duedate[$keys];
+                    $invdet->id_total = str_replace(',','',$request->total[$keys]);
+                    $invdet->save(); 
+                }
+            }
+
+            DB::commit();
+            alert()->success('Success', 'Save Berhasil')->persistent('Dismiss');
+            return back();
+        }catch(Exception $e){
+            DB::rollBack();
+            alert()->success('Error', 'Error, Failed to save')->persistent('Dismiss');
+            return back();
+        }
+
+    }
+
     public function checkInvoice(Request $request)
     {
         if($request->ajax()){
@@ -99,10 +132,11 @@ class InvoiceMTController extends Controller
                 return response()->json(['error' => 'WSA Failed'],404);
             }
 
-            return [number_format((Float)$checkData[0],0), $checkData[1]];
+            return [number_format((Float)$checkData[0],2), $checkData[1]];
         }
     }
 
+    // Invoice Web
     public function printinvoice($id)
     {
         $data = InvoiceMaster::with([
@@ -113,12 +147,23 @@ class InvoiceMTController extends Controller
         
         $terbilang = (new CreateTempTable())->terbilang($total);
         
-        $detail = (new WSAServices())->wsadetailinvoice($data);
+        $detail = (new WSAServices())->wsainvoice($data);
         if($detail == false){
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
         }
-        // dd($detail);
+        $detail = collect($detail);
+        $detail = $detail->groupBy('t_harga')
+                    ->map(function($row){
+                        $firstrow = $row->first();
+
+                        return [
+                            "t_part" => $firstrow['t_part'],
+                            "t_invnbr" => $firstrow['t_invnbr'],
+                            "t_qtyinv" => $row->sum('t_qtyinv'),
+                            "t_harga" => $firstrow['t_harga']
+                        ];
+                    })->values()->all();
         
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
@@ -128,7 +173,103 @@ class InvoiceMTController extends Controller
                 'terbilang' => $terbilang,
                 'detail' => $detail,
             ]
-        )->setPaper('Letter', 'Potrait');
+        )->setPaper('A5', 'Landscape');
+
+        return $pdf->stream();
+    }
+
+    public function printdetailinvoice($id)
+    {
+        $data = InvoiceMaster::with([
+                'getDetail',
+                'getSalesOrder.getCOMaster.getCustomer'])->findOrFail($id);
+        
+        $detail = (new WSAServices())->wsadetailinvoice($data);
+        if($detail == false){
+            alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
+            return back();
+        }
+
+        $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
+        $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
+
+        $pdf = PDF::loadview(
+            'transaksi.laporan.pdf.pdf-detail-invoice',
+            [
+                'data' => $data,
+                'detail' => $detail,
+                'latestdate' => $latestdate,
+                'oldestdate' => $oldestdate
+            ]
+        )->setPaper('A3', 'Landscape');
+
+        return $pdf->stream();
+    }
+
+    // Invoice QAD
+    public function printinvoiceqad($id)
+    {
+        $data = InvoiceDetail::with('getMaster.getSalesOrder.getCOMaster.getCustomer')->findOrFail($id);
+        
+        $total = $data->id_total;
+        // dd($data,$total);
+        
+        $terbilang = (new CreateTempTable())->terbilang($total);
+        
+        $detail = (new WSAServices())->wsainvoiceqad($data);
+        
+        if($detail == false){
+            alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
+            return back();
+        }
+
+        $detail = collect($detail);
+        $detail = $detail->groupBy('t_harga')
+                    ->map(function($row){
+                        $firstrow = $row->first();
+                        return [
+                            "t_part" => $firstrow['t_part'],
+                            "t_invnbr" => $firstrow['t_invnbr'],
+                            "t_qtyinv" => $row->sum('t_qtyinv'),
+                            "t_harga" => $firstrow['t_harga']
+                        ];
+                    })->values()->all();
+        
+        $pdf = PDF::loadview(
+            'transaksi.laporan.pdf.pdf-invoice',
+            [
+                'data' => $data,
+                'total' => $total,
+                'terbilang' => $terbilang,
+                'detail' => $detail,
+            ]
+        )->setPaper('A5', 'Landscape');
+        
+        return $pdf->stream();
+    }
+
+    public function printdetailinvoiceqad($id)
+    {
+        $data = InvoiceDetail::with('getMaster.getSalesOrder.getCOMaster.getCustomer')->findOrFail($id);
+        
+        $detail = (new WSAServices())->wsadetailinvoiceqad($data);
+        if($detail == false){
+            alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
+            return back();
+        }
+
+        $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
+        $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
+
+        $pdf = PDF::loadview(
+            'transaksi.laporan.pdf.pdf-detail-invoice',
+            [
+                'data' => $data,
+                'detail' => $detail,
+                'latestdate' => $latestdate,
+                'oldestdate' => $oldestdate
+            ]
+        )->setPaper('A3', 'Landscape');
 
         return $pdf->stream();
     }

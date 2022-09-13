@@ -101,7 +101,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shopping-basket"></i>
                 <p>
-                  Sales Order
+                  Order
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -110,7 +110,7 @@
                 <li class="nav-item">
                   <a href="{{route('customerorder.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>CO Maintenance</p>
+                    <p>Customer Order</p>
                   </a>
                 </li>
                 @endcan
@@ -118,7 +118,7 @@
                 <li class="nav-item">
                   <a href="{{route('salesorder.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>SO Maintenance</p>
+                    <p>Sales Order</p>
                   </a>
                 </li>
                 @endcan
@@ -126,7 +126,7 @@
                 <li class="nav-item">
                   <a href="{{route('suratjalan.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>SPK Maintenance</p>
+                    <p>SPK</p>
                   </a>
                 </li>
                 @endcan
@@ -155,7 +155,7 @@
                 <li class="nav-item">
                   <a href="{{route('laportrip.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Lapor Trip MT</p>
+                    <p>Lapor Trip</p>
                   </a>
                 </li>
                 @endcan
@@ -221,7 +221,7 @@
                 <li class="nav-item">
                   <a href="{{route('invoicemt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Invoice Maintenance</p>
+                    <p>Invoice</p>
                   </a>
                 </li>
                 @endcan
@@ -242,7 +242,36 @@
                 <li class="nav-item">
                   <a href="{{route('report.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Report Maintenance</p>
+                    <p>Report</p>
+                  </a>
+                </li>
+                @endcan
+              </ul>
+            </li>
+            @endcan
+            @can('access_cicilan_side')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-money-check"></i>
+                <p>
+                  Cicilan  
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                @can('access_cicilan')
+                <li class="nav-item">
+                  <a href="{{route('cicilanmt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Cicilan</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_bayar_cicilan')
+                <li class="nav-item">
+                  <a href="{{route('bayarcicilanmt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pembayaran Cicilan</p>
                   </a>
                 </li>
                 @endcan
@@ -250,14 +279,13 @@
             </li>
             @endcan
 
-
             @can('access_masters')
             <li class="nav-header">MASTER</li>
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-wrench"></i>
                 <p>
-                  Setting
+                  Setting Web
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -265,122 +293,140 @@
                 <li class="nav-item">
                   <a href="{{route('usermaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>User Maintenance</p>
+                    <p>User Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('rolemaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Role Maintenance</p>
+                    <p>Role Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('accessrolemenu.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Role Menu Maintenance</p>
-                  </a>
-                </li>
-                {{-- <li class="nav-item">
-                  <a href="{{route('deptmaint.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Department Maintenance</p>
-                  </a>
-                </li> --}}
-                <li class="nav-item">
-                  <a href="{{route('customermaint.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Customer Maintenance</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{route('custshipto.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ship To Maintenance</p>
+                    <p>Role Menu Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('shipfrom.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Ship From Maintenance</p>
+                    <p>Ship From Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('itemmaint.index')}}" class="nav-link">
+                  <a href="{{route('barangmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Item Maintenance</p>
+                    <p>Barang Master</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('bonusbarangmt.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Bonus Barang Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('kerusakanmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Kerusakan Maintenance</p>
+                    <p>Kerusakan Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('strukturkerusakanmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Struktur Kerusakan Maintenance</p>
+                    <p>Struktur Kerusakan Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('truckmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Truck Maintenance</p>
+                    <p>Truck Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('tipetruck.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Tipe Truck Maintenance</p>
-                  </a>
-                </li>
-                {{-- <li class="nav-item">
-                  <a href="{{route('truckdrivemaint.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Truck Driver Maintenance</p>
-                  </a>
-                </li> --}}
-                {{-- <li class="nav-item">
-                  <a href="{{route('prefixmaint.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Prefix Maintenance</p>
-                  </a>
-                </li> --}}
-                <li class="nav-item">
-                  <a href="{{route('prefixmaint.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Prefix Maintenance</p>
+                    <p>Tipe Truck Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{url('qxwsa')}}" class="nav-link">
+                  <a href="{{route('prefixmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>WSA Qxtend Maintenance</p>
+                    <p>Prefix Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{url('rute')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Rute Maintenance</p>
+                    <p>Rute Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{url('invoiceprice')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Invoice Price Maintenance</p>
+                    <p>Invoice Price Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{url('approvalmt')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Approval Maintenance</p>
+                    <p>Approval Master</p>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a href="{{url('drivermt')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Driver Master</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('drivernopolmt')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Driver Nopol Master</p>
+                  </a>
+                </li>
               </ul>
             </li>
             @endcan
 
+            @can('access_masters_qad')
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                  Setting QAD
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('customermaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Customer Master</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('custshipto.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ship To Master</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{route('itemmaint.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Item Master</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('qxwsa')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>WSA Qxtend Master</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            @endcan
 
           </ul>
         </nav>

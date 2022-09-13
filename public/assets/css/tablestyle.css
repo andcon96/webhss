@@ -54,6 +54,10 @@ tr{
   color:white;
 }
 
+.noHover {
+  color: white !important;
+}
+
 tbody .fas{
   margin-right: 5px;
   margin-left: 5px;
@@ -130,11 +134,14 @@ tbody .fas{
 } */
 
 
-
 @media (min-width: 992px){
   .history{
       width: 1100px;
-  } 
+  }
+  
+  .mini-table{
+    white-space: nowrap;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991px){
@@ -315,4 +322,7 @@ input[type="checkbox"]:focus {
 
 .bg-flat-color-2:hover {
   background: #830083; }
-  
+
+.select2-results .select2-disabled,  .select2-results__option[aria-disabled=true] { 
+    display: none;
+}

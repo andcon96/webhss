@@ -31,11 +31,25 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="kapal" class="col-md-2 col-form-label text-md-right">Kapal</label>
+            <div class="col-md-3">
+                <input id="kapal" type="text" class="form-control" name="kapal" value="{{$data->co_kapal}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
+            <label for="barang" class="col-md-3 col-form-label text-md-right">Barang</label>
+            <div class="col-md-3">
+                <select name="barang" id="barang" class="form-control">
+                    <option value="">None</option>
+                    @foreach ($barang as $barangs)
+                        <option value="{{$barangs->id}}" {{$data->co_barang_id == $barangs->id ? 'Selected' : ''}}>{{$barangs->barang_deskripsi}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
                 <input id="remark" type="text" class="form-control" name="remark" value="{{$data->co_remark}}" autocomplete="off" maxlength="24" autofocus>
             </div>
-
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.customerorder.edit-table')
@@ -59,6 +73,9 @@
 
 @section('scripts')
 <script>
+    $('#barang').select2({
+        width : '100%',
+    })
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: '+0d',

@@ -68,10 +68,10 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
                             'getSOMaster.getShipFrom',
                             'getSOMaster.getShipTo',
                             'getRuteHistory.getRute',
+                            'getBonusBarang',
                             )
                         ->where('sj_status','Closed')    
                         ->get();
-        
                             
         $totalrb = ReportBiaya::where('rb_truck_id',$truck)->sum('rb_nominal');
 

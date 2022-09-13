@@ -9,8 +9,12 @@ use App\Exports\ReportLoosingHSST;
 use App\Exports\ReportTotalanSupirLoosingHSST;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Domain;
+use App\Models\Master\Driver;
+use App\Models\Master\DriverNopol;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
+use App\Models\Transaksi\Cicilan;
+use App\Models\Transaksi\CicilanHistory;
 use App\Services\CreateTempTable;
 use PDF;
 use Illuminate\Http\Request;
@@ -118,7 +122,7 @@ class GenerateReportController extends Controller
     public function updatepreview(Request $request)
     {
         $data = Session::get('data');
-
+        // dd($data);
         if (!$data) {
             alert()->error('Error', 'Terjadi Kesalahan, silahkan dicoba lagi')->persistent('Dismiss');
             return back();
@@ -132,24 +136,51 @@ class GenerateReportController extends Controller
         $datefrom = $data['datefrom'];
         $dateto = $data['dateto'];
 
-        return view('transaksi.laporan.info-per-nopol', compact('nopol', 'report', 'datefrom', 'dateto', 'nopolid'));
+        $driver = DriverNopol::with('getDriver')->where('dn_truck_id',$nopolid)->get();
+        // dd($driver);
+        return view('transaksi.laporan.info-per-nopol', compact('nopol', 'report', 'datefrom', 'dateto', 'nopolid', 'driver'));
+    }
+
+    public function getcicilan(Request $request)
+    {
+        if($request->ajax())
+        {
+            $cicilan = CicilanHistory::query()
+                        ->with('getCicilan.getDriverNopol')
+                        ->whereRelation('getCicilan.getDriverNopol','dn_driver_id',$request->driverid)
+                        ->whereRelation('getCicilan.getDriverNopol','dn_truck_id',$request->truckid)
+                        ->where('hc_eff_date','>=',$request->datefrom)
+                        ->where('hc_eff_date','<=',$request->dateto)
+                        ->get();
+
+            // $cicilan = Cicilan::query()
+            //             ->with('getDriverNopol')
+            //             ->whereRelation('getDriverNopol','dn_driver_id',$request->driverid)
+            //             ->whereRelation('getDriverNopol','dn_truck_id',$request->truckid)
+            //             ->where('cicilan_eff_date','>=',$request->datefrom)
+            //             ->where('cicilan_eff_date','<=',$request->dateto)
+            //             ->get();
+
+            return $cicilan;
+        }
     }
 
     public function printpdf(Request $request)
     {
         $truck = $request->truck;
+        $driver = $request->driver;
         $datefrom = $request->datefrom;
         $dateto = $request->dateto;
-        $tabungan = $request->tabungan;
-        $cicilan = $request->cicilan;
-
-        $getData = (new CreateTempTable())->getDataReportPerNopol($truck, $datefrom, $dateto);
+        
+        $getData = (new CreateTempTable())->getDataReportPerNopol($truck, $datefrom, $dateto, $driver);
 
         $data = $getData['data'];
         $rbhist = $getData['rbhist'];
         $totalrb = $getData['totalrb'];
         $nopol = $getData['nopol'];
-
+        $histcicilan = $getData['histcicilan'];
+        $driver = $getData['driver'];
+        // dd($histcicilan);
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-per-nopol',
             [
@@ -157,8 +188,8 @@ class GenerateReportController extends Controller
                 'rbhist' => $rbhist,
                 'totalrb' => $totalrb,
                 'nopol' => $nopol,
-                'tabungan' => str_replace(',', '', $tabungan),
-                'cicilan' => str_replace(',', '', $cicilan),
+                'histcicilan' => $histcicilan,
+                'driver' => $driver,
                 'datefrom' => $datefrom,
                 'dateto' => $dateto,
             ]

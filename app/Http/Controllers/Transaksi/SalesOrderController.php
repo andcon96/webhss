@@ -260,6 +260,7 @@ class SalesOrderController extends Controller
             alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
+            dd($err);
             alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
         }
 
@@ -366,8 +367,6 @@ class SalesOrderController extends Controller
                                 ->orderByRaw('LENGTH(sj_surat_jalan) ASC')
                                 ->orderBy('sj_surat_jalan','ASC')
                                 ->get();
-                                // ->sortByDesc('getTruck.truck_no_polis');
-                
 
                 if($list->count() > 0){
                     $value = 0;

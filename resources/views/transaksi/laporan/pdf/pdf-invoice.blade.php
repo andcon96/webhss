@@ -6,6 +6,10 @@
 </head>
 
 <style>
+    @page{
+        margin: 6mm 6mm 6mm 6mm;
+    }
+
     body {
         font-size: 12px;
         font-family: 'Calibri', Helvetica, sans-serif;
@@ -61,6 +65,11 @@
         border: none;
         border-right: 1px solid black;
     }
+
+    .table-noborder tbody{
+        border: none;
+
+    }
 </style>
 
 <body>
@@ -68,51 +77,84 @@
         <tbody>
             <tr>
                 <td width="25%">Kwitansi No.</td>
-                <td width="40%" colspan="3">: {{ $data->im_nbr }}</td>
-                <td colspan="2">PT. ADIL SENTOSA ABADI, SURABAYA</td>
+                <td width="40%" colspan="3">: <b>{{ $data->im_nbr ?? $data->id_nbr }}</b> </td>
+                <td colspan="3" style="text-align: right;padding-right: 20px;"><b>PT. ADIL SENTOSA ABADI, SURABAYA</b></td>
             </tr>
             <tr>
                 <td width="25%">Sudah Terima dari</td>
-                <td width="40%" colspan="3">: {{ $data->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? '' }}</td>
-                <td colspan="2"></td>
+                <td width="40%" colspan="6">: <b>{{ $data->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? $data->getMaster->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? '' }}</b></td>
             </tr>
             <tr>
                 <td>Banyaknya Uang</td>
-                <td colspan="3">: {{$terbilang}}</td>
-                <td colspan="2"></td>
+                <td colspan="6">: {{$terbilang}}</td>
             </tr>
             <tr>
                 <td>Untuk Pembayaran</td>
-                <td colspan="3">: Jasa Angkut {{ $data->getSalesOrder->getShipFrom->sf_desc ?? ''}} Ke :</td>
-                <td colspan="2"></td>
+                <td colspan="3">: Jasa Angkut {{ $data->getSalesOrder->getShipFrom->sf_desc ?? $data->getMaster->getSalesOrder->getShipFrom->sf_desc ?? ''}} Ke :</td>
+                <td colspan="3"></td>
             </tr>
             {{-- Loop Data Detail --}}
             @php($total = 0)
             @foreach($detail as $details)
                 <tr>
                     <td></td>
-                    <td width="20%">{{ $data->getSalesOrder->getShipTo->cs_shipto_name ?? '' }}</td>
+                    <td width="20%">{{ $data->getSalesOrder->getShipTo->cs_shipto_name ?? $data->getMaster->getSalesOrder->getShipTo->cs_shipto_name ?? '' }}</td>
                     <td width="15%">{{number_format($details['t_qtyinv'],0)}}</td>
                     <td width="5%">X</td>
-                    <td width="15%">Rp. {{number_format($details['t_harga'],2)}}</td>
-                    <td width="25%">Rp. {{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
+                    <td width="25%">Rp. {{number_format($details['t_harga'],2)}}</td>
+                    <td width="5%">Rp.</td>
+                    <td width="20%">{{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
                 </tr>
                 {{$total += $details['t_qtyinv'] * $details['t_harga']}}
             @endforeach
-
             <tr>
                 <td colspan="5"></td>
-                <td>_________________</td>
+                <td colspan="2">_________________</td>
             </tr>
             <tr>
                 <td colspan="5"></td>
-                <td>Rp. {{number_format($total,2)}}</td>
+                <td>Rp.</td>
+                <td>{{number_format($total,2)}}</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="3" style="text-align: center">Surabaya, {{\carbon\Carbon::now()->isoFormat('DD-MMM-YYYY')}}</td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <table class="table-noborder">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%"></td>
+                                <td style="width: 5%;border:1px solid black;border-right:none !important;">Rp.</td>
+                                <td style="text-align:right !important;border: 1px solid black;border-left:none !important;"><b>{{number_format($total,2)}}</b></td>
+                                <td style="line-height:6em; color:white;" colspan="5">x</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="3" style="text-align: center;">(PT.ASA)</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td>Tanggal Jatuh Tempo</td>
-                <td></td>
+                <td colspan="2">Pembayaran melalui giro/transfer :</td>
+                <td>a/n</td>
+                <td colspan="4">: PT. ADIL SENTOSA ABADI</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td>Bank</td>
+                <td colspan="4">: MASPION</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td>No. acc</td>
+                <td colspan="4">: 101 203 0360</td>
             </tr>
         </tfoot>
     </table>
