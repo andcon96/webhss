@@ -79,6 +79,7 @@ class CustomerOrderController extends Controller
             $comstr->co_remark = $request->remark;
             $comstr->co_barang_id = $request->barang;
             $comstr->co_kapal = $request->kapal;
+            $comstr->co_has_bonus  = $request->bonus;
             $comstr->save();
 
             $id = $comstr->id;
@@ -115,6 +116,7 @@ class CustomerOrderController extends Controller
             $comstr->co_remark = $request->remark;
             $comstr->co_barang_id = $request->barang;
             $comstr->co_kapal = $request->kapal;
+            $comstr->co_has_bonus = $request->bonus;
             $comstr->save();
 
             foreach($request->iddetail as $key => $datas){

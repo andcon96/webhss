@@ -116,20 +116,20 @@ class SuratJalanLaporMTController extends Controller
             }
             
             // Kirim Qxtend
-            // $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
-            // if($pendinginvoice === false){
-            //     alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($pendinginvoice == 'nourl'){
-            //     alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }elseif($pendinginvoice[0] == 'error'){
-            //     alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-            //     DB::rollback();
-            //     return back();
-            // }
+            $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
+            if($pendinginvoice === false){
+                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($pendinginvoice == 'nourl'){
+                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }elseif($pendinginvoice[0] == 'error'){
+                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+                DB::rollback();
+                return back();
+            }
             
             DB::commit();
             alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');

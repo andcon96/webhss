@@ -49,6 +49,15 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="bonus" class="col-md-2 col-form-label text-md-right">Bonus</label>
+            <div class="col-md-3">
+                <select name="bonus" id="bonus" class="form-control">
+                    <option value="1">Yes</option>
+                    <option value="0" selected>No</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
                 <input type="text" name="remark" class="form-control">
@@ -76,7 +85,7 @@
 
 @section('scripts')
 <script>
-    $('#customer, #type, #shipto, #barang').select2({
+    $('#customer, #type, #shipto, #barang, #bonus').select2({
         width: '100%'
     });
     $("#customer").select2('open');

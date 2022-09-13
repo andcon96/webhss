@@ -35,7 +35,7 @@
                 {{ $bonus = 0 }}
                 {{-- Cek Tipe Loosing ato Container --}}
                 @if($datas->getRuteHistory->history_ongkos == 0)
-                    @if($datas->getBonusBarang)
+                    @if($datas->getBonusBarang && $datas->getSOMaster->getCOMaster->co_has_bonus == 1)
                     {{ $bonus = $datas->getBonusBarang->bb_price * floor($datas->getDetail->sum('sjd_qty_conf') / 1000)  }}
                     @endif
                 @else

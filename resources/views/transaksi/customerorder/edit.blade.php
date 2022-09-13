@@ -46,6 +46,15 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="bonus" class="col-md-2 col-form-label text-md-right">Bonus</label>
+            <div class="col-md-3">
+                <select name="bonus" id="bonus" class="form-control">
+                    <option value="1" {{$data->co_has_bonus == 1 ? 'Selected' : ''}}>Yes</option>
+                    <option value="0" {{$data->co_has_bonus == 0 ? 'Selected' : ''}}>No</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
                 <input id="remark" type="text" class="form-control" name="remark" value="{{$data->co_remark}}" autocomplete="off" maxlength="24" autofocus>
@@ -73,7 +82,7 @@
 
 @section('scripts')
 <script>
-    $('#barang').select2({
+    $('#barang, #bonus').select2({
         width : '100%',
     })
     $("#duedate").datepicker({
