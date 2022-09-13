@@ -8,6 +8,7 @@ use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\CustomerShipToController;
 use App\Http\Controllers\Master\DepartmentController;
 use App\Http\Controllers\Master\DomainController;
+use App\Http\Controllers\Master\GandenganMTController;
 use App\Http\Controllers\Master\InvoicePriceController;
 use App\Http\Controllers\Master\ItemMTController;
 use App\Http\Controllers\Master\KerusakanController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\Transaksi\SuratJalanController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
+use App\Models\Master\GandenganMstr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -302,6 +304,13 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
         Route::group(['middleware'=>'can:access_ttmt'], function () {
             Route::resource('tipetruck', TruckTipeController::class);
+        });
+        //================================
+
+        // Gandengan Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_ttmt'], function () {
+            Route::resource('gandengan', GandenganMTController::class);
         });
         //================================
     });

@@ -3,7 +3,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Master</a></li>
-    <li class="breadcrumb-item active">Edit Truck {{$data->truck_no_polis}}</li>
+    <li class="breadcrumb-item active">Edit Gandengan {{$data->truck_no_polis}}</li>
 </ol>
 @endsection
 
@@ -25,51 +25,18 @@
                     </select>
                 </div>
             </div>
+           
             <div class="form-group row">
-                <label for="nopol" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
+                <label for="e_gandeng" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan') }}</label>
                 <div class="col-md-7">
-                    <input id="nopol" type="text" class="form-control" autocomplete="off" name="nopol" value="{{$data->truck_no_polis}}" {{$data->truck_is_active == 0 ? 'readonly' : 'required'}}>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="driver" class="col-md-3 col-form-label text-md-right">{{ __('Driver') }}</label>
-                <div class="col-md-7">
-                    <select name="driver" id="driver" class="form-control" {{$data->truck_is_active == 0 ? 'readonly' : ''}}> 
+                    <select name="e_gandeng" id="e_gandeng" class="form-control" {{$data->truck_is_active == 0 ? 'readonly' : ''}}> 
                         <option selected disabled></option>
-                        @foreach ($user as $driver)
-                            <option value="{{$driver->id}}" {{$driver->id == $data->truck_user_id ? 'Selected' : ''}} >{{$driver->username}} - {{$driver->name}}</option>
+                        @foreach ($gandengmstr as $datas)
+                            <option value="{{$datas->gandeng_code}}"  >{{$datas->gandeng_code}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="pengurus" class="col-md-3 col-form-label text-md-right">{{ __('Pengurus') }}</label>
-                <div class="col-md-7">
-                    <select name="pengurus" id="pengurus" class="form-control" {{$data->truck_is_active == 0 ? 'readonly' : ''}}> 
-                        <option selected disabled></option>
-                        @foreach ($user as $pengurus)
-                            <option value="{{$pengurus->id}}" {{$pengurus->id == $data->truck_pengurus_id ? 'Selected' : ''}} >{{$pengurus->username}} - {{$pengurus->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
-                <div class="col-md-7">
-                    <select name="tipetruck" id="tipetruck" class="form-control" {{$data->truck_is_active == 0 ? 'readonly' : ''}}> 
-                        @foreach ($tipetruck as $tt)
-                            <option value="{{$tt->id}}" {{$tt->id == $data->truck_tipe_id ? 'Selected' : ''}} >{{$tt->tt_code}} - {{$tt->tt_desc}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row" style="display:{{$data->truck_is_active == 0 ? '' : 'none'}}">
-                <label for="newnopol" class="col-md-3 col-form-label text-md-right">{{ __('No Polis Baru') }}</label>
-                <div class="col-md-7">
-                    <input id="newnopol" type="text" class="form-control" autocomplete="off" name="newnopol" value="{{$data->new_truck_note}}" >
-                </div>
-            </div>
-
         </div>
 
         <div class="modal-footer">

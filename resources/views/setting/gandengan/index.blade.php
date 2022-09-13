@@ -13,21 +13,21 @@
 <!-- Page Heading -->
 <div class="col-md-10 offset-lg-1">
     <button class="btn btn-info bt-action newRole" data-toggle="modal" data-target="#myModal">
-        Create Truck</button>
+        Create Gandengan</button>
 </div>
 
 <form action="{{route('truckmaint.index')}}" method="get">
     <div class="form-group row  col-md-12 mt-3">
-        <label for="s_truck" class="col-md-2 col-form-label text-md-right">{{ __('Truck') }}</label>
+        <label for="s_gandengan" class="col-md-2 col-form-label text-md-right">{{ __('Gandengan') }}</label>
         <div class="col-md-2">
-            <select id="s_truck" class="form-control" name="s_truck" autofocus autocomplete="off">
+            <select id="s_gandengan" class="form-control" name="s_gandengan" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
-                @foreach($truck as $trucks)
-                <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
+                @foreach($gandengmstr as $gandengan)
+                <option value="{{$gandengan->id}}">{{$gandengan->gandeng_code}}</option>
                 @endforeach
             </select>
         </div>
-        <label for="s_tipe" class="col-md-2 col-form-label text-md-right">{{ __('Tipe') }}</label>
+{{--        <label for="s_tipe" class="col-md-2 col-form-label text-md-right">{{ __('Tipe') }}</label>
         <div class="col-md-2">
             <select id="s_tipe" class="form-control" name="s_tipe" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
@@ -35,7 +35,7 @@
                 <option value="{{$tipes->id}}">{{$tipes->tt_code}} - {{$tipes->tt_desc}}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
         <div class="col-md-3">
             {{-- <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label> --}}
             {{-- <div class="col-md-3"> --}}
@@ -52,10 +52,8 @@
             <tr>
                 <th>Domain</th>
                 <th>Gandengan</th>
-                <th>Tipe</th>
-                <th>Driver</th>
-                <th>Pengurus</th>
                 <th>Active</th>
+                
                 <th width="10%">Action</th>
             </tr>
         </thead>
@@ -63,31 +61,21 @@
             @forelse ($data as $index => $datas)
             <tr>
                 <td>
-                    {{$datas->truck_domain}}
+                    {{$datas->gandeng_domain}}
                 </td>
                 <td>
-                    {{$datas->truck_no_polis}}
+                    {{$datas->gandeng_code}}
                 </td>
                 <td>
-                    {{$datas->getTipe->tt_desc}}
-                </td>
-                <td>
-                    
-                    {{$datas->getUserDriver->name ?? ''}}
-                </td>
-                <td>
-                    {{$datas->getUserPengurus->name ?? ''}}
-                </td>
-                <td>
-                    {{$datas->truck_is_active == 1 ? 'Active' : 'Not Active'}}
+                    {{$datas->gandeng_is_active == 1 ? 'Active' : 'Not Active'}}
                 </td>
 
                 <td>
-                    <a href="{{Route('truckmaint.edit',$datas)}}" ><i class="fas fa-edit"></i></a>
+                    <a href="{{Route('gandengan.edit',$datas)}}" ><i class="fas fa-edit"></i></a>
                     @if($datas->truck_is_active == 1)
-                    <a href="" class="deleteRole" data-id="{{$datas->id}}" data-active="{{$datas->truck_is_active}}" data-polis="{{$datas->truck_no_polis}}" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                    <a href="" class="deleteRole" data-id="{{$datas->id}}" data-active="{{$datas->gandeng_is_active}}" data-polis="{{$datas->gandeng_code}}" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
                     @else
-                    <a href="" class="deleteRole" data-id="{{$datas->id}}" data-active="{{$datas->truck_is_active}}" data-polis="{{$datas->truck_no_polis}}" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash-restore"></i></button>
+                    <a href="" class="deleteRole" data-id="{{$datas->id}}" data-active="{{$datas->gandeng_is_active}}" data-polis="{{$datas->gandeng_code}}" data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash-restore"></i></button>
                     @endif    
                 </td>
             </tr>
@@ -115,61 +103,41 @@
             </div>
             <div class="panel-body">
                 <!-- heading modal -->
-                <form class="form-horizontal" role="form" method="POST" action="{{route('truckmaint.store')}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{route('gandengan.store')}}">
                     {{ method_field('post') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group row">
                             <label for="domain" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
                             <div class="col-md-7">
-                                <select id="domain" class="form-control domain" name="domain" autofocus required autocomplete="off">
+                                <select id="c_domain" class="form-control domain" name="c_domain" autofocus required autocomplete="off">
                                     
                                     @foreach($domain as $dm)
-                                    <option value="{{$dm->domain_code}}">{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
+                                    <option value="{{$dm->id}}">{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
                                     @endforeach
                                 </select>
                                 
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="polis" class="col-md-3 col-form-label text-md-right">{{ __('No Polis') }}</label>
+                            <label for="c_gandeng" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan') }}</label>
                             <div class="col-md-7">
-                                <input id="polis" type="text" class="form-control" name="polis" autocomplete="off" value="" required>
+                                <input id="c_gandeng" type="text" class="form-control" name="c_gandeng" autocomplete="off" value="" required>
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="driver" class="col-md-3 col-form-label text-md-right">{{ __('Driver') }}</label>
+                            <label for="c_active" class="col-md-3 col-form-label text-md-right">{{ __('Active') }}</label>
                             <div class="col-md-7">
-                                <select id="driver" class="form-control user" name="driver" autofocus required autocomplete="off">
-                                    <option value=""> --Select Data-- </option>
-                                    @foreach($user as $driver)
-                                    <option value="{{$driver->id}}">{{$driver->username}} -- {{$driver->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="pengurus" class="col-md-3 col-form-label text-md-right">{{ __('Pengurus') }}</label>
-                            <div class="col-md-7">
-                                <select id="pengurus" class="form-control user" name="pengurus" autofocus required autocomplete="off">
-                                    <option value=""> --Select Data-- </option>
-                                    @foreach($user as $pengurus)
-                                    <option value="{{$pengurus->id}}">{{$pengurus->username}} -- {{$pengurus->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe truck') }}</label>
-                            <div class="col-md-7">
-                                <select id="tipetruck" class="form-control user" name="tipetruck" autofocus required autocomplete="off">
+                                <select id="c_active" class="form-control user" name="c_active" autofocus required autocomplete="off">
+                                    <option selected disabled> --Select Data-- </option>
+                                    <option value="1">Ya</option>
+                                    <option value="0">Tidak</option>
                                     
-                                    @foreach($tipe as $tt)
-                                    <option value="{{$tt->id}}">{{$tt->tt_code}} -- {{$tt->tt_desc}}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="modal-footer">
@@ -196,7 +164,7 @@
                 </button>
             </div>
 
-            <form action="{{route('truckmaint.destroy', 'role')}}" method="post">
+            <form action="{{route('gandengan.destroy', 'role')}}" method="post">
 
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
@@ -209,7 +177,7 @@
 
                     <div class="container">
                         <div class="row">
-                            Are you sure you want to <a name="temp_active" id="temp_active" class="mr-1 ml-1">  Truck : &nbsp; <strong><a name="temp_uname" id="temp_uname"></a></strong>
+                            Are you sure you want to <a name="temp_active" id="temp_active" class="mr-1 ml-1">  Gandengan : &nbsp; <strong><a name="temp_uname" id="temp_uname"></a></strong>
                             &nbsp;?
                         </div>
                     </div>
