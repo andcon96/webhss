@@ -12,6 +12,7 @@ use App\Http\Controllers\Master\DepartmentController;
 use App\Http\Controllers\Master\DomainController;
 use App\Http\Controllers\Master\DriverController;
 use App\Http\Controllers\Master\DriverNopolController;
+use App\Http\Controllers\Master\GandenganMTController;
 use App\Http\Controllers\Master\InvoicePriceController;
 use App\Http\Controllers\Master\ItemMTController;
 use App\Http\Controllers\Master\KerusakanController;
@@ -352,5 +353,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('custshipto', CustomerShipToController::class);
         });
         //================================
+
+         // Gandengan Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_ttmt'], function () {
+            Route::resource('gandengan', GandenganMTController::class);
+        });
+        //================================
+        
     });
 });
