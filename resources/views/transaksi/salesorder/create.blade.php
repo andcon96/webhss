@@ -87,7 +87,6 @@
     
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
-        minDate: '+0d',
         onClose: function() {
             $("#addrow").focus();
         }

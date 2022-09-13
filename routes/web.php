@@ -4,10 +4,14 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\ApprovalController;
+use App\Http\Controllers\Master\BarangMTController;
+use App\Http\Controllers\Master\BonusBarangController;
 use App\Http\Controllers\Master\CustomerController;
 use App\Http\Controllers\Master\CustomerShipToController;
 use App\Http\Controllers\Master\DepartmentController;
 use App\Http\Controllers\Master\DomainController;
+use App\Http\Controllers\Master\DriverController;
+use App\Http\Controllers\Master\DriverNopolController;
 use App\Http\Controllers\Master\InvoicePriceController;
 use App\Http\Controllers\Master\ItemMTController;
 use App\Http\Controllers\Master\KerusakanController;
@@ -23,6 +27,7 @@ use App\Http\Controllers\Master\TruckTipeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Transaksi\BrowsePolisController;
 use App\Http\Controllers\Transaksi\CheckInOutController;
+use App\Http\Controllers\Transaksi\CicilanMTController;
 use App\Http\Controllers\Transaksi\CustomerOrderController;
 use App\Http\Controllers\Transaksi\GenerateReportController;
 use App\Http\Controllers\Transaksi\InvoiceMTController;
@@ -33,6 +38,8 @@ use App\Http\Controllers\Transaksi\SuratJalanController;
 use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
+use App\Http\Controllers\Transaksi\CicilanHistoryController;
+use App\Models\Transaksi\CicilanHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -46,11 +53,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('loadrutefirst',[RuteController::class,'loadrutefirst']);
-Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
-Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
-Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
-Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
+// Route::get('loadrutefirst',[RuteController::class,'loadrutefirst']);
+// Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
+// Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
+// Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
+// Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
+// Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================
@@ -83,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/report/sangubymonth', [GenerateReportController::class, 'reportsangu'])->name('reportSangu');
         Route::get('/report/updatepreview', [GenerateReportController::class, 'updatepreview'])->name('updatePreview');
         Route::get('/report/printpdf', [GenerateReportController::class, 'printpdf'])->name('reportPerNopol');
+        Route::get('/getcicilan', [GenerateReportController::class, 'getcicilan'])->name('getCicilan');
         Route::resource('report', GenerateReportController::class);
     });
 
@@ -135,6 +144,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('laporkerusakan/assingremarkskr/{id}', [KerusakanLaporMTController::class, 'assingremarkskr'])->name('assignRemarks');
         Route::put('laporkerusakan/upassignremarkskr/{id}', [KerusakanLaporMTController::class, 'upassignremarkskr'])->name('UpAssignRemarks');
         Route::get('laporkerusakan/krhistory/{id}', [KerusakanLaporMTController::class, 'krhistoryview'])->name('krhistview');
+        Route::post('krdone',[KerusakanLaporMTController::class,'krdone'])->name('krdone');
         // Route::get('laporkerusakan/krhistory/{id}', [KerusakanLaporMTController::class, 'krhistorytable'])->name('krhisttable');
     });
 
@@ -145,6 +155,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware'=>'can:access_invoice'], function(){
         Route::resource('invoicemt', InvoiceMTController::class);
         Route::get('checkinvoice', [InvoiceMTController::class, 'checkinvoice'])->name('checkInvoice');
+        Route::get('printinvoice/{id}', [InvoiceMTController::class, 'printinvoice'])->name('printInvoice');
+        Route::get('printinvoiceqad/{id}', [InvoiceMTController::class, 'printinvoiceqad'])->name('printInvoiceQAD');
+        Route::get('printdetailinvoice/{id}', [InvoiceMTController::class, 'printdetailinvoice'])->name('printDetailInvoice');
+        Route::get('printdetailinvoiceqad/{id}', [InvoiceMTController::class, 'printdetailinvoiceqad'])->name('printDetailInvoiceQAD');
+    });
+
+    Route::group(['middleware'=>'can:access_cicilan'], function(){
+        route::resource('cicilanmt', CicilanMTController::class);
+    });
+
+    Route::group(['middleware'=>'can:access_bayar_cicilan'], function(){
+        route::resource('bayarcicilanmt', CicilanHistoryController::class);
+        route::post('updatehistorycicilan', [CicilanHistoryController::class, 'updatehistorycicilan'])->name('updateHistoryCicilan');
     });
 
     Route::group(['middleware'=>'can:access_masters'], function () {
@@ -203,22 +226,6 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
 
         //================================
-        // Customer Maintenance
-        //================================
-        Route::group(['middleware'=>'can:access_custmt'], function () {
-            Route::resource('customermaint', CustomerController::class);
-        });
-        //================================
-
-        //================================
-        // Item Maintenance
-        //================================
-        Route::group(['middleware'=>'can:access_itemmt'], function () {
-            Route::resource('itemmaint', ItemMTController::class);
-        });
-        //================================
-
-        //================================
         // Prefix Maintenance
         //================================
         Route::group(['middleware'=>'can:access_pmmt'], function () {
@@ -236,20 +243,6 @@ Route::group(['middleware' => ['auth']], function () {
         // Domain Maintenance
         //================================
         Route::resource('domainmaint', DomainController::class);
-        //================================
-        
-        // QX WSA Master
-        //================================
-        Route::group(['middleware'=>'can:access_wqmt'], function () {
-            Route::resource('qxwsa', QxWsaMTController::class);
-        });
-        //================================
-        
-        // Ship To Master
-        //================================
-        Route::group(['middleware'=>'can:access_stmt'], function () {
-            Route::resource('custshipto', CustomerShipToController::class);
-        });
         //================================
         
         // Ship From Master
@@ -280,6 +273,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('invoiceprice/invoicepricedetail/{detailid}/historydetail/{id}', [InvoicePriceController::class,'viewHistory']);
             Route::get('invoiceprice/invoicepricedetail/{id}', [InvoicePriceController::class,'listdetail']);
             Route::post('newinvoiceprice', [InvoicePriceController::class,'newinvoiceprice']);
+    
+            Route::post('changestatusinvoice', [InvoicePriceController::class,'changestatusinvoice'])->name('changestatusinvoice');
         });
 
         //================================
@@ -297,6 +292,64 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
         Route::group(['middleware'=>'can:access_ttmt'], function () {
             Route::resource('tipetruck', TruckTipeController::class);
+        });
+        //================================
+
+        
+        // Barang & Bonus Barang Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_barang'], function(){
+            route::resource('barangmt', BarangMTController::class);
+        });
+
+        Route::group(['middleware'=>'can:access_bonus_barang'], function(){
+            route::resource('bonusbarangmt', BonusBarangController::class);
+            route::get('bonusbarangmt/detail/{id}', [BonusBarangController::class, 'bonusbarangdetail'])->name('BonusBarangDetail');
+            route::post('bonusbarangmt/updatedetail', [BonusBarangController::class, 'updatedetail'])->name('BonusUpdateDetail');
+        });
+        //================================
+
+
+        
+        // Driver & Link Driver Nopol Maintenance
+        //================================  
+        Route::group(['middleware'=>'can:access_driver'], function(){
+            route::resource('drivermt', DriverController::class);
+        });
+
+        Route::group(['middleware'=>'can:access_driver_nopol'], function(){
+            Route::resource('drivernopolmt', DriverNopolController::class);
+        });
+        //================================
+    });
+
+    Route::group(['middleware'=>'can:access_masters_qad'], function(){
+        //================================
+        // Customer Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_custmt'], function () {
+            Route::resource('customermaint', CustomerController::class);
+        });
+        //================================
+
+        //================================
+        // Item Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_itemmt'], function () {
+            Route::resource('itemmaint', ItemMTController::class);
+        });
+        //================================
+        // QX WSA Master
+        //================================
+        Route::group(['middleware'=>'can:access_wqmt'], function () {
+            Route::resource('qxwsa', QxWsaMTController::class);
+        });
+        //================================
+        
+        // Ship To Master
+        //================================
+        Route::group(['middleware'=>'can:access_stmt'], function () {
+            Route::resource('custshipto', CustomerShipToController::class);
         });
         //================================
     });

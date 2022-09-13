@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\Barang;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
@@ -27,7 +28,7 @@ class CustomerOrderController extends Controller
         $listcust = Customer::get();
         $listco = CustomerOrderMstr::get();
         $data = CustomerOrderMstr::query()
-                                ->with('getCustomer');
+                                ->with('getCustomer','getBarang');
         
         if($request->conumber){
             $data->where('id',$request->conumber);
@@ -47,15 +48,17 @@ class CustomerOrderController extends Controller
         $data = CustomerOrderMstr::with('getDetail')->findOrFail($id);
         $this->authorize('update',[CustomerOrderMstr::class, $data]);
         $item = Item::where('item_promo',$data->co_type)->get();
+        $barang = Barang::get();
 
-        return view('transaksi.customerorder.edit',compact('data','item'));
+        return view('transaksi.customerorder.edit',compact('data','item','barang'));
     }
 
     public function create()
     {
         $item = Item::get();
         $cust = Customer::get();
-        return view('transaksi.customerorder.create',compact('item','cust'));
+        $listbarang = Barang::where('barang_is_active',1)->get();
+        return view('transaksi.customerorder.create',compact('item','cust','listbarang'));
     }
 
     public function store(Request $request)
@@ -68,13 +71,14 @@ class CustomerOrderController extends Controller
                 return back();
             }
             
-            // dd($getCORN);
             $comstr = new CustomerOrderMstr();
             $comstr->co_nbr = $getCORN;
             $comstr->co_cust_code = $request->customer;
             $comstr->co_type = $request->type;
             $comstr->co_status = "New";
             $comstr->co_remark = $request->remark;
+            $comstr->co_barang_id = $request->barang;
+            $comstr->co_kapal = $request->kapal;
             $comstr->save();
 
             $id = $comstr->id;
@@ -109,6 +113,8 @@ class CustomerOrderController extends Controller
         try{
             $comstr = CustomerOrderMstr::findOrFail($id);
             $comstr->co_remark = $request->remark;
+            $comstr->co_barang_id = $request->barang;
+            $comstr->co_kapal = $request->kapal;
             $comstr->save();
 
             foreach($request->iddetail as $key => $datas){

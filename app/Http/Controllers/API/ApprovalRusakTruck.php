@@ -66,7 +66,7 @@ class ApprovalRusakTruck extends Controller
                     $checkdata = KerusakanMstr::where('kr_nbr',$rusaknbr)->firstOrFail();
                     DB::beginTransaction();
                     try{
-                        $checkdata->kr_status = 'Done';
+                        $checkdata->kr_status = 'WIP';
                         $checkdata->save();
                         DB::commit();
                         $status_display = 'SUCCESS';

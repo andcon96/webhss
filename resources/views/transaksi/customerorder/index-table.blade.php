@@ -2,9 +2,11 @@
     <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="15%">Nomor CO</th>
-                <th>Customer</th>
-                <th width="15%">Status</th>
+                <th width="10%">Nomor CO</th>
+                <th width="25%">Customer</th>
+                <th width="15%">Nama Kapal</th>
+                <th width="10%">Barang</th>
+                <th width="10%">Status</th>
                 <th width="15%">Action</th>
             </tr>
         </thead>
@@ -13,6 +15,8 @@
             <tr>
                 <td data-label="CO NUMBER">{{$datas->co_nbr}}</td>
                 <td data-label="CO CUSTOMER">{{$datas->co_cust_code}} -- {{$datas->getCustomer->cust_desc}}</td>
+                <td data-label="KAPAL">{{$datas->co_kapal}}</td>
+                <td data-label="BARANG">{{$datas->getBarang->barang_deskripsi ?? ''}}</td>
                 <td data-label="CO STATUS">{{$datas->co_status}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-conbr="{{$datas->co_nbr}}"
@@ -40,7 +44,7 @@
                         data-cust="{{$datas->co_cust_code}}" data-custdesc="{{$datas->getCustomer->cust_desc}}"
                         data-status="{{$datas->co_status}}" 
                         data-toggle='modal' data-target="#detailModal"><i
-                        class="fas fa-book"></i></button>
+                        class="fas fa-book"></i></a>
 
                 </td>
             </tr>

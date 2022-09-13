@@ -2,12 +2,12 @@
     <table class="table table-bordered edittable mini-table" id="editTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th width="10%">Line</th>
-                <th width="40%">Part</th>
+                <th width="7%">Line</th>
+                <th width="30%">Part</th>
                 <th width="10%">Qty Order</th>
                 <th width="10%">Qty Open</th>
                 <th width="10%">Qty New</th>
-                <th width="10%">Delete</th>
+                <th width="7%">Delete</th>
             </tr>
         </thead>
         <tbody id="edittable">

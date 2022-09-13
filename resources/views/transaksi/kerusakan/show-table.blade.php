@@ -13,7 +13,11 @@
                     <input type="text" class="form-control" value="{{$datas->getKerusakan->kerusakan_code}} -- {{$datas->getKerusakan->kerusakan_desc}}" readonly>
                 </td>
                 <td>
+<<<<<<< HEAD
                     <textarea type="text" class="form-control" readonly>{{$datas->krd_note}}</textarea>                
+=======
+                    <textarea type="text" class="form-control" readonly>{{$datas->krd_note}}</textarea>
+>>>>>>> master
                 </td>
             </tr>
             @empty

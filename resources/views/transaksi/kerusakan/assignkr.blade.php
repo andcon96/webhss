@@ -25,8 +25,8 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="truck" class="col-md-2 col-form-label text-md-right">Truck</label>
-            <div class="col-md-3">
+            <label for="truck" class="col-md-2 col-form-label text-md-right" style="display: {{!empty($data->getTruck->truck_no_polis) ? '' : 'none'}}">Truck</label>
+            <div class="col-md-3" style="display: {{!empty($data->getTruck->truck_no_polis) ? '' : 'none'}}">
                 <input id="truck" type="text" class="form-control" name="truck" value="{{isset($data->getTruck->truck_no_polis) ? $data->getTruck->truck_no_polis : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
             <label for="driver" class="col-md-2 col-form-label text-md-right">Driver</label>

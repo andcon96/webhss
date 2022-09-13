@@ -113,7 +113,8 @@ class ShipFromController extends Controller
         $data = ShipFrom::findOrFail($id);
         $data->sf_is_active == 0 ? $data->sf_is_active = 1 : $data->sf_is_active = 0;
         $data->save();
-
+        // dd($data);
+        
         alert()->success('Success', 'Ship from Status Successfully Changed');
         return redirect()->route('shipfrom.index');
     }

@@ -52,6 +52,11 @@
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->getCOMaster->co_type}}" autocomplete="off" maxlength="24" required readonly>
             </div>
+            <label for="barang" class="col-md-3 col-form-label text-md-right">Type</label>
+            <div class="col-md-3">
+                <input type="hidden" name="barangid" id="barangid" value="{{$data->getCOMaster->co_barang_id}}">
+                <input id="barang" type="text" class="form-control" name="barang" value="{{$data->getCOMaster->getBarang->barang_deskripsi}}" readonly>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.salesorder.suratjalan.create-table')
@@ -66,7 +71,7 @@
                         data-typetruck="{{$trucks->truck_tipe_id}}"
                         data-pengurus="{{$trucks->getUserPengurus->name ?? ''}}"
                         data-domain="{{$trucks->truck_domain}}">
-                        {{$trucks->truck_no_polis}}
+                        {{$trucks->truck_no_polis}} -- {{$trucks->getTipe->tt_desc ?? ''}}
                     </option>
                     @endforeach
                 </select>
@@ -74,6 +79,13 @@
             <label for="pengurus" class="col-md-3 col-form-label text-md-right">Pengurus</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="pengurus" id="pengurus" readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="catatansj" class="col-md-2 col-form-label text-md-right">SJ</label>
+            <div class="col-md-3">
+                <input id="text" type="catatansj" class="form-control" name="catatansj" value=""
+                    autocomplete="off" maxlength="24">
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -116,7 +128,7 @@
             </div>
             <label for="totsangu" class="col-md-3 col-form-label text-md-right">Sangu</label>
             <div class="col-md-3">
-                <input type="text" class="form-control sangu" required name="totsangu" id="totsangu" required>
+                <input type="text" class="form-control sangu" required name="totsangu" value="0" id="totsangu" required>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -145,7 +157,7 @@
 
 @section('scripts')
 <script>
-    $('#truck,#listsan').select2({
+    $('#truck,#listsan,#bonus').select2({
         width: '100%'
     });
 
@@ -186,6 +198,20 @@
         getDefaultSangu();
     });
 
+    function resetDropDownValue(){
+        let filter = $('#type').val();
+
+        $('.selectpicker option').each(function() {
+            if ($(this).data('type') == filter || $(this).val() == ""){  
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        })
+
+        $('.selectpicker').selectpicker('refresh');
+    }
+
     $(document).on('change', '#truck',function(){
         let truck = $(this).val();
         var typetruck = $(this).find(':selected').data('typetruck');
@@ -194,6 +220,8 @@
         var shipfrom = $('#shipfrom').val();
         var shipto = $('#shipto').val();
         var trip = $('#trip').val();
+        var barangid = $('#barangid').val();
+
 
         $.ajax({
             url: "{{ route('getRute') }}",
@@ -231,6 +259,7 @@
             }
         })
 
+        resetDropDownValue(typetruck, barangid);
         $('#pengurus').val(pengurus);
         $('#truckdomain').val(domain);
     });

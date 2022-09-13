@@ -47,7 +47,9 @@ class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, W
             ->get();
 
         $interval = DateInterval::createFromDateString('1 day');
-        $period = new DatePeriod(new DateTime($datefrom), $interval, new DateTime($dateto));
+        $end = new DateTime($dateto);
+        $end->modify('+1 day');
+        $period = new DatePeriod(new DateTime($datefrom), $interval, $end);
 
         return view(
             'transaksi.laporan.excel.report-loosing-hsst',

@@ -10,8 +10,8 @@
 
 @section('content')
 
-<div class="col-md-12">
-    <a href="{{route('laporkerusakan.create') }}" class="btn btn-info bt-action mb-3">Lapor Kerusakan</a>
+<div class="col-md-12" style="display: {{$access == 'yes' ? '' : 'none'}}">
+    <a href="{{route('laporkerusakan.create') }}" class="btn btn-info bt-action mb-3" >Lapor Kerusakan</a>
 </div>
 <!-- Page Heading -->
 <form action="{{route('laporkerusakan.index')}}" method="get">
@@ -41,6 +41,7 @@
             <select id="s_status" class="form-control" name="s_status" autofocus autocomplete="off">
                 <option value=""> Select Data </option>
                 <option value="Cancelled"> Cancelled </option>
+                <option value="WIP"> WIP </option>
                 <option value="Done"> Done </option>
                 <option value="Need Approval"> Need Approval </option>
                 <option value="New"> New </option>
@@ -116,6 +117,51 @@
     </div>
 </div>
 
+<!-- confirm Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Confirm Kerusakan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="{{route('krdone')}}" method="post">
+
+                {{ method_field('post') }}
+                {{ csrf_field() }}
+
+                <div class="modal-body">
+
+                    <input type="hidden" name="_method" value="post">
+
+                    <input type="hidden" name="temp_id" id="temp_id2" value="">
+                    
+
+                    <div class="container">
+                        <div class="row">
+                            Are you sure you want to Confirm Number :&nbsp; <strong><a name="temp_uname2" id="temp_uname2"></a></strong>
+                            &nbsp;?
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info bt-action" id="d_btnclose" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success bt-action" id="d_btnconf">Save</button>
+                    <button type="button" class="btn bt-action" id="d_btnloading" style="display:none">
+                        <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 
@@ -153,6 +199,13 @@
 
         document.getElementById("temp_id").value = id;
         document.getElementById('temp_uname').text = krnbr;
+    });
+    $(document).on('click', '.confirmModal', function() {
+        var id = $(this).data('id');
+        var krnbr = $(this).data('krnbr');
+
+        document.getElementById("temp_id2").value = id;
+        document.getElementById('temp_uname2').text = krnbr;
     });
 </script>
 @endsection

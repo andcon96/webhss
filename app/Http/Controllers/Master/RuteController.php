@@ -313,7 +313,7 @@ class RuteController extends Controller
     {
         ini_set('max_execution_time', 360);
 
-        if (($open = fopen(public_path() . "/historyrute.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/historyrute_full.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $history[] = $data;
@@ -325,7 +325,7 @@ class RuteController extends Controller
                     $kodetruck = $histories[4];
                     $kodetruck == '2EXL' ? $tipetruck = 1 :
                     ($kodetruck == '3EXL' ?  $tipetruck = 2 :
-                    ($kodetruck == 'SD' ?  $tipetruck = 3 :
+                    ($kodetruck == 'Semi' ?  $tipetruck = 3 :
                     ($kodetruck == 'LD' ?  $tipetruck = 4 :
                     ($kodetruck == '20"' ?  $tipetruck = 5 :
                     ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
@@ -414,15 +414,15 @@ class RuteController extends Controller
                     'history_is_active' => 0,
                     'history_last_active' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
                 ]);
-                DB::commit();
-                alert()->success('Success', 'Rute berhasil di nonaktif');
-                return back();
-            }
-            catch(Exception $err){
-                DB::rollback();
-                alert()->error('Error', 'Rute gagal di nonaktif');
-                return back();
-            }
+            DB::commit();
+            alert()->success('Success', 'Rute berhasil di nonaktif');
+            return back();
+        }
+        catch(Exception $err){
+            DB::rollback();
+            alert()->error('Error', 'Rute gagal di nonaktif');
+            return back();
+        }
 
     }
 }

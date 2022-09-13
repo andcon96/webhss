@@ -68,7 +68,7 @@ class EmailApprovalKerusakan
         ],
         function ($message) use ($email,$nopol) {
             $message->subject('Truck Breackdown Approval - ' . $nopol);
-            $message->from('no-reply@ptimi.co.id');
+            $message->from('anugerahworkshop@gmail.com');
             $message->to($email);
         });
         

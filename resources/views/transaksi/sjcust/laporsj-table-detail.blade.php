@@ -22,10 +22,26 @@
                                     ->where('ip_customership_id', $data->getSOMaster->getShipTo->id)
                                     ->where('ip_shipfrom_id', $data->getSOMaster->getShipFrom->id)
                                     ->first())
+                                    
                     @php($newprice = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ?
                                         $price->getActivePrice->iph_trip_price ?? 0: 
                                         $price->getActivePrice->iph_tonase_price ?? 0)
-                    <input type="number" name="price[]" value="{{number_format($newprice,2)}}" class="form-control">
+
+                    <select id="harga" class="form-control" required>
+                        <option value="">Select Data</option>
+                        @if($price)
+                        @foreach($price->getAllActivePrice as $keys => $harga)
+                            @php($hargapakai = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ? $harga->iph_trip_price : $harga->iph_tonase_price)
+                            <option value="{{$hargapakai}}">
+                                {{$hargapakai}}
+                            </option>
+                        @endforeach
+                        @endif
+                        <option value="Custom">Custom Price</option>
+                    </select>
+
+                    <input type="number" name="price[]" value="" readonly class="form-control price mt-2" required>
+
                 </td>
                 <td>{{$datas->sjd_qty_ship}}</td>
                 <td>

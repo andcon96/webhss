@@ -23,7 +23,7 @@
                 <th><b>TUJUAN</b></th>
                 <th><b>ORDER</b></th>
                 <th><b>RIT</b></th>
-                <th><b>SANGU</b></th>
+                <th><b>TARIF</b></th>
                 <th><b>KOMISI</b></th>
                 <th><b>HARGA</b></th>
             </tr>
@@ -32,21 +32,32 @@
             {{$total = 0}}
             {{$totaldefault = 0}}
             @foreach($data as $keys => $datas)
+                {{ $bonus = 0 }}
+                {{-- Cek Tipe Loosing ato Container --}}
+                @if($datas->getRuteHistory->history_ongkos == 0)
+                    @if($datas->getBonusBarang)
+                    {{ $bonus = $datas->getBonusBarang->bb_price * floor($datas->getDetail->sum('sjd_qty_conf') / 1000)  }}
+                    @endif
+                @else
+                    {{ $bonus = $datas->getRuteHistory->history_ongkos }} 
+                @endif
                 <tr>
-                    <td>{{$keys + 1}}</td>
-                    <td>{{$datas->getDetail[0]->sjd_part}}</td>
+                    <td>{{$keys + 1}}</td> 
+                    <td>{{$datas->getSOMaster->getCOMaster->getBarang->barang_deskripsi ?? ''}}</td>
                     <td>{{$datas->sj_eff_date}}</td>
-                    <td></td>
+                    <td>{{$datas->getSOMaster->getCOMaster->co_kapal ?? ''}}</td>
                     <td>{{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                     <td>{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc ?? ''}}</td>
                     <td>{{$datas->sj_jmlh_trip}}</td>
                     <td>{{number_format($datas->getRuteHistory->history_sangu,0)}} </td>
-                    <td>{{number_format($datas->getRuteHistory->history_ongkos,0)}} </td>
+                    <td class="angka">
+                        {{number_format($bonus,0)}}
+                    </td>
                     <td style="text-align:right">
-                        {{number_format(($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip,2)}}
+                        {{number_format(($datas->getRuteHistory->history_sangu + $bonus) * $datas->sj_jmlh_trip,2)}}
                     </td>
                 </tr>
-                {{$totaldefault += ($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip}}
+                {{$totaldefault += ($datas->getRuteHistory->history_sangu + $bonus) * $datas->sj_jmlh_trip}}
                 {{$total += $datas->sj_tot_sangu}}
 		    @endforeach
         </tbody>
@@ -128,7 +139,7 @@
                 <th><b>TUJUAN</b></th>
                 <th><b>ORDER</b></th>
                 <th><b>RIT</b></th>
-                <th><b>SANGU</b></th>
+                <th><b>TARIF</b></th>
                 <th><b>KOMISI</b></th>
                 <th><b>HARGA</b></th>
             </tr>
@@ -139,11 +150,11 @@
             @foreach($openSPK as $keys => $datas)
                 <tr>
                     <td>{{$keys + 1}}</td>
-                    <td>{{$datas->getDetail[0]->sjd_part}}</td>
+                    <td>{{$datas->getSOMaster->getCOMaster->getBarang->barang_deskripsi ?? ''}}</td>
                     <td>{{$datas->sj_eff_date}}</td>
-                    <td></td>
+                    <td>{{$datas->getSOMaster->getCOMaster->co_kapal ?? ''}}</td>
                     <td>{{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
-                    <td></td>
+                    <td>{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc ?? ''}}</td>
                     <td>{{$datas->sj_jmlh_trip}}</td>
                     <td>{{number_format($datas->getRuteHistory->history_sangu,0)}} </td>
                     <td>{{number_format($datas->getRuteHistory->history_ongkos,0)}} </td>
@@ -172,7 +183,7 @@
                 <td colspan="6" style="text-align: right">Total Diterima</td>
                 <td>:</td>
                 <td colspan="2"></td>
-                <td style="text-align:right"><b>{{number_format($totalClosedSPK - $total,2)}}</b></td>
+                <td style="text-align:right"><b>{{number_format($totaldefault - $total,2)}}</b></td>
             </tr>
         </tfoot>
     </table>

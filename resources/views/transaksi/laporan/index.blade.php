@@ -29,6 +29,8 @@
                 <option value="2"> Report Totalan Supir Loosing</option>
                 <option value="3"> Report Rincian Sangu Loosing HSST</option>
                 <option value="4"> Report Total Supir Loosing HSS Trailer</option>
+                <option value="5"> Report Container By Tipe Truck </option>
+                <option value="6"> Report Tambahan Biaya</option>
             </select>
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
@@ -51,6 +53,15 @@
                 @endforeach
             </select>
         </div>
+        <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="tipetruck" class="form-control" name="tipetruck" autofocus autocomplete="off" required>
+                <option value=""> Select Data </option>
+                @foreach($tipetruck as $tipetrucks)
+                <option value="{{$tipetrucks->id}}">{{$tipetrucks->tt_code}} -- {{$tipetrucks->tt_desc}}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
     <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
@@ -58,7 +69,7 @@
             <button class="btn bt-action newUser" name="aksi" value="1" style="margin-left: 10px; width: 40px !important">
                 <i class="fas fa-file-excel"></i>
             </button>
-            <button class="btn bt-action newUser" name="aksi" formtarget="_blank" value="2" style="margin-left: 10px; width: 40px !important">
+            <button class="btn bt-action newUser" id="btnpdf" name="aksi" formtarget="_blank" value="2" style="margin-left: 10px; width: 40px !important">
                 <i class="fas fa-file-pdf"></i>
             </button>
         </div>
@@ -72,7 +83,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#truck,#report,#domain').select2({
+    $('#truck,#report,#domain,#tipetruck').select2({
         width: '100%',
     });
 
@@ -88,7 +99,7 @@
         }
     });
     
-    $('#truck, #domain').prop('disabled',true);
+    $('#truck, #domain, #tipetruck').prop('disabled',true);
 
     $('#report').on('change', function(){
         let val = $(this).val();
@@ -97,14 +108,28 @@
             $('#truck').prop('disabled',false);
             $('#truck').prop('required',true);
             
-            $('#domain').prop('disabled',true);
-            $('#domain').prop('required',false);
+            $('#domain,#tipetruck').prop('disabled',true);
+            $('#domain,#tipetruck').prop('required',false);
+            $('#btnpdf').prop('disabled',false);
+        }else if(val == 5){
+            $('#truck,#domain').prop('disabled',true);
+            $('#truck,#domain').prop('required',false);
+            
+            $('#tipetruck').prop('disabled',false);
+            $('#tipetruck').prop('required',true);
+
+            $('#btnpdf').prop('disabled',true);
+        }else if(val == 6){
+            $('#truck,#domain,#tipetruck').prop('disabled',true);
+            $('#truck,#domain,#tipetruck').prop('required',false);
+            $('#btnpdf').prop('disabled',true);
         }else{
-            $('#truck').prop('disabled',true);
-            $('#truck').prop('required',false);
+            $('#truck,#tipetruck').prop('disabled',true);
+            $('#truck,#tipetruck').prop('required',false);
 
             $('#domain').prop('disabled',false);
             $('#domain').prop('required',true);
+            $('#btnpdf').prop('disabled',false);
         }
     });
 

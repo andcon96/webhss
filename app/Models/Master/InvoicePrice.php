@@ -37,4 +37,9 @@ class InvoicePrice extends Model
     {
         return $this->hasOne(InvoicePriceHistory::class, 'iph_ip_id')->where('iph_is_active',1);
     }
+
+    public function getAllActivePrice()
+    {
+        return $this->hasMany(InvoicePriceHistory::class, 'iph_ip_id', 'id')->where('iph_is_active',1);
+    }
 }

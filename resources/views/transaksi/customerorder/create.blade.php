@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Transaksi</a></li>
-    <li class="breadcrumb-item active">Sales Order Maintenance</li>
+    <li class="breadcrumb-item active">Customer Order Maintenance</li>
 </ol>
 @endsection
 
@@ -31,6 +31,21 @@
                     <option value="TRIP">Trip</option>
                     {{-- <option value="SHIFT">Shift</option> --}}
                 </select>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="barang" class="col-md-2 col-form-label text-md-right">Barang</label>
+            <div class="col-md-3">
+                <select name="barang" id="barang" class="form-control">
+                    <option value="">None</option>
+                    @foreach ($listbarang as $barang)
+                        <option value="{{$barang->id}}">{{$barang->barang_deskripsi}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <label for="kapal" class="col-md-3 col-form-label text-md-right">Kapal</label>
+            <div class="col-md-3">
+                <input type="text" name="kapal" class="form-control">
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -61,7 +76,7 @@
 
 @section('scripts')
 <script>
-    $('#customer, #type, #shipto').select2({
+    $('#customer, #type, #shipto, #barang').select2({
         width: '100%'
     });
     $("#customer").select2('open');

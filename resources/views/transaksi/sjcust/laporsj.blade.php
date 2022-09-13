@@ -104,6 +104,18 @@
     $("#effdate").datepicker({
         dateFormat: 'yy-mm-dd',
     });
+
+    $('#harga').select2({
+        width: '100%'
+    });
+
+    $(document).on('change', '#harga',function(){
+        var value = $(this).find(':selected').val();
+
+        $('.price').val(value);
+
+        value == 'Custom' ? $('.price').prop('readonly',false) : $('.price').prop('readonly',true)
+    });
     
     $(document).on('keyup', '.sangu', function() {
         letterRegex = /[^\0-9\,]/;
@@ -124,21 +136,33 @@
 
     $(document).on('click', '.btnconf', function(e){
         e.preventDefault();
-        Swal.fire({
-            title: "Lapor Surat Jalan ?",
-            text: "Pastikan Data Sudah Sesuai",
-            type: "warning",
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Lapor",
-            closeOnConfirm: false
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                $('#submit').submit();
-            }
-        })
+        let data = $('.price').val();
+        if(data == 0){
+            swal.fire({
+                title: 'Warning',
+                text: 'Price cannot be 0 or Empty',
+                type: 'warning',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }else{
+            Swal.fire({
+                title: "Lapor Surat Jalan ?",
+                text: "Pastikan Data Sudah Sesuai",
+                type: "warning",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Lapor",
+                closeOnConfirm: false
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $('#submit').submit();
+                }
+            })
+        }
+        
     });
 </script>
 @endsection

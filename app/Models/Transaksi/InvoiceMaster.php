@@ -18,7 +18,7 @@ class InvoiceMaster extends Model
 
     public function getSalesOrder()
     {
-        return $this->hasOne(SalesOrderMstr::class, 'id', 'id_so_mstr_id',);
+        return $this->hasOne(SalesOrderMstr::class, 'id', 'im_so_mstr_id');
     }
 
 }

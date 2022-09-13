@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\Transaksi\CheckInOut;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Session;
+use Kyslik\ColumnSortable\Sortable;
+
 
 class Truck extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     public $table = 'truck';
     protected $fillable = [
@@ -19,6 +20,7 @@ class Truck extends Model
         'truck_user_id',
         'truck_pengurus_id'
     ];
+    public $sortable = ['id','truck_no_polis'];
 
     public function getAllCheckInOut()
     {

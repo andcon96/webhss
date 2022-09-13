@@ -260,6 +260,7 @@ class SalesOrderController extends Controller
             alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
         }catch (\Exception $err) {
             DB::rollBack();
+            dd($err);
             alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
         }
 
@@ -362,12 +363,17 @@ class SalesOrderController extends Controller
                                 ->where('sj_so_mstr_id',$datas->sod_so_mstr_id)
                                 ->whereRelation('getDetail','sjd_line',$datas->sod_line)
                                 ->whereRelation('getDetail','sjd_part',$datas->sod_part)
+                                ->where('sj_status','!=','Cancelled')
+                                ->orderByRaw('LENGTH(sj_surat_jalan) ASC')
+                                ->orderBy('sj_surat_jalan','ASC')
                                 ->get();
 
                 if($list->count() > 0){
+                    $value = 0;
                     foreach($list as $key => $lists){
+                        $value += 1;
                         $output .= '<tr>';
-                        $output .= '<td colspan="2"><b>SPK Number : '.$lists->sj_nbr.'</b></td>';
+                        $output .= '<td colspan="2"><b>SPK Number : '.$lists->sj_nbr.', SJ Number : '.$lists->sj_surat_jalan.'</b></td>';
                         $output .= '<td><b>Nopol : '.$lists->getTruck->truck_no_polis.'</b></td>';
                         $output .= '<td><b> Status : '.$lists->sj_status.'</b></td>';
                         foreach($lists->getDetail as $detail){
@@ -377,6 +383,7 @@ class SalesOrderController extends Controller
                         }
                         $output .= '</tr>';
                     }
+                    $output .= '<tr><td colspan="5"><b>Total SPK : '.$value.'</b></td></tr>';
                 }
             }
         }

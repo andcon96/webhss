@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\BonusBarang;
 use App\Models\Master\Customer;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
@@ -11,6 +12,7 @@ use App\Models\Master\Rute;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
+use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
 use App\Services\CreateTempTable;
@@ -75,14 +77,17 @@ class SuratJalanController extends Controller
             $sjmstr = new SuratJalan();
             $sjmstr->sj_so_mstr_id = $request->soid;
             $sjmstr->sj_nbr = $getSJ;
-            $sjmstr->sj_eff_date = Carbon::now()->toDateString();
+            // $sjmstr->sj_eff_date = Carbon::now()->toDateString();
+            $sjmstr->sj_eff_date = $request->duedate;
             $sjmstr->sj_remark = $request->remark;
             $sjmstr->sj_status = "Open";
+            // $sjmstr->sj_status = "Selesai";
             $sjmstr->sj_truck_id = $request->truck;
             $sjmstr->sj_jmlh_trip = $request->trip;
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_default_sangu_type = $request->defaultpriceid;
+            $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();
 
             $id = $sjmstr->id;
@@ -115,6 +120,11 @@ class SuratJalanController extends Controller
             $prefix->prefix_sj_rn = substr($getSJ,2,6);
             $prefix->save();
 
+            // $newdata = new SJHistTrip();
+            // $newdata->sjh_sj_mstr_id = $id;
+            // $newdata->sjh_truck = $request->truck;
+            // $newdata->save();
+
             DB::commit();
             alert()->success('Success', 'Surat Jalan : '.$getSJ.' berhasil dibuat')->persistent('Dismiss');
             return back();
@@ -143,6 +153,7 @@ class SuratJalanController extends Controller
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
             $sjmstr->sj_jmlh_trip = $request->trip;
+            $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();
             
             foreach($request->iddetail as $key => $datas){
@@ -245,17 +256,22 @@ class SuratJalanController extends Controller
         if($data->count() > 0){
             $output = '';
             foreach($data as $datas){
-                $qtyopen = $datas->sod_qty_ord - $datas->sod_qty_ship;
+                $qtysisa = $datas->sod_qty_ord - $datas->sod_qty_ship;
+                if((int)$qtysisa > 25000){
+                    $qtyopen = 25000;
+                }else{
+                    $qtyopen = $datas->sod_qty_ord - $datas->sod_qty_ship;
+                }
 
                 $qtyopen <= 0 ? $status = 'disabled' : $status = '';
                 
                 $output .= '<tr>';
-                $output .= '<td>'.$datas->sod_line.'</td>';
-                $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
-                $output .= '<td>'.$datas->getItem->item_um.'</td>';
-                $output .= '<td>'.(int)$datas->sod_qty_ord.'</td>';
-                $output .= '<td>'.$qtyopen.'</td>';
-                $output .= '<td>
+                $output .= '<td data-label="Line">'.$datas->sod_line.'</td>';
+                $output .= '<td data-label="Item">'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
+                $output .= '<td data-label="UM">'.$datas->getItem->item_um.'</td>';
+                $output .= '<td data-label="Qty Ord">'.(int)$datas->sod_qty_ord.'</td>';
+                $output .= '<td data-label="Qty Open">'.$qtysisa.'</td>';
+                $output .= '<td data-label="Qty SJ">
                             <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
                                     value="'.$qtyopen.'" required class="form-control qtysj" '.$status.'>
                             <input type="hidden" '.$status.' name="line[]" value="'.$datas->sod_line.'">
@@ -286,7 +302,8 @@ class SuratJalanController extends Controller
         $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getShipFrom','getShipTo')->findOrFail($request->id);
         $item = Item::get();
         $cust = Customer::get();
-        $truck = Truck::with('getUserDriver','getUserPengurus')->get();
+        $truck = Truck::with('getUserDriver','getUserPengurus','getTipe')->get();
+        // $bonus = BonusBarang::with('getBarang')->get();
         
         return view('transaksi.salesorder.suratjalan.create',compact('data','item','cust','truck'));
     }

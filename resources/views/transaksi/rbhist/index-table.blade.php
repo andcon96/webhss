@@ -15,10 +15,14 @@
             <tr>
                 <td data-label="Truck">{{$datas->getTruck->truck_no_polis ?? ''}}</td>
                 <td data-label="Tanggal Lapor">{{$datas->rb_eff_date}}</td>
-                <td data-label="Nominal">{{number_format($datas->rb_nominal,2)}}</td>
+                <td data-label="Nominal">
+                    {{number_format($datas->getDetail->sum('rbd_nominal'),2)}}
+                </td>
                 <td data-label="Catatan">{{$datas->rb_remark}}</td>
                 <td data-label="Status">{{$datas->rb_is_active == 1 ? 'Active' : 'Deleted'}}</td>
-                <td>
+                <td class="row ml-1">
+                    <a href="{{route('rbhist.edit', $datas->id)}}"><i class="fas fa-edit"></i></a>
+
                     @if($datas->rb_is_active == 1)
                     <form action="{{route('rbhist.destroy',$datas->id)}}" method="POST" id="submit">
                         @csrf

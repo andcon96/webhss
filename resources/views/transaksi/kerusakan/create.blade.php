@@ -14,26 +14,45 @@
     @method('POST')
     <div class="row">
         <div class="form-group row col-md-12">
-            <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Truck</label>
+            <label for="jenis" class="col-md-2 col-form-label text-md-right">Jenis</label>
             <div class="col-md-3">  
+                <select id="jenis" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="jenis" data-live-search="true" required autofocus>';
+                    <option value = "" selected disabled> -- Select Jenis -- </option>
+                    <option value = "truck">Truck</option>
+                    <option value = "gandengan">Gandengan</option>
+                </select>
+            </div>
+            <label for="truckdriver" id="labeltruck" class="col-md-2 col-form-label text-md-right" style="display:none">Truck</label>
+            <div class="col-md-3" id="divtruck" style="display:none">  
                 <select id="truck" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="truck" data-live-search="true" required autofocus>';
-                    <option value = ""> -- Select Data -- </option>
+                    <option value = "" selected disabled> -- Select Data -- </option>
+                    @foreach($truck as $truck2)
+                        <option value="{{$truck2->id}}">{{$truck2->truck_no_polis}}</option>
+                    @endforeach
+                </select>
+                
+            </div>
+                        
+            <label for="gandengan" id="labelgandengan" class="col-md-2 col-form-label text-md-right" style="display:none">Gandengan</label>
+            <div class="col-md-3" id="divgandengan" style="display:none">  
+                
+                <select id="gandengan" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="gandengan" data-live-search="true" required autofocus>';
+                    <option value = "" selected disabled> -- Select Data -- </option>
                     @foreach($truck as $truck2)
                         <option value="{{$truck2->id}}">{{$truck2->truck_no_polis}}</option>
                     @endforeach
                 </select>
             </div>
-            <label for="tgllapor" class="col-md-2 col-form-label text-md-right">Tanggal Lapor</label>
-            <div class="col-md-3">
-                <input id="tgllapor" type="text" class="form-control" name="tgllapor" value="" autocomplete="off" maxlength="24" required autofocus>
-            </div>
-            
         </div>
         <div class="form-group row col-md-12">
             
             <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Kilometer</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="km" required>
+            </div>
+            <label for="tgllapor" class="col-md-2 col-form-label text-md-right">Tanggal Lapor</label>
+            <div class="col-md-3">
+                <input id="tgllapor" type="text" class="form-control" name="tgllapor" value="" autocomplete="off" maxlength="24" required autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -150,6 +169,21 @@
         if(colCount == 2){
           // Row table kosong. sisa header & footer
           counter = 1;
+        }
+    });
+    $(document).on('change','#jenis',function(){
+        var jenisval = document.getElementById('jenis').value;
+        if(jenisval == 'truck'){
+            document.getElementById('labeltruck').style.display = '';
+            document.getElementById('divtruck').style.display = '';
+            document.getElementById('labelgandengan').style.display = 'none';
+            document.getElementById('divgandengan').style.display = 'none';
+        }
+        else if(jenisval == 'gandengan'){
+            document.getElementById('labelgandengan').style.display = '';
+            document.getElementById('divgandengan').style.display = '';
+            document.getElementById('labeltruck').style.display = 'none';
+            document.getElementById('divtruck').style.display = 'none';
         }
     });
 </script>

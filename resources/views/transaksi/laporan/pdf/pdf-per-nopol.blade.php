@@ -78,7 +78,7 @@
             </tr>
             <tr>
                 <th colspan="3" class="left-border">Nama</th>
-                <th colspan="7" class="right-border">: &nbsp; Andrew</th>
+                <th colspan="7" class="right-border">: &nbsp; {{ $driver->driver_name }}</th>
             </tr>
             <tr>
                 <th colspan="3" class="left-border">No. Polis</th>
@@ -113,21 +113,33 @@
             {{ $no = 1 }}
             {{ $totalrit = 0 }}
             @foreach ($data as $keys => $datas)
+                {{ $bonus = 0 }}
+                {{-- Cek Tipe Loosing ato Container --}}
+                @if($datas->getRuteHistory->history_ongkos == 0)
+                    @if($datas->getBonusBarang)
+                    {{ $bonus = $datas->getBonusBarang->bb_price * floor($datas->getDetail->sum('sjd_qty_conf') / 1000)  }}
+                    @endif
+                @else
+                    {{ $bonus = $datas->getRuteHistory->history_ongkos }} 
+                @endif
+
                 <tr>
                     <td class="middle">{{ $no }}</td>
-                    <td>{{ $datas->getDetail[0]->sjd_part }}</td>
+                    <td>{{ $datas->getSOMaster->getCOMaster->getBarang->barang_deskripsi ?? '' }}</td>
                     <td>{{ $datas->sj_eff_date }}</td>
-                    <td></td>
+                    <td>{{ $datas->getSOMaster->getCOMaster->co_kapal ?? ''}}</td>
                     <td>{{ $datas->getSOMaster->getShipTo->cs_shipto_name }}</td>
                     <td>{{ $datas->getSOMaster->getCOMaster->getCustomer->cust_desc ?? '' }}</td>
                     <td class="middle">{{ $datas->sj_jmlh_trip }}</td>
                     <td class="angka">{{ number_format($datas->getRuteHistory->history_sangu, 0) }} </td>
-                    <td class="angka">{{ number_format($datas->getRuteHistory->history_ongkos, 0) }} </td>
                     <td class="angka">
-                        {{ number_format(($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip, 0) }}
+                        {{number_format($bonus,0)}}
+                    </td>
+                    <td class="angka">
+                        {{ number_format(($datas->getRuteHistory->history_sangu + $bonus) * $datas->sj_jmlh_trip, 0) }}
                     </td>
                 </tr>
-                {{ $totaldefault += ($datas->getRuteHistory->history_sangu + $datas->getRuteHistory->history_ongkos) * $datas->sj_jmlh_trip }}
+                {{ $totaldefault += ($datas->getRuteHistory->history_sangu + $bonus) * $datas->sj_jmlh_trip }}
                 {{ $total += $datas->sj_tot_sangu }}
                 {{ $no++ }}
                 {{ $totalrit += $datas->sj_jmlh_trip }}
@@ -190,22 +202,23 @@
                 <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $bonsopir, 0) }}</b></td>
             </tr>
             <tr>
+                @php($totalcicilan = $histcicilan->sum('hc_nominal'))
                 <td colspan="6">Cicilan</td>
                 <td class="middle">:</td>
                 <td colspan="2"></td>
-                <td style="text-align:right"><b>{{ number_format($cicilan, 0) }}</b></td>
+                <td style="text-align:right"><b>{{ number_format($totalcicilan, 0) }}</b></td>
             </tr>
             <tr>
                 <td colspan="6">Tabungan</td>
                 <td class="middle">:</td>
                 <td colspan="2"></td>
-                <td style="text-align:right"><b>{{ number_format($tabungan, 0) }}</b></td>
+                <td style="text-align:right"></td>
             </tr>
             <tr>
                 <td colspan="6">Uang Diterima Supir</td>
                 <td class="middle">:</td>
                 <td colspan="2"></td>
-                <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $cicilan + $tabungan, 0) }}</b></td>
+                <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $totalcicilan, 0) }}</b></td>
             </tr>
             <tr>
                 <td colspan="5" class="middle">
