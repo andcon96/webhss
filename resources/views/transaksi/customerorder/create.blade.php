@@ -34,6 +34,21 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="barang" class="col-md-2 col-form-label text-md-right">Barang</label>
+            <div class="col-md-3">
+                <select name="barang" id="barang" class="form-control">
+                    <option value="">None</option>
+                    @foreach ($listbarang as $barang)
+                        <option value="{{$barang->id}}">{{$barang->barang_deskripsi}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <label for="kapal" class="col-md-3 col-form-label text-md-right">Kapal</label>
+            <div class="col-md-3">
+                <input type="text" name="kapal" class="form-control">
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
                 <input type="text" name="remark" class="form-control">
@@ -61,7 +76,7 @@
 
 @section('scripts')
 <script>
-    $('#customer, #type, #shipto').select2({
+    $('#customer, #type, #shipto, #barang').select2({
         width: '100%'
     });
     $("#customer").select2('open');

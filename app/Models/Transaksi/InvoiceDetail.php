@@ -11,4 +11,11 @@ class InvoiceDetail extends Model
 
     protected $table = 'invoice_detail';
 
+    protected $fillable = ['id'];
+
+
+    public function getMaster()
+    {
+        return $this->belongsTo(InvoiceMaster::class, 'id_im_mstr_id', 'id');
+    }
 }

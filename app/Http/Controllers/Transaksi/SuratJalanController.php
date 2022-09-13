@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\BonusBarang;
 use App\Models\Master\Customer;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
@@ -301,7 +302,8 @@ class SuratJalanController extends Controller
         $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getShipFrom','getShipTo')->findOrFail($request->id);
         $item = Item::get();
         $cust = Customer::get();
-        $truck = Truck::with('getUserDriver','getUserPengurus')->get();
+        $truck = Truck::with('getUserDriver','getUserPengurus','getTipe')->get();
+        // $bonus = BonusBarang::with('getBarang')->get();
         
         return view('transaksi.salesorder.suratjalan.create',compact('data','item','cust','truck'));
     }

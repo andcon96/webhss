@@ -127,6 +127,19 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'IV01');
         });
 
+        // Cicilan
+        Gate::define('access_cicilan_side', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'CI');
+        });
+
+        Gate::define('access_cicilan', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'CI01');
+        });
+
+        Gate::define('access_bayar_cicilan', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'CI02');
+        });
+
         //=============================
         // Settings
         //=============================
@@ -148,12 +161,14 @@ class AuthServiceProvider extends ServiceProvider
 
         //Customer Maintenance
         Gate::define('access_custmt', function($user){
-            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT04');
+            // return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT04');
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MQ01');
         });
 
         //Ship To Maintenance
         Gate::define('access_stmt', function($user){
-            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT05');
+            // return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT05');
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MQ02');
         });
 
         //Ship From maintenance
@@ -163,7 +178,8 @@ class AuthServiceProvider extends ServiceProvider
 
         //Item Maintenance
         Gate::define('access_itemmt', function($user){
-            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT07');
+            // return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT07');
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MQ03');
         });
 
         //Kerusakan Maintenance
@@ -193,7 +209,8 @@ class AuthServiceProvider extends ServiceProvider
 
         //WSA Qxtend Maintenance
         Gate::define('access_wqmt', function($user){
-            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT13');
+            // return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT13');
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MQ04');
         });
 
         //rute maintenance
@@ -211,12 +228,35 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT16');
         });
 
+        //Barang
+        Gate::define('access_barang', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT17');
+        });
+
+        //Bonus Barang
+        Gate::define('access_bonus_barang', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT18');
+        });
+
+        //Driver
+        Gate::define('access_driver', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT19');
+        });
+
+        //Driver Nopol
+        Gate::define('access_driver_nopol', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT20');
+        });
 
         //=============================
         // Menu Master
         //=============================
         Gate::define('access_masters', function ($user) {
             return $user->getRole->role === Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT');
+        });
+
+        Gate::define('access_masters_qad', function ($user){
+            return $user->getRole->role === Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MQ');
         });
     }
 }

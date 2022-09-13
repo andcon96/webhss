@@ -1,5 +1,5 @@
-<div class="table-responsive col-lg-12 col-md-12 mt-3">
-    <table class="table table-bordered mini-table" id="dataTable" width="100%" cellspacing="0">
+<div class="table-responsive col-lg-12 col-md-12 mt-3" style="overflow-x:auto;">
+    <table class="table table-bordered mini-table" id="dataTable">
         <thead>
             <tr>
                 <th>Nomor SO</th>
@@ -10,6 +10,7 @@
                 <th>Ship-To</th>
                 <th>Due Date</th>
                 <th>Status</th>
+                <th>Remarks CO</th>
                 <th width="13%">Action</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td data-label="SO SHIP TO">{{$datas->so_ship_to}} -- {{$datas->getShipTo->cs_shipto_name}}</td>
                 <td data-label="SO DUE DATE">{{$datas->so_due_date}}</td>
                 <td data-label="SO STATUS">{{$datas->so_status}}</td>
+                <td data-label="CO REMARKS">{{$datas->getCOMaster->co_remark}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 

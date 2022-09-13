@@ -7,6 +7,8 @@
                 <th>Customer</th>
                 <th>Ship To</th>
                 <th width="15%">Status</th>
+                <th>Remarks CO</th>
+                <th>Remarks SO</th>
                 <th width="15%">Action</th>
             </tr>
         </thead>
@@ -17,7 +19,9 @@
                 <td data-label="SJ NUMBER">{{$datas->sj_nbr}}</td>
                 <td data-label="CUSTOMER">{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
                 <td data-label="SHIP TO">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name ?? ''}}</td>
-                <td data-label="CO STATUS">{{$datas->sj_status}}</td>
+                <td data-label="SJ STATUS">{{$datas->sj_status}}</td>
+                <td data-label="CO REMARKS">{{$datas->getSOMaster->getCOMaster->co_remark}}</td>
+                <td data-label="SO REMARKS">{{$datas->getSOMaster->so_remark}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}"
                         data-sonbr="{{$datas->getSOMaster->so_nbr}}" data-sjnbr="{{$datas->sj_nbr}}"
@@ -31,7 +35,7 @@
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
                         data-pengurus="{{$datas->getTruck->getUserPengurus->name ?? ''}}"
                         data-toggle='modal' data-target="#myModal"><i
-                        class="fas fa-eye"></i></button>
+                        class="fas fa-eye"></i></a>
                         
                     @if($datas->sj_status == 'Open')
                         <a href="{{route('suratjalan.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>

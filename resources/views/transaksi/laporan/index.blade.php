@@ -69,7 +69,7 @@
             <button class="btn bt-action newUser" name="aksi" value="1" style="margin-left: 10px; width: 40px !important">
                 <i class="fas fa-file-excel"></i>
             </button>
-            <button class="btn bt-action newUser" name="aksi" formtarget="_blank" value="2" style="margin-left: 10px; width: 40px !important">
+            <button class="btn bt-action newUser" id="btnpdf" name="aksi" formtarget="_blank" value="2" style="margin-left: 10px; width: 40px !important">
                 <i class="fas fa-file-pdf"></i>
             </button>
         </div>
@@ -110,21 +110,26 @@
             
             $('#domain,#tipetruck').prop('disabled',true);
             $('#domain,#tipetruck').prop('required',false);
+            $('#btnpdf').prop('disabled',false);
         }else if(val == 5){
             $('#truck,#domain').prop('disabled',true);
             $('#truck,#domain').prop('required',false);
             
             $('#tipetruck').prop('disabled',false);
             $('#tipetruck').prop('required',true);
+
+            $('#btnpdf').prop('disabled',true);
         }else if(val == 6){
             $('#truck,#domain,#tipetruck').prop('disabled',true);
             $('#truck,#domain,#tipetruck').prop('required',false);
+            $('#btnpdf').prop('disabled',true);
         }else{
             $('#truck,#tipetruck').prop('disabled',true);
             $('#truck,#tipetruck').prop('required',false);
 
             $('#domain').prop('disabled',false);
             $('#domain').prop('required',true);
+            $('#btnpdf').prop('disabled',false);
         }
     });
 

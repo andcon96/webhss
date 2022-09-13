@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\Barang;
 use App\Models\Master\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,11 @@ class CustomerOrderMstr extends Model
     public function getDetail()
     {
         return $this->hasMany(CustomerOrderDetail::class,'cod_co_mstr_id');
+    }
+
+    public function getBarang()
+    {
+        return $this->hasOne(Barang::class,'id','co_barang_id');
     }
     
     public function getCustomer()

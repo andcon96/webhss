@@ -98,25 +98,26 @@ class AccessRoleMenuController extends Controller
         $cbMT01 = $request->input('cbMT01');
         $cbMT02 = $request->input('cbMT02');
         $cbMT03 = $request->input('cbMT03');
-        $cbMT04 = $request->input('cbMT04');
-        $cbMT05 = $request->input('cbMT05');
         $cbMT06 = $request->input('cbMT06');
-        $cbMT07 = $request->input('cbMT07');
         $cbMT08 = $request->input('cbMT08');
         $cbMT09 = $request->input('cbMT09');
         $cbMT10 = $request->input('cbMT10');
         $cbMT11 = $request->input('cbMT11');
         $cbMT12 = $request->input('cbMT12');
-        $cbMT13 = $request->input('cbMT13');
         $cbMT14 = $request->input('cbMT14');
         $cbMT15 = $request->input('cbMT15');
         $cbMT16 = $request->input('cbMT16');
 
+        $cbMQ01 = $request->input('cbMQ01');
+        $cbMQ02 = $request->input('cbMQ02');
+        $cbMQ03 = $request->input('cbMQ03');
+        $cbMQ04 = $request->input('cbMQ04');
+
         $data = $cbSOMT . $cbCOMT . $cbSJMT . $cbTripBrowse . $cbTripLapor . 
                 $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya.
-                $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMT04.
-                $cbMT05 . $cbMT06 . $cbMT07 . $cbMT08 . $cbMT09.
-                $cbMT10 . $cbMT11 . $cbMT12 . $cbMT13 . $cbMT14.
+                $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMQ01.
+                $cbMQ02 . $cbMT06 . $cbMQ03 . $cbMT08 . $cbMT09.
+                $cbMT10 . $cbMT11 . $cbMT12 . $cbMQ04 . $cbMT14.
                 $cbMT15 . $cbMT16 . $cbInv; 
 
         DB::beginTransaction();

@@ -16,7 +16,7 @@ class ReportByTipeTruck implements FromView, WithColumnWidths, ShouldAutoSize
     {
         $this->datefrom      = $datefrom;
         $this->dateto        = $dateto;
-        $this->tipetruck         = $tipetruck;
+        $this->tipetruck     = $tipetruck;
     }
 
     public function view() : view
@@ -40,8 +40,6 @@ class ReportByTipeTruck implements FromView, WithColumnWidths, ShouldAutoSize
                             ->orderBy('sj_truck_id','asc')
                             ->orderBy('sj_nbr','asc')
                         ->get();
-
-        // dd($datefrom,$dateto,$tipetruck,$truckid,$suratjalan,$tipetruck);
 
         return view('transaksi.laporan.excel.report-by-tipetruck',
                         compact('suratjalan','datefrom','dateto','tipetruck'));

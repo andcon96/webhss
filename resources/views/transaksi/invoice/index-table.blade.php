@@ -16,9 +16,17 @@
                     <td data-label="SO Number">{{ $datas->getSalesOrder->so_nbr ?? '' }}</td>
                     <td data-label="Date">{{ $datas->im_date }}</td>
                     <td data-label="Total">
-                        {{ number_format($datas->getDetail->sum('id_total'))}}
+                        {{ number_format($datas->getDetail->sum('id_total'),2)}}
                     </td>
-                    <td>
+                    <td class="row">
+                        <a href="" class="viewModal" data-id="{{$datas->id}}"
+                            data-invnbr="{{$datas->im_nbr}}"
+                            data-detail="{{$datas->getDetail}}"
+                            data-toggle='modal' data-target="#myModal"><i
+                            class="fas fa-eye"></i></a>
+
+                        <a href="{{ route('invoicemt.edit', $datas->id) }}"><i
+                            class="fa fa-edit ml-1 mr-2"></i></a>
                         @if ($datas->rb_is_active == 1)
                             <form action="{{ route('invoicemt.destroy', $datas->id) }}" method="POST" id="submit">
                                 @csrf
@@ -30,6 +38,11 @@
                         @endif
                         <a href="{{ route('printInvoice', $datas->id) }}" target="_blank" ><i
                                 class="fa fa-print"></i></a>
+
+                        <a href="{{ route('printDetailInvoice', $datas->id) }}" class="ml-2" target="_blank" >
+                            <i class="fa fa-book"></i></a>
+                        
+                                
                     </td>
                 </tr>
             @empty

@@ -237,7 +237,7 @@
           </div>
           <div class="form-group">
             <h5>
-              <center><strong>Settings</strong></center>
+              <center><strong>Setting Web</strong></center>
               </h5>
               <hr>
           </div>
@@ -270,37 +270,10 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Customer Maintenance') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbMT04">
-                <input type="checkbox" id="cbMT04" name="cbMT04" value="MT04" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Ship To Maintenance') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbMT05">
-                <input type="checkbox" id="cbMT05" name="cbMT05" value="MT05" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Ship From Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbMT06">
                 <input type="checkbox" id="cbMT06" name="cbMT06" value="MT06" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Item Maintenance') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbMT07">
-                <input type="checkbox" id="cbMT07" name="cbMT07" value="MT07" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -351,15 +324,6 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('WSA Qxtend Maintenance') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbMT13">
-                <input type="checkbox" id="cbMT13" name="cbMT13" value="MT13" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Rute Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbMT14">
@@ -382,6 +346,49 @@
             <div class="col-md-6">
               <label class="switch" for="cbMT16">
                 <input type="checkbox" id="cbMT16" name="cbMT16" value="MT16" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <h6>
+              <center><strong>Setting QAD</strong></center>
+            </h6>
+            <hr>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Customer Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMQ01">
+                <input type="checkbox" id="cbMQ01" name="cbMQ01" value="MQ01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Ship To Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMQ02">
+                <input type="checkbox" id="cbMQ02" name="cbMQ02" value="MQ02" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Item Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMQ03">
+                <input type="checkbox" id="cbMQ03" name="cbMQ03" value="MQ03" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('WSA Qxtend Maintenance') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMQ04">
+                <input type="checkbox" id="cbMQ04" name="cbMQ04" value="MQ04" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -425,16 +432,16 @@
         document.getElementById("cbMT01").checked = true;  
         document.getElementById("cbMT02").checked = true;  
         document.getElementById("cbMT03").checked = true;  
-        document.getElementById("cbMT04").checked = true;  
-        document.getElementById("cbMT05").checked = true;  
+        document.getElementById("cbMQ01").checked = true;  
+        document.getElementById("cbMQ02").checked = true;  
         document.getElementById("cbMT06").checked = true;  
-        document.getElementById("cbMT07").checked = true;  
+        document.getElementById("cbMQ03").checked = true;  
         document.getElementById("cbMT08").checked = true;  
         document.getElementById("cbMT09").checked = true;  
         document.getElementById("cbMT10").checked = true;  
         document.getElementById("cbMT11").checked = true;  
         document.getElementById("cbMT12").checked = true;  
-        document.getElementById("cbMT13").checked = true;  
+        document.getElementById("cbMQ04").checked = true;  
         document.getElementById("cbMT14").checked = true;  
         document.getElementById("cbMT15").checked = true;  
         document.getElementById("cbMT16").checked = true;  
@@ -454,16 +461,16 @@
         document.getElementById("cbMT01").checked = false;  
         document.getElementById("cbMT02").checked = false;  
         document.getElementById("cbMT03").checked = false;  
-        document.getElementById("cbMT04").checked = false;  
-        document.getElementById("cbMT05").checked = false;  
+        document.getElementById("cbMQ01").checked = false;  
+        document.getElementById("cbMQ02").checked = false;  
         document.getElementById("cbMT06").checked = false;  
-        document.getElementById("cbMT07").checked = false;  
+        document.getElementById("cbMQ03").checked = false;  
         document.getElementById("cbMT08").checked = false;  
         document.getElementById("cbMT09").checked = false;  
         document.getElementById("cbMT10").checked = false;  
         document.getElementById("cbMT11").checked = false;  
         document.getElementById("cbMT12").checked = false;  
-        document.getElementById("cbMT13").checked = false;  
+        document.getElementById("cbMQ04").checked = false;  
         document.getElementById("cbMT14").checked = false;  
         document.getElementById("cbMT15").checked = false;  
         document.getElementById("cbMT16").checked = false;  
@@ -570,25 +577,10 @@
             }else{
               document.getElementById("cbMT03").checked = false;
             }
-            if(totmenu.search("MT04") >= 0){
-              document.getElementById("cbMT04").checked = true;  
-            }else{
-              document.getElementById("cbMT04").checked = false;
-            }
-            if(totmenu.search("MT05") >= 0){
-              document.getElementById("cbMT05").checked = true;  
-            }else{
-              document.getElementById("cbMT05").checked = false;
-            }
             if(totmenu.search("MT06") >= 0){
               document.getElementById("cbMT06").checked = true;  
             }else{
               document.getElementById("cbMT06").checked = false;
-            }
-            if(totmenu.search("MT07") >= 0){
-              document.getElementById("cbMT07").checked = true;  
-            }else{
-              document.getElementById("cbMT07").checked = false;
             }
             if(totmenu.search("MT08") >= 0){
               document.getElementById("cbMT08").checked = true;  
@@ -615,11 +607,6 @@
             }else{
               document.getElementById("cbMT12").checked = false;
             }
-            if(totmenu.search("MT13") >= 0){
-              document.getElementById("cbMT13").checked = true;  
-            }else{
-              document.getElementById("cbMT13").checked = false;
-            }
             if(totmenu.search("MT14") >= 0){
               document.getElementById("cbMT14").checked = true;  
             }else{
@@ -634,6 +621,28 @@
               document.getElementById("cbMT16").checked = true;  
             }else{
               document.getElementById("cbMT16").checked = false;
+            }
+
+            
+            if(totmenu.search("MQ01") >= 0){
+              document.getElementById("cbMQ01").checked = true;  
+            }else{
+              document.getElementById("cbMQ01").checked = false;
+            }
+            if(totmenu.search("MQ02") >= 0){
+              document.getElementById("cbMQ02").checked = true;  
+            }else{
+              document.getElementById("cbMQ02").checked = false;
+            }
+            if(totmenu.search("MQ03") >= 0){
+              document.getElementById("cbMQ03").checked = true;  
+            }else{
+              document.getElementById("cbMQ03").checked = false;
+            }
+            if(totmenu.search("MQ04") >= 0){
+              document.getElementById("cbMQ04").checked = true;  
+            }else{
+              document.getElementById("cbMQ04").checked = false;
             }
           }
       });
