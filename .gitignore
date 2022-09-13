@@ -16,7 +16,7 @@ public_html/storage
 public_html/hot
 
 # Custom File
-/resources/views/auth/login.blade.php
+resources/views/auth/login.blade.php
 
 storage/*.key
 .env
