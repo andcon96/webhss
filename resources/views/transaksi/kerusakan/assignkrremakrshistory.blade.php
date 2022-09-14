@@ -17,11 +17,19 @@
         <div class="col-md-4 col-lg-3">
             <input id="s_krnbr" type="text" class="form-control" name="s_krnbr" value="{{ $data->kr_nbr }}" autofocus autocomplete="off" readonly>
         </div>
+        @if(!empty($data->getTruck))
         <label for="s_truck" class="col-md-2 col-form-label text-md-right">{{ __('Truck') }}</label>
         <div class="col-md-4 col-lg-3">
             
             <input id="s_truck" type="text" class="form-control" name="s_truck" value="{{ $data->getTruck->truck_no_polis }}" autofocus autocomplete="off" readonly>
         </div>
+        @elseif(empty($data->getTruck))
+        <label for="s_gandengan" class="col-md-2 col-form-label text-md-right">{{ __('Gandengan') }}</label>
+        <div class="col-md-4 col-lg-3">
+            
+            <input id="s_gandengan" type="text" class="form-control" name="s_gandengan" value="{{ $data->getGandeng->gandeng_code }}" autofocus autocomplete="off" readonly>
+        </div>
+        @endif
         
     </div>
     

@@ -141,6 +141,15 @@
       <table>
         <tbody>
           <tr>
+            @if(empty($nopol))
+            <td style="width: 15%; background-color: #aaa;" >
+              Gandengan.
+            </td>
+            <td style="width: 20%;">
+              {{$gandengan}}
+            </td>
+          </tr>
+            @elseif(!empty($nopol))
             <td style="width: 15%; background-color: #aaa;" >
               Nomor Polis.
             </td>
@@ -148,6 +157,7 @@
               {{$nopol}}
             </td>
           </tr>
+          @endif
           @for($i=0;$i<count($kerusakan);$i++)
           <tr>
             @if($i == 0)
@@ -168,8 +178,8 @@
     </div>
     <div style="text-align: center;">
       <p>Approve or Reject this Request using the buttons below. </p>
-      <a href="{{'http://45.196.31.99:22003/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param3}}" class="button">Approve</a>
-      <a href="{{'http://45.196.31.99:22003/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param4}}" class="button2">Reject</a>
+      <a href="{{'http://45.196.31.99:22003/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param3.'/'.$param5}}" class="button">Approve</a>
+      <a href="{{'http://45.196.31.99:22003/api/apiapprovaltruck/'.$wonbr.'/'.$param1.'/'.$param2.'/'.$param4.'/'.$param5}}" class="button2">Reject</a>
     </div>
 
       <!-- URL ganti ketika dipasang -->

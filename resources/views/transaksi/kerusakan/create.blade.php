@@ -24,7 +24,7 @@
             </div>
             <label for="truckdriver" id="labeltruck" class="col-md-2 col-form-label text-md-right" style="display:none">Truck</label>
             <div class="col-md-3" id="divtruck" style="display:none">  
-                <select id="truck" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="truck" data-live-search="true" required autofocus>';
+                <select id="truck" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="truck" data-live-search="true" autofocus>;
                     <option value = "" selected disabled> -- Select Data -- </option>
                     @foreach($truck as $truck2)
                         <option value="{{$truck2->id}}">{{$truck2->truck_no_polis}}</option>
@@ -36,10 +36,10 @@
             <label for="gandengan" id="labelgandengan" class="col-md-2 col-form-label text-md-right" style="display:none">Gandengan</label>
             <div class="col-md-3" id="divgandengan" style="display:none">  
                 
-                <select id="gandengan" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="gandengan" data-live-search="true" required autofocus>';
+                <select id="gandengan" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="gandengan" data-live-search="true" autofocus>;
                     <option value = "" selected disabled> -- Select Data -- </option>
-                    @foreach($truck as $truck2)
-                        <option value="{{$truck2->id}}">{{$truck2->truck_no_polis}}</option>
+                    @foreach($gandeng as $gandeng1)
+                        <option value="{{$gandeng1->id}}">{{$gandeng1->gandeng_code}}</option>
                     @endforeach
                 </select>
             </div>
@@ -186,5 +186,17 @@
             document.getElementById('divtruck').style.display = 'none';
         }
     });
+
+    $(document).on('change','#jenis',function(){
+        var thisval = $(this).val();
+        if(thisval == 'truck'){
+            document.getElementById('truck').required = true;
+            document.getElementById('gandengan').required = false;
+        }
+        else if(thisval == 'gandengan'){
+            document.getElementById('truck').required = false;
+            document.getElementById('gandengan').required = true;
+        }
+    })
 </script>
 @endsection

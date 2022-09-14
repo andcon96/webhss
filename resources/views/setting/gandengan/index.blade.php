@@ -18,8 +18,8 @@
 
 <form action="{{route('truckmaint.index')}}" method="get">
     <div class="form-group row  col-md-12 mt-3">
-        <label for="s_gandengan" class="col-md-2 col-form-label text-md-right">{{ __('Gandengan') }}</label>
-        <div class="col-md-2">
+        <label for="s_gandengan" class="col-md-4 col-form-label text-md-right">{{ __('Gandengan') }}</label>
+        <div class="col-md-3">
             <select id="s_gandengan" class="form-control" name="s_gandengan" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
                 @foreach($gandengmstr as $gandengan)
@@ -113,7 +113,7 @@
                                 <select id="c_domain" class="form-control domain" name="c_domain" autofocus required autocomplete="off">
                                     
                                     @foreach($domain as $dm)
-                                    <option value="{{$dm->id}}">{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
+                                    <option value="{{$dm->domain_code}}">{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
                                     @endforeach
                                 </select>
                                 
@@ -205,7 +205,7 @@
 
 <script type="text/javascript">
     
-    $('.domain, .driver, #s_truck, .user, #s_tipe').select2({
+    $('.domain, .driver, #s_gandengan, .user, #s_tipe').select2({
         width: '100%'
     });
 

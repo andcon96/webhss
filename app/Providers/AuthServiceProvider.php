@@ -247,6 +247,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('access_driver_nopol', function($user){
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT20');
         });
+        //Driver Nopol
+        Gate::define('access_gandengan', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT21');
+        });
 
         //=============================
         // Menu Master

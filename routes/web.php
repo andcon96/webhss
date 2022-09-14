@@ -40,6 +40,7 @@ use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Http\Controllers\Transaksi\CicilanHistoryController;
+use App\Models\Master\GandenganMstr;
 use App\Models\Transaksi\CicilanHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -360,6 +361,20 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('gandengan', GandenganMTController::class);
         });
         //================================
+
+         // Load Excel
+        //================================
+        Route::group(['middleware'=>'can:access_ttmt'], function () {
+            route::get('loadkerusakanexcel', [KerusakanLaporMTController::class, 'loaddataexcel']);       
+         });
+        
+        Route::group(['middleware'=>'can:access_ttmt'], function () {
+            route::get('loadgandengan', [GandenganMTController::class, 'loadgandengan']);       
+         });
+        
+        
+        //================================
+        
         
     });
 });

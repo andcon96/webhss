@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-route::get('apiapprovaltruck/{wonbr}/{rusaknbr}/{nopolnbr}/{status}',[ApprovalRusakTruck::class,'receiveAPI']);
+route::get('apiapprovaltruck/{wonbr}/{rusaknbr}/{nopolnbr}/{status}/{gandengan}',[ApprovalRusakTruck::class,'receiveAPI']);
 route::post('qxoutwo',[ApprovalRusakTruck::class,'qxoutstatus']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

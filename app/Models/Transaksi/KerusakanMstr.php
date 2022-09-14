@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\GandenganMstr;
 use App\Models\Master\KerusakanStrukturDetail;
 use App\Models\Master\Truck;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,10 @@ class KerusakanMstr extends Model
     public function getTruck()
     {
         return $this->hasOne(Truck::class, 'id' ,'kr_truck')->withoutGlobalScopes();
+    }
+    public function getGandeng()
+    {
+        return $this->hasOne(GandenganMstr::class, 'id' ,'kr_gandeng')->withoutGlobalScopes();
     }
     
 

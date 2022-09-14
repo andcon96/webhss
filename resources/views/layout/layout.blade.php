@@ -386,6 +386,12 @@
                     <p>Driver Nopol Master</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{{route('gandengan.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Gandengan Master</p>
+                  </a>
+                </li>
               </ul>
             </li>
             @endcan
