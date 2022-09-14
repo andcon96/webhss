@@ -86,7 +86,7 @@ class CicilanMTController extends Controller
     public function edit(Cicilan $cicilan, $id)
     {
         $cicilan = Cicilan::with(['getDriverNopol.getTruck','getDriverNopol.getDriver','getTotalPaid'])->findOrFail($id);
-        $totalbayar = $cicilan->getTotalPaid->sum('hc_nominal') ?? 0 ; 
+        $totalbayar = $cicilan->getTotalPaidActive->sum('hc_nominal') ?? 0 ; 
         
         return view('transaksi.cicilan.edit',compact('cicilan','totalbayar'));
     }

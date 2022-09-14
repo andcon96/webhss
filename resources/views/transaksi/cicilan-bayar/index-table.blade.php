@@ -21,7 +21,7 @@
                         {{ number_format($datas->cicilan_nominal, 0) }}
                     </td>
                     <td data-label="Nominal Paid">
-                        {{ number_format($datas->getTotalPaid->sum('hc_nominal', 0)) }}
+                        {{ number_format($datas->getTotalPaidActive->sum('hc_nominal', 0)) }}
                     </td>
                     <td data-label="Catatan">{{ $datas->cicilan_remarks }}</td>
                     <td class="row ml-1">

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Barang;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
-use App\Models\Master\Domain;
 use App\Models\Master\Item;
 use App\Models\Master\Prefix;
 use App\Models\Master\ShipFrom;
@@ -15,11 +14,9 @@ use App\Models\Transaksi\CustomerOrderMstr;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Services\CreateTempTable;
-use App\Services\QxtendServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class CustomerOrderController extends Controller
 {

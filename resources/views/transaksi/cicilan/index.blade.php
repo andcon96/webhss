@@ -136,6 +136,7 @@
                                     <th style="width:8%">No.</th>
                                     <th>Tanggal Bayar</th>
                                     <th>Nominal Bayar</th>
+                                    <th>Active</th>
                                     <th style="width:40%">Remark</th>
                                 </tr>
                             </thead>
@@ -208,11 +209,14 @@
             output += '<tr>';
             output += '<td>' + parseInt(index + 1)  + '</td>';
             output += '<td>' + value['hc_eff_date'] + '</td>';
-            output += '<td>' + Number(value['hc_nominal']).toLocaleString('en-US') + '</td>';
+            output += '<td>' + Number(value['hc_nominal']).toLocaleString('en-US') + '</td><td>';
+            output += value['hc_is_active'] == 1 ? 'Active' : 'Not Active' + '</td>';
             output += '<td>' + value['hc_remarks'] + '</td>';
             output += '</tr>';
 
-            total += parseFloat(value['hc_nominal'])
+            if (value['hc_is_active'] == 1){
+                total += parseFloat(value['hc_nominal']);
+            }
         });
 
         $('#bodyview').html('').append(output);

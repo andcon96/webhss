@@ -14,7 +14,7 @@ class CicilanHistoryController extends Controller
 
     public function index()
     {
-        $cicilan = Cicilan::with('getTotalPaid')->where('cicilan_is_active',1)->sortable()->paginate(10);
+        $cicilan = Cicilan::with('getTotalPaidActive')->where('cicilan_is_active',1)->sortable()->paginate(10);
 
         $listtruck = Truck::get();
         $listdriver = Driver::get();
@@ -25,7 +25,7 @@ class CicilanHistoryController extends Controller
     public function edit($id)
     {
         $cicilan = Cicilan::with(['getTotalPaid','getDriverNopol.getTruck','getDriverNopol.getDriver'])->findOrFail($id);
-        $totalbayar = $cicilan->getTotalPaid->sum('hc_nominal');
+        $totalbayar = $cicilan->getTotalPaidActive->sum('hc_nominal');
 
         return view('transaksi.cicilan-bayar.edit',compact('cicilan','totalbayar'));
     }
