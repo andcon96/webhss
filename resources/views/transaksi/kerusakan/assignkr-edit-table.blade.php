@@ -21,10 +21,7 @@
                 <td>
                     <textarea type="text" class="form-control" readonly>{{$datas->krd_note}}</textarea>
                 </td>
-<<<<<<< HEAD
 
-=======
->>>>>>> master
                 {{-- <td style="vertical-align:middle;text-align:center;">  --}}
                     
                     {{-- @if($data->kr_status == 'Done' && count($datas->getStrukturTrans) >0)

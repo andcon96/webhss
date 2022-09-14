@@ -474,13 +474,8 @@
         document.getElementById("cbSJLapor").checked = false;  
         document.getElementById("cbKerusakan").checked = false;
         document.getElementById("cbBiaya").checked = false;  
-<<<<<<< HEAD
         document.getElementById("cbDRInOut").checked = false;
         document.getElementById("cbInvoice").checked = false;  
-=======
-        document.getElementById("cbDRInOut").checked = false; 
-        document.getElementById("cbInvoice").checked = false; 
->>>>>>> master
         document.getElementById("cbRPMT").checked = false;  
         document.getElementById("cbMT01").checked = false;  
         document.getElementById("cbMT02").checked = false;  

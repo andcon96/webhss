@@ -115,15 +115,12 @@ class AccessRoleMenuController extends Controller
 
         $data = $cbSOMT . $cbCOMT . $cbSJMT . $cbTripBrowse . $cbTripLapor . 
                 $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya.
-<<<<<<< HEAD
-                $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMT04.
-                $cbMT05 . $cbMT06 . $cbMT07 . $cbMT08 . $cbMT09.
-                $cbMT10 . $cbMT11 . $cbMT12 . $cbMT13 . $cbMT14.
-=======
                 $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMQ01.
                 $cbMQ02 . $cbMT06 . $cbMQ03 . $cbMT08 . $cbMT09.
                 $cbMT10 . $cbMT11 . $cbMT12 . $cbMQ04 . $cbMT14.
->>>>>>> master
+                $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMQ01.
+                $cbMQ02 . $cbMT06 . $cbMQ03 . $cbMT08 . $cbMT09.
+                $cbMT10 . $cbMT11 . $cbMT12 . $cbMQ04 . $cbMT14.
                 $cbMT15 . $cbMT16 . $cbInv; 
 
         DB::beginTransaction();

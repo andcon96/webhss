@@ -203,10 +203,7 @@ class KerusakanLaporMTController extends Controller
         try {
             $mstr = KerusakanMstr::where('id',$request->idmaster)->first();
             $mstr->kr_km = $request->km;
-<<<<<<< HEAD
-=======
             $mstr->kr_gandeng = $request->gandeng;
->>>>>>> master
             $mstr->save();
             foreach ($request->iddetail as $key => $datas) {
                 $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
