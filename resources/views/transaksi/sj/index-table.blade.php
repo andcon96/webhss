@@ -34,6 +34,7 @@
                         data-truck="{{$datas->getTruck->truck_no_polis}}" data-trip="{{$datas->sj_jmlh_trip}}"
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
                         data-pengurus="{{$datas->getTruck->getUserPengurus->name ?? ''}}"
+                        data-barang="{{$datas->getSOMaster->getCOMaster->getBarang->barang_deskripsi ?? ''}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></a>
                         
