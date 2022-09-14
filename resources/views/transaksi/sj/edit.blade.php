@@ -55,6 +55,12 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="barang" class="col-md-2 col-form-label text-md-right">Barang</label>
+            <div class="col-md-3">
+                <input id="barang" type="text" class="form-control" name="type" value="{{$data->getSOMaster->getCOMaster->getBarang->barang_deskripsi ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             @include('transaksi.sj.edit-table')
         </div>
         <div class="form-group row col-md-12">

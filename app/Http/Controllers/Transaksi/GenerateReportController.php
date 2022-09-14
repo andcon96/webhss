@@ -59,7 +59,7 @@ class GenerateReportController extends Controller
                 } elseif ($report == '6'){
                     // Report by Biaya Tambahan
 
-                    return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto), 'ReportByTipeTruck.xlsx');
+                    return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto), 'ReportBiayaTambahan.xlsx');
                 }
                 break;
             case 2:

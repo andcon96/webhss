@@ -60,13 +60,19 @@
             </div>
         @endif
         <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <label for="barang" class="col-md-2 col-form-label text-md-right">Barang</label>
             <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" autofocus>
+                <input id="barang" type="text" class="form-control" name="barang" value="{{$data->getCOMaster->getBarang->barang_deskripsi ?? ''}}" autocomplete="off" readonly autofocus>
             </div>
             <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->getCOMaster->co_type}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">

@@ -33,6 +33,7 @@ class SalesOrderController extends Controller
         $data = SalesOrderMstr::query()
                               ->with('getDetail',
                                      'getCOMaster.getCustomer',
+                                     'getCOMaster.getBarang',
                                      'getShipFrom',
                                      'getShipTo');
 
@@ -68,7 +69,7 @@ class SalesOrderController extends Controller
         $cust = Customer::get();
         $shipfrom = ShipFrom::where('sf_is_active',1)->get();
         $conbr = CustomerOrderMstr::query()
-                        ->with('getCustomer','getDetail')
+                        ->with('getCustomer','getDetail','getBarang')
                         ->whereRelation('getDetail',function ($q){
                             $q->whereRaw('cod_qty_ord > cod_qty_used');
                         })

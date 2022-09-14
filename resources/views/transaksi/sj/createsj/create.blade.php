@@ -29,6 +29,7 @@
                                 data-shiptoid="{{ $listsos->getShipTo->id }}"
                                 data-type="{{ $listsos->getCOMaster->co_type }}"
                                 data-duedate="{{ $listsos->so_due_date }}"
+                                data-barang="{{$listsos->getCOMaster->getBarang->barang_deskripsi ?? ''}}"
                                 data-conbr="{{ $listsos->getCOMaster->co_nbr }}">{{ $listsos->so_nbr }} --
                                 {{ $listsos->getCOMaster->getCustomer->cust_desc ?? '' }}</option>
                         @endforeach
@@ -72,6 +73,11 @@
                 <div class="col-md-3">
                     <input id="type" type="text" class="form-control" name="type" value=""
                         autocomplete="off" maxlength="24" required readonly>
+                </div>
+                <label for="barang" class="col-md-3 col-form-label text-md-right">Barang</label>
+                <div class="col-md-3">
+                    <input id="barang" type="text" class="form-control" name="barang" value=""
+                        autocomplete="off" readonly>
                 </div>
 
             </div>
@@ -196,6 +202,7 @@
             var shipfromid = $(this).find(':selected').data('shipfromid');
             var shiptoid = $(this).find(':selected').data('shiptoid');
             var conbr = $(this).find(':selected').data('conbr');
+            var barang = $(this).find(':selected').data('barang');
 
             $('#customer').val(cust + ' - ' + custdesc);
             $('#shipfrom').val(shipfrom + ' - ' + shipfromdesc);
@@ -205,6 +212,7 @@
             $('#shipfromid').val(shipfromid);
             $('#shiptoid').val(shiptoid);
             $('#conbr').val(conbr);
+            $('#barang').val(barang);
 
             let url = "{{ route('getDetailSJSO', ':soid') }}"
             url = url.replace(':soid', soid);

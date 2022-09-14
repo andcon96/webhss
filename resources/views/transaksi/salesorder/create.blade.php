@@ -22,7 +22,8 @@
                     <option value="{{$conbrs->id}}" 
                             data-cust="{{$conbrs->co_cust_code}}"
                             data-custdesc="{{$conbrs->getCustomer->cust_desc}}"
-                            data-type="{{$conbrs->co_type}}">{{$conbrs->co_nbr}} -- {{$conbrs->getCustomer->cust_desc ?? ''}}</option>
+                            data-type="{{$conbrs->co_type}}"
+                            data-barang="{{$conbrs->getBarang->barang_deskripsi ?? ''}}">{{$conbrs->co_nbr}} -- {{$conbrs->getCustomer->cust_desc ?? ''}}</option>
                     @endforeach
                 </select>
             </div>
@@ -37,9 +38,9 @@
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="" autocomplete="off" maxlength="24" required readonly>
             </div>
-            <label for="duedate" class="col-md-3 col-form-label text-md-right">Due Date</label>
+            <label for="barang" class="col-md-3 col-form-label text-md-right">Barang</label>
             <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->addDays(1)->toDateString()}}" autocomplete="off" maxlength="24" required autofocus>
+                <input type="text" name="barang" id="barang" class="form-control" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -57,6 +58,12 @@
                 <select name="shipto" id="shipto" class="form-control" required>
                     <option value="">Select Data</option>
                 </select>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->addDays(1)->toDateString()}}" autocomplete="off" maxlength="24" required autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -99,11 +106,13 @@
         var type = $(this).find(':selected').data('type');
         var cust = $(this).find(':selected').data('cust');
         var desc = $(this).find(':selected').data('custdesc');
+        var barang = $(this).find(':selected').data('barang');
         var customer = cust + ' - ' + desc;
 
         $('#customer').val(customer);
         $('#custcode').val(cust);
         $('#type').val(type);
+        $('#barang').val(barang);
 
         if(value != ''){
             $.ajax({

@@ -226,7 +226,7 @@ class CustomerOrderController extends Controller
 
     public function createso($id)
     {
-        $data = CustomerOrderMstr::with('getDetail.getItem')->findOrFail($id);
+        $data = CustomerOrderMstr::with('getDetail.getItem','getBarang')->findOrFail($id);
         $cust = Customer::get();
         $item = Item::get();
         $shipto = CustomerShipTo::where('cs_cust_code',$data->co_cust_code)->get();

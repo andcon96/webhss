@@ -299,7 +299,7 @@ class SuratJalanController extends Controller
 
     public function socreatesj(Request $request)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getShipFrom','getShipTo')->findOrFail($request->id);
+        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getBarang','getShipFrom','getShipTo')->findOrFail($request->id);
         $item = Item::get();
         $cust = Customer::get();
         $truck = Truck::with('getUserDriver','getUserPengurus','getTipe')->get();
@@ -310,7 +310,7 @@ class SuratJalanController extends Controller
     
     public function createsj()
     {
-        $listso = SalesOrderMstr::with('getCOMaster.getCustomer','getShipFrom','getShipTo')
+        $listso = SalesOrderMstr::with('getCOMaster.getCustomer','getCOMaster.getBarang','getShipFrom','getShipTo')
                             ->whereIn('so_status',['New','Open'])
                             ->get();
         $item = Item::get();

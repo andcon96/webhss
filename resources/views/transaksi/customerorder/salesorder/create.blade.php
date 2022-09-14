@@ -30,9 +30,9 @@
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->co_type}}" autocomplete="off" maxlength="24" readonly required autofocus>
             </div>
-            <label for="duedate" class="col-md-3 col-form-label text-md-right">Due Date</label>
+            <label for="barang" class="col-md-3 col-form-label text-md-right">Barang</label>
             <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->addDays(1)->toDateString()}}" autocomplete="off" maxlength="24" required autofocus>
+                <input id="barang" type="text" class="form-control" name="barang" value="{{$data->getBarang->barang_deskripsi ?? ''}}" autocomplete="off" readonly autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -52,6 +52,12 @@
                         <option value="{{$shiptos->cs_shipto}}">{{$shiptos->cs_shipto}} -- {{$shiptos->cs_shipto_name}}</option>
                     @endforeach
                 </select>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->addDays(1)->toDateString()}}" autocomplete="off" maxlength="24" required autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
