@@ -51,7 +51,7 @@
                 <label for="nominal" class="col-md-3 col-form-label text-md-right">Nominal</label>
                 <div class="col-md-3">
                     <input id="nominal" type="text" class="form-control nominal" name="nominal"
-                        value="" autocomplete="off" maxlength="24">
+                        value="0" autocomplete="off" maxlength="24">
                 </div>
             </div>
             <div class="form-group row col-md-12">
@@ -198,9 +198,21 @@
         });
 
         $(document).on('submit', '#submit', function(e) {
-            document.getElementById('btnconf').style.display = 'none';
-            document.getElementById('btnback').style.display = 'none';
-            document.getElementById('btnloading').style.display = '';
+            let nominal = $('#nominal').val();
+            if(nominal == 0)
+            {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: 'Nominal tidak boleh 0',
+                    showCloseButton: true,
+                })
+            }else{
+                document.getElementById('btnconf').style.display = 'none';
+                document.getElementById('btnback').style.display = 'none';
+                document.getElementById('btnloading').style.display = '';
+            }
         });
     </script>
 @endsection
