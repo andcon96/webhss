@@ -7,6 +7,7 @@ use App\Jobs\EmailApprovalKerusakan;
 use App\Mail\ApprovalMail;
 use App\Models\Master\approval;
 use App\Models\Master\Domain;
+use App\Models\Master\GandenganMstr;
 use App\Models\Master\Kerusakan;
 use App\Models\Master\KerusakanStruktur;
 use App\Models\Master\KerusakanStrukturDetail;
@@ -33,8 +34,7 @@ class KerusakanLaporMTController extends Controller
         // $this->authorize('view',[KerusakanMstr::class]);
         
         $data = KerusakanMstr::query()
-            ->with(['getDetail', 'getTruck','getTruck.getUserDriver'])
-         ;   
+            ->with(['getDetail', 'getTruck','getTruck.getUserDriver','getGandeng']);   
             
         
         if ($request->s_krnbr) {
@@ -58,6 +58,9 @@ class KerusakanLaporMTController extends Controller
             $data->whereRelation('getTruck', 'id', '=', $request->s_driver);
         }
         
+
+        $data = $data->orderBy('created_at', 'DESC')->paginate(10);
+        
         $access = '';
         $user = session()->get('username');
         $roletype = User::with(['getRoleType'])->where('username',$user)->first();
@@ -68,19 +71,17 @@ class KerusakanLaporMTController extends Controller
             $access = 'yes';
         }
         
-        
-        $data = $data->orderBy('created_at', 'DESC')->paginate(10);
-        
+        $gandeng = GandenganMstr::get();
         $truck = Truck::withoutGlobalScopes()->get();
         
         
-        return view('transaksi.kerusakan.index', compact('data', 'truck','access'));
+        return view('transaksi.kerusakan.index', compact('data', 'truck','access','gandeng'));
     }
 
     public function show($id)
     {
 
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getKerusakan','getDetail.getStrukturTrans.getStrukturMaster'])->findOrFail($id);
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getKerusakan','getDetail.getStrukturTrans.getStrukturMaster','getGandeng'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
         
         $struktur = KerusakanStruktur::with(['getStrukturTrans' => function($q) use ($id){
@@ -99,7 +100,8 @@ class KerusakanLaporMTController extends Controller
         
         $jeniskerusakan = Kerusakan::get();
         $truck = Truck::withoutGlobalScopes()->get();
-        return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck'));
+        $gandeng = GandenganMstr::withoutGlobalScopes()->get();
+        return view('transaksi.kerusakan.create', compact( 'jeniskerusakan','truck','gandeng'));
     }
 
     public function store(Request $request)
@@ -111,29 +113,56 @@ class KerusakanLaporMTController extends Controller
         // }
         // else{
 
-            $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
-            $domainnow = $checktruck->truck_domain;
-            $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
-                $e->where('kr_status','<>','Close');
-                $e->where('kr_status','<>','Reject');
-                $e->where('kr_status','<>','Cancelled');
-            })->first();
+            if($request->truck){
+                $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
             
-            if($checkkr){
-                alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
-                return back();
-            }
-            $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
-            if($checkwo === false){
-                alert()->error('Error', 'No Data from QAD');
-                return back();
-            }
-            else if($checkwo === 'nodata'){
-                
-                alert()->error('Error', 'Truck '.$checktruck->truck_no_polis.' already being repaired in QAD');
-                return back();
-            }
+                $domainnow = $checktruck->truck_domain;
+                $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
+                    $e->where('kr_status','<>','Close');
+                    $e->where('kr_status','<>','Reject');
+                    $e->where('kr_status','<>','Cancelled');
+                })->first();
             
+                if($checkkr){
+                    alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
+                    return back();
+                }
+                $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
+                if($checkwo === false){
+                    alert()->error('Error', 'No Data from QAD');
+                    return back();
+                }
+                else if($checkwo === 'nodata'){
+                    
+                    alert()->error('Error', 'Truck '.$checktruck->truck_no_polis.' already being repaired in QAD');
+                    return back();
+                }
+            }
+            else{
+                $checkgandengan = GandenganMstr::withoutglobalscopes()->where('id',$request->gandengan)->first();
+            
+                $domainnow = $checkgandengan->gandeng_domain;
+                $checkkr = KerusakanMstr::where("kr_gandeng",$request->gandengan)->where(function($e){
+                    $e->where('kr_status','<>','Close');
+                    $e->where('kr_status','<>','Reject');
+                    $e->where('kr_status','<>','Cancelled');
+                })->first();
+            
+                if($checkkr){
+                    alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
+                    return back();
+                }
+                $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code);
+                if($checkwo === false){
+                    alert()->error('Error', 'No Data from QAD');
+                    return back();
+                }
+                else if($checkwo === 'nodata'){
+                    
+                    alert()->error('Error', 'Truck '.$checkgandengan->gandeng_code.' already being repaired in QAD');
+                    return back();
+                }
+            }
             DB::beginTransaction();
             try {
                 $getrn = (new CreateTempTable())->getrnkerusakan();
@@ -151,7 +180,7 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_mstr->kr_status = 'New';
                 $kerusakan_mstr->kr_domain = $domainnow;
                 $kerusakan_mstr->kr_km = $request->km;
-                $kerusakan_mstr->kr_gandeng = $request->gandeng;
+                $kerusakan_mstr->kr_gandeng = $request->gandengan;
                 $kerusakan_mstr->save();
 
                 $id = $kerusakan_mstr->id;
@@ -182,7 +211,8 @@ class KerusakanLaporMTController extends Controller
 
     public function edit($id)
     {
-        $data = KerusakanMstr::with(["getDetail.getStrukturTrans",'getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver'])->findOrFail($id);
+        
+        $data = KerusakanMstr::with(["getDetail.getStrukturTrans",'getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getGandeng'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
         
         // $this->authorize('update',[KerusakanMstr::class,$data]);
@@ -203,7 +233,7 @@ class KerusakanLaporMTController extends Controller
         try {
             $mstr = KerusakanMstr::where('id',$request->idmaster)->first();
             $mstr->kr_km = $request->km;
-            $mstr->kr_gandeng = $request->gandeng;
+            // $mstr->kr_gandeng = $request->gandeng;
             $mstr->save();
             foreach ($request->iddetail as $key => $datas) {
                 $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
@@ -272,11 +302,11 @@ class KerusakanLaporMTController extends Controller
         
         $nopol = $request->truck;
         $wonbr = $request->sonbr;
-        
+        $gandeng = $request->gandengan;
         $kerusakanlist = [];
         $rusaknbr = $request->sonbr;
         $nopolnbr = $request->truck;
-        
+        $gandengnbr = $request->gandengan;
         // validasi approval ada atau tidak
         $emailto = approval::get();
         if(is_null($emailto)){
@@ -314,13 +344,19 @@ class KerusakanLaporMTController extends Controller
                         $kerusakandtl->krs_desc = $request->struk_desc[$key];
                         $kerusakandtl->save();    
                     }
-                    $pesan = 'New Truck Breakdown Approval';
+                    if(!empty($truck)){
+                        $pesan = 'New Truck Breakdown Approval';
+                    }
+                    else if(empty($truck)){
+                        $pesan = 'New Gandengan Breakdown Approval';
+                    }
                     
-
+                    
                     EmailApprovalKerusakan::dispatch(
                         $pesan,
                         $wonbr,
                         $nopol,
+                        $gandeng,
                         $kerusakanlist,
                         $emailto,
                         
@@ -354,7 +390,7 @@ class KerusakanLaporMTController extends Controller
                         $kerusakandtl->krs_desc = $request->struk_desc[$key];
                         $kerusakandtl->save();    
                     }
-                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$krdate);
+                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengnbr,$krdate);
                     if($qxkerusakan[0] == false){
                         DB::rollback();
                         
@@ -393,7 +429,7 @@ class KerusakanLaporMTController extends Controller
 
     public function upassignremarkskr($id, Request $request)
     {
-        // dd($request->all());
+        
         // $this->authorize('custompolicy',[KerusakanMstr::class]);
         DB::beginTransaction();
         try{
@@ -424,7 +460,7 @@ class KerusakanLaporMTController extends Controller
 
     public function krhistoryview($id,Request $request){
         
-        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getTindakan' => function($q) use ($id){
+        $data = KerusakanMstr::with(['getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getDetail.getStrukturTrans','getDetail.getTindakan','getGandeng' => function($q) use ($id){
             $q->orderBy('id','desc');
         }])->findOrFail($id);
         $tindakanlist = [];
@@ -456,5 +492,84 @@ class KerusakanLaporMTController extends Controller
             alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
             return back();
         }
+    }
+
+    public function loaddataexcel(){
+        $arrayrusakdet = [];
+        $arraytruckilang = [];
+        ini_set('max_execution_time', 360);
+
+        if (($open = fopen(public_path() . "/datakerusakan.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $kr[] = $data;
+            }
+
+            $tipetruck = ''; 
+            DB::beginTransaction();
+            try{
+                foreach($kr as $kerusakan){
+                    $newdate = date('Y-m-d',strtotime($kerusakan[2]));
+                    $cekrusak = KerusakanMstr::where('kr_nbr',$kerusakan[0])->first();
+                    if(!empty($cekrusak)){
+                        $rusakid = $cekrusak->id;
+                        
+                        if(!empty($kerusakan[4])){
+                            $krjenis = Kerusakan::where('kerusakan_code',$kerusakan[4])->first();
+                            $arrayrusakdet[] = [
+                                'krd_kr_mstr_id' => $rusakid, 
+                                'krd_kerusakan_id' => $krjenis->id,
+                                'created_at' => $newdate,
+                                'updated_at' => $newdate,
+                            ];
+                        }
+                        
+                    }
+                    else if(empty($cekrusak)){
+    
+                        $truck = Truck::where('truck_no_polis',$kerusakan[1])->first();
+                        
+                        KerusakanMstr::insert([
+                        'kr_domain' => 'HSS',
+                        'kr_nbr' => $kerusakan[0],
+                        'kr_truck' => $truck->id ?? NULL,
+                        'kr_date' => $newdate,
+                        'kr_status' => 'Close',
+                        'created_at' => $newdate,
+                        'updated_at' => $newdate 
+                        ]);
+                        $rusakid = KerusakanMstr::where('kr_nbr',$kerusakan[0])->first();
+                        
+                        if(!empty($kerusakan[4])){
+                            $krjenis = Kerusakan::where('kerusakan_code',$kerusakan[4])->first();
+                            $arrayrusakdet[] = [
+                                'krd_kr_mstr_id' => $rusakid->id, 
+                                'krd_kerusakan_id' => $krjenis->id,
+                                'created_at' => $newdate,
+                                'updated_at' => $newdate,
+                            ];
+                            
+                        }
+                    }
+                
+                    
+                    
+                }
+                KerusakanDetail::insert($arrayrusakdet);
+                $arrayrusakdet = [];
+                DB::commit();
+                fclose($open);
+                alert()->Success('success', 'data successfully inserted')->persistent('Dismiss');
+                return back();
+            }
+            catch(Exception $err){
+                DB::rollBack();
+                
+                alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
+                return back();
+            }
+
+        }
+        
     }
 }

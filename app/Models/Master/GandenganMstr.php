@@ -9,5 +9,8 @@ class GandenganMstr extends Model
 {
     use HasFactory;
     public $table = 'gandengan_mstr';
-
+    public function getDomain()
+    {
+        return $this->belongsTo(Domain::class, 'gandeng_domain','id');;
+    }
 }

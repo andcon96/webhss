@@ -821,7 +821,7 @@ class QxtendServices
   }
 
   //kerusakan
-  public function qxWOkerusakan($rusaknbr,$nopol,$krdate){
+  public function qxWOkerusakan($rusaknbr,$nopol,$gandengan,$krdate){
     $qxwsa = Qxwsa::firstOrFail();
     if (is_null($qxwsa->qx_url)) {
       return [false,'Qxtend belum di setup'];
@@ -906,7 +906,21 @@ class QxtendServices
                   </qcom:dsSessionContext>
                   <dsWorkOrder>
                   <workOrder>';
-      $qdocbody = '
+      if(empty($nopol)){
+        $qdocbody = '
+                      <woNbr>'.$rusaknbr.'</woNbr>
+                      <woPart>Truck</woPart>
+                      <woType>R</woType>
+                      <woSite>HSS</woSite>
+                      <woQtyOrd>1</woQtyOrd>
+                      <woOrdDate>'.$krdate.'</woOrdDate>
+                      <woRelDate>'.$krdate.'</woRelDate>
+                      <woDueDate>'.$krdate.'</woDueDate>
+                      <wocmmts>false</wocmmts>
+                      <woLotNext>'.$gandengan.'</woLotNext>';
+      }
+      else if(!empty($nopol)){
+        $qdocbody = '
                       <woNbr>'.$rusaknbr.'</woNbr>
                       <woPart>Truck</woPart>
                       <woType>R</woType>
@@ -917,6 +931,8 @@ class QxtendServices
                       <woDueDate>'.$krdate.'</woDueDate>
                       <wocmmts>false</wocmmts>
                       <woLotNext>'.$nopol.'</woLotNext>';
+      }
+      
       
       $qdocfoot = '</workOrder>
                   </dsWorkOrder>

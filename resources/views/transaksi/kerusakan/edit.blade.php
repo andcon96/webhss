@@ -24,24 +24,23 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            
+            @if(!empty($data->getTruck->truck_no_polis))
             <label for="truck" class="col-md-2 col-form-label text-md-right" style="display: {{!empty($data->getTruck->truck_no_polis) ? '' : 'none'}}">Truck</label>
             <div class="col-md-3" style="display: {{!empty($data->getTruck->truck_no_polis) ? '' : 'none'}}">
-                <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" readonly>
+                <input id="truck" type="text" class="form-control" name="truck" value="{{!empty($data->getTruck->truck_no_polis) ? $data->getTruck->truck_no_polis : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
-            
+            @elseif(empty($data->getTruck->truck_no_polis))
+            <label for="gandeng" class="col-md-2 col-form-label text-md-right">Gandengan</label>
+            <div class="col-md-3">
+                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{!empty($data->getGandeng->gandeng_code) ? $data->getGandeng->gandeng_code : ''}}" autocomplete="off" readonly autofocus>
+            </div>
+            @endif
             <label for="driver" class="col-md-2 col-form-label text-md-right">Driver</label>
             <div class="col-md-3">
                 <input id="driver" type="text" class="form-control" name="driver" value="{{isset($data->getTruck->getUserDriver->name) ? $data->getTruck->getUserDriver->name : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
         </div>
-        <div class="form-group row col-md-12">
-            <label for="gandeng" class="col-md-2 col-form-label text-md-right">Gandengan</label>
-            <div class="col-md-3">
-                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{isset($data->kr_gandeng) ? $data->kr_gandeng : ''}}" autocomplete="off" autofocus>
-            </div>
 
-        </div>
         <div class="form-group row col-md-12">
             @include('transaksi.kerusakan.edit-table')
         </div>

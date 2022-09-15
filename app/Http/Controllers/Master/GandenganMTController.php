@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\Domain;
 use App\Models\Master\GandenganMstr;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GandenganMTController extends Controller
 {
@@ -16,14 +19,19 @@ class GandenganMTController extends Controller
      */
     public function index(Request $request)
     {
-        $gandengmstr = GandenganMstr::query();
+        $domain = Domain::get();
+        $data = GandenganMstr::query();
+
         if($request->domain){
-            $gandengmstr->where('gandeng_domain',$request->domain);
+            $data->where('gandeng_domain',$request->s_domain);
         }
         if($request->gandengan){
-            $gandengmstr->where('gandeng_domain',$request->domain);
+            $data->where('gandeng_domain',$request->s_domain);
         }
-        $gandengmstr = $gandengmstr->paginate(10);
+        $data = $data->paginate(10);
+        $gandengmstr = GandenganMstr::get();
+        return view('setting.gandengan.index',compact('gandengmstr','data','domain'));
+
     }
 
     /**
@@ -46,7 +54,30 @@ class GandenganMTController extends Controller
     public function store(Request $request)
     {
         
-        //
+        $domain = $request->c_domain;
+        $gandeng = $request->c_gandeng;
+        $active = $request->c_active;
+        
+        DB::beginTransaction();
+        try{
+            $gandengan = new GandenganMstr();
+            $gandengan->gandeng_domain = $domain;
+            $gandengan->gandeng_code = $gandeng;
+            $gandengan->gandeng_is_active = $active;
+            $gandengan->save();
+            DB::commit();
+            alert()->success('Success', 'Create gandengan success');
+            return redirect()->to(route('gandengan.index'));
+
+        }
+        catch(Exception $err){
+            DB::rollBack();
+            
+            alert()->error('Error', 'Failed to create gandengan');
+            return redirect()->to($request->prevurl ?? route('gandengan.index'));
+
+
+        }
     }
 
     /**
@@ -66,9 +97,10 @@ class GandenganMTController extends Controller
      * @param  \App\Models\GandenganMstr  $gandenganMstr
      * @return \Illuminate\Http\Response
      */
-    public function edit(GandenganMstr $gandenganMstr)
-    {
-        //
+    public function edit($id){
+        $data = GandenganMstr::findOrFail($id);
+        $domain = Domain::groupby('domain_code')->get();
+        return view('setting.gandengan.edit',['data' => $data, 'domain' => $domain]);
     }
 
     /**
@@ -80,6 +112,25 @@ class GandenganMTController extends Controller
      */
     public function update(Request $request, GandenganMstr $gandenganMstr)
     {
+        DB::beginTransaction();
+        try{
+            GandenganMstr::where('id',$request->idcur)->update([
+                'gandeng_domain'=>$request->domain,
+                'gandeng_code'=> $request->e_gandeng
+            ]);
+            DB::commit();
+            alert()->success('Success', 'Update gandengan success');
+            return redirect()->to($request->prevurl ?? route('gandengan.index'));
+
+        }
+        catch(Exception $err){
+            DB::rollBack();
+            alert()->error('Error', 'Update gandengan failed');
+            return redirect()->to($request->prevurl ?? route('gandengan.index'));
+
+        }
+
+        
         //
     }
 
@@ -89,9 +140,34 @@ class GandenganMTController extends Controller
      * @param  \App\Models\GandenganMstr  $gandenganMstr
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GandenganMstr $gandenganMstr)
+    public function destroy(GandenganMstr $gandenganMstr, Request $request)
     {
-        //
+        
+        $currentid = $request->temp_id;
+        $datagandeng = GandenganMstr::where('id',$currentid)->first();
+        DB::beginTransaction();
+        try{
+            if($datagandeng->gandeng_is_active == 1){
+                GandenganMstr::where('id',$currentid)->update(['gandeng_is_active' => 0]);
+                DB::commit();
+                alert()->success('Success', 'Gandengan deactivated');
+                return redirect()->to(route('gandengan.index'));
+            }
+            elseif($datagandeng->gandeng_is_active == 0){
+                GandenganMstr::where('id',$currentid)->update(['gandeng_is_active' => 1]);
+                DB::commit();
+                alert()->success('Success', 'Gandengan activated');
+                return redirect()->to(route('gandengan.index'));
+            }
+            
+        }
+        catch(Exception $err){
+            DB::rollBack();
+            
+            alert()->error('Error', 'Failed to activate/deactivate gandengan');
+            return redirect()->to(route('gandengan.index'));
+        }
+        
     }
 
     public function loadgandengan()
@@ -103,21 +179,31 @@ class GandenganMTController extends Controller
             }
 
             $gandenganarr = [];
-
-            foreach($gandeng as $gandengan){  
-                if(!empty($gandengan[2])){
-                    $gandenganarr[] = [
-                        'gandeng_domain'        => (string)$gandengan[0],
-                        'gandeng_code'          => (string)$gandengan[2],
-                        'gandeng_is_active'     => 1,
-                        'created_at'            => Carbon::now()->toDateTimeString(),
-                        'updated_at'            => Carbon::now()->toDateTimeString()
-                    ];
+            DB::beginTransaction();
+            try{
+                foreach($gandeng as $gandengan){  
+                    if(!empty($gandengan[2])){
+                        $gandenganarr[] = [
+                            'gandeng_domain'        => (string)$gandengan[0],
+                            'gandeng_code'          => (string)$gandengan[2],
+                            'gandeng_is_active'     => 1,
+                            'created_at'            => Carbon::now()->toDateTimeString(),
+                            'updated_at'            => Carbon::now()->toDateTimeString()
+                        ];
+                    }
                 }
+                GandenganMstr::insert($gandenganarr);
+                DB::commit();
+                $gandenganarr = [];
+                fclose($open);
             }
-            GandenganMstr::insert($gandenganarr);
-            $gandenganarr = [];
-            fclose($open);
+            catch(Exception $err){
+                DB::rollBack();
+                alert()->error('Error', 'Failed to activate/deactivate gandengan');
+                return redirect()->to(route('gandengan.index'));
+
+            }
+
             
         }
     }

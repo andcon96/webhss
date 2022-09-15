@@ -369,6 +369,15 @@
               </label>
             </div>
           </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Gandengan Master') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT21">
+                <input type="checkbox" id="cbMT21" name="cbMT21" value="MT21" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
           
           <div class="form-group">
             <h6>
@@ -464,6 +473,7 @@
         document.getElementById("cbMT14").checked = true;  
         document.getElementById("cbMT15").checked = true;  
         document.getElementById("cbMT16").checked = true;  
+        document.getElementById("cbMT21").checked = true;  
     }
     else{
       document.getElementById("cbSOMT").checked = false; 
@@ -493,6 +503,7 @@
         document.getElementById("cbMT14").checked = false;  
         document.getElementById("cbMT15").checked = false;  
         document.getElementById("cbMT16").checked = false;  
+        document.getElementById("cbMT21").checked = false;  
     }
   })
 
@@ -640,6 +651,11 @@
               document.getElementById("cbMT16").checked = true;  
             }else{
               document.getElementById("cbMT16").checked = false;
+            }
+            if(totmenu.search("MT21") >= 0){
+              document.getElementById("cbMT21").checked = true;  
+            }else{
+              document.getElementById("cbMT21").checked = false;
             }
 
             
