@@ -313,7 +313,7 @@ class RuteController extends Controller
     {
         ini_set('max_execution_time', 360);
 
-        if (($open = fopen(public_path() . "/historyrute_full.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/HSST_loosing.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $history[] = $data;
@@ -362,7 +362,7 @@ class RuteController extends Controller
 
     public function loadhistoryrutedetail()
     {
-        if (($open = fopen(public_path() . "/Book2.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/HSS_Container.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $history[] = $data;
