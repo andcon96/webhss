@@ -5,8 +5,9 @@
                 <th width="10%">@sortablelink('truck_no_polis', 'Truck', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
                 <th width="10%">@sortablelink('driver_name', 'Driver', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
                 <th width="10%">@sortablelink('cicilan_eff_date', 'Eff Date', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
-                <th width="15%">@sortablelink('cicilan_nominal', 'Nominal', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
-                <th width="30%">Remarks</th>
+                <th width="10%">@sortablelink('cicilan_nominal', 'Nominal', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
+                <th width="10%">Sisa Cicilan</th>
+                <th width="25%">Remarks</th>
                 <th width="10%">Status</th>
                 <th width="10%">Action</th>
             </tr>
@@ -18,7 +19,10 @@
                     <td data-label="Driver">{{ $datas->getDriverNopol->getDriver->driver_name ?? '' }}</td>
                     <td data-label="Tanggal Lapor">{{ $datas->cicilan_eff_date }}</td>
                     <td data-label="Nominal">
-                        {{ number_format($datas->cicilan_nominal, 2) }}
+                        {{ number_format($datas->cicilan_nominal, 0) }}
+                    </td>
+                    <td data-label="Sisa Cicilan">
+                        {{ number_format($datas->cicilan_nominal - $datas->getTotalPaidActive->sum('hc_nominal'), 0)}}
                     </td>
                     <td data-label="Catatan">{{ $datas->cicilan_remarks }}</td>
                     <td data-label="Status">{{ $datas->cicilan_is_active == 1 ? 'Active' : 'Not Active' }}</td>

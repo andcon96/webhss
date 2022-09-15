@@ -5,8 +5,9 @@
                 <th width="10%">@sortablelink('truck_no_polis', 'Truck', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
                 <th width="10%">@sortablelink('driver_name', 'Driver', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
                 <th width="10%">@sortablelink('cicilan_eff_date', 'Eff Date', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
-                <th width="15%">@sortablelink('cicilan_nominal', 'Nominal', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
-                <th width="15%">Nominal Paid</th>
+                <th width="10%">@sortablelink('cicilan_nominal', 'Nominal', ['filter' => 'active, visible'], ['class' => 'noHover', 'rel' => 'nofollow'])</th>
+                <th width="10%">Nominal Paid</th>
+                <th width="10%">Sisa Cicilan</th>
                 <th width="30%">Remarks</th>
                 <th width="10%">Action</th>
             </tr>
@@ -22,6 +23,9 @@
                     </td>
                     <td data-label="Nominal Paid">
                         {{ number_format($datas->getTotalPaidActive->sum('hc_nominal', 0)) }}
+                    </td>
+                    <td data-label="Sisa Cicilan">
+                        {{ number_format($datas->cicilan_nominal - $datas->getTotalPaidActive->sum('hc_nominal'),0)}}
                     </td>
                     <td data-label="Catatan">{{ $datas->cicilan_remarks }}</td>
                     <td class="row ml-1">

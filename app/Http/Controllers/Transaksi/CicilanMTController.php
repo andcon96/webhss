@@ -20,7 +20,7 @@ class CicilanMTController extends Controller
      */
     public function index(Request $request)
     {
-        $cicilan = Cicilan::query()->with(['getDriverNopol.getTruck','getDriverNopol.getDriver','getTotalPaid']);
+        $cicilan = Cicilan::query()->with(['getDriverNopol.getTruck','getDriverNopol.getDriver','getTotalPaid','getTotalPaidActive']);
         
         if($request->truck){
             $cicilan->whereRelation('getDriverNopol','dn_truck_id',$request->truck);
