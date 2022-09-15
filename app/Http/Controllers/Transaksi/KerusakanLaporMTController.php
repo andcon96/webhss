@@ -152,16 +152,16 @@ class KerusakanLaporMTController extends Controller
                     alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
                     return back();
                 }
-                // $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code);
-                // if($checkwo === false){
-                //     alert()->error('Error', 'No Data from QAD');
-                //     return back();
-                // }
-                // else if($checkwo === 'nodata'){
+                $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code);
+                if($checkwo === false){
+                    alert()->error('Error', 'No Data from QAD');
+                    return back();
+                }
+                else if($checkwo === 'nodata'){
                     
-                //     alert()->error('Error', 'Truck '.$checktruck->truck_no_polis.' already being repaired in QAD');
-                //     return back();
-                // }
+                    alert()->error('Error', 'Truck '.$checkgandengan->gandeng_code.' already being repaired in QAD');
+                    return back();
+                }
             }
             DB::beginTransaction();
             try {
