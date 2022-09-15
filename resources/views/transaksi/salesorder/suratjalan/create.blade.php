@@ -52,7 +52,7 @@
             <div class="col-md-3">
                 <input id="type" type="text" class="form-control" name="type" value="{{$data->getCOMaster->co_type}}" autocomplete="off" maxlength="24" required readonly>
             </div>
-            <label for="barang" class="col-md-3 col-form-label text-md-right">Type</label>
+            <label for="barang" class="col-md-3 col-form-label text-md-right">Barang</label>
             <div class="col-md-3">
                 <input type="hidden" name="barangid" id="barangid" value="{{$data->getCOMaster->co_barang_id}}">
                 <input id="barang" type="text" class="form-control" name="barang" value="{{$data->getCOMaster->getBarang->barang_deskripsi}}" readonly>
