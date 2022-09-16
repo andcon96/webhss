@@ -556,7 +556,6 @@ class KerusakanLaporMTController extends Controller
                     
                 }
                 KerusakanDetail::insert($arrayrusakdet);
-                dd($arrayrusakdet);
                 $arrayrusakdet = [];
                 
                 DB::commit();
