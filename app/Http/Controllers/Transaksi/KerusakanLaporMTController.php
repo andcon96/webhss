@@ -556,7 +556,9 @@ class KerusakanLaporMTController extends Controller
                     
                 }
                 KerusakanDetail::insert($arrayrusakdet);
+                dd($arrayrusakdet);
                 $arrayrusakdet = [];
+                
                 DB::commit();
                 fclose($open);
                 alert()->Success('success', 'data successfully inserted')->persistent('Dismiss');
