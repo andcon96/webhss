@@ -564,7 +564,7 @@ class KerusakanLaporMTController extends Controller
             }
             catch(Exception $err){
                 DB::rollBack();
-                
+                dd($err);
                 alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
                 return back();
             }
