@@ -343,7 +343,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Rute Maintenance') }}</label>
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('COGS Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbMT14">
                 <input type="checkbox" id="cbMT14" name="cbMT14" value="MT14" />
