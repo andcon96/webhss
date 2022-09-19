@@ -70,6 +70,8 @@
         border: none;
 
     }
+    
+    table tfoot{display:table-row-group;}
 </style>
 
 <body>
