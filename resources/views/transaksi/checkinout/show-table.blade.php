@@ -23,5 +23,5 @@
             @endforelse
         </tbody>
     </table>
-    {{$detail->links()}}
+    {{$detail->withQueryString()->links()}}
 </div>

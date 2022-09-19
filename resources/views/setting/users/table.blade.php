@@ -58,6 +58,6 @@
 @endforelse
 <tr style="border:0 !important">
   <td colspan="12">
-    {{ $users->links() }}
+    {{ $users->withQueryString()->links() }}
   </td>
 </tr>             
