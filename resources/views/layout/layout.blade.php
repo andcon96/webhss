@@ -359,7 +359,7 @@
                 <li class="nav-item">
                   <a href="{{url('rute')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Rute Master</p>
+                    <p>COGS Master</p>
                   </a>
                 </li>
                 <li class="nav-item">
