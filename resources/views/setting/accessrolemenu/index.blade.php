@@ -464,6 +464,8 @@
         document.getElementById("cbBiaya").checked = true;  
         document.getElementById("cbDRInOut").checked = true; 
         document.getElementById("cbInvoice").checked = true; 
+        document.getElementById("cbCicilan").checked = true; 
+        document.getElementById("cbBayarCicilan").checked = true; 
         document.getElementById("cbRPMT").checked = true;  
         document.getElementById("cbMT01").checked = true;  
         document.getElementById("cbMT02").checked = true;  
@@ -494,6 +496,8 @@
         document.getElementById("cbBiaya").checked = false;  
         document.getElementById("cbDRInOut").checked = false;
         document.getElementById("cbInvoice").checked = false;  
+        document.getElementById("cbCicilan").checked = false; 
+        document.getElementById("cbBayarCicilan").checked = false; 
         document.getElementById("cbRPMT").checked = false;  
         document.getElementById("cbMT01").checked = false;  
         document.getElementById("cbMT02").checked = false;  
@@ -599,6 +603,19 @@
             }else{
               document.getElementById("cbRPMT").checked = false;
             }
+
+            if(totmenu.search("CI01") >= 0){
+              document.getElementById("cbCicilan").checked = true;  
+            }else{
+              document.getElementById("cbCicilan").checked = false;
+            }
+
+            if(totmenu.search("CI02") >= 0){
+              document.getElementById("cbBayarCicilan").checked = true;  
+            }else{
+              document.getElementById("cbBayarCicilan").checked = false;
+            }
+
             if(totmenu.search("MT01") >= 0){
               document.getElementById("cbMT01").checked = true;  
             }else{
