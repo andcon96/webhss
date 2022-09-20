@@ -203,24 +203,6 @@
               </label>
             </div>
           </div>
-
-
-          <div class="form-group">
-            <h6>
-              <center><strong>Invoice</strong></center>
-              </h5>
-              <hr>
-          </div>
-
-          <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Invoice') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbInvoice">
-                <input type="checkbox" id="cbInvoice" name="cbInvoice" value="IV01" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
           <div class="form-group">
             <h6>
               <center><strong>Driver Check In / Out</strong></center>
@@ -250,6 +232,32 @@
             <div class="col-md-6">
               <label class="switch" for="cbRPMT">
                 <input type="checkbox" id="cbRPMT" name="cbRPMT" value="RP01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <h6>
+              <center><strong>Cicilan</strong></center>
+              </h5>
+              <hr>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Cicilan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbCicilan">
+                <input type="checkbox" id="cbCicilan" name="cbCicilan" value="CI01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Pembayaran Cicilan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbBayarCicilan">
+                <input type="checkbox" id="cbBayarCicilan" name="cbBayarCicilan" value="CI02" />
                 <div class="slider round"></div>
               </label>
             </div>
