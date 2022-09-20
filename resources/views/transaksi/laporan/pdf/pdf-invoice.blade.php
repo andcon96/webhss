@@ -68,13 +68,11 @@
 
     .table-noborder tbody{
         border: none;
-
     }
-    
-    table tfoot{display:table-row-group;}
 </style>
 
 <body>
+    @php($flg = 0)
     <table>
         <tbody>
             <tr>
@@ -98,6 +96,7 @@
             {{-- Loop Data Detail --}}
             @php($total = 0)
             @foreach($detail as $details)
+                @php($flg++)
                 <tr>
                     <td></td>
                     <td width="20%">{{ $data->getSalesOrder->getShipTo->cs_shipto_name ?? $data->getMaster->getSalesOrder->getShipTo->cs_shipto_name ?? '' }}</td>
@@ -142,7 +141,13 @@
                 <td colspan="3" style="text-align: center;">(PT.ASA)</td>
             </tr>
         </tbody>
-        <tfoot>
+    </table>
+
+    @if($flg > 2)
+        <div style='page-break-before:always'></div>
+    @endif
+    <table>
+        <tbody style="border: none;">
             <tr>
                 <td colspan="2">Pembayaran melalui giro/transfer :</td>
                 <td>a/n</td>
@@ -158,7 +163,7 @@
                 <td>No. acc</td>
                 <td colspan="4">: 101 203 0360</td>
             </tr>
-        </tfoot>
+        </tbody>
     </table>
 </body>
 

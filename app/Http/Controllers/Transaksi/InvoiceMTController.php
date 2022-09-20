@@ -173,7 +173,6 @@ class InvoiceMTController extends Controller
                 'terbilang' => $terbilang,
                 'detail' => $detail,
             ]
-        // )->setPaper([])
         )->setPaper('A5', 'Landscape');
 
         return $pdf->stream();
