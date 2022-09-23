@@ -94,6 +94,10 @@ class AccessRoleMenuController extends Controller
         // Menu Invoice
         $cbInv = $request->input('cbInvoice');
 
+        // Menu Cicilan
+        $cbCicilan = $request->input('cbCicilan');
+        $cbBayarCicilan = $request->input('cbBayarCicilan');
+
         // Menu Setting
         $cbMT01 = $request->input('cbMT01');
         $cbMT02 = $request->input('cbMT02');
@@ -115,6 +119,7 @@ class AccessRoleMenuController extends Controller
 
         $data = $cbSOMT . $cbCOMT . $cbSJMT . $cbTripBrowse . $cbTripLapor . 
                 $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya.
+                $cbCicilan . $cbBayarCicilan .
                 $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMQ01.
                 $cbMQ02 . $cbMT06 . $cbMQ03 . $cbMT08 . $cbMT09.
                 $cbMT10 . $cbMT11 . $cbMT12 . $cbMQ04 . $cbMT14.

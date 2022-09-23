@@ -58,7 +58,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{$customer->links()}}
+        {{$customer->withQueryString()->links()}}
     </div>
 
 

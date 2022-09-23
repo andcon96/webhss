@@ -1,6 +1,6 @@
 @extends('layout.layout')
 
-@section('menu_name', 'Rute Maintenance')
+@section('menu_name', 'Invoice Price Maintenance')
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{{ url('/') }}">Master</a></li>
