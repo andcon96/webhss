@@ -557,6 +557,7 @@ class KerusakanLaporMTController extends Controller
                 }
                 KerusakanDetail::insert($arrayrusakdet);
                 $arrayrusakdet = [];
+                
                 DB::commit();
                 fclose($open);
                 alert()->Success('success', 'data successfully inserted')->persistent('Dismiss');
@@ -564,7 +565,7 @@ class KerusakanLaporMTController extends Controller
             }
             catch(Exception $err){
                 DB::rollBack();
-                
+                dd($err);
                 alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
                 return back();
             }

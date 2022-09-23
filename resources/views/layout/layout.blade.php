@@ -290,108 +290,142 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @can('access_usermt')
                 <li class="nav-item">
                   <a href="{{route('usermaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>User Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_rolemt')
                 <li class="nav-item">
                   <a href="{{route('rolemaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Role Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_rolemenumt')
                 <li class="nav-item">
                   <a href="{{route('accessrolemenu.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Role Menu Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_sfmt')
                 <li class="nav-item">
                   <a href="{{route('shipfrom.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Ship From Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_barang')
                 <li class="nav-item">
                   <a href="{{route('barangmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Barang Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_bonus_barang')
                 <li class="nav-item">
                   <a href="{{route('bonusbarangmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Bonus Barang Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_krmt')
                 <li class="nav-item">
                   <a href="{{route('kerusakanmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kerusakan Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_skmt')
                 <li class="nav-item">
                   <a href="{{route('strukturkerusakanmt.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Struktur Kerusakan Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_trmt')
                 <li class="nav-item">
                   <a href="{{route('truckmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Truck Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_ttmt')
                 <li class="nav-item">
                   <a href="{{route('tipetruck.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tipe Truck Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_pmmt')
                 <li class="nav-item">
                   <a href="{{route('prefixmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Prefix Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_rutemt')
                 <li class="nav-item">
                   <a href="{{url('rute')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Rute Master</p>
+                    <p>COGS Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_ipmt')
                 <li class="nav-item">
                   <a href="{{url('invoiceprice')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Invoice Price Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_apmt')
                 <li class="nav-item">
                   <a href="{{url('approvalmt')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Approval Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_driver')
                 <li class="nav-item">
                   <a href="{{url('drivermt')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Driver Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_driver_nopol')
                 <li class="nav-item">
                   <a href="{{url('drivernopolmt')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Driver Nopol Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_gandengan')
                 <li class="nav-item">
                   <a href="{{route('gandengan.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Gandengan Master</p>
                   </a>
                 </li>
+                @endcan
               </ul>
             </li>
             @endcan
@@ -406,30 +440,38 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                @can('access_custmt')
                 <li class="nav-item">
                   <a href="{{route('customermaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Customer Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_stmt')
                 <li class="nav-item">
                   <a href="{{route('custshipto.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Ship To Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_itemmt')
                 <li class="nav-item">
                   <a href="{{route('itemmaint.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Item Master</p>
                   </a>
                 </li>
+                @endcan
+                @can('access_wqmt')
                 <li class="nav-item">
                   <a href="{{url('qxwsa')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>WSA Qxtend Master</p>
                   </a>
                 </li>
+                @endcan
               </ul>
             </li>
             @endcan

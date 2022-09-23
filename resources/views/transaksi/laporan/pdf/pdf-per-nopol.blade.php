@@ -22,7 +22,7 @@
         padding-left: 5px;
     }
 
-    table tr td {
+    table tbody tr td {
         border: 1px solid black;
         font-size: 10px !important;
         line-height: 20px;
@@ -30,6 +30,15 @@
         padding-right: 5px;
         white-space: nowrap;
         overflow: hidden;
+        text-overflow: clip;
+    }
+
+    table tfoot tr td {
+        border: 1px solid black;
+        font-size: 10px !important;
+        padding: 0px;
+        margin: 0px;
+        white-space: nowrap;
         text-overflow: clip;
     }
 
@@ -67,6 +76,12 @@
     .right-border{
         border: none;
         border-right: 1px solid black;
+    }
+    .bottom-border{
+        border-bottom: 1px solid black;
+    }
+    .no-border{
+        border:none;
     }
 </style>
 
@@ -163,8 +178,7 @@
                 {{ $no++ }}
                 {{ $totalrit += 1 }}
             @endforeach
-        </tbody>
-        <tfoot>
+
             {{ $bonsopir = 0 }}
             <tr>
                 <td colspan="6">RIT</td>
@@ -220,20 +234,28 @@
                 <td colspan="2"></td>
                 <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $totalcicilan, 0) }}</b></td>
             </tr>
+        </tbody>
+        <tfoot> 
             <tr>
-                <td colspan="5" class="middle">
-                    Menyetujui,
-                </td>
-                <td colspan="5" class="middle">
-                    Penerima,
-                </td>
-            </tr>
-            <tr>
-                <td colspan="5" class="middle" style="line-height: 100px;">
-                    _______________
-                </td>
-                <td colspan="5" class="middle" style="line-height: 100px;">
-                    _______________
+                <td colspan="10">
+                    <table class="insideTable">
+                        <tr>
+                            <td colspan="5" class="middle right-border bottom-border">
+                                Menyetujui,
+                            </td>
+                            <td colspan="5" class="middle left-border bottom-border">
+                                Penerima,
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="middle right-border" style="line-height: 100px;">
+                                _______________
+                            </td>
+                            <td colspan="5" class="middle left-border" style="line-height: 100px;">
+                                _______________
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </tfoot>

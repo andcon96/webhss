@@ -313,46 +313,55 @@ class RuteController extends Controller
     {
         ini_set('max_execution_time', 360);
 
-        if (($open = fopen(public_path() . "/historyrute_full.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/HSST_loosing.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $history[] = $data;
             }
 
             $tipetruck = '';
-            foreach($history as $histories){
-                if($histories[3] != ''){
-                    $kodetruck = $histories[4];
-                    $kodetruck == '2EXL' ? $tipetruck = 1 :
-                    ($kodetruck == '3EXL' ?  $tipetruck = 2 :
-                    ($kodetruck == 'Semi' ?  $tipetruck = 3 :
-                    ($kodetruck == 'LD' ?  $tipetruck = 4 :
-                    ($kodetruck == '20"' ?  $tipetruck = 5 :
-                    ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
-    
-                    $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
-    
-                    $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
-                    
-                    $insertData = [];
-    
-                    foreach($shipto as $shiptos){
-                        $rute = Rute::where('rute_tipe_id',$tipetruck)
-                                    ->where('rute_shipfrom_id',$shipfrom->id)
-                                    ->where('rute_customership_id',$shiptos->id)->first();
-                        if($rute){
-                            $insertData[] = [
-                                'history_rute_id' => $rute->id,
-                                'history_sangu' => trim(str_replace('.','',$histories[5])),
-                                'history_ongkos' => 0,
-                                'history_is_active' => 1,
-                            ];
-                        }
-                    }
-                    RuteHistory::insert($insertData);
-                    $insertData = [];
+            DB::beginTransaction();
+            try{
 
+                foreach($history as $histories){
+                    if($histories[3] != ''){
+                        $kodetruck = $histories[4];
+                        $kodetruck == '2EXL' ? $tipetruck = 1 :
+                        ($kodetruck == '3EXL' ?  $tipetruck = 2 :
+                        ($kodetruck == 'Semi' ?  $tipetruck = 3 :
+                        ($kodetruck == 'LD' ?  $tipetruck = 4 :
+                        ($kodetruck == '20"' ?  $tipetruck = 5 :
+                        ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
+        
+                        $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
+        
+                        $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
+                        
+                        $insertData = [];
+        
+                        foreach($shipto as $shiptos){
+                            $rute = Rute::where('rute_tipe_id',$tipetruck)
+                                        ->where('rute_shipfrom_id',$shipfrom->id)
+                                        ->where('rute_customership_id',$shiptos->id)->first();
+                            if($rute){
+                                $insertData[] = [
+                                    'history_rute_id' => $rute->id,
+                                    'history_sangu' => trim(str_replace('.','',$histories[5])),
+                                    'history_ongkos' => 0,
+                                    'history_is_active' => 1,
+                                ];
+                            }
+                        }
+                        RuteHistory::insert($insertData);
+                        $insertData = [];
+
+                    }
                 }
+                DB::commit();
+            }
+            catch(Exception $err){
+                DB::rollback();
+                dd($histories,$err);
             }
             
 
@@ -362,7 +371,7 @@ class RuteController extends Controller
 
     public function loadhistoryrutedetail()
     {
-        if (($open = fopen(public_path() . "/Book2.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/HSS_Container.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
                 $history[] = $data;

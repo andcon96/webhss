@@ -431,7 +431,7 @@ class WSAServices
 
         // $invoicenbr = Year + '/' + Daybook + Voucher
         $year = substr($invoicenbr,0,4);
-        $voucher = substr($invoicenbr,-9);
+        $voucher = intval(substr($invoicenbr,-9));
         $daybook = substr($invoicenbr,5,strlen($invoicenbr) - 9 - 4 - 1);
 
 

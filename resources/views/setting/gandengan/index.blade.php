@@ -86,7 +86,7 @@
             @endforelse
         </tbody>
     </table>
-    {{$data->render()}}
+    {{$data->withQueryString()->render()}}
 </div>
 
 

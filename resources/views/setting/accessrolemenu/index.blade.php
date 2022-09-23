@@ -203,24 +203,6 @@
               </label>
             </div>
           </div>
-
-
-          <div class="form-group">
-            <h6>
-              <center><strong>Invoice</strong></center>
-              </h5>
-              <hr>
-          </div>
-
-          <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Invoice') }}</label>
-            <div class="col-md-6">
-              <label class="switch" for="cbInvoice">
-                <input type="checkbox" id="cbInvoice" name="cbInvoice" value="IV01" />
-                <div class="slider round"></div>
-              </label>
-            </div>
-          </div>
           <div class="form-group">
             <h6>
               <center><strong>Driver Check In / Out</strong></center>
@@ -250,6 +232,32 @@
             <div class="col-md-6">
               <label class="switch" for="cbRPMT">
                 <input type="checkbox" id="cbRPMT" name="cbRPMT" value="RP01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <h6>
+              <center><strong>Cicilan</strong></center>
+              </h5>
+              <hr>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Cicilan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbCicilan">
+                <input type="checkbox" id="cbCicilan" name="cbCicilan" value="CI01" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Pembayaran Cicilan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbBayarCicilan">
+                <input type="checkbox" id="cbBayarCicilan" name="cbBayarCicilan" value="CI02" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -343,7 +351,7 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Rute Maintenance') }}</label>
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('COGS Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbMT14">
                 <input type="checkbox" id="cbMT14" name="cbMT14" value="MT14" />
@@ -456,6 +464,8 @@
         document.getElementById("cbBiaya").checked = true;  
         document.getElementById("cbDRInOut").checked = true; 
         document.getElementById("cbInvoice").checked = true; 
+        document.getElementById("cbCicilan").checked = true; 
+        document.getElementById("cbBayarCicilan").checked = true; 
         document.getElementById("cbRPMT").checked = true;  
         document.getElementById("cbMT01").checked = true;  
         document.getElementById("cbMT02").checked = true;  
@@ -486,6 +496,8 @@
         document.getElementById("cbBiaya").checked = false;  
         document.getElementById("cbDRInOut").checked = false;
         document.getElementById("cbInvoice").checked = false;  
+        document.getElementById("cbCicilan").checked = false; 
+        document.getElementById("cbBayarCicilan").checked = false; 
         document.getElementById("cbRPMT").checked = false;  
         document.getElementById("cbMT01").checked = false;  
         document.getElementById("cbMT02").checked = false;  
@@ -591,6 +603,19 @@
             }else{
               document.getElementById("cbRPMT").checked = false;
             }
+
+            if(totmenu.search("CI01") >= 0){
+              document.getElementById("cbCicilan").checked = true;  
+            }else{
+              document.getElementById("cbCicilan").checked = false;
+            }
+
+            if(totmenu.search("CI02") >= 0){
+              document.getElementById("cbBayarCicilan").checked = true;  
+            }else{
+              document.getElementById("cbBayarCicilan").checked = false;
+            }
+
             if(totmenu.search("MT01") >= 0){
               document.getElementById("cbMT01").checked = true;  
             }else{

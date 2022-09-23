@@ -12,9 +12,23 @@ use Illuminate\Http\Request;
 class CicilanHistoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $cicilan = Cicilan::with('getTotalPaidActive')->where('cicilan_is_active',1)->sortable()->paginate(10);
+        $cicilan = Cicilan::query()
+                        ->with(['getTotalPaidActive',
+                                'getDriverNopol']);
+
+        if($request->truck){
+            $cicilan->whereRelation('getDriverNopol','dn_truck_id',$request->truck);
+        }
+
+        if($request->driver){
+            $cicilan->whereRelation('getDriverNopol','dn_driver_id',$request->driver);
+        }
+
+        $cicilan = $cicilan->where('cicilan_is_active',1)
+                           ->sortable()
+                           ->paginate(10);
 
         $listtruck = Truck::get();
         $listdriver = Driver::get();
