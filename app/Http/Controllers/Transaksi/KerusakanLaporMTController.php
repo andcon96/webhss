@@ -59,7 +59,7 @@ class KerusakanLaporMTController extends Controller
         }
         
 
-        $data = $data->orderBy('created_at', 'DESC')->paginate(10);
+        $data = $data->orderBy('id', 'DESC')->paginate(10);
         
         $access = '';
         $user = session()->get('username');
