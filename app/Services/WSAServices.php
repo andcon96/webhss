@@ -343,7 +343,7 @@ class WSAServices
                 </HRD_wo_checkloc>
             </Body>
         </Envelope>';
-dd($qdocRequest);
+
         $curlOptions = array(
             CURLOPT_URL => $qxUrl,
             CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
