@@ -393,7 +393,7 @@ class WSAServices
             return false;
         }
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        
+        dd($qdocRequest,$qdocResponse);
         if($qdocResult == 'true'){
             $status = '';
                 foreach($dataloop as $datas){
