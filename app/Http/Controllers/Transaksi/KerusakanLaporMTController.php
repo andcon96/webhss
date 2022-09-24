@@ -106,7 +106,7 @@ class KerusakanLaporMTController extends Controller
 
     public function store(Request $request)
     {
-        
+        dd($request->all());
         // $this->authorize('create',[KerusakanMstr::class]);
         // if(Session::get('domain') != 'HSS'){
         //     alert()->error('Error', 'Not Allowed')->persistent('Dismiss');
