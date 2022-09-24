@@ -343,7 +343,7 @@ class WSAServices
                 </HRD_wo_checkloc>
             </Body>
         </Envelope>';
-
+dd($qdocRequest);
         $curlOptions = array(
             CURLOPT_URL => $qxUrl,
             CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
@@ -380,7 +380,7 @@ class WSAServices
             }
             curl_close($curl);
         }
-        dd($qdocResponse);
+        
         if(is_bool($qdocResponse)){
             return false;
         }
@@ -394,7 +394,7 @@ class WSAServices
             return false;
         }
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        dd($qdocRequest,$qdocResponse);
+        
         if($qdocResult == 'true'){
             $status = '';
                 foreach($dataloop as $datas){
