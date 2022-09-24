@@ -127,7 +127,7 @@ class KerusakanLaporMTController extends Controller
                     alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
                     return back();
                 }
-                $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
+                $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis,'TRUCK');
                 if($checkwo === false){
                     alert()->error('Error', 'No Data from QAD');
                     return back();
@@ -152,7 +152,7 @@ class KerusakanLaporMTController extends Controller
                     alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
                     return back();
                 }
-                $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code);
+                $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code,'GANDENGAN');
                 if($checkwo === false){
                     alert()->error('Error', 'No Data from QAD');
                     return back();

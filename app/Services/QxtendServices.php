@@ -909,7 +909,7 @@ class QxtendServices
       if(empty($nopol)){
         $qdocbody = '
                       <woNbr>'.$rusaknbr.'</woNbr>
-                      <woPart>Truck</woPart>
+                      <woPart>Gandengan</woPart>
                       <woType>R</woType>
                       <woSite>HSS</woSite>
                       <woQtyOrd>1</woQtyOrd>
