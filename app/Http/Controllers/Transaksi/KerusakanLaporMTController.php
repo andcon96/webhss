@@ -203,7 +203,8 @@ class KerusakanLaporMTController extends Controller
                 alert()->success('Success', 'Report created')->persistent('Dismiss');
                 return back();
             } catch (Exception $e) {
-
+                DB::rollBack();
+                dd($e);
                 alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
                 return back();
             }
