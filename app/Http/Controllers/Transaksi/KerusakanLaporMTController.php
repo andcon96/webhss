@@ -185,12 +185,14 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_mstr->save();
 
                 $id = $kerusakan_mstr->id;
-                foreach ($request->jeniskerusakan as $key => $datas) {
-                    $kerusakan_detail = new KerusakanDetail();
-                    $kerusakan_detail->krd_kr_mstr_id = $id;
-                    $kerusakan_detail->krd_kerusakan_id = $datas;
-                    $kerusakan_detail->krd_note = $request->remarkslain[$key];
-                    $kerusakan_detail->save();
+                if($request->jeniskerusakan){
+                    foreach ($request->jeniskerusakan as $key => $datas) {
+                        $kerusakan_detail = new KerusakanDetail();
+                        $kerusakan_detail->krd_kr_mstr_id = $id;
+                        $kerusakan_detail->krd_kerusakan_id = $datas;
+                        $kerusakan_detail->krd_note = $request->remarkslain[$key];
+                        $kerusakan_detail->save();
+                    }
                 }
 
                 
@@ -204,7 +206,7 @@ class KerusakanLaporMTController extends Controller
                 return back();
             } catch (Exception $e) {
                 DB::rollBack();
-                dd($e);
+                
                 alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
                 return back();
             }
