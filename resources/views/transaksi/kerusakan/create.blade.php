@@ -39,7 +39,7 @@
                 <select id="gandengan" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="gandengan" data-live-search="true" autofocus>;
                     <option value = "" selected disabled> -- Select Data -- </option>
                     @foreach($gandeng as $gandeng1)
-                        <option value="{{$gandeng1->id}}">{{$gandeng1->gandeng_code}}</option>
+                        <option value="{{$gandeng1->id}}">{{$gandeng1->gandeng_desc}}</option>
                     @endforeach
                 </select>
             </div>

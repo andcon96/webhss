@@ -16,7 +16,7 @@
         Create Gandengan</button>
 </div>
 
-<form action="{{route('truckmaint.index')}}" method="get">
+<form action="{{route('gandengan.index')}}" method="get">
     <div class="form-group row  col-md-12 mt-3">
         <label for="s_gandengan" class="col-md-4 col-form-label text-md-right">{{ __('Gandengan') }}</label>
         <div class="col-md-3">
