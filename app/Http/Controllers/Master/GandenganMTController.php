@@ -193,7 +193,7 @@ class GandenganMTController extends Controller
                         ];
                     }
                 }
-                dd($gandenganarr);
+                
                 GandenganMstr::insert($gandenganarr);
                 DB::commit();
                 $gandenganarr = [];
