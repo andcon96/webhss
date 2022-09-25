@@ -23,7 +23,7 @@ class GandenganMTController extends Controller
         $data = GandenganMstr::query();
 
         if($request->s_gandengan){
-            $data->where('gandeng_desc',$request->s_gandengan);
+            $data->where('id',$request->s_gandengan);
         }
 
         $data = $data->paginate(10);
