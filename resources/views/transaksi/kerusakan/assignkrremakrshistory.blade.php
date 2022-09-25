@@ -27,7 +27,7 @@
         <label for="s_gandengan" class="col-md-2 col-form-label text-md-right">{{ __('Gandengan') }}</label>
         <div class="col-md-4 col-lg-3">
             
-            <input id="s_gandengan" type="text" class="form-control" name="s_gandengan" value="{{ $data->getGandeng->gandeng_code }}" autofocus autocomplete="off" readonly>
+            <input id="s_gandengan" type="text" class="form-control" name="s_gandengan" value="{{ $data->getGandeng->gandeng_desc }}" autofocus autocomplete="off" readonly>
         </div>
         @endif
         

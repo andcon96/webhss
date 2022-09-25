@@ -40,7 +40,7 @@
         <div class="form-group row col-md-12">
             <label for="gandeng" class="col-md-2 col-form-label text-md-right">Gandengan</label>
             <div class="col-md-3">
-                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{isset($data->getGandeng->gandeng_code) ? $data->getGandeng->gandeng_code : ''}}" autocomplete="off" readonly autofocus>
+                <input id="gandeng" type="text" class="form-control" name="gandeng" value="{{isset($data->getGandeng->gandeng_code) ? $data->getGandeng->gandeng_desc : ''}}" autocomplete="off" readonly autofocus>
             </div>
         </div>
         @endif

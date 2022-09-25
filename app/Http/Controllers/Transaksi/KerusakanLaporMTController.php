@@ -260,7 +260,7 @@ class KerusakanLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
-            
+            dd($e);
             alert()->error('Error', 'Report failed to update')->persistent('Dismiss');
             return back();
         }
