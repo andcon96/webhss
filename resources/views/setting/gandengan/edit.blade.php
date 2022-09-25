@@ -3,7 +3,7 @@
 @section('breadcrumbs')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{url('/')}}">Master</a></li>
-    <li class="breadcrumb-item active">Edit Gandengan {{$data->gandeng_code}}</li>
+    <li class="breadcrumb-item active">Edit Gandengan {{$data->gandeng_desc}}</li>
 </ol>
 @endsection
 
@@ -28,11 +28,17 @@
             </div>
             
             <div class="form-group row">
-                <label for="e_gandeng" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan') }}</label>
+                <label for="e_gandeng" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan Desc') }}</label>
                 <div class="col-md-7">
                     <input type="text" name="e_gandeng" id="e_gandeng" class="form-control" value="{{$data->gandeng_code}}" {{$data->gandeng_is_active == 0 ? 'readonly' : ''}}> 
                         
                         
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="e_gandengdesc" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan Desc') }}</label>
+                <div class="col-md-7">
+                    <input type="text" name="e_gandengdesc" id="e_gandengdesc" class="form-control" value="{{$data->gandeng_desc}}" {{$data->gandeng_is_active == 0 ? 'readonly' : ''}}>      
                 </div>
             </div>
         </div>
