@@ -48,7 +48,7 @@
             
             <label for="truckdriver" class="col-md-2 col-form-label text-md-right">Kilometer</label>
             <div class="col-md-3">
-                <input type="text" class="form-control" name="km" required>
+                <input type="text" id="km" class="form-control" name="km" required>
             </div>
             <label for="tgllapor" class="col-md-2 col-form-label text-md-right">Tanggal Lapor</label>
             <div class="col-md-3">
@@ -178,12 +178,14 @@
             document.getElementById('divtruck').style.display = '';
             document.getElementById('labelgandengan').style.display = 'none';
             document.getElementById('divgandengan').style.display = 'none';
+            document.getElementById('km').required = true;
         }
         else if(jenisval == 'gandengan'){
             document.getElementById('labelgandengan').style.display = '';
             document.getElementById('divgandengan').style.display = '';
             document.getElementById('labeltruck').style.display = 'none';
             document.getElementById('divtruck').style.display = 'none';
+            document.getElementById('km').required = false;
         }
     });
 

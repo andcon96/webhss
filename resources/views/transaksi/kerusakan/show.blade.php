@@ -8,9 +8,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('UpAssignKR',$data->id) }}" id="submit" method="POST">
-    @csrf
-    @method('PUT')
+
     <div class="row">
         <input type="hidden" name="idmaster" value="{{$data->id}}">
         <div class="form-group row col-md-12">
@@ -65,5 +63,4 @@
         </div>
     </div>
 
-</form>
 @endsection

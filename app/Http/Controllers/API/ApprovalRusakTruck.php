@@ -14,13 +14,13 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 class ApprovalRusakTruck extends Controller
 {
-    public function receiveAPI($wonbr,$rusaknbr,$nopolnbr,$status,$gandengan){
+    public function receiveAPI($wonbr,$rusaknbr,$nopolnbr,$status,$gandengan,$gandengcode){
         
         $rusaknbr = Crypt::decrypt($rusaknbr);
         $nopolnbr = Crypt::decrypt($nopolnbr);
         $status = Crypt::decrypt($status);
         $gandengan = Crypt::decrypt($gandengan);
-        
+        $gandengcode = Crypt::decrypt($gandengcode);        
         $wonbr = $wonbr;
         
         $errorlist = [];
@@ -46,7 +46,7 @@ class ApprovalRusakTruck extends Controller
 
             else{
                 $krdate = $checkdata->kr_date;
-                $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengan,$krdate);
+                $qxrusak = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengcode,$krdate);
                 
                 if($qxrusak[0] == false){
                     

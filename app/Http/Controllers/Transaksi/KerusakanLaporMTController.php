@@ -311,6 +311,7 @@ class KerusakanLaporMTController extends Controller
         $rusaknbr = $request->sonbr;
         $nopolnbr = $request->truck;
         $gandengnbr = $request->gandengan;
+        $gandengcode = $request->gandengcode;
         // validasi approval ada atau tidak
         $emailto = approval::get();
         if(is_null($emailto)){
@@ -363,6 +364,7 @@ class KerusakanLaporMTController extends Controller
                         $gandeng,
                         $kerusakanlist,
                         $emailto,
+                        $gandengcode
                         
                     );
 
@@ -394,7 +396,7 @@ class KerusakanLaporMTController extends Controller
                         $kerusakandtl->krs_desc = $request->struk_desc[$key];
                         $kerusakandtl->save();    
                     }
-                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengnbr,$krdate);
+                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengcode,$krdate);
                     if($qxkerusakan[0] == false){
                         DB::rollback();
                         
