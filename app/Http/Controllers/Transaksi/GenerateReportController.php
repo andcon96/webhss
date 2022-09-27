@@ -135,7 +135,7 @@ class GenerateReportController extends Controller
         $dateto = $data['dateto'];
 
         $driver = DriverNopol::with('getDriver')->where('dn_truck_id',$nopolid)->get();
-        // dd($driver);
+        // dd($driver, $data);
         return view('transaksi.laporan.info-per-nopol', compact('nopol', 'report', 'datefrom', 'dateto', 'nopolid', 'driver'));
     }
 
@@ -178,7 +178,7 @@ class GenerateReportController extends Controller
         $nopol = $getData['nopol'];
         $histcicilan = $getData['histcicilan'];
         $driver = $getData['driver'];
-        // dd($histcicilan);
+        // dd($histcicilan,$getData);
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-per-nopol',
             [

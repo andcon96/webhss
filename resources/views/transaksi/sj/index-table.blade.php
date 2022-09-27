@@ -35,6 +35,7 @@
                         data-sangu="{{number_format($datas->sj_tot_sangu,2)}}" 
                         data-pengurus="{{$datas->getTruck->getUserPengurus->name ?? ''}}"
                         data-barang="{{$datas->getSOMaster->getCOMaster->getBarang->barang_deskripsi ?? ''}}"
+                        data-kapal="{{$datas->getSOMaster->getCOMaster->co_kapal ?? ''}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></a>
                         
