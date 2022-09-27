@@ -39,7 +39,7 @@
             @elseif(empty($data->getTruck))
             <label for="gandengan" class="col-md-2 col-form-label text-md-right" style="display: {{!empty($data->getGandeng->gandeng_code) ? '' : 'none'}}">Gandengan</label>
             <div class="col-md-3" style="display: {{!empty($data->getGandeng->gandeng_code) ? '' : 'none'}}">
-                <input id="gandengan" type="text" class="form-control" name="truck" value="{{isset($data->getGandeng->gandeng_code) ? $data->getGandeng->gandeng_code : ''}}" autocomplete="off" maxlength="24" readonly>
+                <input id="gandengan" type="text" class="form-control" name="truck" value="{{isset($data->getGandeng->gandeng_code) ? $data->getGandeng->gandeng_desc : ''}}" autocomplete="off" maxlength="24" readonly>
             </div>
             @endif
         </div>

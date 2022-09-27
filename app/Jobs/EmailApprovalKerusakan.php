@@ -26,8 +26,9 @@ class EmailApprovalKerusakan
     protected $gandengan;
     protected $kerusakan;
     protected $emailto;
-    
-    public function __construct($pesan,$wonbr,$nopol,$gandengan,$kerusakan,$emailto)
+    protected $gandengcode;
+
+    public function __construct($pesan,$wonbr,$nopol,$gandengan,$kerusakan,$emailto,$gandengcode)
     {
         $this->pesan = $pesan;
         $this->wonbr = $wonbr;
@@ -35,6 +36,7 @@ class EmailApprovalKerusakan
         $this->gandengan = $gandengan;
         $this->kerusakan = $kerusakan;
         $this->emailto = $emailto;
+        $this->gandengcode = $gandengcode;
         //
     }
 
@@ -53,11 +55,19 @@ class EmailApprovalKerusakan
         $wonbr = $this->wonbr;
         $nopol = $this->nopol;
         $gandengan = $this->gandengan;
+        $gandengcode = $this->gandengcode;
         $pesan = $this->pesan;
         $kerusakan = $this->kerusakan;
         $rusaknbr = Crypt::encrypt($wonbr);
         $nopolnbr = Crypt::encrypt($nopol);
         $gandengnbr = Crypt::encrypt($gandengan);
+        $crypgandengcode = '';
+        if(!empty($gandengcode)){
+            $crypgandengcode = Crypt::encrypt($gandengcode);
+        }
+        else{
+            $crypgandengcode = '';
+        }
         $yes = Crypt::encrypt('yes');
         $no = Crypt::encrypt('no');
         Mail::send('emails.kerusakanemail',[
@@ -70,7 +80,8 @@ class EmailApprovalKerusakan
             'param2' => $nopolnbr,
             'param3' => $yes,
             'param4' => $no,
-            'param5' => $gandengnbr
+            'param5' => $gandengnbr,
+            'param6' => $crypgandengcode
         ],
         function ($message) use ($email,$nopol,$gandengan) {
             if(empty($nopol)){

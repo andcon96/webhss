@@ -319,7 +319,7 @@ class WSAServices
         }
     }
 
-    public function wsawocheckloc($nopol)
+    public function wsawocheckloc($nopol,$part)
     {
         
         $wsa = Qxwsa::first();
@@ -340,6 +340,7 @@ class WSAServices
                 <HRD_wo_checkloc xmlns="'.$wsa->wsas_path.'">
                     <inpdomain>'.$domain.'</inpdomain>
                     <lotserial>'.$nopol.'</lotserial>
+                    <inldpart>'.$part.'</inldpart>
                 </HRD_wo_checkloc>
             </Body>
         </Envelope>';
@@ -380,6 +381,7 @@ class WSAServices
             }
             curl_close($curl);
         }
+        
         if(is_bool($qdocResponse)){
             return false;
         }

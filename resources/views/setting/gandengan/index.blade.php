@@ -16,14 +16,14 @@
         Create Gandengan</button>
 </div>
 
-<form action="{{route('truckmaint.index')}}" method="get">
+<form action="{{route('gandengan.index')}}" method="get">
     <div class="form-group row  col-md-12 mt-3">
         <label for="s_gandengan" class="col-md-4 col-form-label text-md-right">{{ __('Gandengan') }}</label>
         <div class="col-md-3">
             <select id="s_gandengan" class="form-control" name="s_gandengan" autofocus autocomplete="off">
                 <option value=""> --Select Data-- </option>
                 @foreach($gandengmstr as $gandengan)
-                <option value="{{$gandengan->id}}">{{$gandengan->gandeng_code}}</option>
+                <option value="{{$gandengan->id}}">{{$gandengan->gandeng_desc}}</option>
                 @endforeach
             </select>
         </div>
@@ -51,7 +51,8 @@
         <thead>
             <tr>
                 <th>Domain</th>
-                <th>Gandengan</th>
+                <th>Gandengan Code</th>
+                <th>Gandengan Desc</th>
                 <th>Active</th>
                 
                 <th width="10%">Action</th>
@@ -65,6 +66,9 @@
                 </td>
                 <td>
                     {{$datas->gandeng_code}}
+                </td>
+                <td>
+                    {{$datas->gandeng_desc}}
                 </td>
                 <td>
                     {{$datas->gandeng_is_active == 1 ? 'Active' : 'Not Active'}}
@@ -120,9 +124,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="c_gandeng" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan') }}</label>
+                            <label for="c_gandeng" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan Code') }}</label>
                             <div class="col-md-7">
                                 <input id="c_gandeng" type="text" class="form-control" name="c_gandeng" autocomplete="off" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="c_gandengdesc" class="col-md-3 col-form-label text-md-right">{{ __('Gandengan Desc') }}</label>
+                            <div class="col-md-7">
+                                <input id="c_gandengdesc" type="text" class="form-control" name="c_gandengdesc" autocomplete="off" value="" required>
                             </div>
                         </div>
 

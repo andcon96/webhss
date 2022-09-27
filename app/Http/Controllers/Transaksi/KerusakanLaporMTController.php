@@ -59,7 +59,7 @@ class KerusakanLaporMTController extends Controller
         }
         
 
-        $data = $data->orderBy('created_at', 'DESC')->paginate(10);
+        $data = $data->orderBy('id', 'DESC')->paginate(10);
         
         $access = '';
         $user = session()->get('username');
@@ -106,6 +106,7 @@ class KerusakanLaporMTController extends Controller
 
     public function store(Request $request)
     {
+        
         // $this->authorize('create',[KerusakanMstr::class]);
         // if(Session::get('domain') != 'HSS'){
         //     alert()->error('Error', 'Not Allowed')->persistent('Dismiss');
@@ -127,7 +128,7 @@ class KerusakanLaporMTController extends Controller
                     alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
                     return back();
                 }
-                $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis);
+                $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis,'TRUCK');
                 if($checkwo === false){
                     alert()->error('Error', 'No Data from QAD');
                     return back();
@@ -152,7 +153,7 @@ class KerusakanLaporMTController extends Controller
                     alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
                     return back();
                 }
-                $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code);
+                $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code,'GANDENGAN');
                 if($checkwo === false){
                     alert()->error('Error', 'No Data from QAD');
                     return back();
@@ -184,12 +185,14 @@ class KerusakanLaporMTController extends Controller
                 $kerusakan_mstr->save();
 
                 $id = $kerusakan_mstr->id;
-                foreach ($request->jeniskerusakan as $key => $datas) {
-                    $kerusakan_detail = new KerusakanDetail();
-                    $kerusakan_detail->krd_kr_mstr_id = $id;
-                    $kerusakan_detail->krd_kerusakan_id = $datas;
-                    $kerusakan_detail->krd_note = $request->remarkslain[$key];
-                    $kerusakan_detail->save();
+                if($request->jeniskerusakan){
+                    foreach ($request->jeniskerusakan as $key => $datas) {
+                        $kerusakan_detail = new KerusakanDetail();
+                        $kerusakan_detail->krd_kr_mstr_id = $id;
+                        $kerusakan_detail->krd_kerusakan_id = $datas;
+                        $kerusakan_detail->krd_note = $request->remarkslain[$key];
+                        $kerusakan_detail->save();
+                    }
                 }
 
                 
@@ -202,7 +205,8 @@ class KerusakanLaporMTController extends Controller
                 alert()->success('Success', 'Report created')->persistent('Dismiss');
                 return back();
             } catch (Exception $e) {
-
+                DB::rollBack();
+                
                 alert()->error('Error', 'Failed to create data')->persistent('Dismiss');
                 return back();
             }
@@ -307,6 +311,7 @@ class KerusakanLaporMTController extends Controller
         $rusaknbr = $request->sonbr;
         $nopolnbr = $request->truck;
         $gandengnbr = $request->gandengan;
+        $gandengcode = $request->gandengcode;
         // validasi approval ada atau tidak
         $emailto = approval::get();
         if(is_null($emailto)){
@@ -359,6 +364,7 @@ class KerusakanLaporMTController extends Controller
                         $gandeng,
                         $kerusakanlist,
                         $emailto,
+                        $gandengcode
                         
                     );
 
@@ -390,7 +396,7 @@ class KerusakanLaporMTController extends Controller
                         $kerusakandtl->krs_desc = $request->struk_desc[$key];
                         $kerusakandtl->save();    
                     }
-                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengnbr,$krdate);
+                    $qxkerusakan = (new QxtendServices())->qxWOkerusakan($rusaknbr,$nopolnbr,$gandengcode,$krdate);
                     if($qxkerusakan[0] == false){
                         DB::rollback();
                         
