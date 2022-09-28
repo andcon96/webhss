@@ -381,7 +381,6 @@ class WSAServices
             }
             curl_close($curl);
         }
-        
         if(is_bool($qdocResponse)){
             return false;
         }
