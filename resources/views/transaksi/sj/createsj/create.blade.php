@@ -30,6 +30,7 @@
                                 data-type="{{ $listsos->getCOMaster->co_type }}"
                                 data-duedate="{{ $listsos->so_due_date }}"
                                 data-barang="{{$listsos->getCOMaster->getBarang->barang_deskripsi ?? ''}}"
+                                data-kapal="{{$listsos->getCOMaster->co_kapal}}"
                                 data-conbr="{{ $listsos->getCOMaster->co_nbr }}">{{ $listsos->so_nbr }} --
                                 {{ $listsos->getCOMaster->getCustomer->cust_desc ?? '' }}</option>
                         @endforeach
@@ -79,7 +80,12 @@
                     <input id="barang" type="text" class="form-control" name="barang" value=""
                         autocomplete="off" readonly>
                 </div>
-
+            </div>
+            <div class="form-group row col-md-12">
+                <label for="kapal" class="col-md-2 col-form-label text-md-right">Kapal</label>
+                <div class="col-md-3">
+                    <input id="kapal" type="text" class="form-control" name="kapal" value="" readonly>
+                </div>
             </div>
             <div class="form-group row col-md-12">
                 @include('transaksi.sj.createsj.create-table')
@@ -203,6 +209,7 @@
             var shiptoid = $(this).find(':selected').data('shiptoid');
             var conbr = $(this).find(':selected').data('conbr');
             var barang = $(this).find(':selected').data('barang');
+            var kapal = $(this).find(':selected').data('kapal');
 
             $('#customer').val(cust + ' - ' + custdesc);
             $('#shipfrom').val(shipfrom + ' - ' + shipfromdesc);
@@ -213,6 +220,7 @@
             $('#shiptoid').val(shiptoid);
             $('#conbr').val(conbr);
             $('#barang').val(barang);
+            $('#kapal').val(kapal);
 
             let url = "{{ route('getDetailSJSO', ':soid') }}"
             url = url.replace(':soid', soid);
