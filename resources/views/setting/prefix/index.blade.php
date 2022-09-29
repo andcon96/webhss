@@ -72,6 +72,20 @@
                     <span id="errorcur" style="color:red"></span>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label for="prefixiv" class="col-md-3 col-form-label text-md-right">{{ __('Prefix Invoice') }}</label>
+                <div class="col-md-2">
+                    <input id="prefixiv" type="text" class="form-control" name="prefixiv" autocomplete="off" value="{{$prefix->prefix_iv ?? ''}}" maxlength="3" autofocus required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rniv" class="col-md-3 col-form-label text-md-right">{{ __('Running Nbr Invoice') }}</label>
+                <div class="col-md-3">
+                    <input id="rniv" type="text" class="form-control" autocomplete="off" name="rniv" value="{{ substr($prefix->prefix_iv_rn,4,9) ?? ''}}" minlength="9" maxlength="9" required> 
+                    <span id="errorcur" style="color:red"></span>
+                </div>
+            </div>
         </div>
 
         <div class="modal-footer">

@@ -5,15 +5,10 @@ namespace App\Services;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Item;
-use App\Models\Master\ItemConversion;
 use App\Models\Master\Qxwsa;
-use App\Models\Master\UM;
-use App\Models\RFPMaster;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Session;
 
 class WSAServices
 {
@@ -103,7 +98,6 @@ class WSAServices
                 foreach($dataloop as $datas){
                     $item = Item::updateOrCreate([
                         'item_part' => $datas->t_part,
-
                     ]);
                     
                     $item->item_desc = $datas->t_desc;
