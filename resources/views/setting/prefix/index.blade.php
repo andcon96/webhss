@@ -76,7 +76,7 @@
             <div class="form-group row">
                 <label for="prefixiv" class="col-md-3 col-form-label text-md-right">{{ __('Prefix Invoice') }}</label>
                 <div class="col-md-2">
-                    <input id="prefixiv" type="text" class="form-control" name="prefixiv" autocomplete="off" value="{{$prefix->prefix_iv ?? ''}}" maxlength="3" autofocus required>
+                    <input id="prefixiv" type="text" class="form-control" name="prefixiv" autocomplete="off" value="{{$prefix->prefix_iv ?? ''}}" minlength="3" maxlength="3" autofocus required>
                 </div>
             </div>
             <div class="form-group row">
