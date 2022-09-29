@@ -31,6 +31,8 @@ class PrefixController extends Controller
         $prefix->prefix_sj_rn = $request->rnspk;
         $prefix->prefix_kr = $request->prefixkerusakan;
         $prefix->prefix_kr_rn = $request->rnkerusakan;
+        $prefix->prefix_iv = $request->prefixiv;
+        $prefix->prefix_iv_rn = date('Y').$request->rniv;
         $prefix->save();
 
         alert()->success('Success', 'Prefix Updated');
