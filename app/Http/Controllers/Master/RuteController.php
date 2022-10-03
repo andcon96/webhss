@@ -482,8 +482,26 @@ class RuteController extends Controller
                                         'history_is_active' => 1,
                                     ];
                                 }
+                                
 
-
+                            }
+                            else{
+                                $newrute = new Rute();
+                                $newrute->rute_tipe_id = $tipetruck;
+                                $newrute->rute_shipfrom_id = $shipfrom->id;
+                                $newrute->rute_customership_id = $shiptos->id;
+                                $newrute->save();
+                                $rutehistory = RuteHistory::where('history_rute_id',$newrute->id)->where('history_sangu',(int)$histories[5])->first();
+                                
+                                if(!$rutehistory){
+                                    $insertData[] = [
+                                        'history_rute_id' => $newrute->id,
+                                        'history_sangu' => trim(str_replace('.','',$histories[5])),
+                                        'history_ongkos' => 0,
+                                        'history_is_active' => 1,
+                                    ];
+                                }
+                                
                             }
                         }
                         
