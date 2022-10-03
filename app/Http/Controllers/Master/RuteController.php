@@ -434,4 +434,155 @@ class RuteController extends Controller
         }
 
     }
+
+
+    public function newloadhistoryrute(Request $request)
+    {
+        ini_set('max_execution_time', 360);
+
+        if (($open = fopen(public_path() . "/new_loosing.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $history[] = $data;
+            }
+
+            $tipetruck = '';
+            DB::beginTransaction();
+            try{
+
+                foreach($history as $histories){
+                    if($histories[3] != '' && $histories[1] != ''){
+                        $kodetruck = $histories[4];
+                        $kodetruck == '2EXL' ? $tipetruck = 1 :
+                        ($kodetruck == '3EXL' ?  $tipetruck = 2 :
+                        ($kodetruck == 'Semi' ?  $tipetruck = 3 :
+                        ($kodetruck == 'LD' ?  $tipetruck = 4 :
+                        ($kodetruck == '20"' ?  $tipetruck = 5 :
+                        ($kodetruck == '40"' ?  $tipetruck = 6 : '')))));
+        
+                        $shipfrom = ShipFrom::where('sf_code',$histories[1])->first();
+        
+                        $shipto = CustomerShipTo::where('cs_shipto', 'LIKE' ,'%'.$histories[3])->get();
+                        
+                        $insertData = [];
+                        
+                        foreach($shipto as $shiptos){
+                            $rute = Rute::where('rute_tipe_id',$tipetruck)
+                                        ->where('rute_shipfrom_id',$shipfrom->id)
+                                        ->where('rute_customership_id',$shiptos->id)->first();
+                                        
+                            if($rute){
+                                $rutehistory = RuteHistory::where('history_rute_id',$rute->id)->where('history_sangu',(int)$histories[5])->first();
+                                
+                                if(!$rutehistory){
+                                    $insertData[] = [
+                                        'history_rute_id' => $rute->id,
+                                        'history_sangu' => trim(str_replace('.','',$histories[5])),
+                                        'history_ongkos' => 0,
+                                        'history_is_active' => 1,
+                                    ];
+                                }
+
+
+                            }
+                        }
+                        dd($insertData);
+                        RuteHistory::insert($insertData);
+                        $insertData = [];
+
+                    }
+                }
+                DB::commit();
+            }
+            catch(Exception $err){
+                DB::rollback();
+                dd($histories[1],$histories,$err);
+            }
+            
+
+            fclose($open);
+        }
+    }
+
+    public function newloadhistoryrutedetail()
+    {
+        if (($open = fopen(public_path() . "/new_container.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
+                $history[] = $data;
+            }
+            $rutearray = [];
+            $tipetruck = '';
+            $jenistruck = array('20"','40"');
+            DB::beginTransaction();
+            try{
+                foreach($history as $histories){
+                
+                    if(!empty($histories[2])){
+                        foreach($jenistruck as $value){
+                            $tipeid = TipeTruck::where('tt_code',$value)->first();
+                            if(isset($tipeid)){
+                                $shipto = CustomerShipTo::where('cs_shipto','like','%'.$histories[2])->get();
+                                if(count($shipto) > 0){
+                                    
+                                    foreach($shipto as $st){
+                                        $rute = Rute::where('rute_tipe_id',$tipeid->id)->where('rute_customership_id',$st->id)->get();
+                                        foreach ($rute as $rt){
+                                            if($value == '20"'){
+                                                $rutehistory = RuteHistory::where('history_rute_id',$rt->id)->where('history_sangu',(int)$histories[3])->where('history_ongkos',(int)$histories[4])->first();
+                                                if(!$rutehistory){
+                                                    $rutearray[] = [
+                                                        'history_rute_id'       => $rt->id,
+                                                        'history_harga'         => 0,
+                                                        'history_sangu'         => (int)$histories[3],
+                                                        'history_ongkos'        => (int)$histories[4],
+                                                        'history_is_active'     => 1,
+                                                        'history_last_active'   => Carbon::now()->toDateTimeString(),
+                                                        'history_user'          => 1,
+                                                        'created_at'            => Carbon::now()->toDateTimeString(),
+                                                        'updated_at'            => Carbon::now()->toDateTimeString()
+                                                    ];
+                                                }
+                                            }
+                                            else if ($value == '40"'){
+                                                $rutehistory = RuteHistory::where('history_rute_id',$rt->id)->where('history_sangu',(int)$histories[5])->where('history_ongkos',(int)$histories[6])->first();
+                                                if(!$rutehistory){
+                                                    $rutearray[] = [
+                                                        'history_rute_id'       => $rt->id,
+                                                        'history_harga'         => 0,
+                                                        'history_sangu'         => (int)$histories[5],
+                                                        'history_ongkos'        => (int)$histories[6],
+                                                        'history_is_active'     => 1,
+                                                        'history_last_active'   => Carbon::now()->toDateTimeString(),
+                                                        'history_user'          => 1,
+                                                        'created_at'            => Carbon::now()->toDateTimeString(),
+                                                        'updated_at'            => Carbon::now()->toDateTimeString()
+                                                    ];
+                                                }
+                                            }
+                                            
+    
+                                        }
+                                    }
+                                }
+                            }
+                        }
+    
+                    }
+                    RuteHistory::insert($rutearray);
+                    $rutearray = [];
+                    
+                }
+                DB::commit();
+            }
+            catch(Exception $err){
+                DB::rollBack();
+                dd($err,$rutehistory,$histories);
+            }
+
+            
+            fclose($open);
+            
+        }
+    }
 }
