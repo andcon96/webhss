@@ -528,7 +528,7 @@ class RuteController extends Controller
                                     foreach($shipto as $st){
                                         $rute = Rute::where('rute_tipe_id',$tipeid->id)->where('rute_customership_id',$st->id)->get();
                                         foreach ($rute as $rt){
-                                            if($value == '20"'){
+                                            if($value == '20"' && ((int)$histories[3] != 0 && (int)$histories[4] != 0)){
                                                 $rutehistory = RuteHistory::where('history_rute_id',$rt->id)->where('history_sangu',(int)$histories[3])->where('history_ongkos',(int)$histories[4])->first();
                                                 if(!$rutehistory){
                                                     $rutearray[] = [
@@ -544,7 +544,7 @@ class RuteController extends Controller
                                                     ];
                                                 }
                                             }
-                                            else if ($value == '40"'){
+                                            else if ($value == '40"' && ((int)$histories[5] != 0 && (int)$histories[6] != 0)){
                                                 $rutehistory = RuteHistory::where('history_rute_id',$rt->id)->where('history_sangu',(int)$histories[5])->where('history_ongkos',(int)$histories[6])->first();
                                                 if(!$rutehistory){
                                                     $rutearray[] = [
