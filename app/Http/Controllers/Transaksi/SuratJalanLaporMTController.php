@@ -56,10 +56,17 @@ class SuratJalanLaporMTController extends Controller
 
         if ($request->truck) {
             $data->where('sj_truck_id', $request->truck);
-            $data = $data->orderBy('created_at', 'DESC')->paginate(10);
-        } else {
-            $data = $data->where('sj_truck_id',0)->paginate(10);
         }
+        
+        if(!$request->customer && !$request->shipfrom && 
+           !$request->shipto && !$request->kapal && 
+           !$request->status && !$request->truck){
+
+            $data = $data->where('id',0)->paginate(10);
+        }else{
+            $data = $data->orderBy('created_at', 'DESC')->paginate(10);
+        }
+
 
         return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom'));
     }
