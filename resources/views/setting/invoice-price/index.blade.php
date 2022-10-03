@@ -24,7 +24,7 @@
                 </select>
             </div>
 
-            <div class="col-md-2 offset-md-1">
+            <div class="col-md-3 offset-md-1">
                 <input type="submit" class="btn bt-action" id="btnsearch" value="Search" />
                 <button class="btn bt-action" id='btnrefresh' style="margin-left: 10px; width: 40px !important"><i class="fa fa-sync"></i></button>
             </div>
