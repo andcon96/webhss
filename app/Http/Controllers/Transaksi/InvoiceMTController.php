@@ -16,6 +16,7 @@ use App\Models\Transaksi\InvoiceDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Services\CreateTempTable;
 use App\Services\WSAServices;
+use Carbon\Carbon;
 use PDF;
 use Exception;
 use Illuminate\Http\Request;
@@ -310,7 +311,7 @@ class InvoiceMTController extends Controller
     {
         if (($open = fopen(public_path() . "/InvoiceLoosing.csv", "r")) !== FALSE) {
 
-            while (($data = fgetcsv($open, 2000, ",")) !== FALSE) {
+            while (($data = fgetcsv($open, 2000, ";")) !== FALSE) {
                 $history[] = $data;
             }
             // dd($history);
@@ -327,11 +328,12 @@ class InvoiceMTController extends Controller
                                         'ip_customership_id' => $custship,
                                     ]);
                     $invoicelist->save();
-
+                    
                     $invoicehist = InvoicePriceHistory::firstOrNew([
+                        'iph_tonase_price' => str_replace(',','.',$histories[5]),
                         'iph_ip_id' => $invoicelist->id,
-                        'iph_tonase_price' => str_replace(',','.',$histories[5])
                     ]);
+                    
                     $invoicehist->save();
                     
                     // $insertData[] = [

@@ -13,6 +13,8 @@ class InvoicePriceHistory extends Model
 
     protected $fillable = [
         'iph_ip_id',
+        'iph_tonase_price',
+        'iph_trip_price',
         'iph_is_active',
         'iph_last_active'
     ];
