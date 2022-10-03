@@ -14,6 +14,8 @@
     @method('PUT')
     <div class="row">
         <input type="hidden" name="idmaster" value="{{$data->id}}">
+        <input type="hidden" id="idtipesangu" name="sj_default_sangu_type" value="{{$data->sj_default_sangu_type}}">
+        <input type="hidden" name="idtruck" id="idtruck" value="{{$data->getTruck->truck_tipe_id}}">
         <div class="form-group row col-md-12">
             <label for="sonbr" class="col-md-2 col-form-label text-md-right">Nomor SO</label>
             <div class="col-md-3">
@@ -37,11 +39,21 @@
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <input id="shipfrom" type="text" class="form-control" name="shipfrom" value="{{$data->getSOMaster->so_ship_from}} -- {{$data->getSOMaster->getShipFrom->sf_desc ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <select name="shipfrom" id="shipfrom" class="form-control selectdrop">
+                    <option value="">Select Data</option>
+                    @foreach($shipfrom as $shipfroms)
+                    <option value="{{$shipfroms->sf_code}}" data-id="{{$shipfroms->id}}" {{$shipfroms->sf_code == $data->getSOMaster->so_ship_from ? 'Selected' : ''}}>{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>
+                    @endforeach
+                </select>
             </div>
             <label for="shipto" class="col-md-3 col-form-label text-md-right">Ship To</label>
             <div class="col-md-3">
-                <input id="shipto" type="text" class="form-control" name="shipto" value="{{$data->getSOMaster->so_ship_to}} -- {{$data->getSOMaster->getShipTo->cs_shipto_name ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
+                <select name="shipto" id="shipto" class="form-control selectdrop">
+                    <option value="">Select Data</option>
+                    @foreach($shipto as $shiptos)
+                    <option value="{{$shiptos->cs_shipto}}" data-id="{{$shiptos->id}}" {{$shiptos->cs_shipto == $data->getSOMaster->so_ship_to ? 'Selected' : ''}}>{{$shiptos->cs_shipto}} -- {{$shiptos->cs_shipto_name}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -66,6 +78,14 @@
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.sj.edit-table')
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="listsan" class="col-md-2 col-form-label text-md-right">List Sangu</label>
+            <div class="col-md-3">
+                <select name="listsan" id="listsan" class="form-control selectdrop">
+                    <option value="">Select Data</option>
+                </select>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="defaultsangu" class="col-md-2 col-form-label text-md-right">Total Default Sangu</label>
@@ -116,6 +136,8 @@
 
 @section('scripts')
 <script>
+    $('.selectdrop').select2({width: '100%'});
+
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: '+0d',
@@ -236,6 +258,112 @@
         var newdata = data.replace(/([^ 0-9])/g, '');
 
         $(this).val(Number(newdata).toLocaleString('en-US'));
+    });
+
+    function resetSangu(){
+        $('#defaultsangu').val(0);
+        $('#sangutruck').val(0);
+        $('#komisitruck').val(0);
+    }
+
+    $(document).ready(function(){
+        let shipto = $('#shipto').find(':selected').data('id');
+        let shipfrom = $('#shipfrom').find(':selected').data('id');
+        let tipetruck = $('#idtruck').val();
+
+        $.ajax({
+            url: "{{ route('getRute') }}",
+            data: {
+                tipetruck: tipetruck,
+                shipto: shipto,
+                shipfrom: shipfrom
+            },
+            success: function(data) {
+                let output = '<option value=""> Select Data </option>';
+
+                if(data != 0){
+                    data.forEach(element => {
+                        output += `<option value="${element['id']}"
+                                data-sangu="${element['history_sangu']}"
+                                data-komisi="${element['history_ongkos']}"
+                                data-harga="${element['history_harga']}">
+                                Sangu : ${element['history_sangu']} , Komisi : ${element['history_ongkos']}
+                                </option>`;
+                    });
+                }
+
+                $('#listsan').html('').append(output);
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: 'Gagal mencari data',
+                    showCloseButton: true,
+                })
+                $('#btnconf').hide();
+            },
+        })
+    });
+
+    $(document).on('change', '#shipto, #shipfrom', function(){
+        let shipto = $('#shipto').find(':selected').data('id');
+        let shipfrom = $('#shipfrom').find(':selected').data('id');
+        let tipetruck = $('#idtruck').val();
+
+        $.ajax({
+            url: "{{ route('getRute') }}",
+            data: {
+                tipetruck: tipetruck,
+                shipto: shipto,
+                shipfrom: shipfrom
+            },
+            beforeSend: function() {
+                $('#loader').removeClass('hidden');
+            },
+            success: function(data) {
+                resetSangu();
+                let output = '<option value=""> Select Data </option>';
+
+                if(data != 0){
+                    data.forEach(element => {
+                        output += `<option value="${element['id']}"
+                                data-sangu="${element['history_sangu']}"
+                                data-komisi="${element['history_ongkos']}"
+                                data-harga="${element['history_harga']}">
+                                Sangu : ${element['history_sangu']} , Komisi : ${element['history_ongkos']}
+                                </option>`;
+                    });
+                }
+
+                $('#listsan').html('').append(output);
+            },
+            error: function(data) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: 'Gagal mencari data',
+                    showCloseButton: true,
+                })
+                $('#btnconf').hide();
+            },
+            complete: function() {
+                $('#loader').addClass('hidden');
+            }
+        })
+
+    })
+
+    $(document).on('change', '#listsan', function(){
+        let id = $(this).val();
+        let sangu = $(this).find(':selected').data('sangu');
+        let komisi = $(this).find(':selected').data('komisi');
+        
+        $('#sangutruck').val(sangu);
+        $('#komisitruck').val(komisi);
+        $('#idtipesangu').val(id);
+
+        getDefaultSangu();
     });
 
     $("table.edittable").on("click", ".ibtnDel", function(event) {

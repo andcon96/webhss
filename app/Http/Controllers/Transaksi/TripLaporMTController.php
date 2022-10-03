@@ -90,24 +90,25 @@ class TripLaporMTController extends Controller
             $truck = Truck::query()
                             ->where('truck_user_id', $user)
                             ->where('truck_is_active',1)
-                            ->firstOrFail();
+                            ->first();
 
             $sjmstr = SuratJalan::findOrFail($request->idsjmaster);
                 
             $targetAbsen = $sjmstr->sj_jmlh_trip;
 
             $OnGoingAbsen = SJHistTrip::where('sjh_sj_mstr_id', $request->idsjmaster)
-                                        ->where('sjh_truck', $truck->id)
+                                        ->where('sjh_truck', $truck->id ?? $request->idtruck)
                                         ->count();
 
             if ($OnGoingAbsen >= $targetAbsen) {
                 alert()->error('Error', 'Target Absensi Sudah Tercapai, Data tidak disimpan')->persistent('Dismiss');
                 return back();
             }
-
+            
             $newdata = new SJHistTrip();
             $newdata->sjh_sj_mstr_id = $request->idsjmaster;
-            $newdata->sjh_truck = $truck->id;
+            $newdata->sjh_truck = $truck->id ?? $request->idtruck;
+            $newdata->created_by = Auth::user()->username;
             $newdata->save();
 
             if($OnGoingAbsen + 1 == $targetAbsen){
@@ -131,6 +132,7 @@ class TripLaporMTController extends Controller
             return back();
         } catch (Exception $e) {
             DB::rollBack();
+            dd($e);
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');
             return back();
         }

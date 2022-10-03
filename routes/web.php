@@ -4,6 +4,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\ApprovalController;
+use App\Http\Controllers\Master\BankCustomerController;
 use App\Http\Controllers\Master\BarangMTController;
 use App\Http\Controllers\Master\BonusBarangController;
 use App\Http\Controllers\Master\CustomerController;
@@ -355,6 +356,15 @@ Route::group(['middleware' => ['auth']], function () {
         });
         //================================
 
+        // Bank Customer
+        //================================
+        Route::group(['middleware'=>'can:access_bcmt'], function () {
+            Route::resource('bankcustomer', BankCustomerController::class);
+            Route::get('loadexcel/bankcustomer', [BankCustomerController::class, 'loadexcel'])->name('loadExcel');
+        });
+        //================================
+
+
          // Gandengan Maintenance
         //================================
         Route::group(['middleware'=>'can:access_ttmt'], function () {
@@ -371,7 +381,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['middleware'=>'can:access_ttmt'], function () {
             route::get('loadgandengan', [GandenganMTController::class, 'loadgandengan']);       
          });
-        
         
         //================================
         

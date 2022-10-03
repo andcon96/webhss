@@ -265,7 +265,7 @@ class RuteController extends Controller
         $cekrute = Rute::where('rute_tipe_id',$request->tipecode)->where('rute_shipfrom_id',$request->shipfrom)->where('rute_customership_id',$request->shipto)->first();
         if($cekrute){
             alert()->error('Error', 'Data Exist');
-            return back();
+            return redirect(url()->previous());
         }
 
         DB::beginTransaction();
@@ -277,12 +277,12 @@ class RuteController extends Controller
             $rute->save();
             DB::commit();
             alert()->success('Success', 'Rute berhasil di tambah');
-            return back();
+            return redirect(url()->previous());
         }
         catch(Exception $err){
             DB::rollback();
             alert()->error('Error', 'Rute gagal di tambah');
-            return back();
+            return redirect(url()->previous());
         }
     }
 
