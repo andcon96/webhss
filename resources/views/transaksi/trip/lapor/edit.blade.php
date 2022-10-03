@@ -13,6 +13,7 @@
     @csrf
     @method('PUT')
     <div class="row">
+        <input type="hidden" name="idtruck" value="{{$data->sj_truck_id}}">
         <input type="hidden" name="idsjmaster" value="{{$data->id}}">
         <input type="hidden" name="idsomaster" value="{{$data->getSOMaster->id}}">
         <div class="form-group row col-md-12">
@@ -65,9 +66,9 @@
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
                     <a href="{{Route('laportrip.index',['truck' => $data->sj_truck_id])}}" id="btnback" class="btn btn-success bt-action">Back</a>
-                    @if(Auth::user()->role_id != '1')
+                    
                     <button type="submit" class="btn btn-success bt-action btn-focus btnconf" id="btnconf">Lapor Trip</button>
-                    @endif
+                    
                     <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                         <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
                     </button>

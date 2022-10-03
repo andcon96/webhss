@@ -386,6 +386,15 @@
               </label>
             </div>
           </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Bank Account Master') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT22">
+                <input type="checkbox" id="cbMT22" name="cbMT22" value="MT22" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
           
           <div class="form-group">
             <h6>
@@ -484,6 +493,7 @@
         document.getElementById("cbMT15").checked = true;  
         document.getElementById("cbMT16").checked = true;  
         document.getElementById("cbMT21").checked = true;  
+        document.getElementById("cbMT22").checked = true;  
     }
     else{
       document.getElementById("cbSOMT").checked = false; 
@@ -516,6 +526,7 @@
         document.getElementById("cbMT15").checked = false;  
         document.getElementById("cbMT16").checked = false;  
         document.getElementById("cbMT21").checked = false;  
+        document.getElementById("cbMT22").checked = false;  
     }
   })
 
@@ -681,6 +692,11 @@
               document.getElementById("cbMT21").checked = true;  
             }else{
               document.getElementById("cbMT21").checked = false;
+            }
+            if(totmenu.search("MT22") >= 0){
+              document.getElementById("cbMT22").checked = true;  
+            }else{
+              document.getElementById("cbMT22").checked = false;
             }
 
             

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Transaksi;
 use App\Http\Controllers\Controller;
 use App\Models\Master\BonusBarang;
 use App\Models\Master\Customer;
+use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
 use App\Models\Master\Item;
 use App\Models\Master\Prefix;
 use App\Models\Master\Rute;
+use App\Models\Master\ShipFrom;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
@@ -138,15 +140,24 @@ class SuratJalanController extends Controller
 
     public function edit($id)
     {
-        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer','getSOMaster.getDetail','getSOMaster.getShipTo','getSOMaster.getShipFrom','getDetail','getRuteHistory')->findOrFail($id);
+        $data = SuratJalan::with('getSOMaster.getCOMaster.getCustomer',
+                                 'getSOMaster.getDetail',
+                                 'getSOMaster.getShipTo',
+                                 'getSOMaster.getShipFrom',
+                                 'getDetail',
+                                 'getRuteHistory',
+                                 'getTruck')->findOrFail($id);
         $this->authorize('update',[SuratJalan::class, $data]);
         $item = SalesOrderDetail::where('sod_so_mstr_id',$data->sj_so_mstr_id)->get();
+        $shipto = CustomerShipTo::get();
+        $shipfrom = ShipFrom::get();
         
-        return view('transaksi.sj.edit',compact('data','item'));
+        return view('transaksi.sj.edit',compact('data','item','shipto','shipfrom'));
     }
 
     public function update(Request $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try{
             $sjmstr = SuratJalan::findOrFail($request->idmaster);
@@ -154,6 +165,7 @@ class SuratJalanController extends Controller
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
             $sjmstr->sj_jmlh_trip = $request->trip;
+            $sjmstr->sj_default_sangu_type = $request->sj_default_sangu_type;
             $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();
             

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\BonusBarang;
+use App\Models\Master\Customer;
+use App\Models\Master\CustomerShipTo;
 use App\Models\Master\InvoicePrice;
+use App\Models\Master\ShipFrom;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SJHistTrip;
@@ -25,8 +28,31 @@ class SuratJalanLaporMTController extends Controller
                                'getSOMaster.getCOMaster.getCustomer',
                                'getSOMaster.getShipFrom',
                                'getSOMaster.getShipTo');
-        // dd($data);
+                               
         $truck = Truck::get();
+        $customer = Customer::get();
+        $shipto = CustomerShipTo::get();
+        $shipfrom = ShipFrom::get();
+
+        if($request->customer){
+            $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->customer);
+        }
+
+        if($request->shipfrom){
+            $data->whereRelation('getSOMaster','so_ship_from',$request->shipfrom);
+        }
+
+        if($request->shipto){
+            $data->whereRelation('getSOMaster','so_ship_to',$request->shipto);
+        }
+
+        if($request->kapal){
+            $data->whereRelation('getSOMaster.getCOMaster','co_kapal','like', '%'.$request->kapal.'%');
+        }
+
+        if($request->status){
+            $data->where('sj_status','=',$request->status);
+        }
 
         if ($request->truck) {
             $data->where('sj_truck_id', $request->truck);
@@ -35,7 +61,7 @@ class SuratJalanLaporMTController extends Controller
             $data = $data->where('sj_truck_id',0)->paginate(10);
         }
 
-        return view('transaksi.sjcust.index', compact('data', 'truck'));
+        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom'));
     }
 
     public function laporsj($sj, $truck)
@@ -159,7 +185,6 @@ class SuratJalanLaporMTController extends Controller
     {
         DB::beginTransaction();
         try{
-
             foreach($request->idhist as $key => $idhist){
                 $sohist = SJHistTrip::findOrFail($idhist);
                 $sohist->sjh_remark = $request->sj[$key];

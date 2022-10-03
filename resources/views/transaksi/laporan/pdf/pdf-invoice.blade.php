@@ -156,12 +156,12 @@
             <tr>
                 <td colspan="2"></td>
                 <td>Bank</td>
-                <td colspan="4">: MASPION</td>
+                <td colspan="4">: {{$bankacc->bc_acc_name ?? ''}}</td>
             </tr>
             <tr>
                 <td colspan="2"></td>
                 <td>No. acc</td>
-                <td colspan="4">: 101 203 0360</td>
+                <td colspan="4">: {{$bankacc->bc_acc_nbr ?? ''}}</td>
             </tr>
         </tbody>
     </table>
