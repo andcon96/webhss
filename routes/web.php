@@ -63,6 +63,9 @@ Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
 // Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
 Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
 
+Route::get('newloadhistoryrute',[RuteController::class,'newloadhistoryrute']);
+Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
+
 Route::group(['middleware' => ['auth']], function () {
     //================================
     // Logout & Home 123
