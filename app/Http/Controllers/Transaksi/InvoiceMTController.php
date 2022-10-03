@@ -308,7 +308,7 @@ class InvoiceMTController extends Controller
 
     public function loadinvoice(Request $request)
     {
-        if (($open = fopen(public_path() . "/historyinvoice.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/InvoiceLoosing.csv", "r")) !== FALSE) {
 
             while (($data = fgetcsv($open, 2000, ",")) !== FALSE) {
                 $history[] = $data;
@@ -327,15 +327,20 @@ class InvoiceMTController extends Controller
                                         'ip_customership_id' => $custship,
                                     ]);
                     $invoicelist->save();
-                    
-                    $insertData[] = [
+
+                    InvoicePriceHistory::firstOrNew([
                         'iph_ip_id' => $invoicelist->id,
                         'iph_tonase_price' => str_replace(',','.',$histories[5])
-                    ];
+                    ]);
+                    
+                    // $insertData[] = [
+                    //     'iph_ip_id' => $invoicelist->id,
+                    //     'iph_tonase_price' => str_replace(',','.',$histories[5])
+                    // ];
                 }
                 
             }
-            InvoicePriceHistory::insert($insertData);
+            // InvoicePriceHistory::insert($insertData);
 
             fclose($open);
         }    
