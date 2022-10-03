@@ -328,10 +328,11 @@ class InvoiceMTController extends Controller
                                     ]);
                     $invoicelist->save();
 
-                    InvoicePriceHistory::firstOrNew([
+                    $invoicehist = InvoicePriceHistory::firstOrNew([
                         'iph_ip_id' => $invoicelist->id,
                         'iph_tonase_price' => str_replace(',','.',$histories[5])
                     ]);
+                    $invoicehist->save();
                     
                     // $insertData[] = [
                     //     'iph_ip_id' => $invoicelist->id,
