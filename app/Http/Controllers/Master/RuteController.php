@@ -275,9 +275,12 @@ class RuteController extends Controller
             $rute->rute_shipfrom_id = $request->shipfrom;
             $rute->rute_customership_id = $request->shipto;
             $rute->save();
+
+            
             DB::commit();
             alert()->success('Success', 'Rute berhasil di tambah');
-            return redirect(url()->previous());
+            $redirectUrl = '/rute/rutedetail/'.$request->tipecode.'?s_shipfrom='.$request->shipfrom.'&s_shipto='.$request->shipto;
+            return redirect()->to($redirectUrl);
         }
         catch(Exception $err){
             DB::rollback();
