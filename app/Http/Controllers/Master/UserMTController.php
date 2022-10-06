@@ -55,6 +55,7 @@ class UserMTController extends Controller
             ->orderBy('role')
             ->orderBy('role_type')
             ->orderBy('name')
+            ->selectRaw('*,users.id as id')
             ->paginate(10);
                 
 
