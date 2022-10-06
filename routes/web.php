@@ -41,8 +41,6 @@ use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Http\Controllers\Transaksi\CicilanHistoryController;
-use App\Models\Master\GandenganMstr;
-use App\Models\Transaksi\CicilanHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -62,9 +60,8 @@ Auth::routes();
 // Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
 // Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
 // Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
-
-Route::get('newloadhistoryrute',[RuteController::class,'newloadhistoryrute']);
-Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
+// Route::get('newloadhistoryrute',[RuteController::class,'newloadhistoryrute']);
+// Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================

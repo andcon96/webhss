@@ -16,6 +16,7 @@ use App\Models\Transaksi\CicilanHistory;
 use App\Services\CreateTempTable;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -23,11 +24,18 @@ class GenerateReportController extends Controller
 {
     public function index()
     {
-        $truck = Truck::get();
-
-        $domain = Domain::get();
-
+        $domainUser = Auth::user()->domain;
+        $truck = Truck::query()->with('getDomain');
+        $domain = Domain::query();
         $tipetruck = TipeTruck::get();
+
+        if($domainUser){
+            $truck->whereRelation('getDomain','id',$domainUser);
+            $domain->where('id',$domainUser);
+        }
+
+        $truck = $truck->get();
+        $domain = $domain->get();
 
         return view('transaksi.laporan.index', compact('truck', 'domain', 'tipetruck'));
     }

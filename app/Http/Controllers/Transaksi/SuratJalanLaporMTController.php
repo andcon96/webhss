@@ -17,6 +17,7 @@ use App\Services\QxtendServices;
 use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SuratJalanLaporMTController extends Controller
@@ -28,8 +29,13 @@ class SuratJalanLaporMTController extends Controller
                                'getSOMaster.getCOMaster.getCustomer',
                                'getSOMaster.getShipFrom',
                                'getSOMaster.getShipTo');
-                               
-        $truck = Truck::get();
+
+        $domain = Auth::user()->domain;
+        $truck = Truck::query()->with('getDomain');
+        if($domain){
+            $truck->whereRelation('getDomain','id',$domain);
+        }
+        $truck = $truck->get();
         $customer = Customer::get();
         $shipto = CustomerShipTo::get();
         $shipfrom = ShipFrom::get();
