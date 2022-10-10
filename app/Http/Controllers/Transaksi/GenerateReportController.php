@@ -101,9 +101,10 @@ class GenerateReportController extends Controller
                 } elseif ($report == '4') {
                     $datefrom = $request->datefrom;
                     $dateto = $request->dateto;
+                    $tipe = $request->tipe;
                     $domain = $request->domain;
 
-                    $getData = (new CreateTempTable())->getDataTotalanSupirLoosing($domain, $datefrom, $dateto);
+                    $getData = (new CreateTempTable())->getDataTotalanSupirLoosing($domain, $datefrom, $dateto, $tipe);
                     $data = $getData['data'];
                     $listtruck = $getData['listtruck'];
                     $rbhist = $getData['rbhist'];

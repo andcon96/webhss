@@ -64,6 +64,16 @@
         </div>
     </div>
     <div class="form-group row col-md-12">
+        <label for="tipe" class="col-md-2 col-md-label text-md-right">Tipe</label>
+        <div class="col-md-4 col-lg-3">
+            <select name="tipe" id="tipe" class="form-control" required autocomplete="off">
+                <option value="">Select Data</option>
+                <option value="1">Loosing</option>
+                <option value="2">Container</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
             <button class="btn bt-action newUser" name="aksi" value="1" style="margin-left: 10px; width: 40px !important">
@@ -83,7 +93,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#truck,#report,#domain,#tipetruck').select2({
+    $('#truck,#report,#domain,#tipetruck,#tipe').select2({
         width: '100%',
     });
 
@@ -99,7 +109,7 @@
         }
     });
     
-    $('#truck, #domain, #tipetruck').prop('disabled',true);
+    $('#truck, #domain, #tipetruck, #tipe').prop('disabled',true);
 
     $('#report').on('change', function(){
         let val = $(this).val();
@@ -108,24 +118,31 @@
             $('#truck').prop('disabled',false);
             $('#truck').prop('required',true);
             
-            $('#domain,#tipetruck').prop('disabled',true);
-            $('#domain,#tipetruck').prop('required',false);
+            $('#domain,#tipetruck,#tipe').prop('disabled',true);
+            $('#domain,#tipetruck,#tipe').prop('required',false);
             $('#btnpdf').prop('disabled',false);
+        }else if(val == 4){
+            $('#truck,#tipetruck,#tipe').prop('disabled',true);
+            $('#truck,#tipetruck,#tipe').prop('required',false);
+
+            $('#tipe,#domain').prop('disabled',false);
+            $('#tipe,#domain').prop('required',true);
+
         }else if(val == 5){
-            $('#truck,#domain').prop('disabled',true);
-            $('#truck,#domain').prop('required',false);
+            $('#truck,#domain,#tipe').prop('disabled',true);
+            $('#truck,#domain,#tipe').prop('required',false);
             
             $('#tipetruck').prop('disabled',false);
             $('#tipetruck').prop('required',true);
 
             $('#btnpdf').prop('disabled',true);
         }else if(val == 6){
-            $('#truck,#domain,#tipetruck').prop('disabled',true);
-            $('#truck,#domain,#tipetruck').prop('required',false);
+            $('#truck,#domain,#tipetruck,#tipe').prop('disabled',true);
+            $('#truck,#domain,#tipetruck,#tipe').prop('required',false);
             $('#btnpdf').prop('disabled',true);
         }else{
-            $('#truck,#tipetruck').prop('disabled',true);
-            $('#truck,#tipetruck').prop('required',false);
+            $('#truck,#tipetruck,#tipe').prop('disabled',true);
+            $('#truck,#tipetruck,#tipe').prop('required',false);
 
             $('#domain').prop('disabled',false);
             $('#domain').prop('required',true);

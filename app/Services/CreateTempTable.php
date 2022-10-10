@@ -267,10 +267,12 @@ class CreateTempTable
         ];
     }
 
-    public function getDataTotalanSupirLoosing($domain, $datefrom, $dateto)
+    public function getDataTotalanSupirLoosing($domain, $datefrom, $dateto, $tipe)
     {
-        $data = SuratJalan::query();
-        $rbhist = ReportBiaya::query();
+        $data = SuratJalan::query()->with('getTruck');
+        $rbhist = ReportBiaya::query()->with('getTruck');
+        $listtruck = Truck::query()->with(['getTipe', 'getUserDriver'])
+                        ->where('truck_domain', $domain);
 
         if ($datefrom) {
             $data->where('sj_eff_date', '>=', $datefrom);
@@ -280,6 +282,26 @@ class CreateTempTable
         if ($dateto) {
             $data->where('sj_eff_date', '<=', $dateto);
             $rbhist->where('rb_eff_date', '<=', $dateto);
+        }
+
+        if ($tipe) {
+            if($tipe == 1){
+                $data->whereHas('getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['1','2','3','4']);
+                });
+                $rbhist->whereHas('getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['1','2','3','4']);
+                });
+                $listtruck->whereIn('truck_tipe_id',['1','2','3','4']);
+            }elseif($tipe == 2){
+                $data->whereHas('getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['5','6']);
+                });
+                $rbhist->whereHas('getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['5','6']);
+                });
+                $listtruck->whereIn('truck_tipe_id',['5','6']);
+            }
         }
 
         $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
@@ -295,13 +317,8 @@ class CreateTempTable
             ->groupBy('rb_truck_id')
             ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
             ->get();
-        
-        // dd($rbhist,$data);
-        
 
-        $listtruck = Truck::with(['getTipe', 'getUserDriver'])
-            ->where('truck_domain', $domain)
-            ->get();
+        $listtruck = $listtruck->get();
 
         return [
             'data' => $data,
