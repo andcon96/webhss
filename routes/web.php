@@ -367,7 +367,7 @@ Route::group(['middleware' => ['auth']], function () {
 
          // Gandengan Maintenance
         //================================
-        Route::group(['middleware'=>'can:access_ttmt'], function () {
+        Route::group(['middleware'=>'can:access_gandengan'], function () {
             Route::resource('gandengan', GandenganMTController::class);
         });
         //================================
