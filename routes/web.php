@@ -324,6 +324,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('drivernopolmt', DriverNopolController::class);
         });
         //================================
+        // Gandengan Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_gandengan'], function () {
+            Route::resource('gandengan', GandenganMTController::class);
+        });
+        //================================
+
     });
 
     Route::group(['middleware'=>'can:access_masters_qad'], function(){
@@ -365,12 +372,6 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
 
 
-         // Gandengan Maintenance
-        //================================
-        Route::group(['middleware'=>'can:access_gandengan'], function () {
-            Route::resource('gandengan', GandenganMTController::class);
-        });
-        //================================
 
          // Load Excel
         //================================
