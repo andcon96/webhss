@@ -26,7 +26,7 @@ class TripMTController extends Controller
         
         if($request->truck){
             $data->whereRelation('getTruck','id',$request->truck);
-            $data = $data->orderBy('created_at','DESC')->take(5)->get();
+            $data = $data->orderBy('created_at','DESC')->paginate(10);
         }else{
             if ($userDriver) {
                 $data = SuratJalan::query()
@@ -41,7 +41,7 @@ class TripMTController extends Controller
                                   ->get();
                                   
             } else {
-                $data = [];
+                $data = $data->where('sj_status','Open')->paginate(10);
             }
         }
         
