@@ -140,7 +140,7 @@
                         <div class="form-group row">
                             <label for="driver" class="col-md-3 col-form-label text-md-right">{{ __('Driver') }}</label>
                             <div class="col-md-7">
-                                <select id="driver" class="form-control user" name="driver" autofocus required autocomplete="off">
+                                <select id="driver" class="form-control user" name="driver" autofocus  autocomplete="off">
                                     <option value=""> --Select Data-- </option>
                                     @foreach($user as $driver)
                                     <option value="{{$driver->id}}">{{$driver->username}} -- {{$driver->name}}</option>
@@ -151,7 +151,7 @@
                         <div class="form-group row">
                             <label for="pengurus" class="col-md-3 col-form-label text-md-right">{{ __('Pengurus') }}</label>
                             <div class="col-md-7">
-                                <select id="pengurus" class="form-control user" name="pengurus" autofocus required autocomplete="off">
+                                <select id="pengurus" class="form-control user" name="pengurus" autofocus  autocomplete="off">
                                     <option value=""> --Select Data-- </option>
                                     @foreach($user as $pengurus)
                                     <option value="{{$pengurus->id}}">{{$pengurus->username}} -- {{$pengurus->name}}</option>
