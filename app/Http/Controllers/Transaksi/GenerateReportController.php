@@ -117,7 +117,7 @@ class GenerateReportController extends Controller
                             'rbhist' => $rbhist,
                             'datefrom' => $datefrom,
                             'dateto' => $dateto,
-                            'domain' => $domain
+                            'domain' => $domain,
                             'tipe' => $tipe
                         ]
                     )->setPaper('A3', 'Landscape');
