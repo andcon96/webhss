@@ -64,6 +64,8 @@
             <label for="effdate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
             <div class="col-md-3">
                 <input id="effdate" type="text" class="form-control" name="effdate" value="{{\Carbon\Carbon::now()->toDateString()}}" autocomplete="off" maxlength="24" autofocus>
+                <input type="hidden" id="so_date" name="so_date" value="{{$data->getSOMaster->created_at->format('Y-m-d')}}">
+                <input type="hidden" id="so_due_date" name="so_due_date" value="{{$data->getSOMaster->so_due_date}}">
             </div>
         </div>
         <div class="form-group row col-md-12">
