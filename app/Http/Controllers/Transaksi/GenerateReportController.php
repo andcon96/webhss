@@ -116,7 +116,9 @@ class GenerateReportController extends Controller
                             'listtruck' => $listtruck,
                             'rbhist' => $rbhist,
                             'datefrom' => $datefrom,
-                            'dateto' => $dateto
+                            'dateto' => $dateto,
+                            'domain' => $domain
+                            'tipe' => $tipe
                         ]
                     )->setPaper('A3', 'Landscape');
 

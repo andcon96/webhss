@@ -67,7 +67,7 @@
 	<table>
         <thead>
             <tr>
-                <th colspan="12" class="judul">TOTALAN SOPIR LOOSING HSST</th>
+                <th colspan="12" class="judul">TOTALAN SOPIR {{$tipe == 1 ? 'LOOSING' : 'CONTAINER'}} {{strtoupper($domain)}}</th>
             </tr>
             <tr>
                 <th colspan="12" class="judul">PERIODE : &nbsp; {{\Carbon\Carbon::parse($datefrom)->format('d M Y')}} - {{\Carbon\Carbon::parse($dateto)->format('d M Y')}}</th>
