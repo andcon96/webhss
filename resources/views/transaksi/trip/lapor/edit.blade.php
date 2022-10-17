@@ -56,7 +56,7 @@
         </div>
             <label for="duedate" class="col-md-2 col-form-label text-md-right">Pencatatan Trip</label>
         <div class="form-group row col-md-12">
-            @if(Auth()->user()->role_id == 1)
+            @if(!$userDriver)
             @include('transaksi.trip.lapor.edit-catatan-admin-trip-table')
             @else
             @include('transaksi.trip.lapor.edit-catatan-trip-table')

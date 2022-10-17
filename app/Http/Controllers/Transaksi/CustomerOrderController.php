@@ -169,7 +169,7 @@ class CustomerOrderController extends Controller
                 $output .= '<tr>';
                 $output .= '<td>'.$datas->cod_line.'</td>';
                 $output .= '<td>'.$datas->cod_part.' - '.$datas->getItem->item_desc .'</td>';
-                $output .= '<td>EA</td>';
+                $output .= '<td>'.$datas->getItem->item_um.'</td>';
                 $output .= '<td>'.$datas->cod_qty_ord.'</td>';
                 $output .= '<td>'.$datas->cod_qty_used.'</td>';
                 $output .= '</tr>';

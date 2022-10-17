@@ -66,10 +66,13 @@ class TripLaporMTController extends Controller
         $listdriver = SuratJalan::with(['getTruck.getUserDriver'])
                                 ->where('id',$id)
                                 ->get();
+
+        $userid = Auth::user()->id;
+        $userDriver = Truck::where('truck_user_id',$userid)->first();
                     
         $sohbyso = SJHistTrip::query()->with(['getSJMaster','getTruck.getUserDriver']);
 
-        if (Auth::user()->role_id != '1') {
+        if ($userDriver) {
             $sohbyso->whereRelation('getTruck.getUserDriver', 'id', '=', Auth::id());
         }
 
@@ -78,7 +81,7 @@ class TripLaporMTController extends Controller
                            ->orderBy('sjh_truck', 'ASC')
                            ->get();
                            
-        return view('transaksi.trip.lapor.edit', compact('data', 'sohbyso', 'listdriver'));
+        return view('transaksi.trip.lapor.edit', compact('data', 'sohbyso', 'listdriver','userDriver'));
     }
 
     public function update(Request $request)
