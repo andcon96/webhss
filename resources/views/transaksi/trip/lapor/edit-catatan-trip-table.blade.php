@@ -28,7 +28,7 @@
 
             <tr>
                 <td>Trip ke {{$trip}}</td>
-                <td data-label="No Polis & Driver">{{$datas->getTruck->truck_no_polis}} -- {{$datas->getTruck->getUserDriver->name}}</td>
+                <td data-label="No Polis & Driver">{{$datas->getTruck->truck_no_polis}} -- {{$datas->getTruck->getUserDriver->name ?? ''}}</td>
                 <td data-label="Waktu Pencatatan">{{$datas->tglhist}}</td>
             </tr>
 

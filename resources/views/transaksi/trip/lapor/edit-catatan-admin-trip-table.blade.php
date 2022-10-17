@@ -15,7 +15,7 @@
                 @forelse($sohbyso->where('sjh_truck',$datas->sj_truck_id)->where('sjh_sj_mstr_id',$datas->id) as $flag => $sohbysos)
                 <tr>
                     <td>Trip ke {{$trip}}</td>
-                    <td data-label="No Polis & Driver">{{$sohbysos->getTruck->truck_no_polis}} -- {{$sohbysos->getTruck->getUserDriver->name}}</td>
+                    <td data-label="No Polis & Driver">{{$sohbysos->getTruck->truck_no_polis}} -- {{$sohbysos->getTruck->getUserDriver->name ?? ''}}</td>
                     <td data-label="Waktu Pencatatan">{{$sohbysos->tglhist}}</td>
                 </tr>
                 @php($trip += 1)
@@ -27,8 +27,8 @@
                 @endforelse
                 <tr>
                     <td colspan="2" style="font-weight: bold">
-                        {{$datas->getTruck->getUserDriver->username}} - 
-                        {{$datas->getTruck->getUserDriver->name}} --
+                        {{$datas->getTruck->getUserDriver->username ?? ''}} - 
+                        {{$datas->getTruck->getUserDriver->name ?? ''}} --
                         {{$datas->getTruck->truck_no_polis}} 
                     </td>
                     <td style="font-weight: bold">
