@@ -92,10 +92,15 @@
             </tr>
         </thead>
         <tbody>
+            @php($totalsisa = 0)
+            @php($totaltanggungan = 0)
             @foreach ($listtruck as $trucks)
                 @php($totalSanguTruck = $data->where('sj_truck_id',$trucks->id)->sum('totalSangu'))
                 @php($defaultSanguTruck = $data->where('sj_truck_id',$trucks->id)->sum('defaultSangu'))
                 @php($extraBiayaSangu = $rbhist->where('rb_truck_id',$trucks->id)->sum('total'))
+                @php($sisa = $defaultSanguTruck - ($totalSanguTruck + $extraBiayaSangu))
+                @php($sisa < 0 ? $totaltanggungan += $sisa : $totaltanggungan += 0)
+                @php($totalsisa += $sisa)
                 <tr>
                     <td>{{$trucks->getUserDriver->name ?? ''}}</td>
                     <td>{{$trucks->truck_no_polis}}</td>
@@ -104,27 +109,27 @@
                     <td>0</td>  <!-- Pribadi -->
                     <td>{{number_format($extraBiayaSangu,0)}}</td>  <!-- Klaim -->
                     <td>{{number_format($totalSanguTruck + $extraBiayaSangu ,0)}}</td> <!-- Jumlah BON, Sangu + Pribadi + Klaim -->
-                    <td>{{number_format($defaultSanguTruck - ($totalSanguTruck + $extraBiayaSangu),0)}}</td> <!-- Biaya - Jumlah Bon -->
+                    <td>{{number_format($sisa,0)}}</td> <!-- Sisa, Biaya - Jumlah Bon -->
                     <td>0</td> <!-- Tabungan Ke -->
                     <td>0</td> <!-- Tabungan Ke (Rp) -->
-                    <td>0</td> <!-- Tanggungan -->
-                    <td>{{number_format($defaultSanguTruck - ($totalSanguTruck + $extraBiayaSangu),0)}}</td> <!-- Total  -->
+                    <td>{{$sisa < 0 ? number_format($sisa,0) : 0}}</td> <!-- Tanggungan -->
+                    <td>{{number_format($sisa,0)}}</td> <!-- Total  -->
                 </tr>
             @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="2"></td>
-                <td><b>{{number_format($data->sum('totalSangu'),0)}}</b></td>
-                <td><b>{{number_format($data->sum('defaultSangu'),0)}}</b></td>
+                <td><b>{{number_format($data->sum('defaultSangu'),0)}}</b></td> <!-- Biaya, Default Sangu -->
+                <td><b>{{number_format($data->sum('totalSangu'),0)}}</b></td>  <!-- Sangu, Sangu yang diberikan -->
                 <td>0</td>
-                <td><b>{{number_format($rbhist->sum('total'),0)}}</b></td>
-                <td><b>{{number_format($data->sum('defaultSangu') + $rbhist->sum('total'),0)}}</b></td>
-                <td><b>{{number_format($data->sum('totalSangu') - ($data->sum('defaultSangu') + $rbhist->sum('total')),0)}}</b></td>
+                <td><b>{{number_format($rbhist->sum('total'),0)}}</b></td> <!-- Klaim -->
+                <td><b>{{number_format($data->sum('totalSangu') + $rbhist->sum('total'),0)}}</b></td> <!-- Jumlah BON, Sangu + Pribadi + Klaim -->
+                <td><b>{{number_format($totalsisa),0}}</b></td> <!-- Sisa, Biaya - Jumlah Bon -->
                 <td>0</td>
                 <td>0</td>
-                <td>0</td>
-                <td><b>{{number_format($data->sum('totalSangu') - ($data->sum('defaultSangu') + $rbhist->sum('total')),0)}}</b></td>
+                <td><b>{{number_format($totaltanggungan)}}</b></td> <!-- Tanggungan -->
+                <td><b>{{number_format($totalsisa),0}}</b></td> <!-- Total  -->
             </tr>
         </tfoot>
 	</table>
