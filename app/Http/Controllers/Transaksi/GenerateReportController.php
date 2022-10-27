@@ -99,20 +99,20 @@ class GenerateReportController extends Controller
                 } elseif ($report == '4') {
                     $datefrom = $request->datefrom;
                     $dateto = $request->dateto;
-                    $tipe = $request->tipe;
+                    $tipe = $request->tipe; // 1 Loosing , 2 Container
                     $domain = $request->domain;
 
                     $getData = (new CreateTempTable())->getDataTotalanSupirLoosing($domain, $datefrom, $dateto, $tipe);
                     $data = $getData['data'];
                     $listtruck = $getData['listtruck'];
-                    $rbhist = $getData['rbhist'];
+                    $cicilan = $getData['cicilan'];
                     
                     $pdf = PDF::loadview(   
                         'transaksi.laporan.pdf.pdf-totalan-loosing',
                         [
                             'data' => $data,
                             'listtruck' => $listtruck,
-                            'rbhist' => $rbhist,
+                            'cicilan' => $cicilan,
                             'datefrom' => $datefrom,
                             'dateto' => $dateto,
                             'domain' => $domain,
