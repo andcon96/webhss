@@ -113,6 +113,8 @@ class AccessRoleMenuController extends Controller
         $cbMT16 = $request->input('cbMT16');
         $cbMT21 = $request->input('cbMT21');
         $cbMT22 = $request->input('cbMT22');
+        $cbMT19 = $request->input('cbMT19');
+        $cbMT20 = $request->input('cbMT20');
 
         $cbMQ01 = $request->input('cbMQ01');
         $cbMQ02 = $request->input('cbMQ02');
@@ -128,7 +130,8 @@ class AccessRoleMenuController extends Controller
                 $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMQ01.
                 $cbMQ02 . $cbMT06 . $cbMQ03 . $cbMT08 . $cbMT09.
                 $cbMT10 . $cbMT11 . $cbMT12 . $cbMQ04 . $cbMT14.
-                $cbMT15 . $cbMT16 . $cbInv. $cbMT22 . $cbMT21; 
+                $cbMT15 . $cbMT16 . $cbInv. $cbMT22 . $cbMT21.
+                $cbMT19 . $cbMT20; 
 
         DB::beginTransaction();
 
