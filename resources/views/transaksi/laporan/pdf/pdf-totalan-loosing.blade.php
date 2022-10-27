@@ -99,16 +99,16 @@
                 <tr>
                     <td>{{$trucks->getUserDriver->name ?? ''}}</td>
                     <td>{{$trucks->truck_no_polis}}</td>
-                    <td>{{number_format($defaultSanguTruck + $extraBiayaSangu,0)}}</td>
-                    <td>{{number_format($totalSanguTruck,0)}}</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>{{number_format($defaultSanguTruck,0)}}</td> <!-- Jumlah BON -->
-                    <td>{{number_format($defaultSanguTruck + $extraBiayaSangu - ($totalSanguTruck),0)}}</td> <!-- Sisa -->
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>{{number_format($defaultSanguTruck + $extraBiayaSangu - ($totalSanguTruck),0)}}</td>
+                    <td>{{number_format($defaultSanguTruck,0)}}</td> <!-- Biaya, Default Sangu -->
+                    <td>{{number_format($totalSanguTruck,0)}}</td>  <!-- Sangu, Sangu yang diberikan -->
+                    <td>0</td>  <!-- Pribadi -->
+                    <td>{{number_format($extraBiayaSangu,0)}}</td>  <!-- Klaim -->
+                    <td>{{number_format($totalSanguTruck + $extraBiayaSangu ,0)}}</td> <!-- Jumlah BON, Sangu + Pribadi + Klaim -->
+                    <td>{{number_format($defaultSanguTruck - ($totalSanguTruck + $extraBiayaSangu),0)}}</td> <!-- Biaya - Jumlah Bon -->
+                    <td>0</td> <!-- Tabungan Ke -->
+                    <td>0</td> <!-- Tabungan Ke (Rp) -->
+                    <td>0</td> <!-- Tanggungan -->
+                    <td>{{number_format($defaultSanguTruck - ($totalSanguTruck + $extraBiayaSangu),0)}}</td> <!-- Total  -->
                 </tr>
             @endforeach
         </tbody>

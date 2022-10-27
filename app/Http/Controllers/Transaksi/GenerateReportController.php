@@ -66,12 +66,10 @@ class GenerateReportController extends Controller
                     return Excel::download(new ReportByTipeTruck($datefrom,$dateto,$tipetruck), 'ReportByTipeTruck.xlsx');
                 } elseif ($report == '6'){
                     // Report by Biaya Tambahan
-
                     return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto), 'ReportBiayaTambahan.xlsx');
                 }
                 break;
             case 2:
-
                 if ($report == '2') {
                     return redirect()->route('updatePreview')->with(['data' => $request->all()]);
                 } elseif ($report == '3') {

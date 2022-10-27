@@ -318,8 +318,9 @@ class CreateTempTable
             ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
             ->get();
 
-        $listtruck = $listtruck->get();
+        $listtruck = $listtruck->orderby('truck_no_polis','asc')->get();
 
+        // dd($rbhist);
         return [
             'data' => $data,
             'listtruck' => $listtruck,
