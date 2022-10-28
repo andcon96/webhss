@@ -9,6 +9,7 @@ use App\Models\Master\CustomerShipTo;
 use App\Models\Master\InvoicePrice;
 use App\Models\Master\ShipFrom;
 use App\Models\Master\Truck;
+use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
@@ -85,6 +86,8 @@ class SuratJalanLaporMTController extends Controller
                                'getSOMaster.getCOMaster.getCustomer',
                                'getSOMaster.getShipTo',
                                'getSOMaster.getShipFrom',
+                               'getSOMaster.getDetail',
+                               'getRuteHistory'
                                 )
                         ->where('id',$sj)
                         ->where('sj_truck_id',$truck)
@@ -110,6 +113,21 @@ class SuratJalanLaporMTController extends Controller
             $sjmstr->sj_conf_remark = $request->remark;
             $sjmstr->sj_conf_date = $request->effdate;
             $sjmstr->sj_status = 'Closed';
+            if($sjmstr->sj_jmlh_trip != $request->jmlhtrip){
+                $bedajumlah = $request->jmlhtrip - $sjmstr->sj_jmlh_trip;
+                // Create Trip Hist
+                for($i = 0; $i < $bedajumlah; $i++){
+                    $triphist = new SJHistTrip();
+                    $triphist->sjh_sj_mstr_id = $sjmstr->id;
+                    $triphist->sjh_truck = $sjmstr->sj_truck_id;
+                    $triphist->sjh_remark = 'Update By System';
+                    $triphist->created_by = 'System';
+                    $triphist->save();
+                }
+                // Update New Trip
+                $sjmstr->sj_jmlh_trip = $request->jmlhtrip;
+                $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
+            }
 
             // Update Detail
             $totalkirim = 0;
@@ -118,6 +136,22 @@ class SuratJalanLaporMTController extends Controller
                 $sjddet->sjd_qty_angkut = $request->qtyangkut[$keys];
                 $sjddet->sjd_price = str_replace(',','',$request->price[$keys]);
                 $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
+
+                if($sjddet->sjd_qty_ship != $request->qtyship[$keys]){
+                    // Update SO Detail
+                    $bedaqtyship = $request->qtyship[$keys] - $sjddet->sjd_qty_ship;
+                    $soddet = SalesOrderDetail::lockForUpdate()->findOrFail($request->idsodetail[$keys]);
+                    if($soddet->sod_qty_ship + $bedaqtyship > $soddet->sod_qty_ord){
+                        alert()->error('Error', 'Save Gagal, Qty Ship SO Melebihi Qty Order')->persistent('Dismiss');
+                        DB::rollback();
+                        return back();
+                    }
+                    $soddet->sod_qty_ship = $soddet->sod_qty_ship + $bedaqtyship;
+                    $soddet->save();
+                    // Update SJ Detail 
+                    $sjddet->sjd_qty_ship = $request->qtyship[$keys];
+                }
+
                 $sjddet->save();
 
                 $totalkirim += $request->qtyangkut[$keys];

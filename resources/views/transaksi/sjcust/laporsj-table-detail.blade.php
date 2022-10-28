@@ -13,6 +13,8 @@
         </thead>
         <tbody id="edittable">
             @forelse ($data->getDetail as $key => $datas)
+            @php($sodetail = $data->getSOMaster->getDetail->where('sod_part',$datas->sjd_part)->where('sod_line',$datas->sjd_line)->first())
+                
             <tr>
                 <td>{{$datas->sjd_line}}</td>
                 <td>{{$datas->sjd_part}} -- {{$datas->getItem->item_desc}}</td>
@@ -43,12 +45,16 @@
                     <input type="number" name="price[]" value="" readonly class="form-control price mt-2" required>
 
                 </td>
-                <td>{{$datas->sjd_qty_ship}}</td>
+                <td>
+                    <input type="hidden" value="{{$datas->sjd_qty_ship}}" class="form-control oldship" readonly>
+                    <input type="number" name="qtyship[]" value="{{$datas->sjd_qty_ship}}" class="form-control qtyship" readonly>
+                </td>
                 <td>
                     <input type="number" name="qtyangkut[]" value="{{$datas->sjd_qty_ship}}" class="form-control">
                 </td>
                 <td>
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
+                    <input type="hidden" name="idsodetail[]" value="{{$sodetail->id}}">
                     <input type="hidden" name="part[]" value="{{$datas->sjd_part}}">
                     <input type="number" name="qtyakui[]" value="{{$datas->sjd_qty_ship}}" class="form-control">
                 </td>
