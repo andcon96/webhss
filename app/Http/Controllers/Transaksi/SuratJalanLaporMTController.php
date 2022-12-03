@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\BonusBarang;
+use App\Models\Master\Customer;
+use App\Models\Master\CustomerShipTo;
 use App\Models\Master\InvoicePrice;
+use App\Models\Master\ShipFrom;
 use App\Models\Master\Truck;
+use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
@@ -14,6 +18,7 @@ use App\Services\QxtendServices;
 use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SuratJalanLaporMTController extends Controller
@@ -25,17 +30,52 @@ class SuratJalanLaporMTController extends Controller
                                'getSOMaster.getCOMaster.getCustomer',
                                'getSOMaster.getShipFrom',
                                'getSOMaster.getShipTo');
-        // dd($data);
-        $truck = Truck::get();
+
+        $domain = Auth::user()->domain;
+        $truck = Truck::query()->with('getDomain');
+        if($domain){
+            $truck->whereRelation('getDomain','id',$domain);
+        }
+        $truck = $truck->get();
+        $customer = Customer::get();
+        $shipto = CustomerShipTo::get();
+        $shipfrom = ShipFrom::get();
+
+        if($request->customer){
+            $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->customer);
+        }
+
+        if($request->shipfrom){
+            $data->whereRelation('getSOMaster','so_ship_from',$request->shipfrom);
+        }
+
+        if($request->shipto){
+            $data->whereRelation('getSOMaster','so_ship_to',$request->shipto);
+        }
+
+        if($request->kapal){
+            $data->whereRelation('getSOMaster.getCOMaster','co_kapal','like', '%'.$request->kapal.'%');
+        }
+
+        if($request->status){
+            $data->where('sj_status','=',$request->status);
+        }
 
         if ($request->truck) {
             $data->where('sj_truck_id', $request->truck);
+        }
+        
+        if(!$request->customer && !$request->shipfrom && 
+           !$request->shipto && !$request->kapal && 
+           !$request->status && !$request->truck){
+
+            $data = $data->where('id',0)->paginate(10);
+        }else{
             $data = $data->orderBy('created_at', 'DESC')->paginate(10);
-        } else {
-            $data = $data->where('sj_truck_id',0)->paginate(10);
         }
 
-        return view('transaksi.sjcust.index', compact('data', 'truck'));
+
+        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom'));
     }
 
     public function laporsj($sj, $truck)
@@ -46,6 +86,8 @@ class SuratJalanLaporMTController extends Controller
                                'getSOMaster.getCOMaster.getCustomer',
                                'getSOMaster.getShipTo',
                                'getSOMaster.getShipFrom',
+                               'getSOMaster.getDetail',
+                               'getRuteHistory'
                                 )
                         ->where('id',$sj)
                         ->where('sj_truck_id',$truck)
@@ -71,6 +113,21 @@ class SuratJalanLaporMTController extends Controller
             $sjmstr->sj_conf_remark = $request->remark;
             $sjmstr->sj_conf_date = $request->effdate;
             $sjmstr->sj_status = 'Closed';
+            if($sjmstr->sj_jmlh_trip != $request->jmlhtrip){
+                $bedajumlah = $request->jmlhtrip - $sjmstr->sj_jmlh_trip;
+                // Create Trip Hist
+                for($i = 0; $i < $bedajumlah; $i++){
+                    $triphist = new SJHistTrip();
+                    $triphist->sjh_sj_mstr_id = $sjmstr->id;
+                    $triphist->sjh_truck = $sjmstr->sj_truck_id;
+                    $triphist->sjh_remark = 'Update By System';
+                    $triphist->created_by = 'System';
+                    $triphist->save();
+                }
+                // Update New Trip
+                $sjmstr->sj_jmlh_trip = $request->jmlhtrip;
+                $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
+            }
 
             // Update Detail
             $totalkirim = 0;
@@ -79,6 +136,22 @@ class SuratJalanLaporMTController extends Controller
                 $sjddet->sjd_qty_angkut = $request->qtyangkut[$keys];
                 $sjddet->sjd_price = str_replace(',','',$request->price[$keys]);
                 $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
+
+                if($sjddet->sjd_qty_ship != $request->qtyship[$keys]){
+                    // Update SO Detail
+                    $bedaqtyship = $request->qtyship[$keys] - $sjddet->sjd_qty_ship;
+                    $soddet = SalesOrderDetail::lockForUpdate()->findOrFail($request->idsodetail[$keys]);
+                    if($soddet->sod_qty_ship + $bedaqtyship > $soddet->sod_qty_ord){
+                        alert()->error('Error', 'Save Gagal, Qty Ship SO Melebihi Qty Order')->persistent('Dismiss');
+                        DB::rollback();
+                        return back();
+                    }
+                    $soddet->sod_qty_ship = $soddet->sod_qty_ship + $bedaqtyship;
+                    $soddet->save();
+                    // Update SJ Detail 
+                    $sjddet->sjd_qty_ship = $request->qtyship[$keys];
+                }
+
                 $sjddet->save();
 
                 $totalkirim += $request->qtyangkut[$keys];
@@ -159,7 +232,6 @@ class SuratJalanLaporMTController extends Controller
     {
         DB::beginTransaction();
         try{
-
             foreach($request->idhist as $key => $idhist){
                 $sohist = SJHistTrip::findOrFail($idhist);
                 $sohist->sjh_remark = $request->sj[$key];

@@ -4,6 +4,7 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Master\AccessRoleMenuController;
 use App\Http\Controllers\Master\ApprovalController;
+use App\Http\Controllers\Master\BankCustomerController;
 use App\Http\Controllers\Master\BarangMTController;
 use App\Http\Controllers\Master\BonusBarangController;
 use App\Http\Controllers\Master\CustomerController;
@@ -40,8 +41,6 @@ use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Http\Controllers\Transaksi\CicilanHistoryController;
-use App\Models\Master\GandenganMstr;
-use App\Models\Transaksi\CicilanHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -56,11 +55,13 @@ Route::get('/', function () {
 Auth::routes();
 
 // Route::get('loadrutefirst',[RuteController::class,'loadrutefirst']);
-Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
+// Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
 // Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
 // Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
 // Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
-Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
+// Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
+// Route::get('newloadhistoryrute',[RuteController::class,'newloadhistoryrute']);
+// Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================
@@ -323,6 +324,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('drivernopolmt', DriverNopolController::class);
         });
         //================================
+        // Gandengan Maintenance
+        //================================
+        Route::group(['middleware'=>'can:access_gandengan'], function () {
+            Route::resource('gandengan', GandenganMTController::class);
+        });
+        //================================
+
     });
 
     Route::group(['middleware'=>'can:access_masters_qad'], function(){
@@ -355,12 +363,15 @@ Route::group(['middleware' => ['auth']], function () {
         });
         //================================
 
-         // Gandengan Maintenance
+        // Bank Customer
         //================================
-        Route::group(['middleware'=>'can:access_ttmt'], function () {
-            Route::resource('gandengan', GandenganMTController::class);
+        Route::group(['middleware'=>'can:access_bcmt'], function () {
+            Route::resource('bankcustomer', BankCustomerController::class);
+            Route::get('loadexcel/bankcustomer', [BankCustomerController::class, 'loadexcel'])->name('loadExcel');
         });
         //================================
+
+
 
          // Load Excel
         //================================
@@ -371,7 +382,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['middleware'=>'can:access_ttmt'], function () {
             route::get('loadgandengan', [GandenganMTController::class, 'loadgandengan']);       
          });
-        
         
         //================================
         

@@ -46,6 +46,11 @@ class Truck extends Model
     {
         return $this->hasOne(TipeTruck::class, 'id', 'truck_tipe_id');
     }
+
+    public function getDomain()
+    {
+        return $this->hasOne(Domain::class, 'domain_code', 'truck_domain');
+    }
     
     
     protected static function boot()

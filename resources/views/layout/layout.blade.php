@@ -426,6 +426,14 @@
                   </a>
                 </li>
                 @endcan
+                @can('access_bcmt')
+                <li class="nav-item">
+                  <a href="{{route('bankcustomer.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Bank Account Master</p>
+                  </a>
+                </li>
+                @endcan
               </ul>
             </li>
             @endcan

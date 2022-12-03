@@ -2,6 +2,7 @@
 
 namespace App\Models\Transaksi;
 
+use App\Models\Master\Domain;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +18,10 @@ class InvoiceDetail extends Model
     public function getMaster()
     {
         return $this->belongsTo(InvoiceMaster::class, 'id_im_mstr_id', 'id');
+    }
+
+    public function getDomain()
+    {
+        return $this->hasOne(Domain::class, 'domain_code', 'id_domain');
     }
 }

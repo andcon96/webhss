@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaksi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Master\BankCustomer;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Domain;
@@ -15,6 +16,7 @@ use App\Models\Transaksi\InvoiceDetail;
 use App\Models\Transaksi\SalesOrderMstr;
 use App\Services\CreateTempTable;
 use App\Services\WSAServices;
+use Carbon\Carbon;
 use PDF;
 use Exception;
 use Illuminate\Http\Request;
@@ -193,13 +195,16 @@ class InvoiceMTController extends Controller
         $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
         $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
 
+        $iscontainer = $detail->whereIn('truck_tipe_id',[5,6])->count() == 0 ? 0 : 1;
+        
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-detail-invoice',
             [
                 'data' => $data,
                 'detail' => $detail,
                 'latestdate' => $latestdate,
-                'oldestdate' => $oldestdate
+                'oldestdate' => $oldestdate,
+                'iscontainer' => $iscontainer
             ]
         )->setPaper('A3', 'Landscape');
 
@@ -209,13 +214,16 @@ class InvoiceMTController extends Controller
     // Invoice QAD
     public function printinvoiceqad($id)
     {
-        $data = InvoiceDetail::with('getMaster.getSalesOrder.getCOMaster.getCustomer')->findOrFail($id);
+        $data = InvoiceDetail::with('getMaster.getSalesOrder.getCOMaster.getCustomer','getDomain')->findOrFail($id);
         
         $total = $data->id_total;
-        // dd($data,$total);
         
         $terbilang = (new CreateTempTable())->terbilang($total);
-        
+
+        $bankacc = BankCustomer::where('bc_customer_id',$data->getMaster->getSalesOrder->getCOMaster->getCustomer->id)
+                               ->where('bc_domain_id',$data->getDomain->id)
+                               ->first();
+
         $detail = (new WSAServices())->wsainvoiceqad($data);
         
         if($detail == false){
@@ -242,6 +250,7 @@ class InvoiceMTController extends Controller
                 'total' => $total,
                 'terbilang' => $terbilang,
                 'detail' => $detail,
+                'bankacc' => $bankacc
             ]
         )->setPaper('A5', 'Landscape');
         
@@ -300,9 +309,9 @@ class InvoiceMTController extends Controller
 
     public function loadinvoice(Request $request)
     {
-        if (($open = fopen(public_path() . "/historyinvoice.csv", "r")) !== FALSE) {
+        if (($open = fopen(public_path() . "/InvoiceLoosing.csv", "r")) !== FALSE) {
 
-            while (($data = fgetcsv($open, 2000, ",")) !== FALSE) {
+            while (($data = fgetcsv($open, 2000, ";")) !== FALSE) {
                 $history[] = $data;
             }
             // dd($history);
@@ -320,14 +329,21 @@ class InvoiceMTController extends Controller
                                     ]);
                     $invoicelist->save();
                     
-                    $insertData[] = [
+                    $invoicehist = InvoicePriceHistory::firstOrNew([
+                        'iph_tonase_price' => str_replace(',','.',$histories[5]),
                         'iph_ip_id' => $invoicelist->id,
-                        'iph_tonase_price' => str_replace(',','.',$histories[5])
-                    ];
+                    ]);
+                    
+                    $invoicehist->save();
+                    
+                    // $insertData[] = [
+                    //     'iph_ip_id' => $invoicelist->id,
+                    //     'iph_tonase_price' => str_replace(',','.',$histories[5])
+                    // ];
                 }
                 
             }
-            InvoicePriceHistory::insert($insertData);
+            // InvoicePriceHistory::insert($insertData);
 
             fclose($open);
         }    

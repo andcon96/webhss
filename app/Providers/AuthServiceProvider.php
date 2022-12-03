@@ -252,6 +252,11 @@ class AuthServiceProvider extends ServiceProvider
             return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT21');
         });
 
+        //Bank Customer
+        Gate::define('access_bcmt', function($user){
+            return $user->getRole->role == Role::SUPER_USER || str_contains($user->getRoleType->accessmenu, 'MT22');
+        });
+
         //=============================
         // Menu Master
         //=============================

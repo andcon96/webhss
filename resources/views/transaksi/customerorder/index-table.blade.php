@@ -30,7 +30,7 @@
                     <a href="{{route('customerorder.edit',$datas->id) }}"><i class="fas fa-edit"></i></a>
                     @endif
 
-                    @if($datas->co_status == 'New')
+                    @if($datas->getActiveSalesOrder->count() == 0 && $datas->co_status != 'Cancelled')
                     <a href="" class="deleteModal" 
                         data-id="{{$datas->id}}" data-conbr="{{$datas->co_nbr}}"
                         data-toggle='modal' data-target="#deleteModal"><i class="fas fa-trash"></i></a>

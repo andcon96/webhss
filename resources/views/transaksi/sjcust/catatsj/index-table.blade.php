@@ -17,7 +17,7 @@
 
             <tr>
                 <td>{{$key + 1}}</td>
-                <td>{{$datas->getTruck->truck_no_polis}} -- {{$datas->getTruck->getUserDriver->name}}</td>
+                <td>{{$datas->getTruck->truck_no_polis}} -- {{$datas->getTruck->getUserDriver->name ?? ''}}</td>
                 <td>{{$datas->created_at}}</td>
                 <td>
                     <input type="hidden" name="idsangu[]" value="{{$data->id}}">

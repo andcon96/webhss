@@ -36,6 +36,11 @@ class CustomerOrderMstr extends Model
         return $this->co_status == 'New';
     }
 
+    public function getActiveSalesOrder()
+    {
+        return $this->hasMany(SalesOrderMstr::class,'so_co_mstr_id')->whereIn('so_status',['Open','Closed','Selesai']);
+    }
+
     protected static function boot()
     {
         parent::boot();

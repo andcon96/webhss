@@ -36,7 +36,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = "HSS";
+        $domain = "HSSTR";
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' .
@@ -129,7 +129,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = 'HSS';
+        $domain = 'HSSTR';
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -225,7 +225,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = 'HSS';
+        $domain = 'HSSTR';
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -326,7 +326,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = "HSS";
+        $domain = "HSSTR";
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -705,6 +705,7 @@ class WSAServices
         
         $output = DB::table('temp_table')
                     ->leftJoin('sj_mstr','sj_mstr.sj_nbr','temp_table.t_sj')
+                    ->leftJoin('sj_trip_hist','sj_mstr.id','sj_trip_hist.sjh_sj_mstr_id')
                     ->leftJoin('so_mstr','so_mstr.id','sj_mstr.sj_so_mstr_id')
                     ->leftJoin('co_mstr','co_mstr.id','so_mstr.so_co_mstr_id')
                     ->leftJoin('customership','so_mstr.so_ship_to','customership.cs_shipto')
@@ -715,7 +716,8 @@ class WSAServices
                     ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj',
                             'customer.cust_desc','barang.barang_deskripsi',
                             'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
-                            'shipfrom.sf_desc','customership.cs_shipto_name')
+                            'shipfrom.sf_desc','customership.cs_shipto_name',
+                            'sj_trip_hist.sjh_remark','truck.truck_tipe_id')
                     ->get();
 
         Schema::dropIfExists('temp_group');

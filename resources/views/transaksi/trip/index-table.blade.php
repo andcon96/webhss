@@ -9,6 +9,7 @@
                 <th>Ship To</th>
                 <th>Due Date</th>
                 <th>Status</th>
+                <th>No Polis</th>
                 <th>Default Sangu</th>
                 <th>Total Sangu</th>
                 <th>Total Trip</th>
@@ -26,6 +27,7 @@
                     <td data-label="SO Ship To">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                     <td data-label="SO Due Date">{{$datas->getSOMaster->so_due_date}}</td>
                     <td data-label="SJ Status">{{$datas->sj_status}}</td>
+                    <td data-label="No Polis">{{$datas->getTruck->truck_no_polis}}</td>
                     <td data-label="Defaul Sangu">{{number_format($datas->sj_default_sangu,0)}}</td>
                     <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>
                     <td data-label="Total Trip">{{$datas->sj_jmlh_trip}}</td>
@@ -39,4 +41,5 @@
             @endforelse
         </tbody>
     </table>
+    {{$data->withQueryString()->render()}}
 </div>

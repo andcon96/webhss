@@ -16,6 +16,7 @@ use App\Models\Transaksi\CicilanHistory;
 use App\Services\CreateTempTable;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -23,11 +24,18 @@ class GenerateReportController extends Controller
 {
     public function index()
     {
-        $truck = Truck::get();
-
-        $domain = Domain::get();
-
+        $domainUser = Auth::user()->domain;
+        $truck = Truck::query()->with('getDomain');
+        $domain = Domain::query();
         $tipetruck = TipeTruck::get();
+
+        if($domainUser){
+            $truck->whereRelation('getDomain','id',$domainUser);
+            $domain->where('id',$domainUser);
+        }
+
+        $truck = $truck->get();
+        $domain = $domain->get();
 
         return view('transaksi.laporan.index', compact('truck', 'domain', 'tipetruck'));
     }
@@ -58,12 +66,10 @@ class GenerateReportController extends Controller
                     return Excel::download(new ReportByTipeTruck($datefrom,$dateto,$tipetruck), 'ReportByTipeTruck.xlsx');
                 } elseif ($report == '6'){
                     // Report by Biaya Tambahan
-
                     return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto), 'ReportBiayaTambahan.xlsx');
                 }
                 break;
             case 2:
-
                 if ($report == '2') {
                     return redirect()->route('updatePreview')->with(['data' => $request->all()]);
                 } elseif ($report == '3') {
@@ -93,21 +99,24 @@ class GenerateReportController extends Controller
                 } elseif ($report == '4') {
                     $datefrom = $request->datefrom;
                     $dateto = $request->dateto;
+                    $tipe = $request->tipe; // 1 Loosing , 2 Container
                     $domain = $request->domain;
 
-                    $getData = (new CreateTempTable())->getDataTotalanSupirLoosing($domain, $datefrom, $dateto);
+                    $getData = (new CreateTempTable())->getDataTotalanSupirLoosing($domain, $datefrom, $dateto, $tipe);
                     $data = $getData['data'];
                     $listtruck = $getData['listtruck'];
-                    $rbhist = $getData['rbhist'];
+                    $cicilan = $getData['cicilan'];
                     
                     $pdf = PDF::loadview(   
                         'transaksi.laporan.pdf.pdf-totalan-loosing',
                         [
                             'data' => $data,
                             'listtruck' => $listtruck,
-                            'rbhist' => $rbhist,
+                            'cicilan' => $cicilan,
                             'datefrom' => $datefrom,
-                            'dateto' => $dateto
+                            'dateto' => $dateto,
+                            'domain' => $domain,
+                            'tipe' => $tipe
                         ]
                     )->setPaper('A3', 'Landscape');
 

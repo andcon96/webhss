@@ -9,6 +9,7 @@ use App\Models\Master\Truck;
 use App\Models\Transaksi\Cicilan;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CicilanMTController extends Controller
@@ -20,8 +21,21 @@ class CicilanMTController extends Controller
      */
     public function index(Request $request)
     {
-        $cicilan = Cicilan::query()->with(['getDriverNopol.getTruck','getDriverNopol.getDriver','getTotalPaid','getTotalPaidActive']);
+        $domain = Auth::user()->domain;
+        $listtruck = Truck::query()->with('getDomain');
+        $listdriver = Driver::get();
         
+        $cicilan = Cicilan::query()->with([
+                    'getDriverNopol.getTruck.getDomain',
+                    'getDriverNopol.getDriver',
+                    'getTotalPaid',
+                    'getTotalPaidActive'
+                ]);
+
+        if($domain){
+            $cicilan->whereRelation('getDriverNopol.getTruck.getDomain','id',$domain);
+            $listtruck->whereRelation('getDomain','id',$domain);
+        }
         if($request->truck){
             $cicilan->whereRelation('getDriverNopol','dn_truck_id',$request->truck);
         }
@@ -29,10 +43,9 @@ class CicilanMTController extends Controller
             $cicilan->whereRelation('getDriverNopol','dn_driver_id',$request->driver);
         }
 
+        $listtruck = $listtruck->get();
         $cicilan = $cicilan->sortable()->paginate(10);
 
-        $listtruck = Truck::get();
-        $listdriver = Driver::get();
     
         return view('transaksi.cicilan.index',compact('cicilan','listtruck','listdriver'));
     }
