@@ -101,6 +101,10 @@
                 <th class="top-bottom-border">TUJUAN</th>
                 <th class="top-bottom-border">QTY</th>
                 <th class="top-bottom-border">TARIF</th>
+                @if($iscontainer == 1)
+                <th class="top-bottom-border">NO CONTAINER</th>
+                <th class="top-bottom-border">FEET</th>
+                @endif
                 <th class="top-bottom-border">NILAI Rp.</th>
             </tr>
         </thead>
@@ -119,13 +123,19 @@
                     <td>{{$details->cs_shipto_name}}</td>
                     <td class="angka">{{$details->t_qtyinv}}</td>
                     <td class="angka">{{number_format($details->t_harga,0)}}</td>
+                    @if($iscontainer == 1)
+                    <td>{{$details->sjh_remark}}</td>
+                    <td>{{$details->truck_tipe_id == 6 ? '40"' : 
+                          ($details->truck_tipe_id == 5 ? '20"' :
+                          'Loosing')}}</td>
+                    @endif
                     <td class="angka">{{number_format($details->t_harga * $details->t_qtyinv,0)}}</td>
                 </tr>                
             @endforeach
         </tbody>
         <tfoot>
             <tr>
-                <td  class="top-bottom-border" colspan="10"></td>
+                <td  class="top-bottom-border" colspan="{{$iscontainer == 0 ? '10' : '12'}}"></td>
                 <td class="top-bottom-border angka">{{number_format($total,0)}}</td>
             </tr>
         </tfoot>

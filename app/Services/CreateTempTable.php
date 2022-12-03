@@ -267,19 +267,50 @@ class CreateTempTable
         ];
     }
 
-    public function getDataTotalanSupirLoosing($domain, $datefrom, $dateto)
+    public function getDataTotalanSupirLoosing($domain, $datefrom, $dateto, $tipe)
     {
-        $data = SuratJalan::query();
-        $rbhist = ReportBiaya::query();
+        $data = SuratJalan::query()->with('getTruck');
+        // $rbhist = ReportBiaya::query()->with('getTruck');
+        $cicilan = Cicilan::query()->with('getDriverNopol.getTruck');
+        $listtruck = Truck::query()->with(['getTipe', 'getUserDriver'])
+                        ->where('truck_domain', $domain);
 
         if ($datefrom) {
             $data->where('sj_eff_date', '>=', $datefrom);
-            $rbhist->where('rb_eff_date', '>=', $datefrom);
+            // $rbhist->where('rb_eff_date', '>=', $datefrom);
+            $cicilan->where('cicilan_eff_date', '>=', $datefrom);
         }
 
         if ($dateto) {
             $data->where('sj_eff_date', '<=', $dateto);
-            $rbhist->where('rb_eff_date', '<=', $dateto);
+            // $rbhist->where('rb_eff_date', '<=', $dateto);
+            $cicilan->where('cicilan_eff_date', '<=', $dateto);
+        }
+
+        if ($tipe) {
+            if($tipe == 1){
+                $data->whereHas('getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['1','2','3','4']);
+                });
+                // $rbhist->whereHas('getTruck', function($q){
+                //     $q->whereIn('truck_tipe_id',['1','2','3','4']);
+                // });
+                $cicilan->whereHas('getDriverNopol.getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['1','2','3','4']);
+                });
+                $listtruck->whereIn('truck_tipe_id',['1','2','3','4']);
+            }elseif($tipe == 2){
+                $data->whereHas('getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['5','6']);
+                });
+                // $rbhist->whereHas('getTruck', function($q){
+                //     $q->whereIn('truck_tipe_id',['5','6']);
+                // });
+                $cicilan->whereHas('getDriverNopol.getTruck', function($q){
+                    $q->whereIn('truck_tipe_id',['5','6']);
+                });
+                $listtruck->whereIn('truck_tipe_id',['5','6']);
+            }
         }
 
         $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
@@ -289,24 +320,28 @@ class CreateTempTable
             ->selectRaw('sj_truck_id,sum(sj_default_sangu) as defaultSangu, sum(sj_tot_sangu) as totalSangu')
             ->get();
 
-        $rbhist =  $rbhist->where('rb_is_active', 1)
-            ->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
-            ->whereRelation('getTruck', 'truck_domain', $domain)
-            ->groupBy('rb_truck_id')
-            ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
-            ->get();
-        
-        // dd($rbhist,$data);
-        
+        // $rbhist =  $rbhist->where('rb_is_active', 1)
+        //     ->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
+        //     ->whereRelation('getTruck', 'truck_domain', $domain)
+        //     ->groupBy('rb_truck_id')
+        //     ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
+        //     ->get();
 
-        $listtruck = Truck::with(['getTipe', 'getUserDriver'])
-            ->where('truck_domain', $domain)
+        $cicilan = $cicilan
+            ->join('driver_nopol','cicilan.cicilan_dn_id','=','driver_nopol.id')
+            ->where('cicilan_is_active', 1)
+            ->whereRelation('getDriverNopol.getTruck', 'truck_domain', $domain)
+            ->groupBy('dn_truck_id')
+            ->selectRaw('cicilan.*,driver_nopol.dn_truck_id,SUM(cicilan_nominal) as total')
             ->get();
+
+        $listtruck = $listtruck->orderby('truck_no_polis','asc')->get();
 
         return [
             'data' => $data,
             'listtruck' => $listtruck,
-            'rbhist' => $rbhist,
+            'cicilan' => $cicilan
+            // 'rbhist' => $rbhist,
         ];
     }
     

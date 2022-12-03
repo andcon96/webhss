@@ -1,1088 +1,1088 @@
-Customer Kode, Ship From, Kode Ship From, Ship To, Kode Shipto, Harga Invoice
-C-003,By Pas Krian,SBY-01 ,Panca PP-Pandaan,003PPD,67,00
-C-003,By Pas Krian,SBY-01 ,Margomulyo,003MML,48,50
-C-003,By Pas Krian,SBY-01 ,PT.DMC-Mojokerto,003DMM,72,00
-C-003,By Pas Krian,SBY-01 ,Cpp Sepanjang,003CPS,48,50
-C-003,By Pas Krian,SBY-01 ,Panca PP-Gedangan,003PPG,48,50
-C-003,Romokalisari,SBY-02 ,Sinar Indochem-Krian,003SIK,49,50
-C-003,Margomulyo,SBY-03 ,Tb.Langon,003TBL,27,00
-C-003,Margomulyo,SBY-03 ,Sinar Unigrain-Krian,003SUK,46,00
-C-003,Margomulyo,SBY-03 ,PT.MS-Gempol,003MSG,49,50
-C-003,Margomulyo,SBY-03 ,PT.DMC-Mojokerto,003DMM,54,00
-C-003,Romokalisari,SBY-02 ,PT.DMC-Mojokerto,003DMM,55,00
-C-003,Margomulyo,SBY-03 ,Panca PP-Gedangan,003PPG,38,00
-C-003,Romokalisari,SBY-02 ,Panca PP-Gedangan,003PPG,39,00
-C-003,Margomulyo,SBY-03 ,Panca PP-Pandaan,003PPD,49,50
-C-003,Romokalisari,SBY-02 ,Panca PP-Pandaan,003PPD,50,50
-C-003,Romokalisari,SBY-02 ,Cpp Sepanjang,003CPS,44,50
-C-003,Romokalisari,SBY-02 ,East Hope-Ngoro,003EHN,50,50
-C-003,Margomulyo,SBY-03 ,East Hope-Ngoro,003EHN,49,50
-C-003,Margomulyo,SBY-03 ,PT.MS-M.Mulyo',003MMM,14,00
-C-003,Romokalisari,SBY-02 ,Cpp Dupak,003CPD,25,00
-C-003,Margomulyo,SBY-03 ,Cpp Dupak,003CPD,25,00
-C-003,Romokalisari,SBY-02 ,Wonokoyo,003WKY,50,50
-C-003,Margomulyo,SBY-03 ,Wonokoyo,003WKY,49,50
-C-003,Margomulyo,SBY-03 ,Cpp Sepanjang,003CPS,43,50
-C-003,Tb.Langon,,Margomulyo,003MML,27,00
-C-003,Romokalisari,SBY-02 ,Tg.Batu,003TGB,27,50
-C-003,Margomulyo,SBY-03 ,Margomulyo,003MML,14,00
-C-003,Romokalisari,SBY-02 ,PT.MS-M.Mulyo,003MMM,27,50
-C-003,Romokalisari,SBY-02 ,PT.MS-Gempol,003MSG,50,50
-C-003,Margomulyo,SBY-03 ,Tg.Batu,003TGB,14,00
-C-003,East Hope-Ngoro,,Margomulyo,003MML,49,50
-C-003,Margomulyo,SBY-03 ,MPJS-Jombang,003MPJ,72,00
-C-003,Romokalisari,SBY-02 ,Margomulyo,003MML,27,50
-C-003,Abba(Trosobo),,Margomulyo,003MML,46,00
-C-003,Romokalisari,SBY-02 ,Sinar Indochem-Krian,003SIK,47,00
-C-003,Romokalisari,SBY-02 ,Gold Coin-M.Mulyo,003GCM,27,50
-C-003,Margomulyo,SBY-03 ,New Hope-Jemundo,003NHJ,43,50
-C-003,Romokalisari,SBY-02 ,Romokalisari,003RMK,10,00
-C-003,Margomulyo,SBY-03 ,Cargil-Kraton,003CGK,60,50
-C-003,Romokalisari,SBY-02 ,Cargil-Kraton,003CGK,61,50
-C-003,Margomulyo,SBY-03 ,Malindo,003MLD,43,50
-C-003,Margomulyo,SBY-03 ,Pakindo,003PKD,43,50
-C-003,Romokalisari,SBY-02 ,Sierad,003SID,48,50
-C-003,Teluk Lamong,SBY-07 ,Margomulyo,003MML,25,00
-C-003,Teluk Lamong,SBY-07 ,Romokalisari,003RMK,14,00
-C-003,Margomulyo,SBY-03 ,Cpp Sepanjang,003CPS,43,50
-C-003,Teluk Lamong,SBY-07 ,Cpi Krian,003CIK,49,00
-C-003,Teluk Lamong,SBY-07 ,Cpi Sepanjang,003CIS,46,50
-C-006,Romokalisari,SBY-02 ,Sreeya Sewu,006SYS,48,50
-C-006,Romokalisari,SBY-02 ,New Hope-Mojosari,006NHM,56,00
-C-006,Romokalisari,SBY-02 ,DMC PUNGGING,006DMP,55,00
-C-006,Romokalisari,SBY-02 ,Panca PP-Gedangan,006PPG,39,00
-C-006,Romokalisari,SBY-02 ,Panca PP-Pandaan,006PPD,50,50
-C-006,Romokalisari,SBY-02 ,Wirifa Sakti Ngoro,006WSN,50,50
-C-006,Romokalisari,SBY-02 ,Wonokoyo,006WKY,50,50
-C-006,Romokalisari,SBY-02 ,Sierad,006SID,48,50
-C-006,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,006MSM,27,50
-C-006,Romokalisari,SBY-02 ,JCI Sidoarjo,006JCS,45,00
-C-006,Romokalisari,SBY-02 ,MPJS Jombang,006MPJ,73,00
-C-006,Romokalisari,SBY-02 ,JCI Margomulyo,006JCM,27,50
-C-006,Romokalisari,SBY-02 ,STP Manyar,006STM,39,00
-C-006,Tanjung Batu,SBY-29 ,PFN Mojosari,006PFM,56,00
-C-009,SPC-Trosobo,,Cpi Krian,009CIK,25,00
-C-009,Romokalisari,SBY-02 ,SPC-Trosobo,009SPT,52,00
-C-009,Sinar Unigrain Indonesia,SBY-09 ,Sorini-Pasuruan,009SOR,128,00
-C-009,Romokalisari,SBY-02 ,PT. SUI,009SUI,49,00
-C-010,Jamrud,SBY-10 ,Cpi Krian,010CIK,45,00
-C-010,Romokalisari,SBY-02 ,Haida Kraton,010HKR,51,00
-C-010,Jamrud,SBY-10 ,DMC PUNGGING,010DMP,54,00
-C-010,Pelabuhan Gresik,SBY-12 ,DMC PUNGGING,010DMP,64,00
-C-010,Romokalisari,SBY-02 ,GOLDEN UNION OLI-TAMBAK SAWAH SDA,010GTS,45,00
-C-010,Pelabuhan Gresik,SBY-12 ,GOLDEN UNION OLI-TAMBAK SAWAH SDA,010GTS,55,00
-C-010,Romokalisari,SBY-02 ,Cpi Krian,010CIK,47,00
-C-010,Romokalisari,SBY-02 ,Romokalisari,010RMK,13,00
-C-010,Kalimas,SBY-13 ,Cpi Krian,010CIK,45,00
-C-010,Kalimas,SBY-13 ,New Hope-Mojosari,010NHM,53,00
-C-010,Romokalisari,SBY-02 ,Sinar Indochem-Krian,010SIK,47,00
-C-010,Romokalisari,SBY-02 ,Wonokoyo-Gempol,010WKG,51,00
-C-010,Romokalisari,SBY-02 ,DMC PUNGGING,010DMP,54,00
-C-010,Jamrud,SBY-10 ,Cpi Sepanjang,010CIS,43,00
-C-010,Romokalisari,SBY-02 ,Margomulyo,010MML,25,00
-C-010,Romokalisari,SBY-02 ,Cpi Sepanjang,010CIS,45,00
-C-010,Romokalisari,SBY-02 ,Sreeya ,010SYS,48,00
-C-010,Romokalisari,SBY-02 ,Wirifa Ngoro,010WSN,51,00
-C-010,Romokalisari,SBY-02 ,SMP Warugunung,010SWG,39,00
-C-010,Romokalisari,SBY-02 ,New Hope-Mojosari,010NHM,54,00
-C-010,Romokalisari,SBY-02 ,CJ Feed Jombang,010CFJ,68,00
-C-010,Romokalisari,SBY-02 ,Santori - Tongas,010SAN,90,00
-C-010,Romokalisari,SBY-02 ,H. Ilyas Gempol,010HIG,51,00
-C-010,Romokalisari,SBY-02 ,Berkat Agri Gedangan,010BAG,45,00
-C-010,Pelabuhan Gresik,SBY-12 ,SMP Warugunung,010SWG,49,00
-C-010,Pelabuhan Gresik,SBY-12 ,Romokalisari,010RMK,26,00
-C-010,Pelabuhan Gresik,SBY-12 ,Cpi Krian,010CIK,57,00
-C-010,Jamrud,SBY-10 ,Romokalisari,010RMK,28,00
-C-010,Jamrud,SBY-10 ,SMP Warugunung,010SWG,38,00
-C-010,Jamrud,SBY-10 ,TAMBAK SAWAH SDA,010TBS,43,00
-C-010,Jamrud,SBY-10 ,Berkat Agri Gedangan,010BAG,43,00
-C-010,Pelabuhan Gresik,SBY-12 ,Cpi Sepanjang,010CIS,55,00
-C-010,Pelabuhan Gresik,SBY-12 ,Berkat Agri Gedangan,010BAG,49,00
-C-010,Romokalisari,SBY-02 ,New Hope-Jemundo,010NHJ,45,00
-C-011,Romokalisari,SBY-02 ,Cpi Krian,011CIK,49,875
-C-011,Casaland,SBY-15 ,Cpi Krian,011CIK,20,50
-C-011,Casaland,SBY-15 ,Cpi Sepanjang,011CIS,27,50
-C-011,Bogasari,SBY-16 ,Cpi Krian,011CIK,48,50
-C-011,KIG-Gresik,,Cpi Krian,011CIK,64,00
-C-011,KIG-Gresik,,Cpi Sepanjang,011CIS,61,00
-C-011,Bogasari,SBY-16 ,Cpi Sepanjang,011CIS,45,00
-C-011,Teluk Lamong,SBY-07 ,Cpi Krian,011CIK,53,875
-C-011,Teluk Lamong,SBY-07 ,Cpi Sepanjang,011CIS,50,835
-C-011,Cpi Sepanjang,SBY-19 ,Cpp Dupak,011CPD,47,50
-C-011,Pelabuhan Perak,SBY-20 ,Cpi Krian,011CIK,49,875
-C-011,Pelabuhan Perak,SBY-20 ,Cpi Sepanjang,011CIS,46,835
-C-011,Pelabuhan Perak,SBY-20 ,Cpp Dupak,011CPD,33,250
-C-011,Pelabuhan Perak,SBY-20 ,KIG ,011KGG,50,000
-C-011,Romokalisari,SBY-02 ,Cpi Sepanjang,011CIS,46,835
-C-011,Malindo Gresik,SBY-21 ,Cpi Sepanjang,011CIS,50,835
-C-011,Teluk Lamong,SBY-07 ,Malindo Gresik,011MLG,53,875
-C-011,Margomulyo,SBY-03 ,Cpi Krian,011CIK,49,875
-C-011,Romokalisari,SBY-02 ,Cpp Dupak,011CPD,34,000
-C-011,Romokalisari,SBY-02 ,MS. Margomulyo,011MMM,32,500
-C-011,Romokalisari,SBY-02 ,MS. Gempol,011MSG,55,000
-C-011,Romokalisari,SBY-02 ,Wirifa Rungkut,011WFR,44,000
-C-011,Romokalisari,SBY-02 ,Panca Gedangan,011PPG,44,000
-C-011,Romokalisari,SBY-02 ,Sinar Indochem-Krian,011SIK,49,500
-C-011,Romokalisari,SBY-02 ,Cheil Jeddang - Jombang,011CJJ,69,500
-C-011,Romokalisari,SBY-02 ,Cheil Jeddang - Pasuruan,011CJP,71,000
-C-011,Teluk Lamong,SBY-07 ,Cpp Dupak,011CPD,37,250
-C-011,Teluk Lamong,SBY-07 ,Romokalisari,011RMK,18,000
-C-011,Teluk Lamong,SBY-07 ,KIG,011KGG,41,000
-C-013,Teluk Lamong,SBY-07 ,Wirifa-Ngoro Mojokerto,013WNM,50,00
-C-013,Teluk Lamong,SBY-07 ,New Hope-Casaland Krian,013NHC,45,00
-C-013,Teluk Lamong,SBY-07 ,New Hope-Jemundo,013NHJ,42,50
-C-013,Teluk Lamong,SBY-07 ,Romokalisari,013RMK,22,50
-C-013,Teluk Lamong,SBY-07 ,New Hope-Mojosari,013NHM,46,00
-C-013,New Hope-Mojosari,,East Hope-Ngoro,013EHN,23,00
-C-013,Teluk Lamong,SBY-07 ,East Hope-Ngoro,013EHN,50,00
-C-013,Jamrud,SBY-10 ,New Hope-Casaland Krian,013NHC,43,00
-C-013,Teluk Lamong,SBY-07 ,Casaland - Krian,013CSK,45,00
-C-013,New Hope-Mojosari,,Casaland - Krian,013CSK,22,50
-C-013,Teluk Lamong,SBY-07 ,New Hope-Margomulyo,013NHM,24,00
-C-013,Teluk Lamong,SBY-07 ,Cpi Krian,013CIK,43,00
-C-013,Teluk Lamong,SBY-07 ,Kalianak,013KAL,27,00
-C-013,Teluk Lamong,SBY-07 ,Panca Gedangan,013PPG,35,00
-C-013,Teluk Lamong,SBY-07 ,Manyar Gresik,013MYG,33,00
-C-013,Teluk Lamong,SBY-07 ,Cpi Sepanjang,013CIS,42,50
-C-013,Teluk Lamong,SBY-07 ,Malindo,013MAL,44,00
-C-013,Teluk Lamong,SBY-07 ,Wonokoyo,013WKY,48,50
-C-013,Teluk Lamong,SBY-07 ,Sinar Indochem-Krian,013SIK,45,00
-C-013,Teluk Lamong,SBY-07 ,Kraton Industri,013KRI,60,50
-C-013,Teluk Lamong,SBY-07 ,Sukorejo Blitar,013SKR,155,00
-C-014,Romokalisari,SBY-02 ,Romokalisari,014RMK,15,00
-C-014,Tanjung Perak,SBY-35 ,JCI Gedangan,014JCG,67,00
-C-014,Tanjung Perak,SBY-35 ,BTG Margomulyo,014BTG,53,00
-C-014,Tanjung Perak,SBY-35 ,Romokalisari,014RMK,67,00
-C-014,Tanjung Perak,SBY-35 ,STP Manyar,014STM,75,00
-C-018,KIG-Gresik,,New Hope-Jemundo,018NHJ,62,00
-C-018,KIG-Gresik,,Romokalisari,018RMK,30,00
-C-018,Romokalisari,SBY-02 ,New Hope-Jemundo,018NHJ,56,00
-C-018,Teluk Lamong,SBY-07 ,New Hope Kletek,018NHK,56,00
-C-018,Kalimas,SBY-13 ,New Hope-Jemundo,018NHJ,50,60
-C-018,Pelabuhan Perak,SBY-20 ,New Hope-Jemundo,018NHJ,50,60
-C-018,Teluk Lamong,SBY-07 ,New Hope-Jemundo,018NHJ,56,00
-C-018,Jamrud,SBY-10 ,New Hope-Jemundo,018NHJ,50,60
-C-018,Teluk Lamong,SBY-07 ,Gd Romokalisari,018RMK,20,70
-C-020,GII-Tj Tembaga,,SPC-Trosobo,020SPC,64,00
-C-020,GII-Tj Tembaga,,Sinar Indochem-Krian,020SIK,64,00
-C-021,Jamrud,SBY-10 ,Romokalisari,021RMK,12,50
-C-021,Jamrud,SBY-10 ,Malindo-Wringin Anom,021MAL,35,00
-C-021,Teluk Lamong,SBY-07 ,Wirifa Sakti Ngoro,021WSN,50,00
-C-021,Jamrud,SBY-10 ,Malindo Margomulyo,021MMG,22,00
-C-021,Jamrud,SBY-10 ,Sreeya Sewu,021SRY,39,50
-C-021,Teluk Lamong,SBY-07 ,Sreeya Sewu SDA,021SRY,38,00
-C-021,Teluk Lamong,SBY-07 ,QL Feed-Blitar,021QLB,115,00
-C-021,Jamrud,SBY-10 ,Margomulyo,021MGM,22,00
-C-021,Romokalisari,SBY-02 ,Miwon Gresik,021MWG,34,00
-C-021,Teluk Lamong,SBY-07 ,Miwon Gresik,021MWG,33,00
-C-022,Murti Jaya Abadi,SBY-23 ,Haida Kraton,022HKR,61,50
-C-022,Murti Jaya Abadi,SBY-23 ,MPJS Jombang,022MPJ,72,50
-C-022,Murti Jaya Abadi,SBY-23 ,Siantar Top-Sda,022STA,51,00
-C-022,BMS,SBY-24 ,Murti Jaya Abadi,022MJA,52,00
-C-022,Murti Jaya Abadi,SBY-23 ,New Hope-Mojosari,022NHM,58,00
-C-022,Murti Jaya Abadi,SBY-23 ,STP Manyar,022STM,52,00
-C-022,Murti Jaya Abadi,SBY-23 ,Sinar Indochem-Krian,022SIK,53,00
-C-022,Agristar Grain,SBY-25 ,Murti Jaya Abadi,022MJA,25,00
-C-022,Romokalisari,SBY-02 ,Murti Jaya Abadi,022MJA,14,00
-C-022,Teluk Lamong,SBY-07 ,Murti Jaya Abadi,022MJA,18,00
-C-022,Murti Jaya Abadi,SBY-23 ,Santos Jaya Abadi-SDA,022SAN,51,00
-C-022,Murti Jaya Abadi,SBY-23 ,New Hope-Jemundo,022NHJ,53,00
-C-022,Romokalisari,SBY-02 ,STP Manyar,022STM,52,00
-C-022,Romokalisari,SBY-02 ,Sierad Wonoayu,022SRW,47,50
-C-023,KIG-Gresik,,Sinar Indochem-Krian,023SIK,65,00
-C-023,KIG-Gresik,,Murti Jaya Abadi,023MJA,25,00
-C-023,TB. Langon,,Sinar Indochem-Krian,023SIK,55,00
-C-023,Fugui Flour-Gresik,,Sinar Indochem-Krian,023SIK,65,00
-C-023,Romokalisari,SBY-02 ,Sinar Indochem-Krian,023SIK,49,00
-C-023,Teluk Lamong,SBY-07 ,Sinar Indochem-Krian,023SIK,50,35
-C-023,Pelabuhan Perak,SBY-20 ,Sinar Indochem-Krian,023SIK,50,35
-C-023,JCI Sidoarjo,SBY-27 ,Sinar Indochem-Krian,023SIK,50,35
-C-024,KIG-Gresik,,Wirifa Sakti Ngoro,024WSN,65,00
-C-024,KIG-Gresik,,Cpp Sepanjang,024CPS,55,00
-C-024,KIG-Gresik,,Malindo Margomulyo,024MLM,32,50
-C-024,KIG-Gresik,,JCI Margomulyo,024JCM,35,00
-C-024,KIG-Gresik,,Gold Coin-M.Mulyo,024GCM,35,00
-C-024,KIG-Gresik,,MPJS Jombang,024MPJ,80,00
-C-024,KIG-Gresik,,Malindo Gresik,024MAL,55,00
-C-024,KIG-Gresik,,JCI Sidoarjo,024JCS,50,00
-C-024,KIG-Gresik,,JCI Gedangan,024JCG,50,00
-C-024,KIG-Gresik,,Sama Berkat Ind,024SBI,35,00
-C-024,KIG-Gresik,,Siantar Top-Sda,024STA,55,00
-C-024,KIG-Gresik,,Romokalisari,024RMK,29,00
-C-024,KIG-Gresik,,Malindo Wringin anom,024MAL,58,00
-C-024,KIG-Gresik,,Sinar Indochem-Krian,024SIK,58,00
-C-024,KIG-Gresik,,Cpi Semarang,024CSR,165,00
-C-025,Margomulyo,SBY-03 ,Romokalisari,025RMK,27,00
-C-026,Pelabuhan Gresik,SBY-12 ,Cpi Sepanjang,026CIS,57,00
-C-026,Pelabuhan Gresik,SBY-12 ,PT. Seger - Sumengko,026SGR,59,00
-C-026,Pelabuhan Gresik,SBY-12 ,Cpi Krian,026CIK,59,00
-C-026,Jamrud,SBY-10 ,PT. Seger - Sumengko,026SGR,50,00
-C-026,Jamrud,SBY-10 ,Cpi Krian,026CIK,49,00
-C-026,Teluk Lamong,SBY-07 ,Wringin Anom,026WRA,52,00
-C-026,Jamrud,SBY-10 ,JCI Sidoarjo,026JCS,47,00
-C-026,Jamrud,SBY-10 ,Wonokoyo-Gempol,026WKY,52,00
-C-026,Jamrud,SBY-10 ,Cpi Sepanjang,026CIS,46,00
-C-026,Jamrud,SBY-10 ,PT. Seger-Blora,026SGB,115,00
-C-026,Jamrud,SBY-10 ,Sreeya Sewu,026SRY,50,00
-C-026,Romokalisari,SBY-02 ,Sreeya Sewu,026SRY,55,00
-C-026,Jamrud,SBY-10 ,Wirifa Sakti Ngoro,026WSN,53,00
-C-026,Jamrud,SBY-10 ,CJ Feed Jombang,026CFJ,70,00
-C-026,Jamrud,SBY-10 ,Malindo Margomulyo,026MLM,29,00
-C-036,JCI Sidoarjo,SBY-27 ,MPJS Jombang,036MPJ,70,00
-C-036,Margomulyo,SBY-03 ,MPJS Jombang,036MPJ,75,00
-C-036,Teluk Lamong,SBY-07 ,Margomulyo,036MGM,30,00
-C-036,Agristar Grain,SBY-25 ,MPJS Jombang,036MPJ,80,00
-C-036,Teluk Lamong,SBY-07 ,MPJS Jombang,036MPJ,75,00
-C-036,Pelabuhan Perak,SBY-20 ,MPJS Jombang,036MPJ,70,00
-C-028,KIG-Gresik,,Malindo Margomulyo,028MLM,35,00
-C-028,KIG-Gresik,,Cpp Sepanjang,028CPS,55,00
-C-028,KIG-Gresik,,Romokalisari,028RMK,29,00
-C-028,KIG-Gresik,,Sinar Indochem-Krian,028SIK,58,00
-C-028,KIG-Gresik,,Wonokoyo,028WKY,64,00
-C-028,KIG-Gresik,,MPJS Jombang,028MPJ,80,00
-C-030,Jamrud,SBY-10 ,JCI-Margomulyo,030JCM,51,00
-C-030,Jamrud,SBY-10 ,JCI-Sidoarjo,030JCS,64,00
-C-030,Teluk Lamong,SBY-07 ,JCI-Sidoarjo,030JCS,68,00
-C-030,Teluk Lamong,SBY-07 ,Manyar,030MYR,68,00
-C-031,Romokalisari,SBY-02 ,Manna-Romokalisari,031MRM,6,00
-C-031,Margomulyo,SBY-03 ,Manna-Romokalisari,031MRM,27,50
-C-032,TB. Langon 28,,East Hope-Ngoro,032EHN,64,00
-C-032,New Hope-Mojosari,,East Hope-Ngoro,032EHN,52,50
-C-032,East Hope-Ngoro,,New Hope-Mojosari,032NHM,52,50
-C-032,Berkat ABBA,,East Hope-Ngoro,032EHN,68,00
-C-033,Romokalisari,SBY-02 ,Romokalisari,033RMK,10,00
-C-033,Romokalisari,SBY-02 ,Cpi Sepanjang,033CIS,48,00
-C-035,Tb.Langon,,Panca PP-Gedangan,035PPG,41,00
-C-035,KIG-Gresik,,Panca PP-Gedangan,035PPG,51,00
-C-035,Teluk Lamong,SBY-07 ,Panca PP-Gedangan,035PPG,41,00
-C-035,Pelabuhan Perak,SBY-20 ,Panca PP-Gedangan,035PPG,39,00
-C-037,Romokalisari,SBY-02 ,SPC-Trosobo,037SPT,52,00
-C-037,Tanjung Batu,SBY-29 ,SPC-Trosobo,037SPT,50,35
-C-037,Darmo Sugondo Gresik,,SPC-Trosobo,037SPT,55,00
-C-037,KIG-Gresik,,SPC-Trosobo,037SPT,62,00
-C-038,Romokalisari,SBY-02 ,Siantar Top-Sda,038STT,60,00
-C-038,Romokalisari,SBY-02 ,Siantar Top-Sda,038STT,47,50
-C-038,Siantar Top-Sda,,New Hope-Jemundo,038NHJ,60,00
-C-038,Siantar Top-Sda,,Margomulyo,038MGM,58,00
-C-038,Siantar Top-Sda,,East Hope-Ngoro,038EHN,70,00
-C-038,Siantar Top-Sda,,Wirifa Sakti Ngoro,038WSN,70,00
-C-038,Siantar Top-Sda,,MS. Gempol,038MSG,65,00
-C-038,Siantar Top-Sda,,New Hope - Mojosari,038NHM,65,00
-C-038,Siantar Top-Sda,,Sierad Wonoayu,038SRW,73,00
-C-038,Siantar Top-Sda,,Japfa Buduran,038JPB,60,00
-C-038,Siantar Top-Sda,,STP Manyar,038STM,68,00
-C-042,KIG-Gresik,,Wonokoyo,042WKY,67,00
-C-045,Cpi Sepanjang,SBY-19 ,Cpp Dupak,045CPD,47,50
-C-045,Bogasari,SBY-16 ,Cpp Sepanjang,045CPS,50,00
-C-045,Margomulyo,SBY-03 ,CPI Krian,045CIK,49,87
-C-048,Sinar Unigrain Indonesia,SBY-09 ,Sorini-Pasuruan,048SRP,128,00
-C-048,CARGILL SORINI,SBY-28 ,SINAR ANEKA NIAGA,048SAN,110,00
-C-049,Jamrud,SBY-10 ,Cpi Krian,049CIK,46,50
-C-049,Jamrud,SBY-10 ,CJ Feed Jombang,049CFJ,67,50
-C-049,Jamrud,SBY-10 ,Sumber Asia-Kletek,049SAK,45,00
-C-049,Jamrud,SBY-10 ,Cpi Sepanjang,049CIS,45,00
-C-049,Jamrud,SBY-10 ,Margomulyo,049MGM,27,50
-C-049,Jamrud,SBY-10 ,New Hope Kletek,049NHK,45,00
-C-049,Jamrud,SBY-10 ,Romokalisari,049RMK,28,00
-C-049,Jamrud,SBY-10 ,Malindo Gresik,049MAL,44,00
-C-049,Jamrud,SBY-10 ,JCI Sidoarjo,049JCS,46,50
-C-049,Jamrud,SBY-10 ,Wonokoyo,049WKY,50,00
-C-049,Jamrud,SBY-10 ,CV.Prima Sejahtera-Kediri,049PRIM,80,00
-C-049,Jamrud,SBY-10 ,PT. SMP - Krian,049SMK,46,50
-C-049,Subur-Krian,,CV.Prima Sejahtera-Kediri,049PRIM,75,00
-C-049,Subur-Krian,,Sreeya Sewu SDA,049SRS,30,00
-C-049,Subur-Krian,,Cpi Krian,049CIK,30,00
-C-049,Subur-Krian,,Cpi Sepanjang,049CIS,30,00
-C-049,Jamrud,SBY-10 ,Malindo Margomulyo,049MGM,27,50
-C-049,Jamrud,SBY-10 ,JCI Margomulyo,049JCM,27,50
-C-049,Jamrud,SBY-10 ,JCI Buduran,049JCB,46,50
-C-050,KIAS,SBY-33 ,Fugui Flour-Gresik,050FUG,8,00
-C-050,KIAS,SBY-33 ,HAS Gresik,050HAS,8,00
-C-051,Romokalisari,SBY-02 ,SPC-Trosobo,051SPT,51,00
-C-051,Romokalisari,SBY-02 ,JCI-Margomulyo,051JCM,30,00
-C-051,Romokalisari,SBY-02 ,Widuri Blitar,051WDR,115,00
-C-051,Teluk Lamong,SBY-07 ,Greenfields Blitar,051GFB,115,00
-C-051,Romokalisari,SBY-02 ,Berkat Agri-Gedangan,051BAG,44,00
-C-051,Teluk Lamong,SBY-07 ,Widuri Blitar,051WDR,115,00
-C-051,Teluk Lamong,SBY-07 ,SPC-Trosobo,051SPT,53,00
-C-051,Teluk Lamong,SBY-07 ,Romokalisari,051RMK,22,00
-C-052,CARGILL Beji,SBY-32 ,Gold Coin,052GCN,76,00
-C-052,Tb.Langon 22,,Gold Coin,052GCN,25,00
-C-052,Teluk Lamong,SBY-07 ,Gold Coin,052GCN,29,70
-C-052,KIG-Gresik,,Gold Coin-M.Mulyo,052GCM,38,00
-C-052,Pelabuhan Perak,SBY-20 ,Gold Coin-M.Mulyo,052GCM,30,00
-C-053,TB. Langon 28,,Wonokoyo,053WKY,47,00
-C-053,Teluk Lamong,SBY-07 ,Wonokoyo,053WKY,55,00
-C-053,Pelabuhan Perak,SBY-20 ,Wonokoyo,053WKY,53,00
-C-053,Romokalisari,SBY-02 ,Wonokoyo,053WKY,55,00
-C-053,KIG-Gresik,,Wonokoyo,053WKY,57,00
-C-054,Romokalisari,SBY-02 ,Haida Kraton,054HKR,64,00
-C-054,Romokalisari,SBY-02 ,Gold Coin,054GCN,28,00
-C-054,Teluk Lamong,SBY-07 ,CJ Feed Jombang,054CFJ,68,00
-C-054,Teluk Lamong,SBY-07 ,MARGOMULYO PERMAI,054MGP,25,00
-C-054,Romokalisari,SBY-02 ,East Hope-Ngoro,054EHN,54,00
-C-055,Romokalisari,SBY-02 ,PT.Seger,055SEG,50,00
-C-055,Romokalisari,SBY-02 ,Tb.Langon,055TBL,29,00
-C-055,Tb.Langon 16,,SPC-Trosobo,055SPT,50,00
-C-055,Romokalisari,SBY-02 ,Cpi Sepanjang,055CIS,48,00
-C-055,Margomulyo,SBY-03 ,Cpi Krian,055CIK,46,00
-C-055,Margomulyo,SBY-03 ,Cpi Sepanjang,055CIS,44,00
-C-055,Teluk Lamong,SBY-07 ,Cpi Krian,055CIK,45,00
-C-055,Teluk Lamong,SBY-07 ,Cpi Sepanjang,055CIS,44,50
-C-055,Teluk Lamong,SBY-07 ,Wonokoyo,055WKY,53,50
-C-055,Teluk Lamong,SBY-07 ,Tb.Langon,055TBL,26,50
-C-055,Margomulyo,SBY-03 ,Cpi Krian,055CIK,48,00
-C-055,Romokalisari,SBY-02 ,Cpi Krian,055CIK,50,00
-C-056,KIAS,SBY-33 ,HAS Gresik,056HAS,8,00
-C-057,Romokalisari,SBY-02 ,MPJS Jombang,057MPJ,73,00
-C-057,Romokalisari,SBY-02 ,CARGILL Beji,057CGB,50,50
-C-057,Romokalisari,SBY-02 ,Murti Jaya Abadi,057MJA,13,70
-C-057,Romokalisari,SBY-02 ,Siantar Top-Sda,057STA,43,60
-C-057,Romokalisari,SBY-02 ,Romokalisari,057RMK,10,00
-C-057,Romokalisari,SBY-02 ,TANJUNG BATU SURABAYA,057TGB,27,50
-C-057,Romokalisari,SBY-02 ,Margomulyo,057MML,27,50
-C-057,Romokalisari,SBY-02 ,Dupak,057DPK,25,00
-C-057,Romokalisari,SBY-02 ,Pakindo Jaya,057PKJ,39,00
-C-057,Romokalisari,SBY-02 ,Wirifa Rungkut,057WFR,39,00
-C-057,Romokalisari,SBY-02 ,New Hope Jemundo,057NHJ,44,50
-C-057,Romokalisari,SBY-02 ,Panca Pandaan,057PPD,50,50
-C-057,Romokalisari,SBY-02 ,Wonokoyo,057WKY,50,50
-C-057,Romokalisari,SBY-02 ,Sinar Indochem-Krian,057SIK,47,00
-C-057,Romokalisari,SBY-02 ,Cpi Krian,057CIK,47,00
-C-057,Romokalisari,SBY-02 ,Japfa Buduran,057JPB,45,00
-C-057,Romokalisari,SBY-02 ,Panca Gedangan,057PPG,39,00
-C-057,Romokalisari,SBY-02 ,Cargill PIER,057CKP,61,50
-C-057,Romokalisari,SBY-02 ,Gold Coin-M.Mulyo,057GCM,27,50
-C-057,Romokalisari,SBY-02 ,Matahari Sakti Gempol,057MSG,50,50
-C-057,Romokalisari,SBY-02 ,East Hope-Ngoro,057EHN,50,50
-C-057,Romokalisari,SBY-02 ,Cpi Sepanjang,057CIS,44,50
-C-057,Romokalisari,SBY-02 ,New Hope Mojosari,057NHM,52,50
-C-057,Romokalisari,SBY-02 ,Suri Tani Manyar,057STM,39,00
-C-057,Romokalisari,SBY-02 ,Malindo Wringin anom,057MWA,44,50
-C-057,Romokalisari,SBY-02 ,DMC PUNGGING,057DMP,55,00
-C-057,Romokalisari,SBY-02 ,CJ Feed Jombang,057CFJ,67,50
-C-057,Romokalisari,SBY-02 ,CJ Pasuruan,057CJP,69,50
-C-057,Romokalisari,SBY-02 ,Sierad Wonoayu,057SRW,48,00
-C-057,Romokalisari,SBY-02 ,Haida Kraton,057HKR,65,00
-C-057,Romokalisari,SBY-02 ,CJ Feed BATANG,057CFB,180,00
-C-057,Romokalisari,SBY-02 ,Japfa Sragen,057JPS,160,00
-C-057,Romokalisari,SBY-02 ,New Hope Kletek,057NHK,44,50
-C-057,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,057MMM,27,50
-C-057,Romokalisari,SBY-02 ,Pakindo Jaya,057PKJ,39,00
-C-057,Jamrud,SBY-10 ,MPJS Jombang,057MPJ,72,00
-C-057,Jamrud,SBY-10 ,PT. Murti Gresik,057MUR,30,90
-C-057,Jamrud,SBY-10 ,PT. Siantar Top Tambak Sawah,057STT,42,30
-C-057,Jamrud,SBY-10 ,Romokalisari,057RMK,27,50
-C-057,Jamrud,SBY-10 ,TANJUNG BATU SURABAYA,057TGB,14,00
-C-057,Jamrud,SBY-10 ,Margomulyo,057MML,27,00
-C-057,Jamrud,SBY-10 ,Dupak,057DPK,25,00
-C-057,Jamrud,SBY-10 ,Pakindo Jaya,057PKJ,38,00
-C-057,Jamrud,SBY-10 ,Wirifa Rungkut,057WRR,38,00
-C-057,Jamrud,SBY-10 ,New Hope Jemundo,057NHJ,43,50
-C-057,Jamrud,SBY-10 ,Panca Pandaan,057PPD,49,50
-C-057,Jamrud,SBY-10 ,Wonokoyo,057WKY,49,50
-C-057,Jamrud,SBY-10 ,Matahari Sakti Gempol,057MSG,49,50
-C-057,Jamrud,SBY-10 ,Sinar Indochem-Krian,057SIK,46,00
-C-057,Jamrud,SBY-10 ,Cpi Krian,057CIK,46,00
-C-057,Jamrud,SBY-10 ,Japfa Buduran,057JPB,44,00
-C-057,Jamrud,SBY-10 ,Panca Gedangan,057PPG,38,00
-C-057,Jamrud,SBY-10 ,East Hope-Ngoro,057EHN,49,50
-C-057,Jamrud,SBY-10 ,Cpi Sepanjang,057CIS,43,50
-C-057,Jamrud,SBY-10 ,New Hope Mojosari,057NHM,50,50
-C-057,Jamrud,SBY-10 ,Suri Tani Manyar,057STM,44,00
-C-057,Jamrud,SBY-10 ,Malindo Wringin anom,057MWA,43,50
-C-057,Jamrud,SBY-10 ,PT. DMC Mojokerto,057DMM,54,00
-C-057,Jamrud,SBY-10 ,CJ Jombang,057CJJ,66,50
-C-057,Jamrud,SBY-10 ,CJ Pasuruan,057CJP,68,50
-C-057,Jamrud,SBY-10 ,Sierad Wonoayu,057SRW,47,00
-C-057,Jamrud,SBY-10 ,Cargill Kraton,057CKR,60,50
-C-057,Jamrud,SBY-10 ,Haida Kraton,057HKR,64,00
-C-057,Jamrud,SBY-10 ,CJ Feed BATANG,057CFB,180,00
-C-057,Jamrud,SBY-10 ,Japfa Sragen,057JSR,160,00
-C-057,Teluk Lamong,SBY-07 ,Sama Berkat Indonesia,057SBI,25,00
-C-057,Teluk Lamong,SBY-07 ,Gold Coin,057GCN,25,00
-C-057,Teluk Lamong,SBY-07 ,DMC PUNGGING,057DMP,57,00
-C-057,Teluk Lamong,SBY-07 ,CJ Feed Jombang,057CFJ,69,50
-C-057,Teluk Lamong,SBY-07 ,MPJS Jombang,057MPJ,76,00
-C-057,Teluk Lamong,SBY-07 ,Murti Jaya Abadi,057MJA,26,50
-C-057,Teluk Lamong,SBY-07 ,Siantar Top-Sda,057STT,44,60
-C-057,Teluk Lamong,SBY-07 ,Romokalisari,057RMK,19,80
-C-057,Teluk Lamong,SBY-07 ,TANJUNG BATU SURABAYA,057TGB,25,00
-C-057,Teluk Lamong,SBY-07 ,Margomulyo,057MGM,25,00
-C-057,Teluk Lamong,SBY-07 ,Dupak,057DPK,25,00
-C-057,Teluk Lamong,SBY-07 ,Pakindo Jaya,057PKJ,41,00
-C-057,Teluk Lamong,SBY-07 ,Wirifa Rungkut,057WFR,41,00
-C-057,Teluk Lamong,SBY-07 ,New Hope Jemundo,057NHJ,47,50
-C-057,Teluk Lamong,SBY-07 ,Panca Pandaan,057PPD,52,50
-C-057,Teluk Lamong,SBY-07 ,Wonokoyo,057WKY,63,60
-C-057,Teluk Lamong,SBY-07 ,Sinar Indochem-Krian,057SIK,49,00
-C-057,Teluk Lamong,SBY-07 ,Cpi Krian,057CIK,49,00
-C-057,Teluk Lamong,SBY-07 ,Japfa Buduran,057JPB,47,00
-C-057,Teluk Lamong,SBY-07 ,Panca Gedangan,057PPG,41,00
-C-057,Teluk Lamong,SBY-07 ,East Hope-Ngoro,057EHN,52,50
-C-057,Teluk Lamong,SBY-07 ,Cpi Sepanjang,057CIS,46,50
-C-057,Teluk Lamong,SBY-07 ,New Hope Mojosari,057NHM,51,50
-C-057,Teluk Lamong,SBY-07 ,Suri Tani Manyar,057STM,43,00
-C-057,Teluk Lamong,SBY-07 ,Malindo Wringin anom,057MWA,46,50
-C-057,Teluk Lamong,SBY-07 ,CJ Pasuruan,057CJP,71,50
-C-057,Teluk Lamong,SBY-07 ,Sierad Wonoayu,057SRW,50,00
-C-057,Teluk Lamong,SBY-07 ,Cargill Kraton,057CKR,63,50
-C-057,Teluk Lamong,SBY-07 ,Haida Kraton,057HKR,67,00
-C-057,Teluk Lamong,SBY-07 ,CJ Feed BATANG,057CFB,180,00
-C-057,Teluk Lamong,SBY-07 ,Japfa Sragen,057JPS,160,00
-C-058,Romokalisari,SBY-02 ,MPJS Jombang,058MPJ,73,00
-C-058,Romokalisari,SBY-02 ,CARGILL Beji,058CGB,50,50
-C-058,Romokalisari,SBY-02 ,Murti Jaya Abadi,058MJA,13,70
-C-058,Romokalisari,SBY-02 ,Siantar Top-Sda,058STT,43,60
-C-058,Romokalisari,SBY-02 ,Romokalisari,058RMK,10,00
-C-058,Romokalisari,SBY-02 ,TANJUNG BATU SURABAYA,058TGB,27,50
-C-058,Romokalisari,SBY-02 ,Margomulyo,058MGM,27,50
-C-058,Romokalisari,SBY-02 ,Dupak,058DPK,25,00
-C-058,Romokalisari,SBY-02 ,Pakindo Jaya,058PKJ,39,00
-C-058,Romokalisari,SBY-02 ,Wirifa Rungkut,058WFR,39,00
-C-058,Romokalisari,SBY-02 ,New Hope Jemundo,058NHJ,44,50
-C-058,Romokalisari,SBY-02 ,Panca Pandaan,058PPD,50,50
-C-058,Romokalisari,SBY-02 ,Wonokoyo,058WKY,50,50
-C-058,Romokalisari,SBY-02 ,Sinar Indochem-Krian,058SIK,47,00
-C-058,Romokalisari,SBY-02 ,Cpi Krian,058CIK,47,00
-C-058,Romokalisari,SBY-02 ,Japfa Buduran,058JPB,45,00
-C-058,Romokalisari,SBY-02 ,Panca Gedangan,058PPG,39,00
-C-058,Romokalisari,SBY-02 ,Cargill PIER,058CGP,61,50
-C-058,Romokalisari,SBY-02 ,Gold Coin-M.Mulyo,058GCM,27,50
-C-058,Romokalisari,SBY-02 ,Matahari Sakti Gempol,058MSG,50,50
-C-058,Romokalisari,SBY-02 ,East Hope-Ngoro,058EHN,50,50
-C-058,Romokalisari,SBY-02 ,Cpi Sepanjang,058CIS,44,50
-C-058,Romokalisari,SBY-02 ,New Hope Mojosari,058NHM,52,50
-C-058,Romokalisari,SBY-02 ,Suri Tani Manyar,058STM,39,00
-C-058,Romokalisari,SBY-02 ,Malindo Wringin anom,058MWA,44,50
-C-058,Romokalisari,SBY-02 ,DMC PUNGGING,058DMP,55,00
-C-058,Romokalisari,SBY-02 ,CJ Feed Jombang,058CFJ,67,50
-C-058,Romokalisari,SBY-02 ,CJ Pasuruan,058CJP,69,50
-C-058,Romokalisari,SBY-02 ,Sierad Wonoayu,058SRW,48,00
-C-058,Romokalisari,SBY-02 ,Haida Kraton,058HKR,65,00
-C-058,Romokalisari,SBY-02 ,CJ Feed BATANG,058CFB,180,00
-C-058,Romokalisari,SBY-02 ,Japfa Sragen,058JPS,160,00
-C-058,Romokalisari,SBY-02 ,New Hope Kletek,058NHK,44,50
-C-058,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,058MMM,27,50
-C-058,Romokalisari,SBY-02 ,Pakindo Jaya,058PKJ,39,00
-C-058,Jamrud,SBY-10 ,MPJS Jombang,058MPJ,72,00
-C-058,Jamrud,SBY-10 ,PT. Murti Gresik,058MUR,30,90
-C-058,Jamrud,SBY-10 ,PT. Siantar Top Tambak Sawah,058STT,42,30
-C-058,Jamrud,SBY-10 ,Romokalisari,058RMK,27,50
-C-058,Jamrud,SBY-10 ,TANJUNG BATU SURABAYA,058TGB,14,00
-C-058,Jamrud,SBY-10 ,Margomulyo,058MGM,27,00
-C-058,Jamrud,SBY-10 ,Dupak,058DPK,25,00
-C-058,Jamrud,SBY-10 ,Pakindo Jaya,058PKJ,38,00
-C-058,Jamrud,SBY-10 ,Wirifa Rungkut,058WRR,38,00
-C-058,Jamrud,SBY-10 ,New Hope Jemundo,058NHJ,43,50
-C-058,Jamrud,SBY-10 ,Panca Pandaan,058PPD,49,50
-C-058,Jamrud,SBY-10 ,Wonokoyo,058WKY,49,50
-C-058,Jamrud,SBY-10 ,Matahari Sakti Gempol,058MSG,49,50
-C-058,Jamrud,SBY-10 ,Sinar Indochem-Krian,058SIK,46,00
-C-058,Jamrud,SBY-10 ,Cpi Krian,058CIK,46,00
-C-058,Jamrud,SBY-10 ,Japfa Buduran,058JPB,44,00
-C-058,Jamrud,SBY-10 ,Panca Gedangan,058PPG,38,00
-C-058,Jamrud,SBY-10 ,East Hope-Ngoro,058EHN,49,50
-C-058,Jamrud,SBY-10 ,Cpi Sepanjang,058CIS,43,50
-C-058,Jamrud,SBY-10 ,New Hope Mojosari,058NHM,50,50
-C-058,Jamrud,SBY-10 ,Suri Tani Manyar,058STM,44,00
-C-058,Jamrud,SBY-10 ,Malindo Wringin anom,058MWA,43,50
-C-058,Jamrud,SBY-10 ,PT. DMC Mojokerto,058DMM,54,00
-C-058,Jamrud,SBY-10 ,CJ Jombang,058CJJ,66,50
-C-058,Jamrud,SBY-10 ,CJ Pasuruan,058CJP,68,50
-C-058,Jamrud,SBY-10 ,Sierad Wonoayu,058SRW,47,00
-C-058,Jamrud,SBY-10 ,Cargill Kraton,058CKR,60,50
-C-058,Jamrud,SBY-10 ,Haida Kraton,058HKR,64,00
-C-058,Jamrud,SBY-10 ,CJ Feed BATANG,058CFB,180,00
-C-058,Jamrud,SBY-10 ,Japfa Sragen,058JSR,160,00
-C-058,Teluk Lamong,SBY-07 ,Sama Berkat Indonesia,058SBI,25,00
-C-058,Teluk Lamong,SBY-07 ,Gold Coin,058GCN,25,00
-C-058,Teluk Lamong,SBY-07 ,DMC PUNGGING,058DMP,57,00
-C-058,Teluk Lamong,SBY-07 ,CJ Feed Jombang,058CFJ,69,50
-C-058,Teluk Lamong,SBY-07 ,MPJS Jombang,058MPJ,76,00
-C-058,Teluk Lamong,SBY-07 ,Murti Jaya Abadi,058MJA,26,50
-C-058,Teluk Lamong,SBY-07 ,Siantar Top-Sda,058STT,44,60
-C-058,Teluk Lamong,SBY-07 ,Romokalisari,058RMK,19,80
-C-058,Teluk Lamong,SBY-07 ,TANJUNG BATU SURABAYA,058TGB,25,00
-C-058,Teluk Lamong,SBY-07 ,Margomulyo,058MML,25,00
-C-058,Teluk Lamong,SBY-07 ,Dupak,058DPK,25,00
-C-058,Teluk Lamong,SBY-07 ,Pakindo Jaya,058PKJ,41,00
-C-058,Teluk Lamong,SBY-07 ,Wirifa Rungkut,058WFR,41,00
-C-058,Teluk Lamong,SBY-07 ,New Hope Jemundo,058NHJ,47,50
-C-058,Teluk Lamong,SBY-07 ,Panca Pandaan,058PPD,52,50
-C-058,Teluk Lamong,SBY-07 ,Wonokoyo,058WKY,63,60
-C-058,Teluk Lamong,SBY-07 ,Sinar Indochem-Krian,058SIK,49,00
-C-058,Teluk Lamong,SBY-07 ,Cpi Krian,058CIK,49,00
-C-058,Teluk Lamong,SBY-07 ,Japfa Buduran,058JPB,47,00
-C-058,Teluk Lamong,SBY-07 ,Panca Gedangan,058PPG,41,00
-C-058,Teluk Lamong,SBY-07 ,East Hope-Ngoro,058EHN,52,50
-C-058,Teluk Lamong,SBY-07 ,Cpi Sepanjang,058CIS,46,50
-C-058,Teluk Lamong,SBY-07 ,New Hope Mojosari,058NHM,51,50
-C-058,Teluk Lamong,SBY-07 ,Suri Tani Manyar,058STM,43,00
-C-058,Teluk Lamong,SBY-07 ,Malindo Wringin anom,058MWA,46,50
-C-058,Teluk Lamong,SBY-07 ,CJ Pasuruan,058CJP,71,50
-C-058,Teluk Lamong,SBY-07 ,Sierad Wonoayu,058SRW,50,00
-C-058,Teluk Lamong,SBY-07 ,Cargill Kraton,058CKR,63,50
-C-058,Teluk Lamong,SBY-07 ,Haida Kraton,058HKR,67,00
-C-058,Teluk Lamong,SBY-07 ,CJ Feed BATANG,058CFB,180,00
-C-058,Teluk Lamong,SBY-07 ,Japfa Sragen,058JPS,160,00
-C-063,Darmo Sugondo Gresik,,CJ Feed Jombang,063CFJ,64,00
-C-063,Darmo Sugondo Gresik,,Cpi Sepanjang,063CIS,51,00
-C-063,Darmo Sugondo Gresik,,Cpi Krian,063CIK,53,00
-C-063,Darmo Sugondo Gresik,,New Hope Kletek,063NHK,49,00
-C-063,Darmo Sugondo Gresik,,Wirifa Rungkut,063WFR,49,00
-C-063,Darmo Sugondo Gresik,,Panca Gedangan,063PPG,46,00
-C-063,Darmo Sugondo Gresik,,Japfa Buduran,063JPB,46,00
-C-063,Darmo Sugondo Gresik,,Malindo Wringin anom,063MWA,53,00
-C-063,Darmo Sugondo Gresik,,Wirifa Ngoro,063WFN,56,50
-C-063,Darmo Sugondo Gresik,,East Hope-Ngoro,063EHN,56,50
-C-063,Darmo Sugondo Gresik,,CARGILL Beji,063CGB,56,50
-C-063,Darmo Sugondo Gresik,,Cargill Kraton,063CKR,66,00
-C-063,Darmo Sugondo Gresik,,Panca Pandaan,063PPD,56,50
-C-063,Darmo Sugondo Gresik,,CJ Pasuruan,063CJP,56,50
-C-063,Darmo Sugondo Gresik,,MPJS Jombang,063MPJ,79,00
-C-063,Darmo Sugondo Gresik,,DMC PUNGGING,063DMP,61,00
-C-063,Darmo Sugondo Gresik,,Romokalisari,063RMK,18,00
-C-063,Darmo Sugondo Gresik,,Sierad Wonoayu,063SRW,53,00
-C-063,Darmo Sugondo Gresik,,Tambak Langon,063TBL,25,00
-C-063,Teluk Lamong,SBY-07 ,Cpi Sepanjang,063CIS,50,00
-C-063,Teluk Lamong,SBY-07 ,Cpi Krian,063CIK,52,00
-C-063,Teluk Lamong,SBY-07 ,New Hope Kletek,063NHK,50,00
-C-063,Teluk Lamong,SBY-07 ,Wirifa Rungkut,063WFR,50,00
-C-063,Teluk Lamong,SBY-07 ,Panca Gedangan,063PPG,45,00
-C-063,Teluk Lamong,SBY-07 ,Japfa Buduran,063JPB,45,00
-C-063,Teluk Lamong,SBY-07 ,Malindo Wringin anom,063MWA,56,00
-C-063,Teluk Lamong,SBY-07 ,Wirifa Ngoro,063WFN,55,50
-C-063,Teluk Lamong,SBY-07 ,East Hope-Ngoro,063EHN,55,50
-C-063,Teluk Lamong,SBY-07 ,CARGILL Beji,063CGB,55,50
-C-063,Teluk Lamong,SBY-07 ,Cargill Kraton,063CKR,67,00
-C-063,Teluk Lamong,SBY-07 ,Panca Pandaan,063PPD,55,50
-C-063,Teluk Lamong,SBY-07 ,CJ Pasuruan,063CJP,68,00
-C-063,Teluk Lamong,SBY-07 ,MPJS Jombang,063MPJ,78,00
-C-063,Teluk Lamong,SBY-07 ,DMC PUNGGING,063DMP,60,00
-C-063,Teluk Lamong,SBY-07 ,Romokalisari,063RMK,24,00
-C-063,Teluk Lamong,SBY-07 ,Sierad Wonoayu,063SRW,52,00
-C-063,Teluk Lamong,SBY-07 ,Tambak Langon,063TBL,21,00
-C-063,Teluk Lamong,SBY-07 ,Darmo Sugondo Gresik,063DSG,26,00
-C-063,Romokalisari,SBY-02 ,Cpi Sepanjang,063CIS,47,00
-C-063,Romokalisari,SBY-02 ,Cpi Krian,063CIK,49,00
-C-063,Romokalisari,SBY-02 ,New Hope Kletek,063NHK,45,00
-C-063,Romokalisari,SBY-02 ,Wirifa Rungkut,063WFR,45,00
-C-063,Romokalisari,SBY-02 ,Panca Gedangan,063PPG,42,00
-C-063,Romokalisari,SBY-02 ,Japfa Buduran,063JPB,42,00
-C-063,Romokalisari,SBY-02 ,Malindo Wringin anom,063MWA,49,00
-C-063,Romokalisari,SBY-02 ,Wirifa Ngoro,063WFN,52,50
-C-063,Romokalisari,SBY-02 ,East Hope-Ngoro,063EHN,52,50
-C-063,Romokalisari,SBY-02 ,CARGILL Beji,063CGB,52,50
-C-063,Romokalisari,SBY-02 ,Cargill Kraton,063CKR,62,00
-C-063,Romokalisari,SBY-02 ,Panca Pandaan,063PPG,52,50
-C-063,Romokalisari,SBY-02 ,CJ Pasuruan,063CJP,62,00
-C-063,Romokalisari,SBY-02 ,MPJS Jombang,063MPJ,75,00
-C-063,Romokalisari,SBY-02 ,DMC PUNGGING,063DMP,57,00
-C-063,Romokalisari,SBY-02 ,Sierad Wonoayu,063SRW,49,00
-C-063,Romokalisari,SBY-02 ,Tambak Langon,063TBL,21,00
-C-063,Romokalisari,SBY-02 ,Darmo Sugondo Gresik,063DSG,18,00
-C-063,Jamrud,SBY-10 ,Cpi Sepanjang,063CIS,45,00
-C-063,Jamrud,SBY-10 ,Cpi Krian,063CIK,47,00
-C-063,Jamrud,SBY-10 ,New Hope Kletek,063NHK,45,00
-C-063,Jamrud,SBY-10 ,Wirifa Rungkut,063WFR,45,00
-C-063,Jamrud,SBY-10 ,Panca Gedangan,063PPG,40,00
-C-063,Jamrud,SBY-10 ,Japfa Buduran,063JPB,40,00
-C-063,Jamrud,SBY-10 ,Malindo Wringin anom,063MWA,51,00
-C-063,Jamrud,SBY-10 ,Wirifa Ngoro,063WFN,50,50
-C-063,Jamrud,SBY-10 ,East Hope-Ngoro,063EHN,50,50
-C-063,Jamrud,SBY-10 ,CARGILL Beji,063CGB,50,50
-C-063,Jamrud,SBY-10 ,Cargill Kraton,063CGK,62,00
-C-063,Jamrud,SBY-10 ,Panca Pandaan,063PPD,50,50
-C-063,Jamrud,SBY-10 ,CJ Pasuruan,063CJP,63,00
-C-063,Jamrud,SBY-10 ,MPJS Jombang,063MPJ,73,00
-C-063,Jamrud,SBY-10 ,DMC PUNGGING,063DMP,55,00
-C-063,Jamrud,SBY-10 ,Romokalisari,063RMK,33,00
-C-063,Jamrud,SBY-10 ,Sierad Wonoayu,063SRW,47,00
-C-063,Jamrud,SBY-10 ,Tambak Langon,063TBL,25,00
-C-063,Jamrud,SBY-10 ,Darmo Sugondo Gresik,063DSG,35,00
-C-063,Jamrud,SBY-10 ,Japfa Margo,063JPM,25,00
-C-064,Beji Pasuruan,,Gold Coin,064GCN,76,00
-C-065,Jamrud,SBY-10 ,SPC-Trosobo,065SPT,44,50
-C-065,Jamrud,SBY-10 ,PT. Seger,065SGR,44,50
-C-065,Jamrud,SBY-10 ,Romokalisari,065RMK,30,00
-C-065,Jamrud,SBY-10 ,Tb.Langon,065TBL,27,50
-C-065,Teluk Lamong,SBY-07 ,Cpi Krian,065CIK,45,00
-C-065,Teluk Lamong,SBY-07 ,Wonokoyo,065WKY,51,00
-C-065,Teluk Lamong,SBY-07 ,Tb.Langon,065TBL,25,00
-C-065,Romokalisari,SBY-02 ,Cpi Krian,065CIK,48,00
-C-065,Romokalisari,SBY-02 ,Cpi Sepanjang,065CIS,46,00
-C-065,Margomulyo,SBY-03 ,Cpi Krian,065CIK,46,00
-C-065,Teluk Lamong,SBY-07 ,Cpi Sepanjang,065CIS,44,50
-C-065,Margomulyo,SBY-03 ,Cpi Sepanjang,065CIS,44,00
-C-066,Margomulyo,SBY-03 ,Cpi Krian,066CIK,49,00
-C-066,Teluk Lamong,SBY-07 ,Sierad,066SIR,55,00
-C-066,Teluk Lamong,SBY-07 ,Garda Sumengko,066GDS,52,00
-C-066,Teluk Lamong,SBY-07 ,Wringin Anom,066WRA,52,00
-C-066,Teluk Lamong,SBY-07 ,Romokalisari,066RMK,16,00
-C-066,Romokalisari,SBY-02 ,East Hope-Ngoro,066EHN,50,00
-C-066,Romokalisari,SBY-02 ,Sreeya Sewu,066SRW,55,00
-C-066,Teluk Lamong,SBY-07 ,East Hope-Ngoro,066EHN,53,00
-C-066,Teluk Lamong,SBY-07 ,Tb. Langon 16,066TBL,16,00
-C-066,Teluk Lamong,SBY-07 ,MPJS Jombang,066MPJ,80,00
-C-066,Teluk Lamong,SBY-07 ,PT.Seger-Kedamean,066SGK,50,00
-C-067,Teluk Lamong,SBY-07 ,Tb.Langon,067TBL,18,00
-C-067,Tb.Langon,,Surya Grain-Krian,067SGK,48,00
-C-067,Romokalisari,SBY-02 ,Surya Grain-Krian,067SGK,50,00
-C-067,Romokalisari,SBY-02 ,Surya Grain-Trosobo,067SGT,53,00
-C-067,Teluk Lamong,SBY-07 ,Romokalisari,067RMK,20,00
-C-068,Margomulyo,SBY-03 ,Cpi Sepanjang,068CIS,48,00
-C-069,Romokalisari,SBY-02 ,Sama Berkat Ind,069SBI,27,50
-C-069,Margomulyo,SBY-03 ,Sama Berkat Ind,069SBI,18,00
-C-069,KIG-Gresik,,Sama Berkat Ind,069SBI,38,00
-C-069,Tb. Langon,,PT. DMC Mojokerto,069DMM,55,00
-C-070,Teluk Lamong,SBY-07 ,Panca PP-Gedangan,070PPG,43,00
-C-073,Romokalisari,SBY-02 ,New Hope-Mojosari,073NHM,58,00
-C-073,Teluk Lamong,SBY-07 ,New Hope-Mojosari,073NHM,58,00
-C-073,Teluk Lamong,SBY-07 ,New Hope-Casaland Krian,073NHC,50,00
-C-073,New Hope Kletek,,New Hope-Mojosari,073NHM,29,00
-C-073,Pelabuhan Perak,SBY-20 ,New Hope-Mojosari,073NHM,63,50
-C-073,Teluk Lamong,SBY-07 ,Margomulyo,073MML,27,00
-C-073,Margomulyo,SBY-03 ,New Hope-Mojosari,073NHM,52,00
-C-073,Casaland,SBY-15 ,New Hope-Mojosari,073NHM,58,00
-C-073,Jamrud,SBY-10 ,New Hope-Mojosari,073NHM,63,50
-C-076,Teluk Lamong,SBY-07 ,Margomulyo,076MML,25,00
-C-079,Tb.Langon 22,,Haida PIER,079HPR,55,00
-C-079,Margomulyo,SBY-03 ,Matahari Sakti-M.Mulyo,079MSM,14,00
-C-079,Margomulyo,SBY-03 ,Panca PP-Pandaan,079PPD,42,00
-C-079,Margomulyo,SBY-03 ,Cpp Dupak,079CPD,21,00
-C-079,Margomulyo,SBY-03 ,East Hope-Ngoro,079EHN,42,00
-C-079,Romokalisari,SBY-02 ,Panca PP-Pandaan,079PPD,42,00
-C-079,Romokalisari,SBY-02 ,East Hope-Ngoro,079EHN,42,00
-C-079,Margomulyo,SBY-03 ,Matahari Sakti Gempol,079MSG,42,00
-C-079,Romokalisari,SBY-02 ,Panca PP-Gedangan,079PPG,35,00
-C-079,Margomulyo,SBY-03 ,MPJS Jombang,079MPJ,59,00
-C-079,Margomulyo,SBY-03 ,Sierad,079SRD,40,00
-C-079,Romokalisari,SBY-02 ,Cpp Dupak,079CPD,20,00
-C-079,Margomulyo,SBY-03 ,Panca PP-Gedangan,079PPG,32,00
-C-079,Margomulyo,SBY-03 ,DMC PUNGGING,079DMP,48,00
-C-079,Margomulyo,SBY-03 ,Cpp Sepanjang,079CPS,37,00
-C-079,Margomulyo,SBY-03 ,CJ Feed Jombang,079CFJ,59,00
-C-079,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,079MSM,21,00
-C-079,Romokalisari,SBY-02 ,Cpp Sepanjang,079CPS,40,00
-C-079,Romokalisari,SBY-02 ,Matahari Sakti Gempol,079MSG,42,00
-C-079,Teluk Lamong,SBY-07 ,TANJUNG BATU SURABAYA,079TGB,28,00
-C-079,Teluk Lamong,SBY-07 ,Panca PP-Pandaan,079PPD,42,00
-C-079,Teluk Lamong,SBY-07 ,Cpp Dupak,079CPD,20,00
-C-07R,Teluk Lamong,SBY-07 ,Romokalisari,07RMK,14,00
-C-079,Teluk Lamong,SBY-07 ,East Hope-Ngoro,079EHN,47,00
-C-079,Teluk Lamong,SBY-07 ,Matahari Sakti Gempol,079MSG,42,00
-C-079,Teluk Lamong,SBY-07 ,Sinar Indochem-Krian,079SIK,40,00
-C-079,Teluk Lamong,SBY-07 ,Haida Kraton,079HKR,55,00
-C-079,Teluk Lamong,SBY-07 ,DMC PUNGGING,079DMP,50,00
-C-079,Teluk Lamong,SBY-07 ,Sierad,079SRD,40,00
-C-079,Teluk Lamong,SBY-07 ,MPJS Jombang,079MPJ,60,00
-C-079,Romokalisari,SBY-02 ,CWS Sepanjang,079CWS,40,00
-C-079,Romokalisari,SBY-02 ,Cargill PIER,079CGP,42,00
-C-079,Teluk Lamong,SBY-07 ,Panca PP-Gedangan,079PPG,35,00
-C-079,Teluk Lamong,SBY-07 ,CARGILL Beji,079CGB,42,00
-C-079,Teluk Lamong,SBY-07 ,WONOKOYO GEMPOL,079WKG,42,00
-C-079,Teluk Lamong,SBY-07 ,Sreeya Sewu,079SRS,40,00
-C-079,Teluk Lamong,SBY-07 ,Margomulyo,079MGM,21,00
-C-079,Teluk Lamong,SBY-07 ,Wirifa Sakti Ngoro,079WSN,42,00
-C-079,Teluk Lamong,SBY-07 ,CJ Feed Jombang,079CFJ,60,00
-C-079,Teluk Lamong,SBY-07 ,Cpp Sepanjang,079CPS,40,00
-C-079,Margomulyo,SBY-03 ,CWS Sepanjang,079CWS,37,00
-C-079,Romokalisari,SBY-02 ,CPP MARGO,079CPM,21,00
-C-079,Romokalisari,SBY-02 ,Haida Kraton,079HKR,55,00
-C-079,Margomulyo,SBY-03 ,SANTOSA AGRINDO-PROBOLINGGO,079SAN,88,00
-C-079,Teluk Lamong,SBY-07 ,CPP MARGO,079CPM,21,00
-C-079,Teluk Lamong,SBY-07 ,CWS Sepanjang,079CWS,40,00
-C-079,Teluk Lamong,SBY-07 ,Matahari Sakti-M.Mulyo,079MSM,21,00
-C-079,Romokalisari,SBY-02 ,JCI-Buduran,079JCB,39,00
-C-079,Jamrud,SBY-10 ,Romokalisari,079RMK,28,00
-C-079,Jamrud,SBY-10 ,East Hope-Ngoro,079EHN,47,00
-C-079,Jamrud,SBY-10 ,Wonokoyo,079WKY,47,00
-C-079,Jamrud,SBY-10 ,DMC PUNGGING,079DMP,48,00
-C-079,Margomulyo,SBY-03 ,CARGILL Kraton-PIER,079CKR,55,00
-C-079,Margomulyo,SBY-03 ,CPP MARGO,079CPM,12,00
-C-079,Margomulyo,SBY-03 ,Haida Kraton,079HKR,55,00
-C-079,Teluk Lamong,SBY-07 ,CJ SIDOARJO,079CJS,47,00
-C-079,Margomulyo,SBY-03 ,Berkat Agri-Gedangan,079BAG,32,00
-C-079,Margomulyo,SBY-03 ,Cheil Jeddang-Pasuruan,079CJP,60,00
-C-079,Romokalisari,SBY-02 ,SANTOSA AGRINDO-PROBOLINGGO,079SAN,88,00
-C-079,Margomulyo',,Matahari Sakti-M.Mulyo,079MSM,14,00
-C-079,Teluk Lamong,SBY-07 ,CJ FEED KALIMANTAN (SDA),079CFK,39,00
-C-079,Teluk Lamong,SBY-07 ,INDO KAWAN SEJAHTERA (WONOKOYO),079IKS,47,00
-C-079,Margomulyo,SBY-03 ,CARGILL Beji,079CGB,42,00
-C-079,Margomulyo,SBY-03 ,Cpp M.Mulyo,079CPM,14,00
-C-079,Margomulyo,SBY-03 ,BERSIH BIJAK BEJI,079BBB,42,00
-C-079,Margomulyo,SBY-03 ,CARGILL Kraton-PIER,079CKR,82,50
-C-079,Teluk Lamong,SBY-07 ,CARGILL Kraton-PIER,079CKR,55,00
-C-079,Tanjung Batu,SBY-29 ,Matahari Sakti-M.Mulyo,079MSM,22,00
-C-079,Teluk Lamong,SBY-07 ,Margomulyo,079MGM,21,00
-C-079,Romokalisari,SBY-02 ,CJ Feed Jombang,079CFJ,60,00
-C-079,Margomulyo,SBY-03 ,TANJUNG PERAK SURABAYA,079TPS,22,00
-C-079,Romokalisari,SBY-02 ,TANJUNG PERAK SURABAYA,079TPS,22,00
-C-079,Romokalisari,SBY-02 ,BERSIH BIJAK BEJI,079BBB,42,00
-C-079,Teluk Lamong,SBY-07 ,HAIDA TB LANGON 22,079HTL,21,00
-C-079,Romokalisari,SBY-02 ,JCI Gedangan,079JCG,39,00
-C-079,Romokalisari,SBY-02 ,CARGILL-KRATON,079CGK,55,00
-C-079,Jamrud,SBY-10 ,Cpi Sepanjang,079CIS,37,00
-C-079,Jamrud,SBY-10 ,Cpp M.Mulyo,079CPM,22,00
-C-079,Jamrud,SBY-10 ,Panca PP-Pandaan,079PPD,47,00
-C-079,Romokalisari,SBY-02 ,CARGILL Beji,079CGB,42,00
-C-079,Jamrud,SBY-10 ,TANJUNG BATU SURABAYA,079TGB,14,00
-C-079,Jamrud,SBY-10 ,CWS Sepanjang,079CWS,40,00
-C-079,Jamrud,SBY-10 ,Cpp Dupak,079CPD,21,00
-C-079,Jamrud,SBY-10 ,Cpp Sepanjang,079CPP,40,00
-C-079,Teluk Lamong,SBY-07 ,Wonokoyo,079WKY,47,00
-C-080,Romokalisari,SBY-02 ,Romokalisari,080RMK,10,00
-C-080,Margomulyo,SBY-03 ,Romokalisari,080RMK,25,00
-C-081,Teluk Lamong,SBY-07 ,CV.PUTRA PRIMA MANDIRI, PARE-KEDIRI,081PPM,78,00
-C-081,Wilmar-Gresik,,CV.PUTRA PRIMA MANDIRI, PARE-KEDIRI,081PPM,81,00
-C-082,Romokalisari,SBY-02 ,Romokalisari,082RMK,10,00
-C-082,Romokalisari,SBY-02 ,QL Feed Romokalisari,082QLR,10,00
-C-082,Romokalisari,SBY-02 ,New Hope-Mojosari,082NHM,57,00
-C-082,Romokalisari,SBY-02 ,Wonokoyo,082WKY,55,00
-C-082,Romokalisari,SBY-02 ,Berkat Agri-Gedangan,082BAG,47,00
-C-082,Romokalisari,SBY-02 ,Haida Pasuruan,082HDP,70,00
-C-085,Teluk Lamong,SBY-07 ,Wonokoyo,085WKY,52,50
-C-085,Jamrud,SBY-10 ,Wonokoyo,085WKY,50,00
-C-006,Romokalisari,SBY-02 ,JCI Sidoarjo,006JCS,45,00
-C-006,Romokalisari,SBY-02 ,Panca PP-Gedangan,006PPG,39,00
-C-006,Romokalisari,SBY-02 ,Sreeya Sewu,006SYS,48,50
-C-006,Romokalisari,SBY-02 ,Wonokoyo,006WKY,50,50
-C-006,Romokalisari,SBY-02 ,Gold Coin,006GCN,27,50
-C-006,Romokalisari,SBY-02 ,Panca PP-Pandaan,006PPD,50,50
-C-006,Romokalisari,SBY-02 ,Romokalisari,006RMK,10,00
-C-006,Romokalisari,SBY-02 ,East Hope-Ngoro,006EHN,50,50
-C-006,Romokalisari,SBY-02 ,Cargill-Pasuruan,006CGP,61,50
-C-006,Romokalisari,SBY-02 ,DMC PUNGGING,006DMP,54,00
-C-006,Romokalisari,SBY-02 ,Malindo Gresik,006MLG,44,50
-C-006,Romokalisari,SBY-02 ,Cpp Sepanjang,006CPS,44,50
-C-006,Romokalisari,SBY-02 ,Pakindo Jaya,006PKJ,44,50
-C-006,Romokalisari,SBY-02 ,Wirifa Sakti Ngoro,006WSN,50,50
-C-006,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,006MSM,27,50
-C-006,Romokalisari,SBY-02 ,Matahari Sakti Gempol,006MSG,50,50
-C-006,Romokalisari,SBY-02 ,STP Manyar,006STM,30,00
-C-006,Romokalisari,SBY-02 ,Haida Kraton,006HKR,65,00
-C-006,Romokalisari,SBY-02 ,Malindo Margomulyo,006MLM,27,50
-C-006,Romokalisari,SBY-02 ,Malindo-Wringin Anom,006MWA,44,50
-C-006,Jamrud,SBY-10 ,DMC PUNGGING,006DMP,54,00
-C-006,Romokalisari,SBY-02 ,CJ Feed Jombang,006CFJ,68,00
-C-006,Romokalisari,SBY-02 ,CJ Feed Sidoarjo,006CFS,45,00
-C-006,Teluk Lamong,SBY-07 ,Romokalisari,006RMK,14,00
-C-006,Teluk Lamong,SBY-07 ,DMC PUNGGING,006DMP,57,00
-C-090,Tambak Sawah,,Jamrud,090JMR,40,00
-C-090,Teluk Lamong,SBY-07 ,Agrofood-Mojosari,090AGM,40,00
-C-090,Teluk Lamong,SBY-07 ,KIG-Gresik,090KGG,28,00
-C-090,Kalimas,SBY-13 ,JCI Gedangan,090JCG,37,00
-C-090,Teluk Lamong,SBY-07 ,Harvestar Flour Mills,090HFM,28,00
-C-090,Jamrud,SBY-10 ,Harvestar Flour Mills,090HFM,29,00
-C-090,Jamrud,SBY-10 ,Romokalisari,090RMK,26,00
-C-090,JIIPE,,Harvestar Flour Mills,090HFM,47,00
-C-090,KIG-Gresik,,Malindo ,090MLD,51,00
-C-092,Jamrud,SBY-10 ,Pakindo Jaya,092PKJ,0,00
-C-092,Romokalisari,SBY-02 ,Pakindo Jaya,092PKJ,0,00
-C-093,Teluk Lamong,SBY-07 ,CJ Feed Jombang,093CFJ,69,00
-C-094,JCI Sidoarjo,SBY-27 ,East Hope-Ngoro,094EHN,58,00
-C-095,Jamrud,SBY-10 ,Sreeya Sewu SDA,095SRS,47,50
-C-095,Jamrud,SBY-10 ,New Hope-Jemundo,095NHJ,43,50
-C-095,Kalimas,SBY-13 ,New Hope-Jemundo,095NHJ,43,50
-C-095,Kalimas,SBY-13 ,Sreeya Sewu SDA,095SRS,47,50
-C-095,Jamrud,SBY-10 ,New Hope-Mojosari,095NHM,54,00
-C-096,Romokalisari,SBY-02 ,Sreeya Sewu,096SRS,49,00
-C-100,KIG-Gresik,,Santos Jaya Abadi-SDA,100SJA,55,00
-C-103,Teluk Lamong,SBY-07 ,CV.Prima Sejahtera-Kediri,103PMS,90,00
-C-105,Romokalisari,SBY-02 ,Sorini-Pasuruan,105SOR,81,00
-C-105,Sorini-Pasuruan,,Berkat Agri-Gedangan,105BAG,65,00
-C-105,Sorini-Pasuruan,,Widuri Blitar,105WDB,145,00
-C-105,Sorini-Pasuruan,,Blitar,105BLT,145,00
-C-105,Sorini-Pasuruan,,Wirifa Sakti Ngoro,105WSN,25,00
-C-105,Sorini-Pasuruan,,Sinar Mentari-Blitar,105SMB,145,00
-C-106,Kalimas,SBY-13 ,Cpi Krian,106CIK,45,00
-C-106,Jamrud,SBY-10 ,JCI Sidoarjo,106JCS,45,00
-C-106,Jamrud,SBY-10 ,Wonokoyo-Gempol,106WKG,50,00
-C-106,Jamrud,SBY-10 ,CJ Feed Jombang,106CFJ,65,00
-C-106,Jamrud,SBY-10 ,MPJS Jombang,106MPJ,65,00
-C-106,Jamrud,SBY-10 ,Cargill-Pasuruan,106CGP,50,00
-C-106,Jamrud,SBY-10 ,Cpi Krian,106CIK,45,00
-C-106,Jamrud,SBY-10 ,Cpi Sepanjang,106CIS,45,00
-C-106,Jamrud,SBY-10 ,Margomulyo,106MGM,26,00
-C-106,Jamrud,SBY-10 ,Wirifa Sakti Ngoro,106WSN,50,00
-C-106,Kalimas,SBY-13 ,JCI Sidoarjo,106JCS,45,00
-C-106,Kalimas,SBY-13 ,MPJS Jombang,106MPJ,65,00
-C-106,Kalimas,SBY-13 ,Wirifa Sakti Ngoro,106WSN,50,00
-C-106,Jamrud,SBY-10 ,LAMONGAN,106LMG,60,00
-C-106,Jamrud,SBY-10 ,Brondong-Lamongan,106BDL,77,50
-C-106,JCI Sidoarjo,SBY-27 ,Cpi Sepanjang,106CIS,22,50
-C-106,Pel. Gresik,,CJ Feed Jombang,106CFJ,78,00
-C-106,Pel. Gresik,,Brondong-Lamongan,106BDL,72,00
-C-106,Pel. Gresik,,Cpi Krian,106CIK,58,00
-C-106,Pel. Gresik,,Cpi Sepanjang,106CIS,59,00
-C-109,Teluk Lamong,SBY-07 ,DMC PUNGGING,109DMP,55,00
-C-109,Teluk Lamong,SBY-07 ,CARGILL Kraton-PIER,109CKR,130,00
-C-109,Teluk Lamong,SBY-07 ,Pakindo Jaya,109PKJ,45,00
-C-109,Pelabuhan Perak,SBY-20 ,Gudang Kalimas,109KLM,12,00
-C-109,Romo BMB,,Pakindo Jaya,109PKJ,50,00
-C-109,Kalimas,SBY-13 ,Romokalisari,109RMK,27,00
-C-109,Kalimas,SBY-13 ,New Hope-Jemundo,109NHJ,50,60
-C-109,Pelabuhan Perak,SBY-20 ,DMC PUNGGING,109DMP,55,00
-C-109,Pelabuhan Perak,SBY-20 ,Panca PP-Gedangan,109PPG,34,00
-C-109,Pelabuhan Perak,SBY-20 ,Romokalisari,109RMK,27,00
-C-109,Romokalisari,SBY-02 ,Pakindo Jaya,109PKJ,50,00
-C-109,Jamrud,SBY-10 ,Gd Romokalisari,109RMK,27,00
-C-110,Romokalisari,SBY-02 ,Cpi Krian,110CIK,58,00
-C-012,Teluk Lamong,SBY-07 ,SPC-Trosobo,S012SPT,45,00
-C-012,Teluk Lamong,SBY-07 ,Surya Grain-Trosobo,S012SGT,45,00
-C-012,Teluk Lamong,SBY-07 ,MPJS Jombang,S012MPJ,69,00
-C-012,Jamrud,SBY-10 ,FKS TANJUNG BATU,S012FTB,13,00
-C-012,Jamrud,SBY-10 ,GCU Tanjung Batu,S012GTB,13,00
-C-012,Teluk Lamong,SBY-07 ,PT.LDC TRADING-ROMOKALISARI,S012RMK,22,00
-C-012,Teluk Lamong,SBY-07 ,PT. CENTRAL WINDU SEJATI-SEPANJANG,S012CWS,42,00
-C-012,Teluk Lamong,SBY-07 ,NHI-ROMOKALISARI,S012NHR,22,00
-C-012,Teluk Lamong,SBY-07 ,PT.HAVINDO-MUTIARA TB LANGON,S012HVD,25,00
-C-012,Jamrud,SBY-10 ,PT.SUPERINDO-MARGOMULO INDAH,S012SMI,26,00
-C-012,Teluk Lamong,SBY-07 ,Haida Kraton,S012HKR,58,50
-C-012,Jamrud,SBY-10 ,TB. Langon 28,S012TB8,29,00
-C-012,Jamrud,SBY-10 ,Margomulyo,S012MGM,29,00
-C-012,Teluk Lamong,SBY-07 ,Widuri Blitar,S012WDR,110,00
-C-012,Romokalisari,SBY-02 ,Malindo Margomulyo,S012MLM,26,00
-C-012,Romokalisari,SBY-02 ,JCI-Margomulyo,S012JCM,27,00
-C-012,Romokalisari,SBY-02 ,East Hope-Ngoro,S012EHN,50,00
-C-012,BMS,SBY-24 ,Romokalisari,S012RMK,32,00
-C-012,Jamrud,SBY-10 ,Haida Kraton,S012HKR,55,50
-C-012,Jamrud,SBY-10 ,Romokalisari,S012RMK,27,00
-C-012,Jamrud,SBY-10 ,MPJS Margomulyo 61,S012MPM,26,00
-C-012,Jamrud,SBY-10 ,Margomulyo,S012MGM,26,00
-C-012,Jamrud,SBY-10 ,DMC PUNGGING,S012DMP,54,00
-C-012,Jamrud,SBY-10 ,Cpp Sepanjang,S012CPS,41,00
-C-012,Teluk Lamong,SBY-07 ,Margomulyo,S012MGM,25,00
-C-012,CJ Feed Jombang,,Abba-Sepanjang,S012ABS,21,00
-C-012,Romokalisari,SBY-02 ,Cpi Krian,S012CIK,47,00
-C-012,Tb.Langon 22,,Cpi Krian,S012CIK,47,00
-C-012,Romokalisari,SBY-02 ,Cpi Sepanjang,S012CIS,44,00
-C-012,Romokalisari,SBY-02 ,CJ Feed Jombang,S012CFJ,65,00
-C-012,Romokalisari,SBY-02 ,Pakindo Jaya,S012PKJ,42,50
-C-012,Teluk Lamong,SBY-07 ,East Hope-Ngoro,S012EHN,48,00
-C-012,Teluk Lamong,SBY-07 ,New Hope-Mojosari,S012NHM,48,00
-C-012,Teluk Lamong,SBY-07 ,Romokalisari (FKS),S012RFK,12,50
-C-012,Teluk Lamong,SBY-07 ,New Hope-Jemundo,S012NHJ,42,50
-C-012,Teluk Lamong,SBY-07 ,ROMOKALISARI (GL),S012RGL,24,00
-C-012,Teluk Lamong,SBY-07 ,Sinar Indochem-Krian,S012SIK,45,00
-C-012,Teluk Lamong,SBY-07 ,Sinar Unigrain-Krian,S012SUK,45,00
-C-012,Teluk Lamong,SBY-07 ,Matahari Sakti-M.Mulyo,S012MSM,25,00
-C-012,Teluk Lamong,SBY-07 ,MPJS Margomulyo,S012MPM,25,00
-C-012,Teluk Lamong,SBY-07 ,Cpp Sepanjang,S012CPS,42,00
-C-012,Teluk Lamong,SBY-07 ,WONOKOYO GEMPOL,S012WKG,48,00
-C-012,Teluk Lamong,SBY-07 ,Matahari Sakti Gempol,S012MSG,48,00
-C-012,Teluk Lamong,SBY-07 ,New Hope-Mojosari,S012NHM,48,00
-C-012,Teluk Lamong,SBY-07 ,Sierad,S012SRD,46,00
-C-012,Jamrud,SBY-10 ,MARGOMULYO PERMAI,S012MGP,26,00
-C-012,Romokalisari,SBY-02 ,Cpi Sepanjang,S012CIS,44,00
-C-012,Teluk Lamong,SBY-07 ,GCU Tanjung Batu,S012GTB,25,00
-C-012,Teluk Lamong,SBY-07 ,FKS TANJUNG BATU,S012FTB,25,00
-C-012,Romokalisari,SBY-02 ,Cpi Krian,S012CIK,47,00
-C-012,Teluk Lamong,SBY-07 ,GD.TB LANGON 22,S012TB2,25,00
-C-012,Teluk Lamong,SBY-07 ,Panca PP-Pandaan,S012PPD,49,00
-C-012,Teluk Lamong,SBY-07 ,Margomulyo,S012MGM,25,00
-C-012,Teluk Lamong,SBY-07 ,Panca PP-Gedangan,S012PPG,37,00
-C-012,Teluk Lamong,SBY-07 ,Cpp Dupak,S012CPD,24,00
-C-012,Teluk Lamong,SBY-07 ,Cpi Sepanjang,S012CIS,46,00
-C-012,Teluk Lamong,SBY-07 ,Romokalisari (CPI),S012RCP,16,00
-C-012,Teluk Lamong,SBY-07 ,Cpi Krian,S012CIK,49,00
-C-012,Romokalisari,SBY-02 ,Sierad,S012SRD,41,50
-C-012,Romokalisari,SBY-02 ,Malindo Tb. Langon,S012MTB,34,00
-C-012,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,S012MSM,26,00
-C-012,Romokalisari,SBY-02 ,MPJS Margomulyo 61,S012MPM,26,00
-C-012,Romokalisari,SBY-02 ,New Hope-Jemundo,S012NHJ,37,00
-C-012,Romokalisari,SBY-02 ,New Hope-Mojosari,S012NHM,49,00
-C-012,Romokalisari,SBY-02 ,Malindo Tb. Langon,S012MTB,34,00
-C-012,Teluk Lamong,SBY-07 ,ANTABOGA SDA,S012ABS,42,00
-C-012,Teluk Lamong,SBY-07 ,Tb.Langon 16,S012TB6,25,00
-C-012,Jamrud,SBY-10 ,Romokalisari,S012RMK,27,50
-C-012,Romokalisari,SBY-02 ,CJ Feed Jombang,S012CFJ,65,00
-C-012,Romokalisari,SBY-02 ,New Hope-Jemundo,S012NHJ,37,00
-C-012,Romokalisari,SBY-02 ,East Hope-Ngoro,S012EHN,50,00
-C-012,Romokalisari,SBY-02 ,Matahari Sakti Gempol,S012MSG,49,00
-C-012,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,S012MSM,26,00
-C-012,Romokalisari,SBY-02 ,MPJS Margomulyo 61,S012MPM,26,00
-C-012,Romokalisari,SBY-02 ,Malindo Tb. Langon,S012MTL,34,00
-C-012,Romokalisari,SBY-02 ,Siantar Top-Sda,S012STT,42,50
-C-012,Romokalisari,SBY-02 ,SPC-Trosobo,S012SPT,38,50
-C-012,Romokalisari,SBY-02 ,CJ Feed Jombang,S012CFJ,65,00
-C-012,Teluk Lamong,SBY-07 ,CJ Feed Jombang,S012CFJ,68,00
-C-012,Teluk Lamong,SBY-07 ,JCI-Sidoarjo,S012JCS,42,00
-C-012,Romokalisari,SBY-02 ,Sierad,S012SRD,41,50
-C-012,Romokalisari,SBY-02 ,New Hope-Mojosari,S012NHM,49,00
-C-012,Romokalisari,SBY-02 ,New Hope-Jemundo,S012NHJ,37,00
-C-012,Jamrud,SBY-10 ,Cpi Krian,S012CIK,46,50
-C-012,Teluk Lamong,SBY-07 ,Suri Tani-Manyar,S012STM,39,00
-C-012,Teluk Lamong,SBY-07 ,KEBOMAS GRESIK,S012KBG,22,00
-C-012,Romokalisari,SBY-02 ,Gold Coin,S012GCN,26,00
-C-012,Teluk Lamong,SBY-07 ,MS GEMPOL (GL),S012GGL,48,50
-C-012,Romokalisari,SBY-02 ,New Hope Kletek,S012NHK,37,00
-C-012,Teluk Lamong,SBY-07 ,PT.Seger,S012SGR,43,00
-C-012,Teluk Lamong,SBY-07 ,Sama Berkat Ind,S012SBI,25,00
-C-012,Teluk Lamong,SBY-07 ,PT.QL FEED IND-TB LANGON INDAH 1-3,S012QTL,25,00
-C-012,Teluk Lamong,SBY-07 ,CV.SUPERINDO JAYA MAKMUR-MARGOMULYO INDAH,S012MMI,25,00
-C-012,Teluk Lamong,SBY-07 ,SAMA BERKAT,S012SBK,20,00
-C-012,Teluk Lamong,SBY-07 ,MPJS Margomulyo 61,S012MPM,23,00
-C-012,Jamrud,SBY-10 ,Siantar Top-Sda,S012STT,41,00
-C-012,Jamrud,SBY-10 ,PT.Murti-Gresik,S012MRT,29,00
-C-012,Jamrud,SBY-10 ,GD.TB LANGON 22,S012TB2,26,00
-C-012,Teluk Lamong,SBY-07 ,Gold Coin,S012GCN,25,00
-C-012,Teluk Lamong,SBY-07 ,DMC PUNGGING,S012DMP,55,00
-C-012,Romokalisari,SBY-02 ,Romokalisari,S012RMK,8,00
-C-012,Tb.Langon,,Siantar Top-Sda,S012STT,41,00
-C-012,Romokalisari,SBY-02 ,Sierad,S012SRD,41,50
-C-012,Tb.Langon,,Sierad,S012SRD,41,50
-C-012,Romokalisari,SBY-02 ,East Hope-Ngoro,S012EHN,50,00
-C-012,Tb.Langon,,East Hope-Ngoro,S012EHN,50,00
-C-012,Tb.Langon,,New Hope-Jemundo,S012NHJ,37,00
-C-012,Tb.Langon,,New Hope-Mojosari,S012NHM,49,00
-C-012,Romokalisari,SBY-02 ,New Hope-Jemundo,S012NHJ,37,00
-C-012,Romokalisari,SBY-02 ,New Hope-Mojosari,S012NHM,49,00
-C-012,Romokalisari,SBY-02 ,New Hope-Jemundo,S012NHJ,37,00
-C-012,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,S012MSM,26,00
-C-012,Romokalisari,SBY-02 ,Matahari Sakti Gempol,S012MSG,49,00
-C-012,Romokalisari,SBY-02 ,East Hope-Ngoro,S012EHN,50,00
-C-012,Teluk Lamong,SBY-07 ,MILL AGRO-ROMO,S012RML,24,00
-C-012,Teluk Lamong,SBY-07 ,RATNO-GEDANGAN SDA,S012RGD,37,00
-C-012,Teluk Lamong,SBY-07 ,PT.Seger,S012SGR,43,00
-C-012,Romokalisari,SBY-02 ,East Hope-Ngoro,S012EHN,50,00
-C-012,Romokalisari,SBY-02 ,Pakindo Jaya,S012PKJ,37,00
-C-012,Teluk Lamong,SBY-07 ,Siantar Top-Sda,S012STT,46,00
-C-012,Teluk Lamong,SBY-07 ,Murti Jaya Abadi,S012MJA,25,00
-C-012,Romokalisari,SBY-02 ,Gold Coin,S012GCN,26,00
-C-012,Jamrud,SBY-10 ,CJ Feed Jombang,S012CFJ,65,00
-C-012,CJ Feed Jombang,,Matahari Sakti Gempol,S012MSG,49,00
-C-012,Jamrud,SBY-10 ,KEBOMAS GRESIK,S012KBG,31,00
-C-012,Jamrud,SBY-10 ,PT. Seger,S012SGR,42,00
-C-012,Teluk Lamong,SBY-07 ,Abba-Sepanjang,S012ABS,42,00
-C-012,Romokalisari,SBY-02 ,Siantar Top-Sda,S012STT,42,50
-C-012,Teluk Lamong,SBY-07 ,Wirifa-Ngoro Mojokerto,S012WNM,48,00
-C-012,Romokalisari,SBY-02 ,New Hope-Jemundo,S012NHJ,37,00
-C-012,Romokalisari,SBY-02 ,Malindo Margomulyo,S012MLM,26,00
-C-012,Romokalisari,SBY-02 ,New Hope-Mojosari,S012NHM,49,00
-C-012,Teluk Lamong,SBY-07 ,MARGOMULYO PERMAI,S012MGP,25,00
-C-012,Romokalisari,SBY-02 ,Pakindo Jaya,S012PKJ,37,00
-C-012,Romokalisari,SBY-02 ,MPJS Margomulyo 61,S012MPM,26,00
-C-012,Romokalisari,SBY-02 ,Siantar Top-Sda,S012STT,42,50
-C-012,Romokalisari,SBY-02 ,Matahari Sakti Gempol,S012MSG,49,00
-C-012,Romokalisari,SBY-02 ,Matahari Sakti-M.Mulyo,S012MSM,26,00
-C-012,Romokalisari,SBY-02 ,Cpi Sepanjang,S012CIS,39,00
-C-012,Romokalisari,SBY-02 ,East Hope-Ngoro,S01EHN,50,00
-C-012,Romokalisari,SBY-02 ,Pakindo Jaya,S012PKJ,37,00
-C-012,Romokalisari,SBY-02 ,CJ Feed Jombang,S012CFJ,65,00
-C-012,Jamrud,SBY-10 ,Cpi Sepanjang,S012CIS,43,50
-C-012,Jamrud,SBY-10 ,TB LANGON 28',S012TB8,26,00
-C-012,Teluk Lamong,SBY-07 ,Cargill-Pasuruan,S012CGP,48,00
-C-012,Teluk Lamong,SBY-07 ,GANTARI,JL.DARMO SUGONDO KEC.KEBOMAS GRESIK,S012SGD,21,00
-C-012,Teluk Lamong,SBY-07 ,CV.PUTRA PRIMA MANDIRI, PARE-KEDIRI,S012PPM,78,00
-C-012,Teluk Lamong,SBY-07 ,NHI-ROMOKALISARI,S012NHR,16,00
-C-012,Teluk Lamong,SBY-07 ,MURTI JAYA,S012MRT,15,00
-C-012,Jamrud,SBY-10 ,Panca PP-Gedangan,S012PPG,36,00
-C-012,Jamrud,SBY-10 ,Sreeya Sewu,S012SYS,46,00
-C-012,Cpi Krian,SBY-18 ,Jamrud,S012JMD,46,50
-C-012,Cpi Sepanjang,SBY-19 ,Jamrud,S012JMD,43,50
-C-012,Jamrud,SBY-10 ,Gold Coin,S012GCN,26,00
-C-012,Teluk Lamong,SBY-07 ,Berkat Agri-Gedangan,S012BAG,37,00
-C-012,Jamrud,SBY-10 ,JCI Sidoarjo,S012JCS,42,00
-C-012,Jamrud,SBY-10 ,Romokalisari (CPI),S012RCP,31,00
-C-012,Jamrud,SBY-10 ,AGRICO-ROMOKALISARI,S012AGR,31,00
-C-012,Teluk Lamong,SBY-07 ,SCOULAR TRADING PERG.MASPION,S012STP,16,00
-C-012,Jamrud,SBY-10 ,SUI,S012SUI,44,00
-C-012,Pelabuhan Perak,SBY-20 ,Gd Kalimas,S012KLM,12,00
-C-012,Teluk Lamong,SBY-07 ,Casaland,S012CSL,45,00
-C-012,Teluk Lamong,SBY-07 ,Sorini-Pasuruan,S012SRP,60,00
-C-012,Teluk Lamong,SBY-07 ,Malindo Gresik,S012MLG,43,00
-C-012,Teluk Lamong,SBY-07 ,GANTARI (MBH.BELUK) SIDORUKUN-GRESIK,S012GTR,21,00
-C-012,Teluk Lamong,SBY-07 ,QL Feed Romokalisari,S012QLR,16,00
-C-012,Teluk Lamong,SBY-07 ,JCI Margomulyo,S012JCM,25,00
-C-012,Teluk Lamong,SBY-07 ,CPP SEPANJANG (CPI),S012CPS,46,00
-C-012,Teluk Lamong,SBY-07 ,MARGOMULYO (ADM),S012MAD,22,00
-C-012,Teluk Lamong,SBY-07 ,Surya Grain-Trosobo,S012SGT,17,00
-C-012,Jamrud,SBY-10 ,AGRICO ROMOKALISARI-ADM,S012AGR,28,00
-C-012,Jamrud,SBY-10 ,GANTARI MBAH BELUK-ADM,S012ADM,31,00
-C-012,Jamrud,SBY-10 ,SPC TROSOBO-ADM,S012SPA,43,00
-C-012,Jamrud,SBY-10 ,SCOULAR ROMOKALISARI-ADM,S012RDM,27,00
-C-012,Teluk Lamong,SBY-07 ,Panca PP-Gedangan,S012PPG,42,00
-C-012,Jamrud,SBY-10 ,Seger Agro-Wringinanom,S012SGW,42,00
-C-012,Jamrud,SBY-10 ,Sinar Indochem-Krian,S012SIK,45,00
-C-012,Teluk Lamong,SBY-07 ,GD.TB LANGON 22,S012TB2,25,00
-C-012,Teluk Lamong,SBY-07 ,T.LANGON-SORINI,S012TBS,16,00
-C-012,Teluk Lamong,SBY-07 ,PT.TULUS DHARMOSUGONDO,S012TLS,16,00
-C-012,Manyar,,New Hope-Jemundo,H012NHJ,44,00
-C-012,Romokalisari,SBY-02 ,Romokalisari,H012RMK,10,00
-C-012,Teluk Lamong,SBY-07 ,Romokalisari (Grainland),H012RGL,22,00
-C-012,Romokalisari,SBY-02 ,Cpi Krian (Cpi),H012CIK,40,00
-C-012,Romokalisari,SBY-02 ,Cpi Sepanjang (Cpi),H012CIS,37,00
-C-012,Romokalisari,SBY-02 ,PT.MS-Gempol (Grainland),H012GGL,43,50
-C-012,Jamrud,SBY-10 ,New Hope-Jemundo (FKS),H012NHF,34,00
-C-012,Jamrud,SBY-10 ,Gold Coin-M.Mulyo (FKS),H012GCF,24,00
-C-012,Teluk Lamong,SBY-07 ,Cargill-Pasuruan (FKS),H012CPF,45,50
-C-012,Pelabuhan,SBY-11 ,Margomulyo (FKS),H012MGF,24,00
-C-012,Pelabuhan,SBY-11 ,Tg.Batu (FKS),H012TBF,11,50
-C-012,Romokalisari,SBY-02 ,Wirifa-Ngoro Mojokerto (FKS),H012WNF,43,50
-C-012,Teluk Lamong,SBY-07 ,Tb.Langon (FKS),H012TBF,22,00
-C-012,Pelabuhan,SBY-11 ,SUI-Krian (FKS),H012SUF,37,50
-C-012,Pelabuhan,SBY-11 ,Tb.Langon (FKS),H012TBF,24,00
-C-012,Pelabuhan,SBY-11 ,Romokalisari (FKS),H012RFK,26,00
-C-012,Pelabuhan,SBY-11 ,MPJS-Jombang (FKS),H012MPF,57,50
-C-012,Pelabuhan,SBY-11 ,Wonokoyo (FKS),H012WKF,42,50
-C-012,Romokalisari,SBY-02 ,MPJS-Jombang (Grainland),H012MPG,69,00
-C-012,Pelabuhan,SBY-11 ,SUI-By Pas Krian (Grainland),H012SUG,40,50
-C-012,Pelabuhan,SBY-11 ,Wirifa-Ngoro Mojokerto (FKS),H012WNF,42,50
-C-012,Pelabuhan,SBY-11 ,MPJS-Jombang (Grainland),H012MPG,68,00
-C-012,Romokalisari,SBY-02 ,JCI-Margomulyo (Grainland),H012JMG,22,00
-C-012,Romokalisari,SBY-02 ,Antaboga,H012ABG,37,00
-C-012,Tb.Langon,,Jamrud,H012JMD,24,00
-C-012,Margomulyo,SBY-03 ,Jamrud,H012JMD,24,00
-C-012,Pelabuhan,SBY-11 ,Gd.Cassaland,H012CSL,40,50
-C-012,IJS,,JCI-Gedangan,H012JCG,36,50
-C-012,Pelabuhan,SBY-11 ,Abba(Trosobo),H012ABT,37,50
-C-012,Pelabuhan,SBY-11 ,Cargil-Pier,H012CGP,53,50
-C-012,Pelabuhan,SBY-11 ,Romo (Grainland),H012RGL,26,00
-C-012,Teluk Lamong,SBY-07 ,MPJS-Jombang,H012MPJ,71,00
-C-012,Teluk Lamong,SBY-07 ,Cargil-Pier,H012CGP,56,50
-C-012,Teluk Lamong,SBY-07 ,Romokalisari (CPI),H012RCP,14,00
-C-012,Teluk Lamong,SBY-07 ,SUI-By Pas Krian (FKS),H012SUF,43,50
-C-012,Teluk Lamong,SBY-07 ,Gd.Cassaland (CPI),H012CSF,44,50
-C-012,Jamrud,SBY-10 ,Gd.Cassaland (CPI),H012CSF,40,50
-C-012,Jamrud,SBY-10 ,PT.DMC-Mojokerto,H012DMM,51,00
-C-012,Jamrud,SBY-10 ,JCI-Gedangan,H012JCG,36,50
-C-012,Jamrud,SBY-10 ,Margomulyo 20,H012MG2,24,00
-C-012,Jamrud,SBY-10 ,Cheil Jeddang-Jombang,H012CJJ,57,50
-C-012,Tb.Langon,,Siantar Top-Sda,H012STT,40,00
-C-012,Romokalisari,SBY-02 ,Sierad,H012SRD,41,50
-C-012,Margomulyo,SBY-03 ,Tg.Batu,H012TGB,11,50
-C-012,Romokalisari,SBY-02 ,Margomulyo,H012MGM,22,00
-C-012,Romokalisari,SBY-02 ,New Hope-Mojosari,H012NHM,43,50
-C-012,Romokalisari,SBY-02 ,Cheil Jeddang-Jombang,H012CJJ,65,00
-C-012,Romokalisari,SBY-02 ,Siantar Top-Sda,H012STT,40,00
-C-012,Teluk Lamong,SBY-07 ,Cheil Jeddang-Jombang,H012CJJ,60,50
-C-012,BMS,SBY-24 ,Romokalisari,H012RMK,32,00
-C-012,Teluk Lamong,SBY-07 ,Haida-Pier Kraton,H012HKR,56,50
-C-012,Romokalisari,SBY-02 ,Gold Coin (Grainland),H012GCG,25,00
-C-012,Romokalisari,SBY-02 ,Siantar Top-Sda,H012STT,40,00
-C-012,Romokalisari,SBY-02 ,Sierad,H012SRD,41,50
-C-012,Jamrud,SBY-10 ,Haida-Pier Kraton (Order Haida),H012HKH,55,50
-C-012,Jamrud,SBY-10 ,PT.Antaboga sidoarjo,H012ABS,44,00
-C-012,Romokalisari,SBY-02 ,Malindo (Grainland),H012MGL,22,00
-C-012,Romokalisari,SBY-02 ,Sierad (Grainland),H012SGL,41,50
-C-012,Romokalisari,SBY-02 ,MPJS- Margomulyo (Grainland),H012MPG,25,00
-C-012,Pelabuhan,SBY-11 ,Darmo Sugondo-Gresik,H012DSG,31,00
-C-012,Pelabuhan,SBY-11 ,Wringin Anom,H012WNA,37,00
-C-012,Teluk Lamong,SBY-07 ,Abba(Trosobo),H012ABT,38,00
-C-012,Cheil Jeddang-Jombang,,Abba-Sepanjang,H012ABS,21,00
-C-012,Teluk Lamong,SBY-07 ,Romokalisari ,H012RMK,16,00
-C-012,Teluk Lamong,SBY-07 ,Abba-Sepanjang,H012ABS,52,00
-C-012,Teluk Lamong,SBY-07 ,Sreeya-Wonoayu (FKS),H012SYF,43,50
-C-012,Cpi Krian,SBY-18 ,JAMRUD SELATAN,H012JMS,39,00
-C-012,Jamrud,SBY-10 ,Sreeya-Wonoayu (FKS),H012SYF,40,50
-C-012,Pelabuhan,SBY-11 ,Cpi Krian (FKS),H012CKF,45,00
-C-012,Pelabuhan,SBY-11 ,Cpi Sepanjang (FKS),H012CSF,35,00
-C-012,Teluk Lamong,SBY-07 ,CARGILL SORINI,H012CSR,60,00
-C-012,Teluk Lamong,SBY-07 ,Cpi Demak-Jateng,H012CDM,150,00
-C-012,Teluk Lamong,SBY-07 ,CPI SEMARANG,H012CSM,150,00
-C-012,Pelabuhan,SBY-11 ,PT.AGRICO - ROMO,H012RAG,25,00
-C-012,Pelabuhan,SBY-11 ,PT.Seger,H012SGR,37,00
-C-012,Pelabuhan,SBY-11 ,GD.GANTARI-GRESIK,H012GTG,31,00
-C-012,Teluk Lamong,SBY-07 ,PT. TULUS-Gresik,H012TLS,16,00
+Customer Kode; Ship From; Kode Ship From; Ship To; Kode Shipto; Harga Invoice
+C-003;By Pas Krian;SBY-01 ;Panca PP-Pandaan;003PPD;67.0
+C-003;By Pas Krian;SBY-01 ;Margomulyo;003MML;48.50
+C-003;By Pas Krian;SBY-01 ;PT.DMC-Mojokerto;003DMM;72.0
+C-003;By Pas Krian;SBY-01 ;Cpp Sepanjang;003CPS;48.50
+C-003;By Pas Krian;SBY-01 ;Panca PP-Gedangan;003PPG;48.50
+C-003;Romokalisari;SBY-02 ;Sinar Indochem-Krian;003SIK;49.50
+C-003;Margomulyo;SBY-03 ;Tb.Langon;003TBL;27.0
+C-003;Margomulyo;SBY-03 ;Sinar Unigrain-Krian;003SUK;46.0
+C-003;Margomulyo;SBY-03 ;PT.MS-Gempol;003MSG;49.50
+C-003;Margomulyo;SBY-03 ;PT.DMC-Mojokerto;003DMM;54.0
+C-003;Romokalisari;SBY-02 ;PT.DMC-Mojokerto;003DMM;55.0
+C-003;Margomulyo;SBY-03 ;Panca PP-Gedangan;003PPG;38.0
+C-003;Romokalisari;SBY-02 ;Panca PP-Gedangan;003PPG;39.0
+C-003;Margomulyo;SBY-03 ;Panca PP-Pandaan;003PPD;49.50
+C-003;Romokalisari;SBY-02 ;Panca PP-Pandaan;003PPD;50.50
+C-003;Romokalisari;SBY-02 ;Cpp Sepanjang;003CPS;44.50
+C-003;Romokalisari;SBY-02 ;East Hope-Ngoro;003EHN;50.50
+C-003;Margomulyo;SBY-03 ;East Hope-Ngoro;003EHN;49.50
+C-003;Margomulyo;SBY-03 ;PT.MS-M.Mulyo';003MMM;14.0
+C-003;Romokalisari;SBY-02 ;Cpp Dupak;003CPD;25.0
+C-003;Margomulyo;SBY-03 ;Cpp Dupak;003CPD;25.0
+C-003;Romokalisari;SBY-02 ;Wonokoyo;003WKY;50.50
+C-003;Margomulyo;SBY-03 ;Wonokoyo;003WKY;49.50
+C-003;Margomulyo;SBY-03 ;Cpp Sepanjang;003CPS;43.50
+C-003;Tb.Langon;;Margomulyo;003MML;27.0
+C-003;Romokalisari;SBY-02 ;Tg.Batu;003TGB;27.50
+C-003;Margomulyo;SBY-03 ;Margomulyo;003MML;14.0
+C-003;Romokalisari;SBY-02 ;PT.MS-M.Mulyo;003MMM;27.50
+C-003;Romokalisari;SBY-02 ;PT.MS-Gempol;003MSG;50.50
+C-003;Margomulyo;SBY-03 ;Tg.Batu;003TGB;14.0
+C-003;East Hope-Ngoro;;Margomulyo;003MML;49.50
+C-003;Margomulyo;SBY-03 ;MPJS-Jombang;003MPJ;72.0
+C-003;Romokalisari;SBY-02 ;Margomulyo;003MML;27.50
+C-003;Abba(Trosobo);;Margomulyo;003MML;46.0
+C-003;Romokalisari;SBY-02 ;Sinar Indochem-Krian;003SIK;47.0
+C-003;Romokalisari;SBY-02 ;Gold Coin-M.Mulyo;003GCM;27.50
+C-003;Margomulyo;SBY-03 ;New Hope-Jemundo;003NHJ;43.50
+C-003;Romokalisari;SBY-02 ;Romokalisari;003RMK;10.0
+C-003;Margomulyo;SBY-03 ;Cargil-Kraton;003CGK;60.50
+C-003;Romokalisari;SBY-02 ;Cargil-Kraton;003CGK;61.50
+C-003;Margomulyo;SBY-03 ;Malindo;003MLD;43.50
+C-003;Margomulyo;SBY-03 ;Pakindo;003PKD;43.50
+C-003;Romokalisari;SBY-02 ;Sierad;003SID;48.50
+C-003;Teluk Lamong;SBY-07 ;Margomulyo;003MML;25.0
+C-003;Teluk Lamong;SBY-07 ;Romokalisari;003RMK;14.0
+C-003;Margomulyo;SBY-03 ;Cpp Sepanjang;003CPS;43.50
+C-003;Teluk Lamong;SBY-07 ;Cpi Krian;003CIK;49.0
+C-003;Teluk Lamong;SBY-07 ;Cpi Sepanjang;003CIS;46.50
+C-006;Romokalisari;SBY-02 ;Sreeya Sewu;006SYS;48.50
+C-006;Romokalisari;SBY-02 ;New Hope-Mojosari;006NHM;56.0
+C-006;Romokalisari;SBY-02 ;DMC PUNGGING;006DMP;55.0
+C-006;Romokalisari;SBY-02 ;Panca PP-Gedangan;006PPG;39.0
+C-006;Romokalisari;SBY-02 ;Panca PP-Pandaan;006PPD;50.50
+C-006;Romokalisari;SBY-02 ;Wirifa Sakti Ngoro;006WSN;50.50
+C-006;Romokalisari;SBY-02 ;Wonokoyo;006WKY;50.50
+C-006;Romokalisari;SBY-02 ;Sierad;006SID;48.50
+C-006;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;006MSM;27.50
+C-006;Romokalisari;SBY-02 ;JCI Sidoarjo;006JCS;45.0
+C-006;Romokalisari;SBY-02 ;MPJS Jombang;006MPJ;73.0
+C-006;Romokalisari;SBY-02 ;JCI Margomulyo;006JCM;27.50
+C-006;Romokalisari;SBY-02 ;STP Manyar;006STM;39.0
+C-006;Tanjung Batu;SBY-29 ;PFN Mojosari;006PFM;56.0
+C-009;SPC-Trosobo;;Cpi Krian;009CIK;25.0
+C-009;Romokalisari;SBY-02 ;SPC-Trosobo;009SPT;52.0
+C-009;Sinar Unigrain Indonesia;SBY-09 ;Sorini-Pasuruan;009SOR;128.0
+C-009;Romokalisari;SBY-02 ;PT. SUI;009SUI;49.0
+C-010;Jamrud;SBY-10 ;Cpi Krian;010CIK;45.0
+C-010;Romokalisari;SBY-02 ;Haida Kraton;010HKR;51.0
+C-010;Jamrud;SBY-10 ;DMC PUNGGING;010DMP;54.0
+C-010;Pelabuhan Gresik;SBY-12 ;DMC PUNGGING;010DMP;64.0
+C-010;Romokalisari;SBY-02 ;GOLDEN UNION OLI-TAMBAK SAWAH SDA;010GTS;45.0
+C-010;Pelabuhan Gresik;SBY-12 ;GOLDEN UNION OLI-TAMBAK SAWAH SDA;010GTS;55.0
+C-010;Romokalisari;SBY-02 ;Cpi Krian;010CIK;47.0
+C-010;Romokalisari;SBY-02 ;Romokalisari;010RMK;13.0
+C-010;Kalimas;SBY-13 ;Cpi Krian;010CIK;45.0
+C-010;Kalimas;SBY-13 ;New Hope-Mojosari;010NHM;53.0
+C-010;Romokalisari;SBY-02 ;Sinar Indochem-Krian;010SIK;47.0
+C-010;Romokalisari;SBY-02 ;Wonokoyo-Gempol;010WKG;51.0
+C-010;Romokalisari;SBY-02 ;DMC PUNGGING;010DMP;54.0
+C-010;Jamrud;SBY-10 ;Cpi Sepanjang;010CIS;43.0
+C-010;Romokalisari;SBY-02 ;Margomulyo;010MML;25.0
+C-010;Romokalisari;SBY-02 ;Cpi Sepanjang;010CIS;45.0
+C-010;Romokalisari;SBY-02 ;Sreeya ;010SYS;48.0
+C-010;Romokalisari;SBY-02 ;Wirifa Ngoro;010WSN;51.0
+C-010;Romokalisari;SBY-02 ;SMP Warugunung;010SWG;39.0
+C-010;Romokalisari;SBY-02 ;New Hope-Mojosari;010NHM;54.0
+C-010;Romokalisari;SBY-02 ;CJ Feed Jombang;010CFJ;68.0
+C-010;Romokalisari;SBY-02 ;Santori - Tongas;010SAN;90.0
+C-010;Romokalisari;SBY-02 ;H. Ilyas Gempol;010HIG;51.0
+C-010;Romokalisari;SBY-02 ;Berkat Agri Gedangan;010BAG;45.0
+C-010;Pelabuhan Gresik;SBY-12 ;SMP Warugunung;010SWG;49.0
+C-010;Pelabuhan Gresik;SBY-12 ;Romokalisari;010RMK;26.0
+C-010;Pelabuhan Gresik;SBY-12 ;Cpi Krian;010CIK;57.0
+C-010;Jamrud;SBY-10 ;Romokalisari;010RMK;28.0
+C-010;Jamrud;SBY-10 ;SMP Warugunung;010SWG;38.0
+C-010;Jamrud;SBY-10 ;TAMBAK SAWAH SDA;010TBS;43.0
+C-010;Jamrud;SBY-10 ;Berkat Agri Gedangan;010BAG;43.0
+C-010;Pelabuhan Gresik;SBY-12 ;Cpi Sepanjang;010CIS;55.0
+C-010;Pelabuhan Gresik;SBY-12 ;Berkat Agri Gedangan;010BAG;49.0
+C-010;Romokalisari;SBY-02 ;New Hope-Jemundo;010NHJ;45.0
+C-011;Romokalisari;SBY-02 ;Cpi Krian;011CIK;49.875
+C-011;Casaland;SBY-15 ;Cpi Krian;011CIK;20.50
+C-011;Casaland;SBY-15 ;Cpi Sepanjang;011CIS;27.50
+C-011;Bogasari;SBY-16 ;Cpi Krian;011CIK;48.50
+C-011;KIG-Gresik;;Cpi Krian;011CIK;64.0
+C-011;KIG-Gresik;;Cpi Sepanjang;011CIS;61.0
+C-011;Bogasari;SBY-16 ;Cpi Sepanjang;011CIS;45.0
+C-011;Teluk Lamong;SBY-07 ;Cpi Krian;011CIK;53.875
+C-011;Teluk Lamong;SBY-07 ;Cpi Sepanjang;011CIS;50.835
+C-011;Cpi Sepanjang;SBY-19 ;Cpp Dupak;011CPD;47.50
+C-011;Pelabuhan Perak;SBY-20 ;Cpi Krian;011CIK;49.875
+C-011;Pelabuhan Perak;SBY-20 ;Cpi Sepanjang;011CIS;46.835
+C-011;Pelabuhan Perak;SBY-20 ;Cpp Dupak;011CPD;33.250
+C-011;Pelabuhan Perak;SBY-20 ;KIG ;011KGG;50.0
+C-011;Romokalisari;SBY-02 ;Cpi Sepanjang;011CIS;46.835
+C-011;Malindo Gresik;SBY-21 ;Cpi Sepanjang;011CIS;50.835
+C-011;Teluk Lamong;SBY-07 ;Malindo Gresik;011MLG;53.875
+C-011;Margomulyo;SBY-03 ;Cpi Krian;011CIK;49.875
+C-011;Romokalisari;SBY-02 ;Cpp Dupak;011CPD;34.0
+C-011;Romokalisari;SBY-02 ;MS. Margomulyo;011MMM;32.500
+C-011;Romokalisari;SBY-02 ;MS. Gempol;011MSG;55.0
+C-011;Romokalisari;SBY-02 ;Wirifa Rungkut;011WFR;44.0
+C-011;Romokalisari;SBY-02 ;Panca Gedangan;011PPG;44.0
+C-011;Romokalisari;SBY-02 ;Sinar Indochem-Krian;011SIK;49.500
+C-011;Romokalisari;SBY-02 ;Cheil Jeddang - Jombang;011CJJ;69.500
+C-011;Romokalisari;SBY-02 ;Cheil Jeddang - Pasuruan;011CJP;71.0
+C-011;Teluk Lamong;SBY-07 ;Cpp Dupak;011CPD;37.250
+C-011;Teluk Lamong;SBY-07 ;Romokalisari;011RMK;18.0
+C-011;Teluk Lamong;SBY-07 ;KIG;011KGG;41.0
+C-013;Teluk Lamong;SBY-07 ;Wirifa-Ngoro Mojokerto;013WNM;50.0
+C-013;Teluk Lamong;SBY-07 ;New Hope-Casaland Krian;013NHC;45.0
+C-013;Teluk Lamong;SBY-07 ;New Hope-Jemundo;013NHJ;42.50
+C-013;Teluk Lamong;SBY-07 ;Romokalisari;013RMK;22.50
+C-013;Teluk Lamong;SBY-07 ;New Hope-Mojosari;013NHM;46.0
+C-013;New Hope-Mojosari;;East Hope-Ngoro;013EHN;23.0
+C-013;Teluk Lamong;SBY-07 ;East Hope-Ngoro;013EHN;50.0
+C-013;Jamrud;SBY-10 ;New Hope-Casaland Krian;013NHC;43.0
+C-013;Teluk Lamong;SBY-07 ;Casaland - Krian;013CSK;45.0
+C-013;New Hope-Mojosari;;Casaland - Krian;013CSK;22.50
+C-013;Teluk Lamong;SBY-07 ;New Hope-Margomulyo;013NHM;24.0
+C-013;Teluk Lamong;SBY-07 ;Cpi Krian;013CIK;43.0
+C-013;Teluk Lamong;SBY-07 ;Kalianak;013KAL;27.0
+C-013;Teluk Lamong;SBY-07 ;Panca Gedangan;013PPG;35.0
+C-013;Teluk Lamong;SBY-07 ;Manyar Gresik;013MYG;33.0
+C-013;Teluk Lamong;SBY-07 ;Cpi Sepanjang;013CIS;42.50
+C-013;Teluk Lamong;SBY-07 ;Malindo;013MAL;44.0
+C-013;Teluk Lamong;SBY-07 ;Wonokoyo;013WKY;48.50
+C-013;Teluk Lamong;SBY-07 ;Sinar Indochem-Krian;013SIK;45.0
+C-013;Teluk Lamong;SBY-07 ;Kraton Industri;013KRI;60.50
+C-013;Teluk Lamong;SBY-07 ;Sukorejo Blitar;013SKR;155.0
+C-014;Romokalisari;SBY-02 ;Romokalisari;014RMK;15.0
+C-014;Tanjung Perak;SBY-35 ;JCI Gedangan;014JCG;67.0
+C-014;Tanjung Perak;SBY-35 ;BTG Margomulyo;014BTG;53.0
+C-014;Tanjung Perak;SBY-35 ;Romokalisari;014RMK;67.0
+C-014;Tanjung Perak;SBY-35 ;STP Manyar;014STM;75.0
+C-018;KIG-Gresik;;New Hope-Jemundo;018NHJ;62.0
+C-018;KIG-Gresik;;Romokalisari;018RMK;30.0
+C-018;Romokalisari;SBY-02 ;New Hope-Jemundo;018NHJ;56.0
+C-018;Teluk Lamong;SBY-07 ;New Hope Kletek;018NHK;56.0
+C-018;Kalimas;SBY-13 ;New Hope-Jemundo;018NHJ;50.60
+C-018;Pelabuhan Perak;SBY-20 ;New Hope-Jemundo;018NHJ;50.60
+C-018;Teluk Lamong;SBY-07 ;New Hope-Jemundo;018NHJ;56.0
+C-018;Jamrud;SBY-10 ;New Hope-Jemundo;018NHJ;50.60
+C-018;Teluk Lamong;SBY-07 ;Gd Romokalisari;018RMK;20.70
+C-020;GII-Tj Tembaga;;SPC-Trosobo;020SPC;64.0
+C-020;GII-Tj Tembaga;;Sinar Indochem-Krian;020SIK;64.0
+C-021;Jamrud;SBY-10 ;Romokalisari;021RMK;12.50
+C-021;Jamrud;SBY-10 ;Malindo-Wringin Anom;021MAL;35.0
+C-021;Teluk Lamong;SBY-07 ;Wirifa Sakti Ngoro;021WSN;50.0
+C-021;Jamrud;SBY-10 ;Malindo Margomulyo;021MMG;22.0
+C-021;Jamrud;SBY-10 ;Sreeya Sewu;021SRY;39.50
+C-021;Teluk Lamong;SBY-07 ;Sreeya Sewu SDA;021SRY;38.0
+C-021;Teluk Lamong;SBY-07 ;QL Feed-Blitar;021QLB;115.0
+C-021;Jamrud;SBY-10 ;Margomulyo;021MGM;22.0
+C-021;Romokalisari;SBY-02 ;Miwon Gresik;021MWG;34.0
+C-021;Teluk Lamong;SBY-07 ;Miwon Gresik;021MWG;33.0
+C-022;Murti Jaya Abadi;SBY-23 ;Haida Kraton;022HKR;61.50
+C-022;Murti Jaya Abadi;SBY-23 ;MPJS Jombang;022MPJ;72.50
+C-022;Murti Jaya Abadi;SBY-23 ;Siantar Top-Sda;022STA;51.0
+C-022;BMS;SBY-24 ;Murti Jaya Abadi;022MJA;52.0
+C-022;Murti Jaya Abadi;SBY-23 ;New Hope-Mojosari;022NHM;58.0
+C-022;Murti Jaya Abadi;SBY-23 ;STP Manyar;022STM;52.0
+C-022;Murti Jaya Abadi;SBY-23 ;Sinar Indochem-Krian;022SIK;53.0
+C-022;Agristar Grain;SBY-25 ;Murti Jaya Abadi;022MJA;25.0
+C-022;Romokalisari;SBY-02 ;Murti Jaya Abadi;022MJA;14.0
+C-022;Teluk Lamong;SBY-07 ;Murti Jaya Abadi;022MJA;18.0
+C-022;Murti Jaya Abadi;SBY-23 ;Santos Jaya Abadi-SDA;022SAN;51.0
+C-022;Murti Jaya Abadi;SBY-23 ;New Hope-Jemundo;022NHJ;53.0
+C-022;Romokalisari;SBY-02 ;STP Manyar;022STM;52.0
+C-022;Romokalisari;SBY-02 ;Sierad Wonoayu;022SRW;47.50
+C-023;KIG-Gresik;;Sinar Indochem-Krian;023SIK;65.0
+C-023;KIG-Gresik;;Murti Jaya Abadi;023MJA;25.0
+C-023;TB. Langon;;Sinar Indochem-Krian;023SIK;55.0
+C-023;Fugui Flour-Gresik;;Sinar Indochem-Krian;023SIK;65.0
+C-023;Romokalisari;SBY-02 ;Sinar Indochem-Krian;023SIK;49.0
+C-023;Teluk Lamong;SBY-07 ;Sinar Indochem-Krian;023SIK;50.35
+C-023;Pelabuhan Perak;SBY-20 ;Sinar Indochem-Krian;023SIK;50.35
+C-023;JCI Sidoarjo;SBY-27 ;Sinar Indochem-Krian;023SIK;50.35
+C-024;KIG-Gresik;;Wirifa Sakti Ngoro;024WSN;65.0
+C-024;KIG-Gresik;;Cpp Sepanjang;024CPS;55.0
+C-024;KIG-Gresik;;Malindo Margomulyo;024MLM;32.50
+C-024;KIG-Gresik;;JCI Margomulyo;024JCM;35.0
+C-024;KIG-Gresik;;Gold Coin-M.Mulyo;024GCM;35.0
+C-024;KIG-Gresik;;MPJS Jombang;024MPJ;80.0
+C-024;KIG-Gresik;;Malindo Gresik;024MAL;55.0
+C-024;KIG-Gresik;;JCI Sidoarjo;024JCS;50.0
+C-024;KIG-Gresik;;JCI Gedangan;024JCG;50.0
+C-024;KIG-Gresik;;Sama Berkat Ind;024SBI;35.0
+C-024;KIG-Gresik;;Siantar Top-Sda;024STA;55.0
+C-024;KIG-Gresik;;Romokalisari;024RMK;29.0
+C-024;KIG-Gresik;;Malindo Wringin anom;024MAL;58.0
+C-024;KIG-Gresik;;Sinar Indochem-Krian;024SIK;58.0
+C-024;KIG-Gresik;;Cpi Semarang;024CSR;165.0
+C-025;Margomulyo;SBY-03 ;Romokalisari;025RMK;27.0
+C-026;Pelabuhan Gresik;SBY-12 ;Cpi Sepanjang;026CIS;57.0
+C-026;Pelabuhan Gresik;SBY-12 ;PT. Seger - Sumengko;026SGR;59.0
+C-026;Pelabuhan Gresik;SBY-12 ;Cpi Krian;026CIK;59.0
+C-026;Jamrud;SBY-10 ;PT. Seger - Sumengko;026SGR;50.0
+C-026;Jamrud;SBY-10 ;Cpi Krian;026CIK;49.0
+C-026;Teluk Lamong;SBY-07 ;Wringin Anom;026WRA;52.0
+C-026;Jamrud;SBY-10 ;JCI Sidoarjo;026JCS;47.0
+C-026;Jamrud;SBY-10 ;Wonokoyo-Gempol;026WKY;52.0
+C-026;Jamrud;SBY-10 ;Cpi Sepanjang;026CIS;46.0
+C-026;Jamrud;SBY-10 ;PT. Seger-Blora;026SGB;115.0
+C-026;Jamrud;SBY-10 ;Sreeya Sewu;026SRY;50.0
+C-026;Romokalisari;SBY-02 ;Sreeya Sewu;026SRY;55.0
+C-026;Jamrud;SBY-10 ;Wirifa Sakti Ngoro;026WSN;53.0
+C-026;Jamrud;SBY-10 ;CJ Feed Jombang;026CFJ;70.0
+C-026;Jamrud;SBY-10 ;Malindo Margomulyo;026MLM;29.0
+C-036;JCI Sidoarjo;SBY-27 ;MPJS Jombang;036MPJ;70.0
+C-036;Margomulyo;SBY-03 ;MPJS Jombang;036MPJ;75.0
+C-036;Teluk Lamong;SBY-07 ;Margomulyo;036MGM;30.0
+C-036;Agristar Grain;SBY-25 ;MPJS Jombang;036MPJ;80.0
+C-036;Teluk Lamong;SBY-07 ;MPJS Jombang;036MPJ;75.0
+C-036;Pelabuhan Perak;SBY-20 ;MPJS Jombang;036MPJ;70.0
+C-028;KIG-Gresik;;Malindo Margomulyo;028MLM;35.0
+C-028;KIG-Gresik;;Cpp Sepanjang;028CPS;55.0
+C-028;KIG-Gresik;;Romokalisari;028RMK;29.0
+C-028;KIG-Gresik;;Sinar Indochem-Krian;028SIK;58.0
+C-028;KIG-Gresik;;Wonokoyo;028WKY;64.0
+C-028;KIG-Gresik;;MPJS Jombang;028MPJ;80.0
+C-030;Jamrud;SBY-10 ;JCI-Margomulyo;030JCM;51.0
+C-030;Jamrud;SBY-10 ;JCI-Sidoarjo;030JCS;64.0
+C-030;Teluk Lamong;SBY-07 ;JCI-Sidoarjo;030JCS;68.0
+C-030;Teluk Lamong;SBY-07 ;Manyar;030MYR;68.0
+C-031;Romokalisari;SBY-02 ;Manna-Romokalisari;031MRM;6.0
+C-031;Margomulyo;SBY-03 ;Manna-Romokalisari;031MRM;27.50
+C-032;TB. Langon 28;;East Hope-Ngoro;032EHN;64.0
+C-032;New Hope-Mojosari;;East Hope-Ngoro;032EHN;52.50
+C-032;East Hope-Ngoro;;New Hope-Mojosari;032NHM;52.50
+C-032;Berkat ABBA;;East Hope-Ngoro;032EHN;68.0
+C-033;Romokalisari;SBY-02 ;Romokalisari;033RMK;10.0
+C-033;Romokalisari;SBY-02 ;Cpi Sepanjang;033CIS;48.0
+C-035;Tb.Langon;;Panca PP-Gedangan;035PPG;41.0
+C-035;KIG-Gresik;;Panca PP-Gedangan;035PPG;51.0
+C-035;Teluk Lamong;SBY-07 ;Panca PP-Gedangan;035PPG;41.0
+C-035;Pelabuhan Perak;SBY-20 ;Panca PP-Gedangan;035PPG;39.0
+C-037;Romokalisari;SBY-02 ;SPC-Trosobo;037SPT;52.0
+C-037;Tanjung Batu;SBY-29 ;SPC-Trosobo;037SPT;50.35
+C-037;Darmo Sugondo Gresik;;SPC-Trosobo;037SPT;55.0
+C-037;KIG-Gresik;;SPC-Trosobo;037SPT;62.0
+C-038;Romokalisari;SBY-02 ;Siantar Top-Sda;038STT;60.0
+C-038;Romokalisari;SBY-02 ;Siantar Top-Sda;038STT;47.50
+C-038;Siantar Top-Sda;;New Hope-Jemundo;038NHJ;60.0
+C-038;Siantar Top-Sda;;Margomulyo;038MGM;58.0
+C-038;Siantar Top-Sda;;East Hope-Ngoro;038EHN;70.0
+C-038;Siantar Top-Sda;;Wirifa Sakti Ngoro;038WSN;70.0
+C-038;Siantar Top-Sda;;MS. Gempol;038MSG;65.0
+C-038;Siantar Top-Sda;;New Hope - Mojosari;038NHM;65.0
+C-038;Siantar Top-Sda;;Sierad Wonoayu;038SRW;73.0
+C-038;Siantar Top-Sda;;Japfa Buduran;038JPB;60.0
+C-038;Siantar Top-Sda;;STP Manyar;038STM;68.0
+C-042;KIG-Gresik;;Wonokoyo;042WKY;67.0
+C-045;Cpi Sepanjang;SBY-19 ;Cpp Dupak;045CPD;47.50
+C-045;Bogasari;SBY-16 ;Cpp Sepanjang;045CPS;50.0
+C-045;Margomulyo;SBY-03 ;CPI Krian;045CIK;49.87
+C-048;Sinar Unigrain Indonesia;SBY-09 ;Sorini-Pasuruan;048SRP;128.0
+C-048;CARGILL SORINI;SBY-28 ;SINAR ANEKA NIAGA;048SAN;110.0
+C-049;Jamrud;SBY-10 ;Cpi Krian;049CIK;46.50
+C-049;Jamrud;SBY-10 ;CJ Feed Jombang;049CFJ;67.50
+C-049;Jamrud;SBY-10 ;Sumber Asia-Kletek;049SAK;45.0
+C-049;Jamrud;SBY-10 ;Cpi Sepanjang;049CIS;45.0
+C-049;Jamrud;SBY-10 ;Margomulyo;049MGM;27.50
+C-049;Jamrud;SBY-10 ;New Hope Kletek;049NHK;45.0
+C-049;Jamrud;SBY-10 ;Romokalisari;049RMK;28.0
+C-049;Jamrud;SBY-10 ;Malindo Gresik;049MAL;44.0
+C-049;Jamrud;SBY-10 ;JCI Sidoarjo;049JCS;46.50
+C-049;Jamrud;SBY-10 ;Wonokoyo;049WKY;50.0
+C-049;Jamrud;SBY-10 ;CV.Prima Sejahtera-Kediri;049PRIM;80.0
+C-049;Jamrud;SBY-10 ;PT. SMP - Krian;049SMK;46.50
+C-049;Subur-Krian;;CV.Prima Sejahtera-Kediri;049PRIM;75.0
+C-049;Subur-Krian;;Sreeya Sewu SDA;049SRS;30.0
+C-049;Subur-Krian;;Cpi Krian;049CIK;30.0
+C-049;Subur-Krian;;Cpi Sepanjang;049CIS;30.0
+C-049;Jamrud;SBY-10 ;Malindo Margomulyo;049MGM;27.50
+C-049;Jamrud;SBY-10 ;JCI Margomulyo;049JCM;27.50
+C-049;Jamrud;SBY-10 ;JCI Buduran;049JCB;46.50
+C-050;KIAS;SBY-33 ;Fugui Flour-Gresik;050FUG;8.0
+C-050;KIAS;SBY-33 ;HAS Gresik;050HAS;8.0
+C-051;Romokalisari;SBY-02 ;SPC-Trosobo;051SPT;51.0
+C-051;Romokalisari;SBY-02 ;JCI-Margomulyo;051JCM;30.0
+C-051;Romokalisari;SBY-02 ;Widuri Blitar;051WDR;115.0
+C-051;Teluk Lamong;SBY-07 ;Greenfields Blitar;051GFB;115.0
+C-051;Romokalisari;SBY-02 ;Berkat Agri-Gedangan;051BAG;44.0
+C-051;Teluk Lamong;SBY-07 ;Widuri Blitar;051WDR;115.0
+C-051;Teluk Lamong;SBY-07 ;SPC-Trosobo;051SPT;53.0
+C-051;Teluk Lamong;SBY-07 ;Romokalisari;051RMK;22.0
+C-052;CARGILL Beji;SBY-32 ;Gold Coin;052GCN;76.0
+C-052;Tb.Langon 22;;Gold Coin;052GCN;25.0
+C-052;Teluk Lamong;SBY-07 ;Gold Coin;052GCN;29.70
+C-052;KIG-Gresik;;Gold Coin-M.Mulyo;052GCM;38.0
+C-052;Pelabuhan Perak;SBY-20 ;Gold Coin-M.Mulyo;052GCM;30.0
+C-053;TB. Langon 28;;Wonokoyo;053WKY;47.0
+C-053;Teluk Lamong;SBY-07 ;Wonokoyo;053WKY;55.0
+C-053;Pelabuhan Perak;SBY-20 ;Wonokoyo;053WKY;53.0
+C-053;Romokalisari;SBY-02 ;Wonokoyo;053WKY;55.0
+C-053;KIG-Gresik;;Wonokoyo;053WKY;57.0
+C-054;Romokalisari;SBY-02 ;Haida Kraton;054HKR;64.0
+C-054;Romokalisari;SBY-02 ;Gold Coin;054GCN;28.0
+C-054;Teluk Lamong;SBY-07 ;CJ Feed Jombang;054CFJ;68.0
+C-054;Teluk Lamong;SBY-07 ;MARGOMULYO PERMAI;054MGP;25.0
+C-054;Romokalisari;SBY-02 ;East Hope-Ngoro;054EHN;54.0
+C-055;Romokalisari;SBY-02 ;PT.Seger;055SEG;50.0
+C-055;Romokalisari;SBY-02 ;Tb.Langon;055TBL;29.0
+C-055;Tb.Langon 16;;SPC-Trosobo;055SPT;50.0
+C-055;Romokalisari;SBY-02 ;Cpi Sepanjang;055CIS;48.0
+C-055;Margomulyo;SBY-03 ;Cpi Krian;055CIK;46.0
+C-055;Margomulyo;SBY-03 ;Cpi Sepanjang;055CIS;44.0
+C-055;Teluk Lamong;SBY-07 ;Cpi Krian;055CIK;45.0
+C-055;Teluk Lamong;SBY-07 ;Cpi Sepanjang;055CIS;44.50
+C-055;Teluk Lamong;SBY-07 ;Wonokoyo;055WKY;53.50
+C-055;Teluk Lamong;SBY-07 ;Tb.Langon;055TBL;26.50
+C-055;Margomulyo;SBY-03 ;Cpi Krian;055CIK;48.0
+C-055;Romokalisari;SBY-02 ;Cpi Krian;055CIK;50.0
+C-056;KIAS;SBY-33 ;HAS Gresik;056HAS;8.0
+C-057;Romokalisari;SBY-02 ;MPJS Jombang;057MPJ;73.0
+C-057;Romokalisari;SBY-02 ;CARGILL Beji;057CGB;50.50
+C-057;Romokalisari;SBY-02 ;Murti Jaya Abadi;057MJA;13.70
+C-057;Romokalisari;SBY-02 ;Siantar Top-Sda;057STA;43.60
+C-057;Romokalisari;SBY-02 ;Romokalisari;057RMK;10.0
+C-057;Romokalisari;SBY-02 ;TANJUNG BATU SURABAYA;057TGB;27.50
+C-057;Romokalisari;SBY-02 ;Margomulyo;057MML;27.50
+C-057;Romokalisari;SBY-02 ;Dupak;057DPK;25.0
+C-057;Romokalisari;SBY-02 ;Pakindo Jaya;057PKJ;39.0
+C-057;Romokalisari;SBY-02 ;Wirifa Rungkut;057WFR;39.0
+C-057;Romokalisari;SBY-02 ;New Hope Jemundo;057NHJ;44.50
+C-057;Romokalisari;SBY-02 ;Panca Pandaan;057PPD;50.50
+C-057;Romokalisari;SBY-02 ;Wonokoyo;057WKY;50.50
+C-057;Romokalisari;SBY-02 ;Sinar Indochem-Krian;057SIK;47.0
+C-057;Romokalisari;SBY-02 ;Cpi Krian;057CIK;47.0
+C-057;Romokalisari;SBY-02 ;Japfa Buduran;057JPB;45.0
+C-057;Romokalisari;SBY-02 ;Panca Gedangan;057PPG;39.0
+C-057;Romokalisari;SBY-02 ;Cargill PIER;057CKP;61.50
+C-057;Romokalisari;SBY-02 ;Gold Coin-M.Mulyo;057GCM;27.50
+C-057;Romokalisari;SBY-02 ;Matahari Sakti Gempol;057MSG;50.50
+C-057;Romokalisari;SBY-02 ;East Hope-Ngoro;057EHN;50.50
+C-057;Romokalisari;SBY-02 ;Cpi Sepanjang;057CIS;44.50
+C-057;Romokalisari;SBY-02 ;New Hope Mojosari;057NHM;52.50
+C-057;Romokalisari;SBY-02 ;Suri Tani Manyar;057STM;39.0
+C-057;Romokalisari;SBY-02 ;Malindo Wringin anom;057MWA;44.50
+C-057;Romokalisari;SBY-02 ;DMC PUNGGING;057DMP;55.0
+C-057;Romokalisari;SBY-02 ;CJ Feed Jombang;057CFJ;67.50
+C-057;Romokalisari;SBY-02 ;CJ Pasuruan;057CJP;69.50
+C-057;Romokalisari;SBY-02 ;Sierad Wonoayu;057SRW;48.0
+C-057;Romokalisari;SBY-02 ;Haida Kraton;057HKR;65.0
+C-057;Romokalisari;SBY-02 ;CJ Feed BATANG;057CFB;180.0
+C-057;Romokalisari;SBY-02 ;Japfa Sragen;057JPS;160.0
+C-057;Romokalisari;SBY-02 ;New Hope Kletek;057NHK;44.50
+C-057;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;057MMM;27.50
+C-057;Romokalisari;SBY-02 ;Pakindo Jaya;057PKJ;39.0
+C-057;Jamrud;SBY-10 ;MPJS Jombang;057MPJ;72.0
+C-057;Jamrud;SBY-10 ;PT. Murti Gresik;057MUR;30.90
+C-057;Jamrud;SBY-10 ;PT. Siantar Top Tambak Sawah;057STT;42.30
+C-057;Jamrud;SBY-10 ;Romokalisari;057RMK;27.50
+C-057;Jamrud;SBY-10 ;TANJUNG BATU SURABAYA;057TGB;14.0
+C-057;Jamrud;SBY-10 ;Margomulyo;057MML;27.0
+C-057;Jamrud;SBY-10 ;Dupak;057DPK;25.0
+C-057;Jamrud;SBY-10 ;Pakindo Jaya;057PKJ;38.0
+C-057;Jamrud;SBY-10 ;Wirifa Rungkut;057WRR;38.0
+C-057;Jamrud;SBY-10 ;New Hope Jemundo;057NHJ;43.50
+C-057;Jamrud;SBY-10 ;Panca Pandaan;057PPD;49.50
+C-057;Jamrud;SBY-10 ;Wonokoyo;057WKY;49.50
+C-057;Jamrud;SBY-10 ;Matahari Sakti Gempol;057MSG;49.50
+C-057;Jamrud;SBY-10 ;Sinar Indochem-Krian;057SIK;46.0
+C-057;Jamrud;SBY-10 ;Cpi Krian;057CIK;46.0
+C-057;Jamrud;SBY-10 ;Japfa Buduran;057JPB;44.0
+C-057;Jamrud;SBY-10 ;Panca Gedangan;057PPG;38.0
+C-057;Jamrud;SBY-10 ;East Hope-Ngoro;057EHN;49.50
+C-057;Jamrud;SBY-10 ;Cpi Sepanjang;057CIS;43.50
+C-057;Jamrud;SBY-10 ;New Hope Mojosari;057NHM;50.50
+C-057;Jamrud;SBY-10 ;Suri Tani Manyar;057STM;44.0
+C-057;Jamrud;SBY-10 ;Malindo Wringin anom;057MWA;43.50
+C-057;Jamrud;SBY-10 ;PT. DMC Mojokerto;057DMM;54.0
+C-057;Jamrud;SBY-10 ;CJ Jombang;057CJJ;66.50
+C-057;Jamrud;SBY-10 ;CJ Pasuruan;057CJP;68.50
+C-057;Jamrud;SBY-10 ;Sierad Wonoayu;057SRW;47.0
+C-057;Jamrud;SBY-10 ;Cargill Kraton;057CKR;60.50
+C-057;Jamrud;SBY-10 ;Haida Kraton;057HKR;64.0
+C-057;Jamrud;SBY-10 ;CJ Feed BATANG;057CFB;180.0
+C-057;Jamrud;SBY-10 ;Japfa Sragen;057JSR;160.0
+C-057;Teluk Lamong;SBY-07 ;Sama Berkat Indonesia;057SBI;25.0
+C-057;Teluk Lamong;SBY-07 ;Gold Coin;057GCN;25.0
+C-057;Teluk Lamong;SBY-07 ;DMC PUNGGING;057DMP;57.0
+C-057;Teluk Lamong;SBY-07 ;CJ Feed Jombang;057CFJ;69.50
+C-057;Teluk Lamong;SBY-07 ;MPJS Jombang;057MPJ;76.0
+C-057;Teluk Lamong;SBY-07 ;Murti Jaya Abadi;057MJA;26.50
+C-057;Teluk Lamong;SBY-07 ;Siantar Top-Sda;057STT;44.60
+C-057;Teluk Lamong;SBY-07 ;Romokalisari;057RMK;19.80
+C-057;Teluk Lamong;SBY-07 ;TANJUNG BATU SURABAYA;057TGB;25.0
+C-057;Teluk Lamong;SBY-07 ;Margomulyo;057MGM;25.0
+C-057;Teluk Lamong;SBY-07 ;Dupak;057DPK;25.0
+C-057;Teluk Lamong;SBY-07 ;Pakindo Jaya;057PKJ;41.0
+C-057;Teluk Lamong;SBY-07 ;Wirifa Rungkut;057WFR;41.0
+C-057;Teluk Lamong;SBY-07 ;New Hope Jemundo;057NHJ;47.50
+C-057;Teluk Lamong;SBY-07 ;Panca Pandaan;057PPD;52.50
+C-057;Teluk Lamong;SBY-07 ;Wonokoyo;057WKY;63.60
+C-057;Teluk Lamong;SBY-07 ;Sinar Indochem-Krian;057SIK;49.0
+C-057;Teluk Lamong;SBY-07 ;Cpi Krian;057CIK;49.0
+C-057;Teluk Lamong;SBY-07 ;Japfa Buduran;057JPB;47.0
+C-057;Teluk Lamong;SBY-07 ;Panca Gedangan;057PPG;41.0
+C-057;Teluk Lamong;SBY-07 ;East Hope-Ngoro;057EHN;52.50
+C-057;Teluk Lamong;SBY-07 ;Cpi Sepanjang;057CIS;46.50
+C-057;Teluk Lamong;SBY-07 ;New Hope Mojosari;057NHM;51.50
+C-057;Teluk Lamong;SBY-07 ;Suri Tani Manyar;057STM;43.0
+C-057;Teluk Lamong;SBY-07 ;Malindo Wringin anom;057MWA;46.50
+C-057;Teluk Lamong;SBY-07 ;CJ Pasuruan;057CJP;71.50
+C-057;Teluk Lamong;SBY-07 ;Sierad Wonoayu;057SRW;50.0
+C-057;Teluk Lamong;SBY-07 ;Cargill Kraton;057CKR;63.50
+C-057;Teluk Lamong;SBY-07 ;Haida Kraton;057HKR;67.0
+C-057;Teluk Lamong;SBY-07 ;CJ Feed BATANG;057CFB;180.0
+C-057;Teluk Lamong;SBY-07 ;Japfa Sragen;057JPS;160.0
+C-058;Romokalisari;SBY-02 ;MPJS Jombang;058MPJ;73.0
+C-058;Romokalisari;SBY-02 ;CARGILL Beji;058CGB;50.50
+C-058;Romokalisari;SBY-02 ;Murti Jaya Abadi;058MJA;13.70
+C-058;Romokalisari;SBY-02 ;Siantar Top-Sda;058STT;43.60
+C-058;Romokalisari;SBY-02 ;Romokalisari;058RMK;10.0
+C-058;Romokalisari;SBY-02 ;TANJUNG BATU SURABAYA;058TGB;27.50
+C-058;Romokalisari;SBY-02 ;Margomulyo;058MGM;27.50
+C-058;Romokalisari;SBY-02 ;Dupak;058DPK;25.0
+C-058;Romokalisari;SBY-02 ;Pakindo Jaya;058PKJ;39.0
+C-058;Romokalisari;SBY-02 ;Wirifa Rungkut;058WFR;39.0
+C-058;Romokalisari;SBY-02 ;New Hope Jemundo;058NHJ;44.50
+C-058;Romokalisari;SBY-02 ;Panca Pandaan;058PPD;50.50
+C-058;Romokalisari;SBY-02 ;Wonokoyo;058WKY;50.50
+C-058;Romokalisari;SBY-02 ;Sinar Indochem-Krian;058SIK;47.0
+C-058;Romokalisari;SBY-02 ;Cpi Krian;058CIK;47.0
+C-058;Romokalisari;SBY-02 ;Japfa Buduran;058JPB;45.0
+C-058;Romokalisari;SBY-02 ;Panca Gedangan;058PPG;39.0
+C-058;Romokalisari;SBY-02 ;Cargill PIER;058CGP;61.50
+C-058;Romokalisari;SBY-02 ;Gold Coin-M.Mulyo;058GCM;27.50
+C-058;Romokalisari;SBY-02 ;Matahari Sakti Gempol;058MSG;50.50
+C-058;Romokalisari;SBY-02 ;East Hope-Ngoro;058EHN;50.50
+C-058;Romokalisari;SBY-02 ;Cpi Sepanjang;058CIS;44.50
+C-058;Romokalisari;SBY-02 ;New Hope Mojosari;058NHM;52.50
+C-058;Romokalisari;SBY-02 ;Suri Tani Manyar;058STM;39.0
+C-058;Romokalisari;SBY-02 ;Malindo Wringin anom;058MWA;44.50
+C-058;Romokalisari;SBY-02 ;DMC PUNGGING;058DMP;55.0
+C-058;Romokalisari;SBY-02 ;CJ Feed Jombang;058CFJ;67.50
+C-058;Romokalisari;SBY-02 ;CJ Pasuruan;058CJP;69.50
+C-058;Romokalisari;SBY-02 ;Sierad Wonoayu;058SRW;48.0
+C-058;Romokalisari;SBY-02 ;Haida Kraton;058HKR;65.0
+C-058;Romokalisari;SBY-02 ;CJ Feed BATANG;058CFB;180.0
+C-058;Romokalisari;SBY-02 ;Japfa Sragen;058JPS;160.0
+C-058;Romokalisari;SBY-02 ;New Hope Kletek;058NHK;44.50
+C-058;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;058MMM;27.50
+C-058;Romokalisari;SBY-02 ;Pakindo Jaya;058PKJ;39.0
+C-058;Jamrud;SBY-10 ;MPJS Jombang;058MPJ;72.0
+C-058;Jamrud;SBY-10 ;PT. Murti Gresik;058MUR;30.90
+C-058;Jamrud;SBY-10 ;PT. Siantar Top Tambak Sawah;058STT;42.30
+C-058;Jamrud;SBY-10 ;Romokalisari;058RMK;27.50
+C-058;Jamrud;SBY-10 ;TANJUNG BATU SURABAYA;058TGB;14.0
+C-058;Jamrud;SBY-10 ;Margomulyo;058MGM;27.0
+C-058;Jamrud;SBY-10 ;Dupak;058DPK;25.0
+C-058;Jamrud;SBY-10 ;Pakindo Jaya;058PKJ;38.0
+C-058;Jamrud;SBY-10 ;Wirifa Rungkut;058WRR;38.0
+C-058;Jamrud;SBY-10 ;New Hope Jemundo;058NHJ;43.50
+C-058;Jamrud;SBY-10 ;Panca Pandaan;058PPD;49.50
+C-058;Jamrud;SBY-10 ;Wonokoyo;058WKY;49.50
+C-058;Jamrud;SBY-10 ;Matahari Sakti Gempol;058MSG;49.50
+C-058;Jamrud;SBY-10 ;Sinar Indochem-Krian;058SIK;46.0
+C-058;Jamrud;SBY-10 ;Cpi Krian;058CIK;46.0
+C-058;Jamrud;SBY-10 ;Japfa Buduran;058JPB;44.0
+C-058;Jamrud;SBY-10 ;Panca Gedangan;058PPG;38.0
+C-058;Jamrud;SBY-10 ;East Hope-Ngoro;058EHN;49.50
+C-058;Jamrud;SBY-10 ;Cpi Sepanjang;058CIS;43.50
+C-058;Jamrud;SBY-10 ;New Hope Mojosari;058NHM;50.50
+C-058;Jamrud;SBY-10 ;Suri Tani Manyar;058STM;44.0
+C-058;Jamrud;SBY-10 ;Malindo Wringin anom;058MWA;43.50
+C-058;Jamrud;SBY-10 ;PT. DMC Mojokerto;058DMM;54.0
+C-058;Jamrud;SBY-10 ;CJ Jombang;058CJJ;66.50
+C-058;Jamrud;SBY-10 ;CJ Pasuruan;058CJP;68.50
+C-058;Jamrud;SBY-10 ;Sierad Wonoayu;058SRW;47.0
+C-058;Jamrud;SBY-10 ;Cargill Kraton;058CKR;60.50
+C-058;Jamrud;SBY-10 ;Haida Kraton;058HKR;64.0
+C-058;Jamrud;SBY-10 ;CJ Feed BATANG;058CFB;180.0
+C-058;Jamrud;SBY-10 ;Japfa Sragen;058JSR;160.0
+C-058;Teluk Lamong;SBY-07 ;Sama Berkat Indonesia;058SBI;25.0
+C-058;Teluk Lamong;SBY-07 ;Gold Coin;058GCN;25.0
+C-058;Teluk Lamong;SBY-07 ;DMC PUNGGING;058DMP;57.0
+C-058;Teluk Lamong;SBY-07 ;CJ Feed Jombang;058CFJ;69.50
+C-058;Teluk Lamong;SBY-07 ;MPJS Jombang;058MPJ;76.0
+C-058;Teluk Lamong;SBY-07 ;Murti Jaya Abadi;058MJA;26.50
+C-058;Teluk Lamong;SBY-07 ;Siantar Top-Sda;058STT;44.60
+C-058;Teluk Lamong;SBY-07 ;Romokalisari;058RMK;19.80
+C-058;Teluk Lamong;SBY-07 ;TANJUNG BATU SURABAYA;058TGB;25.0
+C-058;Teluk Lamong;SBY-07 ;Margomulyo;058MML;25.0
+C-058;Teluk Lamong;SBY-07 ;Dupak;058DPK;25.0
+C-058;Teluk Lamong;SBY-07 ;Pakindo Jaya;058PKJ;41.0
+C-058;Teluk Lamong;SBY-07 ;Wirifa Rungkut;058WFR;41.0
+C-058;Teluk Lamong;SBY-07 ;New Hope Jemundo;058NHJ;47.50
+C-058;Teluk Lamong;SBY-07 ;Panca Pandaan;058PPD;52.50
+C-058;Teluk Lamong;SBY-07 ;Wonokoyo;058WKY;63.60
+C-058;Teluk Lamong;SBY-07 ;Sinar Indochem-Krian;058SIK;49.0
+C-058;Teluk Lamong;SBY-07 ;Cpi Krian;058CIK;49.0
+C-058;Teluk Lamong;SBY-07 ;Japfa Buduran;058JPB;47.0
+C-058;Teluk Lamong;SBY-07 ;Panca Gedangan;058PPG;41.0
+C-058;Teluk Lamong;SBY-07 ;East Hope-Ngoro;058EHN;52.50
+C-058;Teluk Lamong;SBY-07 ;Cpi Sepanjang;058CIS;46.50
+C-058;Teluk Lamong;SBY-07 ;New Hope Mojosari;058NHM;51.50
+C-058;Teluk Lamong;SBY-07 ;Suri Tani Manyar;058STM;43.0
+C-058;Teluk Lamong;SBY-07 ;Malindo Wringin anom;058MWA;46.50
+C-058;Teluk Lamong;SBY-07 ;CJ Pasuruan;058CJP;71.50
+C-058;Teluk Lamong;SBY-07 ;Sierad Wonoayu;058SRW;50.0
+C-058;Teluk Lamong;SBY-07 ;Cargill Kraton;058CKR;63.50
+C-058;Teluk Lamong;SBY-07 ;Haida Kraton;058HKR;67.0
+C-058;Teluk Lamong;SBY-07 ;CJ Feed BATANG;058CFB;180.0
+C-058;Teluk Lamong;SBY-07 ;Japfa Sragen;058JPS;160.0
+C-063;Darmo Sugondo Gresik;;CJ Feed Jombang;063CFJ;64.0
+C-063;Darmo Sugondo Gresik;;Cpi Sepanjang;063CIS;51.0
+C-063;Darmo Sugondo Gresik;;Cpi Krian;063CIK;53.0
+C-063;Darmo Sugondo Gresik;;New Hope Kletek;063NHK;49.0
+C-063;Darmo Sugondo Gresik;;Wirifa Rungkut;063WFR;49.0
+C-063;Darmo Sugondo Gresik;;Panca Gedangan;063PPG;46.0
+C-063;Darmo Sugondo Gresik;;Japfa Buduran;063JPB;46.0
+C-063;Darmo Sugondo Gresik;;Malindo Wringin anom;063MWA;53.0
+C-063;Darmo Sugondo Gresik;;Wirifa Ngoro;063WFN;56.50
+C-063;Darmo Sugondo Gresik;;East Hope-Ngoro;063EHN;56.50
+C-063;Darmo Sugondo Gresik;;CARGILL Beji;063CGB;56.50
+C-063;Darmo Sugondo Gresik;;Cargill Kraton;063CKR;66.0
+C-063;Darmo Sugondo Gresik;;Panca Pandaan;063PPD;56.50
+C-063;Darmo Sugondo Gresik;;CJ Pasuruan;063CJP;56.50
+C-063;Darmo Sugondo Gresik;;MPJS Jombang;063MPJ;79.0
+C-063;Darmo Sugondo Gresik;;DMC PUNGGING;063DMP;61.0
+C-063;Darmo Sugondo Gresik;;Romokalisari;063RMK;18.0
+C-063;Darmo Sugondo Gresik;;Sierad Wonoayu;063SRW;53.0
+C-063;Darmo Sugondo Gresik;;Tambak Langon;063TBL;25.0
+C-063;Teluk Lamong;SBY-07 ;Cpi Sepanjang;063CIS;50.0
+C-063;Teluk Lamong;SBY-07 ;Cpi Krian;063CIK;52.0
+C-063;Teluk Lamong;SBY-07 ;New Hope Kletek;063NHK;50.0
+C-063;Teluk Lamong;SBY-07 ;Wirifa Rungkut;063WFR;50.0
+C-063;Teluk Lamong;SBY-07 ;Panca Gedangan;063PPG;45.0
+C-063;Teluk Lamong;SBY-07 ;Japfa Buduran;063JPB;45.0
+C-063;Teluk Lamong;SBY-07 ;Malindo Wringin anom;063MWA;56.0
+C-063;Teluk Lamong;SBY-07 ;Wirifa Ngoro;063WFN;55.50
+C-063;Teluk Lamong;SBY-07 ;East Hope-Ngoro;063EHN;55.50
+C-063;Teluk Lamong;SBY-07 ;CARGILL Beji;063CGB;55.50
+C-063;Teluk Lamong;SBY-07 ;Cargill Kraton;063CKR;67.0
+C-063;Teluk Lamong;SBY-07 ;Panca Pandaan;063PPD;55.50
+C-063;Teluk Lamong;SBY-07 ;CJ Pasuruan;063CJP;68.0
+C-063;Teluk Lamong;SBY-07 ;MPJS Jombang;063MPJ;78.0
+C-063;Teluk Lamong;SBY-07 ;DMC PUNGGING;063DMP;60.0
+C-063;Teluk Lamong;SBY-07 ;Romokalisari;063RMK;24.0
+C-063;Teluk Lamong;SBY-07 ;Sierad Wonoayu;063SRW;52.0
+C-063;Teluk Lamong;SBY-07 ;Tambak Langon;063TBL;21.0
+C-063;Teluk Lamong;SBY-07 ;Darmo Sugondo Gresik;063DSG;26.0
+C-063;Romokalisari;SBY-02 ;Cpi Sepanjang;063CIS;47.0
+C-063;Romokalisari;SBY-02 ;Cpi Krian;063CIK;49.0
+C-063;Romokalisari;SBY-02 ;New Hope Kletek;063NHK;45.0
+C-063;Romokalisari;SBY-02 ;Wirifa Rungkut;063WFR;45.0
+C-063;Romokalisari;SBY-02 ;Panca Gedangan;063PPG;42.0
+C-063;Romokalisari;SBY-02 ;Japfa Buduran;063JPB;42.0
+C-063;Romokalisari;SBY-02 ;Malindo Wringin anom;063MWA;49.0
+C-063;Romokalisari;SBY-02 ;Wirifa Ngoro;063WFN;52.50
+C-063;Romokalisari;SBY-02 ;East Hope-Ngoro;063EHN;52.50
+C-063;Romokalisari;SBY-02 ;CARGILL Beji;063CGB;52.50
+C-063;Romokalisari;SBY-02 ;Cargill Kraton;063CKR;62.0
+C-063;Romokalisari;SBY-02 ;Panca Pandaan;063PPG;52.50
+C-063;Romokalisari;SBY-02 ;CJ Pasuruan;063CJP;62.0
+C-063;Romokalisari;SBY-02 ;MPJS Jombang;063MPJ;75.0
+C-063;Romokalisari;SBY-02 ;DMC PUNGGING;063DMP;57.0
+C-063;Romokalisari;SBY-02 ;Sierad Wonoayu;063SRW;49.0
+C-063;Romokalisari;SBY-02 ;Tambak Langon;063TBL;21.0
+C-063;Romokalisari;SBY-02 ;Darmo Sugondo Gresik;063DSG;18.0
+C-063;Jamrud;SBY-10 ;Cpi Sepanjang;063CIS;45.0
+C-063;Jamrud;SBY-10 ;Cpi Krian;063CIK;47.0
+C-063;Jamrud;SBY-10 ;New Hope Kletek;063NHK;45.0
+C-063;Jamrud;SBY-10 ;Wirifa Rungkut;063WFR;45.0
+C-063;Jamrud;SBY-10 ;Panca Gedangan;063PPG;40.0
+C-063;Jamrud;SBY-10 ;Japfa Buduran;063JPB;40.0
+C-063;Jamrud;SBY-10 ;Malindo Wringin anom;063MWA;51.0
+C-063;Jamrud;SBY-10 ;Wirifa Ngoro;063WFN;50.50
+C-063;Jamrud;SBY-10 ;East Hope-Ngoro;063EHN;50.50
+C-063;Jamrud;SBY-10 ;CARGILL Beji;063CGB;50.50
+C-063;Jamrud;SBY-10 ;Cargill Kraton;063CGK;62.0
+C-063;Jamrud;SBY-10 ;Panca Pandaan;063PPD;50.50
+C-063;Jamrud;SBY-10 ;CJ Pasuruan;063CJP;63.0
+C-063;Jamrud;SBY-10 ;MPJS Jombang;063MPJ;73.0
+C-063;Jamrud;SBY-10 ;DMC PUNGGING;063DMP;55.0
+C-063;Jamrud;SBY-10 ;Romokalisari;063RMK;33.0
+C-063;Jamrud;SBY-10 ;Sierad Wonoayu;063SRW;47.0
+C-063;Jamrud;SBY-10 ;Tambak Langon;063TBL;25.0
+C-063;Jamrud;SBY-10 ;Darmo Sugondo Gresik;063DSG;35.0
+C-063;Jamrud;SBY-10 ;Japfa Margo;063JPM;25.0
+C-064;Beji Pasuruan;;Gold Coin;064GCN;76.0
+C-065;Jamrud;SBY-10 ;SPC-Trosobo;065SPT;44.50
+C-065;Jamrud;SBY-10 ;PT. Seger;065SGR;44.50
+C-065;Jamrud;SBY-10 ;Romokalisari;065RMK;30.0
+C-065;Jamrud;SBY-10 ;Tb.Langon;065TBL;27.50
+C-065;Teluk Lamong;SBY-07 ;Cpi Krian;065CIK;45.0
+C-065;Teluk Lamong;SBY-07 ;Wonokoyo;065WKY;51.0
+C-065;Teluk Lamong;SBY-07 ;Tb.Langon;065TBL;25.0
+C-065;Romokalisari;SBY-02 ;Cpi Krian;065CIK;48.0
+C-065;Romokalisari;SBY-02 ;Cpi Sepanjang;065CIS;46.0
+C-065;Margomulyo;SBY-03 ;Cpi Krian;065CIK;46.0
+C-065;Teluk Lamong;SBY-07 ;Cpi Sepanjang;065CIS;44.50
+C-065;Margomulyo;SBY-03 ;Cpi Sepanjang;065CIS;44.0
+C-066;Margomulyo;SBY-03 ;Cpi Krian;066CIK;49.0
+C-066;Teluk Lamong;SBY-07 ;Sierad;066SIR;55.0
+C-066;Teluk Lamong;SBY-07 ;Garda Sumengko;066GDS;52.0
+C-066;Teluk Lamong;SBY-07 ;Wringin Anom;066WRA;52.0
+C-066;Teluk Lamong;SBY-07 ;Romokalisari;066RMK;16.0
+C-066;Romokalisari;SBY-02 ;East Hope-Ngoro;066EHN;50.0
+C-066;Romokalisari;SBY-02 ;Sreeya Sewu;066SRW;55.0
+C-066;Teluk Lamong;SBY-07 ;East Hope-Ngoro;066EHN;53.0
+C-066;Teluk Lamong;SBY-07 ;Tb. Langon 16;066TBL;16.0
+C-066;Teluk Lamong;SBY-07 ;MPJS Jombang;066MPJ;80.0
+C-066;Teluk Lamong;SBY-07 ;PT.Seger-Kedamean;066SGK;50.0
+C-067;Teluk Lamong;SBY-07 ;Tb.Langon;067TBL;18.0
+C-067;Tb.Langon;;Surya Grain-Krian;067SGK;48.0
+C-067;Romokalisari;SBY-02 ;Surya Grain-Krian;067SGK;50.0
+C-067;Romokalisari;SBY-02 ;Surya Grain-Trosobo;067SGT;53.0
+C-067;Teluk Lamong;SBY-07 ;Romokalisari;067RMK;20.0
+C-068;Margomulyo;SBY-03 ;Cpi Sepanjang;068CIS;48.0
+C-069;Romokalisari;SBY-02 ;Sama Berkat Ind;069SBI;27.50
+C-069;Margomulyo;SBY-03 ;Sama Berkat Ind;069SBI;18.0
+C-069;KIG-Gresik;;Sama Berkat Ind;069SBI;38.0
+C-069;Tb. Langon;;PT. DMC Mojokerto;069DMM;55.0
+C-070;Teluk Lamong;SBY-07 ;Panca PP-Gedangan;070PPG;43.0
+C-073;Romokalisari;SBY-02 ;New Hope-Mojosari;073NHM;58.0
+C-073;Teluk Lamong;SBY-07 ;New Hope-Mojosari;073NHM;58.0
+C-073;Teluk Lamong;SBY-07 ;New Hope-Casaland Krian;073NHC;50.0
+C-073;New Hope Kletek;;New Hope-Mojosari;073NHM;29.0
+C-073;Pelabuhan Perak;SBY-20 ;New Hope-Mojosari;073NHM;63.50
+C-073;Teluk Lamong;SBY-07 ;Margomulyo;073MML;27.0
+C-073;Margomulyo;SBY-03 ;New Hope-Mojosari;073NHM;52.0
+C-073;Casaland;SBY-15 ;New Hope-Mojosari;073NHM;58.0
+C-073;Jamrud;SBY-10 ;New Hope-Mojosari;073NHM;63.50
+C-076;Teluk Lamong;SBY-07 ;Margomulyo;076MML;25.0
+C-079;Tb.Langon 22;;Haida PIER;079HPR;55.0
+C-079;Margomulyo;SBY-03 ;Matahari Sakti-M.Mulyo;079MSM;14.0
+C-079;Margomulyo;SBY-03 ;Panca PP-Pandaan;079PPD;42.0
+C-079;Margomulyo;SBY-03 ;Cpp Dupak;079CPD;21.0
+C-079;Margomulyo;SBY-03 ;East Hope-Ngoro;079EHN;42.0
+C-079;Romokalisari;SBY-02 ;Panca PP-Pandaan;079PPD;42.0
+C-079;Romokalisari;SBY-02 ;East Hope-Ngoro;079EHN;42.0
+C-079;Margomulyo;SBY-03 ;Matahari Sakti Gempol;079MSG;42.0
+C-079;Romokalisari;SBY-02 ;Panca PP-Gedangan;079PPG;35.0
+C-079;Margomulyo;SBY-03 ;MPJS Jombang;079MPJ;59.0
+C-079;Margomulyo;SBY-03 ;Sierad;079SRD;40.0
+C-079;Romokalisari;SBY-02 ;Cpp Dupak;079CPD;20.0
+C-079;Margomulyo;SBY-03 ;Panca PP-Gedangan;079PPG;32.0
+C-079;Margomulyo;SBY-03 ;DMC PUNGGING;079DMP;48.0
+C-079;Margomulyo;SBY-03 ;Cpp Sepanjang;079CPS;37.0
+C-079;Margomulyo;SBY-03 ;CJ Feed Jombang;079CFJ;59.0
+C-079;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;079MSM;21.0
+C-079;Romokalisari;SBY-02 ;Cpp Sepanjang;079CPS;40.0
+C-079;Romokalisari;SBY-02 ;Matahari Sakti Gempol;079MSG;42.0
+C-079;Teluk Lamong;SBY-07 ;TANJUNG BATU SURABAYA;079TGB;28.0
+C-079;Teluk Lamong;SBY-07 ;Panca PP-Pandaan;079PPD;42.0
+C-079;Teluk Lamong;SBY-07 ;Cpp Dupak;079CPD;20.0
+C-07R;Teluk Lamong;SBY-07 ;Romokalisari;07RMK;14.0
+C-079;Teluk Lamong;SBY-07 ;East Hope-Ngoro;079EHN;47.0
+C-079;Teluk Lamong;SBY-07 ;Matahari Sakti Gempol;079MSG;42.0
+C-079;Teluk Lamong;SBY-07 ;Sinar Indochem-Krian;079SIK;40.0
+C-079;Teluk Lamong;SBY-07 ;Haida Kraton;079HKR;55.0
+C-079;Teluk Lamong;SBY-07 ;DMC PUNGGING;079DMP;50.0
+C-079;Teluk Lamong;SBY-07 ;Sierad;079SRD;40.0
+C-079;Teluk Lamong;SBY-07 ;MPJS Jombang;079MPJ;60.0
+C-079;Romokalisari;SBY-02 ;CWS Sepanjang;079CWS;40.0
+C-079;Romokalisari;SBY-02 ;Cargill PIER;079CGP;42.0
+C-079;Teluk Lamong;SBY-07 ;Panca PP-Gedangan;079PPG;35.0
+C-079;Teluk Lamong;SBY-07 ;CARGILL Beji;079CGB;42.0
+C-079;Teluk Lamong;SBY-07 ;WONOKOYO GEMPOL;079WKG;42.0
+C-079;Teluk Lamong;SBY-07 ;Sreeya Sewu;079SRS;40.0
+C-079;Teluk Lamong;SBY-07 ;Margomulyo;079MGM;21.0
+C-079;Teluk Lamong;SBY-07 ;Wirifa Sakti Ngoro;079WSN;42.0
+C-079;Teluk Lamong;SBY-07 ;CJ Feed Jombang;079CFJ;60.0
+C-079;Teluk Lamong;SBY-07 ;Cpp Sepanjang;079CPS;40.0
+C-079;Margomulyo;SBY-03 ;CWS Sepanjang;079CWS;37.0
+C-079;Romokalisari;SBY-02 ;CPP MARGO;079CPM;21.0
+C-079;Romokalisari;SBY-02 ;Haida Kraton;079HKR;55.0
+C-079;Margomulyo;SBY-03 ;SANTOSA AGRINDO-PROBOLINGGO;079SAN;88.0
+C-079;Teluk Lamong;SBY-07 ;CPP MARGO;079CPM;21.0
+C-079;Teluk Lamong;SBY-07 ;CWS Sepanjang;079CWS;40.0
+C-079;Teluk Lamong;SBY-07 ;Matahari Sakti-M.Mulyo;079MSM;21.0
+C-079;Romokalisari;SBY-02 ;JCI-Buduran;079JCB;39.0
+C-079;Jamrud;SBY-10 ;Romokalisari;079RMK;28.0
+C-079;Jamrud;SBY-10 ;East Hope-Ngoro;079EHN;47.0
+C-079;Jamrud;SBY-10 ;Wonokoyo;079WKY;47.0
+C-079;Jamrud;SBY-10 ;DMC PUNGGING;079DMP;48.0
+C-079;Margomulyo;SBY-03 ;CARGILL Kraton-PIER;079CKR;55.0
+C-079;Margomulyo;SBY-03 ;CPP MARGO;079CPM;12.0
+C-079;Margomulyo;SBY-03 ;Haida Kraton;079HKR;55.0
+C-079;Teluk Lamong;SBY-07 ;CJ SIDOARJO;079CJS;47.0
+C-079;Margomulyo;SBY-03 ;Berkat Agri-Gedangan;079BAG;32.0
+C-079;Margomulyo;SBY-03 ;Cheil Jeddang-Pasuruan;079CJP;60.0
+C-079;Romokalisari;SBY-02 ;SANTOSA AGRINDO-PROBOLINGGO;079SAN;88.0
+C-079;Margomulyo';;Matahari Sakti-M.Mulyo;079MSM;14.0
+C-079;Teluk Lamong;SBY-07 ;CJ FEED KALIMANTAN (SDA);079CFK;39.0
+C-079;Teluk Lamong;SBY-07 ;INDO KAWAN SEJAHTERA (WONOKOYO);079IKS;47.0
+C-079;Margomulyo;SBY-03 ;CARGILL Beji;079CGB;42.0
+C-079;Margomulyo;SBY-03 ;Cpp M.Mulyo;079CPM;14.0
+C-079;Margomulyo;SBY-03 ;BERSIH BIJAK BEJI;079BBB;42.0
+C-079;Margomulyo;SBY-03 ;CARGILL Kraton-PIER;079CKR;82.50
+C-079;Teluk Lamong;SBY-07 ;CARGILL Kraton-PIER;079CKR;55.0
+C-079;Tanjung Batu;SBY-29 ;Matahari Sakti-M.Mulyo;079MSM;22.0
+C-079;Teluk Lamong;SBY-07 ;Margomulyo;079MGM;21.0
+C-079;Romokalisari;SBY-02 ;CJ Feed Jombang;079CFJ;60.0
+C-079;Margomulyo;SBY-03 ;TANJUNG PERAK SURABAYA;079TPS;22.0
+C-079;Romokalisari;SBY-02 ;TANJUNG PERAK SURABAYA;079TPS;22.0
+C-079;Romokalisari;SBY-02 ;BERSIH BIJAK BEJI;079BBB;42.0
+C-079;Teluk Lamong;SBY-07 ;HAIDA TB LANGON 22;079HTL;21.0
+C-079;Romokalisari;SBY-02 ;JCI Gedangan;079JCG;39.0
+C-079;Romokalisari;SBY-02 ;CARGILL-KRATON;079CGK;55.0
+C-079;Jamrud;SBY-10 ;Cpi Sepanjang;079CIS;37.0
+C-079;Jamrud;SBY-10 ;Cpp M.Mulyo;079CPM;22.0
+C-079;Jamrud;SBY-10 ;Panca PP-Pandaan;079PPD;47.0
+C-079;Romokalisari;SBY-02 ;CARGILL Beji;079CGB;42.0
+C-079;Jamrud;SBY-10 ;TANJUNG BATU SURABAYA;079TGB;14.0
+C-079;Jamrud;SBY-10 ;CWS Sepanjang;079CWS;40.0
+C-079;Jamrud;SBY-10 ;Cpp Dupak;079CPD;21.0
+C-079;Jamrud;SBY-10 ;Cpp Sepanjang;079CPP;40.0
+C-079;Teluk Lamong;SBY-07 ;Wonokoyo;079WKY;47.0
+C-080;Romokalisari;SBY-02 ;Romokalisari;080RMK;10.0
+C-080;Margomulyo;SBY-03 ;Romokalisari;080RMK;25.0
+C-081;Teluk Lamong;SBY-07 ;CV.PUTRA PRIMA MANDIRI, PARE-KEDIRI;081PPM;78.0
+C-081;Wilmar-Gresik;;CV.PUTRA PRIMA MANDIRI, PARE-KEDIRI;081PPM;81.0
+C-082;Romokalisari;SBY-02 ;Romokalisari;082RMK;10.0
+C-082;Romokalisari;SBY-02 ;QL Feed Romokalisari;082QLR;10.0
+C-082;Romokalisari;SBY-02 ;New Hope-Mojosari;082NHM;57.0
+C-082;Romokalisari;SBY-02 ;Wonokoyo;082WKY;55.0
+C-082;Romokalisari;SBY-02 ;Berkat Agri-Gedangan;082BAG;47.0
+C-082;Romokalisari;SBY-02 ;Haida Pasuruan;082HDP;70.0
+C-085;Teluk Lamong;SBY-07 ;Wonokoyo;085WKY;52.50
+C-085;Jamrud;SBY-10 ;Wonokoyo;085WKY;50.0
+C-006;Romokalisari;SBY-02 ;JCI Sidoarjo;006JCS;45.0
+C-006;Romokalisari;SBY-02 ;Panca PP-Gedangan;006PPG;39.0
+C-006;Romokalisari;SBY-02 ;Sreeya Sewu;006SYS;48.50
+C-006;Romokalisari;SBY-02 ;Wonokoyo;006WKY;50.50
+C-006;Romokalisari;SBY-02 ;Gold Coin;006GCN;27.50
+C-006;Romokalisari;SBY-02 ;Panca PP-Pandaan;006PPD;50.50
+C-006;Romokalisari;SBY-02 ;Romokalisari;006RMK;10.0
+C-006;Romokalisari;SBY-02 ;East Hope-Ngoro;006EHN;50.50
+C-006;Romokalisari;SBY-02 ;Cargill-Pasuruan;006CGP;61.50
+C-006;Romokalisari;SBY-02 ;DMC PUNGGING;006DMP;54.0
+C-006;Romokalisari;SBY-02 ;Malindo Gresik;006MLG;44.50
+C-006;Romokalisari;SBY-02 ;Cpp Sepanjang;006CPS;44.50
+C-006;Romokalisari;SBY-02 ;Pakindo Jaya;006PKJ;44.50
+C-006;Romokalisari;SBY-02 ;Wirifa Sakti Ngoro;006WSN;50.50
+C-006;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;006MSM;27.50
+C-006;Romokalisari;SBY-02 ;Matahari Sakti Gempol;006MSG;50.50
+C-006;Romokalisari;SBY-02 ;STP Manyar;006STM;30.0
+C-006;Romokalisari;SBY-02 ;Haida Kraton;006HKR;65.0
+C-006;Romokalisari;SBY-02 ;Malindo Margomulyo;006MLM;27.50
+C-006;Romokalisari;SBY-02 ;Malindo-Wringin Anom;006MWA;44.50
+C-006;Jamrud;SBY-10 ;DMC PUNGGING;006DMP;54.0
+C-006;Romokalisari;SBY-02 ;CJ Feed Jombang;006CFJ;68.0
+C-006;Romokalisari;SBY-02 ;CJ Feed Sidoarjo;006CFS;45.0
+C-006;Teluk Lamong;SBY-07 ;Romokalisari;006RMK;14.0
+C-006;Teluk Lamong;SBY-07 ;DMC PUNGGING;006DMP;57.0
+C-090;Tambak Sawah;;Jamrud;090JMR;40.0
+C-090;Teluk Lamong;SBY-07 ;Agrofood-Mojosari;090AGM;40.0
+C-090;Teluk Lamong;SBY-07 ;KIG-Gresik;090KGG;28.0
+C-090;Kalimas;SBY-13 ;JCI Gedangan;090JCG;37.0
+C-090;Teluk Lamong;SBY-07 ;Harvestar Flour Mills;090HFM;28.0
+C-090;Jamrud;SBY-10 ;Harvestar Flour Mills;090HFM;29.0
+C-090;Jamrud;SBY-10 ;Romokalisari;090RMK;26.0
+C-090;JIIPE;;Harvestar Flour Mills;090HFM;47.0
+C-090;KIG-Gresik;;Malindo ;090MLD;51.0
+C-092;Jamrud;SBY-10 ;Pakindo Jaya;092PKJ;0.0
+C-092;Romokalisari;SBY-02 ;Pakindo Jaya;092PKJ;0.0
+C-093;Teluk Lamong;SBY-07 ;CJ Feed Jombang;093CFJ;69.0
+C-094;JCI Sidoarjo;SBY-27 ;East Hope-Ngoro;094EHN;58.0
+C-095;Jamrud;SBY-10 ;Sreeya Sewu SDA;095SRS;47.50
+C-095;Jamrud;SBY-10 ;New Hope-Jemundo;095NHJ;43.50
+C-095;Kalimas;SBY-13 ;New Hope-Jemundo;095NHJ;43.50
+C-095;Kalimas;SBY-13 ;Sreeya Sewu SDA;095SRS;47.50
+C-095;Jamrud;SBY-10 ;New Hope-Mojosari;095NHM;54.0
+C-096;Romokalisari;SBY-02 ;Sreeya Sewu;096SRS;49.0
+C-100;KIG-Gresik;;Santos Jaya Abadi-SDA;100SJA;55.0
+C-103;Teluk Lamong;SBY-07 ;CV.Prima Sejahtera-Kediri;103PMS;90.0
+C-105;Romokalisari;SBY-02 ;Sorini-Pasuruan;105SOR;81.0
+C-105;Sorini-Pasuruan;;Berkat Agri-Gedangan;105BAG;65.0
+C-105;Sorini-Pasuruan;;Widuri Blitar;105WDB;145.0
+C-105;Sorini-Pasuruan;;Blitar;105BLT;145.0
+C-105;Sorini-Pasuruan;;Wirifa Sakti Ngoro;105WSN;25.0
+C-105;Sorini-Pasuruan;;Sinar Mentari-Blitar;105SMB;145.0
+C-106;Kalimas;SBY-13 ;Cpi Krian;106CIK;45.0
+C-106;Jamrud;SBY-10 ;JCI Sidoarjo;106JCS;45.0
+C-106;Jamrud;SBY-10 ;Wonokoyo-Gempol;106WKG;50.0
+C-106;Jamrud;SBY-10 ;CJ Feed Jombang;106CFJ;65.0
+C-106;Jamrud;SBY-10 ;MPJS Jombang;106MPJ;65.0
+C-106;Jamrud;SBY-10 ;Cargill-Pasuruan;106CGP;50.0
+C-106;Jamrud;SBY-10 ;Cpi Krian;106CIK;45.0
+C-106;Jamrud;SBY-10 ;Cpi Sepanjang;106CIS;45.0
+C-106;Jamrud;SBY-10 ;Margomulyo;106MGM;26.0
+C-106;Jamrud;SBY-10 ;Wirifa Sakti Ngoro;106WSN;50.0
+C-106;Kalimas;SBY-13 ;JCI Sidoarjo;106JCS;45.0
+C-106;Kalimas;SBY-13 ;MPJS Jombang;106MPJ;65.0
+C-106;Kalimas;SBY-13 ;Wirifa Sakti Ngoro;106WSN;50.0
+C-106;Jamrud;SBY-10 ;LAMONGAN;106LMG;60.0
+C-106;Jamrud;SBY-10 ;Brondong-Lamongan;106BDL;77.50
+C-106;JCI Sidoarjo;SBY-27 ;Cpi Sepanjang;106CIS;22.50
+C-106;Pel. Gresik;;CJ Feed Jombang;106CFJ;78.0
+C-106;Pel. Gresik;;Brondong-Lamongan;106BDL;72.0
+C-106;Pel. Gresik;;Cpi Krian;106CIK;58.0
+C-106;Pel. Gresik;;Cpi Sepanjang;106CIS;59.0
+C-109;Teluk Lamong;SBY-07 ;DMC PUNGGING;109DMP;55.0
+C-109;Teluk Lamong;SBY-07 ;CARGILL Kraton-PIER;109CKR;130.0
+C-109;Teluk Lamong;SBY-07 ;Pakindo Jaya;109PKJ;45.0
+C-109;Pelabuhan Perak;SBY-20 ;Gudang Kalimas;109KLM;12.0
+C-109;Romo BMB;;Pakindo Jaya;109PKJ;50.0
+C-109;Kalimas;SBY-13 ;Romokalisari;109RMK;27.0
+C-109;Kalimas;SBY-13 ;New Hope-Jemundo;109NHJ;50.60
+C-109;Pelabuhan Perak;SBY-20 ;DMC PUNGGING;109DMP;55.0
+C-109;Pelabuhan Perak;SBY-20 ;Panca PP-Gedangan;109PPG;34.0
+C-109;Pelabuhan Perak;SBY-20 ;Romokalisari;109RMK;27.0
+C-109;Romokalisari;SBY-02 ;Pakindo Jaya;109PKJ;50.0
+C-109;Jamrud;SBY-10 ;Gd Romokalisari;109RMK;27.0
+C-110;Romokalisari;SBY-02 ;Cpi Krian;110CIK;58.0
+C-012;Teluk Lamong;SBY-07 ;SPC-Trosobo;S012SPT;45.0
+C-012;Teluk Lamong;SBY-07 ;Surya Grain-Trosobo;S012SGT;45.0
+C-012;Teluk Lamong;SBY-07 ;MPJS Jombang;S012MPJ;69.0
+C-012;Jamrud;SBY-10 ;FKS TANJUNG BATU;S012FTB;13.0
+C-012;Jamrud;SBY-10 ;GCU Tanjung Batu;S012GTB;13.0
+C-012;Teluk Lamong;SBY-07 ;PT.LDC TRADING-ROMOKALISARI;S012RMK;22.0
+C-012;Teluk Lamong;SBY-07 ;PT. CENTRAL WINDU SEJATI-SEPANJANG;S012CWS;42.0
+C-012;Teluk Lamong;SBY-07 ;NHI-ROMOKALISARI;S012NHR;22.0
+C-012;Teluk Lamong;SBY-07 ;PT.HAVINDO-MUTIARA TB LANGON;S012HVD;25.0
+C-012;Jamrud;SBY-10 ;PT.SUPERINDO-MARGOMULO INDAH;S012SMI;26.0
+C-012;Teluk Lamong;SBY-07 ;Haida Kraton;S012HKR;58.50
+C-012;Jamrud;SBY-10 ;TB. Langon 28;S012TB8;29.0
+C-012;Jamrud;SBY-10 ;Margomulyo;S012MGM;29.0
+C-012;Teluk Lamong;SBY-07 ;Widuri Blitar;S012WDR;110.0
+C-012;Romokalisari;SBY-02 ;Malindo Margomulyo;S012MLM;26.0
+C-012;Romokalisari;SBY-02 ;JCI-Margomulyo;S012JCM;27.0
+C-012;Romokalisari;SBY-02 ;East Hope-Ngoro;S012EHN;50.0
+C-012;BMS;SBY-24 ;Romokalisari;S012RMK;32.0
+C-012;Jamrud;SBY-10 ;Haida Kraton;S012HKR;55.50
+C-012;Jamrud;SBY-10 ;Romokalisari;S012RMK;27.0
+C-012;Jamrud;SBY-10 ;MPJS Margomulyo 61;S012MPM;26.0
+C-012;Jamrud;SBY-10 ;Margomulyo;S012MGM;26.0
+C-012;Jamrud;SBY-10 ;DMC PUNGGING;S012DMP;54.0
+C-012;Jamrud;SBY-10 ;Cpp Sepanjang;S012CPS;41.0
+C-012;Teluk Lamong;SBY-07 ;Margomulyo;S012MGM;25.0
+C-012;CJ Feed Jombang;;Abba-Sepanjang;S012ABS;21.0
+C-012;Romokalisari;SBY-02 ;Cpi Krian;S012CIK;47.0
+C-012;Tb.Langon 22;;Cpi Krian;S012CIK;47.0
+C-012;Romokalisari;SBY-02 ;Cpi Sepanjang;S012CIS;44.0
+C-012;Romokalisari;SBY-02 ;CJ Feed Jombang;S012CFJ;65.0
+C-012;Romokalisari;SBY-02 ;Pakindo Jaya;S012PKJ;42.50
+C-012;Teluk Lamong;SBY-07 ;East Hope-Ngoro;S012EHN;48.0
+C-012;Teluk Lamong;SBY-07 ;New Hope-Mojosari;S012NHM;48.0
+C-012;Teluk Lamong;SBY-07 ;Romokalisari (FKS);S012RFK;12.50
+C-012;Teluk Lamong;SBY-07 ;New Hope-Jemundo;S012NHJ;42.50
+C-012;Teluk Lamong;SBY-07 ;ROMOKALISARI (GL);S012RGL;24.0
+C-012;Teluk Lamong;SBY-07 ;Sinar Indochem-Krian;S012SIK;45.0
+C-012;Teluk Lamong;SBY-07 ;Sinar Unigrain-Krian;S012SUK;45.0
+C-012;Teluk Lamong;SBY-07 ;Matahari Sakti-M.Mulyo;S012MSM;25.0
+C-012;Teluk Lamong;SBY-07 ;MPJS Margomulyo;S012MPM;25.0
+C-012;Teluk Lamong;SBY-07 ;Cpp Sepanjang;S012CPS;42.0
+C-012;Teluk Lamong;SBY-07 ;WONOKOYO GEMPOL;S012WKG;48.0
+C-012;Teluk Lamong;SBY-07 ;Matahari Sakti Gempol;S012MSG;48.0
+C-012;Teluk Lamong;SBY-07 ;New Hope-Mojosari;S012NHM;48.0
+C-012;Teluk Lamong;SBY-07 ;Sierad;S012SRD;46.0
+C-012;Jamrud;SBY-10 ;MARGOMULYO PERMAI;S012MGP;26.0
+C-012;Romokalisari;SBY-02 ;Cpi Sepanjang;S012CIS;44.0
+C-012;Teluk Lamong;SBY-07 ;GCU Tanjung Batu;S012GTB;25.0
+C-012;Teluk Lamong;SBY-07 ;FKS TANJUNG BATU;S012FTB;25.0
+C-012;Romokalisari;SBY-02 ;Cpi Krian;S012CIK;47.0
+C-012;Teluk Lamong;SBY-07 ;GD.TB LANGON 22;S012TB2;25.0
+C-012;Teluk Lamong;SBY-07 ;Panca PP-Pandaan;S012PPD;49.0
+C-012;Teluk Lamong;SBY-07 ;Margomulyo;S012MGM;25.0
+C-012;Teluk Lamong;SBY-07 ;Panca PP-Gedangan;S012PPG;37.0
+C-012;Teluk Lamong;SBY-07 ;Cpp Dupak;S012CPD;24.0
+C-012;Teluk Lamong;SBY-07 ;Cpi Sepanjang;S012CIS;46.0
+C-012;Teluk Lamong;SBY-07 ;Romokalisari (CPI);S012RCP;16.0
+C-012;Teluk Lamong;SBY-07 ;Cpi Krian;S012CIK;49.0
+C-012;Romokalisari;SBY-02 ;Sierad;S012SRD;41.50
+C-012;Romokalisari;SBY-02 ;Malindo Tb. Langon;S012MTB;34.0
+C-012;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;S012MSM;26.0
+C-012;Romokalisari;SBY-02 ;MPJS Margomulyo 61;S012MPM;26.0
+C-012;Romokalisari;SBY-02 ;New Hope-Jemundo;S012NHJ;37.0
+C-012;Romokalisari;SBY-02 ;New Hope-Mojosari;S012NHM;49.0
+C-012;Romokalisari;SBY-02 ;Malindo Tb. Langon;S012MTB;34.0
+C-012;Teluk Lamong;SBY-07 ;ANTABOGA SDA;S012ABS;42.0
+C-012;Teluk Lamong;SBY-07 ;Tb.Langon 16;S012TB6;25.0
+C-012;Jamrud;SBY-10 ;Romokalisari;S012RMK;27.50
+C-012;Romokalisari;SBY-02 ;CJ Feed Jombang;S012CFJ;65.0
+C-012;Romokalisari;SBY-02 ;New Hope-Jemundo;S012NHJ;37.0
+C-012;Romokalisari;SBY-02 ;East Hope-Ngoro;S012EHN;50.0
+C-012;Romokalisari;SBY-02 ;Matahari Sakti Gempol;S012MSG;49.0
+C-012;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;S012MSM;26.0
+C-012;Romokalisari;SBY-02 ;MPJS Margomulyo 61;S012MPM;26.0
+C-012;Romokalisari;SBY-02 ;Malindo Tb. Langon;S012MTL;34.0
+C-012;Romokalisari;SBY-02 ;Siantar Top-Sda;S012STT;42.50
+C-012;Romokalisari;SBY-02 ;SPC-Trosobo;S012SPT;38.50
+C-012;Romokalisari;SBY-02 ;CJ Feed Jombang;S012CFJ;65.0
+C-012;Teluk Lamong;SBY-07 ;CJ Feed Jombang;S012CFJ;68.0
+C-012;Teluk Lamong;SBY-07 ;JCI-Sidoarjo;S012JCS;42.0
+C-012;Romokalisari;SBY-02 ;Sierad;S012SRD;41.50
+C-012;Romokalisari;SBY-02 ;New Hope-Mojosari;S012NHM;49.0
+C-012;Romokalisari;SBY-02 ;New Hope-Jemundo;S012NHJ;37.0
+C-012;Jamrud;SBY-10 ;Cpi Krian;S012CIK;46.50
+C-012;Teluk Lamong;SBY-07 ;Suri Tani-Manyar;S012STM;39.0
+C-012;Teluk Lamong;SBY-07 ;KEBOMAS GRESIK;S012KBG;22.0
+C-012;Romokalisari;SBY-02 ;Gold Coin;S012GCN;26.0
+C-012;Teluk Lamong;SBY-07 ;MS GEMPOL (GL);S012GGL;48.50
+C-012;Romokalisari;SBY-02 ;New Hope Kletek;S012NHK;37.0
+C-012;Teluk Lamong;SBY-07 ;PT.Seger;S012SGR;43.0
+C-012;Teluk Lamong;SBY-07 ;Sama Berkat Ind;S012SBI;25.0
+C-012;Teluk Lamong;SBY-07 ;PT.QL FEED IND-TB LANGON INDAH 1-3;S012QTL;25.0
+C-012;Teluk Lamong;SBY-07 ;CV.SUPERINDO JAYA MAKMUR-MARGOMULYO INDAH;S012MMI;25.0
+C-012;Teluk Lamong;SBY-07 ;SAMA BERKAT;S012SBK;20.0
+C-012;Teluk Lamong;SBY-07 ;MPJS Margomulyo 61;S012MPM;23.0
+C-012;Jamrud;SBY-10 ;Siantar Top-Sda;S012STT;41.0
+C-012;Jamrud;SBY-10 ;PT.Murti-Gresik;S012MRT;29.0
+C-012;Jamrud;SBY-10 ;GD.TB LANGON 22;S012TB2;26.0
+C-012;Teluk Lamong;SBY-07 ;Gold Coin;S012GCN;25.0
+C-012;Teluk Lamong;SBY-07 ;DMC PUNGGING;S012DMP;55.0
+C-012;Romokalisari;SBY-02 ;Romokalisari;S012RMK;8.0
+C-012;Tb.Langon;;Siantar Top-Sda;S012STT;41.0
+C-012;Romokalisari;SBY-02 ;Sierad;S012SRD;41.50
+C-012;Tb.Langon;;Sierad;S012SRD;41.50
+C-012;Romokalisari;SBY-02 ;East Hope-Ngoro;S012EHN;50.0
+C-012;Tb.Langon;;East Hope-Ngoro;S012EHN;50.0
+C-012;Tb.Langon;;New Hope-Jemundo;S012NHJ;37.0
+C-012;Tb.Langon;;New Hope-Mojosari;S012NHM;49.0
+C-012;Romokalisari;SBY-02 ;New Hope-Jemundo;S012NHJ;37.0
+C-012;Romokalisari;SBY-02 ;New Hope-Mojosari;S012NHM;49.0
+C-012;Romokalisari;SBY-02 ;New Hope-Jemundo;S012NHJ;37.0
+C-012;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;S012MSM;26.0
+C-012;Romokalisari;SBY-02 ;Matahari Sakti Gempol;S012MSG;49.0
+C-012;Romokalisari;SBY-02 ;East Hope-Ngoro;S012EHN;50.0
+C-012;Teluk Lamong;SBY-07 ;MILL AGRO-ROMO;S012RML;24.0
+C-012;Teluk Lamong;SBY-07 ;RATNO-GEDANGAN SDA;S012RGD;37.0
+C-012;Teluk Lamong;SBY-07 ;PT.Seger;S012SGR;43.0
+C-012;Romokalisari;SBY-02 ;East Hope-Ngoro;S012EHN;50.0
+C-012;Romokalisari;SBY-02 ;Pakindo Jaya;S012PKJ;37.0
+C-012;Teluk Lamong;SBY-07 ;Siantar Top-Sda;S012STT;46.0
+C-012;Teluk Lamong;SBY-07 ;Murti Jaya Abadi;S012MJA;25.0
+C-012;Romokalisari;SBY-02 ;Gold Coin;S012GCN;26.0
+C-012;Jamrud;SBY-10 ;CJ Feed Jombang;S012CFJ;65.0
+C-012;CJ Feed Jombang;;Matahari Sakti Gempol;S012MSG;49.0
+C-012;Jamrud;SBY-10 ;KEBOMAS GRESIK;S012KBG;31.0
+C-012;Jamrud;SBY-10 ;PT. Seger;S012SGR;42.0
+C-012;Teluk Lamong;SBY-07 ;Abba-Sepanjang;S012ABS;42.0
+C-012;Romokalisari;SBY-02 ;Siantar Top-Sda;S012STT;42.50
+C-012;Teluk Lamong;SBY-07 ;Wirifa-Ngoro Mojokerto;S012WNM;48.0
+C-012;Romokalisari;SBY-02 ;New Hope-Jemundo;S012NHJ;37.0
+C-012;Romokalisari;SBY-02 ;Malindo Margomulyo;S012MLM;26.0
+C-012;Romokalisari;SBY-02 ;New Hope-Mojosari;S012NHM;49.0
+C-012;Teluk Lamong;SBY-07 ;MARGOMULYO PERMAI;S012MGP;25.0
+C-012;Romokalisari;SBY-02 ;Pakindo Jaya;S012PKJ;37.0
+C-012;Romokalisari;SBY-02 ;MPJS Margomulyo 61;S012MPM;26.0
+C-012;Romokalisari;SBY-02 ;Siantar Top-Sda;S012STT;42.50
+C-012;Romokalisari;SBY-02 ;Matahari Sakti Gempol;S012MSG;49.0
+C-012;Romokalisari;SBY-02 ;Matahari Sakti-M.Mulyo;S012MSM;26.0
+C-012;Romokalisari;SBY-02 ;Cpi Sepanjang;S012CIS;39.0
+C-012;Romokalisari;SBY-02 ;East Hope-Ngoro;S01EHN;50.0
+C-012;Romokalisari;SBY-02 ;Pakindo Jaya;S012PKJ;37.0
+C-012;Romokalisari;SBY-02 ;CJ Feed Jombang;S012CFJ;65.0
+C-012;Jamrud;SBY-10 ;Cpi Sepanjang;S012CIS;43.50
+C-012;Jamrud;SBY-10 ;TB LANGON 28';S012TB8;26.0
+C-012;Teluk Lamong;SBY-07 ;Cargill-Pasuruan;S012CGP;48.0
+C-012;Teluk Lamong;SBY-07 ;GANTARI,JL.DARMO SUGONDO KEC.KEBOMAS GRESIK;S012SGD;21.0
+C-012;Teluk Lamong;SBY-07 ;CV.PUTRA PRIMA MANDIRI, PARE-KEDIRI;S012PPM;78.0
+C-012;Teluk Lamong;SBY-07 ;NHI-ROMOKALISARI;S012NHR;16.0
+C-012;Teluk Lamong;SBY-07 ;MURTI JAYA;S012MRT;15.0
+C-012;Jamrud;SBY-10 ;Panca PP-Gedangan;S012PPG;36.0
+C-012;Jamrud;SBY-10 ;Sreeya Sewu;S012SYS;46.0
+C-012;Cpi Krian;SBY-18 ;Jamrud;S012JMD;46.50
+C-012;Cpi Sepanjang;SBY-19 ;Jamrud;S012JMD;43.50
+C-012;Jamrud;SBY-10 ;Gold Coin;S012GCN;26.0
+C-012;Teluk Lamong;SBY-07 ;Berkat Agri-Gedangan;S012BAG;37.0
+C-012;Jamrud;SBY-10 ;JCI Sidoarjo;S012JCS;42.0
+C-012;Jamrud;SBY-10 ;Romokalisari (CPI);S012RCP;31.0
+C-012;Jamrud;SBY-10 ;AGRICO-ROMOKALISARI;S012AGR;31.0
+C-012;Teluk Lamong;SBY-07 ;SCOULAR TRADING PERG.MASPION;S012STP;16.0
+C-012;Jamrud;SBY-10 ;SUI;S012SUI;44.0
+C-012;Pelabuhan Perak;SBY-20 ;Gd Kalimas;S012KLM;12.0
+C-012;Teluk Lamong;SBY-07 ;Casaland;S012CSL;45.0
+C-012;Teluk Lamong;SBY-07 ;Sorini-Pasuruan;S012SRP;60.0
+C-012;Teluk Lamong;SBY-07 ;Malindo Gresik;S012MLG;43.0
+C-012;Teluk Lamong;SBY-07 ;GANTARI (MBH.BELUK) SIDORUKUN-GRESIK;S012GTR;21.0
+C-012;Teluk Lamong;SBY-07 ;QL Feed Romokalisari;S012QLR;16.0
+C-012;Teluk Lamong;SBY-07 ;JCI Margomulyo;S012JCM;25.0
+C-012;Teluk Lamong;SBY-07 ;CPP SEPANJANG (CPI);S012CPS;46.0
+C-012;Teluk Lamong;SBY-07 ;MARGOMULYO (ADM);S012MAD;22.0
+C-012;Teluk Lamong;SBY-07 ;Surya Grain-Trosobo;S012SGT;17.0
+C-012;Jamrud;SBY-10 ;AGRICO ROMOKALISARI-ADM;S012AGR;28.0
+C-012;Jamrud;SBY-10 ;GANTARI MBAH BELUK-ADM;S012ADM;31.0
+C-012;Jamrud;SBY-10 ;SPC TROSOBO-ADM;S012SPA;43.0
+C-012;Jamrud;SBY-10 ;SCOULAR ROMOKALISARI-ADM;S012RDM;27.0
+C-012;Teluk Lamong;SBY-07 ;Panca PP-Gedangan;S012PPG;42.0
+C-012;Jamrud;SBY-10 ;Seger Agro-Wringinanom;S012SGW;42.0
+C-012;Jamrud;SBY-10 ;Sinar Indochem-Krian;S012SIK;45.0
+C-012;Teluk Lamong;SBY-07 ;GD.TB LANGON 22;S012TB2;25.0
+C-012;Teluk Lamong;SBY-07 ;T.LANGON-SORINI;S012TBS;16.0
+C-012;Teluk Lamong;SBY-07 ;PT.TULUS DHARMOSUGONDO;S012TLS;16.0
+C-012;Manyar;;New Hope-Jemundo;H012NHJ;44.0
+C-012;Romokalisari;SBY-02 ;Romokalisari;H012RMK;10.0
+C-012;Teluk Lamong;SBY-07 ;Romokalisari (Grainland);H012RGL;22.0
+C-012;Romokalisari;SBY-02 ;Cpi Krian (Cpi);H012CIK;40.0
+C-012;Romokalisari;SBY-02 ;Cpi Sepanjang (Cpi);H012CIS;37.0
+C-012;Romokalisari;SBY-02 ;PT.MS-Gempol (Grainland);H012GGL;43.50
+C-012;Jamrud;SBY-10 ;New Hope-Jemundo (FKS);H012NHF;34.0
+C-012;Jamrud;SBY-10 ;Gold Coin-M.Mulyo (FKS);H012GCF;24.0
+C-012;Teluk Lamong;SBY-07 ;Cargill-Pasuruan (FKS);H012CPF;45.50
+C-012;Pelabuhan;SBY-11 ;Margomulyo (FKS);H012MGF;24.0
+C-012;Pelabuhan;SBY-11 ;Tg.Batu (FKS);H012TBF;11.50
+C-012;Romokalisari;SBY-02 ;Wirifa-Ngoro Mojokerto (FKS);H012WNF;43.50
+C-012;Teluk Lamong;SBY-07 ;Tb.Langon (FKS);H012TBF;22.0
+C-012;Pelabuhan;SBY-11 ;SUI-Krian (FKS);H012SUF;37.50
+C-012;Pelabuhan;SBY-11 ;Tb.Langon (FKS);H012TBF;24.0
+C-012;Pelabuhan;SBY-11 ;Romokalisari (FKS);H012RFK;26.0
+C-012;Pelabuhan;SBY-11 ;MPJS-Jombang (FKS);H012MPF;57.50
+C-012;Pelabuhan;SBY-11 ;Wonokoyo (FKS);H012WKF;42.50
+C-012;Romokalisari;SBY-02 ;MPJS-Jombang (Grainland);H012MPG;69.0
+C-012;Pelabuhan;SBY-11 ;SUI-By Pas Krian (Grainland);H012SUG;40.50
+C-012;Pelabuhan;SBY-11 ;Wirifa-Ngoro Mojokerto (FKS);H012WNF;42.50
+C-012;Pelabuhan;SBY-11 ;MPJS-Jombang (Grainland);H012MPG;68.0
+C-012;Romokalisari;SBY-02 ;JCI-Margomulyo (Grainland);H012JMG;22.0
+C-012;Romokalisari;SBY-02 ;Antaboga;H012ABG;37.0
+C-012;Tb.Langon;;Jamrud;H012JMD;24.0
+C-012;Margomulyo;SBY-03 ;Jamrud;H012JMD;24.0
+C-012;Pelabuhan;SBY-11 ;Gd.Cassaland;H012CSL;40.50
+C-012;IJS;;JCI-Gedangan;H012JCG;36.50
+C-012;Pelabuhan;SBY-11 ;Abba(Trosobo);H012ABT;37.50
+C-012;Pelabuhan;SBY-11 ;Cargil-Pier;H012CGP;53.50
+C-012;Pelabuhan;SBY-11 ;Romo (Grainland);H012RGL;26.0
+C-012;Teluk Lamong;SBY-07 ;MPJS-Jombang;H012MPJ;71.0
+C-012;Teluk Lamong;SBY-07 ;Cargil-Pier;H012CGP;56.50
+C-012;Teluk Lamong;SBY-07 ;Romokalisari (CPI);H012RCP;14.0
+C-012;Teluk Lamong;SBY-07 ;SUI-By Pas Krian (FKS);H012SUF;43.50
+C-012;Teluk Lamong;SBY-07 ;Gd.Cassaland (CPI);H012CSF;44.50
+C-012;Jamrud;SBY-10 ;Gd.Cassaland (CPI);H012CSF;40.50
+C-012;Jamrud;SBY-10 ;PT.DMC-Mojokerto;H012DMM;51.0
+C-012;Jamrud;SBY-10 ;JCI-Gedangan;H012JCG;36.50
+C-012;Jamrud;SBY-10 ;Margomulyo 20;H012MG2;24.0
+C-012;Jamrud;SBY-10 ;Cheil Jeddang-Jombang;H012CJJ;57.50
+C-012;Tb.Langon;;Siantar Top-Sda;H012STT;40.0
+C-012;Romokalisari;SBY-02 ;Sierad;H012SRD;41.50
+C-012;Margomulyo;SBY-03 ;Tg.Batu;H012TGB;11.50
+C-012;Romokalisari;SBY-02 ;Margomulyo;H012MGM;22.0
+C-012;Romokalisari;SBY-02 ;New Hope-Mojosari;H012NHM;43.50
+C-012;Romokalisari;SBY-02 ;Cheil Jeddang-Jombang;H012CJJ;65.0
+C-012;Romokalisari;SBY-02 ;Siantar Top-Sda;H012STT;40.0
+C-012;Teluk Lamong;SBY-07 ;Cheil Jeddang-Jombang;H012CJJ;60.50
+C-012;BMS;SBY-24 ;Romokalisari;H012RMK;32.0
+C-012;Teluk Lamong;SBY-07 ;Haida-Pier Kraton;H012HKR;56.50
+C-012;Romokalisari;SBY-02 ;Gold Coin (Grainland);H012GCG;25.0
+C-012;Romokalisari;SBY-02 ;Siantar Top-Sda;H012STT;40.0
+C-012;Romokalisari;SBY-02 ;Sierad;H012SRD;41.50
+C-012;Jamrud;SBY-10 ;Haida-Pier Kraton (Order Haida);H012HKH;55.50
+C-012;Jamrud;SBY-10 ;PT.Antaboga sidoarjo;H012ABS;44.0
+C-012;Romokalisari;SBY-02 ;Malindo (Grainland);H012MGL;22.0
+C-012;Romokalisari;SBY-02 ;Sierad (Grainland);H012SGL;41.50
+C-012;Romokalisari;SBY-02 ;MPJS- Margomulyo (Grainland);H012MPG;25.0
+C-012;Pelabuhan;SBY-11 ;Darmo Sugondo-Gresik;H012DSG;31.0
+C-012;Pelabuhan;SBY-11 ;Wringin Anom;H012WNA;37.0
+C-012;Teluk Lamong;SBY-07 ;Abba(Trosobo);H012ABT;38.0
+C-012;Cheil Jeddang-Jombang;;Abba-Sepanjang;H012ABS;21.0
+C-012;Teluk Lamong;SBY-07 ;Romokalisari ;H012RMK;16.0
+C-012;Teluk Lamong;SBY-07 ;Abba-Sepanjang;H012ABS;52.0
+C-012;Teluk Lamong;SBY-07 ;Sreeya-Wonoayu (FKS);H012SYF;43.50
+C-012;Cpi Krian;SBY-18 ;JAMRUD SELATAN;H012JMS;39.0
+C-012;Jamrud;SBY-10 ;Sreeya-Wonoayu (FKS);H012SYF;40.50
+C-012;Pelabuhan;SBY-11 ;Cpi Krian (FKS);H012CKF;45.0
+C-012;Pelabuhan;SBY-11 ;Cpi Sepanjang (FKS);H012CSF;35.0
+C-012;Teluk Lamong;SBY-07 ;CARGILL SORINI;H012CSR;60.0
+C-012;Teluk Lamong;SBY-07 ;Cpi Demak-Jateng;H012CDM;150.0
+C-012;Teluk Lamong;SBY-07 ;CPI SEMARANG;H012CSM;150.0
+C-012;Pelabuhan;SBY-11 ;PT.AGRICO - ROMO;H012RAG;25.0
+C-012;Pelabuhan;SBY-11 ;PT.Seger;H012SGR;37.0
+C-012;Pelabuhan;SBY-11 ;GD.GANTARI-GRESIK;H012GTG;31.0
+C-012;Teluk Lamong;SBY-07 ;PT. TULUS-Gresik;H012TLS;16.0

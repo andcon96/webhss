@@ -337,7 +337,7 @@
         $(document).on('change', '#listsan',function(){
             let sangu = $(this).find(':selected').data('sangu');
             let komisi = $(this).find(':selected').data('komisi');
-            let harga = $(this).find(':selected').data('harga');
+            let harga = $(this).find('').data('harga');
             let id = $(this).find(':selected').val();
 
             $('#sangutruck').val(Number(sangu).toLocaleString('en-US'));

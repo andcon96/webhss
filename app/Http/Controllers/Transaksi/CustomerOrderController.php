@@ -25,7 +25,7 @@ class CustomerOrderController extends Controller
         $listcust = Customer::get();
         $listco = CustomerOrderMstr::get();
         $data = CustomerOrderMstr::query()
-                                ->with('getCustomer','getBarang');
+                                ->with('getCustomer','getBarang','getActiveSalesOrder');
         
         if($request->conumber){
             $data->where('id',$request->conumber);
@@ -148,8 +148,8 @@ class CustomerOrderController extends Controller
 
     public function destroy(Request $request)
     {
-        $comstr = CustomerOrderMstr::findOrFail($request->temp_id);
-        if($comstr->co_status == 'New'){
+        $comstr = CustomerOrderMstr::with('getActiveSalesOrder')->findOrFail($request->temp_id);
+        if($comstr->getActiveSalesOrder->count() == 0){
             $comstr->co_status = 'Cancelled';
             $comstr->save();
             alert()->success('Success','Customer Order berhasil dicancel');
@@ -169,7 +169,7 @@ class CustomerOrderController extends Controller
                 $output .= '<tr>';
                 $output .= '<td>'.$datas->cod_line.'</td>';
                 $output .= '<td>'.$datas->cod_part.' - '.$datas->getItem->item_desc .'</td>';
-                $output .= '<td>EA</td>';
+                $output .= '<td>'.$datas->getItem->item_um.'</td>';
                 $output .= '<td>'.$datas->cod_qty_ord.'</td>';
                 $output .= '<td>'.$datas->cod_qty_used.'</td>';
                 $output .= '</tr>';

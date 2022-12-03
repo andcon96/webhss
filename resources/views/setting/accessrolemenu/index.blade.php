@@ -378,10 +378,37 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Driver') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT19">
+                <input type="checkbox" id="cbMT19" name="cbMT19" value="MT19" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Driver Nopol') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT20">
+                <input type="checkbox" id="cbMT20" name="cbMT20" value="MT20" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Gandengan Master') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbMT21">
                 <input type="checkbox" id="cbMT21" name="cbMT21" value="MT21" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Bank Account Master') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbMT22">
+                <input type="checkbox" id="cbMT22" name="cbMT22" value="MT22" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -484,6 +511,9 @@
         document.getElementById("cbMT15").checked = true;  
         document.getElementById("cbMT16").checked = true;  
         document.getElementById("cbMT21").checked = true;  
+        document.getElementById("cbMT22").checked = true;  
+        document.getElementById("cbMT19").checked = true;  
+        document.getElementById("cbMT20").checked = true;  
     }
     else{
       document.getElementById("cbSOMT").checked = false; 
@@ -516,6 +546,9 @@
         document.getElementById("cbMT15").checked = false;  
         document.getElementById("cbMT16").checked = false;  
         document.getElementById("cbMT21").checked = false;  
+        document.getElementById("cbMT22").checked = false;  
+        document.getElementById("cbMT19").checked = false;  
+        document.getElementById("cbMT20").checked = false;  
     }
   })
 
@@ -681,6 +714,21 @@
               document.getElementById("cbMT21").checked = true;  
             }else{
               document.getElementById("cbMT21").checked = false;
+            }
+            if(totmenu.search("MT22") >= 0){
+              document.getElementById("cbMT22").checked = true;  
+            }else{
+              document.getElementById("cbMT22").checked = false;
+            }
+            if(totmenu.search("MT19") >= 0){
+              document.getElementById("cbMT19").checked = true;  
+            }else{
+              document.getElementById("cbMT19").checked = false;
+            }
+            if(totmenu.search("MT20") >= 0){
+              document.getElementById("cbMT20").checked = true;  
+            }else{
+              document.getElementById("cbMT20").checked = false;
             }
 
             

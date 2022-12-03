@@ -26,23 +26,30 @@ class TripMTController extends Controller
         
         if($request->truck){
             $data->whereRelation('getTruck','id',$request->truck);
-            $data = $data->orderBy('created_at','DESC')->take(5)->get();
-        }else{
-            if ($userDriver) {
-                $data = SuratJalan::query()
-                                  ->with(['getSOMaster','getTruck',
-                                        'getSOMaster.getShipFrom',
-                                        'getSOMaster.getShipTo',])
-                                  ->with('getHistTrip', function($query) use($userDriver){
-                                        $query->where('sjh_truck',$userDriver->id);
-                                  })
-                                  ->where('sj_truck_id',$userDriver->id)
-                                  ->orderBy('created_at','DESC')
-                                  ->get();
-                                  
-            } else {
-                $data = [];
-            }
+        }
+
+        if($request->spk){
+            $data->where('sj_nbr',$request->spk);
+        }
+
+        if($request->status){
+            $data->where('sj_status',$request->status);
+        }
+        
+        if ($userDriver) {
+            $data = SuratJalan::query()
+                              ->with(['getSOMaster','getTruck',
+                                    'getSOMaster.getShipFrom',
+                                    'getSOMaster.getShipTo',])
+                              ->with('getHistTrip', function($query) use($userDriver){
+                                    $query->where('sjh_truck',$userDriver->id);
+                              })
+                              ->where('sj_truck_id',$userDriver->id)
+                              ->orderBy('created_at','DESC')
+                              ->paginate(10);
+                              
+        } else {
+            $data = $data->paginate(10);
         }
         
         return view('transaksi.trip.index',compact('truck','data','userDriver'));

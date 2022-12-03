@@ -739,7 +739,8 @@ class QxtendServices
                     <soNbr>'.$data['sonbr'].'</soNbr>
                     <soCust>'.$data['customer'].'</soCust>
                     <soShip>'.$data['shipto'].'</soShip>
-                    <soOrdDate>'.$data['effdate'].'</soOrdDate>
+                    <soOrdDate>'.$data['so_date'].'</soOrdDate>
+                    <soDueDate>'.$data['so_due_date'].'</soDueDate>
                     <yn>true</yn>
                     <soRmks>'.$data['remark'].'</soRmks>';
 

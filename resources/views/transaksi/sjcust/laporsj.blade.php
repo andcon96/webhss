@@ -64,12 +64,34 @@
             <label for="effdate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
             <div class="col-md-3">
                 <input id="effdate" type="text" class="form-control" name="effdate" value="{{\Carbon\Carbon::now()->toDateString()}}" autocomplete="off" maxlength="24" autofocus>
+                <input type="hidden" id="so_date" name="so_date" value="{{$data->getSOMaster->created_at->format('Y-m-d')}}">
+                <input type="hidden" id="so_due_date" name="so_due_date" value="{{$data->getSOMaster->so_due_date}}">
             </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
             <div class="col-md-9">
                 <input id="remark" type="text" class="form-control" name="remark" maxlength="24" value="" autocomplete="off" autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="defaultsangu" class="col-md-2 col-form-label text-md-right">Default Sangu</label>
+            <div class="col-md-3">
+                <input id="defaultsangu" type="text" class="form-control" name="defaultsangu" value="{{number_format($data->getRuteHistory->history_sangu,0)}}" autocomplete="off" maxlength="24" readonly autofocus>
+            </div>
+            <label for="defaultkomisi" class="col-md-3 col-form-label text-md-right">Default Komisi</label>
+            <div class="col-md-3">
+                <input id="defaultkomisi" type="text" class="form-control" name="defaultkomisi" value="{{number_format($data->getRuteHistory->history_ongkos,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="jmlhtrip" class="col-md-2 col-form-label text-md-right">Jumlah Trip</label>
+            <div class="col-md-3">
+                <input id="jmlhtrip" type="number" class="form-control" name="jmlhtrip" value="{{$data->sj_jmlh_trip}}" min="{{$data->sj_jmlh_trip}}" autocomplete="off" maxlength="24" autofocus >
+            </div>
+            <label for="totsangu" class="col-md-3 col-form-label text-md-right">Total Sangu</label>
+            <div class="col-md-3">
+                <input id="totsangu" type="text" class="form-control" name="totsangu" value="{{number_format($data->sj_default_sangu,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
         </div>
 
@@ -107,6 +129,34 @@
 
     $('#harga').select2({
         width: '100%'
+    });
+
+    function getDefaultSangu() {
+        var tipebarang = $('#type').val();
+
+        sum = 0;
+        sum = $('#jmlhtrip').val();
+
+        var hsangu = $('#defaultsangu').val();
+        var hkomisi = $('#defaultkomisi').val();
+
+        let total = (parseInt(hsangu.replace(',', '')) + parseInt(hkomisi.replace(',', ''))) * sum;
+
+        total = Number(total).toLocaleString('en-US');
+
+        $('#totsangu').val(total);
+    }
+
+    
+    $(document).on('change keyup', '#jmlhtrip', function() {
+        getDefaultSangu();
+
+        let jmltrip = $(this).val();
+
+        $('.qtyship').each(function(i, obj){
+            let oldqty = $(this).closest('tr').find('.oldship').val();
+            $(this).val(oldqty * jmltrip);
+        });
     });
 
     $(document).on('change', '#harga',function(){
