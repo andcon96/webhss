@@ -118,7 +118,7 @@ class BankCustomerController extends Controller
             try{
                 foreach($history as $datas){
                     $domain_id = ($datas[2] == 'AS' ? '1' :
-                                 ($datas[2] == 'HSS' ? '2' :
+                                 ($datas[2] == 'HSSTR' ? '2' :
                                  ($datas[2] == 'SPJS' ? '3' : 
                                  '')));
                     

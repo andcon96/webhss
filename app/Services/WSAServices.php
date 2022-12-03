@@ -36,7 +36,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = "HSS";
+        $domain = "HSSTR";
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' .
@@ -129,7 +129,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = 'HSS';
+        $domain = 'HSSTR';
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -225,7 +225,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = 'HSS';
+        $domain = 'HSSTR';
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
@@ -326,7 +326,7 @@ class WSAServices
         $qdocVersion = '';
         $dsName = '';
         $timeout = 0;
-        $domain = "HSS";
+        $domain = "HSSTR";
 
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
