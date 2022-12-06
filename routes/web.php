@@ -64,7 +64,7 @@ Auth::routes();
 // Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
 
 //load truck
-oute::get('loadtruckwithqad',[TruckMTController::class,'loadnopol']);
+route::get('loadtruckwithqad',[TruckMTController::class,'loadnopol']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================
