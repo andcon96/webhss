@@ -160,14 +160,20 @@ class TruckMTController extends Controller
 
     public function loadnopol(){
         $truck = Truck::get();
+        DB::beginTransaction();
+        try {
+            foreach($truck as $tr){
+                $checkwo = (new WSAServices())->wsaloadtruck($tr->truck_no_polis);
+                if($checkwo != false){
+                    $newnopol = strval($checkwo[0]);
+                    Truck::where('truck_no_polis',$tr->truck_no_polis)->update(['truck_no_polis' => $newnopol]); 
+                }
 
-        foreach($truck as $tr){
-            $checkwo = (new WSAServices())->wsaloadtruck($tr->truck_no_polis);
-            $newnopol = strval($checkwo[0]);
-            dd($newnopol,'b');
-            dd($checkwo[0]);
-            dd($tr);
-        
+            }
+            DB::commit();
+        }catch(Exception $err){
+            DB::rollback();
+            dd('failed');
         }
     }
 }
