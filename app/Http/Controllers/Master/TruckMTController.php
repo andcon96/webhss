@@ -163,7 +163,7 @@ class TruckMTController extends Controller
 
         foreach($truck as $tr){
             $checkwo = (new WSAServices())->wsaloadtruck($tr->truck_no_polis);
-            $newnopol = $checkwo[0];
+            $newnopol = strval($checkwo[0]);
             dd($newnopol,'b');
             dd($checkwo[0]);
             dd($tr);
