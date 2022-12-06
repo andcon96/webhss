@@ -58,10 +58,13 @@ Auth::routes();
 // Route::get('loadhistoryrute',[RuteController::class,'loadhistoryrute']);
 // Route::get('loadinvoicefirst',[InvoiceMTController::class,'loadinvoicefirst']);
 // Route::get('loadinvoice',[InvoiceMTController::class,'loadinvoice']);
-Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
+//Route::get('loadinvoicecontainer',[InvoiceMTController::class,'loadinvoicecontainer']);
 // Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
 // Route::get('newloadhistoryrute',[RuteController::class,'newloadhistoryrute']);
 // Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
+
+//load truck
+oute::get('loadtruckwithqad',[TruckMTController::class,'loadnopol']);
 
 Route::group(['middleware' => ['auth']], function () {
     //================================

@@ -7,6 +7,7 @@ use App\Models\Master\Domain;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
 use App\Models\Master\User;
+use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -155,5 +156,16 @@ class TruckMTController extends Controller
         }
 
         return redirect()->route('truckmaint.index');
+    }
+
+    public function loadnopol(){
+        $truck = Truck::get();
+
+        foreach($truck as $tr){
+            $checkwo = (new WSAServices())->wsaloadtruck($tr->truck_no_polis);
+            
+            dd($tr);
+        
+        }
     }
 }
