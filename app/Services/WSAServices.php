@@ -990,7 +990,7 @@ class WSAServices
         if(is_bool($qdocResponse)){
             return false;
         }
-        dd($qdocResponse);
+        
         $xmlResp = simplexml_load_string($qdocResponse);
         
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
@@ -1003,12 +1003,9 @@ class WSAServices
         
         if($qdocResult == 'true'){
             $status = '';
+            
                 foreach($dataloop as $datas){
-                    if($datas->t_location == 'POOL2'){
-                        
-                        return 'nodata';
-                    }
-
+                    return $datas->t_nopol;
                 }
                
                 return true;
