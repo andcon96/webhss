@@ -912,7 +912,7 @@ class QxtendServices
                       <woNbr>'.$rusaknbr.'</woNbr>
                       <woPart>Gandengan</woPart>
                       <woType>R</woType>
-                      <woSite>HSS</woSite>
+                      <woSite>HSSTR</woSite>
                       <woQtyOrd>1</woQtyOrd>
                       <woOrdDate>'.$krdate.'</woOrdDate>
                       <woRelDate>'.$krdate.'</woRelDate>
@@ -925,7 +925,7 @@ class QxtendServices
                       <woNbr>'.$rusaknbr.'</woNbr>
                       <woPart>Truck</woPart>
                       <woType>R</woType>
-                      <woSite>HSS</woSite>
+                      <woSite>HSSTR</woSite>
                       <woQtyOrd>1</woQtyOrd>
                       <woOrdDate>'.$krdate.'</woOrdDate>
                       <woRelDate>'.$krdate.'</woRelDate>
