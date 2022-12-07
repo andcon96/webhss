@@ -7,6 +7,7 @@
                 <th width="15%">Nama Kapal</th>
                 <th width="10%">Barang</th>
                 <th width="10%">Status</th>
+                <th width="10%">Tanggal Dibuat</th>
                 <th width="15%">Action</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
                 <td data-label="KAPAL">{{$datas->co_kapal}}</td>
                 <td data-label="BARANG">{{$datas->getBarang->barang_deskripsi ?? ''}}</td>
                 <td data-label="CO STATUS">{{$datas->co_status}}</td>
+                <td data-label="Tanggal Dibuat">{{$datas->created_at}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-conbr="{{$datas->co_nbr}}"
                         data-cust="{{$datas->co_cust_code}}" data-custdesc="{{$datas->getCustomer->cust_desc}}"
