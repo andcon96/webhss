@@ -855,7 +855,7 @@ class QxtendServices
                     <qcom:ttContext>
                       <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                       <qcom:propertyName>domain</qcom:propertyName>
-                      <qcom:propertyValue>HSS</qcom:propertyValue>
+                      <qcom:propertyValue>HSSTR</qcom:propertyValue>
                     </qcom:ttContext>
                     <qcom:ttContext>
                       <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
