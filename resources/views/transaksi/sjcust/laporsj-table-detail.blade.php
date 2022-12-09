@@ -19,7 +19,7 @@
                 <td>{{$datas->sjd_line}}</td>
                 <td>{{$datas->sjd_part}} -- {{$datas->getItem->item_desc}}</td>
                 <td>{{$datas->getItem->item_um}}</td>
-                <td >
+                <td style="display: none">
                     @php($price = $invoiceprice->where('ip_cust_id',$data->getSOMaster->getCOMaster->getCustomer->id)
                                     ->where('ip_customership_id', $data->getSOMaster->getShipTo->id)
                                     ->where('ip_shipfrom_id', $data->getSOMaster->getShipFrom->id)
@@ -47,7 +47,7 @@
                     @if($price)
                     @foreach($price->getAllActivePrice as $keys => $harga)
                         @php($hargapakai = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ? $harga->iph_trip_price : $harga->iph_tonase_price)
-                        <input type="text" name="price[]" value="{{$hargapakai}}">
+                        <input type="hidden" name="price[]" value="{{$hargapakai}}">
                     @endforeach
                     
                     @else
