@@ -24,7 +24,7 @@
             <select name="nomorso" id="nomorso" class="form-control nomorso">
                 <option value="">Select Data</option>
                     @foreach($nomorso as $sonbr)
-                    <option value="{{$nomorso->getSOMaster->id}}">{{$nomorso->getSOMaster->sonbr}}</option>
+                    <option value="{{$sonbr->getSOMaster->id}}">{{$sonbr->getSOMaster->sonbr}}</option>
                     @endforeach
             </select>
             @else
@@ -61,9 +61,9 @@
         let paramString = cur_url.split('?')[1];
         let queryString = new URLSearchParams(paramString);
 
-        let truck = queryString.get('truck');
+        // let truck = queryString.get('truck');
 
-        $('#truck').val(truck).trigger('change');
+        // $('#truck').val(truck).trigger('change');
     });
 </script>
 @endsection

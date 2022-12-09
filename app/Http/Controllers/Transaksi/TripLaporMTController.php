@@ -18,10 +18,7 @@ class TripLaporMTController extends Controller
     {
         $truck = Truck::orderBy('truck_no_polis', 'ASC')->get();
         $nomorso = SuratJalan::with('getSOMaster')->get();
-        
-        foreach($nomorso as $sonbr){
-            dd($sonbr);
-        }
+
         $data = SuratJalan::query()
                         ->with('getTruck',
                                'getSOMaster.getCOMaster.getCustomer',
