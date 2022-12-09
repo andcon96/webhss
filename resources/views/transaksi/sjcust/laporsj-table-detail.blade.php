@@ -49,7 +49,7 @@
                         @php($hargapakai = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ? $harga->iph_trip_price : $harga->iph_tonase_price)
                         <input type="text" name="price[]" value="{{$hargapakai}}">
                     @endforeach
-                    @endif
+                    
                     @else
                     <input type="hidden" name="price[]" value="0">
                     @endif
