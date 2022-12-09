@@ -15,10 +15,16 @@
         <label for="polis" class="col-form-label text-md-right mt-2" style="margin-left:25px">{{ __('Truck') }}</label>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
             @if(!$userDriver)
-            <select name="truck" id="truck" class="form-control truck">
+            {{-- <select name="truck" id="truck" class="form-control truck">
                 <option value="">Select Data</option>
                     @foreach($truck as $trucks)
                     <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
+                    @endforeach
+            </select> --}}
+            <select name="nomorso" id="nomorso" class="form-control nomorso">
+                <option value="">Select Data</option>
+                    @foreach($nomorso as $sonbr)
+                    <option value="{{$nomorso->getSOMaster->id}}">{{$nomorso->getSOMaster->sonbr}}</option>
                     @endforeach
             </select>
             @else

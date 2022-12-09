@@ -17,7 +17,7 @@ class TripLaporMTController extends Controller
     public function index(Request $request)
     {
         $truck = Truck::orderBy('truck_no_polis', 'ASC')->get();
-
+        $nomorso = SuratJalan::with('getSOMaster')->get();
         $data = SuratJalan::query()
                         ->with('getTruck',
                                'getSOMaster.getCOMaster.getCustomer',
@@ -52,7 +52,7 @@ class TripLaporMTController extends Controller
             }
         }
 
-        return view('transaksi.trip.lapor.index', compact('truck', 'data', 'userDriver'));
+        return view('transaksi.trip.lapor.index', compact('truck', 'data', 'userDriver','nomorso'));
     }
 
     public function edit($id)
