@@ -54,6 +54,9 @@
     $('.truck').select2({
         width: '100%',
     });
+    $('.nomorso').select2({
+        width: '100%',
+    });
 
     $(document).ready(function() {
         var cur_url = window.location.href;
