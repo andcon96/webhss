@@ -5,7 +5,7 @@
                 <th width="5%">Line</th>
                 <th width="25%">Part</th>
                 <th width="5%">UM</th>
-                <th width="10%">Price</th>
+                <th width="10%" style="display: none">Price</th>
                 <th width="10%">Qty SJ</th>
                 <th width="10%">Qty Angkut</th>
                 <th width="10%">Qty Diakui</th>
@@ -19,7 +19,7 @@
                 <td>{{$datas->sjd_line}}</td>
                 <td>{{$datas->sjd_part}} -- {{$datas->getItem->item_desc}}</td>
                 <td>{{$datas->getItem->item_um}}</td>
-                <td>
+                <td >
                     @php($price = $invoiceprice->where('ip_cust_id',$data->getSOMaster->getCOMaster->getCustomer->id)
                                     ->where('ip_customership_id', $data->getSOMaster->getShipTo->id)
                                     ->where('ip_shipfrom_id', $data->getSOMaster->getShipFrom->id)
@@ -29,7 +29,7 @@
                                         $price->getActivePrice->iph_trip_price ?? 0: 
                                         $price->getActivePrice->iph_tonase_price ?? 0)
 
-                    <select id="harga" class="form-control" required>
+                    {{-- <select id="harga" class="form-control" required>
                         <option value="">Select Data</option>
                         @if($price)
                         @foreach($price->getAllActivePrice as $keys => $harga)
@@ -42,10 +42,20 @@
                         <option value="Custom">Custom Price</option>
                     </select>
 
-                    <input type="number" name="price[]" value="" readonly class="form-control price mt-2" required>
-
+                    <input type="number" name="price[]" value="" readonly class="form-control price mt-2" required> --}}
+                    {{-- perubahan harga langsung --}}
+                    @if($price)
+                    @foreach($price->getAllActivePrice as $keys => $harga)
+                        @php($hargapakai = $data->getSOMaster->getCOMaster->co_type == 'TRIP' ? $harga->iph_trip_price : $harga->iph_tonase_price)
+                        <input type="hidden" name="price[]" value="{{$hargapakai}}">
+                    @endforeach
+                    @endif
+                    @else
+                    <input type="hidden" name="price[]" value="0">
+                    @endif
                 </td>
                 <td>
+                    
                     <input type="hidden" value="{{$datas->sjd_qty_ship}}" class="form-control oldship" readonly>
                     <input type="number" name="qtyship[]" value="{{$datas->sjd_qty_ship}}" class="form-control qtyship" readonly>
                 </td>
