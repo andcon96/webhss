@@ -66,7 +66,7 @@
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
                     {{-- <a href="{{Route('laportrip.index',['truck' => $data->sj_truck_id])}}" id="btnback" class="btn btn-success bt-action">Back</a> --}}
-                    <a href="history.back()" id="btnback" class="btn btn-success bt-action">Back</a>
+                    <a href="javascript:history.back()" id="btnback" class="btn btn-success bt-action">Back</a>
                     
                     <button type="submit" class="btn btn-success bt-action btn-focus btnconf" id="btnconf">Lapor Trip</button>
                     
