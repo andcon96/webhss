@@ -17,7 +17,7 @@ class TripLaporMTController extends Controller
     public function index(Request $request)
     {
         $truck = Truck::orderBy('truck_no_polis', 'ASC')->get();
-        $nomorso = SuratJalan::with('getSOMaster')->get();
+        $nomorso = SuratJalan::with('getSOMaster')->groupBy('sj_so_mstr_id')->get();
 
         $data = SuratJalan::query()
                         ->with('getTruck',
