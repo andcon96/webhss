@@ -66,7 +66,7 @@
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
                     {{-- <a href="{{Route('laportrip.index',['truck' => $data->sj_truck_id])}}" id="btnback" class="btn btn-success bt-action">Back</a> --}}
-                    @if($userdriver)
+                    @if($userDriver)
                     <a href="{{Route('laportrip.index',['truck' => $data->sj_truck_id])}}" id="btnback" class="btn btn-success bt-action">Back</a>
                     @else
                     <a href="{{Route('laportrip.index',['nomorso' => $data->sj_so_mstr_id])}}" id="btnback" class="btn btn-success bt-action">Back</a>
