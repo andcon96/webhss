@@ -49,7 +49,14 @@ class TripLaporMTController extends Controller
                                   ->orderBy('created_at','DESC')
                                   ->get();
             } else {
-                $data = [];
+                if($request->nomorso){
+                    $data->whereRelation('getSOMaster', 'id', $request->nomorso);
+                    $data = $data->orderBy('created_at', 'DESC')->get();
+                }
+                else{
+                    $data = [];
+                }
+                
             }
         }
 
