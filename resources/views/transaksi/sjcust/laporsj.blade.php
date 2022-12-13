@@ -69,9 +69,15 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
+            <label for="remarkCO" class="col-md-2 col-form-label text-md-right">Remark CO</label>
             <div class="col-md-9">
-                <input id="remark" type="text" class="form-control" name="remark" maxlength="24" value="" autocomplete="off" autofocus>
+                <input id="remarkCO" type="text" class="form-control" value="{{$data->getSOMaster->getCOMaster->co_remark}}" autocomplete="off" autofocus readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="remark" class="col-md-2 col-form-label text-md-right">Remark SJ</label>
+            <div class="col-md-9">
+                <input id="remark" type="text" class="form-control" name="remark" value="" autocomplete="off" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
