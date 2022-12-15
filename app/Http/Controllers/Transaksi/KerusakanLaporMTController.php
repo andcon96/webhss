@@ -122,6 +122,7 @@ class KerusakanLaporMTController extends Controller
                     $e->where('kr_status','<>','Close');
                     $e->where('kr_status','<>','Reject');
                     $e->where('kr_status','<>','Cancelled');
+                    $e->where('kr_status','<>','Done');
                 })->first();
             
                 if($checkkr){
@@ -147,6 +148,7 @@ class KerusakanLaporMTController extends Controller
                     $e->where('kr_status','<>','Close');
                     $e->where('kr_status','<>','Reject');
                     $e->where('kr_status','<>','Cancelled');
+                    $e->where('kr_status','<>','Done');
                 })->first();
             
                 if($checkkr){

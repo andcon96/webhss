@@ -855,7 +855,7 @@ class QxtendServices
                     <qcom:ttContext>
                       <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
                       <qcom:propertyName>domain</qcom:propertyName>
-                      <qcom:propertyValue>HSS</qcom:propertyValue>
+                      <qcom:propertyValue>HSSTR</qcom:propertyValue>
                     </qcom:ttContext>
                     <qcom:ttContext>
                       <qcom:propertyQualifier>QAD</qcom:propertyQualifier>
@@ -912,7 +912,7 @@ class QxtendServices
                       <woNbr>'.$rusaknbr.'</woNbr>
                       <woPart>Gandengan</woPart>
                       <woType>R</woType>
-                      <woSite>HSS</woSite>
+                      <woSite>HSSTR</woSite>
                       <woQtyOrd>1</woQtyOrd>
                       <woOrdDate>'.$krdate.'</woOrdDate>
                       <woRelDate>'.$krdate.'</woRelDate>
@@ -925,7 +925,7 @@ class QxtendServices
                       <woNbr>'.$rusaknbr.'</woNbr>
                       <woPart>Truck</woPart>
                       <woType>R</woType>
-                      <woSite>HSS</woSite>
+                      <woSite>HSSTR</woSite>
                       <woQtyOrd>1</woQtyOrd>
                       <woOrdDate>'.$krdate.'</woOrdDate>
                       <woRelDate>'.$krdate.'</woRelDate>
