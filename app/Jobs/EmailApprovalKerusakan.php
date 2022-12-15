@@ -58,7 +58,7 @@ class EmailApprovalKerusakan
         $gandengcode = $this->gandengcode;
         $pesan = $this->pesan;
         $kerusakan = $this->kerusakan;
-        dd($wonbr,$nopol,$gandengan,$gandengcode,$pesan,$kerusakan);
+        
         $rusaknbr = Crypt::encrypt($wonbr);
         $nopolnbr = Crypt::encrypt($nopol);
         $gandengnbr = Crypt::encrypt($gandengan);
@@ -71,6 +71,7 @@ class EmailApprovalKerusakan
         }
         $yes = Crypt::encrypt('yes');
         $no = Crypt::encrypt('no');
+        dd($wonbr,$nopol,$gandengan,$gandengcode,$pesan,$kerusakan,$yes,$no);
         Mail::send('emails.kerusakanemail',[
             'pesan' => $pesan,
             'nopol' => $nopol,
