@@ -22,7 +22,7 @@ class ApprovalRusakTruck extends Controller
         $gandengan = Crypt::decrypt($gandengan);
         $gandengcode = Crypt::decrypt($gandengcode);        
         $wonbr = $wonbr;
-        dd(empty($gandengcode));
+        // dd(empty($gandengcode));
         $errorlist = [];
         $status_display = '';
         $message = '';
