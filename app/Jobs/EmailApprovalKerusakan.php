@@ -58,18 +58,24 @@ class EmailApprovalKerusakan
         $gandengcode = $this->gandengcode;
         $pesan = $this->pesan;
         $kerusakan = $this->kerusakan;
-        $rusaknbr = Crypt::encrypt($wonbr);
-        $nopolnbr = Crypt::encrypt($nopol);
-        $gandengnbr = Crypt::encrypt($gandengan);
-        $crypgandengcode = '';
+        // $rusaknbr = Crypt::encrypt($wonbr);
+        // $nopolnbr = Crypt::encrypt($nopol);
+        // $gandengnbr = Crypt::encrypt($gandengan);
+        $rusaknbr = $wonbr;
+        $nopolnbr = $nopol;
+        $gandengnbr = $gandengan;
+        
+        $crypgandengcode = $gandengcode;
         if(!empty($gandengcode)){
-            $crypgandengcode = Crypt::encrypt($gandengcode);
+            // $crypgandengcode = Crypt::encrypt($gandengcode);
         }
         else{
-            $crypgandengcode = '';
+            // $crypgandengcode = '';
         }
-        $yes = Crypt::encrypt('yes');
-        $no = Crypt::encrypt('no');
+        // $yes = Crypt::encrypt('yes');
+        $yes = 'yes';
+        // $no = Crypt::encrypt('no');
+        $no = 'no';
         Mail::send('emails.kerusakanemail',[
             'pesan' => $pesan,
             'nopol' => $nopol,
