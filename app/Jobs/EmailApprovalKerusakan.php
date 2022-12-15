@@ -71,7 +71,7 @@ class EmailApprovalKerusakan
         }
         $yes = Crypt::encrypt('yes');
         $no = Crypt::encrypt('no');
-        dd($wonbr,$nopolnbr,$gandengnbr,$crypgandengcode,$pesan,$kerusakan,$yes,$no);
+        dd($wonbr,$nopolnbr,$gandengnbr,$rusaknbr,$crypgandengcode,$pesan,$kerusakan,$yes,$no);
         Mail::send('emails.kerusakanemail',[
             'pesan' => $pesan,
             'nopol' => $nopol,
