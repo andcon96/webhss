@@ -58,6 +58,7 @@ class EmailApprovalKerusakan
         $gandengcode = $this->gandengcode;
         $pesan = $this->pesan;
         $kerusakan = $this->kerusakan;
+        dd($wonbr,$nopol,$gandengan,$gandengcode,$pesan,$kerusakan);
         $rusaknbr = Crypt::encrypt($wonbr);
         $nopolnbr = Crypt::encrypt($nopol);
         $gandengnbr = Crypt::encrypt($gandengan);
