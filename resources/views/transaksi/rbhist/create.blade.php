@@ -24,7 +24,8 @@
             </div>
             <label for="effdate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
             <div class="col-md-3">
-                <input type="text" name="effdate" id="effdate" class="form-control" value="{{\Carbon\Carbon::now()->toDateString()}}">
+                {{-- <input type="text" name="effdate" id="effdate" class="form-control" value="{{\Carbon\Carbon::now()->toDateString()}}"> --}}
+                <input type="text" name="effdate" id="effdate" class="form-control" value="" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -117,6 +118,11 @@
     $("table#dataTable").on("click", ".ibtnDel", function(event) {
         var row = $(this).closest("tr");
         $(this).closest("tr").remove();
+    });
+
+    $(document).ready(function(){
+        const d = new Date();
+        $("#effdate").val(d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate());
     });
 </script>
 @endsection
