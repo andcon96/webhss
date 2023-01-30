@@ -231,19 +231,20 @@ class KerusakanLaporMTController extends Controller
     {
         $gandengnbr = NULL;
         $trucknbr = NULL;
-        dd($request->all());
+        // dd($request->all());
         $data = KerusakanMstr::findOrfail($request->idmaster);
+       
+        // dd($data);
         if($data->kr_status == "Close"){
             alert()->error('Error', 'Report is closed')->persistent('Dismiss');
             return back();
         }
+        
         DB::beginTransaction();
         try {
             $mstr = KerusakanMstr::where('id',$request->idmaster)->first();
             
-            if($request->jenis == 'truck'){
-                
-                
+            if($request->jenis == 'truck'){   
                 $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
                 $trucknbr = $checktruck->truck_no_polis;
                 $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
@@ -327,16 +328,24 @@ class KerusakanLaporMTController extends Controller
                 }
                 
             }
-            $qxkerusakan = (new QxtendServices())->qxWOkerusakan($mstr->kr_nbr,$trucknbr,$gandengnbr,$mstr->kr_date);
-            if($qxkerusakan[0] == false){
-                DB::rollback();
-                alert()->error('Error','Qxtend gagal, '.$qxkerusakan[1]);
-                return back();
-            }else if($qxkerusakan[0] == true){
+            if($data->kr_status == 'WIP'){
+                $qxkerusakan = (new QxtendServices())->qxWOkerusakan($mstr->kr_nbr,$trucknbr,$gandengnbr,$mstr->kr_date);
+                if($qxkerusakan[0] == false){
+                    DB::rollback();
+                    alert()->error('Error','Qxtend gagal, '.$qxkerusakan[1]);
+                    return back();
+                }else if($qxkerusakan[0] == true){
+                    DB::commit();
+                    alert()->success('Success', 'Report updated')->persistent('Dismiss');
+                    return back();
+                }
+            }
+            else{
                 DB::commit();
                 alert()->success('Success', 'Report updated')->persistent('Dismiss');
                 return back();
             }
+            
 
             
         } catch (Exception $e) {
