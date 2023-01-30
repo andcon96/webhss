@@ -382,7 +382,7 @@ class WSAServices
         $xmlResp = simplexml_load_string($qdocResponse);
         
         $xmlResp->registerXPathNamespace('ns1', $wsa->wsas_path);
-        dd($qdocResponse,$qdocRequest);
+        
         $dataloop    = $xmlResp->xpath('//ns1:tempRow');
         if(empty($dataloop)){
             return false;
