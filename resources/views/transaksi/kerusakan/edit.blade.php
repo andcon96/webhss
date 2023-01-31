@@ -24,7 +24,7 @@
                 <input id="km" type="number" class="form-control" name="km" value="{{$data->kr_km}}" autocomplete="off" maxlength="24" autofocus>
             </div>
         </div>
-        <div class="form-group row col-md-12">
+        <div class="form-group row col-md-12" style="display: none">
             <label for="jenis" class="col-md-2 col-form-label text-md-right">Jenis</label>
             <div class="col-md-3">  
                 <select id="jenis" class="form-control selectpicker" style="border: 1px solid #e9ecef" name="jenis" data-live-search="true" required autofocus>';
