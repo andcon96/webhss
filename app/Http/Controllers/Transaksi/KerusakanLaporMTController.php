@@ -279,9 +279,9 @@ class KerusakanLaporMTController extends Controller
                 if($request->jenis == 'gandengan'){
                 
                     $checkgandengan = GandenganMstr::withoutglobalscopes()->where('id',(int)$request->gandengan)->first();
-                    $checkgandengan2 = GandenganMstr::where('id',(int)$request->gandengan)->first();
-                    dd($checkgandengan,$checkgandengan2);
-                    $gandengnbr = $checkgandengan->truck_no_polis;
+                    
+                    
+                    $gandengnbr = rtrim($checkgandengan->gandeng_code,' ');
                     
                     $checkkr = KerusakanMstr::where("kr_gandeng",$request->gandengan)->where(function($e){
                         $e->where('kr_status','<>','Close');
@@ -330,7 +330,7 @@ class KerusakanLaporMTController extends Controller
                 
             }
             if($data->kr_status == 'WIP'){
-                dd($request->all());
+                
                 $qxkerusakan = (new QxtendServices())->qxWOkerusakan($mstr->kr_nbr,$trucknbr,$gandengnbr,$mstr->kr_date);
                 if($qxkerusakan[0] == false){
                     DB::rollback();
