@@ -281,7 +281,7 @@ class KerusakanLaporMTController extends Controller
                     $checkgandengan = GandenganMstr::withoutglobalscopes()->where('id',$request->gandengan)->first();
                     
                     $gandengnbr = $checkgandengan->truck_no_polis;
-                    dd($gandengnbr);
+                    
                     $checkkr = KerusakanMstr::where("kr_gandeng",$request->gandengan)->where(function($e){
                         $e->where('kr_status','<>','Close');
                         $e->where('kr_status','<>','Reject');
