@@ -277,7 +277,7 @@ class KerusakanLaporMTController extends Controller
             }
             else{
                 if($request->jenis == 'gandengan'){
-                
+                dd($request->gandengan);
                     $checkgandengan = GandenganMstr::withoutglobalscopes()->where('id',$request->gandengan)->first();
                     
                     $gandengnbr = $checkgandengan->truck_no_polis;
