@@ -14,15 +14,15 @@ use PhpOffice\PhpSpreadsheet\Cell\DataType;
 
 class ApprovalRusakTruck extends Controller
 {
-    public function receiveAPI($wonbr,$rusaknbr,$nopolnbr,$status,$gandengan){
+    public function receiveAPI($wonbr,$rusaknbr,$nopolnbr,$status,$gandengan,$gandengcode){
         
         $rusaknbr = Crypt::decrypt($rusaknbr);
         $nopolnbr = Crypt::decrypt($nopolnbr);
         $status = Crypt::decrypt($status);
         $gandengan = Crypt::decrypt($gandengan);
-        // $gandengcode = Crypt::decrypt($gandengan);        
+        $gandengcode = Crypt::decrypt($gandengcode);        
         $wonbr = $wonbr;
-        dd($wonbr,$rusaknbr,$nopolnbr,$status,$gandengan);
+        
         $errorlist = [];
         $status_display = '';
         $message = '';
