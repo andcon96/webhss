@@ -61,13 +61,14 @@ class EmailApprovalKerusakan
         $rusaknbr = Crypt::encrypt($wonbr);
         $nopolnbr = Crypt::encrypt($nopol);
         $gandengnbr = Crypt::encrypt($gandengan);
-        $crypgandengcode = '';
-        if(!empty($gandengcode)){
-            $crypgandengcode = Crypt::encrypt($gandengcode);
-        }
-        else{
-            $crypgandengcode = '';
-        }
+        $crypgandengcode = Crypt::encrypt($gandengcode);
+        // $crypgandengcode = '';
+        // if(!empty($gandengcode)){
+        //     $crypgandengcode = Crypt::encrypt($gandengcode);
+        // }
+        // else{
+        //     $crypgandengcode = '';
+        // }
         $yes = Crypt::encrypt('yes');
         $no = Crypt::encrypt('no');
         Mail::send('emails.kerusakanemail',[
