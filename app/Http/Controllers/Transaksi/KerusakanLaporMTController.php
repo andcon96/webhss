@@ -329,6 +329,7 @@ class KerusakanLaporMTController extends Controller
                 
             }
             if($data->kr_status == 'WIP'){
+                dd($gandengnbr);
                 $qxkerusakan = (new QxtendServices())->qxWOkerusakan($mstr->kr_nbr,$trucknbr,$gandengnbr,$mstr->kr_date);
                 if($qxkerusakan[0] == false){
                     DB::rollback();
