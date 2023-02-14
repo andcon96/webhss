@@ -151,8 +151,9 @@ class SuratJalanController extends Controller
         $item = SalesOrderDetail::where('sod_so_mstr_id',$data->sj_so_mstr_id)->get();
         $shipto = CustomerShipTo::get();
         $shipfrom = ShipFrom::get();
+        $truck = Truck::get();
         
-        return view('transaksi.sj.edit',compact('data','item','shipto','shipfrom'));
+        return view('transaksi.sj.edit',compact('data','item','shipto','shipfrom','truck'));
     }
 
     public function update(Request $request)
@@ -165,6 +166,16 @@ class SuratJalanController extends Controller
             $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
             $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
             $sjmstr->sj_jmlh_trip = $request->trip;
+            if($sjmstr->sj_truck_id != $request->truck){
+                $hist = SJHistTrip::where('sjh_sj_mstr_id',$request->idmaster)->first();
+                if($hist){
+                    alert()->error('Error', 'Save Gagal, Truck tidak dapat dirubah karena sudah ada history trip')->persistent('Dismiss');
+                    DB::rollback();
+                    return back();
+                }else{
+                    $sjmstr->sj_truck_id = $request->truck;
+                }
+            }
             $sjmstr->sj_default_sangu_type = $request->sj_default_sangu_type;
             $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();

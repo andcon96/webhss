@@ -63,7 +63,14 @@
             </div>
             <label for="truck" class="col-md-3 col-form-label text-md-right">Truck</label>
             <div class="col-md-3">
-                <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" autofocus readonly>
+                {{-- <input id="truck" type="text" class="form-control" name="truck" value="{{$data->getTruck->truck_no_polis}}" autocomplete="off" maxlength="24" autofocus readonly> --}}
+                
+                <select name="truck" id="truck" class="form-control selectdrop">
+                    <option value="">Select Data</option>
+                    @foreach ($truck as $trucks)
+                        <option value="$trucks->id" {{$trucks->id == $data->getTruck->id ? 'Selected' : ''}}>{{$trucks->truck_no_polis}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="form-group row col-md-12">
