@@ -198,8 +198,7 @@
         });
 
         $("#duedate").datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: '+0d'
+            dateFormat: 'yy-mm-dd'
         });
         $('#btnconf').hide();
 

@@ -178,8 +178,7 @@
     $('.pricetot').addClass('col-md-2');
     
     $("#duedate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        minDate: '+0d'
+        dateFormat: 'yy-mm-dd'
     });
 
     var sum = 0;
