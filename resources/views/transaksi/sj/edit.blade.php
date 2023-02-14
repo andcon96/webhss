@@ -68,7 +68,7 @@
                 <select name="truck" id="truck" class="form-control selectdrop">
                     <option value="">Select Data</option>
                     @foreach ($truck as $trucks)
-                        <option value="$trucks->id" {{$trucks->id == $data->getTruck->id ? 'Selected' : ''}}>{{$trucks->truck_no_polis}}</option>
+                        <option value="{{$trucks->id}}" {{$trucks->id == $data->getTruck->id ? 'Selected' : ''}}>{{$trucks->truck_no_polis}}</option>
                     @endforeach
                 </select>
             </div>
