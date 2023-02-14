@@ -22,6 +22,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class SuratJalanController extends Controller
@@ -133,6 +134,7 @@ class SuratJalanController extends Controller
             return back();
         }catch(Exception $e){
             DB::rollBack();
+            Log::channel('customlog')->info('ERROR : '.$e);
             alert()->error('Error', 'Surat Jalan gagal dibuat')->persistent('Dismiss');
             return back();
         }
