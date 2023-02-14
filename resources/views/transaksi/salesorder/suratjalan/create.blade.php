@@ -55,7 +55,7 @@
             <label for="barang" class="col-md-3 col-form-label text-md-right">Barang</label>
             <div class="col-md-3">
                 <input type="hidden" name="barangid" id="barangid" value="{{$data->getCOMaster->co_barang_id}}">
-                <input id="barang" type="text" class="form-control" name="barang" value="{{$data->getCOMaster->getBarang->barang_deskripsi}}" readonly>
+                <input id="barang" type="text" class="form-control" name="barang" value="{{$data->getCOMaster->getBarang->barang_deskripsi ?? ''}}" readonly>
             </div>
         </div>
         <div class="form-group row col-md-12">
