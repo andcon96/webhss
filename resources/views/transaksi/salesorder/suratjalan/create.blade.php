@@ -63,6 +63,10 @@
             <div class="col-md-3">
                 <input id="barang" name="barang" type="text" class="form-control" value="{{$data->getCOMaster->co_kapal ?? ''}}" readonly>
             </div>
+            <label for="duedate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
+            <div class="col-md-3">
+                <input id="duedate" type="text" class="form-control" name="duedate" value="" readonly>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             @include('transaksi.salesorder.suratjalan.create-table')
@@ -175,10 +179,7 @@
     
     $("#duedate").datepicker({
         dateFormat: 'yy-mm-dd',
-        minDate: '+0d',
-        onClose: function() {
-            $("#addrow").focus();
-        }
+        minDate: '+0d'
     });
 
     var sum = 0;

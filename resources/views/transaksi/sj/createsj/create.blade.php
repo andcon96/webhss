@@ -44,9 +44,9 @@
                 </div>
             </div>
             <div class="form-group row col-md-12">
-                <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+                <label for="duedateso" class="col-md-2 col-form-label text-md-right">Due Date</label>
                 <div class="col-md-3">
-                    <input id="duedate" type="text" class="form-control" name="duedate" value=""
+                    <input id="duedateso" type="text" class="form-control" name="duedateso" value=""
                         autocomplete="off" maxlength="24" readonly required autofocus>
                 </div>
                 <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
@@ -85,6 +85,10 @@
                 <label for="kapal" class="col-md-2 col-form-label text-md-right">Kapal</label>
                 <div class="col-md-3">
                     <input id="kapal" type="text" class="form-control" name="kapal" value="" readonly>
+                </div>
+                <label for="duedate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
+                <div class="col-md-3">
+                    <input id="duedate" type="text" class="form-control" name="duedate" value="" readonly>
                 </div>
             </div>
             <div class="form-group row col-md-12">
@@ -193,6 +197,10 @@
             width: '100%'
         });
 
+        $("#duedate").datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: '+0d'
+        });
         $('#btnconf').hide();
 
         $(document).on('change', '#soid', function() {
@@ -215,7 +223,7 @@
             $('#shipfrom').val(shipfrom + ' - ' + shipfromdesc);
             $('#shipto').val(shipto + ' - ' + shiptodesc);
             $('#type').val(type);
-            $('#duedate').val(duedate);
+            $('#duedateso').val(duedate);
             $('#shipfromid').val(shipfromid);
             $('#shiptoid').val(shiptoid);
             $('#conbr').val(conbr);
