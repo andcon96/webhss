@@ -65,7 +65,7 @@
             </div>
             <label for="duedate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
             <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="" required>
+                <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->toDateString()}}" required>
             </div>
         </div>
         <div class="form-group row col-md-12">
