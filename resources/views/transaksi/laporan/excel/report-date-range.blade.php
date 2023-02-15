@@ -30,6 +30,7 @@
         </thead>
         <tbody>
             {{$total = 0}}
+            {{ $totalrit = 0 }}
             {{$totaldefault = 0}}
             @foreach($data as $keys => $datas)
                 {{ $bonus = 0 }}
@@ -59,7 +60,65 @@
                 </tr>
                 {{$totaldefault += ($datas->getRuteHistory->history_sangu + $bonus) * $datas->sj_jmlh_trip}}
                 {{$total += $datas->sj_tot_sangu}}
+                {{ $totalrit += $datas->sj_jmlh_trip }}
 		    @endforeach
+
+            {{ $bonsopir = 0 }}
+            <tr>
+                <td colspan="6">RIT</td>
+                <td class="middle">{{$totalrit}}</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="6">Total</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"><b>{{ number_format($totaldefault, 0) }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="6">Sangu</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"><b>{{ number_format($total, 0) }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="6">Totalan Sopir</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"><b>{{ number_format($totaldefault - $total, 0) }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="6">Bon Sopir</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right">{{$bonsopir}}</td>
+            </tr>
+            <tr>
+                <td colspan="6">Sisa Totalan</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $bonsopir, 0) }}</b></td>
+            </tr>
+            <tr>
+                @php($totalcicilan = $histcicilan->sum('hc_nominal'))
+                {{-- @php($totalcicilan = 0) --}}
+                <td colspan="6">Cicilan</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"><b>{{ number_format($totalcicilan, 0) }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="6">Tabungan</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"></td>
+            </tr>
+            <tr>
+                <td colspan="6">Uang Diterima Supir</td>
+                <td class="middle">:</td>
+                <td colspan="2"></td>
+                <td style="text-align:right"><b>{{ number_format($totaldefault - $total - $totalcicilan, 0) }}</b></td>
+            </tr>
         </tbody>
 		<tfoot>
             <tr>
@@ -77,6 +136,7 @@
         </tfoot>
 	</table>
 
+    {{-- Biaya Tambahan --}}
     <table>
         <thead>
             <tr>

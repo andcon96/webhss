@@ -76,7 +76,7 @@
     <div class="form-group row col-md-12">
         <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
         <div class="col-md-4 col-lg-3">
-            <button class="btn bt-action newUser" name="aksi" value="1" style="margin-left: 10px; width: 40px !important">
+            <button class="btn bt-action newUser" id="btnexcel" name="aksi" value="1" style="margin-left: 10px; width: 40px !important">
                 <i class="fas fa-file-excel"></i>
             </button>
             <button class="btn bt-action newUser" id="btnpdf" name="aksi" formtarget="_blank" value="2" style="margin-left: 10px; width: 40px !important">
@@ -121,12 +121,15 @@
             $('#domain,#tipetruck,#tipe').prop('disabled',true);
             $('#domain,#tipetruck,#tipe').prop('required',false);
             $('#btnpdf').prop('disabled',false);
+            $('#btnexcel').prop('disabled',true);
+            
         }else if(val == 4){
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
 
             $('#tipe,#domain').prop('disabled',false);
             $('#tipe,#domain').prop('required',true);
+            $('#btnexcel').prop('disabled',false);
 
         }else if(val == 5){
             $('#truck,#domain,#tipe').prop('disabled',true);
@@ -136,10 +139,12 @@
             $('#tipetruck').prop('required',true);
 
             $('#btnpdf').prop('disabled',true);
+            $('#btnexcel').prop('disabled',false);
         }else if(val == 6){
             $('#truck,#domain,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#domain,#tipetruck,#tipe').prop('required',false);
             $('#btnpdf').prop('disabled',true);
+            $('#btnexcel').prop('disabled',false);
         }else{
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
@@ -147,6 +152,7 @@
             $('#domain').prop('disabled',false);
             $('#domain').prop('required',true);
             $('#btnpdf').prop('disabled',false);
+            $('#btnexcel').prop('disabled',false);
         }
     });
 

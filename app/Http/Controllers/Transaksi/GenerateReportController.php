@@ -53,8 +53,9 @@ class GenerateReportController extends Controller
         switch ($request->aksi) {
             case 1:
                 if ($report == '2') {
-                    // By Truck by Date
-                    return Excel::download(new ReportByMonthExport($datefrom, $dateto, $truck), 'ReportByMonth.xlsx');
+                    // By Truck by Date --> Pindah ke function printpdf karena mau ad driver
+                    return back();
+                    // return Excel::download(new ReportByMonthExport($datefrom, $dateto, $truck), 'ReportByMonth.xlsx');
                 } elseif ($report == '3') {
                     // Loosing HSST
                     return Excel::download(new ReportLoosingHSST($datefrom, $dateto), 'ReportLoosingHSST.xlsx');
@@ -174,35 +175,52 @@ class GenerateReportController extends Controller
 
     public function printpdf(Request $request)
     {
-        $truck = $request->truck;
-        $driver = $request->driver;
-        $datefrom = $request->datefrom;
-        $dateto = $request->dateto;
+        switch($request->aksi){
+            case 1 : 
+                // PDF
+                $truck = $request->truck;
+                $driver = $request->driver;
+                $datefrom = $request->datefrom;
+                $dateto = $request->dateto;
+                
+                $getData = (new CreateTempTable())->getDataReportPerNopol($truck, $datefrom, $dateto, $driver);
         
-        $getData = (new CreateTempTable())->getDataReportPerNopol($truck, $datefrom, $dateto, $driver);
+                $data = $getData['data'];
+                $rbhist = $getData['rbhist'];
+                $totalrb = $getData['totalrb'];
+                $nopol = $getData['nopol'];
+                $histcicilan = $getData['histcicilan'];
+                $driver = $getData['driver'];
+                // dd($histcicilan,$getData);
+                $pdf = PDF::loadview(
+                    'transaksi.laporan.pdf.pdf-per-nopol',
+                    [
+                        'data' => $data,
+                        'rbhist' => $rbhist,
+                        'totalrb' => $totalrb,
+                        'nopol' => $nopol,
+                        'histcicilan' => $histcicilan,
+                        'driver' => $driver,
+                        'datefrom' => $datefrom,
+                        'dateto' => $dateto,
+                    ]
+                )->setPaper([0, 0, 684, 792], 'Potrait');
+                // ->setPaper('A4', 'Potrait');
+        
+                return $pdf->stream();
+                break;
+            
+            case 2 :
+                // Excel
+                $truck = $request->truck;
+                $driver = $request->driver;
+                $datefrom = $request->datefrom;
+                $dateto = $request->dateto;
 
-        $data = $getData['data'];
-        $rbhist = $getData['rbhist'];
-        $totalrb = $getData['totalrb'];
-        $nopol = $getData['nopol'];
-        $histcicilan = $getData['histcicilan'];
-        $driver = $getData['driver'];
-        // dd($histcicilan,$getData);
-        $pdf = PDF::loadview(
-            'transaksi.laporan.pdf.pdf-per-nopol',
-            [
-                'data' => $data,
-                'rbhist' => $rbhist,
-                'totalrb' => $totalrb,
-                'nopol' => $nopol,
-                'histcicilan' => $histcicilan,
-                'driver' => $driver,
-                'datefrom' => $datefrom,
-                'dateto' => $dateto,
-            ]
-        )->setPaper([0, 0, 684, 792], 'Potrait');
-        // ->setPaper('A4', 'Potrait');
+                return Excel::download(new ReportByMonthExport($datefrom, $dateto, $truck, $driver), 'ReportByMonth.xlsx');
 
-        return $pdf->stream();
+                break;
+        }
+        
     }
 }

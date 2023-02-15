@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\ReportBiaya;
 use App\Models\Transaksi\SuratJalan;
+use App\Services\CreateTempTable;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -15,11 +16,12 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize, WithStyles
 {
-    public function __construct($datefrom,$dateto,$truck)
+    public function __construct($datefrom,$dateto,$truck,$driver)
     {
         $this->datefrom      = $datefrom;
         $this->dateto        = $dateto;
         $this->truck         = $truck;
+        $this->driver         = $driver;
     }
 
     public function view() : view
@@ -27,6 +29,7 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
         $datefrom    = $this->datefrom;
         $dateto      = $this->dateto;
         $truck       = $this->truck;
+        $driver       = $this->driver;
 
         $truckcol = Truck::findOrFail($truck);
 
@@ -75,8 +78,13 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
                             
         $totalrb = ReportBiaya::where('rb_truck_id',$truck)->sum('rb_nominal');
 
+        // Update Driver
+        $getData = (new CreateTempTable())->getDataReportPerNopol($truck, $datefrom, $dateto, $driver);
+        $histcicilan = $getData['histcicilan'];
+
+
         return view('transaksi.laporan.excel.report-date-range',
-                        compact('data','datefrom','dateto','nopol','totalrb','rbhist','openSPK'));
+                        compact('data','datefrom','dateto','nopol','totalrb','rbhist','openSPK','histcicilan'));
     }
 
     public function styles(Worksheet $sheet)

@@ -63,10 +63,11 @@
         </div>
         
         <div class="form-group row col-md-12">
-            <label for="s_status" class="col-md-2 col-form-label text-md-right">{{ __('') }}</label>
+            <label for="s_status" class="col-md-1 col-form-label text-md-right">{{ __('') }}</label>
             <div class="col-md-10">
                 <a href="{{route('report.index')}}" class="btn bt-action">Back</a>
-                <button class="btn bt-action" formtarget="_blank">Preview</button>
+                <button class="btn bt-action" name="aksi" value="1" formtarget="_blank">Preview</button>
+                <button class="btn bt-action" name="aksi" value="2" formtarget="_blank">Export Excel</button>
             </div>
         </div>
     </form>

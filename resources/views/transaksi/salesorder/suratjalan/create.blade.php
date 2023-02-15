@@ -26,9 +26,9 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
-            <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
+            <label for="duedateso" class="col-md-2 col-form-label text-md-right">Due Date</label>
             <div class="col-md-3">
-                <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" readonly required autofocus>
+                <input id="duedateso" type="text" class="form-control" name="duedateso" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" readonly required autofocus>
             </div>
             <label for="customer" class="col-md-3 col-form-label text-md-right">Customer</label>
             <div class="col-md-3">

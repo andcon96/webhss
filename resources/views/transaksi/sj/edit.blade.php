@@ -31,7 +31,7 @@
             <div class="col-md-3">
                 <input id="customer" type="text" class="form-control" name="customer" value="{{$data->getSOMaster->getCOMaster->co_cust_code}} - {{$data->getSOMaster->getCOMaster->getCustomer->cust_desc ?? ''}}" autocomplete="off" maxlength="24" autofocus readonly>
             </div>
-            <label for="duedate" class="col-md-3 col-form-label text-md-right">Due Date</label>
+            <label for="duedate" class="col-md-3 col-form-label text-md-right">Due Date SO</label>
             <div class="col-md-3">
                 <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->getSOMaster->so_due_date}}" autocomplete="off" maxlength="24" readonly>
             </div>
@@ -81,6 +81,12 @@
             <label for="kapal" class="col-md-3 col-form-label text-md-right">Kapal</label>
             <div class="col-md-3">
                 <input id="kapal" name="kapal" class="form-control" type="text" value="{{$data->getSOMaster->getCOMaster->co_kapal ?? ''}}" readonly>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
+            <label for="effdate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
+            <div class="col-md-3">
+                <input id="effdate" type="text" class="form-control" name="effdate" value="{{$data->sj_eff_date}}" autocomplete="off" maxlength="24" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">
@@ -151,6 +157,10 @@
         onClose: function() {
             $("#addrow").focus();
         }
+    });
+
+    $("#effdate").datepicker({
+        dateFormat: 'yy-mm-dd'
     });
     
     var tipebarang = $('#type').val();

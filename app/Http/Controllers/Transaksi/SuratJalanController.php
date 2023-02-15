@@ -160,7 +160,6 @@ class SuratJalanController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try{
             $sjmstr = SuratJalan::findOrFail($request->idmaster);
@@ -178,6 +177,7 @@ class SuratJalanController extends Controller
                     $sjmstr->sj_truck_id = $request->truck;
                 }
             }
+            $sjmstr->sj_eff_date = $request->effdate;
             $sjmstr->sj_default_sangu_type = $request->sj_default_sangu_type;
             $sjmstr->sj_surat_jalan = $request->catatansj;
             $sjmstr->save();
@@ -215,7 +215,6 @@ class SuratJalanController extends Controller
             return back();
         }catch(Exception $e){
             DB::rollBack();
-            dd($e);
             alert()->error('Error', 'Surat Jalan gagal diupdate')->persistent('Dismiss');
             return back();
         }
