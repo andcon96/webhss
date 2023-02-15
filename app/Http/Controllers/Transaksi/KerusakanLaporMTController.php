@@ -220,27 +220,100 @@ class KerusakanLaporMTController extends Controller
         
         $data = KerusakanMstr::with(["getDetail.getStrukturTrans",'getDetail.getKerusakan', 'getTruck', 'getTruck.getUserDriver','getGandeng'])->findOrFail($id);
         $jeniskerusakan = Kerusakan::get();
-        
+        $gandeng = GandenganMstr::get();
+        $truck = Truck::withoutGlobalScopes()->get();
         // $this->authorize('update',[KerusakanMstr::class,$data]);
 
-        return view('transaksi.kerusakan.edit', compact('data', 'jeniskerusakan'));
+        return view('transaksi.kerusakan.edit', compact('data', 'jeniskerusakan','gandeng','truck'));
     }
 
     public function update(Request $request)
     {
-        
+        $gandengnbr = NULL;
+        $trucknbr = NULL;
+        // dd($request->all());
         $data = KerusakanMstr::findOrfail($request->idmaster);
+       
+        // dd($data);
         if($data->kr_status == "Close"){
             alert()->error('Error', 'Report is closed')->persistent('Dismiss');
             return back();
         }
-        // $this->authorize('update',[KerusakanMstr::class,$data]);
+        
         DB::beginTransaction();
         try {
             $mstr = KerusakanMstr::where('id',$request->idmaster)->first();
+            
+            if($request->jenis == 'truck'){   
+                $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
+                $trucknbr = $checktruck->truck_no_polis;
+                $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
+                    $e->where('kr_status','<>','Close');
+                    $e->where('kr_status','<>','Reject');
+                    $e->where('kr_status','<>','Cancelled');
+                    $e->where('kr_status','<>','Done');
+                })->first();
+            
+                if($checkkr){
+                    DB::rollBack();
+                    alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
+                    return back();
+                }
+                $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis,'TRUCK');
+                if($checkwo === false){
+                    DB::rollBack();
+                    alert()->error('Error', 'No Data from QAD');
+                    return back();
+                }
+                else if($checkwo === 'nodata'){
+                    DB::rollBack();
+                    alert()->error('Error', 'Truck '.$checktruck->truck_no_polis.' already being repaired in QAD');
+                    return back();
+                }
+                
+                $mstr->kr_gandeng = NULL;
+                $mstr->kr_truck = $request->truck;
+                
+            }
+            else{
+                if($request->jenis == 'gandengan'){
+                
+                    $checkgandengan = GandenganMstr::withoutglobalscopes()->where('id',(int)$request->gandengan)->first();
+                    
+                    
+                    $gandengnbr = rtrim($checkgandengan->gandeng_code,' ');
+                    
+                    $checkkr = KerusakanMstr::where("kr_gandeng",$request->gandengan)->where(function($e){
+                        $e->where('kr_status','<>','Close');
+                        $e->where('kr_status','<>','Reject');
+                        $e->where('kr_status','<>','Cancelled');
+                        $e->where('kr_status','<>','Done');
+                    })->first();
+                
+                    if($checkkr){
+                        DB::rollBack();
+                        alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
+                        return back();
+                    }
+                    $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code,'GANDENGAN');
+                    if($checkwo === false){
+                        DB::rollBack();
+                        alert()->error('Error', 'No Data from QAD');
+                        return back();
+                    }
+                    else if($checkwo === 'nodata'){
+                        DB::rollBack();
+                        alert()->error('Error', 'Truck '.$checkgandengan->gandeng_code.' already being repaired in QAD');
+                        return back();
+                    }
+                    $mstr->kr_gandeng = $request->gandengan;
+                    $mstr->kr_truck = NULL;
+                }
+            }
             $mstr->kr_km = $request->km;
-            // $mstr->kr_gandeng = $request->gandeng;
+            
             $mstr->save();
+            
             foreach ($request->iddetail as $key => $datas) {
                 $detail = KerusakanDetail::firstOrNew(['id' => $datas]);
                 
@@ -256,10 +329,27 @@ class KerusakanLaporMTController extends Controller
                 }
                 
             }
+            if($data->kr_status == 'WIP'){
+                
+                $qxkerusakan = (new QxtendServices())->qxWOkerusakan($mstr->kr_nbr,$trucknbr,$gandengnbr,$mstr->kr_date);
+                if($qxkerusakan[0] == false){
+                    DB::rollback();
+                    alert()->error('Error','Qxtend gagal, '.$qxkerusakan[1]);
+                    return back();
+                }else if($qxkerusakan[0] == true){
+                    DB::commit();
+                    alert()->success('Success', 'Report updated')->persistent('Dismiss');
+                    return back();
+                }
+            }
+            else{
+                DB::commit();
+                alert()->success('Success', 'Report updated')->persistent('Dismiss');
+                return back();
+            }
+            
 
-            DB::commit();
-            alert()->success('Success', 'Report updated')->persistent('Dismiss');
-            return back();
+            
         } catch (Exception $e) {
             DB::rollBack();
             

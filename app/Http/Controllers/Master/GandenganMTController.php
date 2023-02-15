@@ -201,7 +201,7 @@ class GandenganMTController extends Controller
             }
             catch(Exception $err){
                 DB::rollBack();
-                dd('a');
+                // dd('a');
                 alert()->error('Error', 'Failed to activate/deactivate gandengan');
                 return redirect()->to(route('gandengan.index'));
 

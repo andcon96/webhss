@@ -62,7 +62,6 @@ class EmailApprovalKerusakan
         $rusaknbr = Crypt::encrypt($wonbr);
         $nopolnbr = Crypt::encrypt($nopol);
         $gandengnbr = Crypt::encrypt($gandengan);
-        $crypgandengcode = '';
         // if(!empty($gandengcode)){
             $crypgandengcode = Crypt::encrypt($gandengcode);
         // }
