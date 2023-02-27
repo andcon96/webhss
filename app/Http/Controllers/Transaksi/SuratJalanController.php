@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\Exports\ExportSPK;
 use App\Http\Controllers\Controller;
 use App\Models\Master\BonusBarang;
 use App\Models\Master\Customer;
@@ -24,6 +25,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SuratJalanController extends Controller
 {
@@ -343,5 +345,10 @@ class SuratJalanController extends Controller
         $truck = Truck::with('getUserDriver','getUserPengurus')->get();
 
         return view('transaksi.sj.createsj.create',compact('listso','truck'));
+    }
+
+    public function exportsj(Request $request){
+        return Excel::download(new ExportSPK($request->sonumber, $request->sjnumber, $request->s_customer, 
+        $request->s_truck, $request->datefrom, $request->dateto), 'SPK.xlsx');
     }
 }

@@ -166,8 +166,9 @@ class CreateTempTable
     {
         $truckcol = Truck::findOrFail($truck);
         $drivercol = Driver::findOrFail($driver);
-
+        
         $nopol = $truckcol->truck_no_polis;
+        $tipetruck = $truckcol->truck_tipe_id;
 
         $data = SuratJalan::query();
         $rbhist = ReportBiaya::query();
@@ -222,7 +223,8 @@ class CreateTempTable
             'totalrb' => $totalrb,
             'nopol' => $nopol,
             'histcicilan' => $histcicilan,
-            'driver' => $drivercol
+            'driver' => $drivercol,
+            'tipetruck' => $tipetruck
         ];
     }
 

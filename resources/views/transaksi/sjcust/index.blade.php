@@ -12,12 +12,12 @@
 
 <form action="" method="GET">
     <div class="form-group row">
-        <label for="polis" class="col-md-2 col-form-label text-md-right mt-1" style="margin-left:25px">{{ __('Truck') }}</label>
+        <label for="sonumber" class="col-md-2 col-form-label text-md-right mt-1" style="margin-left:25px">{{ __('SO Number') }}</label>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
-            <select name="truck" id="truck" class="form-control">
+            <select name="sonumber" id="sonumber" class="form-control selectdrop">
                 <option value="">Select Data</option>
-                @foreach($truck as $trucks)
-                <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
+                @foreach($so as $sos)
+                <option value="{{$sos->id}}">{{$sos->so_nbr}}</option>
                 @endforeach
             </select>
         </div>
@@ -52,9 +52,14 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="kapal" class="col-md-2 col-form-label text-md-right mt-1" style="margin-left:25px">{{ __('Kapal') }}</label>
+        <label for="polis" class="col-md-2 col-form-label text-md-right mt-1" style="margin-left:25px">{{ __('Truck') }}</label>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
-            <input type="text" class="form-control" name="kapal" id="kapal">
+            <select name="truck" id="truck" class="form-control">
+                <option value="">Select Data</option>
+                @foreach($truck as $trucks)
+                <option value="{{$trucks->id}}">{{$trucks->truck_no_polis}}</option>
+                @endforeach
+            </select>
         </div>
         <label for="status" class="col-md-2 col-form-label text-md-right mt-1" style="margin-left:25px">{{ __('Status') }}</label>
         <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
@@ -65,6 +70,12 @@
                 <option value="Closed">Closed</option>
                 <option value="Cancelled">Cancelled</option>
             </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="kapal" class="col-md-2 col-form-label text-md-right mt-1" style="margin-left:25px">{{ __('Kapal') }}</label>
+        <div class="col-xl-3 col-lg-3 col-md-8 col-sm-12 col-xs-12 mt-2">
+            <input type="text" class="form-control" name="kapal" id="kapal">
         </div>
     </div>
     <div class="form-group row">
@@ -99,6 +110,7 @@
         let shipfrom = queryString.get('shipfrom');
         let status = queryString.get('status');
         let kapal = queryString.get('kapal');
+        let sonumber = queryString.get('sonumber');
 
         $('#truck').val(truck).trigger('change');
         $('#customer').val(customer).trigger('change');
@@ -106,6 +118,7 @@
         $('#shipfrom').val(shipfrom).trigger('change');
         $('#status').val(status).trigger('change');
         $('#kapal').val(kapal);
+        $('#sonumber').val(sonumber).trigger('change');
     });
 
     $('#btnrefresh').on('click',function(){
@@ -115,6 +128,7 @@
         $('#shipfrom').val('');
         $('#status').val('');
         $('#kapal').val('');
+        $('#sonumber').val('');
     });
 </script>
 @endsection

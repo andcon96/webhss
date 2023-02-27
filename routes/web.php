@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/customerorder/getalokasi/{id}', [CustomerOrderController::class, 'getalokasi'])->name('getAlokasiCO');
         Route::get('/customerorder/createso/{id}', [CustomerOrderController::class, 'createso'])->name('coCreateSO');
         Route::post('/customerorder/saveso', [CustomerOrderController::class, 'updateso'])->name('coUpdateSO');
+        Route::get('/exportco',[CustomerOrderController::class, 'exportco'])->name('exportCO');
         Route::resource('customerorder',CustomerOrderController::class);
     });
 
@@ -111,6 +112,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/suratjalan/getdetail/{id}', [SuratJalanController::class, 'getdetail'])->name('getDetailSJ');
         Route::get('getrute', [SuratJalanController::class, 'getrute'])->name('getRute');
         Route::get('/detailso/{id}', [SuratJalanController::class, 'getdetailso'])->name('getDetailSJSO');
+        Route::get('/exportsj',[SuratJalanController::class, 'exportsj'])->name('exportSJ');
         Route::resource('suratjalan',SuratJalanController::class);
     });
 
@@ -118,6 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/salesorder/getco', [SalesOrderController::class, 'getco'])->name('getCO');
         Route::get('/salesorder/getalokasi/{id}', [SalesOrderController::class, 'getalokasiso'])->name('getAlokasiSO');
         Route::get('/salesorder/getdetail/{id}', [SalesOrderController::class, 'getdetail'])->name('getDetailSO');
+        Route::get('/exportso',[SalesOrderController::class, 'exportso'])->name('exportSO');
         Route::resource('salesorder', SalesOrderController::class);
         Route::get('/getum', [SalesOrderController::class, 'getUM'])->name('getum');
         Route::get('/getshipto', [SalesOrderController::class, 'getshipto'])->name('getShipTo');

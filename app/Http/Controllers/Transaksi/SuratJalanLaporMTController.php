@@ -40,6 +40,7 @@ class SuratJalanLaporMTController extends Controller
         $customer = Customer::get();
         $shipto = CustomerShipTo::get();
         $shipfrom = ShipFrom::get();
+        $so = SalesOrderMstr::get();
 
         if($request->customer){
             $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->customer);
@@ -64,10 +65,14 @@ class SuratJalanLaporMTController extends Controller
         if ($request->truck) {
             $data->where('sj_truck_id', $request->truck);
         }
+
+        if ($request->sonumber){
+            $data->where('sj_so_mstr_id', $request->sonumber);
+        }
         
         if(!$request->customer && !$request->shipfrom && 
            !$request->shipto && !$request->kapal && 
-           !$request->status && !$request->truck){
+           !$request->status && !$request->truck && !$request->sonumber){
 
             $data = $data->where('id',0)->paginate(10);
         }else{
@@ -75,7 +80,7 @@ class SuratJalanLaporMTController extends Controller
         }
 
 
-        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom'));
+        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom','so'));
     }
 
     public function laporsj($sj, $truck)
@@ -171,7 +176,6 @@ class SuratJalanLaporMTController extends Controller
                         ->first();
             
             $sjmstr->sj_bb_id = $bonus->id ?? null;
-            $sjmstr->save();
 
             // Get SO Mstr
             $somstr = SalesOrderMstr::query()
@@ -189,20 +193,26 @@ class SuratJalanLaporMTController extends Controller
             }
             
             // Kirim Qxtend
-            $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
-            if($pendinginvoice === false){
-                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($pendinginvoice == 'nourl'){
-                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($pendinginvoice[0] == 'error'){
-                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-                DB::rollback();
-                return back();
+            if($sjmstr->sj_sent_qad == 0){
+                $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
+                if($pendinginvoice === false){
+                    alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+                    DB::rollback();
+                    return back();
+                }elseif($pendinginvoice == 'nourl'){
+                    alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+                    DB::rollback();
+                    return back();
+                }elseif($pendinginvoice[0] == 'error'){
+                    alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+                    DB::rollback();
+                    return back();
+                }else{
+                    $sjmstr->sj_sent_qad = 1;
+                }
             }
+            
+            $sjmstr->save();
             
             DB::commit();
             alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');

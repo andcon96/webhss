@@ -86,7 +86,6 @@
             let dateto = $('#dateto').val();
             let driverid = $(this).find(':selected').val();
             
-            console.log(truckid, driverid);
             $.ajax({
                 url: url,
                 data: {

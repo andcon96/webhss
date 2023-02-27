@@ -48,6 +48,7 @@ class GenerateReportController extends Controller
         $report = $request->report;
         $tipetruck = $request->tipetruck;
         $domain = $request->domain;
+        $tipe = $request->tipe;
 
 
         switch ($request->aksi) {
@@ -67,7 +68,7 @@ class GenerateReportController extends Controller
                     return Excel::download(new ReportByTipeTruck($datefrom,$dateto,$tipetruck), 'ReportByTipeTruck.xlsx');
                 } elseif ($report == '6'){
                     // Report by Biaya Tambahan
-                    return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto), 'ReportBiayaTambahan.xlsx');
+                    return Excel::download(new ReportByBiayaTambahan($datefrom,$dateto,$tipe), 'ReportBiayaTambahan.xlsx');
                 }
                 break;
             case 2:
@@ -191,7 +192,8 @@ class GenerateReportController extends Controller
                 $nopol = $getData['nopol'];
                 $histcicilan = $getData['histcicilan'];
                 $driver = $getData['driver'];
-                // dd($histcicilan,$getData);
+                $tipetruck = $getData['tipetruck'];
+                // dd($tipetruck);
                 $pdf = PDF::loadview(
                     'transaksi.laporan.pdf.pdf-per-nopol',
                     [
@@ -203,6 +205,7 @@ class GenerateReportController extends Controller
                         'driver' => $driver,
                         'datefrom' => $datefrom,
                         'dateto' => $dateto,
+                        'tipetruck' => $tipetruck,
                     ]
                 )->setPaper([0, 0, 684, 792], 'Potrait');
                 // ->setPaper('A4', 'Potrait');

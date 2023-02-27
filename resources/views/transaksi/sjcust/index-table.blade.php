@@ -4,6 +4,7 @@
             <tr>
                 <th style="width:10%">Sales Order</th>
                 <th style="width:10%">SPK</th>
+                <th style="width:10%">Truck</th>
                 <th style="width:10%">Kapal</th>
                 <th style="width:20%">Customer</th>
                 <th style="width:15%">Ship To</th>
@@ -19,6 +20,7 @@
             <tr>
                 <td>{{$datas->getSOMaster->so_nbr}}</td>
                 <td>{{$datas->sj_nbr}}</td>
+                <td>{{$datas->getTruck->truck_no_polis ?? ''}}</td>
                 <td>{{$datas->getSOMaster->getCOMaster->co_kapal}}</td>
                 <td>{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- 
                     {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>

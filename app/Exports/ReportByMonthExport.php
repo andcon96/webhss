@@ -55,7 +55,7 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
             $rbhist->where('rb_truck_id',$truck);
         }
 
-        $rbhist = $rbhist->with('getTruck')->get();
+        $rbhist = $rbhist->with(['getTruck','getDetail'])->get();
 
         $openSPK = $openSPK->with('getDetail.getItem',
                                 'getSOMaster.getCOMaster.getCustomer',
@@ -81,7 +81,6 @@ class ReportByMonthExport implements FromView, WithColumnWidths, ShouldAutoSize,
         // Update Driver
         $getData = (new CreateTempTable())->getDataReportPerNopol($truck, $datefrom, $dateto, $driver);
         $histcicilan = $getData['histcicilan'];
-
 
         return view('transaksi.laporan.excel.report-date-range',
                         compact('data','datefrom','dateto','nopol','totalrb','rbhist','openSPK','histcicilan'));

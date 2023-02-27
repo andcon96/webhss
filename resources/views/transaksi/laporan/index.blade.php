@@ -141,10 +141,12 @@
             $('#btnpdf').prop('disabled',true);
             $('#btnexcel').prop('disabled',false);
         }else if(val == 6){
-            $('#truck,#domain,#tipetruck,#tipe').prop('disabled',true);
-            $('#truck,#domain,#tipetruck,#tipe').prop('required',false);
+            $('#truck,#domain,#tipetruck').prop('disabled',true);
+            $('#truck,#domain,#tipetruck').prop('required',false);
             $('#btnpdf').prop('disabled',true);
             $('#btnexcel').prop('disabled',false);
+            $('#tipe').prop('disabled',false);
+            $('#tipe').prop('required',true);
         }else{
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
