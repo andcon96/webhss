@@ -31,12 +31,12 @@ class ExportSPK implements FromCollection, ShouldAutoSize, WithMapping, WithHead
 
         $spk = SuratJalan::query()
                     ->with(['getSOMaster.getCOMaster.getCustomer','getTruck']);
-
+        
         if($sonbr){
             $spk->where('sj_so_mstr_id',$sonbr);
         }
         if($sjnbr){
-            $spk->where('sj_nbr',$sjnbr);
+            $spk->where('id',$sjnbr);
         }
         if($customer){
             $spk->whereRelation('getSOMaster.getCOMaster','co_cust_code',$customer);

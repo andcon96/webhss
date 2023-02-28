@@ -40,7 +40,7 @@ class ExportSalesOrder implements FromCollection, WithHeadings, ShouldAutoSize, 
             $so->where('so_ship_from',$shipfrom);
         }
         if($sonbr){
-            $so->where('so_nbr',$sonbr);
+            $so->where('id',$sonbr);
         }
         if($shipto){
             $so->where('so_ship_to',$shipto);
@@ -49,11 +49,11 @@ class ExportSalesOrder implements FromCollection, WithHeadings, ShouldAutoSize, 
             $so->where('so_status',$status);
         }
         if($customer){
-            $so->whereRelation('getCOMaster','co_cust_code',$conbr);
+            $so->whereRelation('getCOMaster','co_cust_code',$customer);
         }
 
         $so  = $so->get();
-
+        
         return $so;
     }
 

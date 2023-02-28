@@ -26,7 +26,7 @@ class ExportCustomerOrder implements FromCollection, WithHeadings, WithMapping, 
                     ->with(['getBarang', 'getCustomer']);
 
         if($conbr){
-            $co->where('co_nbr',$conbr);
+            $co->where('id',$conbr);
         }
         if($cust){
             $co->where('co_cust_code',$cust);
