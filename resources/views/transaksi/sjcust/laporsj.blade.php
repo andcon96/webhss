@@ -12,7 +12,7 @@
     <form action="{{ route('updateSJ') }}" method="POST" id="submit">
         @method('POST')
         @csrf
-        <input type="hidden" name="prevurl" value="{{url()->previous()}}">
+        <input type="hidden" name="prevurl" value="{{ url()->previous() }}">
         <div class="row">
             <div class="form-group row col-md-12">
                 <label for="sonbr" class="col-md-2 col-form-label text-md-right">Nomor SO</label>
@@ -61,7 +61,8 @@
                 <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
                 <div class="col-md-3">
                     <input id="duedate" type="text" class="form-control" name="duedate"
-                        value="{{ $data->getSOMaster->so_due_date }}" autocomplete="off" maxlength="24" autofocus disabled>
+                        value="{{ $data->getSOMaster->so_due_date }}" autocomplete="off" maxlength="24" autofocus
+                        disabled>
                 </div>
                 <label for="type" class="col-md-3 col-form-label text-md-right">Type</label>
                 <div class="col-md-3">
@@ -92,17 +93,20 @@
                 <div class="col-md-3">
                     <select id="listsangu" class="form-control" name="listsangu" required autofocus autocomplete="off">
                         <option value="">Select Data</option>
-                        @foreach ($rute->getAllActivePrice as $listsangu)
-                            <option value="{{ $listsangu->id }}" {{$data->sj_default_sangu_type == $listsangu->id ? 'Selected' : ''}}>
-                                Sangu : {{ $listsangu->history_sangu }}, Komisi :
-                                {{ $listsangu->history_ongkos }}</option>
-                        @endforeach
+                        @if ($rute->getAllActivePrice ?? null)
+                            @foreach ($rute->getAllActivePrice as $listsangu)
+                                <option value="{{ $listsangu->id }}"
+                                    {{ $data->sj_default_sangu_type == $listsangu->id ? 'Selected' : '' }}>
+                                    Sangu : {{ $listsangu->history_sangu }}, Komisi :
+                                    {{ $listsangu->history_ongkos }}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
                 <label for="sjcustomer" class="col-md-3 col-form-label text-md-right">SJ Customer</label>
                 <div class="col-md-3">
                     <input id="sjcustomer" type="text" class="form-control" name="sjcustomer" autocomplete="off"
-                       value="{{$data->sj_surat_jalan_customer}}" maxlength="24" autofocus>
+                        value="{{ $data->sj_surat_jalan_customer }}" maxlength="24" autofocus>
                 </div>
             </div>
             <div class="form-group row col-md-12">
@@ -127,7 +131,8 @@
                     <div class="float-right">
                         {{-- <a href="{{ route('laporsj.index',['truck' => $truck]) }}" id="btnback" class="btn btn-success bt-action">Back</a> --}}
                         <a href="{{ url()->previous() }}" id="btnback" class="btn btn-success bt-action">Back</a>
-                        <button type="submit" class="btn btn-success bt-action btn-focus btnconf" id="btnconf">Save</button>
+                        <button type="submit" class="btn btn-success bt-action btn-focus btnconf"
+                            id="btnconf">Save</button>
                         <button type="button" class="btn bt-action" id="btnloading" style="display:none">
                             <i class="fa fa-circle-o-notch fa-spin"></i> &nbsp;Loading
                         </button>
