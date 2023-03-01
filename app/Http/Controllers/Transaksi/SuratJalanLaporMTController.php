@@ -42,6 +42,7 @@ class SuratJalanLaporMTController extends Controller
         $shipto = CustomerShipTo::get();
         $shipfrom = ShipFrom::get();
         $so = SalesOrderMstr::get();
+        $sj = SuratJalan::get();
 
         if($request->customer){
             $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->customer);
@@ -70,10 +71,15 @@ class SuratJalanLaporMTController extends Controller
         if ($request->sonumber){
             $data->where('sj_so_mstr_id', $request->sonumber);
         }
+
+        if($request->sjnbr){
+            $data->where('id',$request->sjnbr);
+        }
         
         if(!$request->customer && !$request->shipfrom && 
            !$request->shipto && !$request->kapal && 
-           !$request->status && !$request->truck && !$request->sonumber){
+           !$request->status && !$request->truck && 
+           !$request->sonumber && !$request->sjnbr){
 
             $data = $data->where('id',0)->paginate(10);
         }else{
@@ -81,7 +87,7 @@ class SuratJalanLaporMTController extends Controller
         }
 
 
-        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom','so'));
+        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom','so','sj'));
     }
 
     public function laporsj($sj, $truck)
@@ -132,9 +138,10 @@ class SuratJalanLaporMTController extends Controller
             $totalkirim = 0;
             foreach($request->iddetail as $keys => $iddetail){
                 $sjddet = SuratJalanDetail::findOrFail($iddetail);
+                $sjddet->sjd_qty_akui = $request->qtyakui[$keys];
                 $sjddet->sjd_qty_angkut = $request->qtyangkut[$keys];
-                $sjddet->sjd_price = str_replace(',','',$request->price[$keys]);
-                $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
+                // $sjddet->sjd_price = str_replace(',','',$request->price[$keys]);
+                // $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
 
                 if($sjddet->sjd_qty_ship != $request->qtyship[$keys]){
                     // Update SO Detail
@@ -155,6 +162,7 @@ class SuratJalanLaporMTController extends Controller
 
                 $totalkirim += $request->qtyangkut[$keys];
             }
+            
             $floor_totalkirim = floor($totalkirim / 1000) * 1000;
 
             // Get Truck

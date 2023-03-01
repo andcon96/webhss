@@ -101,6 +101,7 @@ class ConfirmSuratJalanController extends Controller
             foreach ($request->iddetail as $keys => $iddetail) {
                 $sjddet = SuratJalanDetail::findOrFail($iddetail);
                 $sjddet->sjd_price = str_replace(',', '', $request->price[$keys]);
+                $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
                 $sjddet->save();
             }
 
