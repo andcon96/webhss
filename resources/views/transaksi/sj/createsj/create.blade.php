@@ -29,8 +29,8 @@
                                 data-shiptoid="{{ $listsos->getShipTo->id }}"
                                 data-type="{{ $listsos->getCOMaster->co_type }}"
                                 data-duedate="{{ $listsos->so_due_date }}"
-                                data-barang="{{$listsos->getCOMaster->getBarang->barang_deskripsi ?? ''}}"
-                                data-kapal="{{$listsos->getCOMaster->co_kapal}}"
+                                data-barang="{{ $listsos->getCOMaster->getBarang->barang_deskripsi ?? '' }}"
+                                data-kapal="{{ $listsos->getCOMaster->co_kapal }}"
                                 data-conbr="{{ $listsos->getCOMaster->co_nbr }}">{{ $listsos->so_nbr }} --
                                 {{ $listsos->getCOMaster->getCustomer->cust_desc ?? '' }}</option>
                         @endforeach
@@ -88,91 +88,38 @@
                 </div>
                 <label for="duedate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
-                    @php($today = \Carbon\Carbon::now()->toDateString())
-                    <input id="duedate" type="text" class="form-control" name="duedate" value="{{$today}}" required>
+                    @php($now = \Carbon\Carbon::now())
+                    @if ($now->format('H') >= 22 && $now->format('H') < 5)
+                        <input id="duedate" type="text" class="form-control" name="duedate"
+                            value="{{ $now->toDateString() }}" readonly>
+                    @else
+                        <input id="duedate" type="text" class="form-control duedate" name="duedate"
+                            value="{{ $now->toDateString() }}" required>
+                    @endif
                 </div>
             </div>
             <div class="form-group row col-md-12">
                 @include('transaksi.sj.createsj.create-table')
             </div>
             <div class="form-group row col-md-12">
-                <label for="truck" class="col-md-2 col-form-label text-md-right">Truck</label>
+                @include('transaksi.sj.createsj.listtruck-table')
+            </div>
+            <div class="form-group row col-md-12">
+                <label for="truck" class="col-md-3 col-form-label text-md-right">Truck</label>
                 <div class="col-md-3">
                     <select id="truck" class="form-control" name="truck" required autofocus autocomplete="off">
                         <option value=""> Select Data </option>
                         @foreach ($truck as $trucks)
                             <option value="{{ $trucks->id }}" data-typetruck="{{ $trucks->truck_tipe_id }}"
                                 data-pengurus="{{ $trucks->getUserPengurus->name ?? '' }}"
-                                data-domain="{{ $trucks->truck_domain }}">
+                                data-nopol="{{ $trucks->truck_no_polis }}" data-domain="{{ $trucks->truck_domain }}">
                                 {{ $trucks->truck_no_polis }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                <label for="pengurus" class="col-md-3 col-form-label text-md-right">Pengurus</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="pengurus" id="pengurus" readonly>
-                </div>
-            </div>
-            <div class="form-group row col-md-12">
-                <label for="catatansj" class="col-md-2 col-form-label text-md-right">SJ</label>
-                <div class="col-md-3">
-                    <input id="text" type="catatansj" class="form-control" name="catatansj" value=""
-                        autocomplete="off" maxlength="24">
-                </div>
-            </div>
-            <div class="form-group row col-md-12">
-                <label for="listsan" class="col-md-2 col-form-label text-md-right">List Sangu</label>
-                <div class="col-md-3">
-                    <select id="listsan" class="form-control" name="listsan" required autofocus autocomplete="off">
-                        <option value="">Select Data</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row col-md-12" id="container">
-                <label for="trip" class="col-md-2 col-form-label text-md-right">Tarif</label>
-                <div class="col-md-3">
-                    <input type="text" id="sangutruck" class="form-control" value="0" readonly>
-                </div>
-                <label for="defaultsangu" class="col-md-3 col-form-label text-md-right">Komisi Truck</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="komisitruck" id="komisitruck" value="0"
-                        readonly>
-                </div>
-            </div>
-            <div class="form-group row col-md-12">
-                <label for="trip" class="col-md-2 col-form-label text-md-right tonase">Price Per Unit</label>
-                <div class="col-md-3 tonase">
-                    <input type="text" id="defaultprice" class="form-control" value="0" readonly>
-                    <input type="hidden" id="defaultpriceid" name="defaultpriceid" value="">
-                </div>
-                <label for="defaultsangu" class="col-md-3 col-form-label text-md-right pricetot">Total Tarif</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="defaultsangu" id="defaultsangu" value="0"
-                        readonly>
-                </div>
-                <label for="truckdomain" class="col-md-3 col-form-label text-md-right">Truck Domain</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="truckdomain" id="truckdomain" readonly>
-                </div>
-            </div>
-            <div class="form-group row col-md-12">
-                <label for="trip" class="col-md-2 col-form-label text-md-right">Jumlah Trip</label>
-                <div class="col-md-3">
-                    <input type="number" class="form-control" name="trip" min="1" value="1"
-                        id="trip">
-                </div>
-                <label for="totsangu" class="col-md-3 col-form-label text-md-right">Sangu</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control sangu" name="totsangu" required id="totsangu">
-                </div>
-            </div>
-            <div class="form-group row col-md-12">
-                <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>
-                <div class="col-md-9">
-                    <input type="text" id="remark" class="form-control" name="remark">
-                </div>
-
+                <button class="btn bt-action newUser" id='btnadd' style="margin-left: 10px; width: 40px !important"
+                    disabled><i class="fa fa-plus"></i></button>
             </div>
             <div class="form-group row col-md-12">
                 <div class="offset-md-1 col-md-10" style="margin-top:90px;">
@@ -198,7 +145,7 @@
             width: '100%'
         });
 
-        $("#duedate").datepicker({
+        $(".duedate").datepicker({
             dateFormat: 'yy-mm-dd'
         });
         $('#btnconf').hide();
@@ -245,6 +192,7 @@
                     $('.pricetot').removeClass('col-md-3');
                     $('.pricetot').addClass('col-md-2');
                     $('#container').css('display', '');
+                    $('#btnadd').prop('disabled', false);
                 },
                 error: function(data) {
                     Swal.fire({
@@ -262,125 +210,65 @@
             })
         });
 
-        var sum = 0;
-        var tipebarang = $('#type').val();
+        $(document).on('click', '#btnadd', function(e) {
+            e.preventDefault();
 
-        function getDefaultSangu() {
-            var tipebarang = $('#type').val();
+            let truck = $('#truck').val();
+            if (!truck) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    html: 'Silahkan pilih truck terlebih dahulu',
+                    showCloseButton: true,
+                });
+                return;
+            }
 
-            sum = 0;
-            // $('.qtysj').each(function(){
-            //     sum += parseFloat(this.value);
-            // });
-            sum = $('#trip').val();
+            let nopol = $('#truck').find(':selected').data('nopol');
+            let type = $('#type').val();
 
-            var hsangu = $('#sangutruck').val();
-            var hkomisi = $('#komisitruck').val();
+            let qty = type == "BERAT" ? "25000" : "1";
 
-            let total = (parseInt(hsangu.replace(',', '')) + parseInt(hkomisi.replace(',', ''))) * sum;
+            let output = '';
+            output += '<tr>';
+            output += '<td>' + nopol + '<input type="hidden" name="idtruck[]" value="' + truck + '"></td>';
+            output += '<td><input type="number" class="form-control qtyord" value="' + qty +
+                '" name="qtyord[]" "></td>';
+            output += '<td><input type="text" class="form-control sj" name="sj[]"></td>';
+            output +=
+                '<td><button class="btn btn-danger delrow" style="margin-left: 10px; width: 40px !important"><i class="fa fa-trash"></i></button></td>';
+            output += '</tr>';
 
-            total = Number(total).toLocaleString('en-US');
+            $('#listtruck').append(output);
 
-            $('#defaultsangu').val(total);
-        }
-
-        $('.tonase').css('display', 'none');
-        $('.pricetot').removeClass('col-md-3');
-        $('.pricetot').addClass('col-md-2');
-
-        $(document).on('change keyup', '.qtysj,#trip', function() {
-            getDefaultSangu();
         });
 
-        $(document).on('change', '#truck', function() {
-            let truck = $(this).val();
-            var typetruck = $(this).find(':selected').data('typetruck');
-            var pengurus = $(this).find(':selected').data('pengurus');
-            var domain = $(this).find(':selected').data('domain');
-            var shipfrom = $('#shipfromid').val();
-            var shipto = $('#shiptoid').val();
-            var trip = $('#trip').val();
-
-            $.ajax({
-                url: "{{ route('getRute') }}",
-                data: {
-                    tipetruck: typetruck,
-                    shipto: shipto,
-                    shipfrom: shipfrom
-                },
-                success: function(data) {
-                    console.log(data);
-
-                    let output = '<option value=""> Select Data </option>';
-
-                    data.forEach(element => {
-                        console.log(element['id']);
-                        output += `<option value="${element['id']}"
-                                data-sangu="${element['history_sangu']}"
-                                data-komisi="${element['history_ongkos']}"
-                                data-harga="${element['history_harga']}">
-
-                                Sangu : ${element['history_sangu']} , Komisi : ${element['history_ongkos']}
-                                
-                                </option>`;
-                    });
-
-                    $('#listsan').html('').append(output);
-                },
-                error: function(data) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        html: 'Gagal mencari data',
-                        showCloseButton: true,
-                    })
-                    $('#btnconf').hide();
-                }
-            })
-
-            $('#pengurus').val(pengurus);
-            $('#truckdomain').val(domain);
-        });
-
-        $(document).on('change', '#listsan',function(){
-            let sangu = $(this).find(':selected').data('sangu');
-            let komisi = $(this).find(':selected').data('komisi');
-            let harga = $(this).find('').data('harga');
-            let id = $(this).find(':selected').val();
-
-            $('#sangutruck').val(Number(sangu).toLocaleString('en-US'));
-            $('#komisitruck').val(Number(komisi).toLocaleString('en-US'))
-            $('#defaultprice').val(Number(harga).toLocaleString('en-US'));
-            $('#defaultpriceid').val(id);
-            getDefaultSangu();
+        $(document).on('click', '.delrow', function(e) {
+            $(this).closest("tr").remove();
         });
 
         $(document).on('click', '#btnconf', function(e) {
             e.preventDefault();
-            let totaltarif = $('#defaultsangu').val();
 
-            if (totaltarif == 0) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    html: 'Total Tarif tidak boleh 0, Silahkan cek kembali',
-                    showCloseButton: true,
-                })
-            } else {
-                document.getElementById('btnconf').style.display = 'none';
-                document.getElementById('btnback').style.display = 'none';
-                document.getElementById('btnloading').style.display = '';
+            Swal.fire({
+                title: "Submit Data ?",
+                text: "Data akan dicancel dan tidak bisa diulang",
+                type: "warning",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Confirm",
+                closeOnConfirm: false
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    document.getElementById('btnconf').style.display = 'none';
+                    document.getElementById('btnback').style.display = 'none';
+                    document.getElementById('btnloading').style.display = '';
 
-                $('#submit').submit();
-            }
-        });
-
-        $(document).on('keyup', '.sangu', function() {
-            var data = $(this).val();
-
-            var newdata = data.replace(/([^ 0-9])/g, '');
-
-            $(this).val(Number(newdata).toLocaleString('en-US'));
+                    $('#submit').submit();
+                }
+            })
         });
     </script>
 @endsection

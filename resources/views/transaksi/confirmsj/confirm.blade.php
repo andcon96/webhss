@@ -3,13 +3,13 @@
 @section('menu_name', 'Sales Order Maintenance')
 @section('breadcrumbs')
     <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="{{ url('/') }}">Master</a></li>
-        <li class="breadcrumb-item active">Pelaporan Trip</li>
+        <li class="breadcrumb-item"><a href="{{ url('/') }}">Transaksi</a></li>
+        <li class="breadcrumb-item active">Confirm Surat Jalan</li>
     </ol>
 @endsection
 
 @section('content')
-    <form action="{{ route('updateSJ') }}" method="POST" id="submit">
+    <form action="{{Route('saveConfrimSO')}}" method="POST" id="submit">
         @method('POST')
         @csrf
         <input type="hidden" name="prevurl" value="{{url()->previous()}}">
@@ -120,10 +120,10 @@
                 </div>
             </div>
             <div class="form-group row col-md-12">
-                @include('transaksi.sjcust.laporsj-table-detail')
+                @include('transaksi.confirmsj.confirm-table')
             </div>
             <div class="form-group row col-md-12">
-                <div class="offset-md-1 col-md-10" style="margin-top:90px;">
+                <div class="offset-md-1 col-md-10" style="margin-top:30px;">
                     <div class="float-right">
                         {{-- <a href="{{ route('laporsj.index',['truck' => $truck]) }}" id="btnback" class="btn btn-success bt-action">Back</a> --}}
                         <a href="{{ url()->previous() }}" id="btnback" class="btn btn-success bt-action">Back</a>
@@ -156,51 +156,12 @@
             width: '100%'
         });
 
-        function getDefaultSangu() {
-            var tipebarang = $('#type').val();
-
-            sum = 0;
-            sum = $('#jmlhtrip').val();
-
-            var hsangu = $('#defaultsangu').val();
-            var hkomisi = $('#defaultkomisi').val();
-
-            let total = (parseInt(hsangu.replace(',', '')) + parseInt(hkomisi.replace(',', ''))) * sum;
-
-            total = Number(total).toLocaleString('en-US');
-
-            $('#totsangu').val(total);
-        }
-
-
-        $(document).on('change keyup', '#jmlhtrip', function() {
-            getDefaultSangu();
-
-            let jmltrip = $(this).val();
-
-            $('.qtyship').each(function(i, obj) {
-                let oldqty = $(this).closest('tr').find('.oldship').val();
-                $(this).val(oldqty * jmltrip);
-            });
-        });
-
         $(document).on('change', '#harga', function() {
             var value = $(this).find(':selected').val();
 
             $('.price').val(value);
 
             value == 'Custom' ? $('.price').prop('readonly', false) : $('.price').prop('readonly', true)
-        });
-
-        $(document).on('keyup', '.sangu', function() {
-            letterRegex = /[^\0-9\,]/;
-            var data = $(this).val();
-
-            var newdata = data.replace(/([^0-9])/g, '');
-
-            console.log(Number(newdata).toLocaleString('en-US'));
-
-            $(this).val(Number(newdata).toLocaleString('en-US'));
         });
 
         $(document).on('submit', '#submit', function(e) {
@@ -211,11 +172,11 @@
 
         $(document).on('click', '.btnconf', function(e) {
             e.preventDefault();
-            let data = $('#listsangu').val();
-            if (!data) {
+            let harga = $('.price').val();
+            if (!harga) {
                 swal.fire({
                     title: 'Warning',
-                    text: 'List Sangu Harus diisi',
+                    text: 'Harga Harus Diisi',
                     type: 'warning',
                     icon: 'info',
                     confirmButtonText: 'OK'

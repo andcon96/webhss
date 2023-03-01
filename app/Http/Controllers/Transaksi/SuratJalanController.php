@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Transaksi;
 
 use App\Exports\ExportSPK;
 use App\Http\Controllers\Controller;
-use App\Models\Master\BonusBarang;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
-use App\Models\Master\Domain;
 use App\Models\Master\Item;
 use App\Models\Master\Prefix;
 use App\Models\Master\Rute;
@@ -15,16 +13,13 @@ use App\Models\Master\ShipFrom;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderDetail;
 use App\Models\Transaksi\SalesOrderMstr;
-use App\Models\Transaksi\SJHistTrip;
 use App\Models\Transaksi\SuratJalan;
 use App\Models\Transaksi\SuratJalanDetail;
 use App\Services\CreateTempTable;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SuratJalanController extends Controller
@@ -65,7 +60,7 @@ class SuratJalanController extends Controller
         }
 
 
-        $data = $data->paginate(10);
+        $data = $data->orderBy('id','DESC')->paginate(10);
         
         return view('transaksi.sj.index',compact('data','listcust','listso','listsj','truck'));
     }
@@ -74,65 +69,55 @@ class SuratJalanController extends Controller
     {
         DB::beginTransaction();
         try{
-            $getSJ = (new CreateTempTable())->getrnsj();
-            if($getSJ === false){
-                alert()->error('Error', 'Gagal mengambil nomor SJ')->persistent('Dismiss');
-                return back();
-            }
-
-            $sjmstr = new SuratJalan();
-            $sjmstr->sj_so_mstr_id = $request->soid;
-            $sjmstr->sj_nbr = $getSJ;
-            // $sjmstr->sj_eff_date = Carbon::now()->toDateString();
-            $sjmstr->sj_eff_date = $request->duedate;
-            $sjmstr->sj_remark = $request->remark;
-            $sjmstr->sj_status = "Open";
-            // $sjmstr->sj_status = "Selesai";
-            $sjmstr->sj_truck_id = $request->truck;
-            $sjmstr->sj_jmlh_trip = $request->trip;
-            $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
-            $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
-            $sjmstr->sj_default_sangu_type = $request->defaultpriceid;
-            $sjmstr->sj_surat_jalan = $request->catatansj;
-            $sjmstr->save();
-
-            $id = $sjmstr->id;
-            foreach($request->line as $key => $datas){
-                if($request->qtysj[$key] > 0){
+            foreach($request->idtruck as $flag => $trucks){
+                $getSJ = (new CreateTempTable())->getrnsj();
+                if($getSJ === false){
+                    alert()->error('Error', 'Gagal mengambil nomor SJ')->persistent('Dismiss');
+                    return back();
+                }
+    
+                $sjmstr = new SuratJalan();
+                $sjmstr->sj_so_mstr_id = $request->soid;
+                $sjmstr->sj_nbr = $getSJ;
+                $sjmstr->sj_eff_date = $request->duedate;
+                $sjmstr->sj_remark = $request->remark;
+                $sjmstr->sj_status = "Open";
+                $sjmstr->sj_truck_id = $trucks;
+                $sjmstr->sj_jmlh_trip = 1; // Default 1
+                $sjmstr->sj_tot_sangu = 0; // Default 0 
+                $sjmstr->sj_surat_jalan = $request->sj[$flag];
+                $sjmstr->save();
+    
+                $id = $sjmstr->id;
+                foreach($request->line as $key => $datas){
                     $sjdet = new SuratJalanDetail();
                     $sjdet->sjd_sj_mstr_id = $id;
                     $sjdet->sjd_line = $datas;
                     $sjdet->sjd_part = $request->part[$key];
-                    $sjdet->sjd_qty_ship = $request->qtysj[$key];
+                    $sjdet->sjd_qty_ship = $request->qtyord[$flag];
                     $sjdet->sjd_qty_conf = 0;
                     $sjdet->save();
-
+    
                     $sodet = SalesOrderDetail::query()
                                             ->where('sod_so_mstr_id',$request->soid)
                                             ->where('sod_line',$datas)
                                             ->where('sod_part',$request->part[$key])
                                             ->firstOrFail();
-                    if($sodet->sod_qty_ship + $request->qtysj[$key] > $sodet->sod_qty_ord){
+                    if($sodet->sod_qty_ship + $request->qtyord[$flag] > $sodet->sod_qty_ord){
                         DB::rollBack();
                         alert()->error('Error', 'Data gagal disimpan, Qty sudah berubah')->persistent('Dismiss');
                         return back();
                     }
-                    $sodet->sod_qty_ship = $sodet->sod_qty_ship + $request->qtysj[$key];
+                    $sodet->sod_qty_ship = $sodet->sod_qty_ship + $request->qtyord[$flag];
                     $sodet->save();
                 }
+                
+                $prefix = Prefix::firstOrFail();
+                $prefix->prefix_sj_rn = substr($getSJ,2,6);
+                $prefix->save();
             }
-            
-            $prefix = Prefix::firstOrFail();
-            $prefix->prefix_sj_rn = substr($getSJ,2,6);
-            $prefix->save();
-
-            // $newdata = new SJHistTrip();
-            // $newdata->sjh_sj_mstr_id = $id;
-            // $newdata->sjh_truck = $request->truck;
-            // $newdata->save();
-
             DB::commit();
-            alert()->success('Success', 'Surat Jalan : '.$getSJ.' berhasil dibuat')->persistent('Dismiss');
+            alert()->success('Success', 'Surat Jalan berhasil dibuat')->persistent('Dismiss');
             return back();
         }catch(Exception $e){
             DB::rollBack();
@@ -166,19 +151,9 @@ class SuratJalanController extends Controller
         try{
             $sjmstr = SuratJalan::findOrFail($request->idmaster);
             $this->authorize('update',[SuratJalan::class, $sjmstr]);
-            $sjmstr->sj_default_sangu = str_replace(',','',$request->defaultsangu);
-            $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
-            $sjmstr->sj_jmlh_trip = $request->trip;
-            if($sjmstr->sj_truck_id != $request->truck){
-                $hist = SJHistTrip::where('sjh_sj_mstr_id',$request->idmaster)->first();
-                if($hist){
-                    alert()->error('Error', 'Save Gagal, Truck tidak dapat dirubah karena sudah ada history trip')->persistent('Dismiss');
-                    DB::rollback();
-                    return back();
-                }else{
-                    $sjmstr->sj_truck_id = $request->truck;
-                }
-            }
+            
+            $sjmstr->sj_truck_id = $request->truck;
+            
             $sjmstr->sj_eff_date = $request->effdate;
             $sjmstr->sj_default_sangu_type = $request->sj_default_sangu_type;
             $sjmstr->sj_surat_jalan = $request->catatansj;
@@ -298,13 +273,9 @@ class SuratJalanController extends Controller
                 $output .= '<td data-label="Item">'.$datas->sod_part.' - '.$datas->getItem->item_desc.'</td>';
                 $output .= '<td data-label="UM">'.$datas->getItem->item_um.'</td>';
                 $output .= '<td data-label="Qty Ord">'.(int)$datas->sod_qty_ord.'</td>';
-                $output .= '<td data-label="Qty Open">'.$qtysisa.'</td>';
-                $output .= '<td data-label="Qty SJ">
-                            <input type="number" name="qtysj[]" max="'.$qtyopen.'" 
-                                    value="'.$qtyopen.'" required class="form-control qtysj" '.$status.'>
-                            <input type="hidden" '.$status.' name="line[]" value="'.$datas->sod_line.'">
-                            <input type="hidden" '.$status.' name="part[]" value="'.$datas->sod_part.'">        
-                            </td>';
+                $output .= '<td data-label="Qty Open">'.$qtysisa.'
+                <input type="hidden" '.$status.' name="line[]" value="'.$datas->sod_line.'">
+                <input type="hidden" '.$status.' name="part[]" value="'.$datas->sod_part.'"> </td>';
                 $output .= '</tr>';
             }
         }

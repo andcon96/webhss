@@ -147,7 +147,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
+          {{-- <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Lapor Trip Maintenance') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbTripLapor">
@@ -155,13 +155,23 @@
                 <div class="slider round"></div>
               </label>
             </div>
-          </div>
+          </div> --}}
 
           <div class="form-group row">
             <label for="level" class="col-md-6 col-form-label text-md-right">{{ __('Lapor Surat Jalan') }}</label>
             <div class="col-md-6">
               <label class="switch" for="cbSJLapor">
                 <input type="checkbox" id="cbSJLapor" name="cbSJLapor" value="TR03" />
+                <div class="slider round"></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="cbConfirmSJ" class="col-md-6 col-form-label text-md-right">{{ __('Confirm Surat Jalan') }}</label>
+            <div class="col-md-6">
+              <label class="switch" for="cbConfirmSJ">
+                <input type="checkbox" id="cbConfirmSJ" name="cbConfirmSJ" value="TR06" />
                 <div class="slider round"></div>
               </label>
             </div>
@@ -575,9 +585,8 @@
             search : idrole,
           },
           success:function(data){
-            // /alert(data);
+            // alert(data);
             var totmenu = data;
-            
             // Centang Checkbox berdasarkan data
 
             if(totmenu.search("SO01") >= 0){
@@ -605,11 +614,11 @@
             }else{
               document.getElementById("cbTripBrowse").checked = false;
             }
-            if(totmenu.search("TR02") >= 0){
-              document.getElementById("cbTripLapor").checked = true;  
-            }else{
-              document.getElementById("cbTripLapor").checked = false;
-            }
+            // if(totmenu.search("TR02") >= 0){
+            //   document.getElementById("cbTripLapor").checked = true;  
+            // }else{
+            //   document.getElementById("cbTripLapor").checked = false;
+            // }
             if(totmenu.search("TR03") >= 0){
               document.getElementById("cbSJLapor").checked = true;  
             }else{
@@ -625,6 +634,12 @@
             }else{
               document.getElementById("cbBiaya").checked = false;
             }
+            if(totmenu.search("TR06") >= 0){
+              document.getElementById("cbConfirmSJ").checked = true;  
+            }else{
+              document.getElementById("cbConfirmSJ").checked = false;
+            }
+
             if(totmenu.search("DR01") >= 0){
               document.getElementById("cbDRInOut").checked = true;  
             }else{

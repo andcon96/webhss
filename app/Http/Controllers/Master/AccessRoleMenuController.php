@@ -84,6 +84,7 @@ class AccessRoleMenuController extends Controller
         $cbSJLapor = $request->input('cbSJLapor');
         $cbKerusakan = $request->input('cbKerusakan');
         $cbBiaya = $request->input('cbBiaya');
+        $cbConfirmSJ = $request->input('cbConfirmSJ');
 
         // Menu Driver
         $cbDRInOut = $request->input('cbDRInOut');
@@ -123,7 +124,7 @@ class AccessRoleMenuController extends Controller
 
         $data = $cbSOMT . $cbCOMT . $cbSJMT . $cbTripBrowse . $cbTripLapor . 
                 $cbSJLapor . $cbKerusakan . $cbDRInOut. $cbBiaya.
-                $cbCicilan . $cbBayarCicilan .
+                $cbCicilan . $cbBayarCicilan . $cbConfirmSJ.
                 $cbRPMT . $cbMT01 . $cbMT02 . $cbMT03 . $cbMQ01.
                 $cbMQ02 . $cbMT06 . $cbMQ03 . $cbMT08 . $cbMT09.
                 $cbMT10 . $cbMT11 . $cbMT12 . $cbMQ04 . $cbMT14.

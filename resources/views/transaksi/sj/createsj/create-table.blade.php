@@ -7,7 +7,6 @@
                 <th width="7%">UM</th>
                 <th width="12%">Qty Order</th>
                 <th width="12%">Qty Open</th>
-                <th width="16%">Qty SJ</th>
             </tr>
         </thead>
         <tbody id="addtable">

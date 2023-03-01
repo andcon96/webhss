@@ -41,6 +41,7 @@ use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Http\Controllers\Transaksi\CicilanHistoryController;
+use App\Http\Controllers\Transaksi\ConfirmSuratJalanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -134,8 +135,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('browsepolis', BrowsePolisController::class);
     });
 
-    Route::group(['middleware'=>'can:access_lapor_trip'], function(){
-        Route::resource('laportrip', TripLaporMTController::class);
+    // Not Used
+    // Route::group(['middleware'=>'can:access_lapor_trip'], function(){
+    //     Route::resource('laportrip', TripLaporMTController::class);
+    // });
+
+    Route::group(['middleware'=>'can:access_confirm_sj'], function(){
+        Route::resource('confirmsj', ConfirmSuratJalanController::class);
+        Route::get('confirmsj/{sj}/{truck}', [ConfirmSuratJalanController::class, 'confirmsj'])->name('ConfirmSJ');
+        Route::post('confirmsj', [ConfirmSuratJalanController::class, 'saveconfirmsj'])->name('saveConfrimSO');
     });
 
     Route::group(['middleware'=>'can:access_lapor_sj'], function(){

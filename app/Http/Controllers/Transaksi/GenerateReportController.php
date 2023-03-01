@@ -193,7 +193,7 @@ class GenerateReportController extends Controller
                 $histcicilan = $getData['histcicilan'];
                 $driver = $getData['driver'];
                 $tipetruck = $getData['tipetruck'];
-                // dd($tipetruck);
+                
                 $pdf = PDF::loadview(
                     'transaksi.laporan.pdf.pdf-per-nopol',
                     [

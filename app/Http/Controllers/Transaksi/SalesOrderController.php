@@ -394,6 +394,7 @@ class SalesOrderController extends Controller
 
     public function exportso(Request $request)
     {
+        // dd($request->all());
         return Excel::download(new ExportSalesOrder($request->s_sonumber, $request->s_conumber, $request->s_shipfrom, 
         $request->s_shipto, $request->s_customer, $request->s_status), 'Sales Order.xlsx');
     }
