@@ -11,6 +11,7 @@
                 <th>Due Date</th>
                 <th>Status</th>
                 <th>Remarks CO</th>
+                <th>Remarks SO</th>
                 <th width="13%">Action</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@
                 <td data-label="SO DUE DATE">{{$datas->so_due_date}}</td>
                 <td data-label="SO STATUS">{{$datas->so_status}}</td>
                 <td data-label="CO REMARKS">{{$datas->getCOMaster->co_remark}}</td>
+                <td data-label="CO REMARKS">{{$datas->so_remark}}</td>
                 <td>
                     <a href="" class="viewModal" data-id="{{$datas->id}}" data-sonbr="{{$datas->so_nbr}}"
                         data-cust="{{$datas->getCOMaster->co_cust_code}}" data-type="{{$datas->getCOMaster->co_type}}" 
