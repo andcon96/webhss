@@ -28,7 +28,7 @@ class InvoiceMTController extends Controller
     {
         $list_invoice = InvoiceMaster::with('getDetail')->get();
         $list_sonbr = SalesOrderMstr::all();
-        $data = InvoiceMaster::with('getDetail','getSalesOrder')->paginate(10);
+        $data = InvoiceMaster::with('getDetail','getSalesOrder')->orderBy('id','DESC')->paginate(10);
 
         return view('transaksi.invoice.index', compact('data','list_invoice','list_sonbr'));
     }
