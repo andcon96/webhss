@@ -123,12 +123,21 @@
                             <label for="domain" class="col-md-3 col-form-label text-md-right">{{ __('Domain') }}</label>
                             <div class="col-md-7">
                                 <select id="domain" class="form-control domain" name="domain" autofocus required autocomplete="off">
-                                    
                                     @foreach($domain as $dm)
                                     <option value="{{$dm->domain_code}}">{{$dm->domain_code}} -- {{$dm->domain_desc}}</option>
                                     @endforeach
                                 </select>
-                                
+                            </div>
+                        </div>
+                        <div class="form-group row rowsubdom">
+                            <label for="subdom" class="col-md-3 col-form-label text-md-right">{{ __('Sub Domain') }}</label>
+                            <div class="col-md-7">
+                                <select id="subdom" class="form-control subdom" name="subdom" autofocus autocomplete="off">
+                                    <option value="">Select Data</option>
+                                    @foreach($subdomain as $sd)
+                                    <option value="{{$sd->sd_sub_domain_code}}">{{$sd->sd_sub_domain_code}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -236,15 +245,11 @@
 @section('scripts')
 
 <script type="text/javascript">
-    
-    $('.domain, .driver, #s_truck, .user, #s_tipe').select2({
+    $('.rowsubdom').hide();
+
+    $('.domain, .driver, #s_truck, .user, #s_tipe, .subdom').select2({
         width: '100%'
     });
-
-    // $(document).on('click', '.newRole', function() {
-    //     document.getElementById('role').value = '';
-    //     document.getElementById('desc').value = '';
-    // });
 
     $(document).on('click', '.deleteRole', function() { // Click to only happen on announce links
 
@@ -269,6 +274,12 @@
     
     $(document).on('click', '#btnrefresh', function(){
         resetSearch();
+    });
+
+    $(document).on('change', '.domain', function(){
+        let value = $(this).val();
+        
+        value == "SPJS" ? $('.rowsubdom').show() : $('.rowsubdom').hide(); 
     });
 
     $(document).ready(function(){

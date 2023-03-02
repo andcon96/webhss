@@ -53,7 +53,18 @@
                 @endforeach
             </select>
         </div>
-        <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
+        <label for="subdom" class="col-md-3 col-form-label text-md-right">{{ __('Sub Domain') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="subdom" class="form-control" name="subdom" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($subdomain as $subdomains)
+                <option value="{{$subdomains->truck_sub_domain}}">{{$subdomains->truck_sub_domain}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="form-group row col-md-12">
+        <label for="tipetruck" class="col-md-2 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="tipetruck" class="form-control" name="tipetruck" autofocus autocomplete="off" required>
                 <option value=""> Select Data </option>
@@ -62,9 +73,7 @@
                 @endforeach
             </select>
         </div>
-    </div>
-    <div class="form-group row col-md-12">
-        <label for="tipe" class="col-md-2 col-md-label text-md-right">Tipe</label>
+        <label for="tipe" class="col-md-3 col-md-label text-md-right">Tipe</label>
         <div class="col-md-4 col-lg-3">
             <select name="tipe" id="tipe" class="form-control" required autocomplete="off">
                 <option value="">Select Data</option>
@@ -93,7 +102,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#truck,#report,#domain,#tipetruck,#tipe').select2({
+    $('#truck,#report,#domain,#tipetruck,#tipe,#subdom').select2({
         width: '100%',
     });
 
@@ -109,7 +118,7 @@
         }
     });
     
-    $('#truck, #domain, #tipetruck, #tipe').prop('disabled',true);
+    $('#truck, #domain, #tipetruck, #tipe, #subdom').prop('disabled',true);
 
     $('#report').on('change', function(){
         let val = $(this).val();
@@ -118,7 +127,7 @@
             $('#truck').prop('disabled',false);
             $('#truck').prop('required',true);
             
-            $('#domain,#tipetruck,#tipe').prop('disabled',true);
+            $('#domain,#tipetruck,#tipe,#subdom').prop('disabled',true);
             $('#domain,#tipetruck,#tipe').prop('required',false);
             $('#btnpdf').prop('disabled',false);
             $('#btnexcel').prop('disabled',true);
@@ -127,12 +136,12 @@
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
 
-            $('#tipe,#domain').prop('disabled',false);
+            $('#tipe,#domain,#subdom').prop('disabled',false);
             $('#tipe,#domain').prop('required',true);
             $('#btnexcel').prop('disabled',false);
 
         }else if(val == 5){
-            $('#truck,#domain,#tipe').prop('disabled',true);
+            $('#truck,#domain,#tipe,#subdom').prop('disabled',true);
             $('#truck,#domain,#tipe').prop('required',false);
             
             $('#tipetruck').prop('disabled',false);
@@ -141,7 +150,7 @@
             $('#btnpdf').prop('disabled',true);
             $('#btnexcel').prop('disabled',false);
         }else if(val == 6){
-            $('#truck,#domain,#tipetruck').prop('disabled',true);
+            $('#truck,#domain,#tipetruck,#subdom').prop('disabled',true);
             $('#truck,#domain,#tipetruck').prop('required',false);
             $('#btnpdf').prop('disabled',true);
             $('#btnexcel').prop('disabled',false);
@@ -151,7 +160,7 @@
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
 
-            $('#domain').prop('disabled',false);
+            $('#domain,#subdom').prop('disabled',false);
             $('#domain').prop('required',true);
             $('#btnpdf').prop('disabled',false);
             $('#btnexcel').prop('disabled',false);

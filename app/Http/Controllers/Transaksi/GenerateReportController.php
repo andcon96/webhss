@@ -28,6 +28,7 @@ class GenerateReportController extends Controller
         $truck = Truck::query()->with('getDomain');
         $domain = Domain::query();
         $tipetruck = TipeTruck::get();
+        $subdomain = Truck::whereNotNull('truck_sub_domain')->groupBy('truck_sub_domain')->get();
 
         if($domainUser){
             $truck->whereRelation('getDomain','id',$domainUser);
@@ -37,7 +38,7 @@ class GenerateReportController extends Controller
         $truck = $truck->get();
         $domain = $domain->get();
 
-        return view('transaksi.laporan.index', compact('truck', 'domain', 'tipetruck'));
+        return view('transaksi.laporan.index', compact('truck', 'domain', 'tipetruck', 'subdomain'));
     }
 
     public function reportsangu(Request $request)
@@ -48,6 +49,7 @@ class GenerateReportController extends Controller
         $report = $request->report;
         $tipetruck = $request->tipetruck;
         $domain = $request->domain;
+        $subdomain = $request->subdom;
         $tipe = $request->tipe;
 
 
@@ -59,10 +61,10 @@ class GenerateReportController extends Controller
                     // return Excel::download(new ReportByMonthExport($datefrom, $dateto, $truck), 'ReportByMonth.xlsx');
                 } elseif ($report == '3') {
                     // Loosing HSST
-                    return Excel::download(new ReportLoosingHSST($datefrom, $dateto), 'ReportLoosingHSST.xlsx');
+                    return Excel::download(new ReportLoosingHSST($datefrom, $dateto, $domain, $subdomain), 'ReportLoosingHSST.xlsx');
                 } elseif ($report == '4') {
                     // Totalan Supir Loosing HSST
-                    return Excel::download(new ReportTotalanSupirLoosingHSST($datefrom, $dateto), 'ReportTotalSupirLoosingHSST.xlsx');
+                    return Excel::download(new ReportTotalanSupirLoosingHSST($datefrom, $dateto, $domain, $subdomain), 'ReportTotalSupirLoosingHSST.xlsx');
                 } elseif ($report == '5'){
                     // Report by Tipe Truck
                     return Excel::download(new ReportByTipeTruck($datefrom,$dateto,$tipetruck), 'ReportByTipeTruck.xlsx');

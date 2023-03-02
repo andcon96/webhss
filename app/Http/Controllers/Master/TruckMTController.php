@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use App\Models\Master\Domain;
+use App\Models\Master\SubDomain;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
 use App\Models\Master\User;
@@ -25,6 +26,7 @@ class TruckMTController extends Controller
         $truck = Truck::get();
         $tipe = TipeTruck::get();
         $user = User::get();
+        $subdomain = SubDomain::get();
 
         if($request->s_truck){
             $data->where('id',$request->s_truck);
@@ -36,7 +38,7 @@ class TruckMTController extends Controller
         $domain = Domain::groupBy('domain_code')->get();
         $data = $data->orderBy('truck_domain')->orderBy('truck_no_polis')->paginate(10);
 
-        return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck, 'tipe' => $tipe,'domain' => $domain]);
+        return view('setting.truck.index',['data' => $data, 'user' => $user, 'truck' => $truck, 'tipe' => $tipe,'domain' => $domain, 'subdomain' => $subdomain]);
     }
 
     /**
@@ -55,6 +57,7 @@ class TruckMTController extends Controller
         $newTruck->truck_user_id = $request->driver ?? null;
         $newTruck->truck_pengurus_id = $request->pengurus ?? null;
         $newTruck->truck_tipe_id = $request->tipetruck;
+        $newTruck->truck_sub_domain = $request->subdom;
         $newTruck->save();
 
         
@@ -67,7 +70,9 @@ class TruckMTController extends Controller
         $user = User::get();
         $tipetruck = TipeTruck::get();
         $domain = Domain::groupby('domain_code')->get();
-        return view('setting.truck.edit',['data' => $data, 'user' => $user, 'domain' => $domain,'tipetruck' => $tipetruck]);
+        $subdomain = SubDomain::get();
+
+        return view('setting.truck.edit',['data' => $data, 'user' => $user, 'domain' => $domain,'tipetruck' => $tipetruck, 'subdomain' => $subdomain]);
     }
 
 
@@ -84,6 +89,7 @@ class TruckMTController extends Controller
             $driver = $request->driver;
             $pengurus = $request->pengurus;
             $domain = $request->domain;
+            $subdomain = $request->subdomain;
             DB::beginTransaction();
     
             try{
@@ -94,6 +100,7 @@ class TruckMTController extends Controller
                 $truck->truck_user_id = $driver;
                 $truck->truck_pengurus_id = $pengurus;
                 $truck->truck_tipe_id = $request->tipetruck;
+                $truck->truck_sub_domain = $request->subdomain;
                 if ($truck->isDirty()) {
                     $truck->save();
                 }
