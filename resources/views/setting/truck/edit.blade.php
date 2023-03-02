@@ -115,7 +115,7 @@
     if($('#isactive').val() == 0){
         
         $('#tipetruck,#domain,#driver,#pengurus,.subdomain').select2({
-            placeholder: 'Pilih Driver',
+            placeholder: 'Pilih Data',
             allowClear: true,
             readOnly : true,
             disabled: true
@@ -123,7 +123,7 @@
     }
     else{
         $('#tipetruck,#domain,#driver,#pengurus,.subdomain').select2({
-        placeholder: 'Pilih Driver',
+        placeholder: 'Pilih Data',
         allowClear: true
     });
     }
