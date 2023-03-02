@@ -101,6 +101,7 @@ class SalesOrderController extends Controller
             $so_mstr->so_ship_from = $request->shipfrom;
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
+            $so_mstr->so_remark = $request->remarks;
             $so_mstr->save();
 
             $id = $so_mstr->id;

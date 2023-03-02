@@ -67,6 +67,12 @@
             </div>
         </div>
         <div class="form-group row col-md-12">
+            <label for="remarks" class="col-md-2 col-form-label text-md-right">Remarks</label>
+            <div class="col-md-9">
+                <input id="remarks" type="text" class="form-control" name="remarks" value="" autocomplete="off" maxlength="50" required autofocus>
+            </div>
+        </div>
+        <div class="form-group row col-md-12">
             @include('transaksi.salesorder.create-table')
         </div>
         <div class="form-group row col-md-12">
