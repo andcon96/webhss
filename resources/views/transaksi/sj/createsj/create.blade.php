@@ -89,7 +89,7 @@
                 <label for="duedate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
                     @php($now = \Carbon\Carbon::now())
-                    @if ($now->format('H') >= 22 && $now->format('H') < 5)
+                    @if ($now->format('H') <= 22 && $now->format('H') > 5)
                         <input id="duedate" type="text" class="form-control" name="duedate"
                             value="{{ $now->toDateString() }}" readonly>
                     @else
