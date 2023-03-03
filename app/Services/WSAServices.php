@@ -524,7 +524,7 @@ class WSAServices
                 <Body>
                     <HRD_detail_invoice xmlns="'.$wsa->wsas_path.'">
                         <inpdomain>'.$datas->id_domain.'</inpdomain>
-                        <inpsonbr>'.$sonbr.'</inpsonbr>
+                        <inpsonbr></inpsonbr>
                         <inpinvoicenbr>'.$datas->id_nbr.'</inpinvoicenbr>
                     </HRD_detail_invoice>
                 </Body>
@@ -626,7 +626,7 @@ class WSAServices
                     <Body>
                         <HRD_detail_invoice xmlns="'.$wsa->wsas_path.'">
                             <inpdomain>'.$datas['id_domain'].'</inpdomain>
-                            <inpsonbr>'.$sonbr.'</inpsonbr>
+                            <inpsonbr></inpsonbr>
                             <inpinvoicenbr>'.$datas['id_nbr'].'</inpinvoicenbr>
                         </HRD_detail_invoice>
                     </Body>
@@ -717,7 +717,7 @@ class WSAServices
                             'customer.cust_desc','barang.barang_deskripsi',
                             'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                             'shipfrom.sf_desc','customership.cs_shipto_name',
-                            'sj_trip_hist.sjh_remark','truck.truck_tipe_id')
+                            'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id','co_mstr.co_kapal')
                     ->get();
 
         Schema::dropIfExists('temp_group');
@@ -739,12 +739,11 @@ class WSAServices
                 <Body>
                     <HRD_detail_invoice xmlns="'.$wsa->wsas_path.'">
                         <inpdomain>'.$data['id_domain'].'</inpdomain>
-                        <inpsonbr>'.$sonbr.'</inpsonbr>
+                        <inpsonbr>[string]</inpsonbr>
                         <inpinvoicenbr>'.$data['id_nbr'].'</inpinvoicenbr>
                     </HRD_detail_invoice>
                 </Body>
             </Envelope>';
-            
         $curlOptions = array(
             CURLOPT_URL => $qxUrl,
             CURLOPT_CONNECTTIMEOUT => $timeout,        // in seconds, 0 = unlimited / wait indefinitely.
@@ -782,6 +781,7 @@ class WSAServices
             curl_close($curl);
         }
 
+        // dd($qdocResponse,$qdocRequest);
         if(is_bool($qdocResponse)){
             return false;
         }
@@ -801,9 +801,11 @@ class WSAServices
             foreach($dataloop as $dataloops){    
                 $output[] = [
                     't_part'   => (string)$dataloops->t_part,
+                    't_sonbr'  => (string)$dataloops->t_sonbr,
                     't_invnbr' => (string)$dataloops->t_invnbr,
                     't_qtyinv' => (string)$dataloops->t_qtyinv,
-                    't_harga'  => (string)$dataloops->t_harga
+                    't_harga'  => (string)$dataloops->t_harga,
+                    't_sj'     => (string)$dataloops->t_sj
                 ];
             }
 
@@ -826,7 +828,7 @@ class WSAServices
                 <Body>
                     <HRD_detail_invoice xmlns="'.$wsa->wsas_path.'">
                         <inpdomain>'.$data['id_domain'].'</inpdomain>
-                        <inpsonbr>'.$sonbr.'</inpsonbr>
+                        <inpsonbr></inpsonbr>
                         <inpinvoicenbr>'.$data['id_nbr'].'</inpinvoicenbr>
                     </HRD_detail_invoice>
                 </Body>
@@ -912,10 +914,15 @@ class WSAServices
                         ->leftJoin('customer','co_mstr.co_cust_code','customer.cust_code')
                         ->leftJoin('barang','co_mstr.co_barang_id','barang.id')
                         ->leftJoin('truck','sj_mstr.sj_truck_id','truck.id')
+                        // ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj',
+                        //          'customer.cust_desc','barang.barang_deskripsi',
+                        //          'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
+                        //          'shipfrom.sf_desc','customership.cs_shipto_name')
                         ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj',
-                                 'customer.cust_desc','barang.barang_deskripsi',
-                                 'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
-                                 'shipfrom.sf_desc','customership.cs_shipto_name')
+                                'customer.cust_desc','barang.barang_deskripsi',
+                                'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
+                                'shipfrom.sf_desc','customership.cs_shipto_name',
+                                'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id')
                         ->get();
 
 

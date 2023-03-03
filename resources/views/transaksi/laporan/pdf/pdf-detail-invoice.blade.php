@@ -124,7 +124,7 @@
                     <td class="angka">{{$details->t_qtyinv}}</td>
                     <td class="angka">{{number_format($details->t_harga,0)}}</td>
                     @if($iscontainer == 1)
-                    <td>{{$details->sjh_remark}}</td>
+                    <td>{{$details->sj_surat_jalan_customer}}</td>
                     <td>{{$details->truck_tipe_id == 6 ? '40"' : 
                           ($details->truck_tipe_id == 5 ? '20"' :
                           'Loosing')}}</td>
@@ -136,6 +136,7 @@
         <tfoot>
             <tr>
                 <td  class="top-bottom-border" colspan="{{$iscontainer == 0 ? '10' : '12'}}"></td>
+                {{-- <td  class="top-bottom-border" colspan="10"></td> --}}
                 <td class="top-bottom-border angka">{{number_format($total,0)}}</td>
             </tr>
         </tfoot>

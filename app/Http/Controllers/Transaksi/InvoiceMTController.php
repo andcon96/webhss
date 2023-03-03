@@ -191,7 +191,6 @@ class InvoiceMTController extends Controller
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
         }
-
         $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
         $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
 
@@ -215,7 +214,6 @@ class InvoiceMTController extends Controller
     public function printinvoiceqad($id)
     {
         $data = InvoiceDetail::with('getMaster.getSalesOrder.getCOMaster.getCustomer','getDomain')->findOrFail($id);
-        
         $total = $data->id_total;
         
         $terbilang = (new CreateTempTable())->terbilang($total);
@@ -225,7 +223,7 @@ class InvoiceMTController extends Controller
                                ->first();
 
         $detail = (new WSAServices())->wsainvoiceqad($data);
-        
+        // dd($detail);
         if($detail == false){
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
@@ -269,6 +267,8 @@ class InvoiceMTController extends Controller
 
         $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
         $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
+        
+        $iscontainer = $detail->whereIn('truck_tipe_id',[5,6])->count() == 0 ? 0 : 1;
 
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-detail-invoice',
@@ -276,7 +276,8 @@ class InvoiceMTController extends Controller
                 'data' => $data,
                 'detail' => $detail,
                 'latestdate' => $latestdate,
-                'oldestdate' => $oldestdate
+                'oldestdate' => $oldestdate,
+                'iscontainer' => $iscontainer
             ]
         )->setPaper('A3', 'Landscape');
 

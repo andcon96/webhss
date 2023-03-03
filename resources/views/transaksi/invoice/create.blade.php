@@ -13,16 +13,16 @@
         @method('POST')
         <div class="row">
             <div class="form-group row col-md-12">
-                <label for="sonbr" class="col-md-2 col-form-label text-md-right">SO Number</label>
+                {{-- <label for="sonbr" class="col-md-2 col-form-label text-md-right">SO Number</label>
                 <div class="col-md-3">
-                    <select name="sonbr" id="sonbr" class="form-control" required>
+                    <select name="sonbr" id="sonbr" class="form-control">
                         <option value="">Select Data</option>
                         @foreach ($list_sonbr as $sonbr)
                             <option value="{{ $sonbr->id }}">{{ $sonbr->so_nbr }}</option>
                         @endforeach
                     </select>
-                </div>
-                <label for="effdate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
+                </div> --}}
+                <label for="effdate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
                     <input type="text" name="effdate" id="effdate" class="form-control"
                         value="{{ \Carbon\Carbon::now()->toDateString() }}">
