@@ -85,10 +85,10 @@
                 <th colspan="3"></th>
             </tr>
             <tr>
-                <th colspan="11" style="line-height: 3em;text-align: center">LAPORAN TAGIHAN CUSTOMER</th>
+                <th colspan="{{$iscontainer == 0 ? '11' : '13'}}" style="line-height: 3em;text-align: center">LAPORAN TAGIHAN CUSTOMER</th>
             </tr>
             <tr>
-                <th colspan="11" style="line-height: 3em;text-align:center;">PERIODE {{$oldestdate->sj_eff_date ?? ''}} - {{$latestdate->sj_eff_date ?? ''}}</th>
+                <th colspan="{{$iscontainer == 0 ? '11' : '13'}}" style="line-height: 3em;text-align:center;">PERIODE {{$oldestdate->sj_eff_date ?? ''}} - {{$latestdate->sj_eff_date ?? ''}}</th>
             </tr>
             <tr>
                 <th class="top-bottom-border">CUSTOMER</th>
