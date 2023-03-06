@@ -141,7 +141,7 @@
             $('#btnexcel').prop('disabled',false);
 
         }else if(val == 5){
-            $('#truck,#domain,#tipe').prop('disabled',true);
+            $('#truck,#domain,#tipe,#subdom').prop('disabled',true);
             $('#truck,#domain,#tipe').prop('required',false);
             
             $('#tipetruck').prop('disabled',false);
