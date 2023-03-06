@@ -160,7 +160,7 @@
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
 
-            $('#domain,#subdom').prop('disabled',false);
+            $('#domain').prop('disabled',false);
             $('#domain').prop('required',true);
             $('#btnpdf').prop('disabled',false);
             $('#btnexcel').prop('disabled',false);
