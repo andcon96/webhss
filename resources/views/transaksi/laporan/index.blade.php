@@ -136,12 +136,12 @@
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
 
-            $('#tipe,#domain,#subdom').prop('disabled',false);
+            $('#tipe,#domain').prop('disabled',false);
             $('#tipe,#domain').prop('required',true);
             $('#btnexcel').prop('disabled',false);
 
         }else if(val == 5){
-            $('#truck,#domain,#tipe,#subdom').prop('disabled',true);
+            $('#truck,#domain,#tipe').prop('disabled',true);
             $('#truck,#domain,#tipe').prop('required',false);
             
             $('#tipetruck').prop('disabled',false);
@@ -164,6 +164,15 @@
             $('#domain').prop('required',true);
             $('#btnpdf').prop('disabled',false);
             $('#btnexcel').prop('disabled',false);
+        }
+    });
+
+    $('#domain').on('change', function(){
+        let data = $(this).val();
+        if(data == 'SPJS'){
+            $('#subdom').prop('disabled',false);
+        }else{
+            $('#subdom').prop('disabled',true);
         }
     });
 
