@@ -514,7 +514,7 @@ class WSAServices
         $qxUrl = $wsa->wsas_url;
         $timeout = 0;
 
-        $sonbr = $data->getSalesOrder['so_nbr'];
+        // $sonbr = $data->getSalesOrder['so_nbr'];
         $output = [];
 
         foreach($data->getDetail as $datas){
@@ -607,7 +607,7 @@ class WSAServices
         $qxUrl = $wsa->wsas_url;
         $timeout = 0;
 
-        $sonbr = $data->getSalesOrder['so_nbr'];
+        // $sonbr = $data->getSalesOrder['so_nbr'];
 
         
         Schema::create('temp_table', function ($table) {
@@ -733,7 +733,7 @@ class WSAServices
         $qxUrl = $wsa->wsas_url;
         $timeout = 0;
 
-        $sonbr = $data->getMaster->getSalesOrder['so_nbr'];
+        // $sonbr = $data->getMaster->getSalesOrder['so_nbr'];
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
@@ -822,7 +822,7 @@ class WSAServices
         $qxUrl = $wsa->wsas_url;
         $timeout = 0;
 
-        $sonbr = $data->getMaster->getSalesOrder['so_nbr'];
+        // $sonbr = $data->getMaster->getSalesOrder['so_nbr'];
         $qdocRequest =
             '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
                 <Body>
