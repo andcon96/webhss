@@ -722,6 +722,7 @@ class WSAServices
 
         Schema::dropIfExists('temp_group');
 
+        dd($output, $qdocResult, $qdocResponse);
         return $output;
     }
 
