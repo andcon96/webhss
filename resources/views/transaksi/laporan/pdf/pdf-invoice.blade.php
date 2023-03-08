@@ -8,7 +8,9 @@
 <style>
     @page{
         margin: 6mm 6mm 6mm 6mm;
+        border-collapse: collapse;
     }
+    
 
     body {
         font-size: 12px;
@@ -30,6 +32,7 @@
         line-height: 30px;
         padding-left: 5px;
         padding-right: 5px;
+        margin: 0;
     }
 
     .judul {
@@ -99,7 +102,10 @@
                 @php($flg++)
                 <tr>
                     <td></td>
-                    <td width="20%">{{ $data->getSalesOrder->getShipTo->cs_shipto_name ?? $data->getMaster->getSalesOrder->getShipTo->cs_shipto_name ?? '' }}</td>
+                    <td width="40%">
+                        {{$details['t_part']}}
+                        {{ $data->getSalesOrder->getShipTo->cs_shipto_name ?? 
+                           $data->getMaster->getSalesOrder->getShipTo->cs_shipto_name ?? '' }}</td>
                     <td width="15%">{{number_format($details['t_qtyinv'],0)}}</td>
                     <td width="5%">X</td>
                     <td width="25%">Rp. {{number_format($details['t_harga'],2)}}</td>

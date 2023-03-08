@@ -166,7 +166,7 @@ class InvoiceMTController extends Controller
                             "t_harga" => $firstrow['t_harga']
                         ];
                     })->values()->all();
-        
+        // dd($detail,$data);
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
             [
