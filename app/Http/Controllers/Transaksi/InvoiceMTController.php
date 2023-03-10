@@ -140,6 +140,7 @@ class InvoiceMTController extends Controller
     public function printinvoice($id)
     {
         $data = InvoiceMaster::with([
+            'getMaster.getSalesOrder.getCOMaster.getCustomer',
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
