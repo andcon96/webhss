@@ -140,12 +140,14 @@ class InvoiceMTController extends Controller
     public function printinvoice($id)
     {
         $data = InvoiceMaster::with([
+            'getDetail.getDomain',
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
 
-        $bankacc = BankCustomer::where('bc_customer_id', $data->getSalesOrder->getCOMaster->getCustomer->id)
-            ->where('bc_domain_id', $data->getDomain->id)
+
+        $bankacc = BankCustomer::where('bc_customer_id', $data->getSalesOrder->getCOMaster->getCustomer->id ?? '')
+            ->where('bc_domain_id', $data->getDetail[0]->getDomain->id)
             ->first();
 
         $total = $data->getDetail->sum('id_total');
@@ -169,7 +171,7 @@ class InvoiceMTController extends Controller
                     "t_harga" => $firstrow['t_harga']
                 ];
             })->values()->all();
-        // dd($detail,$data);
+            
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
             [
