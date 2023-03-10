@@ -67,7 +67,7 @@
             </div>
             <label for="poaju" class="col-md-3 col-form-label text-md-right">PO/AJU</label>
             <div class="col-md-3">
-                <input id="poaju" type="text" class="form-control" name="poaju" value="" autocomplete="off" maxlength="50" required autofocus>
+                <input id="poaju" type="text" class="form-control" name="poaju" value="" autocomplete="off" maxlength="50" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">

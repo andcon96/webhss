@@ -18,6 +18,7 @@ use App\Services\CreateTempTable;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerOrderController extends Controller
@@ -298,6 +299,7 @@ class CustomerOrderController extends Controller
 
         }catch(Exception $e){
             DB::rollback();
+            Log::channel('customlog')->info('ERROR : '.$e);
             alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
             return back();
         }
