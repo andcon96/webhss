@@ -74,6 +74,10 @@
             <div class="col-md-3">
                 <input id="duedate" type="text" class="form-control" name="duedate" value="{{$data->so_due_date}}" autocomplete="off" maxlength="24" autofocus>
             </div>
+            <label for="poaju" class="col-md-3 col-form-label text-md-right">PO/AJU</label>
+            <div class="col-md-3">
+                <input id="poaju" type="text" class="form-control" name="poaju" value="{{$data->so_po_aju}}" autocomplete="off" maxlength="24" autofocus>
+            </div>
         </div>
         <div class="form-group row col-md-12">
             <label for="remark" class="col-md-2 col-form-label text-md-right">Remark</label>

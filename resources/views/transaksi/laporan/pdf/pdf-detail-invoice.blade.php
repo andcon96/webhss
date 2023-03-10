@@ -115,7 +115,7 @@
                 <tr>
                     <td>{{$details->cust_desc}}</td>
                     <td>{{$details->barang_deskripsi}}</td>
-                    <td>{{$details->co_kapal}}</td>
+                    <td>{{$details->so_po_aju}} &nbsp; / &nbsp; {{$details->co_kapal}}</td>
                     <td>{{$details->sj_eff_date}}</td>
                     <td>{{$details->t_sj}}</td>
                     <td>{{$details->truck_no_polis}}</td>

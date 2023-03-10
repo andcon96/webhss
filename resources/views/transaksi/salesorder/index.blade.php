@@ -163,6 +163,12 @@
                                 <input id="barang" type="text" class="form-control" name="barang"
                                     autocomplete="off" value="" readonly>
                             </div>
+                            <label for="poaju"
+                                class="col-md-2 col-form-label text-md-right">{{ __('PO/AJU') }}</label>
+                            <div class="col-md-3">
+                                <input id="poaju" type="text" class="form-control" name="poaju"
+                                    autocomplete="off" value="" readonly>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="remark"
@@ -414,6 +420,7 @@
             var custdesc = $(this).data('custdesc');
             var remark = $(this).data('remark');
             var barang = $(this).data('barang');
+            var poaju = $(this).data('poaju');
 
             document.getElementById("sonbr").value = sonbr;
             document.getElementById('cust').value = cust + ' - ' + custdesc;
@@ -423,6 +430,7 @@
             document.getElementById('duedate').value = duedate;
             document.getElementById('remark').value = remark;
             document.getElementById("barang").value = barang;
+            document.getElementById("poaju").value = poaju;
 
 
             $.ajax({

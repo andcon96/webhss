@@ -257,6 +257,7 @@ class CustomerOrderController extends Controller
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
             $so_mstr->so_remark = $request->remark;
+            $so_mstr->so_po_aju = $request->poaju;
             $so_mstr->save();
 
             $id = $so_mstr->id;

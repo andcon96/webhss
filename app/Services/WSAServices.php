@@ -717,7 +717,8 @@ class WSAServices
                             'customer.cust_desc','barang.barang_deskripsi',
                             'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                             'shipfrom.sf_desc','customership.cs_shipto_name',
-                            'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id','co_mstr.co_kapal')
+                            'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id','co_mstr.co_kapal',
+                            'so_mstr.so_po_aju')
                     ->get();
 
         Schema::dropIfExists('temp_group');
@@ -922,7 +923,8 @@ class WSAServices
                                 'customer.cust_desc','barang.barang_deskripsi',
                                 'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                                 'shipfrom.sf_desc','customership.cs_shipto_name',
-                                'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id')
+                                'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id','co_mstr.co_kapal',
+                                'so_mstr.so_po_aju')
                         ->get();
 
 
