@@ -150,6 +150,11 @@
         });
         $('#btnconf').hide();
 
+        document.addEventListener('keydown', function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+            }
+        });
         $(document).on('change', '#soid', function() {
             let soid = $(this).val();
             var cust = $(this).find(':selected').data('cust');
@@ -244,6 +249,11 @@
         });
 
         $(document).on('click', '.delrow', function(e) {
+
+            if (e.ctrlkey == 13) {
+                alert('masuk');
+                e.preventDefault();
+            }
             $(this).closest("tr").remove();
         });
 

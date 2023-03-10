@@ -140,6 +140,12 @@
         $(".duedate").datepicker({
             dateFormat: 'yy-mm-dd'
         });
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+            }
+        });
 
         function resetDropDownValue() {
             let filter = $('#type').val();
