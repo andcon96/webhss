@@ -89,8 +89,13 @@
                 <label for="duedate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
                     @php($now = \Carbon\Carbon::now())
-                    <input id="duedate" type="text" class="form-control duedate" name="duedate"
-                        value="{{ $now->toDateString() }}" required>
+                    @if (auth()->user()->users_can_backdate == 1)
+                        <input id="duedate" type="text" class="form-control duedate" name="duedate"
+                            value="{{ $now->toDateString() }}" required>
+                    @else
+                        <input id="duedate" type="text" class="form-control" name="duedate"
+                            value="{{ $now->toDateString() }}" readonly>
+                    @endif
                     {{-- @if ($now->format('H') <= 22 && $now->format('H') > 5)
                         <input id="duedate" type="text" class="form-control" name="duedate"
                             value="{{ $now->toDateString() }}" readonly>
