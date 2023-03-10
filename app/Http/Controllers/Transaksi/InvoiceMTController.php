@@ -225,7 +225,7 @@ class InvoiceMTController extends Controller
 
         $terbilang = (new CreateTempTable())->terbilang($total);
 
-        $bankacc = BankCustomer::where('bc_customer_id', $data->getMaster->getSalesOrder->getCOMaster->getCustomer->id)
+        $bankacc = BankCustomer::where('bc_customer_id', $data->getMaster->getSalesOrder->getCOMaster->getCustomer->id ?? '')
             ->where('bc_domain_id', $data->getDomain->id)
             ->first();
 
