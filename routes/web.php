@@ -98,7 +98,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware'=>'can:access_report'],function(){
         Route::get('/report/sangubymonth', [GenerateReportController::class, 'reportsangu'])->name('reportSangu');
         Route::get('/report/updatepreview', [GenerateReportController::class, 'updatepreview'])->name('updatePreview');
+        Route::get('/report/tonaserill', [GenerateReportController::class, 'tonaserill'])->name('tonaseRill');
         Route::get('/report/printpdf', [GenerateReportController::class, 'printpdf'])->name('reportPerNopol');
+        Route::get('/report/printtonaserill', [GenerateReportController::class, 'printtonaserill'])->name('reportTonaseRill');
         Route::get('/getcicilan', [GenerateReportController::class, 'getcicilan'])->name('getCicilan');
         Route::resource('report', GenerateReportController::class);
     });

@@ -31,6 +31,7 @@
                 <option value="4"> Report Total Supir Loosing HSS Trailer</option>
                 <option value="5"> Report Container By Tipe Truck </option>
                 <option value="6"> Report Tambahan Biaya</option>
+                <option value="7"> **New Report Tonase Rill & Harga Rill</option>
             </select>
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
@@ -156,6 +157,12 @@
             $('#btnexcel').prop('disabled',false);
             $('#tipe').prop('disabled',false);
             $('#tipe').prop('required',true);
+        }else if(val == 7){
+            $('#truck,#tipetruck,#tipe,#domain').prop('disabled',true);
+            $('#truck,#tipetruck,#tipe,#domain').prop('required',false);
+            $('#btnpdf').prop('disabled',false);
+            $('#btnexcel').prop('disabled',true);
+
         }else{
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);

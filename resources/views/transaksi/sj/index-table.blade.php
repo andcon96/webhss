@@ -7,6 +7,7 @@
                 <th>Customer</th>
                 <th>Ship To</th>
                 <th width="15%">Status</th>
+                <th>PO/AJU</th>
                 <th>Remarks CO</th>
                 <th>Remarks SO</th>
                 <th width="15%">Action</th>
@@ -20,6 +21,7 @@
                 <td data-label="CUSTOMER">{{$datas->getSOMaster->getCOMaster->co_cust_code}} -- {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
                 <td data-label="SHIP TO">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name ?? ''}}</td>
                 <td data-label="SJ STATUS">{{$datas->sj_status}}</td>
+                <td data-label="PO/AJU">{{$datas->getSOMaster->so_po_aju}}</td>
                 <td data-label="CO REMARKS">{{$datas->getSOMaster->getCOMaster->co_remark}}</td>
                 <td data-label="SO REMARKS">{{$datas->getSOMaster->so_remark}}</td>
                 <td>

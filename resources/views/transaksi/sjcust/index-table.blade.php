@@ -12,6 +12,7 @@
                 <th style="width:10%">Eff Date SPK</th>
                 <th style="width:10%">Due Date SO</th>
                 <th style="width:10%">SJ Status</th>
+                <th style="width:10%">PO/AJU</th>
                 <th style="width:10%">CO Remarks</th>
                 <th style="width:10%">SO Remarks</th>
                 <th style="width:10%">Action</th>
@@ -31,6 +32,7 @@
                 <td>{{$datas->sj_eff_date}}</td>
                 <td>{{$datas->getSOMaster->so_due_date}}</td>
                 <td>{{$datas->sj_status}}</td>
+                <td>{{$datas->getSOMaster->so_po_aju}}</td>
                 <td>{{$datas->getSOMaster->getCOMaster->co_remark}}</td>
                 <td>{{$datas->getSOMaster->so_remark}}</td>
                 <td>
