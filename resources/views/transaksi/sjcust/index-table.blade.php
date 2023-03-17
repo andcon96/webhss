@@ -13,6 +13,7 @@
                 <th style="width:10%">Due Date SO</th>
                 <th style="width:10%">SJ Status</th>
                 <th style="width:10%">CO Remarks</th>
+                <th style="width:10%">SO Remarks</th>
                 <th style="width:10%">Action</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{{$datas->getSOMaster->so_due_date}}</td>
                 <td>{{$datas->sj_status}}</td>
                 <td>{{$datas->getSOMaster->getCOMaster->co_remark}}</td>
+                <td>{{$datas->getSOMaster->so_remark}}</td>
                 <td>
                     @if($datas->sj_status == 'Selesai' || $datas->sj_status == 'Open')
                         <a href="{{ route('LaporSJ', ['sj' => $datas->id, 'truck' => $datas->sj_truck_id]) }}">
