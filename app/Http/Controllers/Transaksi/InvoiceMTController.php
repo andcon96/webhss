@@ -146,6 +146,7 @@ class InvoiceMTController extends Controller
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
+        // dd($data);
 
         $cust = Customer::where('cust_code',$data->im_cust_code)->first();
         $idcust = $cust->id ?? '';
