@@ -6,6 +6,7 @@ use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\Item;
 use App\Models\Master\Qxwsa;
+use App\Models\Transaksi\SalesOrderMstr;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -588,12 +589,17 @@ class WSAServices
             
             if($qdocResult == 'true'){
                 
-                foreach($dataloop as $dataloops){    
+                foreach($dataloop as $dataloops){   
+                    $so = SalesOrderMstr::with('getShipTo')->where('so_nbr',(string)$dataloops->t_sonbr)->first();
+                    
                     $output[] = [
                         't_part'   => (string)$dataloops->t_part,
                         't_invnbr' => (string)$dataloops->t_invnbr,
                         't_qtyinv' => (string)$dataloops->t_qtyinv,
-                        't_harga'  => (string)$dataloops->t_harga
+                        't_harga'  => (string)$dataloops->t_harga,
+                        't_sonbr'  => (string)$dataloops->t_sonbr,
+                        't_shipto' => $so->getShipTo->cs_shipto ?? '',
+                        't_shiptodesc' => $so->getShipTo->cs_shipto_name ?? '',
                     ];
                 }
                 
@@ -601,7 +607,7 @@ class WSAServices
                 return false;
             }
         }
-
+        rsort($output);
         return $output;
         
     }
@@ -808,13 +814,16 @@ class WSAServices
             $output = [];
             
             foreach($dataloop as $dataloops){    
+                $so = SalesOrderMstr::with('getShipTo')->where('so_nbr',(string)$dataloops->t_sonbr)->first();
                 $output[] = [
                     't_part'   => (string)$dataloops->t_part,
                     't_sonbr'  => (string)$dataloops->t_sonbr,
                     't_invnbr' => (string)$dataloops->t_invnbr,
                     't_qtyinv' => (string)$dataloops->t_qtyinv,
                     't_harga'  => (string)$dataloops->t_harga,
-                    't_sj'     => (string)$dataloops->t_sj
+                    't_sj'     => (string)$dataloops->t_sj,
+                    't_shipto' => $so->getShipTo->cs_shipto ?? '',
+                    't_shiptodesc' => $so->getShipTo->cs_shipto_name ?? '',
                 ];
             }
 

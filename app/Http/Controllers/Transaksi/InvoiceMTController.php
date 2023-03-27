@@ -166,7 +166,8 @@ class InvoiceMTController extends Controller
             return back();
         }
         $detail = collect($detail);
-        $detail = $detail->groupBy('t_harga')
+        
+        $detail = $detail->groupBy('t_shipto','t_harga')
             ->map(function ($row) {
                 $firstrow = $row->first();
 
@@ -174,7 +175,10 @@ class InvoiceMTController extends Controller
                     "t_part" => $firstrow['t_part'],
                     "t_invnbr" => $firstrow['t_invnbr'],
                     "t_qtyinv" => $row->sum('t_qtyinv'),
-                    "t_harga" => $firstrow['t_harga']
+                    "t_harga" => $firstrow['t_harga'],
+                    "t_sonbr" => $firstrow['t_sonbr'],
+                    "t_shipto" => $firstrow['t_shipto'],
+                    "t_shiptodesc" => $firstrow['t_shiptodesc'],
                 ];
             })->values()->all();
             
@@ -255,7 +259,10 @@ class InvoiceMTController extends Controller
                     "t_part" => $firstrow['t_part'],
                     "t_invnbr" => $firstrow['t_invnbr'],
                     "t_qtyinv" => $row->sum('t_qtyinv'),
-                    "t_harga" => $firstrow['t_harga']
+                    "t_harga" => $firstrow['t_harga'],
+                    "t_sonbr" => $firstrow['t_sonbr'],
+                    "t_shipto" => $firstrow['t_shipto'],
+                    "t_shiptodesc" => $firstrow['t_shiptodesc'],
                 ];
             })->values()->all();
 

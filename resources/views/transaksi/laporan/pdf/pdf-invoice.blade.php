@@ -93,7 +93,11 @@
             </tr>
             <tr>
                 <td>Untuk Pembayaran</td>
-                <td colspan="3">: Jasa Angkut {{ $data->getSalesOrder->getShipFrom->sf_desc ?? $data->getMaster->getSalesOrder->getShipFrom->sf_desc ?? ''}} Ke :</td>
+                <td colspan="3">: 
+                    Jasa Angkut 
+                        {{ $data->getSalesOrder->getShipFrom->sf_desc ?? $data->getMaster->getSalesOrder->getShipFrom->sf_desc ?? ''}} 
+                    Ke :
+                </td>
                 <td colspan="3"></td>
             </tr>
             {{-- Loop Data Detail --}}
@@ -101,15 +105,13 @@
             @foreach($detail as $details)
                 @php($flg++)
                 <tr>
-                    <td></td>
-                    <td width="40%">
+                    <td colspan="3" style="padding-left:15px;">
+                        {{$details['t_shiptodesc']}} {{$details['t_shiptodesc'] ? '-' : '' }}  
                         {{$details['t_part']}}
-                        {{ $data->getSalesOrder->getShipTo->cs_shipto_name ?? 
-                           $data->getMaster->getSalesOrder->getShipTo->cs_shipto_name ?? '' }}</td>
-                    <td width="15%">{{number_format($details['t_qtyinv'],0)}}</td>
+                    </td>
+                    <td width="10%">{{number_format($details['t_qtyinv'],0)}}</td>
                     <td width="5%">X</td>
-                    <td width="25%">Rp. {{number_format($details['t_harga'],2)}}</td>
-                    <td width="5%">Rp.</td>
+                    <td width="20%">Rp. {{number_format($details['t_harga'],2)}}</td>
                     <td width="20%">{{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
                 </tr>
                 {{$total += $details['t_qtyinv'] * $details['t_harga']}}
