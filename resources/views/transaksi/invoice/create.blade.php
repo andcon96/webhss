@@ -132,6 +132,9 @@
 
             cols += '<td>';
             cols += '<input type="text" class="form-control ivnbr" name="ivnbr[]" required />';
+            cols += '<input type="hidden" class="form-control sonbr" name="sonbr[]" required />';
+            cols += '<input type="hidden" class="form-control custdesc" name="custdesc[]" required />';
+            cols += '<input type="hidden" class="form-control custcode" name="custcode[]" required />';
             cols += '</td>';
 
             cols += '<td>';
@@ -173,6 +176,9 @@
             let domain = $(this).closest('tr').find('.domain :selected').val();
             let price = $(this).closest('tr').find('.price');
             let duedate = $(this).closest('tr').find('.duedate');
+            let sonbr = $(this).closest('tr').find('.sonbr');
+            let custdesc = $(this).closest('tr').find('.custdesc');
+            let custcode = $(this).closest('tr').find('.custcode');
 
             if (!invoiceqad || !domain) {
                 // data kosong alert error;
@@ -195,6 +201,9 @@
                     success: function(data) {
                         price.val(data[0]);
                         duedate.val(data[1]);
+                        sonbr.val(data[2]);
+                        custdesc.val(data[3]);
+                        custcode.val(data[4]);
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',

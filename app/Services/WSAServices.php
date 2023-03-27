@@ -490,17 +490,23 @@ class WSAServices
         
 
         $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-        
+        // dd($qdocResponse);
         if($qdocResult == 'true'){
             $harga = '';
             $duedate = '';
+            $sonbr = '';
+            $cust = '';
+            $custcode = '';
             foreach($dataloop as $datas){
                 
                 $harga = $datas->t_harga;
                 $duedate = (string)$datas->t_duedate;
+                $sonbr = (string)$datas->t_sonbr;
+                $cust = (string)$datas->t_custdesc;
+                $custcode = (string)$datas->t_custcode;
             }
                
-            return [$harga, $duedate];
+            return [$harga, $duedate, $sonbr, $cust, $custcode];
         }else{
             return false;
         }
@@ -616,6 +622,7 @@ class WSAServices
             $table->string('t_qtyinv');
             $table->string('t_harga');
             $table->string('t_sj');
+            $table->string('t_orddate');
             $table->temporary();
         });
 
@@ -683,7 +690,7 @@ class WSAServices
             }
             
             $qdocResult = (string) $xmlResp->xpath('//ns1:outOK')[0];
-            
+
             if($qdocResult == 'true'){
 
                 foreach($dataloop as $dataloops){    
@@ -693,6 +700,7 @@ class WSAServices
                         't_qtyinv' => (string)$dataloops->t_qtyinv,
                         't_harga'  => (string)$dataloops->t_harga,
                         't_sj' => (string)$dataloops->t_sj,
+                        't_orddate' => (string)$dataloops->t_orddate,
                     ]);
                 }
                 
@@ -713,7 +721,7 @@ class WSAServices
                     ->leftJoin('customer','co_mstr.co_cust_code','customer.cust_code')
                     ->leftJoin('barang','co_mstr.co_barang_id','barang.id')
                     ->leftJoin('truck','sj_mstr.sj_truck_id','truck.id')
-                    ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj',
+                    ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj', 't_orddate',
                             'customer.cust_desc','barang.barang_deskripsi',
                             'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                             'shipfrom.sf_desc','customership.cs_shipto_name',
@@ -722,7 +730,7 @@ class WSAServices
                     ->get();
 
         Schema::dropIfExists('temp_group');
-
+        // dd($output);
         return $output;
     }
 
@@ -893,6 +901,7 @@ class WSAServices
                 $table->string('t_qtyinv');
                 $table->string('t_harga');
                 $table->string('t_sj');
+                $table->string('t_orddate');
                 $table->temporary();
             });
 
@@ -903,6 +912,7 @@ class WSAServices
                     't_qtyinv' => (string)$dataloops->t_qtyinv,
                     't_harga'  => (string)$dataloops->t_harga,
                     't_sj' => (string)$dataloops->t_sj,
+                    't_orddate' => (string)$dataloops->t_orddate,
                 ]);
             }
             
@@ -919,7 +929,7 @@ class WSAServices
                         //          'customer.cust_desc','barang.barang_deskripsi',
                         //          'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                         //          'shipfrom.sf_desc','customership.cs_shipto_name')
-                        ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj',
+                        ->select('t_part','t_invnbr','t_harga','t_qtyinv','t_sj', 't_orddate',
                                 'customer.cust_desc','barang.barang_deskripsi',
                                 'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                                 'shipfrom.sf_desc','customership.cs_shipto_name',

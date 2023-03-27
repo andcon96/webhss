@@ -85,7 +85,7 @@
             </tr>
             <tr>
                 <td width="25%">Sudah Terima dari</td>
-                <td width="40%" colspan="6">: <b>{{ $data->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? $data->getMaster->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? '' }}</b></td>
+                <td width="40%" colspan="6">: <b>{{ $data->getMaster->im_cust_qad ?? $data->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? $data->getMaster->getSalesOrder->getCOMaster->getCustomer->cust_desc ?? '' }}</b></td>
             </tr>
             <tr>
                 <td>Banyaknya Uang</td>

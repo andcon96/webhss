@@ -113,10 +113,11 @@
             @foreach ($detail as $details)
                 @php($total += $details->t_harga * $details->t_qtyinv)
                 <tr>
-                    <td>{{$details->cust_desc}}</td>
-                    <td>{{$details->barang_deskripsi}}</td>
+                    {{-- Print PDF Gabung antara Detail & Master --}}
+                    <td>{{$details->cust_desc ?? $data->im_cust_qad ?? $data->getMaster->im_cust_qad ?? ''}}</td> /
+                    <td>{{$details->t_part ?? $details->barang_deskripsi}}</td>
                     <td>{{$details->so_po_aju}} &nbsp; / &nbsp; {{$details->co_kapal}}</td>
-                    <td>{{$details->sj_eff_date}}</td>
+                    <td>{{$details->sj_eff_date ?? $details->t_orddate ?? ''}}</td>
                     <td>{{$details->t_sj}}</td>
                     <td>{{$details->truck_no_polis}}</td>
                     <td>{{$details->sf_desc}}</td>
@@ -125,9 +126,10 @@
                     <td class="angka">{{number_format($details->t_harga,0)}}</td>
                     @if($iscontainer == 1)
                     <td>{{$details->sj_surat_jalan_customer}}</td>
-                    <td>{{$details->truck_tipe_id == 6 ? '40"' : 
+                    <td>{{$details->truck_tipe_id == null ? '' : 
+                          ($details->truck_tipe_id == 6 ? '40"' : 
                           ($details->truck_tipe_id == 5 ? '20"' :
-                          'Loosing')}}</td>
+                          'Loosing'))}}</td>
                     @endif
                     <td class="angka">{{number_format($details->t_harga * $details->t_qtyinv,0)}}</td>
                 </tr>                
