@@ -29,7 +29,7 @@
     table tr td {
         /* border: 1px solid black; */
         vertical-align: middle;
-        line-height: 30px;
+        line-height: 21px;
         padding-left: 5px;
         padding-right: 5px;
         margin: 0;
@@ -92,31 +92,32 @@
                 <td colspan="6">: {{$terbilang}}</td>
             </tr>
             <tr>
-                <td>Untuk Pembayaran</td>
+                <td style="padding-bottom:10px;">Untuk Pembayaran</td>
                 <td colspan="6">: 
                     Jasa Angkut &nbsp;
-                        {{ $data->getSOByNbr->so_po_aju ?? $data->getMaster->getSOByNbr->so_po_aju ?? ''}} &nbsp;
+                        {{ $data->getSOByNbr->getCOMaster->getBarang->barang_deskripsi ?? $data->getMaster->getSOByNbr->getCOMaster->getBarang->barang_deskripsi ?? ''}} &nbsp;
                         {{ $data->getSOByNbr->getCOMaster->co_kapal ?? $data->getMaster->getSOByNbr->getCOMaster->co_kapal ?? ''}} &nbsp;
-                        {{ $data->getSOByNbr->getCOMaster->getBarang->barang_deskripsi ?? $data->getMaster->getSOByNbr->getCOMaster->getBarang->barang_deskripsi ?? ''}}
-                </td>
+                        {{ $data->getSOByNbr->so_po_aju ?? $data->getMaster->getSOByNbr->so_po_aju ?? ''}} &nbsp;
+                    </td>
             </tr>
             {{-- Loop Data Detail --}}
             @php($total = 0)
             @foreach($detail as $details)
-                @php($flg++)
-                <tr>
-                    <td colspan="3" style="padding-left:15px;">
-                        
-                        {{$details['t_shipfromdesc']}} {{$details['t_shipfromdesc'] ? '-' : '' }}  
-                        {{$details['t_shiptodesc']}} {{$details['t_shiptodesc'] ? '-' : '' }}  
-                        {{$details['t_part']}}
-                    </td>
-                    <td width="8%">{{number_format($details['t_qtyinv'],0)}}</td>
-                    <td width="3%">X</td>
-                    <td width="18%">Rp. {{number_format($details['t_harga'],2)}}</td>
-                    <td width="18%">{{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
-                </tr>
-                {{$total += $details['t_qtyinv'] * $details['t_harga']}}
+            @php($flg++)
+            <tr>
+                <td colspan="3" style="padding-left:15px;">
+                    
+                    {{$details['t_shipfromdesc']}} {{$details['t_shipfromdesc'] ? 'ke' : '' }}  
+                    {{$details['t_shiptodesc']}} {{$details['t_shiptodesc'] ? '-' : '' }}  
+                    {{$details['t_part']}}
+                </td>
+                <td width="8%">{{number_format($details['t_qtyinv'],0)}}</td>
+                <td width="3%">X</td>
+                <td width="18%">Rp. {{number_format($details['t_harga'],2)}}</td>
+                <td width="15%">{{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
+            </tr>
+            {{$total += $details['t_qtyinv'] * $details['t_harga']}}
+                
             @endforeach
             <tr>
                 <td colspan="5"></td>
@@ -153,7 +154,7 @@
         </tbody>
     </table>
 
-    @if($flg > 2)
+    @if($flg > 7)
         <div style='page-break-before:always'></div>
     @endif
     <table>

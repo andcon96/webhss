@@ -225,8 +225,6 @@ class InvoiceMTController extends Controller
 
         $iscontainer = $detail->whereIn('truck_tipe_id', [5, 6])->count() == 0 ? 0 : 1;
 
-        // dd($detail);
-
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-detail-invoice',
             [

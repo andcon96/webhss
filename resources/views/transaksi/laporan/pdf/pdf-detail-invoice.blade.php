@@ -122,7 +122,7 @@
                 <tr>
                     {{-- Print PDF Gabung antara Detail & Master --}}
                     <td>{{ $details->cust_desc ?? ($data->im_cust_qad ?? ($data->getMaster->im_cust_qad ?? '')) }}</td> /
-                    <td>{{ $details->t_part ?? $details->barang_deskripsi }}</td>
+                    <td>{{ $details->barang_deskripsi ?? $details->t_part ?? '' }}</td>
                     <td>{{ $details->so_po_aju }} &nbsp; / &nbsp; {{ $details->co_kapal }}</td>
                     <td>{{ $details->sj_eff_date ?? ($details->t_orddate ?? '') }}</td>
                     <td>{{ $details->t_sj }}</td>
