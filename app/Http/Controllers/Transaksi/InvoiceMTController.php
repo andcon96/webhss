@@ -68,6 +68,7 @@ class InvoiceMTController extends Controller
             $invmstr->im_date = $request->effdate;
             $invmstr->im_cust_code = $request->custcode[0];
             $invmstr->im_cust_qad = $request->custdesc[0];
+            $invmstr->im_so_nbr = $request->sonbr[0];
             $invmstr->save();
 
             $invmstr_id = $invmstr->id;
@@ -144,16 +145,25 @@ class InvoiceMTController extends Controller
         $data = InvoiceMaster::with([
             'getDetail.getDomain',
             'getDetail',
+            'getSOByNbr.getCOMaster.getCustomer',
+            'getSOByNbr.getCOMaster.getBarang',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
-        // dd($data);
 
-        $cust = Customer::where('cust_code',$data->im_cust_code)->first();
+        $cust = Customer::where('cust_code', $data->im_cust_code)->first();
         $idcust = $cust->id ?? '';
-        
 
-        $bankacc = BankCustomer::where('bc_customer_id', $data->getSalesOrder->getCOMaster->getCustomer->id ?? $idcust ?? '')
-            ->where('bc_domain_id', $data->getDetail[0]->getDomain->id)
+        $jmlhdomaininvoice = $data->getDetail->unique('id_domain')->count();
+
+        $bankacc = BankCustomer::query();
+
+        if($jmlhdomaininvoice > 1){
+            $bankacc->where('bc_domain_id', 1); // Hardcode Sesuai Permintaan Pak Yunias , 1 = AS
+        }else{
+            $bankacc->where('bc_domain_id', $data->getDetail[0]->getDomain->id);
+        }
+
+        $bankacc = $bankacc->where('bc_customer_id', $data->getSalesOrder->getCOMaster->getCustomer->id ?? $idcust ?? '')
             ->first();
 
         $total = $data->getDetail->sum('id_total');
@@ -166,8 +176,8 @@ class InvoiceMTController extends Controller
             return back();
         }
         $detail = collect($detail);
-        
-        $detail = $detail->groupBy('t_shipto','t_harga')
+
+        $detail = $detail->groupBy('t_shipto', 't_harga')
             ->map(function ($row) {
                 $firstrow = $row->first();
 
@@ -179,9 +189,11 @@ class InvoiceMTController extends Controller
                     "t_sonbr" => $firstrow['t_sonbr'],
                     "t_shipto" => $firstrow['t_shipto'],
                     "t_shiptodesc" => $firstrow['t_shiptodesc'],
+                    "t_shipfrom" => $firstrow['t_shipfrom'],
+                    "t_shipfromdesc" => $firstrow['t_shipfromdesc'],
                 ];
             })->values()->all();
-            
+
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
             [
@@ -202,7 +214,7 @@ class InvoiceMTController extends Controller
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
-
+            // dd($data);
         $detail = (new WSAServices())->wsadetailinvoice($data);
         if ($detail == false) {
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
@@ -232,20 +244,26 @@ class InvoiceMTController extends Controller
     // Invoice QAD
     public function printinvoiceqad($id)
     {
-        $data = InvoiceDetail::with('getMaster.getSalesOrder.getCOMaster.getCustomer', 'getDomain')->findOrFail($id);
+        $data = InvoiceDetail::with(
+            'getMaster.getSalesOrder.getCOMaster.getCustomer',
+            'getMaster.getSOByNbr.getCOMaster.getCustomer',
+            'getMaster.getSOByNbr.getCOMaster.getBarang', 
+            'getDomain')
+            ->findOrFail($id);
+            
         $total = $data->id_total;
 
         $terbilang = (new CreateTempTable())->terbilang($total);
 
-        $cust = Customer::where('cust_code',$data->getMaster->im_cust_code ?? '')->first();
+        $cust = Customer::where('cust_code', $data->getMaster->im_cust_code ?? '')->first();
         $idcust = $cust->id ?? '';
-        
+
         $bankacc = BankCustomer::where('bc_customer_id', $idcust ?? $data->getMaster->getSalesOrder->getCOMaster->getCustomer->id ?? '')
             ->where('bc_domain_id', $data->getDomain->id)
             ->first();
 
         $detail = (new WSAServices())->wsainvoiceqad($data);
-        // dd($data, $bankacc);
+        
         if ($detail == false) {
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
@@ -263,6 +281,8 @@ class InvoiceMTController extends Controller
                     "t_sonbr" => $firstrow['t_sonbr'],
                     "t_shipto" => $firstrow['t_shipto'],
                     "t_shiptodesc" => $firstrow['t_shiptodesc'],
+                    "t_shipfrom" => $firstrow['t_shipfrom'],
+                    "t_shipfromdesc" => $firstrow['t_shipfromdesc'],
                 ];
             })->values()->all();
 
@@ -289,7 +309,7 @@ class InvoiceMTController extends Controller
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
         }
-        
+
         $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
         $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
 

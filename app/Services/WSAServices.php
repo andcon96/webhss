@@ -590,7 +590,7 @@ class WSAServices
             if($qdocResult == 'true'){
                 
                 foreach($dataloop as $dataloops){   
-                    $so = SalesOrderMstr::with('getShipTo')->where('so_nbr',(string)$dataloops->t_sonbr)->first();
+                    $so = SalesOrderMstr::with('getShipTo','getShipFrom')->where('so_nbr',(string)$dataloops->t_sonbr)->first();
                     
                     $output[] = [
                         't_part'   => (string)$dataloops->t_part,
@@ -600,6 +600,8 @@ class WSAServices
                         't_sonbr'  => (string)$dataloops->t_sonbr,
                         't_shipto' => $so->getShipTo->cs_shipto ?? '',
                         't_shiptodesc' => $so->getShipTo->cs_shipto_name ?? '',
+                        't_shipfrom' => $so->getShipFrom->sf_code ?? '',
+                        't_shipfromdesc' => $so->getShipFrom->sf_desc ?? '',
                     ];
                 }
                 
@@ -824,6 +826,8 @@ class WSAServices
                     't_sj'     => (string)$dataloops->t_sj,
                     't_shipto' => $so->getShipTo->cs_shipto ?? '',
                     't_shiptodesc' => $so->getShipTo->cs_shipto_name ?? '',
+                    't_shipfrom' => $so->getShipFrom->sf_code ?? '',
+                    't_shipfromdesc' => $so->getShipFrom->sf_desc ?? '',
                 ];
             }
 

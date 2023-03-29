@@ -93,12 +93,12 @@
             </tr>
             <tr>
                 <td>Untuk Pembayaran</td>
-                <td colspan="3">: 
-                    Jasa Angkut 
-                        {{ $data->getSalesOrder->getShipFrom->sf_desc ?? $data->getMaster->getSalesOrder->getShipFrom->sf_desc ?? ''}} 
-                    Ke :
+                <td colspan="6">: 
+                    Jasa Angkut &nbsp;
+                        {{ $data->getSOByNbr->so_po_aju ?? $data->getMaster->getSOByNbr->so_po_aju ?? ''}} &nbsp;
+                        {{ $data->getSOByNbr->getCOMaster->co_kapal ?? $data->getMaster->getSOByNbr->getCOMaster->co_kapal ?? ''}} &nbsp;
+                        {{ $data->getSOByNbr->getCOMaster->getBarang->barang_deskripsi ?? $data->getMaster->getSOByNbr->getCOMaster->getBarang->barang_deskripsi ?? ''}}
                 </td>
-                <td colspan="3"></td>
             </tr>
             {{-- Loop Data Detail --}}
             @php($total = 0)
@@ -106,13 +106,15 @@
                 @php($flg++)
                 <tr>
                     <td colspan="3" style="padding-left:15px;">
+                        
+                        {{$details['t_shipfromdesc']}} {{$details['t_shipfromdesc'] ? '-' : '' }}  
                         {{$details['t_shiptodesc']}} {{$details['t_shiptodesc'] ? '-' : '' }}  
                         {{$details['t_part']}}
                     </td>
-                    <td width="10%">{{number_format($details['t_qtyinv'],0)}}</td>
-                    <td width="5%">X</td>
-                    <td width="20%">Rp. {{number_format($details['t_harga'],2)}}</td>
-                    <td width="20%">{{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
+                    <td width="8%">{{number_format($details['t_qtyinv'],0)}}</td>
+                    <td width="3%">X</td>
+                    <td width="18%">Rp. {{number_format($details['t_harga'],2)}}</td>
+                    <td width="18%">{{number_format($details['t_qtyinv'] * $details['t_harga'],2)}}</td>
                 </tr>
                 {{$total += $details['t_qtyinv'] * $details['t_harga']}}
             @endforeach

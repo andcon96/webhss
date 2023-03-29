@@ -21,4 +21,9 @@ class InvoiceMaster extends Model
         return $this->hasOne(SalesOrderMstr::class, 'id', 'im_so_mstr_id');
     }
 
+    public function getSOByNbr()
+    {
+        return $this->hasOne(SalesOrderMstr::class, 'so_nbr', 'im_so_nbr');
+    }
+
 }
