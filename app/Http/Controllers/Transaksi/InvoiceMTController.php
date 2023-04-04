@@ -157,9 +157,9 @@ class InvoiceMTController extends Controller
 
         $bankacc = BankCustomer::query();
 
-        if($jmlhdomaininvoice > 1){
+        if ($jmlhdomaininvoice > 1) {
             $bankacc->where('bc_domain_id', 1); // Hardcode Sesuai Permintaan Pak Yunias , 1 = AS
-        }else{
+        } else {
             $bankacc->where('bc_domain_id', $data->getDetail[0]->getDomain->id);
         }
 
@@ -175,16 +175,18 @@ class InvoiceMTController extends Controller
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
         }
+
         $detail = collect($detail);
 
-        $detail = $detail->groupBy('t_shipto', 't_harga')
-            ->map(function ($row) {
-                $firstrow = $row->first();
-
-                return [
+        $detail = $detail->groupBy(['t_shipto', 't_harga'])->map(function ($row) {
+            $allrow = $row->all();
+            $flg = 0;
+            foreach ($allrow as $key => $allrows) {
+                $firstrow = $allrows->first();
+                $result[] = [
                     "t_part" => $firstrow['t_part'],
                     "t_invnbr" => $firstrow['t_invnbr'],
-                    "t_qtyinv" => $row->sum('t_qtyinv'),
+                    "t_qtyinv" => $allrows->sum('t_qtyinv'),
                     "t_harga" => $firstrow['t_harga'],
                     "t_sonbr" => $firstrow['t_sonbr'],
                     "t_shipto" => $firstrow['t_shipto'],
@@ -192,8 +194,27 @@ class InvoiceMTController extends Controller
                     "t_shipfrom" => $firstrow['t_shipfrom'],
                     "t_shipfromdesc" => $firstrow['t_shipfromdesc'],
                 ];
-            })->values()->all();
+            }
+            return $result;
+        })->values()->all();
 
+        // $detail = $detail->groupBy('t_shipto','t_harga')
+        //     ->map(function ($row) {
+        //         $firstrow = $row->first();
+
+        //         return [
+        //             "t_part" => $firstrow['t_part'],
+        //             "t_invnbr" => $firstrow['t_invnbr'],
+        //             "t_qtyinv" => $row->sum('t_qtyinv'),
+        //             "t_harga" => $firstrow['t_harga'],
+        //             "t_sonbr" => $firstrow['t_sonbr'],
+        //             "t_shipto" => $firstrow['t_shipto'],
+        //             "t_shiptodesc" => $firstrow['t_shiptodesc'],
+        //             "t_shipfrom" => $firstrow['t_shipfrom'],
+        //             "t_shipfromdesc" => $firstrow['t_shipfromdesc'],
+        //         ];
+        //     })->values()->all();
+        
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
             [
@@ -214,7 +235,7 @@ class InvoiceMTController extends Controller
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
-            // dd($data);
+        // dd($data);
         $detail = (new WSAServices())->wsadetailinvoice($data);
         if ($detail == false) {
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
@@ -245,10 +266,11 @@ class InvoiceMTController extends Controller
         $data = InvoiceDetail::with(
             'getMaster.getSalesOrder.getCOMaster.getCustomer',
             'getMaster.getSOByNbr.getCOMaster.getCustomer',
-            'getMaster.getSOByNbr.getCOMaster.getBarang', 
-            'getDomain')
+            'getMaster.getSOByNbr.getCOMaster.getBarang',
+            'getDomain'
+        )
             ->findOrFail($id);
-            
+
         $total = $data->id_total;
 
         $terbilang = (new CreateTempTable())->terbilang($total);
@@ -261,20 +283,24 @@ class InvoiceMTController extends Controller
             ->first();
 
         $detail = (new WSAServices())->wsainvoiceqad($data);
-        
+
         if ($detail == false) {
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
         }
 
         $detail = collect($detail);
-        $detail = $detail->groupBy('t_harga')
-            ->map(function ($row) {
-                $firstrow = $row->first();
-                return [
+        
+
+        $detail = $detail->groupBy(['t_shipto', 't_harga'])->map(function ($row) {
+            $allrow = $row->all();
+            $flg = 0;
+            foreach ($allrow as $key => $allrows) {
+                $firstrow = $allrows->first();
+                $result[] = [
                     "t_part" => $firstrow['t_part'],
                     "t_invnbr" => $firstrow['t_invnbr'],
-                    "t_qtyinv" => $row->sum('t_qtyinv'),
+                    "t_qtyinv" => $allrows->sum('t_qtyinv'),
                     "t_harga" => $firstrow['t_harga'],
                     "t_sonbr" => $firstrow['t_sonbr'],
                     "t_shipto" => $firstrow['t_shipto'],
@@ -282,7 +308,25 @@ class InvoiceMTController extends Controller
                     "t_shipfrom" => $firstrow['t_shipfrom'],
                     "t_shipfromdesc" => $firstrow['t_shipfromdesc'],
                 ];
-            })->values()->all();
+            }
+            return $result;
+        })->values()->all();
+
+        // $detail = $detail->groupBy('t_harga')
+        //     ->map(function ($row) {
+        //         $firstrow = $row->first();
+        //         return [
+        //             "t_part" => $firstrow['t_part'],
+        //             "t_invnbr" => $firstrow['t_invnbr'],
+        //             "t_qtyinv" => $row->sum('t_qtyinv'),
+        //             "t_harga" => $firstrow['t_harga'],
+        //             "t_sonbr" => $firstrow['t_sonbr'],
+        //             "t_shipto" => $firstrow['t_shipto'],
+        //             "t_shiptodesc" => $firstrow['t_shiptodesc'],
+        //             "t_shipfrom" => $firstrow['t_shipfrom'],
+        //             "t_shipfromdesc" => $firstrow['t_shipfromdesc'],
+        //         ];
+        //     })->values()->all();
 
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-invoice',
