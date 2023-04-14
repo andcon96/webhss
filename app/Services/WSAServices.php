@@ -734,7 +734,9 @@ class WSAServices
                             'co_mstr.co_kapal','sj_mstr.sj_eff_date','truck.truck_no_polis',
                             'shipfrom.sf_desc','customership.cs_shipto_name',
                             'sj_mstr.sj_surat_jalan_customer','truck.truck_tipe_id','co_mstr.co_kapal',
-                            'so_mstr.so_po_aju')
+                            'so_mstr.so_po_aju','so_mstr.so_ship_to')
+                    ->orderBy('so_ship_to')
+                    ->orderBy('sj_eff_date')
                     ->get();
 
         Schema::dropIfExists('temp_group');

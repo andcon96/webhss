@@ -180,8 +180,7 @@ class InvoiceMTController extends Controller
 
         $detail = $detail->groupBy(['t_shipto', 't_harga'])->map(function ($row) {
             $allrow = $row->all();
-            $flg = 0;
-            foreach ($allrow as $key => $allrows) {
+            foreach ($allrow as $allrows) {
                 $firstrow = $allrows->first();
                 $result[] = [
                     "t_part" => $firstrow['t_part'],
@@ -245,7 +244,7 @@ class InvoiceMTController extends Controller
         $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
 
         $iscontainer = $detail->whereIn('truck_tipe_id', [5, 6])->count() == 0 ? 0 : 1;
-
+        // dd($detail);
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-detail-invoice',
             [

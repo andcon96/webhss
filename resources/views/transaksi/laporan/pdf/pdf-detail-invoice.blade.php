@@ -94,7 +94,8 @@
             </tr>
             <tr>
                 <th colspan="{{ $iscontainer == 0 ? '9' : '11' }}"
-                    style="line-height: 3em; text-align:left;font-weight:bold;padding-bottom: 10px;padding-left: 10px;">NO. INVOICE :
+                    style="line-height: 3em; text-align:left;font-weight:bold;padding-bottom: 10px;padding-left: 10px;">
+                    NO. INVOICE :
                     {{ $data->im_nbr }}</th>
             </tr>
             <tr>
@@ -102,7 +103,7 @@
                 <th class="top-bottom-border">NAMA BARANG</th>
                 <th class="top-bottom-border">NO. PO / EKS</th>
                 <th class="top-bottom-border">TANGGAL</th>
-                <th class="top-bottom-border">SURAT JALAN</th>
+                <th class="top-bottom-border">SJ CUSTOMER</th>
                 <th class="top-bottom-border">NO POLIS</th>
                 <th class="top-bottom-border">DARI</th>
                 <th class="top-bottom-border">TUJUAN</th>
@@ -117,15 +118,35 @@
         </thead>
         <tbody>
             @php($total = 0)
+            @php($subtotal = 0)
+            @php($tempshipto = '')
             @foreach ($detail as $details)
+                @if ($tempshipto != '' && $tempshipto != $details->cs_shipto_name)
+                    <tr>
+                        <td colspan="7">
+
+                        </td>
+                        <td colspan="{{ $iscontainer == 0 ? '3' : '5' }}" style="font-weight:bold">
+                            Sub Total {{ $tempshipto }}
+                        </td>
+                        <td style="font-weight:bold; text-align:right">
+                            {{ number_format($subtotal, 0) }}
+                        </td>
+                    </tr>
+                    @php($subtotal = 0)
+                @endif
+                @php($tempshipto = $details->cs_shipto_name ?? ($details->t_part ?? ''))
+                @php($subtotal += $details->t_harga * $details->t_qtyinv)
                 @php($total += $details->t_harga * $details->t_qtyinv)
+
                 <tr>
                     {{-- Print PDF Gabung antara Detail & Master --}}
-                    <td>{{ $details->cust_desc ?? ($data->im_cust_qad ?? ($data->getMaster->im_cust_qad ?? '')) }}</td> /
-                    <td>{{ $details->barang_deskripsi ?? $details->t_part ?? '' }}</td>
+                    <td>{{ $details->cust_desc ?? ($data->im_cust_qad ?? ($data->getMaster->im_cust_qad ?? '')) }}</td>
+                    /
+                    <td>{{ $details->barang_deskripsi ?? ($details->t_part ?? '') }}</td>
                     <td>{{ $details->so_po_aju }} &nbsp; / &nbsp; {{ $details->co_kapal }}</td>
                     <td>{{ $details->sj_eff_date ?? ($details->t_orddate ?? '') }}</td>
-                    <td>{{ $details->t_sj }}</td>
+                    <td>{{ $details->sj_surat_jalan_customer }}</td>
                     <td>{{ $details->truck_no_polis }}</td>
                     <td>{{ $details->sf_desc }}</td>
                     <td>{{ $details->cs_shipto_name ?? ($details->t_part ?? '') }}</td>
@@ -144,6 +165,19 @@
                     @endif
                     <td class="angka">{{ number_format($details->t_harga * $details->t_qtyinv, 0) }}</td>
                 </tr>
+
+                @if ($loop->last)
+                    <tr>
+                        <td colspan="7">
+                        </td>
+                        <td colspan="{{ $iscontainer == 0 ? '3' : '5' }}" style="font-weight:bold">
+                            Sub Total {{ $details->cs_shipto_name ?? ($details->t_part ?? '') }}
+                        </td>
+                        <td style="font-weight:bold; text-align:right">
+                            {{ number_format($subtotal, 0) }}
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
         <tfoot>
