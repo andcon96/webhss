@@ -16,18 +16,24 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, WithStyles
 {
-    public function __construct($datefrom, $dateto)
+    public function __construct($datefrom, $dateto, $domain, $subdomain)
     {
         $this->datefrom      = $datefrom;
         $this->dateto        = $dateto;
+        $this->domain        = $domain;
+        $this->subdomain        = $subdomain;
     }
 
     public function view(): view
     {
         $datefrom    = $this->datefrom;
         $dateto      = $this->dateto;
+        $domain      = $this->domain;
+        $subdomain   = $this->subdomain;
 
-        $data = SuratJalan::query();
+        $data = SuratJalan::query()
+            ->with(['getTruck.getUserDriver', 'getTruck.getTipe']);
+        $listtruck = Truck::query()->with(['getTipe', 'getUserDriver']);
 
         if ($datefrom) {
             $data->where('sj_eff_date', '>=', $datefrom);
@@ -37,14 +43,23 @@ class ReportLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, W
             $data->where('sj_eff_date', '<=', $dateto);
         }
 
-        $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
+        if ($domain) {
+            $data->whereRelation('getTruck', 'truck_domain', $domain);
+            $listtruck->where('truck_domain',$domain);
+        }
+
+        if ($subdomain) {
+            $data->whereRelation('getTruck', 'truck_sub_domain', $subdomain);
+            $listtruck->where('truck_sub_domain',$subdomain);
+        }
+
+        $data = $data
             ->where('sj_status', 'Closed')
             ->groupBy('sj_truck_id', 'sj_eff_date')
             ->selectRaw('sj_truck_id,sj_eff_date,sum(sj_default_sangu) as sangu')
             ->get();
 
-        $listtruck = Truck::with(['getTipe', 'getUserDriver'])
-            ->get();
+        $listtruck = $listtruck->get();
 
         $interval = DateInterval::createFromDateString('1 day');
         $end = new DateTime($dateto);

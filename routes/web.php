@@ -41,6 +41,7 @@ use App\Http\Controllers\Transaksi\SuratJalanLaporMTController;
 use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Http\Controllers\Transaksi\CicilanHistoryController;
+use App\Http\Controllers\Transaksi\ConfirmSuratJalanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -90,13 +91,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/customerorder/getalokasi/{id}', [CustomerOrderController::class, 'getalokasi'])->name('getAlokasiCO');
         Route::get('/customerorder/createso/{id}', [CustomerOrderController::class, 'createso'])->name('coCreateSO');
         Route::post('/customerorder/saveso', [CustomerOrderController::class, 'updateso'])->name('coUpdateSO');
+        Route::get('/exportco',[CustomerOrderController::class, 'exportco'])->name('exportCO');
         Route::resource('customerorder',CustomerOrderController::class);
     });
 
     Route::group(['middleware'=>'can:access_report'],function(){
         Route::get('/report/sangubymonth', [GenerateReportController::class, 'reportsangu'])->name('reportSangu');
         Route::get('/report/updatepreview', [GenerateReportController::class, 'updatepreview'])->name('updatePreview');
+        Route::get('/report/tonaserill', [GenerateReportController::class, 'tonaserill'])->name('tonaseRill');
         Route::get('/report/printpdf', [GenerateReportController::class, 'printpdf'])->name('reportPerNopol');
+        Route::get('/report/printtonaserill', [GenerateReportController::class, 'printtonaserill'])->name('reportTonaseRill');
         Route::get('/getcicilan', [GenerateReportController::class, 'getcicilan'])->name('getCicilan');
         Route::resource('report', GenerateReportController::class);
     });
@@ -111,6 +115,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/suratjalan/getdetail/{id}', [SuratJalanController::class, 'getdetail'])->name('getDetailSJ');
         Route::get('getrute', [SuratJalanController::class, 'getrute'])->name('getRute');
         Route::get('/detailso/{id}', [SuratJalanController::class, 'getdetailso'])->name('getDetailSJSO');
+        Route::get('/exportsj',[SuratJalanController::class, 'exportsj'])->name('exportSJ');
         Route::resource('suratjalan',SuratJalanController::class);
     });
 
@@ -118,6 +123,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/salesorder/getco', [SalesOrderController::class, 'getco'])->name('getCO');
         Route::get('/salesorder/getalokasi/{id}', [SalesOrderController::class, 'getalokasiso'])->name('getAlokasiSO');
         Route::get('/salesorder/getdetail/{id}', [SalesOrderController::class, 'getdetail'])->name('getDetailSO');
+        Route::get('/exportso',[SalesOrderController::class, 'exportso'])->name('exportSO');
         Route::resource('salesorder', SalesOrderController::class);
         Route::get('/getum', [SalesOrderController::class, 'getUM'])->name('getum');
         Route::get('/getshipto', [SalesOrderController::class, 'getshipto'])->name('getShipTo');
@@ -131,8 +137,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('browsepolis', BrowsePolisController::class);
     });
 
-    Route::group(['middleware'=>'can:access_lapor_trip'], function(){
-        Route::resource('laportrip', TripLaporMTController::class);
+    // Not Used
+    // Route::group(['middleware'=>'can:access_lapor_trip'], function(){
+    //     Route::resource('laportrip', TripLaporMTController::class);
+    // });
+
+    Route::group(['middleware'=>'can:access_confirm_sj'], function(){
+        Route::resource('confirmsj', ConfirmSuratJalanController::class);
+        Route::get('confirmsj/{sj}/{truck}', [ConfirmSuratJalanController::class, 'confirmsj'])->name('ConfirmSJ');
+        Route::post('confirmsj', [ConfirmSuratJalanController::class, 'saveconfirmsj'])->name('saveConfrimSO');
     });
 
     Route::group(['middleware'=>'can:access_lapor_sj'], function(){

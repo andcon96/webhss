@@ -160,6 +160,7 @@
                 {{ $totalrit += $datas->sj_jmlh_trip }}
             @endforeach
 
+            @if($tipetruck != 5 && $tipetruck != 6)
             @foreach ($rbhist as $rbhists)
                 {{ $nominal = $rbhists->rb_is_pemasukan == 1 ? -$rbhists->rb_nominal : $rbhists->rb_nominal }}
                 <tr>
@@ -178,6 +179,7 @@
                 {{ $no++ }}
                 {{ $totalrit += 1 }}
             @endforeach
+            @endif
 
             {{ $bonsopir = 0 }}
             <tr>

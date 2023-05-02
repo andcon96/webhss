@@ -31,6 +31,7 @@
                 <option value="4"> Report Total Supir Loosing HSS Trailer</option>
                 <option value="5"> Report Container By Tipe Truck </option>
                 <option value="6"> Report Tambahan Biaya</option>
+                <option value="7"> **New Report Tonase Rill & Harga Rill</option>
             </select>
         </div>
         <label for="truck" class="col-md-3 col-form-label text-md-right">{{ __('Truck') }}</label>
@@ -53,7 +54,18 @@
                 @endforeach
             </select>
         </div>
-        <label for="tipetruck" class="col-md-3 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
+        <label for="subdom" class="col-md-3 col-form-label text-md-right">{{ __('Sub Domain') }}</label>
+        <div class="col-md-4 col-lg-3">
+            <select id="subdom" class="form-control" name="subdom" autofocus autocomplete="off">
+                <option value=""> Select Data </option>
+                @foreach($subdomain as $subdomains)
+                <option value="{{$subdomains->truck_sub_domain}}">{{$subdomains->truck_sub_domain}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="form-group row col-md-12">
+        <label for="tipetruck" class="col-md-2 col-form-label text-md-right">{{ __('Tipe Truck') }}</label>
         <div class="col-md-4 col-lg-3">
             <select id="tipetruck" class="form-control" name="tipetruck" autofocus autocomplete="off" required>
                 <option value=""> Select Data </option>
@@ -62,9 +74,7 @@
                 @endforeach
             </select>
         </div>
-    </div>
-    <div class="form-group row col-md-12">
-        <label for="tipe" class="col-md-2 col-md-label text-md-right">Tipe</label>
+        <label for="tipe" class="col-md-3 col-md-label text-md-right">Tipe</label>
         <div class="col-md-4 col-lg-3">
             <select name="tipe" id="tipe" class="form-control" required autocomplete="off">
                 <option value="">Select Data</option>
@@ -93,7 +103,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $('#truck,#report,#domain,#tipetruck,#tipe').select2({
+    $('#truck,#report,#domain,#tipetruck,#tipe,#subdom').select2({
         width: '100%',
     });
 
@@ -109,7 +119,7 @@
         }
     });
     
-    $('#truck, #domain, #tipetruck, #tipe').prop('disabled',true);
+    $('#truck, #domain, #tipetruck, #tipe, #subdom').prop('disabled',true);
 
     $('#report').on('change', function(){
         let val = $(this).val();
@@ -118,7 +128,7 @@
             $('#truck').prop('disabled',false);
             $('#truck').prop('required',true);
             
-            $('#domain,#tipetruck,#tipe').prop('disabled',true);
+            $('#domain,#tipetruck,#tipe,#subdom').prop('disabled',true);
             $('#domain,#tipetruck,#tipe').prop('required',false);
             $('#btnpdf').prop('disabled',false);
             $('#btnexcel').prop('disabled',true);
@@ -132,7 +142,7 @@
             $('#btnexcel').prop('disabled',false);
 
         }else if(val == 5){
-            $('#truck,#domain,#tipe').prop('disabled',true);
+            $('#truck,#domain,#tipe,#subdom').prop('disabled',true);
             $('#truck,#domain,#tipe').prop('required',false);
             
             $('#tipetruck').prop('disabled',false);
@@ -141,10 +151,18 @@
             $('#btnpdf').prop('disabled',true);
             $('#btnexcel').prop('disabled',false);
         }else if(val == 6){
-            $('#truck,#domain,#tipetruck,#tipe').prop('disabled',true);
-            $('#truck,#domain,#tipetruck,#tipe').prop('required',false);
+            $('#truck,#domain,#tipetruck,#subdom').prop('disabled',true);
+            $('#truck,#domain,#tipetruck').prop('required',false);
             $('#btnpdf').prop('disabled',true);
             $('#btnexcel').prop('disabled',false);
+            $('#tipe').prop('disabled',false);
+            $('#tipe').prop('required',true);
+        }else if(val == 7){
+            $('#truck,#tipetruck,#tipe,#domain').prop('disabled',true);
+            $('#truck,#tipetruck,#tipe,#domain').prop('required',false);
+            $('#btnpdf').prop('disabled',false);
+            $('#btnexcel').prop('disabled',true);
+
         }else{
             $('#truck,#tipetruck,#tipe').prop('disabled',true);
             $('#truck,#tipetruck,#tipe').prop('required',false);
@@ -153,6 +171,15 @@
             $('#domain').prop('required',true);
             $('#btnpdf').prop('disabled',false);
             $('#btnexcel').prop('disabled',false);
+        }
+    });
+
+    $('#domain').on('change', function(){
+        let data = $(this).val();
+        if(data == 'SPJS'){
+            $('#subdom').prop('disabled',false);
+        }else{
+            $('#subdom').prop('disabled',true);
         }
     });
 

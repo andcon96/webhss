@@ -97,6 +97,7 @@ class UserMTController extends Controller
         try {
             $dept = $request->dept;
             $password = $request->password;
+            $backdate = $request->backdate;
 
             $role = $request->role;
             $role_id = Role::where('role', $role)->value('id');
@@ -111,6 +112,7 @@ class UserMTController extends Controller
             $storeUser->role_type_id = $request->input('roletype');
             $storeUser->dept_id = 1;
             $storeUser->domain = $request->input('domain');
+            $storeUser->users_can_backdate = $backdate;
 
             $storeUser->isActive = 1;
             $storeUser->save();
@@ -173,7 +175,7 @@ class UserMTController extends Controller
         $name = $request->name;
         $roletype = $request->roletype;
         $domain = $request->domain;
-
+        $d_backdate = $request->d_backdate;
         DB::beginTransaction();
 
         try {
@@ -183,6 +185,11 @@ class UserMTController extends Controller
             $user->username = $username;
             $user->role_type_id = $roletype;
             $user->domain = $domain;
+            if($d_backdate){
+                $user->users_can_backdate = 1;
+            }else{
+                $user->users_can_backdate = 0;
+            }
             if ($user->isDirty()) {
                 $user->save();
             }

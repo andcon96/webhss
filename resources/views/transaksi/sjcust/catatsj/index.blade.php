@@ -57,7 +57,8 @@
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
-                    <a href="{{ route('laporsj.index',['truck' => $truck]) }}" id="btnback" class="btn btn-success bt-action">Back</a>
+                    {{-- <a href="{{ route('laporsj.index',['truck' => $truck]) }}" id="btnback" class="btn btn-success bt-action">Back</a> --}}
+                    <a href="{{ url()->previous() }}" id="btnback" class="btn btn-success bt-action">Back</a>
 
                     {{-- @if(Auth()->user()->id == $data->getTruck->getUserDriver->id) --}}
                     <button type="submit" class="btn btn-success bt-action btn-focus btnconf" id="btnconf">Lapor SJ</button>

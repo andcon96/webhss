@@ -27,13 +27,16 @@
         </thead>
         <tbody>
             @php($idrbhist = '')
+            @php($line = 1)
             @foreach($rbhist as $key => $datas)
                @php($total = 0)
                @if($idrbhist == '' || $idrbhist != $datas->rb_truck_id)
                   <tr>
-                     <td>{{$key+1}}</td>
+                     {{-- <td>{{$key+1}}</td> --}}
+                     <td>{{$line}}</td>
                      <td colspan="6">{{$datas->getTruck->truck_no_polis}}</td>
                   </tr>
+                  @php($line += 1)
                @endif
 
                @foreach($datas->getDetail as $keys => $details)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\Exports\ExportSalesOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
@@ -20,6 +21,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SalesOrderController extends Controller
 {
@@ -31,77 +33,81 @@ class SalesOrderController extends Controller
         $custord = CustomerOrderMstr::get();
         $salesord = SalesOrderMstr::get();
         $data = SalesOrderMstr::query()
-                              ->with('getDetail',
-                                     'getCOMaster.getCustomer',
-                                     'getCOMaster.getBarang',
-                                     'getShipFrom',
-                                     'getShipTo');
+            ->with(
+                'getDetail',
+                'getCOMaster.getCustomer',
+                'getCOMaster.getBarang',
+                'getShipFrom',
+                'getShipTo'
+            );
 
-        if($request->s_sonumber){
-            $data->where('id',$request->s_sonumber);
+        if ($request->s_sonumber) {
+            $data->where('id', $request->s_sonumber);
         }
-        if($request->s_conumber){
-            $data->whereRelation('getCOMaster','id',$request->s_conumber);
+        if ($request->s_conumber) {
+            $data->whereRelation('getCOMaster', 'id', $request->s_conumber);
         }
-        if($request->s_customer){
-            $data->whereRelation('getCOMaster.getCustomer','co_cust_code',$request->s_customer);
+        if ($request->s_customer) {
+            $data->whereRelation('getCOMaster.getCustomer', 'co_cust_code', $request->s_customer);
         }
-        if($request->s_shipto){
-                $data->where('so_ship_to',$request->s_shipto);
+        if ($request->s_shipto) {
+            $data->where('so_ship_to', $request->s_shipto);
         }
-        if($request->s_shipfrom){
-            $request->s_shipfrom == 'null' ? 
-                $data->whereNull('so_ship_from') : 
-                $data->where('so_ship_from',$request->s_shipfrom);
+        if ($request->s_shipfrom) {
+            $request->s_shipfrom == 'null' ?
+                $data->whereNull('so_ship_from') :
+                $data->where('so_ship_from', $request->s_shipfrom);
         }
-        if($request->s_status){
-            $data->where('so_status',$request->s_status);
+        if ($request->s_status) {
+            $data->where('so_status', $request->s_status);
         }
 
-        $data = $data->orderBy('created_at','DESC')->paginate(10);
+        $data = $data->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('transaksi.salesorder.index',compact('cust','shipfrom','shipto','custord','salesord','data'));       
+        return view('transaksi.salesorder.index', compact('cust', 'shipfrom', 'shipto', 'custord', 'salesord', 'data'));
     }
 
     public function create()
     {
         $item = Item::get();
         $cust = Customer::get();
-        $shipfrom = ShipFrom::where('sf_is_active',1)->get();
+        $shipfrom = ShipFrom::where('sf_is_active', 1)->get();
         $conbr = CustomerOrderMstr::query()
-                        ->with('getCustomer','getDetail','getBarang')
-                        ->whereRelation('getDetail',function ($q){
-                            $q->whereRaw('cod_qty_ord > cod_qty_used');
-                        })
-                        ->get();
-                        
-        return view('transaksi.salesorder.create',compact('item','cust','conbr','shipfrom'));
+            ->with('getCustomer', 'getDetail', 'getBarang')
+            ->whereRelation('getDetail', function ($q) {
+                $q->whereRaw('cod_qty_ord > cod_qty_used');
+            })
+            ->get();
+
+        return view('transaksi.salesorder.create', compact('item', 'cust', 'conbr', 'shipfrom'));
     }
 
     public function store(Request $request)
     {
         DB::beginTransaction();
-        try{
+        try {
             $prefix = Prefix::lockForUpdate()->first();
 
             $getrn = (new CreateTempTable())->getrnso();
-            if($getrn === false){
+            if ($getrn === false) {
                 alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
                 DB::rollBack();
                 return back();
             }
-            
+
             $so_mstr = new SalesOrderMstr();
             $so_mstr->so_nbr = $getrn;
             $so_mstr->so_co_mstr_id = $request->conbr;
             $so_mstr->so_ship_from = $request->shipfrom;
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
+            $so_mstr->so_remark = $request->remarks;
+            $so_mstr->so_po_aju = $request->poaju;
             $so_mstr->save();
 
             $id = $so_mstr->id;
-            foreach($request->line as $key => $datas){
-                if($request->qtyord[$key] != 0){
+            foreach ($request->line as $key => $datas) {
+                if ($request->qtyord[$key] != 0) {
                     $so_detail = new SalesOrderDetail();
                     $so_detail->sod_so_mstr_id = $id;
                     $so_detail->sod_line = $datas;
@@ -110,9 +116,9 @@ class SalesOrderController extends Controller
                     $so_detail->sod_qty_ord = $request->qtyord[$key];
                     $so_detail->sod_qty_ship = 0;
                     $so_detail->save();
-    
+
                     $coddet = CustomerOrderDetail::lockForUpdate()->findOrFail($request->idcodetail[$key]);
-                    if($coddet->cod_qty_used + $request->qtyord[$key] > $coddet->cod_qty_ord){
+                    if ($coddet->cod_qty_used + $request->qtyord[$key] > $coddet->cod_qty_ord) {
                         alert()->error('Error', 'Save Gagal, Qty Customer Order berubah')->persistent('Dismiss');
                         return back();
                     }
@@ -121,21 +127,19 @@ class SalesOrderController extends Controller
                 }
             }
 
-            $prefix->prefix_so_rn = substr($getrn,2,6);
+            $prefix->prefix_so_rn = substr($getrn, 2, 6);
             $prefix->save();
 
             $comstr = CustomerOrderMstr::find($request->conbr);
-            if($comstr->co_status == 'New'){
+            if ($comstr->co_status == 'New') {
                 $comstr->co_status = 'Ongoing';
             }
             $comstr->save();
 
             DB::commit();
-            alert()->success('Success', 'Sales Order : '.$getrn.' Created')->persistent('Dismiss');
+            alert()->success('Success', 'Sales Order : ' . $getrn . ' Created')->persistent('Dismiss');
             return back();
-            
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollback();
             alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
             return back();
@@ -144,17 +148,17 @@ class SalesOrderController extends Controller
 
     public function edit(SalesOrderMstr $salesOrderMstr, $id)
     {
-        $data = SalesOrderMstr::with('getDetail.getItem','getCOMaster.getCustomer','getCOMaster.getDetail','getNonCancelledSJ','getShipFrom','getShipTo')->findOrFail($id);
-        
-        $item = CustomerOrderDetail::with('getItem')->where('cod_co_mstr_id',$data->so_co_mstr_id)->get();
+        $data = SalesOrderMstr::with('getDetail.getItem', 'getCOMaster.getCustomer', 'getCOMaster.getDetail', 'getNonCancelledSJ', 'getShipFrom', 'getShipTo')->findOrFail($id);
+
+        $item = CustomerOrderDetail::with('getItem')->where('cod_co_mstr_id', $data->so_co_mstr_id)->get();
 
         $shipfrom = ShipFrom::get();
 
-        $shipto = CustomerShipTo::where('cs_cust_code',$data->getCOMaster->co_cust_code)->orderBy('cs_shipto','asc')->get();
+        $shipto = CustomerShipTo::where('cs_cust_code', $data->getCOMaster->co_cust_code)->orderBy('cs_shipto', 'asc')->get();
 
-        $this->authorize('update',[SalesOrderMstr::class, $data]);
-        
-        return view('transaksi.salesorder.edit',compact('data','item','shipfrom','shipto'));
+        $this->authorize('update', [SalesOrderMstr::class, $data]);
+
+        return view('transaksi.salesorder.edit', compact('data', 'item', 'shipfrom', 'shipto'));
     }
 
     public function update(Request $request, SalesOrderMstr $salesOrderMstr)
@@ -164,6 +168,7 @@ class SalesOrderController extends Controller
         $shipfrom = $request->shipfrom;
         $shipto = $request->shipto;
         $remark = $request->remark;
+        $poaju  = $request->poaju;
 
         $operation = $request->operation;
         $iddetail = $request->iddetail;
@@ -175,21 +180,22 @@ class SalesOrderController extends Controller
         $um = $request->um;
 
         DB::beginTransaction();
-        try{
+        try {
             $master = SalesOrderMstr::findOrFail($id);
-            $this->authorize('update',[SalesOrderMstr::class, $master]);
+            $this->authorize('update', [SalesOrderMstr::class, $master]);
 
             $master->so_due_date = $duedate;
             $master->so_ship_from = $shipfrom;
             $master->so_ship_to = $shipto;
             $master->so_remark = $remark;
+            $master->so_po_aju = $poaju;
             $master->save();
 
-            foreach($iddetail as $key => $details){
+            foreach ($iddetail as $key => $details) {
                 $detail = SalesOrderDetail::lockForUpdate()->firstOrNew(['id' => $details]);
-                if($operation[$key] == 'R'){
+                if ($operation[$key] == 'R') {
                     $detail->delete();
-                }else{
+                } else {
                     $detail->sod_so_mstr_id = $id;
                     $detail->sod_line = $line[$key];
                     $detail->sod_part = $part[$key];
@@ -200,36 +206,34 @@ class SalesOrderController extends Controller
                 }
 
                 $codetail = CustomerOrderDetail::query()
-                                    ->where('cod_co_mstr_id',$master->so_co_mstr_id)
-                                    ->where('cod_line',$line[$key])
-                                    ->where('cod_part',$part[$key])
-                                    ->lockForUpdate()
-                                    ->first();
-                if($request->operation[$key] == 'R'){        
+                    ->where('cod_co_mstr_id', $master->so_co_mstr_id)
+                    ->where('cod_line', $line[$key])
+                    ->where('cod_part', $part[$key])
+                    ->lockForUpdate()
+                    ->first();
+                if ($request->operation[$key] == 'R') {
                     $codetail->cod_qty_used = $codetail->cod_qty_used - $request->qtyold[$key];
                     $codetail->save();
-                }else{
+                } else {
                     $codetail->cod_qty_used = $codetail->cod_qty_used - $qtyold[$key] + $qtyord[$key];
-                    if($codetail->cod_qty_used > $codetail->cod_qty_ord){
+                    if ($codetail->cod_qty_used > $codetail->cod_qty_ord) {
                         DB::rollback();
                         alert()->error('Error', 'Data Sudah berubah, silahkan dicoba lagi')->persistent('Dismiss');
                         return back();
-                    }else{
+                    } else {
                         $codetail->save();
                     }
-                }         
-                
+                }
             }
 
             DB::commit();
             alert()->success('Success', 'SO Updated')->persistent('Dismiss');
             return back();
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
             alert()->error('Error', 'Failed to update so')->persistent('Dismiss');
             return back();
         }
-
     }
 
     public function destroy(SalesOrderMstr $salesOrderMstr, Request $request)
@@ -238,28 +242,28 @@ class SalesOrderController extends Controller
 
         DB::beginTransaction();
 
-        try{
+        try {
             $somstr = SalesOrderMstr::with('getDetail')->findOrFail($id);
-            
-            $this->authorize('delete',[SalesOrderMstr::class, $somstr]);
-            
-            $soddet = SalesOrderDetail::where('sod_so_mstr_id',$id)->get();
-            foreach($soddet as $key => $soddets){
+
+            $this->authorize('delete', [SalesOrderMstr::class, $somstr]);
+
+            $soddet = SalesOrderDetail::where('sod_so_mstr_id', $id)->get();
+            foreach ($soddet as $key => $soddets) {
                 $coddet = CustomerOrderDetail::query()
-                                    ->where('cod_line',$soddets->sod_line)
-                                    ->where('cod_part',$soddets->sod_part)
-                                    ->where('cod_co_mstr_id',$somstr->so_co_mstr_id)
-                                    ->firstOrFail();
+                    ->where('cod_line', $soddets->sod_line)
+                    ->where('cod_part', $soddets->sod_part)
+                    ->where('cod_co_mstr_id', $somstr->so_co_mstr_id)
+                    ->firstOrFail();
                 $coddet->cod_qty_used = $coddet->cod_qty_used - $soddets->sod_qty_ord;
                 $coddet->save();
             }
-            
+
             $somstr->so_status = 'Cancelled';
             $somstr->save();
-            
+
             DB::commit();
             alert()->success('Success', 'Sales Order Deleted Successfully')->persistent('Dismiss');
-        }catch (\Exception $err) {
+        } catch (\Exception $err) {
             DB::rollBack();
             dd($err);
             alert()->error('Error', 'Failed to delete Sales Order')->persistent('Dismiss');
@@ -270,17 +274,17 @@ class SalesOrderController extends Controller
 
     public function getdetail($id)
     {
-        $data = SalesOrderDetail::with('getItem')->where('sod_so_mstr_id',$id)->get();
+        $data = SalesOrderDetail::with('getItem')->where('sod_so_mstr_id', $id)->get();
         $output = '<tr><td colspan="7"> No Data Avail </td></tr>';
-        if($data->count() > 0){
+        if ($data->count() > 0) {
             $output = '';
-            foreach($data as $datas){
+            foreach ($data as $datas) {
                 $output .= '<tr>';
-                $output .= '<td>'.$datas->sod_line.'</td>';
-                $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc .'</td>';
-                $output .= '<td>'.$datas->sod_um.'</td>';
-                $output .= '<td>'.$datas->sod_qty_ord.'</td>';
-                $output .= '<td>'.$datas->sod_qty_ship.'</td>';
+                $output .= '<td>' . $datas->sod_line . '</td>';
+                $output .= '<td>' . $datas->sod_part . ' - ' . $datas->getItem->item_desc . '</td>';
+                $output .= '<td>' . $datas->sod_um . '</td>';
+                $output .= '<td>' . $datas->sod_qty_ord . '</td>';
+                $output .= '<td>' . $datas->sod_qty_ship . '</td>';
                 $output .= '</tr>';
             }
         }
@@ -290,7 +294,7 @@ class SalesOrderController extends Controller
 
     public function getum(Request $request)
     {
-        $item = Item::where('item_part',$request->search)->firstOrFail();
+        $item = Item::where('item_part', $request->search)->firstOrFail();
         $um = $item->item_um ?? '';
 
         return $um;
@@ -300,10 +304,10 @@ class SalesOrderController extends Controller
     {
         $output = '';
 
-        $shipto = CustomerShipTo::where('cs_cust_code',$request->search)->orderBy('cs_shipto','asc')->get();
-        if($shipto->count() > 0){
-            foreach($shipto as $data){
-                $output .= '<option value="'.$data->cs_shipto.'">'.$data->cs_shipto.' - '.$data->cs_shipto_name.'</option>';
+        $shipto = CustomerShipTo::where('cs_cust_code', $request->search)->orderBy('cs_shipto', 'asc')->get();
+        if ($shipto->count() > 0) {
+            foreach ($shipto as $data) {
+                $output .= '<option value="' . $data->cs_shipto . '">' . $data->cs_shipto . ' - ' . $data->cs_shipto_name . '</option>';
             }
         }
 
@@ -313,28 +317,28 @@ class SalesOrderController extends Controller
     public function getco(Request $request)
     {
         $coddetail = CustomerOrderDetail::query()
-                                ->with('getItem')
-                                ->where('cod_co_mstr_id',$request->search)
-                                ->get();
+            ->with('getItem')
+            ->where('cod_co_mstr_id', $request->search)
+            ->get();
         $output = '';
-        if($coddetail->count() > 0){
-            foreach($coddetail as $datas){
+        if ($coddetail->count() > 0) {
+            foreach ($coddetail as $datas) {
                 $qtyopen = $datas->cod_qty_ord - $datas->cod_qty_used;
                 $output .= '<tr>';
-                $output .= '<td>'.$datas->cod_line.'<input type="hidden" name="line[]" value="'.$datas->cod_line.'"></td>';
-                $output .= '<td>'.$datas->cod_part.' - '.$datas->getItem->item_desc.'<input type="hidden" name="part[]" value="'.$datas->cod_part.'"></td>';
-                $output .= '<td>'.$datas->getItem->item_um.'<input type="hidden" name="um[]" value="'.$datas->getItem->item_um.'"></td>';
-                $output .= '<td>'.(int)$datas->cod_qty_ord.'</td>';
-                $output .= '<td>'.$qtyopen.'</td>';
-                if($qtyopen == 0){
+                $output .= '<td>' . $datas->cod_line . '<input type="hidden" name="line[]" value="' . $datas->cod_line . '"></td>';
+                $output .= '<td>' . $datas->cod_part . ' - ' . $datas->getItem->item_desc . '<input type="hidden" name="part[]" value="' . $datas->cod_part . '"></td>';
+                $output .= '<td>' . $datas->getItem->item_um . '<input type="hidden" name="um[]" value="' . $datas->getItem->item_um . '"></td>';
+                $output .= '<td>' . (int)$datas->cod_qty_ord . '</td>';
+                $output .= '<td>' . $qtyopen . '</td>';
+                if ($qtyopen == 0) {
                     $output .= '<td>
-                                <input type="hidden" name="idcodetail[]" value="'.$datas->id.'">
-                                <input type="number" class="form-control" name="qtyord[]" max="'.$qtyopen.'" required disabled>
+                                <input type="hidden" name="idcodetail[]" value="' . $datas->id . '">
+                                <input type="number" class="form-control" name="qtyord[]" max="' . $qtyopen . '" required disabled>
                                 </td>';
-                }else{
+                } else {
                     $output .= '<td>
-                    <input type="hidden" name="idcodetail[]" value="'.$datas->id.'">
-                    <input type="number" class="form-control" name="qtyord[]" max="'.$qtyopen.'" required>
+                    <input type="hidden" name="idcodetail[]" value="' . $datas->id . '">
+                    <input type="number" class="form-control" name="qtyord[]" max="' . $qtyopen . '" required>
                     </td>';
                 }
                 $output .= '</tr>';
@@ -346,49 +350,56 @@ class SalesOrderController extends Controller
 
     public function getalokasiso($id)
     {
-        $data = SalesOrderDetail::with('getItem')->where('sod_so_mstr_id',$id)->get();
+        $data = SalesOrderDetail::with('getItem')->where('sod_so_mstr_id', $id)->get();
         $output = '<tr><td colspan="7"> No Data Avail </td></tr>';
-        if($data->count() > 0){
+        if ($data->count() > 0) {
             $output = '';
-            foreach($data as $datas){
+            foreach ($data as $datas) {
                 $output .= '<tr>';
-                $output .= '<td>'.$datas->sod_line.'</td>';
-                $output .= '<td>'.$datas->sod_part.' - '.$datas->getItem->item_desc .'</td>';
-                $output .= '<td>'.$datas->getItem->item_um.'</td>';
-                $output .= '<td>'.(int)$datas->sod_qty_ord.'</td>';
-                $output .= '<td>'.(int)$datas->sod_qty_ship.'</td>';
+                $output .= '<td>' . $datas->sod_line . '</td>';
+                $output .= '<td>' . $datas->sod_part . ' - ' . $datas->getItem->item_desc . '</td>';
+                $output .= '<td>' . $datas->getItem->item_um . '</td>';
+                $output .= '<td>' . (int)$datas->sod_qty_ord . '</td>';
+                $output .= '<td>' . (int)$datas->sod_qty_ship . '</td>';
                 $output .= '</tr>';
 
                 $list = SuratJalan::query()
-                                ->with('getDetail','getTruck')
-                                ->where('sj_so_mstr_id',$datas->sod_so_mstr_id)
-                                ->whereRelation('getDetail','sjd_line',$datas->sod_line)
-                                ->whereRelation('getDetail','sjd_part',$datas->sod_part)
-                                ->where('sj_status','!=','Cancelled')
-                                ->orderByRaw('LENGTH(sj_surat_jalan) ASC')
-                                ->orderBy('sj_surat_jalan','ASC')
-                                ->get();
+                    ->with('getDetail', 'getTruck')
+                    ->where('sj_so_mstr_id', $datas->sod_so_mstr_id)
+                    ->whereRelation('getDetail', 'sjd_line', $datas->sod_line)
+                    ->whereRelation('getDetail', 'sjd_part', $datas->sod_part)
+                    ->where('sj_status', '!=', 'Cancelled')
+                    ->orderByRaw('LENGTH(sj_surat_jalan) ASC')
+                    ->orderBy('sj_surat_jalan', 'ASC')
+                    ->get();
 
-                if($list->count() > 0){
+                if ($list->count() > 0) {
                     $value = 0;
-                    foreach($list as $key => $lists){
+                    foreach ($list as $key => $lists) {
                         $value += 1;
                         $output .= '<tr>';
-                        $output .= '<td colspan="2"><b>SPK Number : '.$lists->sj_nbr.', SJ Number : '.$lists->sj_surat_jalan.'</b></td>';
-                        $output .= '<td><b>Nopol : '.$lists->getTruck->truck_no_polis.'</b></td>';
-                        $output .= '<td><b> Status : '.$lists->sj_status.'</b></td>';
-                        foreach($lists->getDetail as $detail){
-                            if($detail->sjd_part == $datas->sod_part){
-                                $output .= '<td><b>Qty : '.(int)$detail->sjd_qty_ship.'</b></td>';
+                        $output .= '<td colspan="2"><b>SPK Number : ' . $lists->sj_nbr . ', SJ Number : ' . $lists->sj_surat_jalan . '</b></td>';
+                        $output .= '<td><b>Nopol : ' . $lists->getTruck->truck_no_polis . '</b></td>';
+                        $output .= '<td><b> Status : ' . $lists->sj_status . '</b></td>';
+                        foreach ($lists->getDetail as $detail) {
+                            if ($detail->sjd_part == $datas->sod_part) {
+                                $output .= '<td><b>Qty : ' . (int)$detail->sjd_qty_ship . '</b></td>';
                             }
                         }
                         $output .= '</tr>';
                     }
-                    $output .= '<tr><td colspan="5"><b>Total SPK : '.$value.'</b></td></tr>';
+                    $output .= '<tr><td colspan="5"><b>Total SPK : ' . $value . '</b></td></tr>';
                 }
             }
         }
 
         return $output;
+    }
+
+    public function exportso(Request $request)
+    {
+        // dd($request->all());
+        return Excel::download(new ExportSalesOrder($request->s_sonumber, $request->s_conumber, $request->s_shipfrom, 
+        $request->s_shipto, $request->s_customer, $request->s_status), 'Sales Order.xlsx');
     }
 }

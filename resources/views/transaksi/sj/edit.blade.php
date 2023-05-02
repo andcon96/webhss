@@ -88,48 +88,15 @@
             <div class="col-md-3">
                 <input id="effdate" type="text" class="form-control" name="effdate" value="{{$data->sj_eff_date}}" autocomplete="off" maxlength="24" autofocus>
             </div>
-        </div>
-        <div class="form-group row col-md-12">
-            @include('transaksi.sj.edit-table')
-        </div>
-        <div class="form-group row col-md-12">
-            <label for="listsan" class="col-md-2 col-form-label text-md-right">List Sangu</label>
-            <div class="col-md-3">
-                <select name="listsan" id="listsan" class="form-control selectdrop">
-                    <option value="">Select Data</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row col-md-12">
-            <label for="defaultsangu" class="col-md-2 col-form-label text-md-right">Total Default Sangu</label>
-            <div class="col-md-3">
-                <input id="defaultsangu" type="text" class="form-control" name="defaultsangu" value="{{number_format($data->sj_default_sangu,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
-            </div>
-            <label for="trip" class="col-md-3 col-form-label text-md-right">Trip</label>
-            <div class="col-md-3">
-                <input id="trip" type="number" class="form-control qtyord" name="trip" value="{{$data->sj_jmlh_trip ?? 0}}" autocomplete="off" maxlength="24" autofocus>
-            </div>
-        </div>
-        <div class="form-group row col-md-12" id="container">
-            <label for="sangutruck" class="col-md-2 col-form-label text-md-right">Default Sangu</label>
-            <div class="col-md-3">
-                <input id="sangutruck" type="text" class="form-control" name="sangutruck" value="{{number_format($data->getRuteHistory->history_sangu ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
-            </div>
-            <label for="komisitruck" class="col-md-3 col-form-label text-md-right">Default Komisi</label>
-            <div class="col-md-3">
-                <input id="komisitruck" type="text" class="form-control" name="komisitruck" value="{{number_format($data->getRuteHistory->history_ongkos ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus readonly>
-            </div>
-        </div>
-        <div class="form-group row col-md-12">
-            <label for="totsangu" class="col-md-2 col-form-label text-md-right">Total Sangu</label>
-            <div class="col-md-3">
-                <input id="totsangu" type="text" class="form-control sangu" name="totsangu" value="{{number_format($data->sj_tot_sangu ?? 0,0)}}" autocomplete="off" maxlength="24" autofocus>
-            </div>
             <label for="catatansj" class="col-md-3 col-form-label text-md-right">Surat Jalan</label>
             <div class="col-md-3">
                 <input id="catatansj" type="text" class="form-control" name="catatansj" value="{{$data->sj_surat_jalan}}" autocomplete="off" maxlength="24" autofocus>
             </div>
         </div>
+        <div class="form-group row col-md-12">
+            @include('transaksi.sj.edit-table')
+        </div>
+        
         <div class="form-group row col-md-12">
             <div class="offset-md-1 col-md-10" style="margin-top:90px;">
                 <div class="float-right">
@@ -165,31 +132,6 @@
     
     var tipebarang = $('#type').val();
 
-    $('.tonase').css('display','none');
-    $('.pricetot').removeClass('col-md-3');
-    $('.pricetot').addClass('col-md-2');
-
-    function getDefaultSangu(){
-        var tipebarang = $('#type').val();
-        
-            sum = 0;
-            // $('.qtyord').each(function(){
-            //     sum += parseFloat(this.value);
-            // });
-            sum = $('#trip').val();
-            var hsangu = $('#sangutruck').val();
-            var hkomisi = $('#komisitruck').val();
-
-            let total = (parseInt(hsangu.replace(',','')) + parseInt(hkomisi.replace(',',''))) * sum;
-
-            total = Number(total).toLocaleString('en-US');
-            $('#defaultsangu').val(total);
-
-    }
-    
-    $(document).on('change keyup', '.qtyord',function(){
-        getDefaultSangu();
-    });
 
     var counter = 1;
 
@@ -267,120 +209,6 @@
         document.getElementById('btnconf').style.display = 'none';
         document.getElementById('btnback').style.display = 'none';
         document.getElementById('btnloading').style.display = '';
-    });
-    
-    $(document).on('keyup', '.sangu', function() {
-        var data = $(this).val();
-
-        var newdata = data.replace(/([^ 0-9])/g, '');
-
-        $(this).val(Number(newdata).toLocaleString('en-US'));
-    });
-
-    function resetSangu(){
-        $('#defaultsangu').val(0);
-        $('#sangutruck').val(0);
-        $('#komisitruck').val(0);
-    }
-
-    $(document).ready(function(){
-        let shipto = $('#shipto').find(':selected').data('id');
-        let shipfrom = $('#shipfrom').find(':selected').data('id');
-        let tipetruck = $('#idtruck').val();
-
-        $.ajax({
-            url: "{{ route('getRute') }}",
-            data: {
-                tipetruck: tipetruck,
-                shipto: shipto,
-                shipfrom: shipfrom
-            },
-            success: function(data) {
-                let output = '<option value=""> Select Data </option>';
-
-                if(data != 0){
-                    data.forEach(element => {
-                        output += `<option value="${element['id']}"
-                                data-sangu="${element['history_sangu']}"
-                                data-komisi="${element['history_ongkos']}"
-                                data-harga="${element['history_harga']}">
-                                Sangu : ${element['history_sangu']} , Komisi : ${element['history_ongkos']}
-                                </option>`;
-                    });
-                }
-
-                $('#listsan').html('').append(output);
-            },
-            error: function(data) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    html: 'Gagal mencari data',
-                    showCloseButton: true,
-                })
-                $('#btnconf').hide();
-            },
-        })
-    });
-
-    $(document).on('change', '#shipto, #shipfrom', function(){
-        let shipto = $('#shipto').find(':selected').data('id');
-        let shipfrom = $('#shipfrom').find(':selected').data('id');
-        let tipetruck = $('#idtruck').val();
-
-        $.ajax({
-            url: "{{ route('getRute') }}",
-            data: {
-                tipetruck: tipetruck,
-                shipto: shipto,
-                shipfrom: shipfrom
-            },
-            beforeSend: function() {
-                $('#loader').removeClass('hidden');
-            },
-            success: function(data) {
-                resetSangu();
-                let output = '<option value=""> Select Data </option>';
-
-                if(data != 0){
-                    data.forEach(element => {
-                        output += `<option value="${element['id']}"
-                                data-sangu="${element['history_sangu']}"
-                                data-komisi="${element['history_ongkos']}"
-                                data-harga="${element['history_harga']}">
-                                Sangu : ${element['history_sangu']} , Komisi : ${element['history_ongkos']}
-                                </option>`;
-                    });
-                }
-
-                $('#listsan').html('').append(output);
-            },
-            error: function(data) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    html: 'Gagal mencari data',
-                    showCloseButton: true,
-                })
-                $('#btnconf').hide();
-            },
-            complete: function() {
-                $('#loader').addClass('hidden');
-            }
-        })
-
-    })
-
-    $(document).on('change', '#listsan', function(){
-        let id = $(this).val();
-        let sangu = $(this).find(':selected').data('sangu');
-        let komisi = $(this).find(':selected').data('komisi');
-        
-        $('#sangutruck').val(sangu);
-        $('#komisitruck').val(komisi);
-        $('#idtipesangu').val(id);
-
-        getDefaultSangu();
     });
 
     $("table.edittable").on("click", ".ibtnDel", function(event) {

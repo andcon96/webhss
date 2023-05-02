@@ -7,6 +7,7 @@ use App\Models\Master\BonusBarang;
 use App\Models\Master\Customer;
 use App\Models\Master\CustomerShipTo;
 use App\Models\Master\InvoicePrice;
+use App\Models\Master\Rute;
 use App\Models\Master\ShipFrom;
 use App\Models\Master\Truck;
 use App\Models\Transaksi\SalesOrderDetail;
@@ -40,6 +41,8 @@ class SuratJalanLaporMTController extends Controller
         $customer = Customer::get();
         $shipto = CustomerShipTo::get();
         $shipfrom = ShipFrom::get();
+        $so = SalesOrderMstr::get();
+        $sj = SuratJalan::get();
 
         if($request->customer){
             $data->whereRelation('getSOMaster.getCOMaster','co_cust_code',$request->customer);
@@ -64,10 +67,19 @@ class SuratJalanLaporMTController extends Controller
         if ($request->truck) {
             $data->where('sj_truck_id', $request->truck);
         }
+
+        if ($request->sonumber){
+            $data->where('sj_so_mstr_id', $request->sonumber);
+        }
+
+        if($request->sjnbr){
+            $data->where('id',$request->sjnbr);
+        }
         
         if(!$request->customer && !$request->shipfrom && 
            !$request->shipto && !$request->kapal && 
-           !$request->status && !$request->truck){
+           !$request->status && !$request->truck && 
+           !$request->sonumber && !$request->sjnbr){
 
             $data = $data->where('id',0)->paginate(10);
         }else{
@@ -75,7 +87,7 @@ class SuratJalanLaporMTController extends Controller
         }
 
 
-        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom'));
+        return view('transaksi.sjcust.index', compact('data', 'truck','customer','shipto','shipfrom','so','sj'));
     }
 
     public function laporsj($sj, $truck)
@@ -99,9 +111,15 @@ class SuratJalanLaporMTController extends Controller
                         ->where('ip_shipfrom_id', $data->getSOMaster->getShipFrom->id)
                         ->where('ip_cust_id', $data->getSOMaster->getCOMaster->getCustomer->id)
                         ->get();
-                        
+
+        $rute = Rute::query()
+                        ->where('rute_tipe_id',$data->getTruck->truck_tipe_id)
+                        ->where('rute_shipfrom_id',$data->getSOMaster->getShipFrom->id)
+                        ->where('rute_customership_id',$data->getSOMaster->getShipTo->id)
+                        ->with('getAllActivePrice')
+                        ->first();
         
-        return view('transaksi.sjcust.laporsj', compact('data','truck','invoiceprice'));
+        return view('transaksi.sjcust.laporsj', compact('data','truck','invoiceprice','rute'));
     }
 
     public function updatesj(Request $request)
@@ -112,30 +130,18 @@ class SuratJalanLaporMTController extends Controller
             $sjmstr = SuratJalan::with('getSOMaster.getCOMaster')->findOrFail($request->idsjmstr);
             $sjmstr->sj_conf_remark = $request->remark;
             $sjmstr->sj_conf_date = $request->effdate;
-            $sjmstr->sj_status = 'Closed';
-            if($sjmstr->sj_jmlh_trip != $request->jmlhtrip){
-                $bedajumlah = $request->jmlhtrip - $sjmstr->sj_jmlh_trip;
-                // Create Trip Hist
-                for($i = 0; $i < $bedajumlah; $i++){
-                    $triphist = new SJHistTrip();
-                    $triphist->sjh_sj_mstr_id = $sjmstr->id;
-                    $triphist->sjh_truck = $sjmstr->sj_truck_id;
-                    $triphist->sjh_remark = 'Update By System';
-                    $triphist->created_by = 'System';
-                    $triphist->save();
-                }
-                // Update New Trip
-                $sjmstr->sj_jmlh_trip = $request->jmlhtrip;
-                $sjmstr->sj_tot_sangu = str_replace(',','',$request->totsangu);
-            }
+            $sjmstr->sj_default_sangu_type = $request->listsangu;
+            $sjmstr->sj_status = 'Selesai';
+            $sjmstr->sj_surat_jalan_customer = $request->sjcustomer;
 
             // Update Detail
             $totalkirim = 0;
             foreach($request->iddetail as $keys => $iddetail){
                 $sjddet = SuratJalanDetail::findOrFail($iddetail);
+                $sjddet->sjd_qty_akui = $request->qtyakui[$keys];
                 $sjddet->sjd_qty_angkut = $request->qtyangkut[$keys];
-                $sjddet->sjd_price = str_replace(',','',$request->price[$keys]);
-                $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
+                // $sjddet->sjd_price = str_replace(',','',$request->price[$keys]);
+                // $sjddet->sjd_qty_conf = $sjddet->sjd_qty_conf + $request->qtyakui[$keys];
 
                 if($sjddet->sjd_qty_ship != $request->qtyship[$keys]){
                     // Update SO Detail
@@ -156,6 +162,7 @@ class SuratJalanLaporMTController extends Controller
 
                 $totalkirim += $request->qtyangkut[$keys];
             }
+            
             $floor_totalkirim = floor($totalkirim / 1000) * 1000;
 
             // Get Truck
@@ -171,7 +178,6 @@ class SuratJalanLaporMTController extends Controller
                         ->first();
             
             $sjmstr->sj_bb_id = $bonus->id ?? null;
-            $sjmstr->save();
 
             // Get SO Mstr
             $somstr = SalesOrderMstr::query()
@@ -189,24 +195,31 @@ class SuratJalanLaporMTController extends Controller
             }
             
             // Kirim Qxtend
-            $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
-            if($pendinginvoice === false){
-                alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($pendinginvoice == 'nourl'){
-                alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }elseif($pendinginvoice[0] == 'error'){
-                alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
-                DB::rollback();
-                return back();
-            }
+            // if($sjmstr->sj_sent_qad == 0){
+            //     $pendinginvoice = (new QxtendServices())->qxPendingInvoice($request->all());
+            //     if($pendinginvoice === false){
+            //         alert()->error('Error', 'Error Qxtend, Silahkan cek URL Qxtend.')->persistent('Dismiss');
+            //         DB::rollback();
+            //         return back();
+            //     }elseif($pendinginvoice == 'nourl'){
+            //         alert()->error('Error', 'Mohon isi URL Qxtend di Setting QXWSA.')->persistent('Dismiss');
+            //         DB::rollback();
+            //         return back();
+            //     }elseif($pendinginvoice[0] == 'error'){
+            //         alert()->error('Error', 'Qxtend kembalikan error, Silahkan cek log Qxtend')->persistent('Dismiss');
+            //         DB::rollback();
+            //         return back();
+            //     }else{
+            //         $sjmstr->sj_sent_qad = 1;
+            //     }
+            // }
+            
+            $sjmstr->save();
             
             DB::commit();
             alert()->success('Success', 'Surat Jalan Berhasil Disimpan')->persistent('Dismiss');
-            return redirect()->route('laporsj.index');
+            // return redirect()->route('laporsj.index');
+            return redirect()->to($request->prevurl ?? url()->previous());
         }catch(Exception $e){
             DB::rollback();
             alert()->error('Error', 'Save Gagal silahkan dicoba berberapa saat lagi')->persistent('Dismiss');

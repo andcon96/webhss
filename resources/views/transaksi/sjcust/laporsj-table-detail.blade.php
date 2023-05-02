@@ -55,18 +55,17 @@
                     @endif
                 </td>
                 <td>
-                    
                     <input type="hidden" value="{{$datas->sjd_qty_ship}}" class="form-control oldship" readonly>
                     <input type="number" name="qtyship[]" value="{{$datas->sjd_qty_ship}}" class="form-control qtyship" readonly>
                 </td>
                 <td>
-                    <input type="number" name="qtyangkut[]" value="{{$datas->sjd_qty_ship}}" class="form-control">
+                    <input type="number" name="qtyangkut[]" value="{{$datas->sjd_qty_angkut == 0 ? $datas->sjd_qty_ship : $datas->sjd_qty_angkut}}" class="form-control">
                 </td>
                 <td>
                     <input type="hidden" name="iddetail[]" value="{{$datas->id}}">
                     <input type="hidden" name="idsodetail[]" value="{{$sodetail->id}}">
                     <input type="hidden" name="part[]" value="{{$datas->sjd_part}}">
-                    <input type="number" name="qtyakui[]" value="{{$datas->sjd_qty_ship}}" class="form-control">
+                    <input type="number" name="qtyakui[]" value="{{$datas->sjd_qty_akui == 0 ? $datas->sjd_qty_ship : $datas->sjd_qty_akui}}" class="form-control">
                 </td>
             </tr>
             @empty

@@ -151,19 +151,27 @@
                   </a>
                 </li>
                 @endcan
-                @can('access_lapor_trip')
+                {{-- @can('access_lapor_trip')
                 <li class="nav-item">
                   <a href="{{route('laportrip.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Lapor Trip</p>
                   </a>
                 </li>
-                @endcan
+                @endcan --}}
                 @can('access_lapor_sj')
                 <li class="nav-item">
                   <a href="{{route('laporsj.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Lapor Surat Jalan</p>
+                  </a>
+                </li>
+                @endcan
+                @can('access_confirm_sj')
+                <li class="nav-item">
+                  <a href="{{route('confirmsj.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Confirm Surat Jalan</p>
                   </a>
                 </li>
                 @endcan

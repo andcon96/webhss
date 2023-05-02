@@ -15,19 +15,24 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 class ReportTotalanSupirLoosingHSST implements FromView, WithColumnWidths, ShouldAutoSize, WithStyles
 {
 
-    public function __construct($datefrom, $dateto)
+    public function __construct($datefrom, $dateto, $domain, $subdomain)
     {
         $this->datefrom      = $datefrom;
         $this->dateto        = $dateto;
+        $this->domain        = $domain;
+        $this->subdomain        = $subdomain;
     }
 
     public function view(): view
     {
         $datefrom    = $this->datefrom;
         $dateto      = $this->dateto;
+        $domain      = $this->domain;
+        $subdomain      = $this->subdomain;
 
-        $data = SuratJalan::query();
+        $data = SuratJalan::query()->with(['getTruck.getUserDriver', 'getTruck.getTipe']);
         $rbhist = ReportBiaya::query();
+        $listtruck = Truck::query()->with(['getTipe', 'getUserDriver']);
 
         if ($datefrom) {
             $data->where('sj_eff_date', '>=', $datefrom);
@@ -39,7 +44,18 @@ class ReportTotalanSupirLoosingHSST implements FromView, WithColumnWidths, Shoul
             $rbhist->where('rb_eff_date', '>=', $dateto);
         }
 
-        $data = $data->with(['getTruck.getUserDriver', 'getTruck.getTipe'])
+        if ($domain) {
+            $data->whereRelation('getTruck', 'truck_domain', $domain);
+            $listtruck->where('truck_domain',$domain);
+        }
+
+        if ($subdomain){
+            $data->whereRelation('getTruck', 'truck_sub_domain', $subdomain);
+            $listtruck->where('truck_sub_domain',$subdomain);
+        }
+
+
+        $data = $data
             ->where('sj_status', 'Closed')
             ->groupBy('sj_truck_id')
             ->selectRaw('sj_truck_id,sum(sj_default_sangu) as defaultSangu, sum(sj_tot_sangu) as totalSangu')
@@ -51,8 +67,8 @@ class ReportTotalanSupirLoosingHSST implements FromView, WithColumnWidths, Shoul
             ->selectRaw('rb_truck_id,sum(CASE WHEN rb_is_pemasukan = 1 then - rb_nominal else rb_nominal end) as total')
             ->get();
 
-        $listtruck = Truck::with(['getTipe', 'getUserDriver'])
-            ->get();
+        $listtruck = $listtruck->get();
+
 
         return view(
             'transaksi.laporan.excel.report-total-sopir-loosing-hsst',

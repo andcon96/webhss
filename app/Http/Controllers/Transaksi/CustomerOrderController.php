@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\Exports\ExportCustomerOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Barang;
 use App\Models\Master\Customer;
@@ -17,6 +18,8 @@ use App\Services\CreateTempTable;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerOrderController extends Controller
 {
@@ -255,6 +258,7 @@ class CustomerOrderController extends Controller
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
             $so_mstr->so_remark = $request->remark;
+            $so_mstr->so_po_aju = $request->poaju;
             $so_mstr->save();
 
             $id = $so_mstr->id;
@@ -295,8 +299,13 @@ class CustomerOrderController extends Controller
 
         }catch(Exception $e){
             DB::rollback();
+            Log::channel('customlog')->info('ERROR : '.$e);
             alert()->error('Error', 'Failed to create SO')->persistent('Dismiss');
             return back();
         }
+    }
+
+    public function exportco(Request $request){
+        return Excel::download(new ExportCustomerOrder($request->conbr, $request->cust), 'Customer Order.xlsx');
     }
 }

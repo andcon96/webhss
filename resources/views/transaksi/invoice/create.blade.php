@@ -13,16 +13,16 @@
         @method('POST')
         <div class="row">
             <div class="form-group row col-md-12">
-                <label for="sonbr" class="col-md-2 col-form-label text-md-right">SO Number</label>
+                {{-- <label for="sonbr" class="col-md-2 col-form-label text-md-right">SO Number</label>
                 <div class="col-md-3">
-                    <select name="sonbr" id="sonbr" class="form-control" required>
+                    <select name="sonbr" id="sonbr" class="form-control">
                         <option value="">Select Data</option>
                         @foreach ($list_sonbr as $sonbr)
                             <option value="{{ $sonbr->id }}">{{ $sonbr->so_nbr }}</option>
                         @endforeach
                     </select>
-                </div>
-                <label for="effdate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
+                </div> --}}
+                <label for="effdate" class="col-md-2 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
                     <input type="text" name="effdate" id="effdate" class="form-control"
                         value="{{ \Carbon\Carbon::now()->toDateString() }}">
@@ -132,6 +132,9 @@
 
             cols += '<td>';
             cols += '<input type="text" class="form-control ivnbr" name="ivnbr[]" required />';
+            cols += '<input type="hidden" class="form-control sonbr" name="sonbr[]" required />';
+            cols += '<input type="hidden" class="form-control custdesc" name="custdesc[]" required />';
+            cols += '<input type="hidden" class="form-control custcode" name="custcode[]" required />';
             cols += '</td>';
 
             cols += '<td>';
@@ -173,6 +176,9 @@
             let domain = $(this).closest('tr').find('.domain :selected').val();
             let price = $(this).closest('tr').find('.price');
             let duedate = $(this).closest('tr').find('.duedate');
+            let sonbr = $(this).closest('tr').find('.sonbr');
+            let custdesc = $(this).closest('tr').find('.custdesc');
+            let custcode = $(this).closest('tr').find('.custcode');
 
             if (!invoiceqad || !domain) {
                 // data kosong alert error;
@@ -195,6 +201,9 @@
                     success: function(data) {
                         price.val(data[0]);
                         duedate.val(data[1]);
+                        sonbr.val(data[2]);
+                        custdesc.val(data[3]);
+                        custcode.val(data[4]);
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',

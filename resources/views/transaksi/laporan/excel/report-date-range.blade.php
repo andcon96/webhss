@@ -157,9 +157,17 @@
                     $rbhists->rb_is_pemasukan == 1 ? 
                     -$rbhists->rb_nominal : 
                     $rbhists->rb_nominal }}
+                
+                @foreach($rbhists->getDetail as $details)
+                    <tr>
+                        <td colspan="2">{{$rbhists->rb_eff_date}}</td>
+                        <td colspan="2">{{$details->rbd_deskripsi}}</td>
+                        <td style="text-align:right;">{{number_format($details->rbd_nominal,2)}}</td>
+                    </tr>
+                @endforeach
+                
                 <tr>
-                    <td colspan="2">{{$rbhists->rb_eff_date}}</td>
-                    <td colspan="2">{{$rbhists->rb_remark}}</td>
+                    <td colspan="4" style="font-weight:bold;text-align:center">{{$rbhists->rb_remark}}</td>
                     <td style="text-align:right">{{number_format($nominal,2)}}</td>
                 </tr>
                 {{$totalbiaya += (float)$nominal}}
