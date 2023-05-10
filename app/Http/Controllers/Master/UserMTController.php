@@ -97,7 +97,7 @@ class UserMTController extends Controller
         try {
             $dept = $request->dept;
             $password = $request->password;
-            $backdate = $request->backdate;
+            $backdate = $request->backdate ?? 0;
 
             $role = $request->role;
             $role_id = Role::where('role', $role)->value('id');
