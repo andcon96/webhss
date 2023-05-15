@@ -42,7 +42,7 @@ class BarangMTController extends Controller
     {
         $barang = New Barang();
         $barang->barang_deskripsi = $request->barang;
-        $barang->barang_has_bonus = $request->hasbonus;
+        $barang->barang_has_bonus = $request->hasbonus ?? 0;
         $barang->save();
 
         
