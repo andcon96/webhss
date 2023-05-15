@@ -22,8 +22,8 @@ class TruckMTController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Truck::query()->with('getTipe','getUserDriver','getUserPengurus');
-        $truck = Truck::get();
+        $data = Truck::query()->withoutGlobalScopes()->with('getTipe','getUserDriver','getUserPengurus');
+        $truck = Truck::withoutGlobalScopes()->get();
         $tipe = TipeTruck::get();
         $user = User::get();
         $subdomain = SubDomain::get();
@@ -66,7 +66,7 @@ class TruckMTController extends Controller
     }
 
     public function edit($id){
-        $data = Truck::with('getUserDriver','getUserPengurus')->findOrFail($id);
+        $data = Truck::withoutGlobalScope()->with('getUserDriver','getUserPengurus')->findOrFail($id);
         $user = User::get();
         $tipetruck = TipeTruck::get();
         $domain = Domain::groupby('domain_code')->get();

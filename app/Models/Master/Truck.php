@@ -63,6 +63,7 @@ class Truck extends Model
 
         self::addGlobalScope(function(Builder $builder){
             // $builder->where('truck_domain', Session::get('domain'));
+            $builder->where('truck_is_active',1);
         });
     }
 
