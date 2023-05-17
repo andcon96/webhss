@@ -66,7 +66,7 @@ class TruckMTController extends Controller
     }
 
     public function edit($id){
-        $data = Truck::withoutGlobalScope()->with('getUserDriver','getUserPengurus')->findOrFail($id);
+        $data = Truck::withoutGlobalScopes()->with('getUserDriver','getUserPengurus')->findOrFail($id);
         $user = User::get();
         $tipetruck = TipeTruck::get();
         $domain = Domain::groupby('domain_code')->get();
