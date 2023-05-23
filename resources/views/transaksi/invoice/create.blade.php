@@ -199,6 +199,7 @@
                         $('#loader').removeClass('hidden');
                     },
                     success: function(data) {
+                        console.log(data);
                         price.val(data[0]);
                         duedate.val(data[1]);
                         sonbr.val(data[2]);
