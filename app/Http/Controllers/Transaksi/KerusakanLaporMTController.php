@@ -255,12 +255,10 @@ class KerusakanLaporMTController extends Controller
                 })->first();
                 
                 if($checkkr){
-                    dd($mstr->kr_truck,$checkkr->kr_truck,$mstr->kr_nbr, $checkkr->kr_nbr);
-                    if(($mstr->kr_truck == $checkkr->kr_truck) && ($mstr->kr_nbr != $checkkr->kr_nbr)){
-                        DB::rollBack();
-                        alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
-                        return back();
-                    }
+                    
+                    DB::rollBack();
+                    alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
+                    return back();
                 }
                 $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis,'TRUCK');
                 if($checkwo === false){
@@ -286,7 +284,7 @@ class KerusakanLaporMTController extends Controller
                     
                     $gandengnbr = rtrim($checkgandengan->gandeng_code,' ');
                     
-                    $checkkr = KerusakanMstr::where("kr_gandeng",$request->gandengan)->where(function($e){
+                    $checkkr = KerusakanMstr::where("kr_gandeng",$request->gandengan)->where('id', '<>',$request->idmaster)->where(function($e){
                         $e->where('kr_status','<>','Close');
                         $e->where('kr_status','<>','Reject');
                         $e->where('kr_status','<>','Cancelled');
