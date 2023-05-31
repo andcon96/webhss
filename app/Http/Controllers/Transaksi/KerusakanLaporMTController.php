@@ -398,7 +398,7 @@ class KerusakanLaporMTController extends Controller
     public function upassignkr($id, Request $request)
     {
         // $this->authorize('custompolicy',[KerusakanMstr::class]);
-        
+        dd($request->all());
         $nopol = $request->truck;
         $wonbr = $request->sonbr;
         $gandeng = $request->gandengan;
