@@ -255,9 +255,11 @@ class KerusakanLaporMTController extends Controller
                 })->first();
             
                 if($checkkr){
-                    DB::rollBack();
-                    alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
-                    return back();
+                    if(($mstr->kr_truck == $checkkr->kr_truck) && ($mstr->kr_nbr != $checkkr->kr_nbr)){
+                        DB::rollBack();
+                        alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
+                        return back();
+                    }
                 }
                 $checkwo = (new WSAServices())->wsawocheckloc($checktruck->truck_no_polis,'TRUCK');
                 if($checkwo === false){
@@ -291,9 +293,11 @@ class KerusakanLaporMTController extends Controller
                     })->first();
                 
                     if($checkkr){
-                        DB::rollBack();
-                        alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
-                        return back();
+                        if(($mstr->kr_gandengan == $checkkr->kr_gandengan) && ($mstr->kr_nbr != $checkkr->kr_nbr)){
+                            DB::rollBack();
+                            alert()->error('Error', 'Report already exist for : '.$checkgandengan->gandeng_code);
+                            return back();
+                        }
                     }
                     $checkwo = (new WSAServices())->wsawocheckloc($checkgandengan->gandeng_code,'GANDENGAN');
                     if($checkwo === false){
