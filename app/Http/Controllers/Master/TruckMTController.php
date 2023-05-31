@@ -8,6 +8,7 @@ use App\Models\Master\SubDomain;
 use App\Models\Master\TipeTruck;
 use App\Models\Master\Truck;
 use App\Models\Master\User;
+use App\Services\QxtendServices;
 use App\Services\WSAServices;
 use Exception;
 use Illuminate\Http\Request;
@@ -182,5 +183,40 @@ class TruckMTController extends Controller
             DB::rollback();
             dd('failed');
         }
+    }
+    public function LoadNopolExcelToQad(){
+        $arrayrusakdet = [];
+        $arraytruckilang = [];
+        ini_set('max_execution_time', 360);
+
+        if (($open = fopen(public_path() . "/truckexcel.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 1000, ";")) !== FALSE) {
+                $kr[] = $data;
+            }
+
+            $tipetruck = ''; 
+            DB::beginTransaction();
+            try{
+                
+                $loadnopol = (new QxtendServices())->qxLoadNopol('TRUCK',$kr);
+                
+                // KerusakanDetail::insert($arrayrusakdet);
+                $arrayrusakdet = [];
+                
+                DB::commit();
+                fclose($open);
+                alert()->Success('success', 'data successfully inserted')->persistent('Dismiss');
+                return back();
+            }
+            catch(Exception $err){
+                DB::rollBack();
+                dd($err);
+                alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
+                return back();
+            }
+
+        }
+        
     }
 }
