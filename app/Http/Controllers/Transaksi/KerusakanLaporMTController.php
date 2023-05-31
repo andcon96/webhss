@@ -398,7 +398,7 @@ class KerusakanLaporMTController extends Controller
     public function upassignkr($id, Request $request)
     {
         // $this->authorize('custompolicy',[KerusakanMstr::class]);
-        
+ 
         $nopol = $request->truck;
         $wonbr = $request->sonbr;
         $gandeng = $request->gandengan;
@@ -409,7 +409,8 @@ class KerusakanLaporMTController extends Controller
         $gandengcode = $request->gandengcode;
         // validasi approval ada atau tidak
         $emailto = approval::get();
-        if(is_null($emailto)){
+
+        if($emailto->isEmpty()){
             alert()->error('Error','Harap setting terlebih dahulu email untuk Approver di Approval Maintenance');
             return redirect()->route('laporkerusakan.index');
         }
