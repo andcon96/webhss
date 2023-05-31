@@ -316,7 +316,7 @@ class WSAServices
 
     public function wsawocheckloc($nopol,$part)
     {
-        
+        dd('1');
         $wsa = Qxwsa::first();
 
         $qxUrl = $wsa->wsas_url;
