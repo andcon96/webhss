@@ -247,7 +247,7 @@ class KerusakanLaporMTController extends Controller
             if($request->jenis == 'truck'){   
                 $checktruck = Truck::withoutglobalscopes()->where('id',$request->truck)->first();
                 $trucknbr = $checktruck->truck_no_polis;
-                $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where(function($e){
+                $checkkr = KerusakanMstr::where("kr_truck",$request->truck)->where('id', '<>',$request->idmaster)->where(function($e){
                     $e->where('kr_status','<>','Close');
                     $e->where('kr_status','<>','Reject');
                     $e->where('kr_status','<>','Cancelled');
