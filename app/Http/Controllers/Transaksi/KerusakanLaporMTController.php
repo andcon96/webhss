@@ -409,8 +409,8 @@ class KerusakanLaporMTController extends Controller
         $gandengcode = $request->gandengcode;
         // validasi approval ada atau tidak
         $emailto = approval::get();
-        dd($emailto,$emailto->isEmpty());
-        if(is_null($emailto)){
+
+        if($emailto->isEmpty()){
             alert()->error('Error','Harap setting terlebih dahulu email untuk Approver di Approval Maintenance');
             return redirect()->route('laporkerusakan.index');
         }
