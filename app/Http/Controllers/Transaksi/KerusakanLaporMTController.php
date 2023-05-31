@@ -631,7 +631,7 @@ class KerusakanLaporMTController extends Controller
                         $truck = Truck::where('truck_no_polis',$kerusakan[1])->first();
                         
                         KerusakanMstr::insert([
-                        'kr_domain' => 'HSSTR',
+                        'kr_domain' => 'ASAHSST',
                         'kr_nbr' => $kerusakan[0],
                         'kr_truck' => $truck->id ?? NULL,
                         'kr_date' => $newdate,
