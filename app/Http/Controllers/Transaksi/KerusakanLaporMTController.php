@@ -253,7 +253,7 @@ class KerusakanLaporMTController extends Controller
                     $e->where('kr_status','<>','Cancelled');
                     $e->where('kr_status','<>','Done');
                 })->first();
-                dd($mstr->kr_truck, $checkkr->kr_truck,$mstr->kr_nbr, $checkkr->kr_nbr,$checkkr);
+                
                 if($checkkr){
                     
                     if(($mstr->kr_truck == $checkkr->kr_truck) && ($mstr->kr_nbr != $checkkr->kr_nbr)){
