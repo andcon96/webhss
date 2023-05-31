@@ -42,6 +42,7 @@ use App\Http\Controllers\Transaksi\TripLaporMTController;
 use App\Http\Controllers\Transaksi\TripMTController;
 use App\Http\Controllers\Transaksi\CicilanHistoryController;
 use App\Http\Controllers\Transaksi\ConfirmSuratJalanController;
+use App\Models\Master\GandenganMstr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,9 @@ Auth::routes();
 // Route::get('loadhistoryrutedetail',[RuteController::class,'loadhistoryrutedetail']);
 // Route::get('newloadhistoryrute',[RuteController::class,'newloadhistoryrute']);
 // Route::get('newloadhistorydetail',[RuteController::class,'newloadhistoryrutedetail']);
+Route::get('loadnopoltoqad', [TruckMTController::class,'LoadNopolExcelToQad']);
+Route::get('loadgandengantoqad', [GandenganMTController::class,'LoadGandenganExcelToQad']);
+
 
 //load truck
 route::get('loadtruckwithqad',[TruckMTController::class,'loadnopol']);
@@ -223,6 +227,7 @@ Route::group(['middleware' => ['auth']], function () {
         //================================
         Route::group(['middleware'=>'can:access_trmt'], function () {
             Route::resource('truckmaint', TruckMTController::class);
+            
         });
         //================================
         
