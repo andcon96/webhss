@@ -135,7 +135,7 @@ class InvoiceMTController extends Controller
                 return response()->json(['error' => 'WSA Failed'], 404);
             }
 
-            return [number_format((float)$checkData[0], 2), $checkData[1], $checkData[2], $checkData[3], $checkData[4]]; // Harga, Due Date, SO Nbr, Cust Desc
+            return [number_format((float)$checkData[0], 3), $checkData[1], $checkData[2], $checkData[3], $checkData[4]]; // Harga, Due Date, SO Nbr, Cust Desc
         }
     }
 
@@ -196,7 +196,7 @@ class InvoiceMTController extends Controller
             }
             return $result;
         })->values()->all();
-
+        
         // $detail = $detail->groupBy('t_shipto','t_harga')
         //     ->map(function ($row) {
         //         $firstrow = $row->first();
