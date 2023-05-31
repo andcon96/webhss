@@ -255,7 +255,7 @@ class KerusakanLaporMTController extends Controller
                 })->first();
                 
                 if($checkkr){
-                    
+                    dd($mstr->kr_truck,$checkkr->kr_truck,$mstr->kr_nbr, $checkkr->kr_nbr);
                     if(($mstr->kr_truck == $checkkr->kr_truck) && ($mstr->kr_nbr != $checkkr->kr_nbr)){
                         DB::rollBack();
                         alert()->error('Error', 'Report already exist for : '.$checktruck->truck_no_polis);
