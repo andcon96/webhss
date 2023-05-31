@@ -9,9 +9,12 @@
                 <th style="width:20%">Customer</th>
                 <th style="width:15%">Ship To</th>
                 <th style="width:15%">Ship From</th>
-                <th style="width:10%">Due Date</th>
+                <th style="width:10%">Eff Date SPK</th>
+                <th style="width:10%">Due Date SO</th>
                 <th style="width:10%">SJ Status</th>
+                <th style="width:10%">PO/AJU</th>
                 <th style="width:10%">CO Remarks</th>
+                <th style="width:10%">SO Remarks</th>
                 <th style="width:10%">Action</th>
             </tr>
         </thead>
@@ -26,9 +29,12 @@
                     {{$datas->getSOMaster->getCOMaster->getCustomer->cust_desc}}</td>
                 <td>{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name ?? ''}}</td>
                 <td>{{$datas->getSOMaster->so_ship_from}} -- {{$datas->getSOMaster->getShipFrom->sf_desc ?? ''}}</td>
+                <td>{{$datas->sj_eff_date}}</td>
                 <td>{{$datas->getSOMaster->so_due_date}}</td>
                 <td>{{$datas->sj_status}}</td>
+                <td>{{$datas->getSOMaster->so_po_aju}}</td>
                 <td>{{$datas->getSOMaster->getCOMaster->co_remark}}</td>
+                <td>{{$datas->getSOMaster->so_remark}}</td>
                 <td>
                     @if($datas->sj_status == 'Selesai' || $datas->sj_status == 'Open')
                         <a href="{{ route('LaporSJ', ['sj' => $datas->id, 'truck' => $datas->sj_truck_id]) }}">

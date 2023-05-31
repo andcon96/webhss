@@ -89,13 +89,20 @@
                 <label for="duedate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
                     @php($now = \Carbon\Carbon::now())
-                    @if ($now->format('H') >= 22 && $now->format('H') < 5)
+                    @if (auth()->user()->users_can_backdate == 1)
+                        <input id="duedate" type="text" class="form-control duedate" name="duedate"
+                            value="{{ $now->toDateString() }}" required>
+                    @else
+                        <input id="duedate" type="text" class="form-control" name="duedate"
+                            value="{{ $now->toDateString() }}" readonly>
+                    @endif
+                    {{-- @if ($now->format('H') <= 22 && $now->format('H') > 5)
                         <input id="duedate" type="text" class="form-control" name="duedate"
                             value="{{ $now->toDateString() }}" readonly>
                     @else
                         <input id="duedate" type="text" class="form-control duedate" name="duedate"
                             value="{{ $now->toDateString() }}" required>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
             <div class="form-group row col-md-12">
@@ -150,6 +157,11 @@
         });
         $('#btnconf').hide();
 
+        document.addEventListener('keydown', function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+            }
+        });
         $(document).on('change', '#soid', function() {
             let soid = $(this).val();
             var cust = $(this).find(':selected').data('cust');
@@ -244,6 +256,11 @@
         });
 
         $(document).on('click', '.delrow', function(e) {
+
+            if (e.ctrlkey == 13) {
+                alert('masuk');
+                e.preventDefault();
+            }
             $(this).closest("tr").remove();
         });
 

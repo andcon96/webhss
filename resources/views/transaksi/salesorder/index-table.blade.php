@@ -35,6 +35,7 @@
                         data-shipto="{{$datas->so_ship_to}}" data-shiptodesc="{{$datas->getShipTo->cs_shipto_name ?? ''}}"
                         data-duedate="{{$datas->so_due_date}}" data-custdesc="{{$datas->getCOMaster->getCustomer->cust_desc ?? ''}}"
                         data-remark="{{$datas->so_remark}}" data-barang="{{$datas->getCOMaster->getBarang->barang_deskripsi ?? ''}}"
+                        data-poaju="{{$datas->so_po_aju}}"
                         data-toggle='modal' data-target="#myModal"><i
                         class="fas fa-eye"></i></button>
                         

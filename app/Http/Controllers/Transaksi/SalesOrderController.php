@@ -102,6 +102,7 @@ class SalesOrderController extends Controller
             $so_mstr->so_ship_to = $request->shipto;
             $so_mstr->so_due_date = $request->duedate;
             $so_mstr->so_remark = $request->remarks;
+            $so_mstr->so_po_aju = $request->poaju;
             $so_mstr->save();
 
             $id = $so_mstr->id;
@@ -167,6 +168,7 @@ class SalesOrderController extends Controller
         $shipfrom = $request->shipfrom;
         $shipto = $request->shipto;
         $remark = $request->remark;
+        $poaju  = $request->poaju;
 
         $operation = $request->operation;
         $iddetail = $request->iddetail;
@@ -186,6 +188,7 @@ class SalesOrderController extends Controller
             $master->so_ship_from = $shipfrom;
             $master->so_ship_to = $shipto;
             $master->so_remark = $remark;
+            $master->so_po_aju = $poaju;
             $master->save();
 
             foreach ($iddetail as $key => $details) {

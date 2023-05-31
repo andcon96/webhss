@@ -28,7 +28,7 @@
       <a href="" class="editUser" data-toggle="modal" data-target="#editModal" data-id="{{$show->id}}" 
         data-uname="{{$show->username}}" data-name="{{$show->name}}" data-role="{{$show->role}}" 
         data-email="{{$show->email}}" data-dept="{{$show->dept_id}}" data-domain="{{$show->domain}}"
-        data-roletype="{{$show->role_type}}" 
+        data-roletype="{{$show->role_type}}" data-d_backdate="{{$show->users_can_backdate}}"
       ><i class="fas fa-edit"></i></a>
       @endif
     </td>

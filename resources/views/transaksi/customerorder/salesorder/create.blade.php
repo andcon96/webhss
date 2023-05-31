@@ -38,7 +38,7 @@
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <select name="shipfrom" id="shipfrom" class="form-control">
+                <select name="shipfrom" id="shipfrom" class="form-control" required > <!-- Update 230523 -->
                         <option value="">None</option>
                     @foreach($shipfrom as $shipfroms)
                         <option value="{{$shipfroms->sf_code}}">{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>
@@ -58,6 +58,10 @@
             <label for="duedate" class="col-md-2 col-form-label text-md-right">Due Date</label>
             <div class="col-md-3">
                 <input id="duedate" type="text" class="form-control" name="duedate" value="{{\Carbon\Carbon::now()->addDays(1)->toDateString()}}" autocomplete="off" maxlength="24" required autofocus>
+            </div>
+            <label for="poaju" class="col-md-3 col-form-label text-md-right">PO/AJU</label>
+            <div class="col-md-3">
+                <input id="poaju" type="text" class="form-control" name="poaju" value="" autocomplete="off" maxlength="50" autofocus>
             </div>
         </div>
         <div class="form-group row col-md-12">

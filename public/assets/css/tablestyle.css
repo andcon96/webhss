@@ -31,6 +31,13 @@ tr{
 }
 
 
+#dataTable td,
+#dataTable th{
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
 .bt-action{
   font-size: 14px;
   width: 140px;

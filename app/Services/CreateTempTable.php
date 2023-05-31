@@ -147,13 +147,16 @@ class CreateTempTable
             $prefix = Prefix::firstOrFail();
             $cektahun = substr($prefix->prefix_iv_rn, 0, 4); // Save ke DB 2022000000001, 4 digit tahun 9 digit rn
             $yearnow = date('Y');
+            $monthnow = date('m');
+            
             if ($cektahun != $yearnow) {
                 $rn_new = '000000001';
             } else {
                 $rn_new = substr($prefix->prefix_iv_rn, 4, 10) + 1;
                 $rn_new = str_pad($rn_new, 9, '0', STR_PAD_LEFT);
             }
-            $newprefix =  $yearnow."/".$prefix->prefix_iv.$rn_new;
+            // Tambah Bulan
+            $newprefix =  $yearnow."/".$monthnow."/".$prefix->prefix_iv.$rn_new;
             $updateprefix = $yearnow.$rn_new;
 
             return [$newprefix,$updateprefix];

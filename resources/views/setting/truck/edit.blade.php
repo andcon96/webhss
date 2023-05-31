@@ -29,7 +29,7 @@
                 <label for="subdomain" class="col-md-3 col-form-label text-md-right">{{ __('Sub Domain') }}</label>
                 <div class="col-md-7">
                     <select id="subdomain" class="form-control subdomain" name="subdomain" autofocus autocomplete="off">
-                            <option value="">Select Data</option>
+                        <option value="">Select Data</option>
                         @foreach($subdomain as $sd)
                             <option value="{{$sd->sd_sub_domain_code}}" {{$sd->sd_sub_domain_code == $data->truck_sub_domain ? 'Selected' : ''}}>{{$sd->sd_sub_domain_code}}</option>
                         @endforeach
@@ -114,18 +114,21 @@
     
     if($('#isactive').val() == 0){
         
-        $('#tipetruck,#domain,#driver,#pengurus,.subdomain').select2({
+        $('#tipetruck,#domain,#driver,#pengurus').select2({
             placeholder: 'Pilih Data',
             allowClear: true,
             readOnly : true,
             disabled: true
         });
+
+        $('.subdomain').select2({disabled: true, readOnly: true});
     }
     else{
-        $('#tipetruck,#domain,#driver,#pengurus,.subdomain').select2({
+        $('#tipetruck,#domain,#driver,#pengurus').select2({
         placeholder: 'Pilih Data',
         allowClear: true
     });
+        $('.subdomain').select2({});
     }
 
     

@@ -78,8 +78,19 @@
                 </div>
                 <label for="duedate" class="col-md-3 col-form-label text-md-right">Eff Date</label>
                 <div class="col-md-3">
-                    <input id="duedate" type="text" class="form-control" name="duedate"
-                        value="{{ \Carbon\Carbon::now()->toDateString() }}" required>
+                    @php($now = \Carbon\Carbon::now())
+                    @if (auth()->user()->users_can_backdate == 1)
+                        <input id="duedate" type="text" class="form-control duedate" name="duedate"
+                            value="{{ $now->toDateString() }}" required>
+                    @else
+                        <input id="duedate" type="text" class="form-control" name="duedate"
+                            value="{{ $now->toDateString() }}" readonly>
+                    @endif
+                    {{-- @if ($now->format('H') <= 22 && $now->format('H') > 5)
+                        <input id="duedate" type="text" class="form-control" name="duedate"
+                            value="{{ $now->toDateString() }}" readonly>
+                    @else
+                    @endif --}}
                 </div>
             </div>
             <div class="form-group row col-md-12">
@@ -96,15 +107,14 @@
                         @foreach ($truck as $trucks)
                             <option value="{{ $trucks->id }}" data-typetruck="{{ $trucks->truck_tipe_id }}"
                                 data-pengurus="{{ $trucks->getUserPengurus->name ?? '' }}"
-                                data-nopol="{{$trucks->truck_no_polis}}"
-                                data-domain="{{ $trucks->truck_domain }}">
+                                data-nopol="{{ $trucks->truck_no_polis }}" data-domain="{{ $trucks->truck_domain }}">
                                 {{ $trucks->truck_no_polis }} -- {{ $trucks->getTipe->tt_desc ?? '' }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                <button class="btn bt-action newUser" id='btnadd' style="margin-left: 10px; width: 40px !important"
-                    ><i class="fa fa-plus"></i></button>
+                <button class="btn bt-action newUser" id='btnadd' style="margin-left: 10px; width: 40px !important"><i
+                        class="fa fa-plus"></i></button>
             </div>
             <div class="form-group row col-md-12">
                 <div class="offset-md-1 col-md-10" style="margin-top:90px;">
@@ -132,8 +142,14 @@
 
         var tipebarang = $('#type').val();
 
-        $("#duedate").datepicker({
+        $(".duedate").datepicker({
             dateFormat: 'yy-mm-dd'
+        });
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+            }
         });
 
         function resetDropDownValue() {
@@ -253,11 +269,11 @@
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                document.getElementById('btnconf').style.display = 'none';
-                document.getElementById('btnback').style.display = 'none';
-                document.getElementById('btnloading').style.display = '';
+                    document.getElementById('btnconf').style.display = 'none';
+                    document.getElementById('btnback').style.display = 'none';
+                    document.getElementById('btnloading').style.display = '';
 
-                $('#submit').submit();
+                    $('#submit').submit();
                 }
             })
         });
