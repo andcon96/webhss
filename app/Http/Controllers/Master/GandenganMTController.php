@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use App\Models\Master\Domain;
 use App\Models\Master\GandenganMstr;
+use App\Services\QxtendServices;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -209,5 +210,41 @@ class GandenganMTController extends Controller
 
             
         }
+    }
+
+    public function LoadGandenganExcelToQad(){
+        $arrayrusakdet = [];
+        $arraytruckilang = [];
+        ini_set('max_execution_time', 360);
+
+        if (($open = fopen(public_path() . "/gandenganexcel.csv", "r")) !== FALSE) {
+
+            while (($data = fgetcsv($open, 1000, ";")) !== FALSE) {
+                $kr[] = $data;
+            }
+
+            $tipetruck = ''; 
+            DB::beginTransaction();
+            try{
+                
+                $loadnopol = (new QxtendServices())->qxLoadNopol('GANDENGAN',$kr);
+                
+                // KerusakanDetail::insert($arrayrusakdet);
+                $arrayrusakdet = [];
+                
+                DB::commit();
+                fclose($open);
+                alert()->Success('success', 'data successfully inserted')->persistent('Dismiss');
+                return back();
+            }
+            catch(Exception $err){
+                DB::rollBack();
+                dd($err);
+                alert()->error('Error', 'Failed to submit data')->persistent('Dismiss');
+                return back();
+            }
+
+        }
+        
     }
 }
