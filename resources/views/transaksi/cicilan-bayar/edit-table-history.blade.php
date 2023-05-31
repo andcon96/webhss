@@ -17,7 +17,7 @@
                <td data-label="TRUCK">{{$cicilan->getDriverNopol->getTruck->truck_no_polis ?? ''}}</td>
                <td data-label="DRIVER">{{$cicilan->getDriverNopol->getDriver->driver_name ?? ''}}</td>
                <td data-label="PAYMENT DATE">{{$datas->hc_eff_date}}</td>
-               <td data-label="NOMINAL">{{number_format($datas->hc_nominal,3)}}</td>
+               <td data-label="NOMINAL">{{number_format($datas->hc_nominal,0)}}</td>
                <td data-label="REMARKS">{{$datas->hc_remarks}}</td>
                <td>
                     {{$datas->hc_is_active == 1 ? 'Active' : 'Not Active'}}
@@ -27,7 +27,7 @@
                     data-truck="{{$cicilan->getDriverNopol->getTruck->truck_no_polis ?? ''}}"
                     data-driver="{{$cicilan->getDriverNopol->getDriver->driver_name ?? ''}}"
                     data-tglbayar="{{$datas->hc_eff_date}}"
-                    data-nominal="{{number_format($datas->hc_nominal,3)}}"
+                    data-nominal="{{number_format($datas->hc_nominal,0)}}"
                     data-remarks="{{$datas->hc_remarks}}"
                     data-isactive="{{$datas->hc_is_active}}"
                     data-toggle='modal' data-target="#editModal"><i

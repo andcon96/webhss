@@ -30,7 +30,7 @@
                <label for="totpaid" class="col-md-2 col-form-label text-md-right">Total Paid</label>
                <div class="col-md-3">
                    <input id="totpaid" type="text" class="form-control nominal" name="totpaid"
-                       value="{{ number_format($totalbayar, 3) }}" autocomplete="off" readonly>
+                       value="{{ number_format($totalbayar, 0) }}" autocomplete="off" readonly>
                </div>
             </div>
             <div class="form-group row col-md-12">
@@ -42,7 +42,7 @@
                 <label for="nominal" class="col-md-3 col-form-label text-md-right">Nominal</label>
                 <div class="col-md-3">
                     <input id="nominal" type="text" class="form-control nominal" name="nominal"
-                        value="{{ number_format($cicilan->cicilan_nominal, 3) }}" autocomplete="off" maxlength="24">
+                        value="{{ number_format($cicilan->cicilan_nominal, 0) }}" autocomplete="off" maxlength="24">
                 </div>
             </div>
             <div class="form-group row col-md-12">

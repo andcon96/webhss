@@ -42,10 +42,10 @@
                                 {{ $show->getIP->getShipTo->cs_shipto_name ?? '' }}
                             </td>
                             <td>
-                                {{ number_format($show->iph_tonase_price, 3) ?? '' }}
+                                {{ number_format($show->iph_tonase_price, 2) ?? '' }}
                             </td>
                             <td>
-                                {{ number_format($show->iph_trip_price, 3) ?? '' }}
+                                {{ number_format($show->iph_trip_price, 2) ?? '' }}
                             </td>
                             <td>
                                 {{ $show->getTipeTruck->tt_desc ?? '' }}
@@ -112,7 +112,7 @@
                         <label for="tonaseprice" class="col-md-3 col-form-label text-md-right" style="color: black">Harga
                             Tonase</label>
                         <div class="col-md-7">
-                            <input id="tonaseprice" type="number" class="form-control" name="tonaseprice" step=".001"
+                            <input id="tonaseprice" type="number" class="form-control" name="tonaseprice" step=".01"
                                 min="0" required>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                         <label for="ritsprice" class="col-md-3 col-form-label text-md-right" style="color: black">Harga
                             Rits</label>
                         <div class="col-md-7">
-                            <input id="ritsprice" type="text" class="form-control" name="ritsprice" step=".001"
+                            <input id="ritsprice" type="text" class="form-control" name="ritsprice" step=".01"
                                 value="0" min="0" required>
                         </div>
                     </div>

@@ -16,7 +16,7 @@
                 <td data-label="Truck">{{$datas->getTruck->truck_no_polis ?? ''}}</td>
                 <td data-label="Tanggal Lapor">{{$datas->rb_eff_date}}</td>
                 <td data-label="Nominal">
-                    {{number_format($datas->getDetail->sum('rbd_nominal'),3)}}
+                    {{number_format($datas->getDetail->sum('rbd_nominal'),2)}}
                 </td>
                 <td data-label="Catatan">{{$datas->rb_remark}}</td>
                 <td data-label="Status">{{$datas->rb_is_active == 1 ? 'Active' : 'Deleted'}}</td>

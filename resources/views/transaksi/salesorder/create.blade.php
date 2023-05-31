@@ -46,7 +46,7 @@
         <div class="form-group row col-md-12">
             <label for="shipfrom" class="col-md-2 col-form-label text-md-right">Ship From</label>
             <div class="col-md-3">
-                <select name="shipfrom" id="shipfrom" class="form-control" required> <!--Update 230523 -->
+                <select name="shipfrom" id="shipfrom" class="form-control">
                     <option value="">None</option>
                     @foreach($shipfrom as $shipfroms)
                         <option value="{{$shipfroms->sf_code}}">{{$shipfroms->sf_code}} -- {{$shipfroms->sf_desc}}</option>

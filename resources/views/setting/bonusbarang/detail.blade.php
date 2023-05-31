@@ -215,7 +215,7 @@
                             {{ $show->bb_qty_end }}
                         </td>
                         <td>
-                            {{ number_format($show->bb_price,3) }}
+                            {{ number_format($show->bb_price,0) }}
                         </td>
                         <td>
                             {{ $show->bb_is_active == 1 ? 'Active' : 'Not Active'}}

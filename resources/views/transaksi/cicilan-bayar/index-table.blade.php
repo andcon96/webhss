@@ -19,13 +19,13 @@
                     <td data-label="Driver">{{ $datas->getDriverNopol->getDriver->driver_name ?? '' }}</td>
                     <td data-label="Tanggal Lapor">{{ $datas->cicilan_eff_date }}</td>
                     <td data-label="Nominal">
-                        {{ number_format($datas->cicilan_nominal, 3) }}
+                        {{ number_format($datas->cicilan_nominal, 0) }}
                     </td>
                     <td data-label="Nominal Paid">
                         {{ number_format($datas->getTotalPaidActive->sum('hc_nominal', 0)) }}
                     </td>
                     <td data-label="Sisa Cicilan">
-                        {{ number_format($datas->cicilan_nominal - $datas->getTotalPaidActive->sum('hc_nominal'),3)}}
+                        {{ number_format($datas->cicilan_nominal - $datas->getTotalPaidActive->sum('hc_nominal'),0)}}
                     </td>
                     <td data-label="Catatan">{{ $datas->cicilan_remarks }}</td>
                     <td class="row ml-1">

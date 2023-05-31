@@ -19,10 +19,10 @@
                     <td data-label="Driver">{{ $datas->getDriverNopol->getDriver->driver_name ?? '' }}</td>
                     <td data-label="Tanggal Lapor">{{ $datas->cicilan_eff_date }}</td>
                     <td data-label="Nominal">
-                        {{ number_format($datas->cicilan_nominal, 3) }}
+                        {{ number_format($datas->cicilan_nominal, 0) }}
                     </td>
                     <td data-label="Sisa Cicilan">
-                        {{ number_format($datas->cicilan_nominal - $datas->getTotalPaidActive->sum('hc_nominal'), 3)}}
+                        {{ number_format($datas->cicilan_nominal - $datas->getTotalPaidActive->sum('hc_nominal'), 0)}}
                     </td>
                     <td data-label="Catatan">{{ $datas->cicilan_remarks }}</td>
                     <td data-label="Status">{{ $datas->cicilan_is_active == 1 ? 'Active' : 'Not Active' }}</td>
@@ -31,7 +31,7 @@
                                 data-id="{{ $datas->id }}" data-detail="{{$datas->getTotalPaid}}"
                                 data-truck="{{$datas->getDriverNopol->getTruck->truck_no_polis ?? ''}}"
                                 data-driver="{{$datas->getDriverNopol->getDriver->driver_name ?? ''}}"
-                                data-total="{{number_format($datas->cicilan_nominal,3)}}">
+                                data-total="{{number_format($datas->cicilan_nominal,0)}}">
                                 <i class="fas fa-eye"></i></a>
                         @if ($datas->cicilan_is_active == 1)
                             <a href="{{ route('cicilanmt.edit', $datas->id) }}"><i class="fas fa-edit"></i></a>

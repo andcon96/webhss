@@ -21,7 +21,7 @@
                 <td data-label="SJ Nbr">{{$datas->sj_nbr}}</td>
                 <td data-label="Customer">{{$datas->getSOMaster->getCOMaster->co_cust_code}} 
                     - {{$datas->getSOMaster->getCOmaster->getCustomer->cust_desc}}</td>
-                <td data-label="Sangu">{{number_format($datas->sj_tot_sangu,3)}}</td>
+                <td data-label="Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>
                 <td data-label="Ship To">{{$datas->getSOMaster->so_ship_to}} -- {{$datas->getSOMaster->getShipTo->cs_shipto_name}}</td>
                 <td data-label="Status">{{$datas->sj_status}}</td>
                 <td data-label="Due Date">{{$datas->getSOMaster->so_due_date}}</td>

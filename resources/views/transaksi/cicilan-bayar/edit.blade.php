@@ -34,19 +34,19 @@
                <label for="totcil" class="col-md-2 col-form-label text-md-right">Total Cicilan</label>
                <div class="col-md-3">
                    <input id="totcil" type="text" class="form-control nominal" name="totcil"
-                       value="{{number_format($cicilan->cicilan_nominal,3)}}" autocomplete="off" readonly>
+                       value="{{number_format($cicilan->cicilan_nominal,0)}}" autocomplete="off" readonly>
                </div>
                <label for="totpaid" class="col-md-3 col-form-label text-md-right">Total Bayar</label>
                <div class="col-md-3">
                    <input id="totpaid" type="text" class="form-control nominal" name="totpaid"
-                       value="{{number_format($totalbayar,3)}}" autocomplete="off" readonly>
+                       value="{{number_format($totalbayar,0)}}" autocomplete="off" readonly>
                </div>
             </div>
             <div class="form-group row col-md-12">
                 <label for="totcil" class="col-md-2 col-form-label text-md-right">Sisa Cicilan</label>
                 <div class="col-md-3">
                     <input id="totcil" type="text" class="form-control nominal" name="totcil"
-                        value="{{number_format($cicilan->cicilan_nominal - $totalbayar,3)}}" autocomplete="off" readonly>
+                        value="{{number_format($cicilan->cicilan_nominal - $totalbayar,0)}}" autocomplete="off" readonly>
                 </div>
             </div>
             <div class="form-group row col-md-12">

@@ -28,8 +28,8 @@
                     <td data-label="SO Due Date">{{$datas->getSOMaster->so_due_date}}</td>
                     <td data-label="SJ Status">{{$datas->sj_status}}</td>
                     <td data-label="No Polis">{{$datas->getTruck->truck_no_polis}}</td>
-                    <td data-label="Defaul Sangu">{{number_format($datas->sj_default_sangu,3)}}</td>
-                    <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,3)}}</td>
+                    <td data-label="Defaul Sangu">{{number_format($datas->sj_default_sangu,0)}}</td>
+                    <td data-label="Total Sangu">{{number_format($datas->sj_tot_sangu,0)}}</td>
                     <td data-label="Total Trip">{{$datas->sj_jmlh_trip}}</td>
                     <td data-label="Trip Dilaporkan">{{$datas->getHistTrip->count()}}</td>
                     <td data-label="Surat Jalan">{{$datas->getHistTrip->whereNotNull('sjh_remark')->count() == $datas->sj_jmlh_trip ? 'Yes' : 'No'}}</td>

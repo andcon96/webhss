@@ -48,10 +48,10 @@
               </td>
 
               <td>
-                {{number_format($show->history_sangu, 3) ?? ''}}
+                {{number_format($show->history_sangu) ?? ''}}
               </td>
               <td>
-                {{number_format($show->history_ongkos, 3) ?? ''}}
+                {{number_format($show->history_ongkos) ?? ''}}
               </td>
               <td>
                 {{$show->history_is_active == 1 ? 'Aktif' : 'Tidak Aktif' ?? ''}}
