@@ -16,7 +16,7 @@
                     <td data-label="SO Number">{{ $datas->getSalesOrder->so_nbr ?? '' }}</td>
                     <td data-label="Date">{{ $datas->im_date }}</td>
                     <td data-label="Total">
-                        {{ number_format($datas->getDetail->sum('id_total'),2)}}
+                        {{ number_format($datas->getDetail->sum('id_total'),3)}}
                     </td>
                     <td class="row">
                         <a href="" class="viewModal" data-id="{{$datas->id}}"

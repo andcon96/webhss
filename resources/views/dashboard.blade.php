@@ -630,7 +630,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($purItemNoAct30->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($purItemNoAct30->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
@@ -653,7 +653,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($purItemNoAct90->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($purItemNoAct90->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
@@ -677,7 +677,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($purItemNoAct180->sum('tr_hist_amount') ,2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($purItemNoAct180->sum('tr_hist_amount') ,3) }}
             </h6>
           </center>
         </div>
@@ -701,7 +701,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black">{{ number_format($purItemNoAct365->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black">{{ number_format($purItemNoAct365->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
@@ -731,7 +731,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct30->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct30->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
@@ -754,7 +754,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct90->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct90->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
@@ -777,7 +777,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct180->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct180->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
@@ -800,7 +800,7 @@
       <div class="card-body" style="padding: 5px;">
         <div class="purchase-item-number flex-row align-items-center justify-content-between">
           <center>
-            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct365->sum('tr_hist_amount'), 2) }}
+            <h6 class="card-text" style="color: black;">{{ number_format($manItemNoAct365->sum('tr_hist_amount'), 3) }}
             </h6>
           </center>
         </div>
