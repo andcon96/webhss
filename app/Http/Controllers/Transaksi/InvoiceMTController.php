@@ -230,6 +230,8 @@ class InvoiceMTController extends Controller
 
     public function printdetailinvoice($id)
     {
+        ini_set('memory_limit', '-1');
+        
         $data = InvoiceMaster::with([
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
