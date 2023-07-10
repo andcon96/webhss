@@ -96,7 +96,7 @@
                 <th colspan="{{ $iscontainer == 0 ? '9' : '11' }}"
                     style="line-height: 3em; text-align:left;font-weight:bold;padding-bottom: 10px;padding-left: 10px;">
                     NO. INVOICE :
-                    {{ $data->im_nbr }}</th>
+                    {{ $data->im_nbr ?? '' }}</th>
             </tr>
             <tr>
                 <th class="top-bottom-border">CUSTOMER</th>

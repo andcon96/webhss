@@ -230,23 +230,25 @@ class InvoiceMTController extends Controller
 
     public function printdetailinvoice($id)
     {
-        ini_set('memory_limit', '256M');
-        
+        ini_set('memory_limit', '-1');
+
         $data = InvoiceMaster::with([
             'getDetail',
             'getSalesOrder.getCOMaster.getCustomer'
         ])->findOrFail($id);
-        // dd($data);
+        // dump($data);
         $detail = (new WSAServices())->wsadetailinvoice($data);
         if ($detail == false) {
             alert()->error('Error', 'Gagal mengambil data invoice')->persistent('Dismiss');
             return back();
         }
+        // dump($detail);
         $latestdate = $detail->whereNotNull('sj_eff_date')->sortByDesc('sj_eff_date')->first();
         $oldestdate = $detail->whereNotNull('sj_eff_date')->sortBy('sj_eff_date')->first();
 
         $iscontainer = $detail->whereIn('truck_tipe_id', [5, 6])->count() == 0 ? 0 : 1;
-        // dd($detail);
+        // dd($detail->take(10), $latestdate, $oldestdate, $data);
+        // dd($data->im_nbr);
         $pdf = PDF::loadview(
             'transaksi.laporan.pdf.pdf-detail-invoice',
             [
